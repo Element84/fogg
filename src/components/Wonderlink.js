@@ -27,7 +27,7 @@ const WonderLink = ( args = {}) => {
       <Link to={ args.to } { ...component_args }>
         { args.children }
       </Link>
-    );
+    )
 
   }
 
