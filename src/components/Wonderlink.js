@@ -1,9 +1,6 @@
 import React from 'react'
 import {Link} from 'gatsby'
 
-import React from 'react';
-import { Link } from 'gatsby';
-
 import { routeIsInternal } from '../lib/util';
 
 const ARGS_WHITELIST = [
