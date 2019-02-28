@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "spacejam-theme",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Gatsby theme for E84 Space Jam project",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Element 84, Inc.",
   "dependencies": {
     "gatsby": "^2.1.19",
     "gatsby-image": "^2.0.30",
