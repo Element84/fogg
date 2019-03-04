@@ -1,15 +1,16 @@
 import React from 'react'
 
 import Layout from '../../components/Layout'
-import Button from '../../components/Button'
+import Footer from '../../components/Footer'
 
-const ButtonDemo = () => (
+const FooterDemo = () => (
     <Layout>
         <div className = "container">
-            <h3>Button</h3>
-            <Button />
+            <h3>Footer</h3>
+            <Footer />
         </div>
     </Layout>
 )
 
-export default ButtonDemo
+
+export default FooterDemo
