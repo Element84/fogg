@@ -12,7 +12,6 @@ const Layout = ({ children }) => (
     </Helmet>
     {/* Header/Nav component goes here */}
     {children}
-    <Button />
     <Footer />
   </>
 )
