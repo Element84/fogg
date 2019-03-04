@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Space Jam Gatsby Theme`,
     description: `Gatsby theme for E84 Space Jam project`,
-    author: `Element 84`,
+    author: `Element 84`
   },
   plugins: [
     `gatsby-plugin-sass`,
@@ -11,8 +11,8 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/assets/images`, // why does this matter?
-      },
+        path: `${__dirname}/src/assets/images` // why does this matter?
+      }
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
@@ -24,12 +24,12 @@ module.exports = {
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,
-        display: `minimal-ui`,
+        display: `minimal-ui`
         // icon: `src/assets/images/<image-name>`, // This path is relative to the root of the site.
-      },
-    },
+      }
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // 'gatsby-plugin-offline',
-  ],
-}
+  ]
+};
