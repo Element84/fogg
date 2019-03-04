@@ -1,63 +1,63 @@
-const path = require('path');
-const fs = require('fs');
-const mkdirp = require('mkdirp');
-const Logger = require('./src/lib/logger');
+// const path = require('path');
+// const fs = require('fs');
+// const mkdirp = require('mkdirp');
+// const Logger = require('./src/lib/logger');
 
-exports.onCreateWebpackConfig = ({ loaders, actions }) => {
+// exports.onCreateWebpackConfig = ({ loaders, actions }) => {
 
-  const logger = new Logger('e84-website-styles:onCreateWebpackConfig');
+//   const logger = new Logger('e84-website-styles:onCreateWebpackConfig');
 
-  let theme_location;
+//   let theme_location;
 
-  logger.log('Adding theme to Webpack compilation');
+//   logger.log('Adding theme to Webpack compilation');
 
-  try {
-    theme_location = require.resolve('e84-website-styles');
-  } catch(e) {
-    logger.error(`Failed to load theme module: ${theme_location}; ${e}`);
-    return;
-  }
+//   try {
+//     theme_location = require.resolve('e84-website-styles');
+//   } catch(e) {
+//     logger.error(`Failed to load theme module: ${theme_location}; ${e}`);
+//     return;
+//   }
 
-  actions.setWebpackConfig({
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          include: path.dirname(theme_location),
-          use: [
-            loaders.js(),
-          ],
-        },
-      ],
-    },
-  });
+//   actions.setWebpackConfig({
+//     module: {
+//       rules: [
+//         {
+//           test: /\.js$/,
+//           include: path.dirname(theme_location),
+//           use: [
+//             loaders.js(),
+//           ],
+//         },
+//       ],
+//     },
+//   });
 
-};
+// };
 
-// make sure src/pages exists for the filesystem source or it will error
-exports.onPreBootstrap = ({ store }) => {
+// // make sure src/pages exists for the filesystem source or it will error
+// exports.onPreBootstrap = ({ store }) => {
 
-  const logger = new Logger('e84-website-styles:onPreBoostrap');
-  const { program } = store.getState();
-  const dir = `${program.directory}/src/pages`;
+//   const logger = new Logger('e84-website-styles:onPreBoostrap');
+//   const { program } = store.getState();
+//   const dir = `${program.directory}/src/pages`;
 
-  logger.log(`Checking if ${dir} exists`);
+//   logger.log(`Checking if ${dir} exists`);
 
-  if ( !fs.existsSync(dir) ) {
-    logger.log(`Creating ${dir}`);
-    mkdirp.sync(dir);
-  }
+//   if ( !fs.existsSync(dir) ) {
+//     logger.log(`Creating ${dir}`);
+//     mkdirp.sync(dir);
+//   }
 
-};
+// };
 
-exports.onCreateBabelConfig = ({ actions }) => {
+// exports.onCreateBabelConfig = ({ actions }) => {
 
-  const logger = new Logger('e84-website-styles:onCreateBabelConfig');
+//   const logger = new Logger('e84-website-styles:onCreateBabelConfig');
 
-  logger.log('Setting babel preset: @babel/preset-react');
+//   logger.log('Setting babel preset: @babel/preset-react');
 
-  actions.setBabelPreset({
-    name: '@babel/preset-react',
-  });
+//   actions.setBabelPreset({
+//     name: '@babel/preset-react',
+//   });
 
-};
+// };

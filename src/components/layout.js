@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 
 import Footer from '../components/Footer'
+import Button from '../components/Button'
 
 const Layout = ({ children }) => (
   <>
@@ -11,6 +12,7 @@ const Layout = ({ children }) => (
     </Helmet>
     {/* Header/Nav component goes here */}
     {children}
+    <Button />
     <Footer />
   </>
 )
