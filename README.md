@@ -31,6 +31,8 @@ yarn develop
 ```
 By default, the project runs on on [localhost:8000](http://localhost:8000).
 
+You can a list of this theme's components on [localhost:8000/components](http://localhost:8000/components)
+
 # Deployment & Releases
 There is no traditional sense of deployment here. When making any updates, please increment the `package.json` version number.
 
