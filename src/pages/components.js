@@ -26,7 +26,7 @@ const ComponentsPage = () => {
     <Layout>
       <h1 className='component-title'>Space Jam Components</h1>
       <section className='description'>
-        <p>The links and actions below will NOT zap all of your developer talent. However, clicking this basketball will! <span role="img" alt="basketball">🏀</span></p>
+        <p>The links and actions below will NOT zap all of your developer talent. However, clicking this basketball will! <span role="img" aria-label="basketball">🏀</span></p>
       </section>
       <section>
           <ul className="list-clean">
