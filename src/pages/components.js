@@ -43,7 +43,6 @@ const ComponentsPage = () => {
             }) }
           </ul>
         </section>
-      {/* </Hero> */}
 
       <div className="components-demo site-section animate-3">
         { DEMO_COMPONENTS.map(( component, index ) => {
