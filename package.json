@@ -5,6 +5,7 @@
   "version": "0.1.5",
   "author": "Element 84, Inc.",
   "dependencies": {
+    "@storybook/cli": "^5.0.1",
     "fs": "^0.0.1-security",
     "gatsby": "^2.1.19",
     "gatsby-image": "^2.0.30",
@@ -26,7 +27,13 @@
   },
   "devDependencies": {
     "husky": "^1.3.1",
-    "semistandard": "^13.0.1"
+    "semistandard": "^13.0.1",
+    "@storybook/react": "^5.0.1",
+    "@storybook/addon-actions": "^5.0.1",
+    "@storybook/addon-links": "^5.0.1",
+    "@storybook/addons": "^5.0.1",
+    "@babel/core": "^7.3.4",
+    "babel-loader": "^8.0.5"
   },
   "keywords": [
     "gatsby"
@@ -40,7 +47,9 @@
     "pre-commit": "yarn test && lint-staged",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "lint-staged": {
     "src/**/*.js": [
