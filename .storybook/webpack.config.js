@@ -1,3 +1,5 @@
+const path = require('path');
+
 // Setup via https://www.gatsbyjs.org/docs/visual-testing-with-storybook/
 
 module.exports = async ({ config, mode }) => {
@@ -22,7 +24,21 @@ module.exports = async ({ config, mode }) => {
   // Prefer Gatsby ES6 entrypoint (module) over commonjs (main) entrypoint
   config.resolve.mainFields = ["browser", "module", "main"];
 
+  // Add specific loader rule for CSS (SASS)
+
+  config.module.rules.push({
+    test: /\.scss$/,
+    loaders: [
+      "style-loader",
+      "css-loader",
+      "sass-loader",
+    ],
+    exclude: /\.module\.scss$/,
+    include: path.resolve(__dirname, '../src')
+  })
+
   // Return the altered config
+
   return config;
 
 };

@@ -1,6 +1,10 @@
+// Gatsby setup docs: via https://www.gatsbyjs.org/docs/visual-testing-with-storybook/
+
 import { configure } from '@storybook/react';
 
-// Setup via https://www.gatsbyjs.org/docs/visual-testing-with-storybook/
+// Import application SCSS for all components
+
+import '../src/assets/stylesheets/theme.scss';
 
 // automatically import all files ending in *.stories.js
 
