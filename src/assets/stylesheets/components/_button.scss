@@ -1,0 +1,66 @@
+.button {
+
+  display: inline-block;
+  background: $color-blue linear-gradient(lighten($color-blue, 3), $color-blue);
+  border-radius: $border-radius-small;
+  box-shadow: $component-shadow-basic;
+
+  // @include notmobile() {
+
+  //   &:hover {
+  //     background: linear-gradient($color-blue4, $color-blue);
+  //     box-shadow: $component-shadow-strong;
+  //   }
+
+  //   &:active {
+  //     background: linear-gradient(darken($color-blue, 3), $color-blue);;
+  //     box-shadow: $component-shadow-basic;
+  //   }
+
+  // }
+
+  a,
+  button {
+
+    display: block;
+    width: 100%;
+    color: white;
+    background: transparent;
+    font-size: 1em;
+    font-weight: $font-weight-bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 1em 1.4em;
+    border: none;
+    cursor: pointer;
+    border: none;
+
+    // @include notmobile() {
+    //   font-size: 1em;
+    // }
+
+  }
+
+  &[data-full="true"] {
+    display: block;
+    width: 100%;
+  }
+
+}
+
+.button-disabled {
+
+  &,
+  &:hover,
+  &:active {
+    background: $color-gray2;
+    box-shadow: $component-shadow-basic;
+  }
+
+  a,
+  button {
+    pointer-events: none;
+  }
+
+}

@@ -1,0 +1,21 @@
+@function colorByKey($key) {
+
+  @if map-has-key( $color-map, $key ) {
+
+    @if map-has-key( $color-map, map-get( $color-map, $key ) ) {
+
+      @if map-has-key( $color-map, map-get( $color-map, map-get( $color-map, $key ) ) ) {
+        @return map-get( $color-map, map-get( $color-map, map-get( $color-map, $key ) ) );
+      } @else {
+        @return map-get( $color-map, map-get($color-map, $key) );
+      }
+
+    } @else {
+      @return map-get( $color-map, $key );
+    }
+
+  } @else {
+    @return $key;
+  }
+
+}

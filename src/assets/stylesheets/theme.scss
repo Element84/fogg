@@ -1,4 +1,7 @@
+@import "~normalize.css/normalize";
+
 @import "settings/__settings";
 
+@import "layout";
 @import "pages/__pages";
 @import "components/__components";
