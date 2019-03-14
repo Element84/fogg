@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react';
-// import PropTypes from 'prop-types'
+import React from 'react';
 
 // building the example of this footer based on e84 official website footer
 const Footer = () => (
-  <Fragment>
+  <footer className="footer">
     <p>This is the footer for now</p>
     <section className='left-side'>
       <div className='logo'>{/* space jam logo goes here */}</div>
@@ -17,7 +16,7 @@ const Footer = () => (
       <div className='mailing-list-form'>{/* import form for adding people to the mailing list. Will include button from the button component */}</div>
       <div className='social-media-links'>{/* links to social media will be here */}</div>
     </section>
-  </Fragment>
+  </footer>
 );
 
 export default Footer;
