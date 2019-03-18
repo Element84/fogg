@@ -54,6 +54,6 @@ exports.onCreateBabelConfig = ({ actions }) => {
   logger.log('Setting babel preset: @babel/preset-react');
 
   actions.setBabelPreset({
-    name: '@babel/preset-react'
+    name: 'babel-preset-gatsby'
   });
 };
