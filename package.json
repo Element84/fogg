@@ -62,7 +62,7 @@
     "lint-css": "stylelint 'src/assets/stylesheets/**/*.scss' --config ./config/stylelint.config.js",
     "lint-js": "eslint -c ./config/eslint.config.js . --ext .js",
     "lint": "yarn lint-js && yarn lint-css && echo '> Finished linting ✅'",
-    "pre-commit": "yarn test && lint-staged",
+    "precommit": "yarn test && lint-staged",
     "serve": "gatsby serve",
     "start": "npm run develop",
     "storybook": "start-storybook -p 6006",
