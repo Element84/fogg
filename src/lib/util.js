@@ -13,9 +13,9 @@ function isSmallDevice () {
 module.exports.isSmallDevice = isSmallDevice;
 
 /**
-* throttle
-* Via https://remysharp.com/2010/07/21/throttling-function-calls
-*/
+ * throttle
+ * Via https://remysharp.com/2010/07/21/throttling-function-calls
+ */
 
 function throttle (fn, threshhold, scope) {
   threshhold || (threshhold = 250);
@@ -27,7 +27,7 @@ function throttle (fn, threshhold, scope) {
     // Check to see if we're working with an event as the first argument (standard)
 
     if (arguments[0] && arguments[0].target) {
-    // Check if persist exists as a function. React handles events synthetically
+      // Check if persist exists as a function. React handles events synthetically
       // and nullifys them through a pooling process. Adding persist keeps this from
       // happening until standard garbage collection so we can retain the event
       // information through the callback
@@ -63,8 +63,8 @@ function throttle (fn, threshhold, scope) {
 module.exports.throttle = throttle;
 
 /**
-   * routeIsInternal
-   */
+ * routeIsInternal
+ */
 
 function routeIsInternal (route) {
   return route.charAt(0) === '/';

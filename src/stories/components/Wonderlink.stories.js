@@ -3,5 +3,8 @@ import { storiesOf } from '@storybook/react';
 
 import WonderLink from '../../components/WonderLink';
 
-storiesOf('WonderLink', module)
-  .add('Default', () => <WonderLink to="/">What's in a WonderLink?</WonderLink>);
+const stories = storiesOf('Components|WonderLink', module);
+
+stories.add('Default', () => (
+  <WonderLink to="/">What&apos;s in a WonderLink?</WonderLink>
+));

@@ -8,14 +8,14 @@ const THEME_NAME = 'dashboard-components';
 exports.onCreateWebpackConfig = ({ loaders, actions }) => {
   const logger = new Logger(`${THEME_NAME}:onCreateWebpackConfig`);
 
-  let theme_location;
+  let themeLocation;
 
   logger.log('Adding theme to Webpack compilation');
 
   try {
-    theme_location = require.resolve(THEME_NAME);
+    themeLocation = require.resolve(THEME_NAME);
   } catch (e) {
-    logger.error(`Failed to load theme module: ${theme_location}; ${e}`);
+    logger.error(`Failed to load theme module: ${themeLocation}; ${e}`);
     return;
   }
 
@@ -24,7 +24,7 @@ exports.onCreateWebpackConfig = ({ loaders, actions }) => {
       rules: [
         {
           test: /\.js$/,
-          include: path.dirname(theme_location),
+          include: path.dirname(themeLocation),
           use: [
             loaders.js()
           ]

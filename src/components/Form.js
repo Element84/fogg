@@ -6,12 +6,18 @@ import PropTypes from 'prop-types';
  * @description Default form component
  */
 
-const Form = ({children, className, name = 'theform', onSubmit, onInput, onChange}) => {
+const Form = ({
+  children,
+  className,
+  name = 'theform',
+  onSubmit,
+  onInput,
+  onChange
+}) => {
+  let formClassName = 'form';
 
-  let class_name = 'form';
-
-  if ( typeof className === 'string' ) {
-    class_name = `${class_name} ${className}`;
+  if (typeof className === 'string') {
+    formClassName = `${formClassName} ${className}`;
   }
 
   /**
@@ -19,8 +25,8 @@ const Form = ({children, className, name = 'theform', onSubmit, onInput, onChang
    * @description Manages event handler for submit type events on the form
    */
 
-  function handleSubmit(event) {
-    if ( typeof onSubmit === 'function' ) {
+  function handleSubmit (event) {
+    if (typeof onSubmit === 'function') {
       onSubmit(event);
     }
   }
@@ -30,8 +36,8 @@ const Form = ({children, className, name = 'theform', onSubmit, onInput, onChang
    * @description Manages event handler for input type events on the form
    */
 
-  function handleInput(event) {
-    if ( typeof onInput === 'function' ) {
+  function handleInput (event) {
+    if (typeof onInput === 'function') {
       onInput(event);
     }
   }
@@ -41,30 +47,36 @@ const Form = ({children, className, name = 'theform', onSubmit, onInput, onChang
    * @description Manages event handler for change type events on the form
    */
 
-  function handleChange(event) {
-    if ( typeof onChange === 'function' ) {
+  function handleChange (event) {
+    if (typeof onChange === 'function') {
       onChange(event);
     }
   }
 
   return (
-    <form className={class_name} name={name} action="" onSubmit={handleSubmit} onInput={handleInput} onChange={handleChange}>
-      { children }
+    <form
+      className={formClassName}
+      name={name}
+      action=""
+      onSubmit={handleSubmit}
+      onInput={handleInput}
+      onChange={handleChange}
+    >
+      {children}
     </form>
   );
-
-}
+};
 
 Form.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
+    PropTypes.node
   ]).isRequired,
   className: PropTypes.string,
   name: PropTypes.string,
   onSubmit: PropTypes.func,
   onInput: PropTypes.func,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func
 };
 
 export default Form;
