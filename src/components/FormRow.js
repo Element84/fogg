@@ -11,7 +11,10 @@ export const FormRow = ({ children }) => {
 };
 
 FormRow.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.array])
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ])
 };
 
 export default FormRow;

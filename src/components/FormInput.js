@@ -103,13 +103,13 @@ const FormInput = props => {
     </div>
   );
 
-  function handleOnInput () {
+  function handleOnInput (event) {
     if (typeof onInput === 'function') {
       onInput(event);
     }
   }
 
-  function handleOnChange () {
+  function handleOnChange (event) {
     if (typeof onChange === 'function') {
       onChange(event);
     }

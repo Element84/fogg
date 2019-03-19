@@ -90,6 +90,8 @@ const ButtonElement = ({
     );
   }
 
+  // TODO: this should use WonderLink
+
   return (
     <Link to={to} onClick={onClick} {...attributes}>
       {text}

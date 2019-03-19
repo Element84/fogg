@@ -51,6 +51,7 @@
     "prettier-eslint": "^8.8.2",
     "prettier-eslint-cli": "^4.7.1",
     "semistandard": "^13.0.1",
+    "sinon": "^7.2.7",
     "stylelint": "^9.10.1"
   },
   "keywords": [
@@ -62,7 +63,7 @@
     "build-storybook": "build-storybook",
     "develop": "rm -rf .cache && concurrently --names 'GATSBY,STORYBOOK' -c 'bgCyan.bold,bgMagenta.bold' 'gatsby develop' 'yarn storybook'",
     "format": "yarn format-js && yarn lint-css --fix && echo '> Finished formatting ✅'",
-    "format-js": "prettier-eslint --eslint-config-path ./config/eslint.config.js --trailing-comma es5 --single-quote --write 'src/**/*.js'",
+    "format-js": "prettier-eslint --eslint-config-path ./config/eslint.config.js --trailing-comma es5 --single-quote --write '**/*.js'",
     "lint-css": "stylelint 'src/assets/stylesheets/**/*.scss' --config ./config/stylelint.config.js",
     "lint-js": "eslint -c ./config/eslint.config.js . --ext .js",
     "lint": "yarn lint-js && yarn lint-css && echo '> Finished linting ✅'",

@@ -25,9 +25,7 @@ exports.onCreateWebpackConfig = ({ loaders, actions }) => {
         {
           test: /\.js$/,
           include: path.dirname(themeLocation),
-          use: [
-            loaders.js()
-          ]
+          use: [loaders.js()]
         }
       ]
     }
