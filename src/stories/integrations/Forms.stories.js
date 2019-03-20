@@ -27,6 +27,15 @@ stories.add('Default', () => {
         <FormInput id="name" label="Name" required={true} />
 
         <FormInput id="email" label="Email" type="email" required={true} />
+
+        <FormInput
+          id="password"
+          label="Password"
+          type="password"
+          required={true}
+        />
+
+        <FormInput id="number" label="Number" type="number" />
       </FormRow>
 
       <FormRow>

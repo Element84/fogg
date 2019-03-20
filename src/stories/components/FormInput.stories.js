@@ -27,6 +27,12 @@ stories.add('Default', () => {
       <FormInput id="default-text" label="Default Text" />
       <FormInput id="default-email" label="Default Email" type="email" />
       <FormInput
+        id="default-password"
+        label="Default Password"
+        type="password"
+      />
+      <FormInput id="default-number" label="Default Number" type="number" />
+      <FormInput
         id="default-select"
         label="Default Select"
         type="select"
