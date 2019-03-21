@@ -58,6 +58,16 @@
     box-shadow: $component-shadow-basic;
   }
 
+.button-invalid {
+
+  &,
+  &:hover,
+  &active {
+    background: $color-red;
+    box-shadow: $component-shadow-basic
+  }
+}
+
   a,
   button {
     pointer-events: none;

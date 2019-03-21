@@ -6,8 +6,11 @@ import { Link } from 'gatsby';
 
 /**
  * Button
- * @description A button that wraps a React Router link. If no to exists, it's a normal buttono
+ * @description A button that wraps a React Router link. If no to exists, it's a normal button
  */
+
+ // needs a active attribute
+ // need an invalid attribute
 
 const Button = ({
   text = 'Button',
@@ -15,6 +18,7 @@ const Button = ({
   full = false,
   onClick = null,
   disabled = false,
+  invalid = false,
   eventCategory = null,
   eventAction = null,
   eventLabel = null,
@@ -22,14 +26,15 @@ const Button = ({
 
   let class_name = 'button button-link';
 
-  let button_link_attributes = {
-    to: to,
-    onClick: onClick,
-    text: text,
-    disabled: disabled,
-    eventCategory: eventCategory,
-    eventAction: eventAction,
-    eventLabel: eventLabel,
+  let ButtonLinkAttributes = {
+    to,
+    onClick,
+    text,
+    disabled,
+    invalid,
+    eventCategory,
+    eventAction,
+    eventLabel,
   };
 
   if ( disabled ) {
@@ -38,9 +43,13 @@ const Button = ({
 
   }
 
+  if (invalid) {
+    class_name += ' button-invalid'
+  }
+
   return (
     <span className={class_name} data-full={full}>
-      <ButtonElement {...button_link_attributes} />
+      <ButtonElement {...ButtonLinkAttributes} />
     </span>
   );
 
@@ -55,6 +64,7 @@ Button.propTypes = {
   full: PropTypes.bool,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
+  invalid: PropTypes.bool,
   eventCategory: PropTypes.string,
   eventAction: PropTypes.string,
   eventLabel: PropTypes.oneOfType([
@@ -70,7 +80,7 @@ export default Button;
  * ButtonElement
  */
 
-const ButtonElement = ({ to, text, onClick, disabled = false, eventCategory, eventAction, eventLabel, }) => {
+const ButtonElement = ({ to, text, onClick, disabled = false, invalid = false, eventCategory, eventAction, eventLabel, }) => {
 
   if ( React.isValidElement( eventLabel )) {
 
@@ -90,6 +100,10 @@ const ButtonElement = ({ to, text, onClick, disabled = false, eventCategory, eve
 
   }
 
+  if (invalid) {
+    attributes.invalid = true
+  }
+
   if ( !to || disabled ) {
 
     return (
@@ -100,12 +114,23 @@ const ButtonElement = ({ to, text, onClick, disabled = false, eventCategory, eve
 
   }
 
-  return (
-    <Link to={to} onClick={onClick} {...attributes}>
-      {text}
-    </Link>
-  );
+  else if (invalid) {
 
+    return (
+      <button onClick={onClick} {...attributes}>
+        {text}
+      </button>
+    )
+
+  }
+
+  else {
+    return (
+      <Link to={to} onClick={onClick} {...attributes}>
+        {text}
+      </Link>
+    );
+  }
 };
 
 ButtonElement.propTypes = {
@@ -116,6 +141,7 @@ ButtonElement.propTypes = {
   to: PropTypes.string,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
+  invalid: PropTypes.bool,
   eventCategory: PropTypes.string,
   eventAction: PropTypes.string,
   eventLabel:PropTypes.oneOfType([
