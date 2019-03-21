@@ -58,19 +58,24 @@
     box-shadow: $component-shadow-basic;
   }
 
-.button-invalid {
-
-  &,
-  &:hover,
-  &active {
-    background: $color-red;
-    box-shadow: $component-shadow-basic
-  }
-}
-
   a,
   button {
     pointer-events: none;
   }
 
+}
+
+.button-active {
+
+  &,
+  &:hover,
+  &:active {
+    background: $color-blue9, $color-blue;
+    box-shadow: $component-shadow-basic;
+  }
+
+  a,
+  button {
+    pointer-events: none;
+  }
 }

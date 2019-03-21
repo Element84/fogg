@@ -8,7 +8,7 @@ storiesOf('Button', module)
     return (
       <>
         <p>
-          <Button text="Button No Link" invalid={true} />
+          <Button text="Button No Link" active={true} />
         </p>
         <p>
           <Button to="/" text="Button With Link" />

@@ -18,7 +18,7 @@ const Button = ({
   full = false,
   onClick = null,
   disabled = false,
-  invalid = false,
+  active = false,
   eventCategory = null,
   eventAction = null,
   eventLabel = null,
@@ -31,7 +31,7 @@ const Button = ({
     onClick,
     text,
     disabled,
-    invalid,
+    active,
     eventCategory,
     eventAction,
     eventLabel,
@@ -43,8 +43,8 @@ const Button = ({
 
   }
 
-  if (invalid) {
-    class_name += ' button-invalid'
+  if (active) {
+    class_name += ' button-active'
   }
 
   return (
@@ -64,7 +64,7 @@ Button.propTypes = {
   full: PropTypes.bool,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
-  invalid: PropTypes.bool,
+  active: PropTypes.bool,
   eventCategory: PropTypes.string,
   eventAction: PropTypes.string,
   eventLabel: PropTypes.oneOfType([
@@ -80,7 +80,7 @@ export default Button;
  * ButtonElement
  */
 
-const ButtonElement = ({ to, text, onClick, disabled = false, invalid = false, eventCategory, eventAction, eventLabel, }) => {
+const ButtonElement = ({ to, text, onClick, disabled = false, active = false, eventCategory, eventAction, eventLabel, }) => {
 
   if ( React.isValidElement( eventLabel )) {
 
@@ -100,10 +100,6 @@ const ButtonElement = ({ to, text, onClick, disabled = false, invalid = false, e
 
   }
 
-  if (invalid) {
-    attributes.invalid = true
-  }
-
   if ( !to || disabled ) {
 
     return (
@@ -114,7 +110,7 @@ const ButtonElement = ({ to, text, onClick, disabled = false, invalid = false, e
 
   }
 
-  else if (invalid) {
+  else if (active) {
 
     return (
       <button onClick={onClick} {...attributes}>
@@ -141,7 +137,7 @@ ButtonElement.propTypes = {
   to: PropTypes.string,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
-  invalid: PropTypes.bool,
+  active: PropTypes.bool,
   eventCategory: PropTypes.string,
   eventAction: PropTypes.string,
   eventLabel:PropTypes.oneOfType([
