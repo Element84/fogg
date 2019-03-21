@@ -3,5 +3,6 @@ import { storiesOf } from '@storybook/react';
 
 import Layout from '../../components/Layout';
 
-storiesOf('Layout', module)
-  .add('Default', () => <Layout>I'm in a Layout</Layout>);
+const stories = storiesOf('Components|Layout', module);
+
+stories.add('Default', () => <Layout>I&apos;m in a Layout</Layout>);

@@ -3,9 +3,7 @@ import { Link } from 'gatsby';
 
 import { routeIsInternal } from '../lib/util';
 
-const ARGS_WHITELIST = [
-  'className'
-];
+const ARGS_WHITELIST = ['className'];
 
 /**
  * WonderLink
@@ -13,7 +11,7 @@ const ARGS_WHITELIST = [
  */
 
 const WonderLink = (args = {}) => {
-  const component_args = filterArgs(args);
+  const componentArgs = filterArgs(args);
 
   if (typeof args.to !== 'string') return null;
 
@@ -22,8 +20,8 @@ const WonderLink = (args = {}) => {
 
   if (routeIsInternal(args.to)) {
     return (
-      <Link to={args.to} {...component_args}>
-        { args.children }
+      <Link to={args.to} {...componentArgs}>
+        {args.children}
       </Link>
     );
   }
@@ -31,11 +29,11 @@ const WonderLink = (args = {}) => {
   // If it's an external link, add rel noopener and noreferrer to cover any security
   // concerns with the new window being able to access the previous page
 
-  component_args.rel = 'noopener noreferrer';
+  componentArgs.rel = 'noopener noreferrer';
 
   return (
-    <a href={args.to} target={args.target} {...component_args}>
-      { args.children }
+    <a href={args.to} target={args.target} {...componentArgs}>
+      {args.children}
     </a>
   );
 };
@@ -48,15 +46,15 @@ export default WonderLink;
  */
 
 function filterArgs (args) {
-  let new_args = {};
+  let newArgs = {};
 
   for (let key in args) {
     if (!args.hasOwnProperty(key)) continue;
 
     if (ARGS_WHITELIST.includes(key)) {
-      new_args[key] = args[key];
+      newArgs[key] = args[key];
     }
   }
 
-  return new_args;
+  return newArgs;
 }
