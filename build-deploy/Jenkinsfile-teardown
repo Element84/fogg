@@ -14,22 +14,28 @@ pipeline {
     string(description: 'What ticket?', name: 'ticket')
   }
 
-  
+
   stages {
     stage('Teardown'){
       steps {
-        withAWS(credentials:'deploy-dev-dashboard', region:'us-west-2') {
-            script {
-              try {
-                  sh '''
-                        cd build-deploy && sh ./teardown-bucket.sh ${ticket}
-                     '''
-              } catch (Exception ex) {
-                  sh 'echo "Could not find bucket for ${ticket}"'
-              }
-            }
-        }
+        performDelete("${ticket}")
       }
     }
   }
+}
+
+void performDelete(environment) {
+  env.target_environment = environment.toLowerCase()
+  withAWS(credentials:'deploy-dev-dashboard', region:'us-west-2') {
+      script {
+        try {
+            sh '''
+                  cd build-deploy && sh ./teardown-bucket.sh ${target_environment}
+               '''
+        } catch (Exception ex) {
+            sh 'echo "Could not find bucket for ${environment}"'
+        }
+      }
+  }
+
 }
