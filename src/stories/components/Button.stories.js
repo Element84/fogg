@@ -3,7 +3,9 @@ import { storiesOf } from '@storybook/react';
 
 import Button from '../../components/Button';
 
-storiesOf('Button', module).add('Default', () => {
+const stories = storiesOf('Components|Button', module);
+
+stories.add('Default', () => {
   return (
     <>
       <p>
@@ -11,6 +13,19 @@ storiesOf('Button', module).add('Default', () => {
       </p>
       <p>
         <Button to="/" text="Button With Link" />
+      </p>
+    </>
+  );
+});
+
+stories.add('Disabled', () => {
+  return (
+    <>
+      <p>
+        <Button text="Button No Link" disabled={true} />
+      </p>
+      <p>
+        <Button to="/" text="Button With Link" disabled={true} />
       </p>
     </>
   );

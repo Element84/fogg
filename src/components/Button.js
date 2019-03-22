@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOMServer from 'react-dom/server';
 
-import { Link } from 'gatsby';
+import WonderLink from './WonderLink';
 
 /**
  * Button
@@ -23,30 +22,38 @@ const Button = ({
   eventAction = null,
   eventLabel = null
 }) => {
-  let className = 'button button-link';
+  let buttonElement = null;
 
-  let ButtonLinkAttributes = {
+  let className = 'button';
+
+  const attributes = {
     to,
     onClick,
     text,
     disabled,
-    active,
-    eventCategory,
-    eventAction,
-    eventLabel
+    'data-event-category': eventCategory,
+    'data-event-action': eventAction,
+    'data-event-label': eventLabel
   };
 
   if (disabled) {
     className += ' button-disabled';
+    attributes.disabled = true;
   }
 
-  if (active) {
-    className += ' button-active';
+  if (!to || disabled) {
+    buttonElement = <button {...attributes}>{text}</button>;
+  } else {
+    buttonElement = (
+      <WonderLink to={to} {...attributes}>
+        {text}
+      </WonderLink>
+    );
   }
 
   return (
     <span className={className} data-full={full}>
-      <ButtonElement {...ButtonLinkAttributes} />
+      {buttonElement}
     </span>
   );
 };
@@ -64,63 +71,3 @@ Button.propTypes = {
 };
 
 export default Button;
-
-/*
- * ButtonElement
- */
-
-const ButtonElement = ({
-  to,
-  text,
-  onClick,
-  disabled = false,
-  active = false,
-  eventCategory,
-  eventAction,
-  eventLabel
-}) => {
-  if (React.isValidElement(eventLabel)) {
-    eventLabel = ReactDOMServer.renderToString(eventLabel);
-  }
-
-  const attributes = {
-    'data-event-category': eventCategory,
-    'data-event-action': eventAction,
-    'data-event-label': eventLabel
-  };
-
-  if (disabled) {
-    attributes.disabled = true;
-  }
-
-  if (!to || disabled) {
-    return (
-      <button onClick={onClick} {...attributes}>
-        {text}
-      </button>
-    );
-  } else if (active) {
-    return (
-      <button onClick={onClick} {...attributes}>
-        {text}
-      </button>
-    );
-  } else {
-    return (
-      <Link to={to} onClick={onClick} {...attributes}>
-        {text}
-      </Link>
-    );
-  }
-};
-
-ButtonElement.propTypes = {
-  text: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
-  to: PropTypes.string,
-  onClick: PropTypes.func,
-  disabled: PropTypes.bool,
-  active: PropTypes.bool,
-  eventCategory: PropTypes.string,
-  eventAction: PropTypes.string,
-  eventLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
-};
