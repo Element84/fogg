@@ -5,20 +5,6 @@
   border-radius: $border-radius-small;
   box-shadow: $component-shadow-basic;
 
-  // @include notmobile() {
-
-  //   &:hover {
-  //     background: linear-gradient($color-blue4, $color-blue);
-  //     box-shadow: $component-shadow-strong;
-  //   }
-
-  //   &:active {
-  //     background: linear-gradient(darken($color-blue, 3), $color-blue);;
-  //     box-shadow: $component-shadow-basic;
-  //   }
-
-  // }
-
   a,
   button {
 
@@ -35,10 +21,6 @@
     border: none;
     cursor: pointer;
     border: none;
-
-    // @include notmobile() {
-    //   font-size: 1em;
-    // }
 
   }
 

@@ -4,7 +4,7 @@ import sinon from 'sinon';
 
 import FormInput from 'components/FormInput';
 
-describe('WonderLink', () => {
+describe('FormInput', () => {
   const selectOptions = [
     {
       label: 'Futurama',

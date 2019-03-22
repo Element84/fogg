@@ -1,13 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOMServer from 'react-dom/server';
 
-import { Link } from 'gatsby';
-
-/**
- * Button
- * @description A button that wraps a React Router link. If no to exists, it's a normal buttono
- */
+import WonderLink from './WonderLink';
 
 const Button = ({
   text = 'Button',
@@ -15,29 +9,43 @@ const Button = ({
   full = false,
   onClick = null,
   disabled = false,
+  className = null,
   eventCategory = null,
   eventAction = null,
   eventLabel = null
 }) => {
-  let className = 'button button-link';
+  let buttonElement = null;
 
-  let buttonLinkAttributes = {
-    to: to,
-    onClick: onClick,
-    text: text,
-    disabled: disabled,
-    eventCategory: eventCategory,
-    eventAction: eventAction,
-    eventLabel: eventLabel
+  className = `button ${className}`;
+
+  const attributes = {
+    to,
+    onClick,
+    text,
+    disabled,
+    'data-event-category': eventCategory,
+    'data-event-action': eventAction,
+    'data-event-label': eventLabel
   };
 
   if (disabled) {
     className += ' button-disabled';
+    attributes.disabled = true;
+  }
+
+  if (!to || disabled) {
+    buttonElement = <button {...attributes}>{text}</button>;
+  } else {
+    buttonElement = (
+      <WonderLink to={to} {...attributes}>
+        {text}
+      </WonderLink>
+    );
   }
 
   return (
     <span className={className} data-full={full}>
-      <ButtonElement {...buttonLinkAttributes} />
+      {buttonElement}
     </span>
   );
 };
@@ -47,6 +55,7 @@ Button.propTypes = {
   to: PropTypes.string,
   full: PropTypes.bool,
   onClick: PropTypes.func,
+  className: PropTypes.string,
   disabled: PropTypes.bool,
   eventCategory: PropTypes.string,
   eventAction: PropTypes.string,
@@ -54,57 +63,3 @@ Button.propTypes = {
 };
 
 export default Button;
-
-/*
- * ButtonElement
- */
-
-const ButtonElement = ({
-  to,
-  text,
-  onClick,
-  disabled = false,
-  eventCategory,
-  eventAction,
-  eventLabel
-}) => {
-  if (React.isValidElement(eventLabel)) {
-    eventLabel = ReactDOMServer.renderToString(eventLabel);
-  }
-
-  const attributes = {
-    'data-event-category': eventCategory,
-    'data-event-action': eventAction,
-    'data-event-label': eventLabel
-  };
-
-  if (disabled) {
-    attributes.disabled = true;
-  }
-
-  if (!to || disabled) {
-    return (
-      <button onClick={onClick} {...attributes}>
-        {text}
-      </button>
-    );
-  }
-
-  // TODO: this should use WonderLink
-
-  return (
-    <Link to={to} onClick={onClick} {...attributes}>
-      {text}
-    </Link>
-  );
-};
-
-ButtonElement.propTypes = {
-  text: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
-  to: PropTypes.string,
-  onClick: PropTypes.func,
-  disabled: PropTypes.bool,
-  eventCategory: PropTypes.string,
-  eventAction: PropTypes.string,
-  eventLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
-};
