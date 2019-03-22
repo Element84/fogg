@@ -12,7 +12,7 @@ shift
 
 ARGS=$@
 
-BUCKET="capella-dashboard-ui-${ENVIRONMENT}"
+BUCKET="capella-dashboard-components-${ENVIRONMENT}"
 
 echo "Tearing down ${BUCKET}"
 
