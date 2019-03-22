@@ -2,7 +2,7 @@
 
 set -o pipefail
 
-if [ "$#" -lt 1 ]; then
+if [ "$#" -lt 1 || "$#" -lt 2 ]; then
     echo "Requires environment name as a parameter"
     exit 1
 fi

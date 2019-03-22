@@ -24,9 +24,6 @@ describe('Button', () => {
   describe('Routing', () => {
     const route = '/';
     const button = shallow(<Button to={route} />);
-    // console.log('to prop: ', button.find('span').find('a'))
-    console.log(button.find('WonderLink').props());
-    console.log('props: ', button.find('WonderLink').prop('to'));
 
     it('should route to correct place', () => {
       expect(button.find('WonderLink').prop('to')).toEqual(route);
