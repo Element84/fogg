@@ -1,0 +1,144 @@
+pipeline {
+
+  agent {
+    docker {
+      label 'SpaceJam'
+      image '942037308728.dkr.ecr.us-west-1.amazonaws.com/spacejam-builds:latest'
+      args '-e npm_config_cache=/npm_cache -v /opt/jenkins/cache:/npm_cache'
+    }
+  }
+
+  options {
+    gitLabConnection('E84 Gitlab')
+  }
+
+  environment {
+    AWS_DEFAULT_REGION = 'us-west-2'
+    AWS_REGION = 'us-west-2'
+  }
+
+  stages {
+
+    stage('Prepare'){
+
+      steps {
+
+        updateCommitStatus('pending')
+
+        sshagent(credentials : ['spacejam-buildserver']) {
+
+          sh 'mkdir ~/.ssh'
+          sh 'touch ~/.ssh/config'
+          sh 'echo "StrictHostKeyChecking no" >> ~/.ssh/config'
+
+          updateCommitStatus('running')
+
+          echo "Installing..."
+          sh 'yarn install'
+
+          echo "Testing..."
+          sh 'yarn test'
+
+        }
+
+      }
+
+    }
+
+    stage('Build'){
+      steps {
+
+        // The actual build...
+
+        sh 'yarn build'
+        sh 'mkdir -p artifacts'
+        sh 'tar --exclude="./artifacts" -czf artifacts/dashboard.tgz public'
+        archiveArtifacts artifacts: 'artifacts/dashboard.tgz', fingerprint: true
+
+      }
+    }
+
+    stage('Deploy Feature') {
+      when { branch 'feature/*' }
+      steps {
+        deployFeature()
+      }
+    }
+
+    stage('Deploy SIT') {
+      when { branch 'develop' }
+      steps {
+        deploySIT()
+      }
+    }
+
+  }
+
+  post {
+    always {
+      echo 'Cleaning workspace...'
+       deleteDir()
+     }
+     success {
+      updateCommitStatus('success')
+     }
+     failure {
+      updateCommitStatus('failed')
+     }
+  }
+
+}
+
+void deployFeature() {
+  sh 'echo "Feature"'
+  script {
+    echo("Branch: " + env.BRANCH_NAME)
+    def match = (env.BRANCH_NAME =~ /^(?i)feature\/((jam|fd)-\d+).*/)
+
+    if(!match.hasGroup() || match.size() == 0) {
+          error "Unable to find Jira ticket in branch name"
+    }
+    env.JIRA_TICKET = match[0][1]
+  }
+  performDeploy("${JIRA_TICKET}", true)
+}
+
+void deploySIT() {
+  sh 'echo "SIT"'
+  performDeploy("sit")
+}
+
+void deployUAT() {
+  sh 'echo "UAT"'
+  performDeploy("uat")
+}
+
+void performDeploy(environment, createBucket = false) {
+  env.target_environment = environment.toLowerCase()
+  env.target_bucket = "capella-dashboard-components-${target_environment}"
+  env.s3_bucket = "http://${target_bucket}.s3-website-us-west-2.amazonaws.com"
+
+  withAWS(credentials:'deploy-dev-dashboard', region:'us-west-2') {
+
+    if(createBucket) {
+      sh '''
+          cd build-deploy && \
+          sh ./create-bucket.sh "${target_environment}" "${target_bucket}"
+          aws lambda invoke --function-name pipeline-service-live-initializeNewEnvironment --region us-west-2 --log-type Tail --payload '{"key":"'${JIRA_TICKET}'", "url":"'${s3_bucket}'"}' /tmp/outfile-${JIRA_TICKET}.txt && cat "/tmp/outfile-${JIRA_TICKET}.txt" && echo "${JIRA_TICKET}\n"
+         '''
+    }
+    echo 'Deleting old files from S3...'
+
+    s3Delete bucket: "${target_bucket}", path: '/'
+
+    echo 'Uploading new files to S3...'
+
+    s3Upload(file: 'storybook-static', bucket: "${target_bucket}")
+
+  }
+
+}
+
+void updateCommitStatus(status) {
+  updateGitlabCommitStatus name: 'build', state: "$status"
+}
