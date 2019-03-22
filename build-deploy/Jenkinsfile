@@ -123,7 +123,7 @@ void performDeploy(environment, createBucket = false) {
     if(createBucket) {
       sh '''
           cd build-deploy && \
-          sh ./create-bucket.sh "${target_environment}" "${env.target_bucket}"
+          sh ./create-bucket.sh "${target_environment}" "${target_bucket}"
           aws lambda invoke --function-name pipeline-service-live-initializeNewEnvironment --region us-west-2 --log-type Tail --payload '{"key":"'${JIRA_TICKET}'", "url":"'${s3_bucket}'"}' /tmp/outfile-${JIRA_TICKET}.txt && cat "/tmp/outfile-${JIRA_TICKET}.txt" && echo "${JIRA_TICKET}\n"
          '''
     }
