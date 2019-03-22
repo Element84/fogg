@@ -2,8 +2,6 @@
 
 import { configure } from '@storybook/react';
 
-// Import application SCSS for all components
-
 import '../src/assets/stylesheets/theme.scss';
 
 // automatically import all files ending in *.stories.js

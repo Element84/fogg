@@ -1,0 +1,55 @@
+.form-input {
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  textarea,
+  select {
+
+    display: block;
+    width: 100%;
+    line-height: 1.4;
+    background-color: white;
+    padding: .5em .7em;
+    border: solid 2px $color-gray;
+    border-radius: .2em;
+    box-shadow: $component-shadow-basic;
+    outline: 0;
+
+    &:disabled {
+      background-color: lighten($color-gray, 20);
+      pointer-events: none;
+    }
+
+    &:focus {
+      border: solid 2px $color-blue;
+      box-shadow: 0 0 7px 1px rgba($color-blue, .6);
+    }
+
+    // Prevent number inputs from showing increment UI
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  select {
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
+  }
+
+  label {
+    display: block;
+    font-size: .9em;
+    margin-bottom: .4em;
+  }
+
+}

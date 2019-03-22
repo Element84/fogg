@@ -1,35 +1,28 @@
 /* eslint-disable */
 
 module.exports = {
-
   env: {
     browser: true,
     jest: true,
-    es6: true
+    es6: true,
   },
 
   parserOptions: {
     ecmaVersion: '2017',
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
 
   settings: {
     react: {
-      version: 'detect'
-    }
+      version: 'detect',
+    },
   },
 
-  plugins: [
-    'react'
-  ],
+  plugins: ['react'],
 
-  extends: [
-    'semistandard',
-    'plugin:react/recommended'
-  ]
-
+  extends: ['semistandard', 'plugin:react/recommended'],
 };
 
 /* eslint-enable */

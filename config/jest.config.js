@@ -1,9 +1,9 @@
 module.exports = {
-
   collectCoverage: true,
-  collectCoverageFrom: [
-    'src/assets/**/*.{js,jsx}'
-  ],
+
+  collectCoverageFrom: ['src/**/*.js'],
+
+  coveragePathIgnorePatterns: ['src/stories'],
 
   rootDir: '../',
 
@@ -21,10 +21,7 @@ module.exports = {
     '<rootDir>/node_modules'
   ],
 
-  testPathIgnorePatterns: [
-    'node_modules',
-    '.cache'
-  ],
+  testPathIgnorePatterns: ['node_modules', '.cache', '.storybook'],
 
   setupFilesAfterEnv: [
     '<rootDir>/config/jest-setup.config.js',
@@ -35,16 +32,14 @@ module.exports = {
     '^.+\\.js$': '<rootDir>/config/jest-preprocess.config.js'
   },
 
-  transformIgnorePatterns: [
-    'node_modules/(?!(gatsby|dashboard-components)/)'
-  ],
+  transformIgnorePatterns: ['node_modules/(?!(gatsby|dashboard-components)/)'],
 
   // Sets up mocks for images and files that the tests either can't handle
   // or doesn't make sense to include
 
   moduleNameMapper: {
-    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/tests/__mocks__/fileMock.js',
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/tests/__mocks__/fileMock.js',
     '.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy'
   }
-
 };
