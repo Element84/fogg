@@ -16,6 +16,7 @@ const Button = ({
   to = null,
   full = false,
   onClick = null,
+  className = null,
   disabled = false,
   active = false,
   eventCategory = null,
@@ -24,7 +25,7 @@ const Button = ({
 }) => {
   let buttonElement = null;
 
-  let className = 'button';
+  className = `button ${className}`;
 
   const attributes = {
     to,
@@ -63,6 +64,7 @@ Button.propTypes = {
   to: PropTypes.string,
   full: PropTypes.bool,
   onClick: PropTypes.func,
+  className: PropTypes.string,
   disabled: PropTypes.bool,
   active: PropTypes.bool,
   eventCategory: PropTypes.string,
