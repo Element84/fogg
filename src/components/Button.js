@@ -3,22 +3,13 @@ import PropTypes from 'prop-types';
 
 import WonderLink from './WonderLink';
 
-/**
- * Button
- * @description A button that wraps a React Router link. If no to exists, it's a normal button
- */
-
-// needs a active attribute
-// need an invalid attribute
-
 const Button = ({
   text = 'Button',
   to = null,
   full = false,
   onClick = null,
-  className = null,
   disabled = false,
-  active = false,
+  className = null,
   eventCategory = null,
   eventAction = null,
   eventLabel = null
@@ -66,7 +57,6 @@ Button.propTypes = {
   onClick: PropTypes.func,
   className: PropTypes.string,
   disabled: PropTypes.bool,
-  active: PropTypes.bool,
   eventCategory: PropTypes.string,
   eventAction: PropTypes.string,
   eventLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
