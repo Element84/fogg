@@ -12,7 +12,7 @@ shift
 
 ARGS=$@
 
-BUCKET="capella-dashboard-ui-${ENVIRONMENT}"
+BUCKET="capella-dashboard-components-${ENVIRONMENT}"
 BUCKET_ARN="arn:aws:s3:::$BUCKET/*"
 echo "Checking to see if ${BUCKET} exists"
 
