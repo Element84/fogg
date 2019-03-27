@@ -7,11 +7,7 @@ describe('Table', () => {
   const columns = ['First Name', 'Last Name', null];
 
   const rows = [
-    [
-      'Gary',
-      'Godspeed',
-      <button key={'row-1-button'}>View</button>
-    ],
+    ['Gary', 'Godspeed', <button key={'row-1-button'}>View</button>],
     [
       'Quinn',
       'Airgon',
