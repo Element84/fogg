@@ -10,17 +10,13 @@
 //   [<p>column one again</p>, 'column two stuff again']
 // ];
 
-// console.table(
-//   'columns',
-//   columns.map(column => {
-//     <th>{column}</th>;
-//   })
-// );
-// console.table(
-//   data.map(row => [
-//     <tr>
-//       {row.map(cell => {
-//         <td>{cell}</td>;
+// console.log('columns', columns.map(column => <th>{column}</th>));
+// console.log(
+//   // 'rows and cells',
+//   data.map((row, index) => [
+//     <tr key={`row-${index}`}>
+//       {row.map((cell, key) => {
+//         <td key={`row-${key}`}>{cell}</td>;
 //       })}
 //     </tr>
 //   ])
@@ -28,24 +24,27 @@
 
 // const Table = () => {
 //   return (
-//     <thead>
-//       <tr>
-//         {columns.map(column => {
-//           <th>{column}</th>;
+//     <table>
+//     (
+//       <thead>
+//         <tr>
+//           {columns.map(column => {
+//             <th>{column}</th>;
+//           })}
+//         </tr>
+//       </thead>
+//     ),
+//     <tbody>
+//     data.map((row, index) => [
+//       <tr key={`row-${index}`}>
+//         {row.map((cell, key) => {
+//           <td key={`row-${key}`}>{cell}</td>;
 //         })}
 //       </tr>
-//     </thead>
-//     {Object.keys(data).map(key => (
-//       data.map(row => [
-//         <tr>
-//           {
-//             row.map(cell => {
-//               <td key={key}>{ cell }</td>
-//             })
-//           }
-//         </tr>
-//       ])
-//     ))}
+
+//     ])
+//     </tbody>
+//     </table>
 //   );
 // };
 
