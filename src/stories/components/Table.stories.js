@@ -26,3 +26,18 @@ stories.add('Default', () => {
     </>
   );
 });
+
+stories.add('Padded Rows', () => {
+  const longColumns = columns.map(column => column);
+  const longRows = rows.map(row => Array.from(row));
+
+  longColumns.push('Test');
+  longRows[0].push('Test');
+
+  return (
+    <>
+      <Table columns={longColumns} rows={rows} />
+      <Table columns={columns} rows={longRows} />
+    </>
+  );
+});

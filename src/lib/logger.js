@@ -1,6 +1,7 @@
 class Logger {
-  constructor (namespace) {
+  constructor (namespace, { isBrowser = false } = {}) {
     this.namespace = namespace;
+    this.isBrowser = isBrowser;
   }
 
   isVerbose () {
@@ -10,13 +11,33 @@ class Logger {
   log (message) {
     if (!this.isVerbose()) return;
 
-    // eslint-disable-next-line no-console
+    message = `[${this.namespace}] ${message}`;
+
+    /* eslint-disable */
     console.log(`[${this.namespace}] ${message}`);
+    /* eslint-enable */
+  }
+
+  warn (message) {
+    message = `[${this.namespace}] ${message}`;
+    /* eslint-disable */
+    if (this.isBrowser) {
+      console.warn(message);
+    } else {
+      console.log(message);
+    }
+    /* eslint-enable */
   }
 
   error (message) {
-    // eslint-disable-next-line no-console
-    console.log(`[${this.namespace}] ${message}`);
+    message = `[${this.namespace}] ${message}`;
+    /* eslint-disable */
+    if (this.isBrowser) {
+      console.error(message);
+    } else {
+      console.log(message);
+    }
+    /* eslint-enable */
   }
 }
 

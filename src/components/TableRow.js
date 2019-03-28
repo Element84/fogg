@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const TableRow = ({ className, cells }) => {
+  if (!Array.isArray(cells)) {
+    return null;
+  }
+
   return (
     <tr className={`table-row ${className || ''}`}>
       {cells.map((cell, index) => {
