@@ -43,11 +43,10 @@ describe('Table', () => {
   });
 
   describe('Invalid', () => {
-
-    const invalidTableConfigError = '[Table] Invalid table configuration, trying to fix';
+    const invalidTableConfigError =
+      '[Table] Invalid table configuration, trying to fix';
 
     it('should try to fix a table row with an uneven number of columns', () => {
-
       let consoleStub = sinon.stub(console, 'warn');
 
       const invalidColumns = columns.map(column => column);
@@ -56,16 +55,23 @@ describe('Table', () => {
 
       const table = shallow(<Table columns={invalidColumns} rows={rows} />);
 
-      expect(table.find('tbody').find('TableRow').first().dive().find('td')).toHaveLength(invalidColumns.length);
+      expect(
+        table
+          .find('tbody')
+          .find('TableRow')
+          .first()
+          .dive()
+          .find('td')
+      ).toHaveLength(invalidColumns.length);
 
-      expect(consoleStub.calledWithMatch(invalidTableConfigError)).toEqual(true);
+      expect(consoleStub.calledWithMatch(invalidTableConfigError)).toEqual(
+        true
+      );
 
       console.warn.restore();
-
     });
 
     it('should not render a table with more row columns than header columns', () => {
-
       let consoleStub = sinon.stub(console, 'warn');
 
       const invalidRows = rows.map(row => Array.from(row));
@@ -74,13 +80,19 @@ describe('Table', () => {
 
       const table = shallow(<Table columns={columns} rows={invalidRows} />);
 
-      expect(table.find('thead').find('TableRow').dive().find('td')).toHaveLength(invalidRows[0].length);
+      expect(
+        table
+          .find('thead')
+          .find('TableRow')
+          .dive()
+          .find('td')
+      ).toHaveLength(invalidRows[0].length);
 
-      expect(consoleStub.calledWithMatch(invalidTableConfigError)).toEqual(true);
+      expect(consoleStub.calledWithMatch(invalidTableConfigError)).toEqual(
+        true
+      );
 
       console.warn.restore();
     });
-
-
   });
 });
