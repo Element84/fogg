@@ -74,7 +74,7 @@
     "test": "jest --config ./config/jest.config.js && echo '> Finished testing ✅'"
   },
   "lint-staged": {
-    "src/**/*.js": [
+    "**/*.js": [
       "yarn format",
       "yarn lint",
       "git add"
