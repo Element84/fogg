@@ -1,0 +1,25 @@
+.table-row {
+
+  border-top: solid 1px $color-gray1;
+
+  &:last-child {
+    border-bottom: solid 1px $color-gray1;
+  }
+
+  td {
+    padding: 1em;
+  }
+
+  p {
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+  }
+
+}

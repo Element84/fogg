@@ -1,0 +1,19 @@
+.table {
+
+  table {
+    border-collapse: collapse;
+  }
+
+}
+
+.table-header.table-row {
+
+  color: $color-gray5;
+  font-weight: bold;
+  font-size: .8em;
+
+  td {
+    padding: 1.25em;
+  }
+
+}
