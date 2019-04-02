@@ -1,6 +1,6 @@
 import React from 'react';
 
-import UserTable from './UserTable';
+import UsersTable from './UsersTable';
 
 // going to add user name, org, and plan
 // take user data and display it in a table
@@ -29,7 +29,7 @@ const Users = () => {
   // map over data and return everything as seperata arrays
   const users = [userData.map(user => Object.values(user))];
 
-  return <UserTable headers={headers} users={users} />;
+  return <UsersTable headers={headers} users={users} />;
 };
 
 export default Users;
