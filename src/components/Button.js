@@ -13,7 +13,7 @@ const Button = ({
   eventCategory = null,
   eventAction = null,
   eventLabel = null
-}) => {
+} = {}) => {
   let buttonElement = null;
 
   className = `button ${className}`;

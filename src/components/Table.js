@@ -57,6 +57,7 @@ export default Table;
  */
 
 function tableConfigurationIsValid (columns, rows) {
+  if (!Array.isArray(rows) || !Array.isArray(columns)) return false;
   const invalidRows = rows.filter(row => row.length !== columns.length);
   return invalidRows.length === 0;
 }
