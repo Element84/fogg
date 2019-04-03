@@ -1,16 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+// import React from 'react';
+// import PropTypes from 'prop-types';
 
-import Table from './Table';
+// import Table from './Table';
+// import Button from './Button';
 
-const columns = this.props.headers;
-const rows = this.props.users;
+// const userData = [];
+// const headers = [];
+// const users = userData.map(({ firstName, lastName, organization, role }) => {
+//   return [`${firstName} ${lastName}`, organization, role, <Button />];
+// });
 
-const UsersTable = props => <Table columns={columns} rows={rows} />;
+// const UsersTable = ({ headers, users }) => (
+//   <Table columns={headers} rows={users} />
+// );
 
-UsersTable.propTypes = {
-  headers: PropTypes.array,
-  users: PropTypes.array
-};
+// UsersTable.propTypes = {
+//   headers: PropTypes.array,
+//   users: PropTypes.array
+// };
 
-export default UsersTable;
+// export default UsersTable;
