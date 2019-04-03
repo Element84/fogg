@@ -4,7 +4,6 @@
 
 // import UsersTable from 'components/UsersTable';
 // import Button from 'components/Button';
-// import { italic } from 'ansi-colors';
 
 // describe('Users Table', () => {
 //   const userData = [
@@ -47,9 +46,9 @@
 //       organization: 'Vance Refridgeration',
 //       role: 'Admin'
 //     }
-//   ]
+//   ];
 
-//   const columns = ['Last Name', 'First Name', 'Organization', 'Role']
+//   const columns = ['Last Name', 'First Name', 'Organization', 'Role'];
 
 //   const rows = userData.map(
 //     ({ lastName, firstName, organization, role }, index) => {
@@ -63,18 +62,33 @@
 //     }
 //   );
 
+//   const wrapper = shallow(<UsersTable headers={columns} users={userData} />);
+//   console.log('debugger: ', wrapper.find('table').debug());
+
 //   describe('Render', () => {
-//     const usersTable = shallow(<UsersTable headers={columns} users={userData} />)
+//     const usersTable = shallow(
+//       <UsersTable headers={columns} users={userData} />
+//     );
 
 //     it('should render a table header', () => {
+//       console.log('user table: ', usersTable.html());
+//       console.log(
+//         'header: ',
+//         usersTable
+//           .dive()
+//           .find('table')
+//           .find('thead')
+//           .find('td')
+//           .html()
+//       );
 //       expect(
 //         usersTable
 //           .find('tbody')
 //           .find('TableRow')
 //           .first()
 //           .props().cells
-//       ).toEqual(rows[0])
-//     })
+//       ).toEqual(columns);
+//     });
 
 //     it('should render a table row', () => {
 //       expect(
@@ -85,31 +99,37 @@
 //           .props().cells
 //       ).toEqual(rows[0]);
 //     });
-//   })
+//   });
 
 //   describe('Props', () => {
-//     const usersTable = shallow(<UsersTable headers={columns} users={userData} />)
+//     const usersTable = shallow(
+//       <UsersTable headers={columns} users={userData} />
+//     );
 
-//     //expect rows[0] === columns
+//     // expect rows[0] === columns
 //     it('should display custom headers', () => {
-//       console.log('tbody', usersTable.find('tbody').find('TableRow').first().props('cells'))
+//       console.log(
+//         'tbody',
+//         usersTable
+//           .find('tbody')
+//           .find('TableRow')
+//           .first()
+//           .props('cells')
+//       );
 //       expect(
 //         usersTable
-//         .find('tbody')
-//         .find('TableRow')
-//         .first()
-//         .props().cells
-//       ).toEqual(`columns`)
-//     })
+//           .find('tbody')
+//           .find('TableRow')
+//           .first()
+//           .props().cells
+//       ).toEqual(`columns`);
+//     });
 
-//   //expect users === usersData
+//     // expect users === usersData
 //     it('should take in userData as users prop', () => {
-//       console.log('user props: ', usersTable.props(users))
-//       console.log('also maybe props: ', usersTable.props('users.rows'))
-//       expect(
-//         usersTable
-//         .props('users')
-//       ).toEqual(`{[${columns}], [${rows}]}`)
-//     })
-//   })
-// })
+//       console.log('user props: ', usersTable.props(users));
+//       console.log('also maybe props: ', usersTable.props('users.rows'));
+//       expect(usersTable.props('users')).toEqual(`{[${columns}], [${rows}]}`);
+//     });
+//   });
+// });
