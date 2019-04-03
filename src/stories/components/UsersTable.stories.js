@@ -20,7 +20,7 @@ const userData = [
   {
     id: 2,
     firstName: 'Dwight',
-    lastName: 'Shroot',
+    lastName: 'Schrute',
     address: {
       street: '1725 Slough Avenue suite 200',
       city: 'Scranton',
@@ -45,10 +45,14 @@ const userData = [
   }
 ];
 
-const columns = ['Last Name', 'First Name', 'Organization', 'Role'];
+const columns = ['Last of Her Name', 'First Men', 'Order', 'Roller Coaster'];
 
 const stories = storiesOf('Components|UsersTable', module);
 
-stories.add('Users Table', () => {
+stories.add('Default', () => {
+  return <UsersTable users={userData} />;
+});
+
+stories.add('Custom Headers', () => {
   return <UsersTable headers={columns} users={userData} />;
 });
