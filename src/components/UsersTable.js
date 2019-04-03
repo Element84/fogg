@@ -1,22 +1,30 @@
-// import React from 'react';
-// import PropTypes from 'prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-// import Table from './Table';
-// import Button from './Button';
+import Table from './Table';
+import Button from './Button';
 
-// const userData = [];
-// const headers = [];
-// const users = userData.map(({ firstName, lastName, organization, role }) => {
-//   return [`${firstName} ${lastName}`, organization, role, <Button />];
-// });
+const DEFAULT_HEADERS = ['Last Name', 'First Name', 'Organization', 'Role'];
 
-// const UsersTable = ({ headers, users }) => (
-//   <Table columns={headers} rows={users} />
-// );
+const UsersTable = ({ headers = DEFAULT_HEADERS, users }) => {
+  const rows = users.map(
+    ({ lastName, firstName, organization, role }, index) => {
+      return [
+        lastName,
+        firstName,
+        organization,
+        role,
+        <Button key={`UsersTable-Button-${index}`} />
+      ];
+    }
+  );
 
-// UsersTable.propTypes = {
-//   headers: PropTypes.array,
-//   users: PropTypes.array
-// };
+  return <Table columns={headers} rows={rows} />;
+};
 
-// export default UsersTable;
+UsersTable.propTypes = {
+  headers: PropTypes.array,
+  users: PropTypes.array
+};
+
+export default UsersTable;
