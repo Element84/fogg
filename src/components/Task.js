@@ -4,14 +4,16 @@ import PropTypes from 'prop-types';
 import Table from './Table';
 import Button from './Button';
 
-// take a task by user
-// put a date on it
-// add a status
-// add a button
-
 const DEFAULT_HEADERS = ['Name', 'Date', 'Status'];
 
 const Task = ({ headers = DEFAULT_HEADERS, task }) => {
+  let date = new Date();
+  const dd = String(date.getDate()).padStart(2, '0');
+  const mm = String(date.getMonth() + 1).padStart(2, '0');
+  const yyyy = date.getFullYear();
+
+  date = mm + '/' + dd + '/' + yyyy;
+
   const rows = task.map(({ name, date, status }, index) => {
     return [name, date, status, <Button key={`Task-Button-${index}`} />];
   });
