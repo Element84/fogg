@@ -85,7 +85,7 @@ describe('Users Table', () => {
       <UsersTable headers={customColumns} users={userData} />
     );
 
-    it('should render a table with default headers', () => {
+    it('should render a table with custom headers', () => {
       const propColumns = usersTable.find('Table').prop('columns');
       expect(propColumns).toEqual(customColumns);
     });
