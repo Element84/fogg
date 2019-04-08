@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Table from './Table';
 import Button from './Button';
 
+import { formatDate } from '../lib/datetime';
+
 const DEFAULT_HEADERS = ['Name', 'Window Open', 'Window Close', 'Status'];
 
 const OrdersList = ({ headers = DEFAULT_HEADERS, orders }) => {
@@ -27,11 +29,3 @@ OrdersList.propTypes = {
 };
 
 export default OrdersList;
-
-function formatDate (dateTime) {
-  let date = new Date(dateTime);
-  const dd = String(date.getDate()).padStart(2, '0');
-  const mm = String(date.getMonth() + 1).padStart(2, '0');
-  const yyyy = date.getFullYear();
-  return (date = mm + '/' + dd + '/' + yyyy);
-}
