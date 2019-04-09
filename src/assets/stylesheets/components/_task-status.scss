@@ -1,0 +1,15 @@
+.task-status-header-info {
+  display: inline-block;
+}
+.task-status-info-wrapper {
+  border: 1px solid #000;
+  height: 20vh;
+  width: 30vw;
+}
+.task-status-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;  
+  // align-self: center;
+  padding-top: 5vh;
+}
