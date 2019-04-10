@@ -16,7 +16,7 @@ import { FaCheck } from 'react-icons/fa';
 
 const InputButton = ({
   children,
-  type,
+  type = 'radio',
   label,
   id,
   value,
