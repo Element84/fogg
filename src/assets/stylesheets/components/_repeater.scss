@@ -1,0 +1,33 @@
+.repeater {
+
+  .checkbox-button label {
+    padding: 0.5em;
+  }
+
+  .input-group {
+    border-left: 1px solid black;
+    padding-left: 1em;
+    margin: 1em;
+  }
+
+  .repeater-row {
+    display: flex;
+
+    .form-input {
+      width: 100%;
+      padding: .5em;
+    }
+
+    &[data-col="2"] .form-input{
+      width: 50%;
+    }
+
+    &[data-col="3"] .form-input{
+      width: 33.333%;
+    }
+
+    &[data-col="4"] .form-input{
+      width: 25%;
+    }
+  }
+}
