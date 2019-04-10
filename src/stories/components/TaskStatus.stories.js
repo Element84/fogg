@@ -18,10 +18,8 @@ const data = [
   }
 ];
 
-const headers = ['Window Open', 'Status', 'Window Close'];
-
 const stories = storiesOf('Components|TaskStatus', module);
 
 stories.add('Default', () => {
-  return <TaskStatus headers={headers} task={data} />;
+  return <TaskStatus task={data} />;
 });

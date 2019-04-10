@@ -5,29 +5,47 @@ import Button from './Button';
 
 import { formatDate } from '../lib/datetime';
 
-const TaskStatus = ({ header, task }) => {
+const TaskStatus = ({ task }) => {
   const statusBox = task.map(({ status, windowOpen, windowClose }, index) => {
     return [
-      // <p>Window Open</p>,
-      <p key={index}>{formatDate(windowOpen)}</p>,
-      <b key={index}>
-        <p key={index}>{status}</p>
-      </b>,
-      // <p>Window Close</p>,
-      <p key={index}>{formatDate(windowClose)}</p>
+      <p key={`status-info-${index}`} className="status-info">
+        {formatDate(windowOpen)}
+      </p>,
+      // <b key={`status-info-${index}`}>
+      <p
+        key={`status-info-${index}`}
+        className="status-info status-info-status"
+      >
+        {status}
+      </p>,
+      // </b>,
+      <p key={`status-info-${index}`} className="status-info">
+        {formatDate(windowClose)}
+      </p>
     ];
   });
+
+  const headers = task.map(({ windowOpen, windowClose }, index) => {
+    return [
+      <p key={`status-headers-${index}`}>{Object.keys({ windowOpen })}</p>,
+      <p key={`status-headers-${index}`}>{Object.keys({ windowClose })}</p>
+    ];
+  });
+
   return (
     <>
       <div className="task-status">
-        <section className="task-status-header">
+        <section className="task-status-meta">
           <Button />
-          <section className="task-status-header-info">
+          <section className="task-status-meta-data">
             <p>{task[0].name}</p>
             <p>ID: {task[0].id}</p>
           </section>
         </section>
         <div className="task-status-info-wrapper">
+          <section className="task-status-headers-wrapper">
+            <section className="task-status-headers">{headers}</section>
+          </section>
           <section className="task-status-info">{statusBox}</section>
         </div>
       </div>
@@ -36,7 +54,6 @@ const TaskStatus = ({ header, task }) => {
 };
 
 TaskStatus.propTypes = {
-  header: PropTypes.array,
   task: PropTypes.array
 };
 

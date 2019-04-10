@@ -1,5 +1,10 @@
-.task-status-header-info {
+.task-status-meta-data {
   display: inline-block;
+}
+.task-status-headers {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .task-status-info-wrapper {
   border: 1px solid #000;
@@ -10,6 +15,11 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;  
-  // align-self: center;
-  padding-top: 5vh;
+}
+.status-info {
+  padding-bottom: 15vh;
+}
+.status-info-status {
+  font-weight: bold;
+  // padding-top: -2vh;
 }
