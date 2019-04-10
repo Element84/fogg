@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
+import Form from 'components/Form';
 import FormInput from 'components/FormInput';
 
 describe('FormInput', () => {
@@ -19,21 +20,6 @@ describe('FormInput', () => {
       value: 'final-space'
     }
   ];
-
-  const form = (
-    <form>
-      <FormInput id="name" label="Name" required={true} />
-      <FormInput id="email" label="Email" type="email" required={true} />
-      <FormInput
-        id="organization"
-        label="Organization"
-        type="select"
-        options={selectOptions}
-      />
-      <FormInput id="admin-only" label="Admin Only" disabled={true} />
-      <FormInput id="comments" label="Comments" type="textarea" />
-    </form>
-  );
 
   describe('Render', () => {
     const label = 'Name';

@@ -71,3 +71,49 @@ function routeIsInternal (route) {
 }
 
 module.exports.routeIsInternal = routeIsInternal;
+
+/**
+ * parseNumber
+ * @description Attempts to retrieve a number value from the given input
+ */
+
+function parseNumber (value) {
+  const defaultValue = undefined;
+  let calculatedValue;
+
+  if (typeof value === 'undefined') return defaultValue;
+  if (typeof value === 'number') return value;
+
+  // Try to be forgiving and parse a number from a string
+
+  if (typeof value === 'string') {
+    calculatedValue = parseInt(value);
+    if (!isNaN(calculatedValue)) return calculatedValue;
+  }
+
+  return defaultValue;
+}
+
+module.exports.parseNumber = parseNumber;
+
+/**
+ * getRegex
+ * @description Caches regex creation to avoid additional resources used each validation check
+ */
+
+const regexCache = {};
+
+function getRegex (pattern, flags = '') {
+  const cacheKey = `${pattern}${flags}`;
+
+  if (regexCache[cacheKey]) {
+    return regexCache[cacheKey];
+  }
+
+  regexCache[cacheKey] = new RegExp(pattern, flags);
+
+  return regexCache[cacheKey];
+}
+
+
+module.exports.getRegex = getRegex;

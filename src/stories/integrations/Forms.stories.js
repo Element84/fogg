@@ -11,18 +11,25 @@ const stories = storiesOf('Integrations|Forms', module);
 
 stories.add('Default', () => {
   function handleSubmit (event) {
-    event.persist();
-    event.preventDefault();
     action('form-submit')(event);
   }
 
   function handleChange (event) {
-    event.persist();
     action('form-change')(event);
   }
 
+  const validationRules = {
+    firstName: {
+      required: true
+    },
+    lastName: {
+      minLength: 4,
+      maxLength: 8
+    },
+  }
+
   return (
-    <Form onSubmit={handleSubmit} onChange={handleChange}>
+    <Form onSubmit={handleSubmit} onChange={handleChange} rules={validationRules}>
       <FormRow>
         <FormInput id="name" label="Name" required={true} />
 

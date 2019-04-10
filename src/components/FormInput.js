@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+
+import { FormContext } from '../context';
 
 const INPUT_PROPS_WHITELIST = [
   'id',
@@ -22,6 +24,9 @@ const INPUT_PROPS_WHITELIST = [
  */
 
 const FormInput = props => {
+
+  const { fields, updateField } = useContext(FormContext);
+
   const {
     value = '',
     type = 'text',
@@ -104,6 +109,7 @@ const FormInput = props => {
   );
 
   function handleOnInput (event) {
+    updateField(event.target.value);
     if (typeof onInput === 'function') {
       onInput(event);
     }
