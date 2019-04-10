@@ -7,28 +7,38 @@ import { formatDate } from '../lib/datetime';
 
 const TaskStatus = ({ task }) => {
   const statusBox = task.map(({ status, windowOpen, windowClose }, index) => {
+    // headers === key value of windowOpen and windowClose split out into two words => Window Open && Window Close
+    // flex-direction: columns on WO && WC headers and values
+    // flex-direction: rows on everything
+    // wo ___ wc
+    // v stat v
     return [
-      <p key={`status-info-${index}`} className="status-info">
-        {formatDate(windowOpen)}
-      </p>,
-      // <b key={`status-info-${index}`}>
+      <div key={`status-headers-${index}`}>
+        <p
+          key={`status-headers-${index}`}
+          className="status-info status-info-window-open"
+        >
+          {Object.keys({ windowOpen })}
+        </p>
+        <p key={`status-info-${index}`} className="status-info">
+          {formatDate(windowOpen)}
+        </p>
+      </div>,
       <p
         key={`status-info-${index}`}
         className="status-info status-info-status"
       >
         {status}
       </p>,
-      // </b>,
-      <p key={`status-info-${index}`} className="status-info">
-        {formatDate(windowClose)}
-      </p>
-    ];
-  });
-
-  const headers = task.map(({ windowOpen, windowClose }, index) => {
-    return [
-      <p key={`status-headers-${index}`}>{Object.keys({ windowOpen })}</p>,
-      <p key={`status-headers-${index}`}>{Object.keys({ windowClose })}</p>
+      <div key={`status-headers-${index}`}>
+        <p
+          key={`status-headers-${index}`}
+          className="status-info status-info-window-close"
+        >
+          {Object.keys({ windowClose })}
+        </p>
+        <p key={`status-info-${index}`}>{formatDate(windowClose)}</p>
+      </div>
     ];
   });
 
@@ -43,9 +53,6 @@ const TaskStatus = ({ task }) => {
           </section>
         </section>
         <div className="task-status-info-wrapper">
-          <section className="task-status-headers-wrapper">
-            <section className="task-status-headers">{headers}</section>
-          </section>
           <section className="task-status-info">{statusBox}</section>
         </div>
       </div>

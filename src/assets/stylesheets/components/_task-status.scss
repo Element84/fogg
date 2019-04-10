@@ -16,10 +16,10 @@
   flex-direction: row;
   justify-content: space-around;  
 }
-.status-info {
-  padding-bottom: 15vh;
-}
 .status-info-status {
   font-weight: bold;
-  // padding-top: -2vh;
+  padding-top: 2vh;
+}
+.status-info-window-open, .status-info-window-close {
+  font-weight: bold;
 }
