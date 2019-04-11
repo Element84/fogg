@@ -5,9 +5,9 @@ import Button from './Button';
 
 import { formatDate } from '../lib/datetime';
 
-const DEFAULT_HEADERS = ['Window Open', 'Window Close']
+const DEFAULT_HEADERS = ['Window Open', 'Window Close'];
 
-const TaskStatus = ({ headers={DEFAULT_HEADERS}, task }) => {
+const TaskStatus = ({ headers = { DEFAULT_HEADERS }, task }) => {
   const statusBox = task.map(({ status, windowOpen, windowClose }, index) => {
     return [
       <div key={`status-headers-${index}`}>

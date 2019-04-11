@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import TaskStatus from '../../components/TaskStatus';
+import StatusIndicator from '../../components/StatusIndicator';
 
 /* statuses
 pending, accepted, rejected,
