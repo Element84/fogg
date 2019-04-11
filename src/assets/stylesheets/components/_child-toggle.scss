@@ -13,6 +13,8 @@
   .form-row,
   .repeater-row {
     display: flex;
+    max-width: 100%;
+    margin: 0;
 
     .form-input {
       width: 100%;
