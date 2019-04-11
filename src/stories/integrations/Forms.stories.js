@@ -25,11 +25,15 @@ stories.add('Default', () => {
     lastName: {
       minLength: 4,
       maxLength: 8
-    },
-  }
+    }
+  };
 
   return (
-    <Form onSubmit={handleSubmit} onChange={handleChange} rules={validationRules}>
+    <Form
+      onSubmit={handleSubmit}
+      onChange={handleChange}
+      rules={validationRules}
+    >
       <FormRow>
         <FormInput id="name" label="Name" required={true} />
 

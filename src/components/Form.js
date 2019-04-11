@@ -15,7 +15,7 @@ const Form = ({
   name = 'theform',
   onSubmit,
   onChange,
-  rules = {},
+  rules = {}
 }) => {
   let formClassName = 'form';
 
@@ -26,11 +26,11 @@ const Form = ({
   const { fields, updateField, handleChange, handleSubmit } = useForm({
     onSubmit,
     onChange,
-    rules,
-  })
+    rules
+  });
 
   return (
-    <FormContext.Provider value={{fields, updateField}}>
+    <FormContext.Provider value={{ fields, updateField }}>
       <form
         className={formClassName}
         name={name}
@@ -52,7 +52,8 @@ Form.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string,
   onSubmit: PropTypes.func,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  rules: PropTypes.object
 };
 
 export default Form;

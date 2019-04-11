@@ -14,12 +14,14 @@ describe('Form', () => {
 
   const defaultFormEvent = {
     persist: () => {},
-    preventDefault: () => {},
+    preventDefault: () => {}
   };
 
   describe('Text', () => {
     const formClass = 'test-class';
-    const form = shallow(<Form className={formClass}>Chookity!</Form>).find('form');
+    const form = shallow(<Form className={formClass}>Chookity!</Form>).find(
+      'form'
+    );
 
     it('should render the given text', () => {
       expect(form.text()).toEqual('Chookity!');
@@ -51,10 +53,7 @@ describe('Form', () => {
     }
 
     const form = shallow(
-      <Form
-        onSubmit={handleSubmit}
-        onChange={handleChange}
-      >
+      <Form onSubmit={handleSubmit} onChange={handleChange}>
         {inputs}
       </Form>
     ).find('form');
@@ -68,7 +67,6 @@ describe('Form', () => {
       form.simulate('change', defaultFormEvent);
       expect(changeTest).toEqual(2);
     });
-
   });
 
   describe('Invalid Events', () => {

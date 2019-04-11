@@ -115,5 +115,4 @@ function getRegex (pattern, flags = '') {
   return regexCache[cacheKey];
 }
 
-
 module.exports.getRegex = getRegex;

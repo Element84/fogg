@@ -49,7 +49,7 @@ function validate (rules = {}, value) {
   // If we don't have a length because it's undefined or if we have no
   // length but it's required, it's not valid
 
-  if (isRequired && ( !valueLength || valueLength === 0) ) return false;
+  if (isRequired && (!valueLength || valueLength === 0)) return false;
 
   if (minLength && valueLength < minLength) return false;
   if (maxLength && valueLength > maxLength) return false;

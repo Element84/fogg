@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { FormContext } from '../context';
+import { FormNoContext } from '../context/form-context';
 
 const INPUT_PROPS_WHITELIST = [
   'id',
@@ -24,8 +25,9 @@ const INPUT_PROPS_WHITELIST = [
  */
 
 const FormInput = props => {
+  // TODO: is NoContext a good pattern?
 
-  const { fields, updateField } = useContext(FormContext);
+  const { updateField } = useContext(FormContext) || FormNoContext;
 
   const {
     value = '',

@@ -1,9 +1,8 @@
 import { useState } from 'react';
 
-import { FormContext } from '../context';
+// import { FormContext } from '../context';
 
 const useForm = ({ onSubmit, onChange, rules }) => {
-
   const [fields, setFields] = useState({});
 
   /**
@@ -12,7 +11,6 @@ const useForm = ({ onSubmit, onChange, rules }) => {
    */
 
   function handleSubmit (event) {
-
     event.persist();
     event.preventDefault();
 
@@ -24,7 +22,6 @@ const useForm = ({ onSubmit, onChange, rules }) => {
     if (typeof onSubmit === 'function') {
       return onSubmit(event);
     }
-
   }
 
   /**
@@ -33,13 +30,11 @@ const useForm = ({ onSubmit, onChange, rules }) => {
    */
 
   function handleChange (event) {
-
     event.persist();
 
     if (typeof onChange === 'function') {
       onChange(event);
     }
-
   }
 
   /**
@@ -47,10 +42,8 @@ const useForm = ({ onSubmit, onChange, rules }) => {
    * @description Manages event handler for change type events on the form
    */
 
-  function updateField(field = {}) {
-
+  function updateField (field = {}) {
     setFields(fields => {
-
       const fieldName = event.target.name;
       let fieldAttributes = fields[fieldName] || {};
 
@@ -60,20 +53,17 @@ const useForm = ({ onSubmit, onChange, rules }) => {
 
       return {
         ...fields,
-        [fieldName]: fieldAttributes,
-      }
-
-    })
-
+        [fieldName]: fieldAttributes
+      };
+    });
   }
 
   return {
     fields,
     updateField,
     handleSubmit,
-    handleChange,
-  }
-
+    handleChange
+  };
 };
 
 export default useForm;
