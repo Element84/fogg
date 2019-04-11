@@ -1,14 +1,14 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import Repeater from 'components/Repeater';
+import ChildToggle from 'components/ChildToggle';
 
-describe('Repeater', () => {
+describe('ChildToggle', () => {
   describe('Default', () => {
     const repeater = mount(
-      <Repeater>
+      <ChildToggle name="repeater" id="repeater" label="Repeat">
         <div className="unique" />
-      </Repeater>
+      </ChildToggle>
     );
 
     it('does not render children when not checked', () => {

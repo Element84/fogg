@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import InputButton from 'components/InputButton';
 
@@ -9,19 +9,19 @@ describe('InputButton', () => {
       <span>hello world</span>
     </InputButton>
   );
-  const checkboxButton = shallow(<InputButton type="checkbox" />);
+  const checkboxButton = mount(<InputButton type="checkbox" name="checkbox" />);
 
   it('renders an InputButton', () => {
-    expect(inputButton.find('.radio-button-content span').text()).toEqual(
+    expect(inputButton.find('.input-button-content span').text()).toEqual(
       'hello world'
     );
   });
 
   it('renders an radio button by default', () => {
-    expect(inputButton.find('.radio-button'));
+    expect(inputButton.find('.radio-button').exists()).toEqual(true);
   });
 
   it('renders a checkbox button', () => {
-    expect(checkboxButton.find('.checkbox-button'));
+    expect(checkboxButton.find('.checkbox-button').exists()).toEqual(true);
   });
 });

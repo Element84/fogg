@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useRepeater = () => {
+const useChildToggle = () => {
   const [checked, setChecked] = useState(false);
 
   function handleChange (event) {
@@ -13,4 +13,4 @@ const useRepeater = () => {
   };
 };
 
-export default useRepeater;
+export default useChildToggle;

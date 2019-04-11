@@ -46,7 +46,7 @@ const InputButton = ({
           </span>
         </div>
 
-        <div className="radio-button-content">{children || label}</div>
+        <div className="input-button-content">{children || label}</div>
       </label>
     </div>
   );

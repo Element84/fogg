@@ -1,3 +1,3 @@
-import useRepeater from './useRepeater';
+import useChildToggle from './useChildToggle';
 
-export { useRepeater };
+export { useChildToggle };

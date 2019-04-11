@@ -1,10 +1,10 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Repeater from '../../components/Repeater';
+import ChildToggle from '../../components/ChildToggle';
 import FormInput from '../../components/FormInput';
-import RepeaterRow from '../../components/RepeaterRow';
+import FormRow from '../../components/FormRow';
 
-const stories = storiesOf('Components|Repeater', module);
+const stories = storiesOf('Components|ChildToggle', module);
 
 const intervalOptions = [
   {
@@ -23,17 +23,22 @@ const intervalOptions = [
 
 stories.add('Default', () => {
   return (
-    <Repeater>
-      <RepeaterRow>
+    <ChildToggle
+      label="Repeat"
+      className="repeater"
+      name="repeater"
+      id="repeater"
+    >
+      <FormRow className="repeater-row">
         <FormInput type="select" label="Interval" options={intervalOptions} />
-      </RepeaterRow>
-      <RepeaterRow col={2}>
+      </FormRow>
+      <FormRow className="repeater-row" col={2}>
         <FormInput type="text" label="Separation Min" />
         <FormInput type="text" label="Separation Max" />
-      </RepeaterRow>
-      <RepeaterRow col={2}>
+      </FormRow>
+      <FormRow className="repeater-row" col={2}>
         <FormInput type="text" label="Max Collections" />
-      </RepeaterRow>
-    </Repeater>
+      </FormRow>
+    </ChildToggle>
   );
 });
