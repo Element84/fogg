@@ -53,7 +53,7 @@ const FormInput = props => {
     const allProps = Object.assign(props, inputProps);
     return (
       <>
-        <FaCalendarAlt />
+        <FaCalendarAlt {...props} />
         <input type="text" {...allProps} />
       </>
     );
