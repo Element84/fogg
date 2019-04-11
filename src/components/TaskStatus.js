@@ -5,20 +5,17 @@ import Button from './Button';
 
 import { formatDate } from '../lib/datetime';
 
-const TaskStatus = ({ task }) => {
+const DEFAULT_HEADERS = ['Window Open', 'Window Close']
+
+const TaskStatus = ({ headers={DEFAULT_HEADERS}, task }) => {
   const statusBox = task.map(({ status, windowOpen, windowClose }, index) => {
-    // headers === key value of windowOpen and windowClose split out into two words => Window Open && Window Close
-    // flex-direction: columns on WO && WC headers and values
-    // flex-direction: rows on everything
-    // wo ___ wc
-    // v stat v
     return [
       <div key={`status-headers-${index}`}>
         <p
           key={`status-headers-${index}`}
           className="status-info status-info-window-open"
         >
-          {Object.keys({ windowOpen })}
+          {DEFAULT_HEADERS[0]}
         </p>
         <p key={`status-info-${index}`} className="status-info">
           {formatDate(windowOpen)}
@@ -35,7 +32,7 @@ const TaskStatus = ({ task }) => {
           key={`status-headers-${index}`}
           className="status-info status-info-window-close"
         >
-          {Object.keys({ windowClose })}
+          {DEFAULT_HEADERS[1]}
         </p>
         <p key={`status-info-${index}`}>{formatDate(windowClose)}</p>
       </div>
@@ -45,13 +42,6 @@ const TaskStatus = ({ task }) => {
   return (
     <>
       <div className="task-status">
-        <section className="task-status-meta">
-          <Button />
-          <section className="task-status-meta-data">
-            <p>{task[0].name}</p>
-            <p>ID: {task[0].id}</p>
-          </section>
-        </section>
         <div className="task-status-info-wrapper">
           <section className="task-status-info">{statusBox}</section>
         </div>
