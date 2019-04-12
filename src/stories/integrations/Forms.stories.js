@@ -92,6 +92,10 @@ stories.add('Default', () => {
       </FormRow>
 
       <FormRow>
+        <FormInput id="datetime" label="Datetime" type="datetime" />
+      </FormRow>
+
+      <FormRow>
         <Button>Submit</Button>
       </FormRow>
 

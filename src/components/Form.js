@@ -19,16 +19,18 @@ const Form = ({
 }) => {
   let formClassName = 'form';
 
+  const formHook = {
+    onSubmit,
+    onChange,
+    rules
+  };
+
   const {
     updateField,
     handleChange,
     handleSubmit,
     invalidFields = []
-  } = useForm({
-    onSubmit,
-    onChange,
-    rules
-  });
+  } = useForm(formHook);
 
   if (typeof className === 'string') {
     formClassName = `${formClassName} ${className}`;
