@@ -21,5 +21,26 @@ const task = [
 const stories = storiesOf('Components|StatusIndicator', module);
 
 stories.add('Default', () => {
-  return <StatusIndicator task={task} />;
+  const statusList = [
+    {
+      label: 'Pending',
+      id: 'pending'
+    },
+    {
+      label: 'Accepted',
+      id: 'accepted'
+    },
+    {
+      label: 'Partially Completed',
+      id: 'partially-completed'
+    },
+    {
+      label: 'Completed',
+      id: 'completed'
+    }
+  ];
+
+  return (
+    <StatusIndicator activeId={statusList[1].id} statusList={statusList} />
+  );
 });

@@ -14,7 +14,14 @@ const data = [
     name: 'Make Dwight Smack Himself in the Face',
     windowOpen: 1554416208102,
     windowClose: 1554782400000,
-    status: 'Partially Completed'
+    status: 'partially-completed'
+  },
+  {
+    id: 222,
+    name: 'Make Dwight Smack Himself in the Face',
+    windowOpen: 1554416208102,
+    windowClose: 1554782400000,
+    status: 'accepted'
   }
 ];
 
@@ -23,5 +30,7 @@ const headers = ['Window Open', 'Window Close'];
 const stories = storiesOf('Components|TaskStatus', module);
 
 stories.add('Default', () => {
-  return <TaskStatus headers={headers} task={data} />;
+  return data.map(task => {
+    return <TaskStatus headers={headers} task={task} />;
+  });
 });
