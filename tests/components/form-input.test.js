@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import sinon from 'sinon';
 
 import FormInput from 'components/FormInput';
@@ -164,6 +164,25 @@ describe('FormInput', () => {
         expect(inputTest).toEqual(selectOptions[1].value);
       });
     });
+
+    describe('Datetime', () => {
+      const input = mount(<FormInput id="datetime" type="datetime" />);
+
+      it('should display datepicker on focus', () => {
+        input.find('input').simulate('focus');
+        expect(input.find('.rdtOpen').exists()).toEqual(true);
+      });
+
+      it('should display datepicker on click', () => {
+        input.find('input').simulate('click');
+        expect(input.find('.rdtOpen').exists()).toEqual(true);
+      });
+
+      it('should display datepicker on clicking icon', () => {
+        input.find('svg').simulate('click');
+        expect(input.find('.rdtOpen').exists()).toEqual(true);
+      });
+    });
   });
 
   describe('Invalid Events', () => {
@@ -222,6 +241,22 @@ describe('FormInput', () => {
           onInput={'test'}
         />
       );
+
+      it('should not throw an error when trying to fire the change handler', () => {
+        expect(input.simulate('change')).toEqual({});
+      });
+
+      it('should not throw an error when trying to fire the input handler', () => {
+        expect(input.simulate('input')).toEqual({});
+      });
+
+      expect(consoleStub.callCount).toEqual(2);
+      expect(
+        consoleStub.calledWithMatch('Warning: Failed prop type: Invalid prop')
+      ).toEqual(true);
+    });
+    describe('Datetime', () => {
+      const input = shallow(<FormInput id="datetime" type="datetime" />);
 
       it('should not throw an error when trying to fire the change handler', () => {
         expect(input.simulate('change')).toEqual({});

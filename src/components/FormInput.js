@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import Datetime from 'react-datetime';
+import { FaCalendarAlt } from 'react-icons/fa';
 
 import { FormContext, FormNoContext } from '../context';
 
@@ -58,6 +60,16 @@ const FormInput = props => {
   inputProps.onInput = handleOnInput;
   inputProps.onChange = handleOnChange;
 
+  function renderInput (props) {
+    const allProps = Object.assign(props, inputProps);
+    return (
+      <>
+        <FaCalendarAlt {...props} />
+        <input type="text" {...allProps} className="form-input-field" />
+      </>
+    );
+  }
+
   if (type === 'select') {
     input = (
       <select className="form-input-field" {...inputProps}>
@@ -81,6 +93,8 @@ const FormInput = props => {
     input = (
       <textarea className="form-input-field" type={type} {...inputProps} />
     );
+  } else if (type === 'datetime') {
+    input = <Datetime renderInput={renderInput} />;
   } else {
     input = <input className="form-input-field" type={type} {...inputProps} />;
   }
@@ -127,7 +141,8 @@ FormInput.propTypes = {
   required: PropTypes.bool,
   inputMode: PropTypes.string,
   onInput: PropTypes.func,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func
 };
 
 export default FormInput;

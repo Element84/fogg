@@ -43,6 +43,11 @@ stories.add('Default', () => {
         label="Default Textarea"
         type="textarea"
       />
+      <FormInput
+        id="default-datetime"
+        label="Default Datetime"
+        type="datetime"
+      />
     </BaseForm>
   );
 });
