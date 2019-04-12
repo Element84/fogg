@@ -1,0 +1,36 @@
+.child-toggle {
+
+  .checkbox-button label {
+    padding: 0.5em;
+  }
+
+  .children {
+    border-left: 1px solid black;
+    padding-left: 1em;
+    margin: 1em;
+  }
+
+  .form-row,
+  .repeater-row {
+    display: flex;
+    max-width: 100%;
+    margin: 0;
+
+    .form-input {
+      width: 100%;
+      padding: .5em;
+    }
+
+    &[data-col="2"] .form-input{
+      width: 50%;
+    }
+
+    &[data-col="3"] .form-input{
+      width: 33.333%;
+    }
+
+    &[data-col="4"] .form-input{
+      width: 25%;
+    }
+  }
+}
