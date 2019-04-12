@@ -8,20 +8,20 @@ pending, accepted, rejected,
 partially completed, cancelled, anomaly,
 completed */
 
-const data = [
-  {
-    id: 221,
-    name: 'Make Dwight Smack Himself in the Face',
-    windowOpen: 1554416208102,
-    windowClose: 1554782400000,
-    status: 'Partially Completed'
-  }
-];
+// const data = [
+//   {
+//     id: 221,
+//     name: 'Make Dwight Smack Himself in the Face',
+//     windowOpen: 1554416208102,
+//     windowClose: 1554782400000,
+//     status: 'Partially Completed'
+//   }
+// ];
 
-const headers = ['Window Open', 'Window Close'];
+const status = 'pending'
 
-const stories = storiesOf('Components|TaskStatus', module);
+const stories = storiesOf('Components|StatusIndicator', module);
 
 stories.add('Default', () => {
-  return <TaskStatus headers={headers} task={data} />;
+  return <StatusIndicator status={status} />;
 });
