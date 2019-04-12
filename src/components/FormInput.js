@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import { FormContext } from '../context';
-import { FormNoContext } from '../context/form-context';
+import { FormContext, FormNoContext } from '../context';
 
 import { filterObject } from '../lib/util';
 

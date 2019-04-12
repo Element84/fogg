@@ -1,3 +1,3 @@
-import FormContext from './form-context';
+import FormContext, { FormNoContext } from './form-context';
 
-export { FormContext };
+export { FormContext, FormNoContext };
