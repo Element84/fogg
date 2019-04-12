@@ -116,3 +116,45 @@ function getRegex (pattern, flags = '') {
 }
 
 module.exports.getRegex = getRegex;
+
+/**
+ * copyKeysToEmptyObject
+ * @description Create a clone of the top level of an object without values unless a default provided
+ */
+
+function copyKeysToEmptyObject (objectToCopy = {}, defaultValue) {
+  const newObject = {};
+
+  for (let key in objectToCopy) {
+    if (!objectToCopy.hasOwnProperty(key)) continue;
+    newObject[key] = defaultValue;
+  }
+
+  return newObject;
+}
+
+module.exports.copyKeysToEmptyObject = copyKeysToEmptyObject;
+
+/**
+ * filterObject
+ * @description Given an object and evaluator function, return a filtered copy of an object
+ */
+
+function filterObject (object, evaluator) {
+  if (typeof evaluator !== 'function') {
+    throw new Error('filterObject: 2nd argument is not a function');
+  }
+
+  const newObject = {};
+
+  for (let key in object) {
+    if (!object.hasOwnProperty(key)) continue;
+    if (evaluator(key, object[key])) {
+      newObject[key] = object[key];
+    }
+  }
+
+  return newObject;
+}
+
+module.exports.filterObject = filterObject;

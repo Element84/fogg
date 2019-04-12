@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { FormContext } from '../context';
 import { FormNoContext } from '../context/form-context';
 
+import { filterObject } from '../lib/util';
+
 const INPUT_PROPS_WHITELIST = [
   'id',
   'name',
@@ -16,7 +18,8 @@ const INPUT_PROPS_WHITELIST = [
   'pattern',
   'disabled',
   'required',
-  'inputMode'
+  'inputMode',
+  'defaultValue'
 ];
 
 /**
@@ -27,26 +30,19 @@ const INPUT_PROPS_WHITELIST = [
 const FormInput = props => {
   // TODO: is NoContext a good pattern?
 
-  const { updateField } = useContext(FormContext) || FormNoContext;
+  const { invalidFields = [], updateField } =
+    useContext(FormContext) || FormNoContext;
 
-  const {
-    value = '',
-    type = 'text',
-    label,
-    options,
-    onInput,
-    onChange
-  } = props;
-  let inputProps = {};
-  let input;
+  const { type = 'text', label, options, onInput, onChange } = props;
 
   // Only include the input props that we know for sure we want to have in the DOM
 
-  for (let key in props) {
-    if (INPUT_PROPS_WHITELIST.includes(key)) {
-      inputProps[key] = props[key];
-    }
-  }
+  const inputProps = filterObject(props, key =>
+    INPUT_PROPS_WHITELIST.includes(key)
+  );
+
+  let input;
+  let className = `form-input form-input-${type}`;
 
   // If we didn't supply a name, default to the ID
 
@@ -54,14 +50,18 @@ const FormInput = props => {
     inputProps.name = inputProps.id;
   }
 
+  // If the input is invalid, tag an extra class for styling
+
+  if (Array.isArray(invalidFields) && invalidFields.includes(inputProps.name)) {
+    className = `${className} form-input-invalid`;
+  }
+
+  inputProps.onInput = handleOnInput;
+  inputProps.onChange = handleOnChange;
+
   if (type === 'select') {
     input = (
-      <select
-        defaultValue={value}
-        onInput={handleOnInput}
-        onChange={handleOnChange}
-        {...inputProps}
-      >
+      <select className="form-input-field" {...inputProps}>
         <option value="">
           {inputProps.placeholder || '- Please Select -'}
         </option>
@@ -80,28 +80,14 @@ const FormInput = props => {
     );
   } else if (type === 'textarea') {
     input = (
-      <textarea
-        defaultValue={value}
-        type={type}
-        onInput={handleOnInput}
-        onChange={handleOnChange}
-        {...inputProps}
-      />
+      <textarea className="form-input-field" type={type} {...inputProps} />
     );
   } else {
-    input = (
-      <input
-        defaultValue={value}
-        type={type}
-        onInput={handleOnInput}
-        onChange={handleOnChange}
-        {...inputProps}
-      />
-    );
+    input = <input className="form-input-field" type={type} {...inputProps} />;
   }
 
   return (
-    <div className={`form-input form-input-${type}`}>
+    <div className={className}>
       <label className="form-label" htmlFor={inputProps.id}>
         {label}
       </label>
@@ -111,7 +97,7 @@ const FormInput = props => {
   );
 
   function handleOnInput (event) {
-    updateField(event.target.value);
+    updateField(event.target.name, event.target.value);
     if (typeof onInput === 'function') {
       onInput(event);
     }

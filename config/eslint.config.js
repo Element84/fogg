@@ -15,6 +15,16 @@ module.exports = {
     },
   },
 
+  rules: {
+    'no-warning-comments': [
+      'warn',
+      {
+        terms: ['todo', 'fixme'],
+        location: 'start',
+      },
+    ],
+  },
+
   settings: {
     react: {
       version: 'detect',

@@ -7,11 +7,13 @@ import FormInput from '../../components/FormInput';
 import FormRow from '../../components/FormRow';
 import Button from '../../components/Button';
 
+import { regexByFieldName } from '../../models/validation';
+
 const stories = storiesOf('Integrations|Forms', module);
 
 stories.add('Default', () => {
-  function handleSubmit (event) {
-    action('form-submit')(event);
+  function handleSubmit (event, fields) {
+    action('form-submit')(event, JSON.stringify(fields));
   }
 
   function handleChange (event) {
@@ -25,6 +27,10 @@ stories.add('Default', () => {
     lastName: {
       minLength: 4,
       maxLength: 8
+    },
+    email: {
+      required: true,
+      regex: regexByFieldName('email')
     }
   };
 
@@ -35,8 +41,12 @@ stories.add('Default', () => {
       rules={validationRules}
     >
       <FormRow>
-        <FormInput id="name" label="Name" required={true} />
+        <FormInput id="firstName" label="First Name" required={true} />
 
+        <FormInput id="lastName" label="Last Name" required={true} />
+      </FormRow>
+
+      <FormRow>
         <FormInput id="email" label="Email" type="email" required={true} />
 
         <FormInput
@@ -45,7 +55,9 @@ stories.add('Default', () => {
           type="password"
           required={true}
         />
+      </FormRow>
 
+      <FormRow>
         <FormInput id="number" label="Number" type="number" />
       </FormRow>
 

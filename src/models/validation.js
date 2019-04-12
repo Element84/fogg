@@ -1,4 +1,4 @@
-import { parseNumber, getRegex } from 'lib/util';
+import { parseNumber, getRegex } from '../lib/util';
 
 // Note: these are not used by default, these are intended to be
 // conveniently available and accessed via the getRegex method
@@ -9,18 +9,36 @@ const FIELD_REGEX = {
 
 class Validation {
   constructor (rules = {}) {
+    this.rules = {};
     for (let key in rules) {
       if (!rules.hasOwnProperty(key)) continue;
-      this[key] = rules[key];
+      this.rules[key] = rules[key];
     }
   }
 
   byField (fieldName, value) {
-    const field = this[fieldName];
+    const field = this.rules[fieldName];
 
-    if (!field) return false;
+    // By default, if there are no validation rules, we should not
+    // validate it and consider it valid input
+    if (!field) return true;
 
     return validate(field, value);
+  }
+
+  bySet (set = {}, returnErrors = false) {
+    const validatedSet = validateSet(this.rules, set);
+
+    // Checks through all fields and returns true if there are no invalid fields
+    const invalidFields = Object.keys(validatedSet).filter(
+      key => !validatedSet[key].isValid
+    );
+
+    if (returnErrors) {
+      return invalidFields;
+    }
+
+    return invalidFields.length === 0;
   }
 }
 
@@ -57,6 +75,19 @@ function validate (rules = {}, value) {
   if (rules.regex && !getRegex(rules.regex, 'i').test(value)) return false;
 
   return true;
+}
+
+function validateSet (rules, set) {
+  let validatedSet = {};
+
+  for (let key in set) {
+    if (!set.hasOwnProperty(key)) continue;
+    validatedSet[key] = Object.assign({}, set[key], {
+      isValid: validate(rules[key], set[key].value)
+    });
+  }
+
+  return validatedSet;
 }
 
 /*

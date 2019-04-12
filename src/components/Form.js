@@ -19,24 +19,34 @@ const Form = ({
 }) => {
   let formClassName = 'form';
 
-  if (typeof className === 'string') {
-    formClassName = `${formClassName} ${className}`;
-  }
-
-  const { fields, updateField, handleChange, handleSubmit } = useForm({
+  const {
+    updateField,
+    handleChange,
+    handleSubmit,
+    invalidFields = []
+  } = useForm({
     onSubmit,
     onChange,
     rules
   });
 
+  if (typeof className === 'string') {
+    formClassName = `${formClassName} ${className}`;
+  }
+
+  if (Array.isArray(invalidFields) && invalidFields.length > 0) {
+    formClassName = `${formClassName} form-not-valid`;
+  }
+
   return (
-    <FormContext.Provider value={{ fields, updateField }}>
+    <FormContext.Provider value={{ invalidFields, updateField }}>
       <form
         className={formClassName}
         name={name}
         action=""
         onSubmit={handleSubmit}
         onChange={handleChange}
+        noValidate={true}
       >
         {children}
       </form>
