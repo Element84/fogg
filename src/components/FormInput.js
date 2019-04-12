@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Datetime from 'react-datetime';
+import { FaCalendarAlt } from 'react-icons/fa';
 
 const INPUT_PROPS_WHITELIST = [
   'id',
@@ -47,6 +49,16 @@ const FormInput = props => {
     inputProps.name = inputProps.id;
   }
 
+  function renderInput (props) {
+    const allProps = Object.assign(props, inputProps);
+    return (
+      <>
+        <FaCalendarAlt {...props} />
+        <input type="text" {...allProps} />
+      </>
+    );
+  }
+
   if (type === 'select') {
     input = (
       <select
@@ -81,6 +93,8 @@ const FormInput = props => {
         {...inputProps}
       />
     );
+  } else if (type === 'datetime') {
+    input = <Datetime renderInput={renderInput} />;
   } else {
     input = (
       <input
@@ -134,7 +148,8 @@ FormInput.propTypes = {
   required: PropTypes.bool,
   inputMode: PropTypes.string,
   onInput: PropTypes.func,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func
 };
 
 export default FormInput;
