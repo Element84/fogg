@@ -94,6 +94,9 @@ stories.add('Default', () => {
       <FormRow>
         <Button>Submit</Button>
       </FormRow>
+
+      <h2>Validation Rules</h2>
+      <pre>{JSON.stringify(validationRules, undefined, 2)}</pre>
     </Form>
   );
 });
