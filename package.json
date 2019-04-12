@@ -71,6 +71,7 @@
     "serve": "gatsby serve",
     "start": "npm run develop",
     "storybook": "start-storybook -p 6006",
+    "test-watch": "jest --watchAll --config ./config/jest.config.js",
     "test": "jest --config ./config/jest.config.js && echo '> Finished testing ✅'"
   },
   "lint-staged": {

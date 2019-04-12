@@ -23,11 +23,11 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
     event.persist();
     event.preventDefault();
 
-    const setValidity = validate.bySet(fields, true);
+    const fieldsValidity = validate.bySet(fields, true);
 
-    if (setValidity.length > 0) {
+    if (fieldsValidity.length > 0) {
       setFields(fields => fields);
-      updateValidity(setValidity);
+      updateValidity(fieldsValidity);
       return;
     }
 
@@ -80,6 +80,7 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
   }
 
   return {
+    fields,
     invalidFields,
     updateField,
     handleSubmit,
