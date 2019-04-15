@@ -27,7 +27,7 @@ const STATUS_LIST = [
 ];
 
 const TaskStatus = ({ headers = DEFAULT_HEADERS, task }) => {
-  const { windowOpen, windowClose } = task;
+  const { status, windowOpen, windowClose } = task;
 
   return (
     <div className="task-status">

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 const StatusIndicator = ({ activeId, statusList = [] }) => {
   const activeStatus = statusList.find(status => status.id === activeId);
-  console.log('active status: ', activeStatus);
   // TODO: handle this betteR??
   if (!activeStatus) return null;
 
@@ -29,7 +28,7 @@ const StatusIndicator = ({ activeId, statusList = [] }) => {
 
             return (
               <li key={`StatusIndicator-${index}`} className={className}>
-                <span>{status}</span>
+                <span>{label}</span>
               </li>
             );
           })}

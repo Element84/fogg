@@ -1,10 +1,15 @@
 .task-status-status-indicator {
   margin: 0 auto;
+  justify-content: center;
+}
+h2 {
+  text-align: center;
+}
+.task-status-status-indicator h2 {
+  text-align: center;
 }
 .task-status-status-indicator ul {
-  // padding-inline-start: 0px;
-  background: red;
-  // margin-left: -100px;
+  padding-inline-start: 0px;
 }
 .status-indicator-circles {
   display: flex;
@@ -21,9 +26,13 @@
   width: 1vw;
   display: center;
 
-  // DONT DO THISSS HIDE IT FOR USABILITY
-  span {
-    display: none;
+span {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
   }
 }
 .status-indicator-circle-active {
