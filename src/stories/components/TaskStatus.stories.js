@@ -22,6 +22,20 @@ const data = [
     windowOpen: 1554416208102,
     windowClose: 1554782400000,
     status: 'accepted'
+  },
+  {
+    id: 222,
+    name: 'Make Dwight Smack Himself in the Face',
+    windowOpen: 1554416208102,
+    windowClose: 1554782400000,
+    status: 'completed'
+  },
+  {
+    id: 221,
+    name: 'Make Dwight Smack Himself in the Face',
+    windowOpen: 1554416208102,
+    windowClose: 1554782400000,
+    status: 'partially-completed'
   }
 ];
 

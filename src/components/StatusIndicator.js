@@ -2,22 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const StatusIndicator = ({ activeId, statusList = [] }) => {
-  // const status = task.map(({status}) => {
-  //   return status
-  // })
-
-  // const activeIndex = statusList.map(i => {
-  //   if (i.toLowerCase() === status.toString().toLowerCase()) {
-  //     return statusList.indexOf(i)
-  //   }
-  // })
-
-  // if div id === activeIndex set that div to active
-  // turn that div blue
-  // turn all divs before that to black
-
   const activeStatus = statusList.find(status => status.id === activeId);
-
+  console.log('active status: ', activeStatus);
   // TODO: handle this betteR??
   if (!activeStatus) return null;
 
@@ -26,32 +12,36 @@ const StatusIndicator = ({ activeId, statusList = [] }) => {
   return (
     <>
       <h2>{activeStatus.label}</h2>
-      <ul className="status-indicator-circles">
-        {statusList.map(({ label, id }, index) => {
-          const isActive = activeStatus.id === id;
+      <div className="status-indicator-circles-wrapper">
+        <ul className="status-indicator-circles">
+          {statusList.map(({ label, id }, index) => {
+            const isActive = activeStatus.id === id;
 
-          let className = 'status-indicator-circle';
+            let className = 'status-indicator-circle';
 
-          if (isActive) {
-            className = `${className} status-indicator-circle-active`;
-          }
+            if (isActive) {
+              className = `${className} status-indicator-circle-active`;
+            }
 
-          if (index < activeStatusIndex) {
-            className = `${className} status-indicator-circle-past`;
-          }
+            if (index < activeStatusIndex) {
+              className = `${className} status-indicator-circle-past`;
+            }
 
-          return (
-            <li key={`StatusIndicator-${index}`} className={className}>
-              <span>{status}</span>
-            </li>
-          );
-        })}
-      </ul>
+            return (
+              <li key={`StatusIndicator-${index}`} className={className}>
+                <span>{status}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </>
   );
-  // make 4 circles 0 - 3
-  // make circle active based on number returned
-  // if circle also returns another var change color based on var
+};
+
+StatusIndicator.propTypes = {
+  activeId: PropTypes.string,
+  statusList: PropTypes.array
 };
 
 export default StatusIndicator;
