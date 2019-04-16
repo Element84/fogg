@@ -44,14 +44,16 @@ pipeline {
       }
 
     }
-
-    stage('Build'){
     
+    stage('Versioning'){
       // bumping version number for the develop pipeline
       when { branch 'develop' }
       steps {
         sh 'yarn bump "patch"'
       }
+    }
+
+    stage('Build'){
     
       steps {
 
