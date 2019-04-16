@@ -63,6 +63,7 @@
   ],
   "license": "MIT",
   "scripts": {
+    "bump": "bump",
     "build": "gatsby build && yarn build-storybook",
     "build-storybook": "build-storybook",
     "develop": "rm -rf .cache && concurrently --names 'GATSBY,STORYBOOK' -c 'bgCyan.bold,bgMagenta.bold' 'gatsby develop' 'yarn storybook'",
