@@ -8,18 +8,18 @@
 }
 .task-status-info-wrapper {
   border: 1px solid #000;
-  height: 20vh;
-  width: 30vw;
+  height: 125px;
+  width: 450px;
 }
 .task-status-info {
   display: flex;
   flex-direction: row;
   justify-content: space-around;  
 }
-.status-info-status {
+.task-status-info-status {
   font-weight: bold;
   padding-top: 2vh;
 }
-.status-info-window-open, .status-info-window-close {
+.task-status-info-window-open, .task-status-info-window-close {
   font-weight: bold;
 }

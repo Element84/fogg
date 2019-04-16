@@ -34,8 +34,10 @@ const TaskStatus = ({ headers = DEFAULT_HEADERS, task }) => {
       <div className="task-status-info-wrapper">
         <section className="task-status-info">
           <div className="task-status-window-open">
-            <p className="status-info status-info-window-open">{headers[0]}</p>
-            <p className="status-info">{formatDate(windowOpen)}</p>
+            <p className="task-status-info task-status-info-window-open">
+              {headers[0]}
+            </p>
+            <p className="task-status-info">{formatDate(windowOpen)}</p>
           </div>
 
           <div className="task-status-status-indicator">
@@ -43,7 +45,9 @@ const TaskStatus = ({ headers = DEFAULT_HEADERS, task }) => {
           </div>
 
           <div className="task-status-window-open">
-            <p className="status-info status-info-window-close">{headers[1]}</p>
+            <p className="task-status-info task-status-info-window-close">
+              {headers[1]}
+            </p>
             <p>{formatDate(windowClose)}</p>
           </div>
         </section>
