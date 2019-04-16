@@ -105,6 +105,7 @@ void deployFeature() {
 
 void deploySIT() {
   sh 'echo "SIT"'
+  sh 'bump version "minor"'
   performDeploy("sit")
 }
 
