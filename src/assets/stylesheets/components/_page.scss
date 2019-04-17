@@ -1,0 +1,57 @@
+.page {
+    padding: 2em;
+
+    .parent-link{
+        font-size:0.8em;
+        font-weight: 500;
+
+        a{
+            text-decoration: none;
+            color: black;
+        }
+
+        svg {
+            width: .8em;
+            height: .8em;
+        }
+
+    } 
+
+    .header {
+
+        margin-bottom: 1.2em;
+
+        @media (min-width:$screen-sm) {
+            display: inline-block;
+        }
+    h1 {
+        text-align: left;
+        font-size:1.2em;
+        font-weight: normal;
+
+        svg {
+            position: relative;
+            top: .3em;
+            font-size: 1.5em;
+            margin-right: .6em;
+        }
+    }
+}
+
+    .nav {
+        @media (min-width:$screen-sm) {
+            float: left;
+            width: 25%;
+        }
+    }
+
+    .content {
+        @media (min-width: $screen-sm) {
+            float: left;
+            width: 75%;
+        }
+
+    }
+
+
+}
