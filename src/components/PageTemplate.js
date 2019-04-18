@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NavLinks from './NavLinks';
 import { FaChevronLeft } from 'react-icons/fa';
+import WonderLink from './WonderLink';
 
 const PageTemplate = ({ id, children, title, parent, navigation, icon }) => {
   return (
@@ -9,9 +10,9 @@ const PageTemplate = ({ id, children, title, parent, navigation, icon }) => {
       <div className="page-header">
         {parent && (
           <div className="page-parent-link">
-            <a href={parent.to}>
+            <WonderLink to={parent.to}>
               <FaChevronLeft /> Back to {parent.label}
-            </a>
+            </WonderLink>
           </div>
         )}
         <h1>

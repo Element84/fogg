@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import PageTemplate from 'components/PageTemplate';
 import { FaUser } from 'react-icons/fa';
+import WonderLink from '../../src/components/WonderLink';
 
 describe('Page Template', () => {
   const navigation = [
@@ -58,7 +59,12 @@ describe('Page Template', () => {
     });
 
     it('correctly displays parent link', () => {
-      expect(page.find('.page-parent-link').text()).toMatch(/My Account/);
+      expect(
+        page
+          .find('.page-parent-link')
+          .find(WonderLink)
+          .props().to
+      ).toEqual('/account');
     });
 
     it('does not display parent link when no parent is provided', () => {
