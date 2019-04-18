@@ -9,6 +9,8 @@
     "@fabiospampinato/bump": "^1.0.6",
     "babel-loader": "^8.0.5",
     "babel-preset-gatsby": "^0.1.9",
+    "esri-leaflet": "^2.2.4",
+    "esri-leaflet-geocoder": "^2.2.14",
     "fs": "^0.0.1-security",
     "gatsby": "^2.1.19",
     "gatsby-image": "^2.0.30",
@@ -19,6 +21,7 @@
     "gatsby-plugin-sharp": "^2.0.23",
     "gatsby-source-filesystem": "^2.0.23",
     "gatsby-transformer-sharp": "^2.1.14",
+    "leaflet": "^1.4.0",
     "mkdirp": "^0.5.1",
     "moment": "^2.24.0",
     "node-sass": "^4.11.0",
@@ -29,7 +32,7 @@
     "react-datetime": "^2.16.3",
     "react-dom": "^16.8.3",
     "react-helmet": "^5.2.0",
-    "react-icons": "^3.5.0",
+    "react-icons": "^3.6.1",
     "sass": "^1.17.2"
   },
   "devDependencies": {

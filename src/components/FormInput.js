@@ -30,7 +30,8 @@ const FormInput = props => {
     label,
     options,
     onInput,
-    onChange
+    onChange,
+    className
   } = props;
   let inputProps = {};
   let input;
@@ -108,10 +109,12 @@ const FormInput = props => {
   }
 
   return (
-    <div className={`form-input form-input-${type}`}>
-      <label className="form-label" htmlFor={inputProps.id}>
-        {label}
-      </label>
+    <div className={`form-input form-input-${type} ${className || ''}`}>
+      { label && (
+        <label className="form-label" htmlFor={inputProps.id}>
+          {label}
+        </label>
+      )}
 
       {input}
     </div>
