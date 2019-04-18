@@ -1,28 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import NavLinks from './NavLinks';
-import * as Fa from 'react-icons/fa';
+import { FaChevronLeft } from 'react-icons/fa';
 
 const PageTemplate = ({ id, children, title, parent, navigation, icon }) => {
-  const faIcon = Fa[icon];
   return (
     <div className="page">
-      <div className="header">
+      <div className="page-header">
         {parent && (
-          <div className="parent-link">
-            <a href={parent.id}>
-              <Fa.FaChevronLeft /> Back to {parent.label}
+          <div className="page-parent-link">
+            <a href={parent.to}>
+              <FaChevronLeft /> Back to {parent.label}
             </a>
           </div>
         )}
         <h1>
-          {React.createElement(faIcon)} <span>{title}</span>
+          {icon} <span>{title}</span>
         </h1>
       </div>
 
       <NavLinks active={id} routes={navigation} />
 
-      <div className="content">{children}</div>
+      <div className="page-content">{children}</div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import WonderLink from '../components/WonderLink';
 
 const NavLinks = ({ routes, active }) => {
   return (
@@ -8,7 +9,7 @@ const NavLinks = ({ routes, active }) => {
         {routes.map((route, index) => {
           return (
             <li data-active={route.id === active} key={index}>
-              <a href={route.id}>{route.label}</a>
+              <WonderLink to={route.to}>{route.label}</WonderLink>
             </li>
           );
         })}

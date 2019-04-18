@@ -2,7 +2,11 @@
   overflow: scroll;
   padding: 0;
   white-space: nowrap;
-  margin: 0;
+  margin: .8em 0;
+
+  @media(min-width:$screen-sm) {
+    margin: 0;
+}
 
   li {
 

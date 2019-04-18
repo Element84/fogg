@@ -4,34 +4,41 @@ import { storiesOf } from '@storybook/react';
 import PageTemplate from '../../components/PageTemplate';
 import FormInput from '../../components/FormInput';
 import Button from '../../components/Button';
+import { FaUser } from 'react-icons/fa';
 
 const stories = storiesOf('Components|Template', module);
 
 const navigation = [
   {
     id: 'profile',
+    to: '/profile',
     label: 'My Profile'
   },
   {
     id: 'billing',
+    to: '/billing',
     label: 'Membership & Billing'
   },
   {
     id: 'page3',
+    to: 'page3',
     label: 'Page Name'
   },
   {
     id: 'page4',
+    to: 'page4',
     label: 'Page Name'
   },
   {
     id: 'page5',
+    to: 'page5',
     label: 'Page Name'
   }
 ];
 
 const parent = {
   id: 'account',
+  to: '/account',
   label: 'My Account'
 };
 
@@ -42,7 +49,7 @@ stories.add('Default', () => {
       parent={parent}
       title="My Profile"
       navigation={navigation}
-      icon="FaUser"
+      icon={<FaUser />}
     >
       <div>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed

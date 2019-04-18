@@ -1,7 +1,7 @@
 .page {
   padding: 2em;
 
-  .parent-link{
+  .page-parent-link{
     font-size: 0.8em;
     font-weight: 500;
 
@@ -17,7 +17,7 @@
 
   } 
 
-  .header {
+  .page-header {
 
     margin-bottom: 1.2em;
 
@@ -45,7 +45,7 @@
     }
   }
 
-  .content {
+  .page-content {
     @media (min-width: $screen-sm) {
       float: left;
       width: 75%;

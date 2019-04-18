@@ -1,27 +1,33 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import NavLinks from 'components/NavLinks';
+import WonderLink from '../../src/components/WonderLink';
 
 describe('Nav Links', () => {
   const navigationList = [
     {
       id: 'profile',
+      to: '/profile',
       label: 'My Profile'
     },
     {
       id: 'billing',
+      to: '/billing',
       label: 'Membership & Billing'
     },
     {
       id: 'page3',
+      to: 'page3',
       label: 'Page Name'
     },
     {
       id: 'page4',
+      to: 'page4',
       label: 'Page Name'
     },
     {
       id: 'page5',
+      to: 'page5',
       label: 'Page Name'
     }
   ];
@@ -29,10 +35,15 @@ describe('Nav Links', () => {
   describe('Render', () => {
     const nav = shallow(<NavLinks routes={navigationList} active="profile" />);
     it('correctly sets the active link', () => {
-      expect(nav.find('[data-active=true]').text()).toEqual('My Profile');
+      expect(
+        nav
+          .find('[data-active=true]')
+          .find(WonderLink)
+          .props().to
+      ).toEqual('/profile');
     });
 
-    nav.find('li').forEach((item, index) => {
+    nav.find('li a').forEach((item, index) => {
       it('item labels are correct', () => {
         expect(item.text()).toEqual(navigationList[index].label);
       });
@@ -40,7 +51,12 @@ describe('Nav Links', () => {
 
     navigationList.forEach(item => {
       it('all links in navigationList exist', () => {
-        expect(nav.find(`[href="${item.id}"]`).exists()).toEqual(true);
+        expect(
+          nav
+            .find(WonderLink)
+            .findWhere(n => n.prop('to') === item.to)
+            .exists()
+        ).toEqual(true);
       });
     });
   });
