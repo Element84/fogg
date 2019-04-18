@@ -25,8 +25,12 @@ const FormInput = props => {
   const { onChange, onInput } = props;
 
   let input;
-  let className = `form-input form-input-${type}`;
+  let className = `form-input`;
   let inputClassName = 'form-input-field';
+
+  if (type) {
+    className = `${className} form-input-${type}`;
+  }
 
   // If the input is invalid, tag an extra class for styling
 
