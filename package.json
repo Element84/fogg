@@ -2,10 +2,11 @@
   "name": "dashboard-components",
   "private": true,
   "description": "Gatsby theme for E84 Space Jam project",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "author": "Element 84, Inc.",
   "dependencies": {
     "@babel/core": "^7.3.4",
+    "@fabiospampinato/bump": "^1.0.6",
     "babel-loader": "^8.0.5",
     "babel-preset-gatsby": "^0.1.9",
     "fs": "^0.0.1-security",
@@ -62,6 +63,7 @@
   ],
   "license": "MIT",
   "scripts": {
+    "bump": "bump",
     "build": "gatsby build && yarn build-storybook",
     "build-storybook": "build-storybook",
     "develop": "rm -rf .cache && concurrently --names 'GATSBY,STORYBOOK' -c 'bgCyan.bold,bgMagenta.bold' 'gatsby develop' 'yarn storybook'",
