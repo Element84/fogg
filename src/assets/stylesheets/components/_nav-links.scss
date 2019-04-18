@@ -6,7 +6,7 @@
 
   @media(min-width:$screen-sm) {
     margin: 0;
-}
+  }
 
   li {
 
@@ -15,9 +15,9 @@
     margin-right: 1.5em;
 
     @media(min-width:$screen-sm) {
-        display: block;
-        padding: .2em 1em;
-        margin: .8em 0;
+      display: block;
+      padding: .2em 1em;
+      margin: .8em 0;
     }
 
     &[data-active="true"] {
