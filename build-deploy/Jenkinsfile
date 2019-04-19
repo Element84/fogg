@@ -55,7 +55,7 @@ pipeline {
         sh 'git config user.email "buildserver@element84.com"'
         sh 'git config user.name "Jenkins"'
         
-        sh 'yarn bump "patch"'
+        sh 'yarn bump "patch" --force'
 
         // Note this assumes the remote is gitlab - 
         //   in bamboo for instance this doesn't work because
