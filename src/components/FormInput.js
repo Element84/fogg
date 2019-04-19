@@ -20,13 +20,17 @@ const FormInput = props => {
   const { invalidFields = [], updateField } =
     useContext(FormContext) || FormNoContext;
 
-  const { id, name, type, label } = useInput({ props });
+  const { id, name, type, label, inputRules } = useInput({ props });
 
   const { onChange, onInput } = props;
 
   let input;
   let className = `form-input`;
   let inputClassName = 'form-input-field';
+
+  // Update the field immediately with any local rules for validation
+
+  updateField(name, undefined, inputRules);
 
   if (type) {
     className = `${className} form-input-${type}`;
@@ -88,6 +92,7 @@ const FormInput = props => {
 
   function handleOnInput (event) {
     updateField(event.target.name, event.target.value);
+
     if (typeof onInput === 'function') {
       onInput(event);
     }

@@ -59,7 +59,17 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
    * @description Manages event handler for change type events on the form
    */
 
-  function updateField (name, value) {
+  function updateField (name, value, rules) {
+    if (rules) {
+      validate.updateRulesByField(name, rules);
+    }
+
+    // If we're passing in undefined, we probably don't want to update it
+    // in the first place, but most likely this is intentionally passing it
+    // as undefined to solely update the rules above
+
+    if (typeof value === 'undefined') return;
+
     setFields(fields => {
       let fieldAttributes = fields[name] || {};
 

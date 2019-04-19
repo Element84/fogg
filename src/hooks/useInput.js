@@ -19,7 +19,8 @@ const INPUT_PROPS_WHITELIST = [
 ];
 
 const useInput = ({ props = {} }) => {
-  const { label } = props;
+  const { label, required } = props;
+  const inputRules = {};
 
   // Only include the input props that we know for sure we want to have in the DOM
 
@@ -33,13 +34,20 @@ const useInput = ({ props = {} }) => {
     inputProps.name = inputProps.id;
   }
 
+  // Patch in any local rules passed directly to the input
+
+  if (required) {
+    inputRules.required = true;
+  }
+
   return {
     id: inputProps.id,
     name: inputProps.name,
     options: props.options,
     type: inputProps.type,
     label,
-    inputProps
+    inputProps,
+    inputRules
   };
 };
 

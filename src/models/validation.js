@@ -16,6 +16,14 @@ class Validation {
     }
   }
 
+  updateRulesByField (name, rules) {
+    if (!this.rules[name]) return;
+    this.rules[name] = {
+      ...this.rules[name],
+      ...rules
+    };
+  }
+
   byField (fieldName, value) {
     const field = this.rules[fieldName];
 
