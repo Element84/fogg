@@ -11,7 +11,18 @@ module.exports = {
     ecmaVersion: '2017',
     ecmaFeatures: {
       jsx: true,
+      experimentalObjectRestSpread: true,
     },
+  },
+
+  rules: {
+    'no-warning-comments': [
+      'warn',
+      {
+        terms: ['todo', 'fixme'],
+        location: 'start',
+      },
+    ],
   },
 
   settings: {

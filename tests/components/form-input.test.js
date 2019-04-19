@@ -20,26 +20,16 @@ describe('FormInput', () => {
     }
   ];
 
-  const form = (
-    <form>
-      <FormInput id="name" label="Name" required={true} />
-      <FormInput id="email" label="Email" type="email" required={true} />
-      <FormInput
-        id="organization"
-        label="Organization"
-        type="select"
-        options={selectOptions}
-      />
-      <FormInput id="admin-only" label="Admin Only" disabled={true} />
-      <FormInput id="comments" label="Comments" type="textarea" />
-    </form>
-  );
-
   describe('Render', () => {
     const label = 'Name';
     const id = 'name-test-id';
     const input = shallow(<FormInput id={id} label={label} />);
-    const inputRendered = input.find('input').render();
+
+    const inputRendered = input
+      .find('Input')
+      .dive()
+      .find('input')
+      .render();
 
     it('should render a label', () => {
       expect(input.find('label').text()).toEqual(label);
@@ -73,10 +63,13 @@ describe('FormInput', () => {
           onChange={handleChange}
           onInput={handleInput}
         />
-      );
+      )
+        .find('Input')
+        .dive()
+        .find('input');
 
       it('should fire the change handler', () => {
-        input.find('input').simulate('change', {
+        input.simulate('change', {
           target: {
             value: changeTestValue
           }
@@ -85,7 +78,7 @@ describe('FormInput', () => {
       });
 
       it('should fire the input handler', () => {
-        input.find('input').simulate('input', {
+        input.simulate('input', {
           target: {
             value: inputTestValue
           }
@@ -118,7 +111,10 @@ describe('FormInput', () => {
           onChange={handleChange}
           onInput={handleInput}
         />
-      );
+      )
+        .find('Textarea')
+        .dive()
+        .find('textarea');
 
       it('should fire the change handler', () => {
         input.find('textarea').simulate('change', {
@@ -159,7 +155,10 @@ describe('FormInput', () => {
           onChange={handleChange}
           onInput={handleInput}
         />
-      );
+      )
+        .find('Select')
+        .dive()
+        .find('select');
 
       it('should fire the change handler', () => {
         input.find('select').simulate('change', {

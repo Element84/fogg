@@ -7,34 +7,55 @@ import FormInput from '../../components/FormInput';
 import FormRow from '../../components/FormRow';
 import Button from '../../components/Button';
 
+import { regexByFieldName } from '../../models/validation';
+
 const stories = storiesOf('Integrations|Forms', module);
 
 stories.add('Default', () => {
-  function handleSubmit (event) {
-    event.persist();
-    event.preventDefault();
-    action('form-submit')(event);
+  function handleSubmit (event, fields) {
+    action('form-submit')(event, JSON.stringify(fields));
   }
 
   function handleChange (event) {
-    event.persist();
     action('form-change')(event);
   }
 
-  return (
-    <Form onSubmit={handleSubmit} onChange={handleChange}>
-      <FormRow>
-        <FormInput id="name" label="Name" required={true} />
+  const validationRules = {
+    firstName: {
+      required: true
+    },
+    lastName: {
+      minLength: 4,
+      maxLength: 8
+    },
+    email: {
+      required: true,
+      regex: regexByFieldName('email')
+    },
+    password: {
+      minLength: 8
+    }
+  };
 
+  return (
+    <Form
+      onSubmit={handleSubmit}
+      onChange={handleChange}
+      rules={validationRules}
+    >
+      <FormRow>
+        <FormInput id="firstName" label="First Name" required={true} />
+
+        <FormInput id="lastName" label="Last Name" required={true} />
+      </FormRow>
+
+      <FormRow>
         <FormInput id="email" label="Email" type="email" required={true} />
 
-        <FormInput
-          id="password"
-          label="Password"
-          type="password"
-          required={true}
-        />
+        <FormInput id="password" label="Password" type="password" />
+      </FormRow>
 
+      <FormRow>
         <FormInput id="number" label="Number" type="number" />
       </FormRow>
 
@@ -69,8 +90,15 @@ stories.add('Default', () => {
       </FormRow>
 
       <FormRow>
+        <FormInput id="datetime" label="Datetime" type="datetime" />
+      </FormRow>
+
+      <FormRow>
         <Button>Submit</Button>
       </FormRow>
+
+      <h2>Validation Rules</h2>
+      <pre>{JSON.stringify(validationRules, undefined, 2)}</pre>
     </Form>
   );
 });

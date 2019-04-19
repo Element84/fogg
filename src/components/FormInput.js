@@ -1,22 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import Datetime from 'react-datetime';
-import { FaCalendarAlt } from 'react-icons/fa';
 
-const INPUT_PROPS_WHITELIST = [
-  'id',
-  'name',
-  'placeholder',
-  'autoComplete',
-  'autoCorrect',
-  'autoCapitalize',
-  'minLength',
-  'maxLength',
-  'pattern',
-  'disabled',
-  'required',
-  'inputMode'
-];
+import { FormContext, FormNoContext } from '../context';
+import { useInput } from '../hooks';
+
+import Input from './Input';
+import Select from './Select';
+import Textarea from './Textarea';
+import Datetime from './Datetime';
 
 /**
  * FormInput
@@ -24,92 +15,74 @@ const INPUT_PROPS_WHITELIST = [
  */
 
 const FormInput = props => {
-  const {
-    value = '',
-    type = 'text',
-    label,
-    options,
-    onInput,
-    onChange
-  } = props;
-  let inputProps = {};
+  // TODO: is NoContext a good pattern?
+
+  const { invalidFields = [], updateField } =
+    useContext(FormContext) || FormNoContext;
+
+  const { id, name, type, label, inputRules } = useInput({ props });
+
+  const { onChange, onInput } = props;
+
   let input;
+  let className = `form-input`;
+  let inputClassName = 'form-input-field';
 
-  // Only include the input props that we know for sure we want to have in the DOM
+  // Update the field immediately with any local rules for validation
 
-  for (let key in props) {
-    if (INPUT_PROPS_WHITELIST.includes(key)) {
-      inputProps[key] = props[key];
-    }
+  updateField(name, undefined, inputRules);
+
+  if (type) {
+    className = `${className} form-input-${type}`;
   }
 
-  // If we didn't supply a name, default to the ID
+  // If the input is invalid, tag an extra class for styling
 
-  if (!inputProps.name) {
-    inputProps.name = inputProps.id;
-  }
-
-  function renderInput (props) {
-    const allProps = Object.assign(props, inputProps);
-    return (
-      <>
-        <FaCalendarAlt {...props} />
-        <input type="text" {...allProps} />
-      </>
-    );
+  if (Array.isArray(invalidFields) && invalidFields.includes(name)) {
+    className = `${className} form-input-invalid`;
   }
 
   if (type === 'select') {
     input = (
-      <select
-        defaultValue={value}
-        onInput={handleOnInput}
+      <Select
+        className={inputClassName}
+        props={props}
         onChange={handleOnChange}
-        {...inputProps}
-      >
-        <option value="">
-          {inputProps.placeholder || '- Please Select -'}
-        </option>
-
-        {options.map((option, index) => {
-          return (
-            <option
-              key={`FormInput-Select-Option-${index}`}
-              value={option.value}
-            >
-              {option.label}
-            </option>
-          );
-        })}
-      </select>
+        onInput={handleOnInput}
+      />
     );
   } else if (type === 'textarea') {
     input = (
-      <textarea
-        defaultValue={value}
-        type={type}
-        onInput={handleOnInput}
+      <Textarea
+        className={inputClassName}
+        props={props}
         onChange={handleOnChange}
-        {...inputProps}
+        onInput={handleOnInput}
       />
     );
   } else if (type === 'datetime') {
-    input = <Datetime renderInput={renderInput} />;
+    input = (
+      <Datetime
+        className={inputClassName}
+        props={props}
+        onChange={handleOnChange}
+        onInput={handleOnInput}
+      />
+    );
   } else {
     input = (
-      <input
-        defaultValue={value}
-        type={type}
-        onInput={handleOnInput}
+      <Input
+        className={inputClassName}
+        props={props}
         onChange={handleOnChange}
-        {...inputProps}
+        onInput={handleOnInput}
       />
     );
   }
 
   return (
-    <div className={`form-input form-input-${type}`}>
-      <label className="form-label" htmlFor={inputProps.id}>
+    <div className={className}>
+      <label className="form-label" htmlFor={id}>
         {label}
       </label>
 
@@ -118,6 +91,8 @@ const FormInput = props => {
   );
 
   function handleOnInput (event) {
+    updateField(event.target.name, event.target.value);
+
     if (typeof onInput === 'function') {
       onInput(event);
     }
