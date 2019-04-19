@@ -1,3 +1,9 @@
+### Version 0.1.12
+- [JAM-276] Add force argument
+- [JAM-276] Change git command
+- [JAM-276] Give ssh key to git commands
+- [JAM-276] Safer git push
+
 ### Version 0.1.11
 
 ### Version 0.1.8
