@@ -39,6 +39,16 @@ const data = [
   }
 ];
 
+const rejected = [
+  {
+    id: 223,
+    name: 'Beat Dwight in a Snowball Fight',
+    windowOpen: 1554416208102,
+    windowClose: 1554782400000,
+    status: 'rejected'
+  }
+];
+
 const headers = ['Window Open', 'Window Close'];
 
 const stories = storiesOf('Components|TaskStatus', module);
@@ -48,3 +58,9 @@ stories.add('Default', () => {
     return <TaskStatus headers={headers} task={task} />;
   });
 });
+
+// stories.add('Non Default Status', () => {
+//   return rejected.map(task => {
+//     return <TaskStatus headers={headers} task={task} />
+//   })
+// })

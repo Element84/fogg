@@ -1,12 +1,12 @@
 .task-status-status-indicator {
   margin: 0 auto;
   // justify-content: center;
-  h2 {
-    text-align: center;
-  }
   ul {
-    padding-inline-start: 0px;
+    padding: 0;
   }
+}
+.status-indicator-status {
+  text-align: center;
 }
 .status-indicator-circles {
   display: flex;
@@ -14,13 +14,10 @@
   justify-content: space-around;
   width: 100%;
   list-style: none;
-  margin: 0 auto;
 }
 .status-indicator-circle {
   border: 1px solid #000;
   border-radius: 100%;
-  // height: 2vh;
-  // width: 1vw;
   height: 20px;
   width: 20px;
   display: center;
@@ -36,7 +33,9 @@
 .status-indicator-circle-active {
   background: blue;
 }
-
+.status-indicator-circle-error {
+  background: red;
+}
 .status-indicator-circle-past {
   background: black;
 }

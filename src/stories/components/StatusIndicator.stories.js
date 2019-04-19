@@ -8,16 +8,6 @@ pending, accepted, rejected,
 partially completed, cancelled, anomaly,
 completed */
 
-// const task = [
-//   {
-//     id: 221,
-//     name: 'Make Dwight Smack Himself in the Face',
-//     windowOpen: 1554416208102,
-//     windowClose: 1554782400000,
-//     status: 'Partially Completed'
-//   }
-// ];
-
 const stories = storiesOf('Components|StatusIndicator', module);
 
 stories.add('Default', () => {
@@ -42,5 +32,30 @@ stories.add('Default', () => {
 
   return (
     <StatusIndicator activeId={statusList[1].id} statusList={statusList} />
+  );
+});
+
+stories.add('Error', () => {
+  const errorList = [
+    {
+      label: 'Rejected',
+      id: 'rejected'
+    },
+    {
+      label: 'Canceled',
+      id: 'canceled'
+    },
+    {
+      label: 'Anomoly',
+      id: 'anomoly'
+    }
+  ];
+
+  return (
+    <StatusIndicator
+      activeId={errorList[2].id}
+      statusList={errorList}
+      errorList={errorList}
+    />
   );
 });

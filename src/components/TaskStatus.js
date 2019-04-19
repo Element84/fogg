@@ -18,11 +18,26 @@ const STATUS_LIST = [
   },
   {
     label: 'Partially Completed',
-    id: 'partially-completed'
+    id: 'partially completed'
   },
   {
     label: 'Completed',
     id: 'completed'
+  }
+];
+
+const ERROR_LIST = [
+  {
+    label: 'Rejected',
+    id: 'rejected'
+  },
+  {
+    label: 'Cancelled',
+    id: 'cancelled'
+  },
+  {
+    label: 'Anomally',
+    id: 'anomally'
   }
 ];
 
@@ -41,7 +56,11 @@ const TaskStatus = ({ headers = DEFAULT_HEADERS, task }) => {
           </div>
 
           <div className="task-status-status-indicator">
-            <StatusIndicator activeId={task.status} statusList={STATUS_LIST} />
+            <StatusIndicator
+              activeId={task.status}
+              statusList={STATUS_LIST}
+              errorList={ERROR_LIST}
+            />
           </div>
 
           <div className="task-status-window-open">
