@@ -1,0 +1,38 @@
+.nav-list {
+  overflow: scroll;
+  padding: 0;
+  white-space: nowrap;
+  margin: .8em 0;
+
+  @media(min-width:$screen-sm) {
+    margin: 0;
+  }
+
+  li {
+
+    display: inline-block;
+    padding: .5em 0;
+    margin-right: 1.5em;
+
+    @media(min-width:$screen-sm) {
+      display: block;
+      padding: .2em 1em;
+      margin: .8em 0;
+    }
+
+    &[data-active="true"] {
+      font-weight: bold;
+
+      @media(min-width:$screen-sm) {
+        border-left: 2px solid $color-blue;
+      }
+
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+  }
+}
+
