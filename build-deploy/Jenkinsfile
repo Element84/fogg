@@ -61,7 +61,8 @@ pipeline {
           // Note this assumes the remote is gitlab - 
           //   in bamboo for instance this doesn't work because
           //   the remote is a local cached copy of the git index
-          sh "git push origin HEAD"
+          sh "git config --global push.default current"
+          sh "git push"
         }
       }
     }
