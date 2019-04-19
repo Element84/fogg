@@ -51,10 +51,18 @@ $search-box-height: 3.2em;
 
   position: relative;
 
-  &[data-is-open="true"] {
+  &[data-is-searchbox-open="true"] {
 
     svg {
-      color: black;
+      color: $color-gray9;
+    }
+
+  }
+
+  [data-has-active-date-range="true"] & {
+
+    svg {
+      color: $color-blue;
     }
 
   }
@@ -78,7 +86,7 @@ $search-box-height: 3.2em;
   right: 0;
   box-shadow: $component-shadow-lifted;
 
-  .search-box-controls-date[data-is-open="true"] & {
+  .search-box-controls-date[data-is-searchbox-open="true"] & {
     display: block;
   }
 

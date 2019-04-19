@@ -1,17 +1,14 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
-// import L from 'leaflet';
-// import * as E from 'esri-leaflet';
 import { geocode } from 'esri-leaflet-geocoder';
 
 import SearchComplete from '../../components/SearchComplete';
 
 const stories = storiesOf('Components|SearchComplete', module);
 
-function handleOnSearch (query) {
-  action('SearchComplete::onSearch')(query);
+function handleOnSearch (query, date) {
+  action('SearchComplete::onSearch')(query, date);
 }
 
 async function handleFetchQueryComplete (query) {
@@ -30,7 +27,8 @@ async function handleFetchQueryComplete (query) {
         const results = candidates.map(({ address, location } = {}) => {
           return {
             label: address,
-            location
+            sublabel: `Location: ${location.x}, ${location.y}`,
+            value: location
           };
         });
 

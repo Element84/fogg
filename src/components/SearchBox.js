@@ -23,7 +23,7 @@ const SearchBox = ({ onInput, onSearch }) => {
     const { target } = e;
     setQuery(target.value);
     if (typeof onInput === 'function') {
-      onInput(e);
+      onInput(e, date.date);
     }
   }
 
@@ -74,14 +74,22 @@ const SearchBox = ({ onInput, onSearch }) => {
   }
 
   return (
-    <div className="search-box">
+    <div
+      className="search-box"
+      data-has-active-date-range={
+        date.date && !!(date.date.start || date.date.end)
+      }
+    >
       <FormInput
         className="search-box-input"
         placeholder="Search"
         onInput={handleSearchInput}
       />
       <div className="search-box-controls">
-        <div className="search-box-controls-date" data-is-open={date.isOpen}>
+        <div
+          className="search-box-controls-date"
+          data-is-searchbox-open={date.isOpen}
+        >
           <Button onClick={handleDateClick}>
             <FaCalendarAlt />
           </Button>
