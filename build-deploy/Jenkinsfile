@@ -47,8 +47,14 @@ pipeline {
     
     stage('Versioning'){
       // bumping version number for the develop pipeline
-      when { branch 'develop' }
+      when { 
+        branch 'develop' 
+        changeRequest()
+      }
       steps {
+        sh 'git config user.email "buildserver@element84.com"'
+        sh 'git config "Jenkins"'
+        
         sh 'yarn bump "patch"'
       }
     }
