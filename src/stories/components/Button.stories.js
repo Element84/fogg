@@ -25,7 +25,9 @@ stories.add('Disabled', () => {
         <Button disabled={true}>Button No Link</Button>
       </p>
       <p>
-        <Button to="/" disabled={true}>Button With Link</Button>
+        <Button to="/" disabled={true}>
+          Button With Link
+        </Button>
       </p>
     </>
   );

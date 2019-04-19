@@ -110,7 +110,7 @@ const FormInput = props => {
 
   return (
     <div className={`form-input form-input-${type} ${className || ''}`}>
-      { label && (
+      {label && (
         <label className="form-label" htmlFor={inputProps.id}>
           {label}
         </label>
@@ -134,6 +134,7 @@ const FormInput = props => {
 };
 
 FormInput.propTypes = {
+  className: PropTypes.string,
   label: PropTypes.string,
   value: PropTypes.string,
   type: PropTypes.string,

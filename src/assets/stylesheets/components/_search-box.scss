@@ -51,6 +51,14 @@ $search-box-height: 3.2em;
 
   position: relative;
 
+  &[data-is-open="true"] {
+
+    svg {
+      color: black;
+    }
+
+  }
+
   .button {
     background: none;
     box-shadow: none;
@@ -67,6 +75,8 @@ $search-box-height: 3.2em;
   display: none;
   position: absolute;
   top: 100%;
+  right: 0;
+  box-shadow: $component-shadow-lifted;
 
   .search-box-controls-date[data-is-open="true"] & {
     display: block;
