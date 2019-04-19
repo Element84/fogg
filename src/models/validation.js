@@ -62,10 +62,11 @@ function validate (rules = {}, value) {
   const maxLength = parseNumber(rules.maxLength);
   const isRequired = !!rules.required;
   const valueLength = typeof value === 'string' && value.length;
+  const hasNoValue = !valueLength || typeof value === 'undefined';
 
   // If we don't have a value but it's not required,
 
-  if (typeof value === 'undefined' && !isRequired) return true;
+  if (hasNoValue && !isRequired) return true;
 
   // Input that isn't a string isn't valid, so if thats what we have and
   // it's required, it fails
@@ -75,7 +76,7 @@ function validate (rules = {}, value) {
   // If we don't have a length because it's undefined or if we have no
   // length but it's required, it's not valid
 
-  if (isRequired && (!valueLength || valueLength === 0)) return false;
+  if (isRequired && !valueLength) return false;
 
   if (minLength && valueLength < minLength) return false;
   if (maxLength && valueLength > maxLength) return false;

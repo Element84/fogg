@@ -12,6 +12,9 @@ describe('Validation', () => {
     email: {
       required: true,
       regex: regexByFieldName('email')
+    },
+    password: {
+      minLength: 8
     }
   };
 
@@ -24,6 +27,9 @@ describe('Validation', () => {
     },
     email: {
       value: 'gus.bus@fring.com'
+    },
+    password: {
+      value: '12345678'
     }
   };
 
@@ -32,6 +38,7 @@ describe('Validation', () => {
 
     it('should return true a valid input', () => {
       expect(validate.byField('firstName', 'Walter')).toEqual(true);
+      expect(validate.byField('password', '')).toEqual(true);
     });
 
     it('should return false with no input', () => {
@@ -77,6 +84,15 @@ describe('Validation', () => {
 
     it('should return true for valid inputs', () => {
       expect(validate.bySet(validFields)).toEqual(true);
+      expect(
+        validate.bySet(
+          Object.assign({}, validFields, {
+            password: {
+              value: ''
+            }
+          })
+        )
+      ).toEqual(true);
     });
 
     it('should return false for invalid inputs', () => {
