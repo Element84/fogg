@@ -37,7 +37,8 @@ const StatusIndicator = ({ activeId, statusList = [], errorList = [] }) => {
             if (activeError) {
               // if isActive and error make circles red...also still needs to be 4 circles
               errorList.map(({ label, id }, index) => {
-                const isErrorCircle = activeStatus.id === id;
+                const isErrorCircle = activeError.id === id;
+                console.log(activeError.id, id, isErrorCircle)
                 className = `${className} status-indicator-circle-error`;
               });
               return (
