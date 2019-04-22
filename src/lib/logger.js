@@ -1,7 +1,13 @@
 class Logger {
-  constructor (namespace, { isBrowser = false } = {}) {
+  constructor (namespace, { isBrowser = false, production = false } = {}) {
     this.namespace = namespace;
     this.isBrowser = isBrowser;
+    this.production = production;
+  }
+
+  shouldLog () {
+    if (process.env.NODE_ENV === 'production' && !this.production) return false;
+    return true;
   }
 
   isVerbose () {
@@ -9,6 +15,7 @@ class Logger {
   }
 
   log (message) {
+    if (!this.shouldLog()) return;
     if (!this.isVerbose()) return;
 
     message = `[${this.namespace}] ${message}`;
@@ -19,6 +26,7 @@ class Logger {
   }
 
   warn (message) {
+    if (!this.shouldLog()) return;
     message = `[${this.namespace}] ${message}`;
     /* eslint-disable */
     if (this.isBrowser) {
@@ -30,6 +38,7 @@ class Logger {
   }
 
   error (message) {
+    if (!this.shouldLog()) return;
     message = `[${this.namespace}] ${message}`;
     /* eslint-disable */
     if (this.isBrowser) {
