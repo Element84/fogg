@@ -1,8 +1,8 @@
-.task-status-status-indicator {
-  ul {
-    padding: 0;
-  }
-}
+// .task-status-status-indicator {
+//   ul {
+//     padding: 0;
+//   }
+// }
 .task-status-info-wrapper {
   border: 1px solid #000;
   height: 125px;
@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  position: relative;
 }
 .task-status-info-window-open, .task-status-info-window-close {
   font-weight: bold;

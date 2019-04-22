@@ -5,8 +5,7 @@ const StatusIndicator = ({ activeId, statusList = [], errorList = [] }) => {
   let activeStatus = statusList.find(status => status.id === activeId);
   let activeError = errorList.find(status => status.id === activeId);
 
-  let isError = null; // probably don't need this
-
+  let isError = null;
   if (activeError) {
     isError = true;
     activeStatus = { activeError };
@@ -21,38 +20,29 @@ const StatusIndicator = ({ activeId, statusList = [], errorList = [] }) => {
 
   const activeStatusIndex = statusList.indexOf(activeStatus);
   
-  function label() {
-    if (activeError) {
-      return <h2 className="status-indicator-status">{activeError.label}</h2>
-    } 
-    else {
-      return <h2 className="status-indicator-status">{activeStatus.label}</h2>
-    }
-  }
+  // function label() {
+  //   if (activeError) {
+  //     return <h2 className="status-indicator-status">{activeError.label}</h2>
+  //   } 
+  //   else {
+  //     return <h2 className="status-indicator-status">{activeStatus.label}</h2>
+  //   }
+  // }
   return (
     <>
-      {label()}
+      {/* {label()} */}
+      <h2 className="status-indicator-status">{activeStatus.label}</h2>
       <div className="status-indicator-circles-wrapper">
         <ul className="status-indicator-circles">
+        
           {statusList.map(({ label, id }, index) => {
             const isActive = activeStatus.id === id;
 
             let className = 'status-indicator-circle';
-
-            if (activeError) {
-              // if isActive and error make circles red...also still needs to be 4 circles
-              errorList.map(({ label, id }, index) => {
-                const isErrorCircle = activeError.id === id;
-                console.log(activeError.id, id, isErrorCircle)
-                className = `${className} status-indicator-circle-error`;
-              });
-              return (
-                <>
-                  <li key={`StatusIndicator-${index}`} className={className}>
-                    <span>{label}</span>
-                  </li>
-                </>
-              );
+            
+            if (isError) {
+              className = `${className} status-indicator-circle-error`;
+              activeStatus.label = activeError.label
             }
 
             if (isActive) {
