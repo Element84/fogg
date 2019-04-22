@@ -2,7 +2,7 @@
   "name": "dashboard-components",
   "private": true,
   "description": "Gatsby theme for E84 Space Jam project",
-  "version": "0.1.8",
+  "version": "0.1.14",
   "author": "Element 84, Inc.",
   "dependencies": {
     "@babel/core": "^7.3.4",
@@ -79,6 +79,7 @@
     "serve": "gatsby serve",
     "start": "npm run develop",
     "storybook": "start-storybook -p 6006",
+    "test-watch": "jest --watchAll --config ./config/jest.config.js",
     "test": "jest --config ./config/jest.config.js && echo '> Finished testing ✅'"
   },
   "lint-staged": {

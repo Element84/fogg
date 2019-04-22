@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { FormContext } from '../context';
+import { useForm } from '../hooks';
+
 /**
  * Form
  * @description Default form component
@@ -11,59 +14,45 @@ const Form = ({
   className,
   name = 'theform',
   onSubmit,
-  onInput,
-  onChange
+  onChange,
+  rules = {}
 }) => {
   let formClassName = 'form';
+
+  const formHook = {
+    onSubmit,
+    onChange,
+    rules
+  };
+
+  const {
+    updateField,
+    handleChange,
+    handleSubmit,
+    invalidFields = []
+  } = useForm(formHook);
 
   if (typeof className === 'string') {
     formClassName = `${formClassName} ${className}`;
   }
 
-  /**
-   * handleSubmit
-   * @description Manages event handler for submit type events on the form
-   */
-
-  function handleSubmit (event) {
-    if (typeof onSubmit === 'function') {
-      onSubmit(event);
-    }
-  }
-
-  /**
-   * handleInput
-   * @description Manages event handler for input type events on the form
-   */
-
-  function handleInput (event) {
-    if (typeof onInput === 'function') {
-      onInput(event);
-    }
-  }
-
-  /**
-   * handleChange
-   * @description Manages event handler for change type events on the form
-   */
-
-  function handleChange (event) {
-    if (typeof onChange === 'function') {
-      onChange(event);
-    }
+  if (Array.isArray(invalidFields) && invalidFields.length > 0) {
+    formClassName = `${formClassName} form-not-valid`;
   }
 
   return (
-    <form
-      className={formClassName}
-      name={name}
-      action=""
-      onSubmit={handleSubmit}
-      onInput={handleInput}
-      onChange={handleChange}
-    >
-      {children}
-    </form>
+    <FormContext.Provider value={{ invalidFields, updateField }}>
+      <form
+        className={formClassName}
+        name={name}
+        action=""
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+        noValidate={true}
+      >
+        {children}
+      </form>
+    </FormContext.Provider>
   );
 };
 
@@ -75,8 +64,8 @@ Form.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string,
   onSubmit: PropTypes.func,
-  onInput: PropTypes.func,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  rules: PropTypes.object
 };
 
 export default Form;

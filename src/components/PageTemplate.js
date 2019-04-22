@@ -33,7 +33,7 @@ PageTemplate.propTypes = {
   title: PropTypes.string,
   parent: PropTypes.object,
   navigation: PropTypes.arrayOf(PropTypes.object),
-  icon: PropTypes.string
+  icon: PropTypes.node
 };
 
 export default PageTemplate;
