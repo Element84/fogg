@@ -19,7 +19,7 @@ const SearchBox = ({ onInput, onSearch }) => {
    * @description Fires onInput of search field and fires onInput if available
    */
 
-  function handleSearchInput (e) {
+  function handleSearchInput (e = {}) {
     const { target } = e;
     setQuery(target.value);
     if (typeof onInput === 'function') {
@@ -41,7 +41,7 @@ const SearchBox = ({ onInput, onSearch }) => {
    * @description Handles performing search and firing onSearch callback with query
    */
 
-  function handleSearch (query) {
+  function handleSearch () {
     if (typeof onSearch === 'function') {
       onSearch(query, date.date);
     }
@@ -88,7 +88,7 @@ const SearchBox = ({ onInput, onSearch }) => {
       <div className="search-box-controls">
         <div
           className="search-box-controls-date"
-          data-is-searchbox-open={date.isOpen}
+          data-is-searchbox-date-open={date.isOpen}
         >
           <Button onClick={handleDateClick}>
             <FaCalendarAlt />
