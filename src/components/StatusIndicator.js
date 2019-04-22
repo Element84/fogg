@@ -7,7 +7,7 @@ const StatusIndicator = ({ activeId, statusList = [], errorList = [] }) => {
   // TODO: handle this betteR??
   // if (!activeStatus) return null;
 
-  let isError = null;
+  let isError = null; // probably don't need this
 
   if (activeError) {
     isError = true;
@@ -16,19 +16,26 @@ const StatusIndicator = ({ activeId, statusList = [], errorList = [] }) => {
 
   if (!activeStatus) {
     activeStatus = {
-      label: 'unknown',
+      label: 'Unknown',
       id: 'unknown'
     };
   }
 
   const activeStatusIndex = statusList.indexOf(activeStatus);
-
+  
+  function label() {
+    if (activeError) {
+      return <h2 className="status-indicator-status">{activeError.label}</h2>
+    } 
+    else {
+      return <h2 className="status-indicator-status">{activeStatus.label}</h2>
+    }
+  }
   return (
     <>
-      <h2 className="status-indicator-status">{activeStatus.label}</h2>
+      {label()}
       <div className="status-indicator-circles-wrapper">
         <ul className="status-indicator-circles">
-          {/* if (isError) {className = status-indicator-circle} */}
           {statusList.map(({ label, id }, index) => {
             const isActive = activeStatus.id === id;
 
@@ -43,9 +50,6 @@ const StatusIndicator = ({ activeId, statusList = [], errorList = [] }) => {
               });
               return (
                 <>
-                  <h2 className="status-indicator-status">
-                    {errorList[0].label}
-                  </h2>
                   <li key={`StatusIndicator-${index}`} className={className}>
                     <span>{label}</span>
                   </li>

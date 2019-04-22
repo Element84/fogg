@@ -46,8 +46,8 @@ stories.add('Error', () => {
       id: 'canceled'
     },
     {
-      label: 'Anomoly',
-      id: 'anomoly'
+      label: 'Anomolly',
+      id: 'anomolly'
     }
   ];
 

@@ -14,32 +14,11 @@ const data = [
     name: 'Make Dwight Smack Himself in the Face',
     windowOpen: 1554416208102,
     windowClose: 1554782400000,
-    status: 'partially-completed'
-  },
-  {
-    id: 222,
-    name: 'Make Dwight Smack Himself in the Face',
-    windowOpen: 1554416208102,
-    windowClose: 1554782400000,
-    status: 'accepted'
-  },
-  {
-    id: 222,
-    name: 'Make Dwight Smack Himself in the Face',
-    windowOpen: 1554416208102,
-    windowClose: 1554782400000,
-    status: 'completed'
-  },
-  {
-    id: 221,
-    name: 'Make Dwight Smack Himself in the Face',
-    windowOpen: 1554416208102,
-    windowClose: 1554782400000,
-    status: 'partially-completed'
+    status: 'partially completed'
   }
 ];
 
-const rejected = [
+const error = [
   {
     id: 223,
     name: 'Beat Dwight in a Snowball Fight',
@@ -48,6 +27,16 @@ const rejected = [
     status: 'rejected'
   }
 ];
+
+const unknown = [
+  {
+    id: 223,
+    name: 'Beat Dwight in a Snowball Fight',
+    windowOpen: 1554416208102,
+    windowClose: 1554782400000,
+    status: 'not happening'
+  }
+]
 
 const headers = ['Window Open', 'Window Close'];
 
@@ -59,8 +48,14 @@ stories.add('Default', () => {
   });
 });
 
-// stories.add('Non Default Status', () => {
-//   return rejected.map(task => {
-//     return <TaskStatus headers={headers} task={task} />
-//   })
-// })
+stories.add('Error', () => {
+  return error.map(task => {
+    return <TaskStatus headers={headers} task={task} />
+  })
+})
+
+stories.add('Unknown', () => {
+  return unknown.map(task => {
+    return <TaskStatus headers={headers} task={task} />
+  })
+})
