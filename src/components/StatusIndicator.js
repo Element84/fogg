@@ -6,6 +6,7 @@ const StatusIndicator = ({ activeId, statusList = [], errorList = [] }) => {
   let activeError = errorList.find(status => status.id === activeId);
 
   let isError = null;
+  
   if (activeError) {
     isError = true;
     activeStatus = { activeError };
@@ -31,7 +32,7 @@ const StatusIndicator = ({ activeId, statusList = [], errorList = [] }) => {
   return (
     <>
       {/* {label()} */}
-      <h2 className="status-indicator-status">{activeStatus.label}</h2>
+      <h2 className="status-indicator-status">{activeStatus.label || activeError.label}</h2>
       <div className="status-indicator-circles-wrapper">
         <ul className="status-indicator-circles">
         
@@ -42,7 +43,6 @@ const StatusIndicator = ({ activeId, statusList = [], errorList = [] }) => {
             
             if (isError) {
               className = `${className} status-indicator-circle-error`;
-              activeStatus.label = activeError.label
             }
 
             if (isActive) {
