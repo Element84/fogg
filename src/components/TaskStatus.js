@@ -77,7 +77,7 @@ const TaskStatus = ({ headers = DEFAULT_HEADERS, task = {} }) => {
 
 TaskStatus.propTypes = {
   headers: PropTypes.array,
-  task: PropTypes.array
+  task: PropTypes.object
 };
 
 export default TaskStatus;

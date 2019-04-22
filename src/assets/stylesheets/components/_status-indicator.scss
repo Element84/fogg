@@ -1,11 +1,10 @@
-.status-indicator-status {
+.status-indicator-label {
   text-align: center;
 }
 .status-indicator-circles {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  position: absolute;
+  justify-content: center;
   padding: 0;
   width: 100%; // make circles take 100% of div not status.lable.length
   list-style: none;
@@ -17,7 +16,7 @@
   height: 20px;
   width: 20px;
   display: center;
-  padding-right: 0;
+  margin: 0 1em;
   span {
     position: absolute;
     left: -10000px;

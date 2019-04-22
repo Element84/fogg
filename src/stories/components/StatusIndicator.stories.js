@@ -87,5 +87,5 @@ stories.add('Unknown', () => {
     }
   ];
 
-  return <StatusIndicator activeId={statusList[1].id} statusList={status} />;
+  return <StatusIndicator activeId={status[0].id} statusList={statusList} />;
 });

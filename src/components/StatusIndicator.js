@@ -23,7 +23,7 @@ const StatusIndicator = ({ activeId, statusList = [], errorList = [] }) => {
 
   return (
     <>
-      <h2 className="status-indicator-status">
+      <h2 className="status-indicator-label">
         {activeStatus.label || activeError.label}
       </h2>
       <div className="status-indicator-circles-wrapper">
