@@ -41,7 +41,7 @@ const ERROR_LIST = [
   }
 ];
 
-const TaskStatus = ({ headers = DEFAULT_HEADERS, task }) => {
+const TaskStatus = ({ headers = DEFAULT_HEADERS, task = {} }) => {
   const { windowOpen, windowClose } = task;
 
   return (

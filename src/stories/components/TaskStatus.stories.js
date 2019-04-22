@@ -43,19 +43,19 @@ const headers = ['Window Open', 'Window Close'];
 const stories = storiesOf('Components|TaskStatus', module);
 
 stories.add('Default', () => {
-  return data.map(({ task }, index) => {
+  return data.map((task, index) => {
     return <TaskStatus headers={headers} task={task} key={index} />;
   });
 });
 
 stories.add('Error', () => {
-  return error.map(({ task }, index) => {
+  return error.map((task, index) => {
     return <TaskStatus headers={headers} task={task} key={index} />;
   });
 });
 
 stories.add('Unknown', () => {
-  return unknown.map(({ task }, index) => {
+  return unknown.map((task, index) => {
     return <TaskStatus headers={headers} task={task} key={index} />;
   });
 });
