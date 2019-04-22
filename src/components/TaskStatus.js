@@ -42,7 +42,7 @@ const ERROR_LIST = [
 ];
 
 const TaskStatus = ({ headers = DEFAULT_HEADERS, task }) => {
-  const { status, windowOpen, windowClose } = task;
+  const { windowOpen, windowClose } = task;
 
   return (
     <div className="task-status">

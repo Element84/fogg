@@ -79,7 +79,7 @@ stories.add('Unknown', () => {
       id: 'completed'
     }
   ];
-  
+
   const status = [
     {
       label: 'Indubitably',
@@ -87,7 +87,5 @@ stories.add('Unknown', () => {
     }
   ];
 
-  return (
-    <StatusIndicator activeId={statusList[1].id} statusList={status} />
-  );
+  return <StatusIndicator activeId={statusList[1].id} statusList={status} />;
 });
