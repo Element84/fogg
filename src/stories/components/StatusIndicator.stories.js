@@ -59,3 +59,35 @@ stories.add('Error', () => {
     />
   );
 });
+
+stories.add('Unknown', () => {
+  const statusList = [
+    {
+      label: 'Pending',
+      id: 'pending'
+    },
+    {
+      label: 'Accepted',
+      id: 'accepted'
+    },
+    {
+      label: 'Partially Completed',
+      id: 'partially-completed'
+    },
+    {
+      label: 'Completed',
+      id: 'completed'
+    }
+  ];
+  
+  const status = [
+    {
+      label: 'Indubitably',
+      id: 'indubitably'
+    }
+  ];
+
+  return (
+    <StatusIndicator activeId={statusList[1].id} statusList={status} />
+  );
+});

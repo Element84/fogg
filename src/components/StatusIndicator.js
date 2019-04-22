@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 const StatusIndicator = ({ activeId, statusList = [], errorList = [] }) => {
   let activeStatus = statusList.find(status => status.id === activeId);
   let activeError = errorList.find(status => status.id === activeId);
-  // TODO: handle this betteR??
-  // if (!activeStatus) return null;
 
   let isError = null; // probably don't need this
 
@@ -60,10 +58,6 @@ const StatusIndicator = ({ activeId, statusList = [], errorList = [] }) => {
             if (isActive) {
               className = `${className} status-indicator-circle-active`;
             }
-
-            // if (!isActive) {
-
-            // }
 
             if (index < activeStatusIndex) {
               className = `${className} status-indicator-circle-past`;
