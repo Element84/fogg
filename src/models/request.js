@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { addParamsToUrl } from './util';
-import { HttpError } from 'errors/http';
+import { addParamsToUrl } from '../lib/util';
+import { HttpError } from '../errors/http';
 
 /**
  * Request
