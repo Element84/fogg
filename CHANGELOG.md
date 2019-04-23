@@ -1,3 +1,6 @@
+### Version 0.1.16
+- moving bump to dev dependencies
+
 ### Version 0.1.15
 - [JAM-235] moving esri and leaflet to dev dependencies
 - [JAM-235] updating search date box to collapse on search
