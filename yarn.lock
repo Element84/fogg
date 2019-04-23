@@ -937,6 +937,11 @@
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.2.tgz#63985d3d8b02530e0869962f4da09142ee8e200e"
 
+"@esri/arcgis-to-geojson-utils@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@esri/arcgis-to-geojson-utils/-/arcgis-to-geojson-utils-1.3.0.tgz#79ab65bf3e40c039dbdebceff4b3b0ec088b189c"
+  integrity sha512-8yPorlHeU63U6aT7RJbgSfXGKTZtnQz7Os8Qw96PW2lXJ+g1CRe5L/G8h5qtYHqt5VM4yCUGIhzHHYxdGzanLQ==
+
 "@fabiospampinato/bump@^1.0.6":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@fabiospampinato/bump/-/bump-1.0.6.tgz#d5c226eaf09949441d7ac57a39f7879e6d30c484"
@@ -5705,6 +5710,23 @@ esrecurse@^4.1.0:
   dependencies:
     estraverse "^4.1.0"
 
+esri-leaflet-geocoder@^2.2.14:
+  version "2.2.14"
+  resolved "https://registry.yarnpkg.com/esri-leaflet-geocoder/-/esri-leaflet-geocoder-2.2.14.tgz#d00d456d8d595903af6c087de3b1b9ffd96de79d"
+  integrity sha512-OG1oNm5Tku2M3PNM6n+PHjy9rjY76B7aYNPmz6p6yfYeiXMQ5Zv7Ye38isY0mw2lyq4PWSuja5ZIwoAbMDq74g==
+  dependencies:
+    esri-leaflet "^2.1.4"
+    leaflet "^1.0.0"
+
+esri-leaflet@^2.1.4, esri-leaflet@^2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/esri-leaflet/-/esri-leaflet-2.2.4.tgz#b9a71747ed96b79153166935f371e8cd27921b7e"
+  integrity sha512-VnIcqOZ+1AxmhD+wxyFJ7YrxXsSfBv2fhps2DWGQsDqS+mg+WOfARpGUA2Z3JxjasSKOhY34Uo8OKEHRpNGyQg==
+  dependencies:
+    "@esri/arcgis-to-geojson-utils" "^1.3.0"
+    leaflet-virtual-grid "^1.0.7"
+    tiny-binary-search "^1.0.3"
+
 estraverse@^4.0.0, estraverse@^4.1.0, estraverse@^4.1.1, estraverse@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-4.2.0.tgz#0dee3fed31fcd469618ce7342099fc1afa0bdb13"
@@ -9064,6 +9086,18 @@ lcid@^2.0.0:
   dependencies:
     invert-kv "^2.0.0"
 
+leaflet-virtual-grid@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/leaflet-virtual-grid/-/leaflet-virtual-grid-1.0.7.tgz#0dbb0dacd506b6e6d291314da5022d348729f8ad"
+  integrity sha512-sJxWYPcIKwMTewE+z8OFzfZHsbZcniQgTcreVdIQnxSRf+1XpMp+c4QKAWRKTBRmWOhEGyQO0Z90CLANJ9jRUQ==
+  dependencies:
+    leaflet "^1.0.0"
+
+leaflet@^1.0.0, leaflet@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.4.0.tgz#d5f56eeb2aa32787c24011e8be4c77e362ae171b"
+  integrity sha512-x9j9tGY1+PDLN9pcWTx9/y6C5nezoTMB8BLK5jTakx+H7bPlnbCHfi9Hjg+Qt36sgDz/cb9lrSpNQXmk45Tvhw==
+
 left-pad@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/left-pad/-/left-pad-1.3.0.tgz#5b8a3a7765dfe001261dde915589e782f8c94d1e"
@@ -12093,9 +12127,12 @@ react-hotkeys@2.0.0-pre4:
   dependencies:
     prop-types "^15.6.1"
 
-react-icons@^3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.5.0.tgz#a6135480e3bcbc63f5dd045193ef2a814263d8d1"
+react-icons@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.6.1.tgz#794da15fff7788907e0390237e13a50692bffd00"
+  integrity sha512-TpdkxqS2zohHjMjO58AfMB3aW4HE6Hn2FWX2HhIbfCptHpPzW3fIrXRBSOhkzsm59CZUr7M5v2F/j3eBwws95Q==
+  dependencies:
+    camelcase "^5.0.0"
 
 react-inspector@^2.3.0, react-inspector@^2.3.1:
   version "2.3.1"
@@ -14197,6 +14234,11 @@ timers-browserify@^2.0.4:
 timsort@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
+
+tiny-binary-search@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/tiny-binary-search/-/tiny-binary-search-1.0.3.tgz#9d52e3d16dd1171eb74486caf704ba08c0c62186"
+  integrity sha512-STSHX/L5nI9WTLv6wrzJbAPbO7OIISX83KFBh2GVbX1Uz/vgZOU/ANn/8iV6t35yMTpoPzzO+3OQid3mifE0CA==
 
 tiny-emitter@^2.0.0:
   version "2.1.0"
