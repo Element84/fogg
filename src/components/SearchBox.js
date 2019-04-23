@@ -10,7 +10,7 @@ const SearchBox = ({ onInput, onSearch }) => {
   const [query, setQuery] = useState('');
 
   const [date, setDate] = useState({
-    isOpen: false,
+    dateIsOpen: false,
     date: {}
   });
 
@@ -34,6 +34,10 @@ const SearchBox = ({ onInput, onSearch }) => {
 
   function handleSearchClick (e) {
     handleSearch(query);
+    setDate({
+      ...date,
+      dateIsOpen: false
+    });
   }
 
   /**
@@ -55,7 +59,7 @@ const SearchBox = ({ onInput, onSearch }) => {
   function handleDateClick () {
     setDate({
       ...date,
-      isOpen: !date.isOpen
+      dateIsOpen: !date.dateIsOpen
     });
   }
 
@@ -88,7 +92,7 @@ const SearchBox = ({ onInput, onSearch }) => {
       <div className="search-box-controls">
         <div
           className="search-box-controls-date"
-          data-is-searchbox-date-open={date.isOpen}
+          data-is-searchbox-date-open={date.dateIsOpen}
         >
           <Button onClick={handleDateClick}>
             <FaCalendarAlt />

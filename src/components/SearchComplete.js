@@ -16,7 +16,7 @@ const SearchComplete = ({ onSearch, resolveQueryComplete }) => {
    */
 
   function handleSearchboxSearch (textInput, searchDate) {
-    const { value } = results[0];
+    const { value } = results[0] || {};
     updateDate(searchDate);
     handleQuery(value);
     updateOpenState(false);

@@ -22,30 +22,30 @@ const FormInput = props => {
 
   const { id, name, type, label, inputRules } = useInput({ props });
 
-  const { onChange, onInput } = props;
+  const { onChange, onInput, className } = props;
 
   let input;
-  let className = `form-input`;
-  let inputClassName = 'form-input-field';
+  let inputClassName = `form-input ${className || ''}`;
+  let fieldClassName = 'form-input-field';
 
   // Update the field immediately with any local rules for validation
 
   updateField(name, undefined, inputRules);
 
   if (type) {
-    className = `${className} form-input-${type}`;
+    inputClassName = `${inputClassName} form-input-${type}`;
   }
 
   // If the input is invalid, tag an extra class for styling
 
   if (Array.isArray(invalidFields) && invalidFields.includes(name)) {
-    className = `${className} form-input-invalid`;
+    inputClassName = `${inputClassName} form-input-invalid`;
   }
 
   if (type === 'select') {
     input = (
       <Select
-        className={inputClassName}
+        className={fieldClassName}
         props={props}
         onChange={handleOnChange}
         onInput={handleOnInput}
@@ -54,7 +54,7 @@ const FormInput = props => {
   } else if (type === 'textarea') {
     input = (
       <Textarea
-        className={inputClassName}
+        className={fieldClassName}
         props={props}
         onChange={handleOnChange}
         onInput={handleOnInput}
@@ -63,7 +63,7 @@ const FormInput = props => {
   } else if (type === 'datetime') {
     input = (
       <Datetime
-        className={inputClassName}
+        className={fieldClassName}
         props={props}
         onChange={handleOnChange}
         onInput={handleOnInput}
@@ -72,7 +72,7 @@ const FormInput = props => {
   } else {
     input = (
       <Input
-        className={inputClassName}
+        className={fieldClassName}
         props={props}
         onChange={handleOnChange}
         onInput={handleOnInput}
@@ -81,7 +81,7 @@ const FormInput = props => {
   }
 
   return (
-    <div className={className}>
+    <div className={inputClassName}>
       {label && (
         <label className="form-label" htmlFor={id}>
           {label}
