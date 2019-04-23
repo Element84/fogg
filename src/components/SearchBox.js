@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FaSearch, FaCalendarAlt } from 'react-icons/fa';
 
+import Form from './Form';
 import FormInput from './FormInput';
 import Button from './Button';
 import DatetimeRange from './DatetimeRange';
@@ -77,6 +78,16 @@ const SearchBox = ({ onInput, onSearch }) => {
     });
   }
 
+  /**
+   * handleFormSubmit
+   * @description
+   */
+
+  function handleFormSubmit () {
+    handleSearchClick();
+    return false;
+  }
+
   return (
     <div
       className="search-box"
@@ -84,11 +95,13 @@ const SearchBox = ({ onInput, onSearch }) => {
         date.date && !!(date.date.start || date.date.end)
       }
     >
-      <FormInput
-        className="search-box-input"
-        placeholder="Search"
-        onInput={handleSearchInput}
-      />
+      <Form onSubmit={handleFormSubmit}>
+        <FormInput
+          className="search-box-input"
+          placeholder="Search"
+          onInput={handleSearchInput}
+        />
+      </Form>
       <div className="search-box-controls">
         <div
           className="search-box-controls-date"
