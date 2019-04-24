@@ -10,7 +10,11 @@ const defaultValue = 'Chookity';
 
 function handleOnSave (value, name) {
   const hasChanged = value !== defaultValue;
-  action('ModInput::onSave')(name, value, `Has changed: ${hasChanged}`);
+  action('ModInput::onSave')(
+    name,
+    value,
+    `Has changed since load: ${hasChanged}`
+  );
 }
 
 stories.add('Default', () => (

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FaPencilAlt, FaCheck, FaTimes } from 'react-icons/fa';
 
+import { useModValue } from '../hooks';
 import Logger from '../lib/logger';
 
 import FormInput from './FormInput';
@@ -18,9 +19,14 @@ const ModInput = ({ id, name, defaultValue = '', onSave }) => {
     logger.warn(`Missing input name`);
   }
 
-  const [isChangeable, updateChangeable] = useState(false);
-  const [originalValue, updateOriginalValue] = useState(defaultValue);
-  const [value, updateValue] = useState(originalValue);
+  const {
+    isChangeable,
+    updateChangeable,
+    originalValue,
+    updateOriginalValue,
+    value,
+    updateValue
+  } = useModValue(defaultValue);
 
   let icon = isChangeable ? <FaCheck /> : <FaPencilAlt />;
 
