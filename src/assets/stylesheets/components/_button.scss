@@ -46,3 +46,19 @@
   }
 
 }
+
+.button-circle {
+
+  border-radius: 3.2em;
+
+  button {
+    display: block;
+    width: 3.2em;
+    height: 3.2em;
+    line-height: 3.2em;
+    text-align: center;
+    padding: 0;
+    
+  }
+
+}

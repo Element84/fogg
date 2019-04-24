@@ -1,0 +1,67 @@
+$mod-input-button-size: 2.4em;
+
+.mod-input {
+
+  display: flex;
+  width: 100%;
+  align-items: center;
+
+  &[data-modinput-is-changeable="false"] {
+
+    .button {
+      
+      background: white;
+
+      button {
+        color: $color-gray;
+        border: solid 2px $color-gray;
+        border-radius: $mod-input-button-size;
+      }
+
+    }
+
+  }
+
+  .button {
+    
+    width: $mod-input-button-size;
+    height: $mod-input-button-size;
+    line-height: $mod-input-button-size;
+    margin-left: 1em;
+
+    button {
+      width: $mod-input-button-size;
+      height: $mod-input-button-size;
+      line-height: $mod-input-button-size;
+      border: solid 2px transparent;
+    }
+
+  }
+  
+
+  .form-input-disabled {
+
+    input {
+      background-color: white;
+      border: solid 2px transparent;
+      box-shadow: none;
+    }
+
+  }
+
+}
+
+.mod-input-cancel {
+  background: $color-gray linear-gradient(lighten($color-gray, 3), $color-gray);
+}
+
+.mod-input-value {
+  
+  display: block;
+  flex-grow: 1;
+
+  span {
+    display: block;
+  }
+
+}
