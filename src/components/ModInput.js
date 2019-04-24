@@ -86,14 +86,13 @@ const ModInput = ({ id, name, defaultValue = '', onSave }) => {
         <Button
           className="button-circle mod-input-cancel"
           onClick={handleCancelClick}
-          text={<FaTimes />}
-        />
+        >
+          <FaTimes />
+        </Button>
       )}
-      <Button
-        className="button-circle"
-        onClick={handleChangeClick}
-        text={icon}
-      />
+      <Button className="button-circle" onClick={handleChangeClick}>
+        {icon}
+      </Button>
     </div>
   );
 };
