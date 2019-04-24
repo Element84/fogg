@@ -10,6 +10,22 @@ stories.add('Default', () => {
   return (
     <>
       <NavBar
+        primary={[
+          { label: 'Top Link 1', to: '/iframe.html', icon: <FaSearch /> }
+        ]}
+        secondary={[
+          { label: 'Bottom Link 1', to: '/bottom', icon: <FaDatabase /> },
+          { label: 'Bottom Link 2', to: '/bottom2', icon: <FaServer /> }
+        ]}
+      />
+    </>
+  );
+});
+
+stories.add('Vertical', () => {
+  return (
+    <>
+      <NavBar
         orientation="vertical"
         primary={[
           { label: 'Top Link 1', to: '/iframe.html', icon: <FaSearch /> }

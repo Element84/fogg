@@ -39,11 +39,12 @@ describe('Nav Bar', () => {
             .exists()
         ).toEqual(true);
       });
-      it('correctly sets the button text', () => {
+
+      it('correctly sets the button icon', () => {
         expect(
           wrapper
             .find(Button)
-            .findWhere(n => n.prop('text') === item.icon)
+            .findWhere(n => n.prop('children') === item.icon)
             .exists()
         ).toEqual(true);
       });
@@ -58,11 +59,12 @@ describe('Nav Bar', () => {
             .exists()
         ).toEqual(true);
       });
-      it('correctly sets the button text', () => {
+
+      it('correctly sets the button icon', () => {
         expect(
           wrapper
             .find(Button)
-            .findWhere(n => n.prop('text') === item.icon)
+            .findWhere(n => n.prop('children') === item.icon)
             .exists()
         ).toEqual(true);
       });

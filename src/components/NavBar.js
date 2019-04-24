@@ -6,31 +6,29 @@ const NavBar = ({ orientation, primary, secondary }) => {
   let currentPage = window.location.pathname;
 
   return (
-    <div className="nav-bar">
-      <ul className={orientation}>
-        {primary.map(link => {
-          return (
-            <li key={link.to}>
-              <Button
-                to={link.to}
-                text={link.icon}
-                className={currentPage === link.to ? 'isActive' : ''}
-              />
-            </li>
-          );
-        })}
-        {secondary.map(link => {
-          return (
-            <li key={link.to}>
-              <Button
-                to={link.to}
-                text={link.icon}
-                className={currentPage === link.to ? 'isActive' : ''}
-              />
-            </li>
-          );
-        })}
-      </ul>
+    <div className={'nav-bar ' + orientation}>
+      {primary.map(link => {
+        return (
+          <Button
+            key={link.id}
+            to={link.to}
+            className={currentPage === link.to ? 'isActive' : ''}
+          >
+            {link.icon}
+          </Button>
+        );
+      })}
+      {secondary.map(link => {
+        return (
+          <Button
+            key={link.id}
+            to={link.to}
+            className={currentPage === link.to ? 'isActive' : ''}
+          >
+            {link.icon}
+          </Button>
+        );
+      })}
     </div>
   );
 };
