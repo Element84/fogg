@@ -1,0 +1,30 @@
+.datetime-range {
+  display: flex;
+}
+
+.datetime-range-selection {
+
+  flex-grow: 1;
+  margin-right: .5em;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  & > strong {
+    display: block;
+    font-size: .9em;
+    text-align: center;
+    color: $color-gray1;
+    background-color: $color-gray8;
+    padding: .5em 0;
+  }
+
+  .rdtPicker {
+    width: 100%;
+    padding: 0;
+    border: 0;
+    margin: 0;
+  }
+
+}

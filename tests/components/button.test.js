@@ -6,7 +6,7 @@ import Button from 'components/Button';
 describe('Button', () => {
   describe('Render', () => {
     const text = 'Name';
-    const button = shallow(<Button text={text} />);
+    const button = shallow(<Button>{text}</Button>);
     it('should render a button', () => {
       expect(button.find('span').text()).toEqual(text);
     });

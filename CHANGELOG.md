@@ -1,3 +1,14 @@
+### Version 0.1.17
+- fixing styles for datetime range
+
+### Version 0.1.16
+- moving bump to dev dependencies
+
+### Version 0.1.15
+- [JAM-235] moving esri and leaflet to dev dependencies
+- [JAM-235] updating search date box to collapse on search
+- [JAM-235] firing search handler on form submit
+
 ### Version 0.1.14
 
 ### Version 0.1.13

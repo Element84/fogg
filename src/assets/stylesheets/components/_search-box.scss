@@ -1,0 +1,102 @@
+$search-box-height: 3.2em;
+
+.search-box {
+  position: relative;
+}
+
+.search-box-input {
+
+  width: 100%;
+
+  input[type="text"] {
+    height: $search-box-height;
+    line-height: $search-box-height;
+    padding-left: 1em;
+    padding-right: ( $search-box-height * 2 );
+  }
+
+}
+
+.search-box-controls {
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+
+  button,
+  .button {
+    width: $search-box-height;
+    height: $search-box-height;
+    line-height: $search-box-height;
+    text-align: center;
+    border-radius: 0;
+  }
+
+  button {
+    padding: 0;
+  }
+
+  .button {
+
+    &:last-child {
+      border-radius: 0 $border-radius-small $border-radius-small 0;
+    }
+
+  }
+
+}
+
+.search-box-controls-date {
+
+  position: relative;
+
+  &[data-is-searchbox-date-open="true"] {
+
+    svg {
+      color: $color-gray9;
+    }
+
+  }
+
+  [data-has-active-date-range="true"] & {
+
+    svg {
+      color: $color-blue;
+    }
+
+  }
+
+  .button {
+    background: none;
+    box-shadow: none;
+  }
+
+  svg {
+    color: $color-gray;
+  }
+
+}
+
+.search-box-controls-date-picker {
+
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  box-shadow: $component-shadow-lifted;
+
+  .search-box-controls-date[data-is-searchbox-date-open="true"] & {
+    display: block;
+  }
+
+  .datetime-range {
+    min-width: 30em;
+    padding: .5em;
+  }
+
+}
+
+.search-box-controls-search {
+
+}

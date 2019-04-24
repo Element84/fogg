@@ -9,10 +9,10 @@ stories.add('Default', () => {
   return (
     <>
       <p>
-        <Button text="Button No Link" />
+        <Button>Button No Link</Button>
       </p>
       <p>
-        <Button to="/" text="Button With Link" />
+        <Button to="/">Button With Link</Button>
       </p>
     </>
   );
@@ -22,10 +22,12 @@ stories.add('Disabled', () => {
   return (
     <>
       <p>
-        <Button text="Button No Link" disabled={true} />
+        <Button disabled={true}>Button No Link</Button>
       </p>
       <p>
-        <Button to="/" text="Button With Link" disabled={true} />
+        <Button to="/" disabled={true}>
+          Button With Link
+        </Button>
       </p>
     </>
   );

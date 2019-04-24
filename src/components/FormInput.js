@@ -31,34 +31,34 @@ const FormInput = props => {
     logger.warn(`Missing input name`);
   }
 
-  const { onChange, onInput, disabled } = props;
+  const { onChange, onInput, className, disabled } = props;
 
   let input;
-  let className = `form-input`;
-  let inputClassName = 'form-input-field';
+  let inputClassName = `form-input ${className || ''}`;
+  let fieldClassName = 'form-input-field';
 
   // Update the field immediately with any local rules for validation
 
   updateField(name, undefined, inputRules);
 
   if (type) {
-    className = `${className} form-input-${type}`;
+    inputClassName = `${inputClassName} form-input-${type}`;
   }
 
   // If the input is invalid, tag an extra class for styling
 
   if (Array.isArray(invalidFields) && invalidFields.includes(name)) {
-    className = `${className} form-input-invalid`;
+    inputClassName = `${inputClassName} form-input-invalid`;
   }
 
   if (disabled) {
-    className = `${className} form-input-disabled`;
+    inputClassName = `${inputClassName} form-input-disabled`;
   }
 
   if (type === 'select') {
     input = (
       <Select
-        className={inputClassName}
+        className={fieldClassName}
         props={props}
         onChange={handleOnChange}
         onInput={handleOnInput}
@@ -67,7 +67,7 @@ const FormInput = props => {
   } else if (type === 'textarea') {
     input = (
       <Textarea
-        className={inputClassName}
+        className={fieldClassName}
         props={props}
         onChange={handleOnChange}
         onInput={handleOnInput}
@@ -76,7 +76,7 @@ const FormInput = props => {
   } else if (type === 'datetime') {
     input = (
       <Datetime
-        className={inputClassName}
+        className={fieldClassName}
         props={props}
         onChange={handleOnChange}
         onInput={handleOnInput}
@@ -85,7 +85,7 @@ const FormInput = props => {
   } else {
     input = (
       <Input
-        className={inputClassName}
+        className={fieldClassName}
         props={props}
         onChange={handleOnChange}
         onInput={handleOnInput}
@@ -94,7 +94,7 @@ const FormInput = props => {
   }
 
   return (
-    <div className={className}>
+    <div className={inputClassName}>
       {label && (
         <label className="form-label" htmlFor={id}>
           {label}
@@ -121,12 +121,11 @@ const FormInput = props => {
 };
 
 FormInput.propTypes = {
+  className: PropTypes.string,
   label: PropTypes.string,
-  value: PropTypes.string,
   type: PropTypes.string,
   id: PropTypes.string,
   name: PropTypes.string,
-  options: PropTypes.array,
   placeholder: PropTypes.string,
   autoComplete: PropTypes.string,
   autoCorrect: PropTypes.string,
