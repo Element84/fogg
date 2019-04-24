@@ -1,3 +1,6 @@
+### Version 0.1.17
+- fixing styles for datetime range
+
 ### Version 0.1.16
 - moving bump to dev dependencies
 
