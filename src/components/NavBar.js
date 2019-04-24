@@ -4,21 +4,11 @@ import Button from './Button';
 
 const NavBar = ({ orientation, primary, secondary }) => {
   let currentPage = window.location.pathname;
+  let navButtons = primary.concat(secondary);
 
   return (
     <div className={'nav-bar ' + orientation}>
-      {primary.map(link => {
-        return (
-          <Button
-            key={link.id}
-            to={link.to}
-            className={currentPage === link.to ? 'isActive' : ''}
-          >
-            {link.icon}
-          </Button>
-        );
-      })}
-      {secondary.map(link => {
+      {navButtons.map(link => {
         return (
           <Button
             key={link.id}
