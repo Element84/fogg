@@ -4,7 +4,7 @@ import sinon from 'sinon';
 
 import Form from 'components/Form';
 
-describe('WonderLink', () => {
+describe('Form', () => {
   const inputs = (
     <div>
       <input id="test-1" name="test-1" type="text" />
@@ -12,9 +12,16 @@ describe('WonderLink', () => {
     </div>
   );
 
+  const defaultFormEvent = {
+    persist: () => {},
+    preventDefault: () => {}
+  };
+
   describe('Text', () => {
     const formClass = 'test-class';
-    const form = shallow(<Form className={formClass}>Chookity!</Form>);
+    const form = shallow(<Form className={formClass}>Chookity!</Form>).find(
+      'form'
+    );
 
     it('should render the given text', () => {
       expect(form.text()).toEqual('Chookity!');
@@ -26,7 +33,7 @@ describe('WonderLink', () => {
   });
 
   describe('Inputs', () => {
-    const form = shallow(<Form>{inputs}</Form>);
+    const form = shallow(<Form>{inputs}</Form>).find('form');
 
     it('should render the given inputs', () => {
       expect(form.contains(inputs)).toEqual(true);
@@ -36,7 +43,6 @@ describe('WonderLink', () => {
   describe('Events', () => {
     let submitTest = 1;
     let changeTest = 1;
-    let inputTest = 1;
 
     function handleSubmit () {
       submitTest++;
@@ -46,57 +52,40 @@ describe('WonderLink', () => {
       changeTest++;
     }
 
-    function handleInput (event) {
-      inputTest++;
-    }
-
     const form = shallow(
-      <Form
-        onSubmit={handleSubmit}
-        onChange={handleChange}
-        onInput={handleInput}
-      >
+      <Form onSubmit={handleSubmit} onChange={handleChange}>
         {inputs}
       </Form>
-    );
+    ).find('form');
 
     it('should fire the submit handler', () => {
-      form.simulate('submit');
+      form.simulate('submit', defaultFormEvent);
       expect(submitTest).toEqual(2);
     });
 
     it('should fire the change handler', () => {
-      form.simulate('change');
+      form.simulate('change', defaultFormEvent);
       expect(changeTest).toEqual(2);
-    });
-
-    it('should fire the input handler', () => {
-      form.simulate('input');
-      expect(inputTest).toEqual(2);
     });
   });
 
   describe('Invalid Events', () => {
     let consoleStub = sinon.stub(console, 'error');
     const form = shallow(
-      <Form onSubmit={'test'} onChange={'test'} onInput={'test'}>
+      <Form onSubmit={'test'} onChange={'test'}>
         {inputs}
       </Form>
-    );
+    ).find('form');
 
     it('should not throw an error when trying to fire the submit handler', () => {
-      expect(form.simulate('submit')).toEqual({});
+      expect(form.simulate('submit', defaultFormEvent)).toEqual({});
     });
 
     it('should not throw an error when trying to fire the change handler', () => {
-      expect(form.simulate('change')).toEqual({});
+      expect(form.simulate('change', defaultFormEvent)).toEqual({});
     });
 
-    it('should not throw an error when trying to fire the input handler', () => {
-      expect(form.simulate('input')).toEqual({});
-    });
-
-    expect(consoleStub.callCount).toEqual(3);
+    expect(consoleStub.callCount).toEqual(2);
     expect(
       consoleStub.calledWithMatch('Warning: Failed prop type: Invalid prop')
     ).toEqual(true);

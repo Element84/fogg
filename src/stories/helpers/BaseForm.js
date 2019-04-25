@@ -11,13 +11,10 @@ import Form from '../../components/Form';
 
 const BaseForm = ({ children }) => {
   function handleSubmit (event) {
-    event.persist();
-    event.preventDefault();
     action('form-submit')(event);
   }
 
   function handleChange (event) {
-    event.persist();
     action('form-change')(event);
   }
 

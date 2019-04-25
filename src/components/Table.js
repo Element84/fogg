@@ -14,10 +14,7 @@ const Table = ({ className, columns, rows }) => {
   // it will end up messed up in one way or another. We can protect
   // against this and just fail right away returning null
 
-  if (
-    !tableConfigurationIsValid(columns, rows) &&
-    process.env.NODE_ENV !== 'production'
-  ) {
+  if (!tableConfigurationIsValid(columns, rows)) {
     logger.warn(`Invalid table configuration, trying to fix`);
 
     const configuration = fixTableConfiguration(columns, rows);

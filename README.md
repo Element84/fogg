@@ -34,6 +34,6 @@ By default, the project runs on on [localhost:8000](http://localhost:8000).
 You can view a list of this theme's components on [localhost:8000/components](http://localhost:8000/components)
 
 # Deployment & Releases
-There is no traditional sense of deployment here. When making any updates, please increment the `package.json` version number.
+There is no traditional sense of deployment here. When the development pipeline runs (SIT is updated), the version number will automatically increment
 
 The version number utilizes [semantic versioning](https://semver.org/) and should be updated accordingly.

@@ -1,20 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-const INPUT_PROPS_WHITELIST = [
-  'id',
-  'name',
-  'placeholder',
-  'autoComplete',
-  'autoCorrect',
-  'autoCapitalize',
-  'minLength',
-  'maxLength',
-  'pattern',
-  'disabled',
-  'required',
-  'inputMode'
-];
+import Logger from '../lib/logger';
+import { FormContext, FormNoContext } from '../context';
+import { useInput } from '../hooks';
+
+import Input from './Input';
+import Select from './Select';
+import Textarea from './Textarea';
+import Datetime from './Datetime';
+
+const logger = new Logger('FormInput', {
+  isBrowser: true
+});
 
 /**
  * FormInput
@@ -22,88 +20,94 @@ const INPUT_PROPS_WHITELIST = [
  */
 
 const FormInput = props => {
-  const {
-    value = '',
-    type = 'text',
-    label,
-    options,
-    onInput,
-    onChange
-  } = props;
-  let inputProps = {};
-  let input;
+  // TODO: is NoContext a good pattern?
 
-  // Only include the input props that we know for sure we want to have in the DOM
+  const { invalidFields = [], updateField } =
+    useContext(FormContext) || FormNoContext;
 
-  for (let key in props) {
-    if (INPUT_PROPS_WHITELIST.includes(key)) {
-      inputProps[key] = props[key];
-    }
+  const { id, name, type, label, inputRules } = useInput({ props });
+
+  if (!name) {
+    logger.warn(`Missing input name`);
   }
 
-  // If we didn't supply a name, default to the ID
+  const { onChange, onInput, className, disabled } = props;
 
-  if (!inputProps.name) {
-    inputProps.name = inputProps.id;
+  let input;
+  let inputClassName = `form-input ${className || ''}`;
+  let fieldClassName = 'form-input-field';
+
+  // Update the field immediately with any local rules for validation
+
+  updateField(name, undefined, inputRules);
+
+  if (type) {
+    inputClassName = `${inputClassName} form-input-${type}`;
+  }
+
+  // If the input is invalid, tag an extra class for styling
+
+  if (Array.isArray(invalidFields) && invalidFields.includes(name)) {
+    inputClassName = `${inputClassName} form-input-invalid`;
+  }
+
+  if (disabled) {
+    inputClassName = `${inputClassName} form-input-disabled`;
   }
 
   if (type === 'select') {
     input = (
-      <select
-        defaultValue={value}
-        onInput={handleOnInput}
+      <Select
+        className={fieldClassName}
+        props={props}
         onChange={handleOnChange}
-        {...inputProps}
-      >
-        <option value="">
-          {inputProps.placeholder || '- Please Select -'}
-        </option>
-
-        {options.map((option, index) => {
-          return (
-            <option
-              key={`FormInput-Select-Option-${index}`}
-              value={option.value}
-            >
-              {option.label}
-            </option>
-          );
-        })}
-      </select>
+        onInput={handleOnInput}
+      />
     );
   } else if (type === 'textarea') {
     input = (
-      <textarea
-        defaultValue={value}
-        type={type}
-        onInput={handleOnInput}
+      <Textarea
+        className={fieldClassName}
+        props={props}
         onChange={handleOnChange}
-        {...inputProps}
+        onInput={handleOnInput}
+      />
+    );
+  } else if (type === 'datetime') {
+    input = (
+      <Datetime
+        className={fieldClassName}
+        props={props}
+        onChange={handleOnChange}
+        onInput={handleOnInput}
       />
     );
   } else {
     input = (
-      <input
-        defaultValue={value}
-        type={type}
-        onInput={handleOnInput}
+      <Input
+        className={fieldClassName}
+        props={props}
         onChange={handleOnChange}
-        {...inputProps}
+        onInput={handleOnInput}
       />
     );
   }
 
   return (
-    <div className={`form-input form-input-${type}`}>
-      <label className="form-label" htmlFor={inputProps.id}>
-        {label}
-      </label>
+    <div className={inputClassName}>
+      {label && (
+        <label className="form-label" htmlFor={id}>
+          {label}
+        </label>
+      )}
 
       {input}
     </div>
   );
 
   function handleOnInput (event) {
+    updateField(event.target.name, event.target.value);
+
     if (typeof onInput === 'function') {
       onInput(event);
     }
@@ -117,12 +121,11 @@ const FormInput = props => {
 };
 
 FormInput.propTypes = {
+  className: PropTypes.string,
   label: PropTypes.string,
-  value: PropTypes.string,
   type: PropTypes.string,
   id: PropTypes.string,
   name: PropTypes.string,
-  options: PropTypes.array,
   placeholder: PropTypes.string,
   autoComplete: PropTypes.string,
   autoCorrect: PropTypes.string,
@@ -134,7 +137,8 @@ FormInput.propTypes = {
   required: PropTypes.bool,
   inputMode: PropTypes.string,
   onInput: PropTypes.func,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func
 };
 
 export default FormInput;

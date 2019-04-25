@@ -59,7 +59,7 @@ describe('Task', () => {
       const firstRow = propRows[0];
       expect(firstRow[0]).toEqual(data[0].name);
       expect(firstRow[1]).toEqual(data[0].windowOpen);
-      expect(firstRow[1]).toEqual(data[0].windowClose);
+      expect(firstRow[2]).toEqual(data[0].windowClose);
       expect(firstRow[3]).toEqual(data[0].status);
     });
 

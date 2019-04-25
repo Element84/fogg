@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import WonderLink from './WonderLink';
 
 const Button = ({
-  text = 'Button',
+  children = 'Button',
   to = null,
   full = false,
   onClick = null,
@@ -16,12 +16,12 @@ const Button = ({
 } = {}) => {
   let buttonElement = null;
 
-  className = `button ${className}`;
+  className = `button ${className || ''}`;
 
   const attributes = {
     to,
     onClick,
-    text,
+    children,
     disabled,
     'data-event-category': eventCategory,
     'data-event-action': eventAction,
@@ -34,11 +34,11 @@ const Button = ({
   }
 
   if (!to || disabled) {
-    buttonElement = <button {...attributes}>{text}</button>;
+    buttonElement = <button {...attributes}>{children}</button>;
   } else {
     buttonElement = (
       <WonderLink to={to} {...attributes}>
-        {text}
+        {children}
       </WonderLink>
     );
   }
