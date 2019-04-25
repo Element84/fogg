@@ -1,0 +1,14 @@
+.task-status-info-wrapper {
+  border: 1px solid #000;
+  height: 125px;
+  width: 450px;
+}
+.task-status-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: relative;
+}
+.task-status-info-window-open, .task-status-info-window-close {
+  font-weight: bold;
+}
