@@ -1,3 +1,9 @@
+### Version 0.1.18
+- [JAM-311] Fix merge conflict
+- [JAM-243] fixing button icons, updating modinput ui
+- [JAM-243] abstracting modinput logic into a hook
+- Revert "Bumped version to 0.1.18"
+
 ### Version 0.1.17
 - fixing styles for datetime range
 
