@@ -164,7 +164,7 @@ module.exports.filterObject = filterObject;
  * @description Removes any property that doesnt exist in the allowed keys array
  */
 
-export function filterObjectByAllowedKeys (object = {}, allowedKeys = []) {
+function filterObjectByAllowedKeys (object = {}, allowedKeys = []) {
   if (typeof object !== 'object') return {};
   if (!Array.isArray(allowedKeys)) return object;
 
@@ -186,7 +186,7 @@ module.exports.filterObjectByAllowedKeys = filterObjectByAllowedKeys;
  * @description Takes the URL param string and turns it into an oobject
  */
 
-export function queryParamsToObject (string) {
+function queryParamsToObject (string) {
   if (typeof string !== 'string') return null;
 
   const queryString = string.replace('?', '');
@@ -210,7 +210,7 @@ module.exports.queryParamsToObject = queryParamsToObject;
  * @description takes a url and query param object and adds the params to the url
  */
 
-export function addParamsToUrl (url, object, encodeComponents) {
+function addParamsToUrl (url, object, encodeComponents) {
   if (typeof url !== 'string' || typeof object !== 'object') return url;
 
   if (typeof encodeComponents === 'undefined') encodeComponents = true;
