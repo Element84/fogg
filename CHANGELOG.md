@@ -1,3 +1,5 @@
+### Version 0.1.19
+
 ### Version 0.1.18
 - [JAM-311] Fix merge conflict
 - [JAM-243] fixing button icons, updating modinput ui
