@@ -15,7 +15,7 @@ describe('Task Status', () => {
   const headers = ['Window Open', 'Window Close'];
 
   describe('Render', () => {
-    const taskStatus = shallow(<TaskStatus headers={headers} task={data} />);
+    const taskStatus = shallow(<TaskStatus task={data} />);
 
     it('should render the correct headers', () => {
       const windowOpen = taskStatus
