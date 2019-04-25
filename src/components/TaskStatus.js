@@ -69,7 +69,9 @@ const TaskStatus = ({ headers = DEFAULT_HEADERS, task = {} }) => {
             <p className="task-status-info task-status-info-window-close">
               {headers[1]}
             </p>
-            <p className="task-status-date">{formatDate(windowClose)}</p>
+            <p className="task-status-info task-status-date">
+              {formatDate(windowClose)}
+            </p>
           </div>
         </section>
       </div>
