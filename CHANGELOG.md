@@ -1,3 +1,7 @@
+### Version 0.1.21
+- [JAM-241] adding navbar to idnex exports
+- [JAM-241] small story change
+
 ### Version 0.1.20
 
 ### Version 0.1.19
