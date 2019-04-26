@@ -23,7 +23,7 @@ pipeline {
 
       steps {
         echo sh(returnStdout: true, script: 'env')
-            
+
         updateCommitStatus('pending')
 
         sshagent(credentials : ['spacejam-buildserver']) {
@@ -45,18 +45,18 @@ pipeline {
       }
 
     }
-    
+
     stage('Versioning'){
-      // bumping version number for the develop pipeline 
-      when { 
-        branch 'develop' 
+      // bumping version number for the develop pipeline
+      when {
+        branch 'develop'
       }
       steps {
         sshagent(credentials : ['spacejam-buildserver']) {
           // Without 'force', bump will fail if it doesn't think
           // there is anything to put in the changelog.
-          
-          // Note this assumes the remote is gitlab - 
+
+          // Note this assumes the remote is gitlab -
           // in bamboo for instance this doesn't work because
           // the remote is a local cached copy of the git index
 
@@ -80,7 +80,7 @@ pipeline {
     }
 
     stage('Build'){
-    
+
       steps {
 
         // The actual build...
@@ -119,6 +119,7 @@ pipeline {
      }
      failure {
       updateCommitStatus('failed')
+      notifySlack('failure')
      }
   }
 
@@ -172,8 +173,26 @@ void performDeploy(environment, createBucket = false) {
 
   }
 
+  notifySlack('success')
+
 }
 
 void updateCommitStatus(status) {
   updateGitlabCommitStatus name: 'build', state: "$status"
+}
+
+void notifySlack(status = 'success') {
+
+  color = 'good'
+  channel = '#space-jam-deploys'
+  job = "${env.JOB_NAME} - ${env.BRANCH_NAME} - ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+  message = "Deployed to ${env.target_environment} - ${env.s3_bucket} - ${job} :pikachu:"
+
+  if ( status == 'failure' ) {
+    color = '#FF0000'
+    message = "Build Failed - ${job} :alert:"
+  }
+
+  slackSend color: color, channel: channel, message: message
+
 }
