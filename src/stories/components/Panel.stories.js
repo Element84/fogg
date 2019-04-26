@@ -13,7 +13,7 @@ stories.add('Default', () => {
         <p>Content Body</p>
       </Panel>
 
-      <Panel header="Content No Body" />
+      <Panel header="Content Header, No Body" />
 
       <Panel>
         <p>Content Body, No Header</p>
