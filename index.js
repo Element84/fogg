@@ -34,14 +34,14 @@ export { default as TaskList } from './src/components/TaskList';
 export { default as TaskStatus } from './src/components/TaskStatus';
 export { default as Textarea } from './src/components/Textarea';
 export { default as UsersTable } from './src/components/UsersTable';
-export { default as WonderLink } from './src/components/UsersTable';
+export { default as WonderLink } from './src/components/WonderLink';
 
 // Lib
 
-export { default as datetime } from './src/lib/datetime';
-export { default as leaflet } from './src/lib/leaflet';
-export { default as logger } from './src/lib/logger';
-export { default as util } from './src/lib/util';
+export * from './src/lib/datetime';
+export * from './src/lib/leaflet';
+export * from './src/lib/logger';
+export * from './src/lib/util';
 
 // Models
 
