@@ -1,0 +1,37 @@
+.status-indicator-label {
+  text-align: center;
+}
+.status-indicator-circles {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0;
+  width: 100%; // make circles take 100% of div not status.lable.length
+  list-style: none;
+  padding-right: 0;
+}
+.status-indicator-circle {
+  border: 1px solid #000;
+  border-radius: 100%;
+  height: 20px;
+  width: 20px;
+  margin: 0 1em;
+  span {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    padding-right: 0;
+  }
+}
+.status-indicator-circle-active {
+  background: blue;
+}
+.status-indicator-circle-error {
+  background: red;
+}
+.status-indicator-circle-past {
+  background: black;
+}

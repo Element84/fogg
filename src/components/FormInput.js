@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
+import Logger from '../lib/logger';
 import { FormContext, FormNoContext } from '../context';
 import { useInput } from '../hooks';
 
@@ -8,6 +9,10 @@ import Input from './Input';
 import Select from './Select';
 import Textarea from './Textarea';
 import Datetime from './Datetime';
+
+const logger = new Logger('FormInput', {
+  isBrowser: true
+});
 
 /**
  * FormInput
@@ -22,7 +27,11 @@ const FormInput = props => {
 
   const { id, name, type, label, inputRules } = useInput({ props });
 
-  const { onChange, onInput, className } = props;
+  if (!name) {
+    logger.warn(`Missing input name`);
+  }
+
+  const { onChange, onInput, className, disabled } = props;
 
   let input;
   let inputClassName = `form-input ${className || ''}`;
@@ -40,6 +49,10 @@ const FormInput = props => {
 
   if (Array.isArray(invalidFields) && invalidFields.includes(name)) {
     inputClassName = `${inputClassName} form-input-invalid`;
+  }
+
+  if (disabled) {
+    inputClassName = `${inputClassName} form-input-disabled`;
   }
 
   if (type === 'select') {
