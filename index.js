@@ -19,6 +19,7 @@ export { default as Map } from './src/components/Map';
 export { default as MapDraw } from './src/components/MapDraw';
 export { default as MapMarker } from './src/components/MapMarker';
 export { default as ModInput } from './src/components/ModInput';
+export { default as NavBar } from './src/components/NavBar';
 export { default as NavLinks } from './src/components/NavLinks';
 export { default as OrdersList } from './src/components/OrdersList';
 export { default as PageTemplate } from './src/components/PageTemplate';
