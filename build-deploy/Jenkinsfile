@@ -136,25 +136,25 @@ void deployFeature() {
     }
     env.JIRA_TICKET = match[0][1]
   }
-  performDeploy("${JIRA_TICKET}", true)
+  performDeploy("${JIRA_TICKET}", 'dev', true)
 }
 
 void deploySIT() {
   sh 'echo "SIT"'
-  performDeploy("sit")
+  performDeploy('sit', 'sit')
 }
 
 void deployUAT() {
   sh 'echo "UAT"'
-  performDeploy("uat")
+  performDeploy('uat', 'uat')
 }
 
-void performDeploy(environment, createBucket = false) {
+void performDeploy(environment, credentials_env = 'dev', createBucket = false) {
   env.target_environment = environment.toLowerCase()
   env.target_bucket = "capella-dashboard-components-${target_environment}"
   env.s3_bucket = "http://${target_bucket}.s3-website-us-west-2.amazonaws.com"
 
-  withAWS(credentials:'deploy-dev-dashboard', region:'us-west-2') {
+  withAWS(credentials: "deploy-${credentials_env}-dashboard", region:'us-west-2') {
 
     if(createBucket) {
       sh '''

@@ -1,3 +1,7 @@
+### Version 0.1.22
+- notifying slack on build succcess and failure
+- fixing export name for wonderlink, changing lib exports to export all
+
 ### Version 0.1.21
 - [JAM-241] adding navbar to idnex exports
 - [JAM-241] small story change
