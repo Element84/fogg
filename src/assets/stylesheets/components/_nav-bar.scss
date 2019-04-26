@@ -2,11 +2,21 @@
 
   padding: 0;
   margin: .8em 0;
-  display: flex;
 
-  &.vertical {
-    flex-direction: column;
-    justify-content: space-between;
+  .nav-bar-primary,
+  .nav-bar-secondary  {
+    display: flex;
+    margin: 10px 0px;
+  }
+
+  &.nav-bar-vertical {
+
+    .nav-bar-primary,
+    .nav-bar-secondary  {
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
   }
 
   .button {
@@ -26,7 +36,7 @@
     }
   }
 
-  .button.isActive {
+  .nav-bar-active-button {
     background: gray;
     box-shadow: 0px 5px 5px $color-gray2;
 

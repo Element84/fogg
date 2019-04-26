@@ -11,12 +11,13 @@ stories.add('Default', () => {
     <>
       <NavBar
         primary={[
-          { label: 'Top Link 1', to: '/iframe.html', icon: <FaSearch /> }
+          { label: 'Top Link 1', to: '/top1.html', icon: <FaSearch /> }
         ]}
         secondary={[
           { label: 'Bottom Link 1', to: '/bottom', icon: <FaDatabase /> },
           { label: 'Bottom Link 2', to: '/bottom2', icon: <FaServer /> }
         ]}
+        activePage="/top1.html"
       />
     </>
   );
@@ -28,12 +29,13 @@ stories.add('Vertical', () => {
       <NavBar
         orientation="vertical"
         primary={[
-          { label: 'Top Link 1', to: '/iframe.html', icon: <FaSearch /> }
+          { label: 'Top Link 1', to: '/top1.html', icon: <FaSearch /> }
         ]}
         secondary={[
           { label: 'Bottom Link 1', to: '/bottom', icon: <FaDatabase /> },
           { label: 'Bottom Link 2', to: '/bottom2', icon: <FaServer /> }
         ]}
+        activePage="/top1.html"
       />
     </>
   );

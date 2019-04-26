@@ -8,7 +8,7 @@ describe('Nav Bar', () => {
   const orientation = 'vertical';
 
   const primary = [
-    { label: 'Top Link 1', to: '/', icon: { FaSearch } },
+    { label: 'Top Link 1', to: '/top1', icon: { FaSearch } },
     { label: 'Top Link 2', to: '/top2', icon: { FaDatabase } }
   ];
 
@@ -23,6 +23,7 @@ describe('Nav Bar', () => {
         orientation={orientation}
         primary={primary}
         secondary={secondary}
+        activePage="/top1"
       />
     );
 
@@ -73,16 +74,16 @@ describe('Nav Bar', () => {
     it('correctly sets the active link', () => {
       wrapper
         .find(Button)
-        .findWhere(n => n.prop('to') === '/')
+        .findWhere(n => n.prop('to') === '/top1')
         .forEach(item => {
-          expect(item.hasClass('isActive')).toEqual(true);
+          expect(item.hasClass('nav-bar-active-button')).toEqual(true);
         });
 
       wrapper
         .find(Button)
-        .findWhere(n => n.prop('to') !== '/')
+        .findWhere(n => n.prop('to') !== '/top1')
         .forEach(item => {
-          expect(item.hasClass('isActive')).not.toEqual(true);
+          expect(item.hasClass('nav-bar-active-button')).not.toEqual(true);
         });
     });
   });
