@@ -11,23 +11,23 @@ stories.add('Default', () => {
       <ItemList
         items={[
           {
-            label: 'Ka',
+            label: 'Kaaaaaaaaa',
             to: '#'
           },
           {
-            label: 'Me',
+            label: 'Meeeeeeeeeeeee',
             to: '#'
           },
           {
-            label: 'Ha',
+            label: 'Haaaaaa',
             to: '#'
           },
           {
-            label: 'Me',
+            label: 'Meeeeeeeeeee',
             to: '#'
           },
           {
-            label: 'Ha',
+            label: 'Haaaaaaaaaaaaaaaaaa',
             to: '#'
           }
         ]}

@@ -6,6 +6,8 @@ import { useAtlas } from '../hooks';
 import Map from './Map';
 import MapMarker from './MapMarker';
 import MapDraw from './MapDraw';
+import Panel from './Panel';
+import ItemList from './ItemList';
 import SearchComplete from './SearchComplete';
 
 const Atlas = ({ defaultCenter = {}, zoom = 4 }) => {
@@ -78,10 +80,35 @@ const Atlas = ({ defaultCenter = {}, zoom = 4 }) => {
   return (
     <div className="atlas">
       <div className="atlas-sidebar">
-        <SearchComplete
-          onSearch={handleOnSearch}
-          resolveQueryComplete={resolveAtlasAutocomplete}
-        />
+        <Panel className="panel-clean">
+          <SearchComplete
+            onSearch={handleOnSearch}
+            resolveQueryComplete={resolveAtlasAutocomplete}
+          />
+        </Panel>
+
+        <Panel header="Explore">
+          <p>Explore stuff</p>
+        </Panel>
+
+        <Panel header="Past Searches">
+          <ItemList
+            items={[
+              {
+                label: 'Alexandria, VA',
+                to: '#'
+              },
+              {
+                label: 'Montes Claros, MG',
+                to: '#'
+              }
+            ]}
+          />
+        </Panel>
+
+        <Panel>
+          <p style={{ color: 'red' }}>Warning: clicking things breaks</p>
+        </Panel>
       </div>
 
       <Map className="atlas-map" {...mapSettings}>

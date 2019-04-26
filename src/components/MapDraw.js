@@ -21,12 +21,14 @@ const MapDraw = ({ children, onCreated, onEdited }) => {
    *     Clears all other layers except the newly created one.
    */
 
-  function handleOnCreated (event) {
+  function handleOnCreated (event = {}) {
     const layer = reduceDrawEventToLayer(event);
     const { current } = refFeatureGroup;
-    const { leafletElement } = current;
+    const { leafletElement } = current || {};
 
-    clearLeafletElementLayers(leafletElement, [layer.id]);
+    if (leafletElement) {
+      clearLeafletElementLayers(leafletElement, [layer.id]);
+    }
 
     if (typeof onCreated === 'function') {
       onCreated(layer);
@@ -38,16 +40,19 @@ const MapDraw = ({ children, onCreated, onEdited }) => {
    * @description Fires when a layer is edited. Triggers a callback of available
    */
 
-  function handleOnEdited (event) {
-    const layers = event.layers.getLayers();
+  function handleOnEdited (event = {}) {
+    const { layers } = event;
+    const eventLayers = layers && layers.getLayers();
+    let currentLayer;
+    let layer;
 
-    if (!Array.isArray(layers) || layers.length === 0) return;
-
-    const currentLayer = layers[0];
-    const layer = reduceDrawEventToLayer({
-      layer: currentLayer,
-      layerType: getShapeType(currentLayer)
-    });
+    if (Array.isArray(eventLayers) && eventLayers.length > 0) {
+      currentLayer = eventLayers[0];
+      layer = reduceDrawEventToLayer({
+        layer: currentLayer,
+        layerType: getShapeType(currentLayer)
+      });
+    }
 
     if (typeof onEdited === 'function') {
       onEdited(layer);
