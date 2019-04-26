@@ -1,0 +1,37 @@
+.atlas {
+  
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+
+}
+
+.atlas-sidebar {
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 25em;
+  height: 100vh;
+  padding: 1em;
+
+  .search-box {
+    
+    form {
+      margin: 0;
+    }
+
+  }
+
+  .search-box-controls-date-picker {
+    left: 0;
+  }
+
+}
+
+.atlas-map {
+  position: relative;
+  z-index: 0;
+}

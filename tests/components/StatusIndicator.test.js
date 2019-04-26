@@ -32,7 +32,6 @@ describe('Task Status', () => {
 
     it('should render a default status', () => {
       const good = defaultStatus.find('.status-indicator-label').text();
-      console.log(good);
       expect(good).toEqual('Completed');
     });
 

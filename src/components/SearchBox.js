@@ -97,6 +97,7 @@ const SearchBox = ({ onInput, onSearch }) => {
     >
       <Form onSubmit={handleFormSubmit}>
         <FormInput
+          id="search-box-input"
           className="search-box-input"
           placeholder="Search"
           onInput={handleSearchInput}
