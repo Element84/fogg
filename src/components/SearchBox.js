@@ -95,7 +95,7 @@ const SearchBox = ({ onInput, onSearch }) => {
         date.date && !!(date.date.start || date.date.end)
       }
     >
-      <Form onSubmit={handleFormSubmit}>
+      <Form onSubmit={handleFormSubmit} autoComplete="off">
         <FormInput
           id="search-box-input"
           className="search-box-input"

@@ -80,7 +80,10 @@ const SearchComplete = ({ onSearch, resolveQueryComplete }) => {
   }
 
   return (
-    <div className="search-complete" data-is-search-complete-open={isOpen}>
+    <div
+      className="search-complete"
+      data-is-search-complete-open={isOpen && results.length > 0}
+    >
       <SearchBox
         onSearch={handleSearchboxSearch}
         onInput={handleSearchboxInput}

@@ -2,7 +2,12 @@ $panel-side-padding: 1em;
 $panel-top-padding: .8em;
 
 .panel {
-  overflow: hidden;
+  // We set this as display flex and a column to allow the margin
+  // of the inner content to push the height. We could use
+  // overflow: hidden, but then we can't escape the panel
+  // for things like autocomplete dropdown
+  display: flex;
+  flex-direction: column;
   background-color: white;
   border-radius: $border-radius-small;
   margin-bottom: 1em;
@@ -10,7 +15,7 @@ $panel-top-padding: .8em;
 }
 
 .panel-header {
-  
+
   color: white;
   background-color: $color-gray6;
   padding: .6em $panel-side-padding;
@@ -40,7 +45,7 @@ $panel-top-padding: .8em;
   }
 
   p {
-    
+
     margin: $panel-top-padding 0;
 
   }
@@ -48,5 +53,5 @@ $panel-top-padding: .8em;
   .item-list {
     margin: 0 ( $panel-side-padding - ( $panel-side-padding * 2 ) );
   }
-  
+
 }
