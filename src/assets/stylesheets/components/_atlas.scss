@@ -1,5 +1,5 @@
 .atlas {
-  
+
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -17,8 +17,12 @@
   height: 100vh;
   padding: 1em;
 
+  .search-complete {
+    z-index: 9999;
+  }
+
   .search-box {
-    
+
     form {
       margin: 0;
     }

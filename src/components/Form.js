@@ -15,7 +15,8 @@ const Form = ({
   name = 'theform',
   onSubmit,
   onChange,
-  rules = {}
+  rules = {},
+  autoComplete = 'on'
 }) => {
   let formClassName = 'form';
 
@@ -49,6 +50,7 @@ const Form = ({
         onSubmit={handleSubmit}
         onChange={handleChange}
         noValidate={true}
+        autoComplete={autoComplete}
       >
         {children}
       </form>
@@ -65,7 +67,8 @@ Form.propTypes = {
   name: PropTypes.string,
   onSubmit: PropTypes.func,
   onChange: PropTypes.func,
-  rules: PropTypes.object
+  rules: PropTypes.object,
+  autoComplete: PropTypes.string
 };
 
 export default Form;
