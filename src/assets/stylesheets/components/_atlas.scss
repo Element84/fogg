@@ -1,9 +1,13 @@
 .atlas {
-  
+
   position: relative;
   width: 100vw;
   height: 100vh;
   background-color: black;
+
+  &[data-has-results="true"] {
+    // padding-left: 25em;
+  }
 
 }
 
@@ -17,8 +21,12 @@
   height: 100vh;
   padding: 1em;
 
+  .atlas[data-has-results="true"] & {
+    // background-color: white;
+  }
+
   .search-box {
-    
+
     form {
       margin: 0;
     }

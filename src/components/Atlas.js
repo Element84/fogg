@@ -7,14 +7,13 @@ import Map from './Map';
 import MapMarker from './MapMarker';
 import MapDraw from './MapDraw';
 import Panel from './Panel';
-import ItemList from './ItemList';
 import SearchComplete from './SearchComplete';
 
 const Atlas = ({
   children,
   defaultCenter = {},
   zoom = 4,
-  SidebarPanels,
+  SidebarComponents,
   resolveOnSearch
 }) => {
   const atlasSettings = {
@@ -26,6 +25,7 @@ const Atlas = ({
   );
 
   const [results, updateResults] = useState();
+  const hasResults = Array.isArray(results) && results.length > 0;
 
   const { lat = 0, lng = 0 } = mapPosition;
 
@@ -93,7 +93,7 @@ const Atlas = ({
   }
 
   return (
-    <div className="atlas">
+    <div className="atlas" data-has-results={hasResults}>
       <div className="atlas-sidebar">
         <Panel className="panel-clean">
           <SearchComplete
@@ -102,8 +102,8 @@ const Atlas = ({
           />
         </Panel>
 
-        {SidebarPanels && (
-          <SidebarPanels results={results} mapPosition={mapPosition} />
+        {SidebarComponents && (
+          <SidebarComponents results={results} mapPosition={mapPosition} />
         )}
       </div>
 
@@ -119,8 +119,11 @@ const Atlas = ({
 };
 
 Atlas.propTypes = {
+  children: PropTypes.node,
   defaultCenter: PropTypes.object,
-  zoom: PropTypes.number
+  zoom: PropTypes.number,
+  SidebarComponents: PropTypes.node,
+  resolveOnSearch: PropTypes.func
 };
 
 export default Atlas;
