@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import useDebouncedCallback from 'use-debounce/lib/callback';
 
 import SearchBox from './SearchBox';
 
 const MAX_RESULTS = 5;
+const QUERY_COMPLETE_DEBOUNCE = 300;
 
 const SearchComplete = ({ onSearch, resolveQueryComplete }) => {
   const [isOpen, updateOpenState] = useState(false);
   const [results, updateResults] = useState([]);
   const [date, updateDate] = useState({});
+  const [debouncedUpdateQueryState] = useDebouncedCallback(
+    updateQueryState,
+    QUERY_COMPLETE_DEBOUNCE
+  );
 
   /**
    * handleSearchboxSearch
@@ -44,11 +50,25 @@ const SearchComplete = ({ onSearch, resolveQueryComplete }) => {
   }
 
   /**
-   * handleSearchboxInput
+   * handleOnInput
    * @description Handles onInput for the searchbox
    */
 
-  function handleSearchboxInput ({ target }, searchDate) {
+  function handleOnInput (e, searchDate) {
+    e.persist();
+    // Use a debounced version of the function that
+    // updates the query state and handles the fetching
+    // of our autocomplete results to avoid many
+    // unneeded calls
+    debouncedUpdateQueryState(e, searchDate);
+  }
+
+  /**
+   * updateQueryState
+   * @description Handles onInput for the searchbox
+   */
+
+  function updateQueryState ({ target }, searchDate) {
     updateDate(searchDate);
     handleFetchQueryComplete(target.value);
   }
@@ -80,11 +100,11 @@ const SearchComplete = ({ onSearch, resolveQueryComplete }) => {
   }
 
   return (
-    <div className="search-complete" data-is-search-complete-open={isOpen}>
-      <SearchBox
-        onSearch={handleSearchboxSearch}
-        onInput={handleSearchboxInput}
-      />
+    <div
+      className="search-complete"
+      data-is-search-complete-open={isOpen && results.length > 0}
+    >
+      <SearchBox onSearch={handleSearchboxSearch} onInput={handleOnInput} />
 
       <div className="search-complete-results">
         <ul>

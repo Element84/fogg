@@ -1,5 +1,6 @@
 import L from 'leaflet';
 import { geocode } from 'esri-leaflet-geocoder';
+import PromiseCancelable from 'p-cancelable';
 
 const DRAW_SHAPES = ['polygon', 'rectangle'];
 
@@ -91,16 +92,17 @@ export function reduceDrawEventToLayer ({ layer, layerType } = {}) {
  * @description Promise that performs a geocode request on the given placename
  */
 
-export async function geocodePlacename (placename) {
-  return new Promise((resolve, reject) => {
-    geocode()
+export function geocodePlacename (placename) {
+  return new PromiseCancelable((resolve, reject, onCancel) => {
+    const request = geocode()
       .text(placename)
       .run((error, body, response) => {
-        if (error) {
-          reject(error);
-        }
-
+        if (error) reject(error);
         resolve(response);
       }, this);
+
+    onCancel(() => {
+      request.abort();
+    });
   });
 }
