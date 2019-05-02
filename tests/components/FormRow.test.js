@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { FormRow } from '../../';
+import { FormRow } from '../../ui';
 
 describe('WonderLink', () => {
   describe('Default', () => {

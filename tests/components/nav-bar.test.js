@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { FaSearch, FaDatabase, FaServer, FaHddO } from 'react-icons/fa';
 
-import { NavBar, Button } from '../../';
+import { NavBar, Button } from '../../ui';
 
 describe('Nav Bar', () => {
   const orientation = 'vertical';

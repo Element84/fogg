@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { ChildToggle } from '../../';
+import { ChildToggle } from '../../ui';
 
 describe('ChildToggle', () => {
   describe('Default', () => {

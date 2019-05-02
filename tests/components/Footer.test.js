@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'enzyme';
 
-import { Footer } from '../../';
+import { Footer } from '../../ui';
 
 describe('Footer', () => {
   it('renders', () => {

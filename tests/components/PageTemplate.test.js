@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { FaUser } from 'react-icons/fa';
 
-import { PageTemplate, WonderLink } from '../../';
+import { PageTemplate, WonderLink } from '../../ui';
 
 describe('Page Template', () => {
   const navigation = [

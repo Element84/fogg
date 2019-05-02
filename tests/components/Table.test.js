@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import { Table } from '../../';
+import { Table } from '../../ui';
 
 describe('Table', () => {
   const columns = ['First Name', 'Last Name', null];

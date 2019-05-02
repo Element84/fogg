@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { TableRow } from '../../';
+import { TableRow } from '../../ui';
 
 describe('TableRow', () => {
   const rowClassName = 'row-test';

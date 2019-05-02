@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { UsersTable } from '../../';
+import { UsersTable } from '../../ui';
 
 describe('Users Table', () => {
   const userData = [

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Atlas } from '../../';
+import { Atlas } from '../../ui';
 
 const ALEXANDRIA = {
   lat: 38.8048,

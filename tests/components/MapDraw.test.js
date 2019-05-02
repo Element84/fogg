@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { MapDraw } from '../../';
+import { MapDraw } from '../../ui';
 
 describe('MapDraw', () => {
   describe('Render', () => {

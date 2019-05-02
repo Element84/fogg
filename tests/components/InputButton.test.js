@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 
-import { InputButton } from '../../';
+import { InputButton } from '../../ui';
 
 describe('InputButton', () => {
   const inputButton = shallow(

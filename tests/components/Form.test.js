@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import { Form } from '../../';
+import { Form } from '../../ui';
 
 describe('Form', () => {
   const inputs = (

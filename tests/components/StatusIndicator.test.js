@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { StatusIndicator } from '../../';
+import { StatusIndicator } from '../../ui';
 
 describe('Task Status', () => {
   const statusList = [
