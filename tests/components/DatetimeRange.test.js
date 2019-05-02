@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 
-import DatetimeRange from 'components/DatetimeRange';
+import { DatetimeRange } from '../../';
 
 describe('DatetimeRange', () => {
   it('renders a DatetimeRange', () => {

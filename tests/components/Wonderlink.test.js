@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import WonderLink from 'components/WonderLink';
+import { WonderLink } from '../../';
 
 describe('WonderLink', () => {
   describe('Default Internal', () => {

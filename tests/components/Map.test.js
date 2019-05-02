@@ -1,8 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Map from 'components/Map';
-import MapService from 'models/map-service';
+import { Map, MapService } from '../../';
 
 const ALEXANDRIA = {
   lat: 38.8048,

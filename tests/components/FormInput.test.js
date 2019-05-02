@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import sinon from 'sinon';
 
-import FormInput from 'components/FormInput';
+import { FormInput } from '../../';
 
 describe('FormInput', () => {
   const selectOptions = [

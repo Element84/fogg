@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { FaBeer } from 'react-icons/fa';
 
-import ItemList from 'components/ItemList';
+import { ItemList } from '../../';
 
 describe('ItemList', () => {
   describe('Render', () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import OrdersList from 'components/OrdersList';
+import { OrdersList } from '../../';
 
 describe('Orders List', () => {
   const ordersData = [

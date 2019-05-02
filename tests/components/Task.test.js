@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import TaskList from 'components/TaskList';
+import { TaskList } from '../../';
 
 describe('Task', () => {
   const data = [

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import NavLinks from 'components/NavLinks';
-import WonderLink from '../../src/components/WonderLink';
+
+import { NavLinks, WonderLink } from '../../';
 
 describe('Nav Links', () => {
   const navigationList = [

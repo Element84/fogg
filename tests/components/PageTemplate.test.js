@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import PageTemplate from 'components/PageTemplate';
 import { FaUser } from 'react-icons/fa';
-import WonderLink from '../../src/components/WonderLink';
+
+import { PageTemplate, WonderLink } from '../../';
 
 describe('Page Template', () => {
   const navigation = [

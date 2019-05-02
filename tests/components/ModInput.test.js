@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import ModInput from 'components/ModInput';
+import { ModInput } from '../../';
 
 // TODO: Tests need to be filled out for this component once Enzyme fully supports hooks
 

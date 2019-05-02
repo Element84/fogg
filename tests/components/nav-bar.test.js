@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import NavBar from 'components/NavBar';
-import Button from 'components/Button';
 import { FaSearch, FaDatabase, FaServer, FaHddO } from 'react-icons/fa';
+
+import { NavBar, Button } from '../../';
 
 describe('Nav Bar', () => {
   const orientation = 'vertical';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import MapMarker from 'components/MapMarker';
+import { MapMarker } from '../../';
 
 const ALEXANDRIA = {
   lat: 38.8048,

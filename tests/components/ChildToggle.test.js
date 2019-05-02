@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import ChildToggle from 'components/ChildToggle';
+import { ChildToggle } from '../../';
 
 describe('ChildToggle', () => {
   describe('Default', () => {

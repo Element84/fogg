@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import SearchBox from 'components/SearchBox';
+import { SearchBox } from '../../';
 
 // TODO: seems like some of these tests are difficult to set up without Enzyme having
 // Hook support at this time. We should write tests when possible
