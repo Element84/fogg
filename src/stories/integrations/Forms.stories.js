@@ -7,7 +7,7 @@ import FormInput from '../../components/FormInput';
 import FormRow from '../../components/FormRow';
 import Button from '../../components/Button';
 
-import { regexByFieldName } from '../../models/validation';
+import { regexByFieldName } from '../../lib/input';
 
 const stories = storiesOf('Integrations|Forms', module);
 

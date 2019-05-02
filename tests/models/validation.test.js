@@ -1,4 +1,5 @@
-import Validation, { regexByFieldName } from 'models/validation';
+import { Validation } from '../../models';
+import { regexByFieldName } from 'lib/input';
 
 describe('Validation', () => {
   const rules = {
