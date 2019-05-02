@@ -1,13 +1,13 @@
-# Space Jam Dashboard Styles
-The official styles Gatsby theme for the Space Jam dashboard.
+# Fogg
+A Gatsby theme that provides out of the box components and tooling for mapmakers.
 
 ## About
 
-Space Jam Styles is a Gatsby Theme that provides a starting point for any Space Jam themed front-end. It's built using the following tools:
+Fogg is a Gatsby Theme that provides a starting point for any map based front-end. It's built using the following tools:
 
 - [Gatsby](https://www.gatsbyjs.org/) for templating and static site generation
 - Gatsby relies on [React](https://reactjs.org/) as the UI framework
-- [Gatsby Themes](https://www.gatsbyjs.org/blog/2018-11-11-introducing-gatsby-themes/) are utilized to provide a reusable starting point for E84 websites
+- [Gatsby Themes](https://www.gatsbyjs.org/blog/2018-11-11-introducing-gatsby-themes/) are utilized to provide a reusable starting point for mapping UIs
 - The website using the theme imports this repository as a dependency
 
 # Getting Started
@@ -29,11 +29,15 @@ Run the following command to start up your development server.
 ```
 yarn develop
 ```
-By default, the project runs on on [localhost:8000](http://localhost:8000).
 
-You can view a list of this theme's components on [localhost:8000/components](http://localhost:8000/components)
+After starting, two servers will start up:
+- By default, the project runs on on [localhost:8000](http://localhost:8000)
+- Additionally, a Storybook will automatically open for component development
+
+### Why both?
+Given the project is a Gatsby Theme, we want to make sure that the project will still build and compile with Gatsby. Being able to run it concurrently with Storybook provides us the benefit of catching issues should they occur.
 
 # Deployment & Releases
-There is no traditional sense of deployment here. When the development pipeline runs (SIT is updated), the version number will automatically increment
+There is no traditional sense of deployment here. When the development pipeline runs (SIT is updated), the version number will automatically increment.
 
 The version number utilizes [semantic versioning](https://semver.org/) and should be updated accordingly.
