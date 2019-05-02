@@ -151,7 +151,7 @@ void deployUAT() {
 
 void performDeploy(environment, credentials_env = 'dev', createBucket = false) {
   env.target_environment = environment.toLowerCase()
-  env.target_bucket = "capella-dashboard-components-${target_environment}"
+  env.target_bucket = "fogg-${target_environment}"
   env.s3_bucket = "http://${target_bucket}.s3-website-us-west-2.amazonaws.com"
 
   withAWS(credentials: "deploy-${credentials_env}-dashboard", region:'us-west-2') {
