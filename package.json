@@ -1,5 +1,5 @@
 {
-  "name": "dashboard-components",
+  "name": "fogg",
   "private": true,
   "description": "Gatsby theme for E84 Space Jam project",
   "version": "0.1.23",
@@ -105,7 +105,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://repo.element84.com/SpaceJam/dashboard-components"
+    "url": "https://repo.element84.com/SpaceJam/fogg"
   },
   "main": "n/a"
 }

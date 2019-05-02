@@ -32,7 +32,7 @@ module.exports = {
     '^.+\\.js$': '<rootDir>/config/jest-preprocess.config.js'
   },
 
-  transformIgnorePatterns: ['node_modules/(?!(gatsby|dashboard-components)/)'],
+  transformIgnorePatterns: ['node_modules/(?!(gatsby|fogg)/)'],
 
   // Sets up mocks for images and files that the tests either can't handle
   // or doesn't make sense to include

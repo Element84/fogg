@@ -3,7 +3,7 @@ const fs = require('fs');
 const mkdirp = require('mkdirp');
 const Logger = require('./src/lib/logger');
 
-const THEME_NAME = 'dashboard-components';
+const THEME_NAME = 'fogg';
 
 exports.onCreateWebpackConfig = ({ loaders, actions }) => {
   const logger = new Logger(`${THEME_NAME}:onCreateWebpackConfig`);
