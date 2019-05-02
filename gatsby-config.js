@@ -4,7 +4,7 @@ module.exports = {
     description: `Gatsby theme for E84 Space Jam project`,
     author: `Element 84`
   },
-  pathPrefix: '/dashboard-components',
+  pathPrefix: '/fogg',
   plugins: [
     `gatsby-plugin-sass`,
     `gatsby-plugin-react-helmet`,

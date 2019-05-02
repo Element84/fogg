@@ -1,3 +1,12 @@
+### Version 0.0.0
+- updating readme
+- updating jenkins namespace
+- fixing fogg paths
+
+### Version 0.1.23
+- [JAM-377] fixing panel from hiding autocomplete reesults, updating autocomplete query to cancel previous requests
+- [JAM-377] updating function names and adding some comments
+
 ### Version 0.1.22
 - notifying slack on build succcess and failure
 - fixing export name for wonderlink, changing lib exports to export all
