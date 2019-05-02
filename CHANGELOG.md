@@ -1,3 +1,9 @@
+### Version 0.1.25
+- updating all component tests to point to root
+- adding a ui export and updating all component tests to point to it
+- updating all models to pull from root
+- updating navbar test name
+
 ### Version 0.0.0
 - updating readme
 - updating jenkins namespace
