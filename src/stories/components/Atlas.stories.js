@@ -13,9 +13,27 @@ const SidebarPanels = ({ results }) => {
 
   return (
     <>
-      <Panel header="Explore">
-        <p>Explore stuff</p>
-      </Panel>
+      {!hasResults && (
+        <>
+          <Panel header="Explore">
+            <p>Explore stuff</p>
+          </Panel>
+          <Panel header="Past Searches">
+            <ItemList
+              items={[
+                {
+                  label: 'Alexandria, VA',
+                  to: '#'
+                },
+                {
+                  label: 'Montes Claros, MG',
+                  to: '#'
+                }
+              ]}
+            />
+          </Panel>
+        </>
+      )}
 
       {hasResults && (
         <Panel header="Results">
@@ -36,16 +54,17 @@ stories.add('Default', () => {
     lng: -77.0469
   };
 
-  function handleResolveOnSearch () {
+  function handleResolveOnSearch (coordinates) {
+    const coordinatesString = JSON.stringify(coordinates);
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve([
           {
-            label: 'Alexandria, VA',
+            label: `#1 from ${coordinatesString}`,
             to: '#'
           },
           {
-            label: 'Montes Claros, MG',
+            label: `#2 from ${coordinatesString} 2`,
             to: '#'
           }
         ]);

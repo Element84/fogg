@@ -122,7 +122,7 @@ Atlas.propTypes = {
   children: PropTypes.node,
   defaultCenter: PropTypes.object,
   zoom: PropTypes.number,
-  SidebarComponents: PropTypes.node,
+  SidebarComponents: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   resolveOnSearch: PropTypes.func
 };
 

@@ -78,7 +78,11 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
         isValid: validate.byField(name, value)
       });
 
-      if (fieldAttributes.isValid && invalidFields.includes(name)) {
+      if (
+        fieldAttributes.isValid &&
+        Array.isArray(invalidFields) &&
+        invalidFields.includes(name)
+      ) {
         updateValidity(invalidFields.filter(field => field !== name));
       }
 
