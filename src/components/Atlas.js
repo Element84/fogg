@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { useAtlas } from '../hooks';
@@ -7,10 +7,15 @@ import Map from './Map';
 import MapMarker from './MapMarker';
 import MapDraw from './MapDraw';
 import Panel from './Panel';
-import ItemList from './ItemList';
 import SearchComplete from './SearchComplete';
 
-const Atlas = ({ defaultCenter = {}, zoom = 4 }) => {
+const Atlas = ({
+  children,
+  defaultCenter = {},
+  zoom = 4,
+  SidebarComponents,
+  resolveOnSearch
+}) => {
   const atlasSettings = {
     defaultCenter
   };
@@ -18,6 +23,9 @@ const Atlas = ({ defaultCenter = {}, zoom = 4 }) => {
   const { mapPosition, updateMapPosition, resolveAtlasAutocomplete } = useAtlas(
     atlasSettings
   );
+
+  const [results, updateResults] = useState();
+  const hasResults = Array.isArray(results) && results.length > 0;
 
   const { lat = 0, lng = 0 } = mapPosition;
 
@@ -71,14 +79,21 @@ const Atlas = ({ defaultCenter = {}, zoom = 4 }) => {
     if (typeof x === 'undefined' || typeof y === 'undefined') {
       return;
     }
-    updateMapPosition({
+
+    const coordinates = {
       lat: y,
       lng: x
+    };
+
+    updateMapPosition(coordinates);
+
+    resolveOnSearch(coordinates).then(data => {
+      updateResults(data);
     });
   }
 
   return (
-    <div className="atlas">
+    <div className="atlas" data-has-results={hasResults}>
       <div className="atlas-sidebar">
         <Panel className="panel-clean">
           <SearchComplete
@@ -87,28 +102,9 @@ const Atlas = ({ defaultCenter = {}, zoom = 4 }) => {
           />
         </Panel>
 
-        <Panel header="Explore">
-          <p>Explore stuff</p>
-        </Panel>
-
-        <Panel header="Past Searches">
-          <ItemList
-            items={[
-              {
-                label: 'Alexandria, VA',
-                to: '#'
-              },
-              {
-                label: 'Montes Claros, MG',
-                to: '#'
-              }
-            ]}
-          />
-        </Panel>
-
-        <Panel>
-          <p style={{ color: 'red' }}>Warning: clicking things breaks</p>
-        </Panel>
+        {SidebarComponents && (
+          <SidebarComponents results={results} mapPosition={mapPosition} />
+        )}
       </div>
 
       <Map className="atlas-map" {...mapSettings}>
@@ -116,13 +112,18 @@ const Atlas = ({ defaultCenter = {}, zoom = 4 }) => {
           <MapMarker {...markerSettings} />
         </MapDraw>
       </Map>
+
+      <div className="atlas-extensions">{children}</div>
     </div>
   );
 };
 
 Atlas.propTypes = {
+  children: PropTypes.node,
   defaultCenter: PropTypes.object,
-  zoom: PropTypes.number
+  zoom: PropTypes.number,
+  SidebarComponents: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  resolveOnSearch: PropTypes.func
 };
 
 export default Atlas;

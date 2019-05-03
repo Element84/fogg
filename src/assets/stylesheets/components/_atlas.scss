@@ -5,6 +5,10 @@
   height: 100vh;
   background-color: black;
 
+  &[data-has-results="true"] {
+    // padding-left: 25em;
+  }
+
 }
 
 .atlas-sidebar {
@@ -16,6 +20,10 @@
   width: 25em;
   height: 100vh;
   padding: 1em;
+
+  .atlas[data-has-results="true"] & {
+    // background-color: white;
+  }
 
   .search-complete {
     z-index: 9999;

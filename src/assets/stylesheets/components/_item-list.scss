@@ -2,7 +2,7 @@ $item-list-side-padding: 1em;
 $item-list-top-padding: .8em;
 
 .item-list {
-  
+
   ul {
     list-style: none;
     padding: 0;
@@ -10,7 +10,7 @@ $item-list-top-padding: .8em;
   }
 
   li {
-    
+
     padding: 0;
     border-bottom: solid 1px $color-gray1;
     margin: 0;
@@ -23,9 +23,12 @@ $item-list-top-padding: .8em;
 
   a {
     display: block;
+    overflow: hidden;
+    white-space: nowrap;
     color: inherit;
     text-decoration: none;
-    padding: $item-list-top-padding 1em;
+    text-overflow: ellipsis;
+    padding: $item-list-top-padding 2.4em $item-list-top-padding 1em;
   }
 
 }
