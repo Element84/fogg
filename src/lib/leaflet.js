@@ -4,6 +4,12 @@ import PromiseCancelable from 'p-cancelable';
 
 const DRAW_SHAPES = ['polygon', 'rectangle'];
 
+const SHAPE_TO_GEOTYPE_MAP = {
+  marker: 'Point',
+  polygon: 'Polygon',
+  rectangle: 'Polygon'
+};
+
 /**
  * clearLeafletElementLayers
  * @description
@@ -62,13 +68,12 @@ export function reduceDrawEventToLayer ({ layer, layerType } = {}) {
 
   let coordinates;
   let center;
+  let geoJson;
 
   // Grab the coordinates and center based on the type of layer
   // Shapes have different methods than markers
 
   if (DRAW_SHAPES.includes(layerType)) {
-    coordinates = layer.getLatLngs();
-    coordinates = coordinates && coordinates[0];
     center = layer.getCenter();
   } else if (layerType === 'marker') {
     coordinates = [{ ...layer.getLatLng() }];
@@ -76,14 +81,74 @@ export function reduceDrawEventToLayer ({ layer, layerType } = {}) {
   }
 
   // Further reduce data to pure objects
-  coordinates =
-    coordinates && coordinates.map(coordinate => ({ ...coordinate }));
+  coordinates = coordinatesFromLayer(layer);
   center = center && { ...center };
+  geoJson = geoJsonFromLayer(layer);
 
   return {
     ...data,
     coordinates,
-    center
+    center,
+    geoJson
+  };
+}
+
+/**
+ * coordinatesFromLayer
+ * @description
+ */
+
+export function coordinatesFromLayer (layer = {}) {
+  let coordinates = [];
+  const shape = getShapeType(layer);
+
+  if (DRAW_SHAPES.includes(shape)) {
+    coordinates = layer.getLatLngs();
+    coordinates = coordinates && coordinates[0];
+  } else if (shape === 'marker') {
+    coordinates = [{ ...layer.getLatLng() }];
+  }
+
+  return coordinates.map((coordinate = {}) => ({ ...coordinate }));
+}
+
+/**
+ * geoJsonFromLayer
+ * @description
+ */
+
+export function geoJsonFromLayer (layer) {
+  const shape = getShapeType(layer);
+  const type = SHAPE_TO_GEOTYPE_MAP[shape];
+  const coordinates = coordinatesFromLayer(layer);
+
+  let geoCoordinates = [];
+
+  if (type === 'Point') {
+    geoCoordinates.push(coordinates[0].lng, coordinates[0].lat);
+  } else if (type === 'Polygon') {
+    geoCoordinates.push(
+      coordinates.map(({ lat, lng }) => {
+        return [lng, lat];
+      })
+    );
+  }
+
+  return {
+    type,
+    coordinates: geoCoordinates
+  };
+}
+
+/**
+ * geoJsonFromLatLn
+ * @description
+ */
+
+export function geoJsonFromLatLn ({ lat = 0, lng = 0 }) {
+  return {
+    type: 'Point',
+    coordinates: [lng, lat]
   };
 }
 
