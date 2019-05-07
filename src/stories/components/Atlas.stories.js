@@ -90,6 +90,7 @@ stories.add('SAT API', () => {
     console.log('geoJson', geoJson);
 
     let response;
+    let features;
 
     const request = new Request(
       'https://yzvdrl0zsc.execute-api.us-west-2.amazonaws.com/SIT/catalog/search'
@@ -112,18 +113,19 @@ stories.add('SAT API', () => {
       throw new Error(`Failed to get search results: ${e}`);
     }
 
-    console.log('response', response);
+    features = response && response.data && response.data.features;
 
-    return [
-      {
-        label: `#1 from ${JSON.stringify(geoJson)}`,
+    return features.map((feature = {}) => {
+      const { collection, id } = feature;
+      return {
+        label: `${id}`,
+        sublabels: [
+          `Collection: ${collection}`,
+          `GeoJSON: ${JSON.stringify(geoJson)}`
+        ],
         to: '#'
-      },
-      {
-        label: `#2 from ${JSON.stringify(geoJson)} 2`,
-        to: '#'
-      }
-    ];
+      };
+    });
   }
 
   return (
