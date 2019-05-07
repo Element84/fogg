@@ -85,7 +85,7 @@ stories.add('Default', () => {
   );
 });
 
-stories.add('SAT API', () => {
+stories.add('Earth Search', () => {
   async function handleResolveOnSearch ({ geoJson = {} } = {}) {
     const { features = [] } = geoJson;
     const { geometry } = features[0] || {};
@@ -93,7 +93,7 @@ stories.add('SAT API', () => {
     let responseFeatures;
 
     const request = new Request(
-      'https://yzvdrl0zsc.execute-api.us-west-2.amazonaws.com/SIT/catalog/search'
+      'https://earth-search.aws.element84.com/stac/search'
     );
 
     if (!geometry) {
@@ -119,17 +119,20 @@ stories.add('SAT API', () => {
 
     responseFeatures = response && response.data && response.data.features;
 
-    return responseFeatures.map((feature = {}) => {
-      const { collection, id } = feature;
-      return {
-        label: `${id}`,
-        sublabels: [
-          `Collection: ${collection}`,
-          `GeoJSON: ${JSON.stringify(geoJson)}`
-        ],
-        to: '#'
-      };
-    });
+    return Array.isArray(responseFeatures)
+      ? responseFeatures.map((feature = {}) => {
+        const { properties, id } = feature;
+        const { collection } = properties;
+        return {
+          label: `${id}`,
+          sublabels: [
+            `Collection: ${collection}`,
+            `GeoJSON: ${JSON.stringify(geoJson)}`
+          ],
+          to: '#'
+        };
+      })
+      : [];
   }
 
   return (
