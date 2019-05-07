@@ -1,15 +1,89 @@
 import { useState } from 'react';
 import uuidv1 from 'uuid/v1';
 
-import { geocodePlacename } from '../lib/leaflet';
+import { geocodePlacename, geoJsonFromLatLn } from '../lib/leaflet';
 
-export default function useAtlas ({ defaultCenter = {} }) {
-  const [mapPosition, updateMapPosition] = useState(defaultCenter);
+export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
+  const [map, updateMap] = useState({
+    center: defaultCenter
+  });
+  const [results, updateResults] = useState();
+
+  /**
+   * search
+   * @description HAndle search functionality given layer settings and a date
+   */
+
+  function search (layer, date) {
+    const { center, geoJson } = layer;
+
+    updateMap({
+      ...map,
+      center,
+      geoJson
+    });
+
+    const params = {
+      geoJson: layer.geoJson,
+      date
+    };
+
+    resolveOnSearch(params).then(data => {
+      updateResults(data);
+    });
+  }
+
+  /**
+   * handleOnSearch
+   * @description Fires when a search is performed via SearchComplete
+   */
+
+  function handleOnSearch ({ x, y } = {}, date) {
+    if (typeof x === 'undefined' || typeof y === 'undefined') {
+      return;
+    }
+
+    const center = {
+      lng: x,
+      lat: y
+    };
+
+    search(
+      {
+        geoJson: geoJsonFromLatLn(center),
+        center
+      },
+      date
+    );
+  }
+
+  /**
+   * handleOnCreated
+   * @description Fires when a layer is created
+   */
+
+  function handleOnCreated (layer) {
+    search(layer);
+  }
+
+  /**
+   * handleOnEdited
+   * @description Fires when a layer is edited
+   */
+
+  function handleOnEdited (layer) {
+    search(layer);
+  }
 
   return {
-    mapPosition,
-    updateMapPosition,
-    resolveAtlasAutocomplete
+    map,
+    results,
+    handlers: {
+      handleOnCreated,
+      handleOnEdited,
+      handleOnSearch,
+      resolveAtlasAutocomplete
+    }
   };
 }
 

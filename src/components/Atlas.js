@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { useAtlas } from '../hooks';
@@ -16,81 +16,33 @@ const Atlas = ({
   SidebarComponents,
   resolveOnSearch
 }) => {
-  const atlasSettings = {
-    defaultCenter
-  };
+  const atlas = useAtlas({
+    defaultCenter,
+    resolveOnSearch
+  });
 
-  const { mapPosition, updateMapPosition, resolveAtlasAutocomplete } = useAtlas(
-    atlasSettings
-  );
+  const { map, results, handlers } = atlas;
+  const {
+    handleOnCreated,
+    handleOnEdited,
+    handleOnSearch,
+    resolveAtlasAutocomplete
+  } = handlers;
+  const { center } = map || {};
+  const { lat = 0, lng = 0 } = center;
 
-  const [results, updateResults] = useState();
   const hasResults = Array.isArray(results) && results.length > 0;
-
-  const { lat = 0, lng = 0 } = mapPosition;
+  const position = [lat, lng];
 
   const mapSettings = {
-    center: [lat, lng],
+    center: position,
     zoom
   };
 
   const markerSettings = {
-    position: [lat, lng],
-    draggable: true,
-    onDragEnd
+    position,
+    draggable: false
   };
-
-  /**
-   * onDragEnd
-   * @description Fires after a marker is dragged. Updates current position of map
-   */
-
-  function onDragEnd (event, ref) {
-    const { current } = ref;
-    const currentLatLng = current && current.leafletElement.getLatLng();
-
-    updateMapPosition(currentLatLng);
-  }
-
-  /**
-   * handleOnCreated
-   * @description Fires when a layer is created
-   */
-
-  function handleOnCreated ({ center }) {
-    updateMapPosition(center);
-  }
-
-  /**
-   * handleOnEdited
-   * @description Fires when a layer is edited
-   */
-
-  function handleOnEdited ({ center }) {
-    updateMapPosition(center);
-  }
-
-  /**
-   * handleOnSearch
-   * @description Fires when a search is performed via SearchComplete
-   */
-
-  function handleOnSearch ({ x, y } = {}, date) {
-    if (typeof x === 'undefined' || typeof y === 'undefined') {
-      return;
-    }
-
-    const coordinates = {
-      lat: y,
-      lng: x
-    };
-
-    updateMapPosition(coordinates);
-
-    resolveOnSearch(coordinates).then(data => {
-      updateResults(data);
-    });
-  }
 
   return (
     <div className="atlas" data-has-results={hasResults}>
@@ -103,7 +55,7 @@ const Atlas = ({
         </Panel>
 
         {SidebarComponents && (
-          <SidebarComponents results={results} mapPosition={mapPosition} />
+          <SidebarComponents results={results} mapPosition={position} />
         )}
       </div>
 

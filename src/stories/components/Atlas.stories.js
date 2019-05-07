@@ -6,7 +6,14 @@ import Atlas from '../../components/Atlas';
 import ItemList from '../../components/ItemList';
 import Panel from '../../components/Panel';
 
+import Request from '../../models/request';
+
 const stories = storiesOf('Components|Atlas', module);
+
+const ALEXANDRIA = {
+  lat: 38.8048,
+  lng: -77.0469
+};
 
 const SidebarPanels = ({ results }) => {
   const hasResults = Array.isArray(results) && results.length > 0;
@@ -49,26 +56,79 @@ SidebarPanels.propTypes = {
 };
 
 stories.add('Default', () => {
-  const ALEXANDRIA = {
-    lat: 38.8048,
-    lng: -77.0469
-  };
-
-  function handleResolveOnSearch (coordinates) {
-    const coordinatesString = JSON.stringify(coordinates);
+  function handleResolveOnSearch ({ geoJson }) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve([
           {
-            label: `#1 from ${coordinatesString}`,
+            label: `#1 from ${JSON.stringify(geoJson)}`,
             to: '#'
           },
           {
-            label: `#2 from ${coordinatesString} 2`,
+            label: `#2 from ${JSON.stringify(geoJson)} 2`,
             to: '#'
           }
         ]);
       }, 1000);
+    });
+  }
+
+  return (
+    <>
+      <Atlas
+        defaultCenter={ALEXANDRIA}
+        zoom={3}
+        resolveOnSearch={handleResolveOnSearch}
+        SidebarComponents={SidebarPanels}
+      />
+    </>
+  );
+});
+
+stories.add('SAT API', () => {
+  async function handleResolveOnSearch ({ geoJson = {} } = {}) {
+    const { features = [] } = geoJson;
+    const { geometry } = features[0] || {};
+    let response;
+    let responseFeatures;
+
+    const request = new Request(
+      'https://yzvdrl0zsc.execute-api.us-west-2.amazonaws.com/SIT/catalog/search'
+    );
+
+    if (!geometry) {
+      return [];
+    }
+
+    request.setData({
+      intersects: geometry
+    });
+
+    request.setOptions({
+      headers: {
+        Accept: 'application/geo+json',
+        'Content-Type': 'application/json'
+      }
+    });
+
+    try {
+      response = await request.post();
+    } catch (e) {
+      throw new Error(`Failed to get search results: ${e}`);
+    }
+
+    responseFeatures = response && response.data && response.data.features;
+
+    return responseFeatures.map((feature = {}) => {
+      const { collection, id } = feature;
+      return {
+        label: `${id}`,
+        sublabels: [
+          `Collection: ${collection}`,
+          `GeoJSON: ${JSON.stringify(geoJson)}`
+        ],
+        to: '#'
+      };
     });
   }
 
