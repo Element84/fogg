@@ -22,7 +22,7 @@ $item-list-top-padding: .8em;
   }
 
   a {
-    display: block;
+    display: flex;
     color: inherit;
     text-decoration: none;
     padding: $item-list-top-padding 2.4em $item-list-top-padding 1em;
@@ -32,6 +32,24 @@ $item-list-top-padding: .8em;
 
 .item-list-item {
   position: relative;
+}
+
+.item-list-item-thumb {
+
+  display: block;
+  width: 4em;
+  height: 4em;
+  margin-right: .5em;
+
+  img {
+    display: block;
+    width: 100%;
+  }
+
+}
+
+.item-list-item-content {
+  flex-grow: 1;
 }
 
 .item-list-item-label,

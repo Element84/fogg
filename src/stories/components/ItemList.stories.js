@@ -35,3 +35,39 @@ stories.add('Default', () => {
     </>
   );
 });
+
+stories.add('Thumbnails', () => {
+  return (
+    <>
+      <ItemList
+        items={[
+          {
+            thumb: 'https://www.placecage.com/200/200',
+            label: 'Why',
+            to: '#'
+          },
+          {
+            thumb: 'https://www.placecage.com/300/300',
+            label: 'Not',
+            to: '#'
+          },
+          {
+            thumb: 'https://www.placecage.com/400/400',
+            label: 'Nic',
+            to: '#'
+          },
+          {
+            thumb: 'https://www.placecage.com/500/500',
+            label: 'Cage',
+            to: '#'
+          },
+          {
+            thumb: 'https://www.placecage.com/600/600',
+            label: '?',
+            to: '#'
+          }
+        ]}
+      />
+    </>
+  );
+});
