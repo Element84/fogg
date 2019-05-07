@@ -86,18 +86,22 @@ stories.add('Default', () => {
 });
 
 stories.add('SAT API', () => {
-  async function handleResolveOnSearch ({ geoJson }) {
-    console.log('geoJson', geoJson);
-
+  async function handleResolveOnSearch ({ geoJson = {} } = {}) {
+    const { features = [] } = geoJson;
+    const { geometry } = features[0] || {};
     let response;
-    let features;
+    let responseFeatures;
 
     const request = new Request(
       'https://yzvdrl0zsc.execute-api.us-west-2.amazonaws.com/SIT/catalog/search'
     );
 
+    if (!geometry) {
+      return [];
+    }
+
     request.setData({
-      intersects: geoJson
+      intersects: geometry
     });
 
     request.setOptions({
@@ -113,9 +117,9 @@ stories.add('SAT API', () => {
       throw new Error(`Failed to get search results: ${e}`);
     }
 
-    features = response && response.data && response.data.features;
+    responseFeatures = response && response.data && response.data.features;
 
-    return features.map((feature = {}) => {
+    return responseFeatures.map((feature = {}) => {
       const { collection, id } = feature;
       return {
         label: `${id}`,

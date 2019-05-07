@@ -1,5 +1,6 @@
 import L from 'leaflet';
 import { geocode } from 'esri-leaflet-geocoder';
+import GeoJSON from 'geojson';
 import PromiseCancelable from 'p-cancelable';
 
 const DRAW_SHAPES = ['polygon', 'rectangle'];
@@ -10,9 +11,21 @@ const SHAPE_TO_GEOTYPE_MAP = {
   rectangle: 'Polygon'
 };
 
+const GEOJSON_PARSE_SETTINGS = {
+  Point: [
+    // Logically you would think this should be lng,lat, but
+    // apparently geojson wants it this way in order to
+    // properly arrange the coordinates
+    'lat',
+    'lng'
+  ],
+  LineString: 'line',
+  Polygon: 'polygon'
+};
+
 /**
  * clearLeafletElementLayers
- * @description
+ * @description Given a LeafletElement, clear all layers
  */
 
 export function clearLeafletElementLayers (leafletElement, excludeIds = []) {
@@ -26,6 +39,7 @@ export function clearLeafletElementLayers (leafletElement, excludeIds = []) {
 
 /**
  * getShapeType
+ * @description Given a Leaflet Layer, produce the shape type
  * @see https://stackoverflow.com/a/25082568/844780
  */
 
@@ -58,6 +72,9 @@ export function getShapeType (layer) {
 
 export function reduceDrawEventToLayer ({ layer, layerType } = {}) {
   // If we don't have a layer, there's really nothing to grab
+
+  console.log(layer);
+  console.log(layerType);
 
   if (!layer) return {};
 
@@ -95,7 +112,7 @@ export function reduceDrawEventToLayer ({ layer, layerType } = {}) {
 
 /**
  * coordinatesFromLayer
- * @description
+ * @description Given a Leaflet Layer, produce a set of coordinates
  */
 
 export function coordinatesFromLayer (layer = {}) {
@@ -114,7 +131,7 @@ export function coordinatesFromLayer (layer = {}) {
 
 /**
  * geoJsonFromLayer
- * @description
+ * @description Given a Leaflet layer, produce a GeoJSON doc
  */
 
 export function geoJsonFromLayer (layer) {
@@ -122,34 +139,50 @@ export function geoJsonFromLayer (layer) {
   const type = SHAPE_TO_GEOTYPE_MAP[shape];
   const coordinates = coordinatesFromLayer(layer);
 
-  let geoCoordinates = [];
+  let data = [];
 
   if (type === 'Point') {
-    geoCoordinates.push(coordinates[0].lng, coordinates[0].lat);
+    data.push({
+      lng: coordinates[0].lng,
+      lat: coordinates[0].lat
+    });
   } else if (type === 'Polygon') {
-    geoCoordinates.push(
-      coordinates.map(({ lat, lng }) => {
-        return [lng, lat];
-      })
-    );
+    const polygon = coordinates.map(({ lat, lng }) => {
+      return [lng, lat];
+    });
+
+    const lastPolygon = polygon[polygon.length - 1];
+
+    // If the first set of coordinates do not match the last set, we need to
+    // push the first set on to the end of the coordinates array so that we can
+    // "close" the shape
+    if (polygon[0][0] !== lastPolygon[0] || polygon[0][1] !== lastPolygon[1]) {
+      polygon.push(polygon[0]);
+    }
+
+    data.push({
+      polygon: [polygon]
+    });
   }
 
-  return {
-    type,
-    coordinates: geoCoordinates
-  };
+  return GeoJSON.parse(data, { ...GEOJSON_PARSE_SETTINGS });
 }
 
 /**
  * geoJsonFromLatLn
- * @description
+ * @description Given a lat and long, produce a GeoJSON doc
  */
 
 export function geoJsonFromLatLn ({ lat = 0, lng = 0 }) {
-  return {
-    type: 'Point',
-    coordinates: [lng, lat]
-  };
+  return GeoJSON.parse(
+    [
+      {
+        lng,
+        lat
+      }
+    ],
+    { ...GEOJSON_PARSE_SETTINGS }
+  );
 }
 
 /**

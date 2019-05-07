@@ -11,7 +11,7 @@ export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
 
   /**
    * search
-   * @description
+   * @description HAndle search functionality given layer settings and a date
    */
 
   function search (layer, date) {
@@ -44,8 +44,8 @@ export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
     }
 
     const center = {
-      lat: y,
-      lng: x
+      lng: x,
+      lat: y
     };
 
     search(
