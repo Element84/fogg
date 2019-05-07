@@ -2,7 +2,7 @@
   "name": "fogg",
   "private": true,
   "description": "Gatsby theme for E84 Space Jam project",
-  "version": "0.1.26",
+  "version": "0.1.27",
   "author": "Element 84, Inc.",
   "dependencies": {
     "@babel/core": "^7.3.4",
