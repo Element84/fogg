@@ -1,3 +1,8 @@
+### Version 0.1.26
+- [JAM-238] refactoring map queries on atlas to support passing back different search handler options
+- [JAM-238] adding real result data to example, adding support for sublabels
+- [JAM-238] fixing geojson handling for search
+
 ### Version 0.1.25
 - updating all component tests to point to root
 - adding a ui export and updating all component tests to point to it
