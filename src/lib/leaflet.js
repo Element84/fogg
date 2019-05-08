@@ -73,9 +73,6 @@ export function getShapeType (layer) {
 export function reduceDrawEventToLayer ({ layer, layerType } = {}) {
   // If we don't have a layer, there's really nothing to grab
 
-  console.log(layer);
-  console.log(layerType);
-
   if (!layer) return {};
 
   const data = {
