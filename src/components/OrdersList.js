@@ -6,16 +6,15 @@ import Button from './Button';
 
 import { formatDate } from '../lib/datetime';
 
-const DEFAULT_HEADERS = ['Name', 'Window Open', 'Window Close', 'Status'];
+const DEFAULT_HEADERS = ['Product', 'Order Date', 'Order Status'];
 
 const OrdersList = ({ headers = DEFAULT_HEADERS, orders }) => {
   const rows = orders.map(
-    ({ name, windowOpen, windowClose, status }, index) => {
+    ({ productIdentifier, orderDate, orderStatus }, index) => {
       return [
-        name,
-        formatDate(windowOpen),
-        formatDate(windowClose),
-        status,
+        productIdentifier,
+        formatDate(orderDate),
+        orderStatus,
         <Button key={`OrdersList-Button-${index}`} />
       ];
     }
