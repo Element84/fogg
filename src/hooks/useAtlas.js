@@ -4,7 +4,7 @@ import uuidv1 from 'uuid/v1';
 import { geocodePlacename, geoJsonFromLatLn } from '../lib/leaflet';
 
 export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
-  const [map, updateMap] = useState({
+  const [mapConfig, updateMapConfig] = useState({
     center: defaultCenter
   });
   const [results, updateResults] = useState();
@@ -17,8 +17,8 @@ export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
   function search (layer, date) {
     const { center, geoJson } = layer;
 
-    updateMap({
-      ...map,
+    updateMapConfig({
+      ...mapConfig,
       center,
       geoJson
     });
@@ -28,9 +28,11 @@ export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
       date
     };
 
-    resolveOnSearch(params).then(data => {
-      updateResults(data);
-    });
+    if (typeof resolveOnSearch === 'function') {
+      resolveOnSearch(params).then(data => {
+        updateResults(data);
+      });
+    }
   }
 
   /**
@@ -76,7 +78,7 @@ export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
   }
 
   return {
-    map,
+    mapConfig,
     results,
     handlers: {
       handleOnCreated,

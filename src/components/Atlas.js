@@ -14,21 +14,23 @@ const Atlas = ({
   defaultCenter = {},
   zoom = 4,
   SidebarComponents,
-  resolveOnSearch
+  resolveOnSearch,
+  services,
+  map = 'blue_marble'
 }) => {
   const atlas = useAtlas({
     defaultCenter,
     resolveOnSearch
   });
 
-  const { map, results, handlers } = atlas;
+  const { mapConfig, results, handlers } = atlas;
   const {
     handleOnCreated,
     handleOnEdited,
     handleOnSearch,
     resolveAtlasAutocomplete
   } = handlers;
-  const { center } = map || {};
+  const { center } = mapConfig || {};
   const { lat = 0, lng = 0 } = center;
 
   const hasResults = Array.isArray(results) && results.length > 0;
@@ -36,7 +38,9 @@ const Atlas = ({
 
   const mapSettings = {
     center: position,
-    zoom
+    zoom,
+    services,
+    map
   };
 
   const markerSettings = {
@@ -75,7 +79,10 @@ Atlas.propTypes = {
   defaultCenter: PropTypes.object,
   zoom: PropTypes.number,
   SidebarComponents: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  resolveOnSearch: PropTypes.func
+  resolveOnSearch: PropTypes.func,
+  map: PropTypes.string,
+  projections: PropTypes.array,
+  services: PropTypes.array
 };
 
 export default Atlas;
