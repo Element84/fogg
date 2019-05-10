@@ -24,7 +24,7 @@ const ordersData = [
   }
 ];
 
-const columns = ['Order', 'Order Date', 'Current Status'];
+const columns = ['Order', 'Date Ordered', 'Current Status'];
 
 const stories = storiesOf('Components|OrdersList', module);
 
