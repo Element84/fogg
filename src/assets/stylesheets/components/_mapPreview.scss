@@ -1,12 +1,7 @@
-// .map {
-//   max-height: 80vh;
-//   max-width: 60vw;
-//   margin: 0 auto;
-//   background: blue;
-// }
-.map-base {
-  max-height: 80vh;
-  max-width: 60vw;
-  margin: 0 auto;
-  background: blue;
+.map-preview-container {
+  height: 500px;
+  width: 500px;
+}
+.marker-location {
+  text-align: center;
 }

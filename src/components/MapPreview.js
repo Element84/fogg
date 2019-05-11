@@ -1,9 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Map from './Map';
 import Marker from './MapMarker';
 
-const MapPreview = props => {
+const MapPreview = () => {
   // put map in smaller area with all of its stuff
   // add line at the bottom with area of interest and coordinates
 
@@ -18,17 +17,21 @@ const MapPreview = props => {
   };
 
   const markerSettings = {
-    ...props,
     position: [ALEXANDRIA.lat, ALEXANDRIA.lng],
     draggable: false
   };
 
   return (
-    <>
-      <Map {...mapSettings} />
-      <Marker {...markerSettings} />
+    <div className="map-preview-container">
+      <Map {...mapSettings}>
+        <Marker {...markerSettings} />
+      </Map>
+      <hr />
       <h1>Area of Interest</h1>
-    </>
+      <p className="marker-location">
+        {ALEXANDRIA.lat} &deg;N, {ALEXANDRIA.lng} &deg;W
+      </p>
+    </div>
   );
 };
 

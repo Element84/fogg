@@ -16,9 +16,5 @@ stories.add('Default', () => {
     zoom: 3
   };
 
-  return (
-    <div style={{ width: '500px', height: '500px' }}>
-      <MapPreview {...mapSettings} />
-    </div>
-  );
+  return <MapPreview {...mapSettings} />;
 });
