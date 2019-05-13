@@ -24,7 +24,6 @@ const Atlas = ({
   const { map, results, handlers } = atlas;
   const {
     handleOnCreated,
-    handleOnEdited,
     handleOnSearch,
     resolveAtlasAutocomplete
   } = handlers;
@@ -60,7 +59,7 @@ const Atlas = ({
       </div>
 
       <Map className="atlas-map" {...mapSettings}>
-        <MapDraw onCreated={handleOnCreated} onEdited={handleOnEdited}>
+        <MapDraw onCreated={handleOnCreated}>
           <MapMarker {...markerSettings} />
         </MapDraw>
       </Map>

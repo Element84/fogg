@@ -11,6 +11,7 @@ const SearchComplete = ({ onSearch, resolveQueryComplete }) => {
   const [isOpen, updateOpenState] = useState(false);
   const [results, updateResults] = useState([]);
   const [date, updateDate] = useState({});
+  const [query, updateQuery] = useState('');
   const [debouncedUpdateQueryState] = useDebouncedCallback(
     updateQueryState,
     QUERY_COMPLETE_DEBOUNCE
@@ -24,7 +25,7 @@ const SearchComplete = ({ onSearch, resolveQueryComplete }) => {
   function handleSearchboxSearch (textInput, searchDate) {
     const { value } = results[0] || {};
     updateDate(searchDate);
-    handleQuery(value, searchDate);
+    handleQuery(value, searchDate, textInput);
     updateOpenState(false);
   }
 
@@ -34,7 +35,7 @@ const SearchComplete = ({ onSearch, resolveQueryComplete }) => {
    */
 
   function handleResultClick (e, value) {
-    handleQuery(value);
+    handleQuery(value, null, query);
     updateOpenState(false);
   }
 
@@ -43,9 +44,9 @@ const SearchComplete = ({ onSearch, resolveQueryComplete }) => {
    * @description Manges making the actual query search
    */
 
-  function handleQuery (query, searchDate) {
+  function handleQuery (query, searchDate, textInput) {
     if (typeof onSearch === 'function') {
-      onSearch(query, searchDate || date);
+      onSearch(query, searchDate || date, textInput || query);
     }
   }
 
@@ -70,6 +71,7 @@ const SearchComplete = ({ onSearch, resolveQueryComplete }) => {
 
   function updateQueryState ({ target }, searchDate) {
     updateDate(searchDate);
+    updateQuery(target.value);
     handleFetchQueryComplete(target.value);
   }
 

@@ -5,7 +5,9 @@ import { geocodePlacename, geoJsonFromLatLn } from '../lib/leaflet';
 
 export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
   const [map, updateMap] = useState({
-    center: defaultCenter
+    center: defaultCenter,
+    textInput: '',
+    date: {}
   });
   const [results, updateResults] = useState();
 
@@ -14,18 +16,22 @@ export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
    * @description HAndle search functionality given layer settings and a date
    */
 
-  function search (layer, date) {
+  function search (layer, date = map.date, textInput = map.textInput) {
     const { center, geoJson } = layer;
 
-    updateMap({
+    const mapUpdate = {
       ...map,
       center,
-      geoJson
-    });
+      geoJson,
+      textInput,
+      date
+    };
+    updateMap(mapUpdate);
 
     const params = {
       geoJson: layer.geoJson,
-      date
+      date,
+      textInput
     };
 
     resolveOnSearch(params).then(data => {
@@ -38,7 +44,7 @@ export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
    * @description Fires when a search is performed via SearchComplete
    */
 
-  function handleOnSearch ({ x, y } = {}, date) {
+  function handleOnSearch ({ x, y } = {}, date, textInput) {
     if (typeof x === 'undefined' || typeof y === 'undefined') {
       return;
     }
@@ -53,7 +59,8 @@ export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
         geoJson: geoJsonFromLatLn(center),
         center
       },
-      date
+      date,
+      textInput
     );
   }
 
@@ -66,21 +73,11 @@ export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
     search(layer);
   }
 
-  /**
-   * handleOnEdited
-   * @description Fires when a layer is edited
-   */
-
-  function handleOnEdited (layer) {
-    search(layer);
-  }
-
   return {
     map,
     results,
     handlers: {
       handleOnCreated,
-      handleOnEdited,
       handleOnSearch,
       resolveAtlasAutocomplete
     }

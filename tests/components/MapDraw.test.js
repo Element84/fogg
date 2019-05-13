@@ -31,31 +31,19 @@ describe('MapDraw', () => {
   });
 
   describe('Events', () => {
-    const mapdraw = shallow(
-      <MapDraw onCreated={handleOnCreated} onEdited={handleOnEdited} />
-    );
+    const mapdraw = shallow(<MapDraw onCreated={handleOnCreated} />);
     const editcontrol = mapdraw.find('ForwardRef(Leaflet(EditControl))');
 
     let testCreated = 1;
-    let testEdited = 1;
 
     function handleOnCreated () {
       testCreated++;
     }
 
-    function handleOnEdited () {
-      testEdited++;
-    }
-
     editcontrol.prop('onCreated')();
-    editcontrol.prop('onEdited')();
 
     it('should fire given onCreated event', () => {
       expect(testCreated).toEqual(2);
-    });
-
-    it('should fire given onEdited event', () => {
-      expect(testEdited).toEqual(2);
     });
   });
 });

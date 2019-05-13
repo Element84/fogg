@@ -73,12 +73,18 @@ stories.add('Default', () => {
     });
   }
 
+  function testPatchTextQuery (args) {
+    const { textInput } = args;
+    console.log('testPatchTextQuery', textInput);
+    return handleResolveOnSearch(args);
+  }
+
   return (
     <>
       <Atlas
         defaultCenter={ALEXANDRIA}
         zoom={3}
-        resolveOnSearch={handleResolveOnSearch}
+        resolveOnSearch={testPatchTextQuery}
         SidebarComponents={SidebarPanels}
       />
     </>
@@ -86,7 +92,7 @@ stories.add('Default', () => {
 });
 
 stories.add('Earth Search', () => {
-  async function handleResolveOnSearch ({ geoJson = {} } = {}) {
+  async function handleResolveOnSearch ({ geoJson = {}, textInput } = {}) {
     const { features = [] } = geoJson;
     const { geometry } = features[0] || {};
     let response;
