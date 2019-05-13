@@ -51,9 +51,9 @@ const columns = ['Task', 'Start Date', 'End Date', 'Current Status'];
 const stories = storiesOf('Components|TaskList', module);
 
 stories.add('Default', () => {
-  return <TaskList task={data} />;
+  return <TaskList tasks={data} />;
 });
 
 stories.add('Custom Headers', () => {
-  return <TaskList headers={columns} task={data} />;
+  return <TaskList headers={columns} tasks={data} />;
 });
