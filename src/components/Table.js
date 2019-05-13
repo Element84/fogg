@@ -68,7 +68,7 @@ function tableConfigurationIsValid (columns, rows) {
 
 function fixTableConfiguration (columns, rows) {
   const cellMaxCount = Math.max(...rows.map(row => row.length));
-  const columnsCount = columns.length;
+  const columnsCount = (columns && columns.length) || 0;
   const differenceCellsColumns = cellMaxCount - columnsCount;
 
   if (differenceCellsColumns > 0) {
