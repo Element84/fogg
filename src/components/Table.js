@@ -25,9 +25,11 @@ const Table = ({ className, columns, rows }) => {
   return (
     <div className={`table ${className || ''}`}>
       <table>
-        <thead>
-          <TableRow className="table-header" cells={columns} />
-        </thead>
+        {columns && (
+          <thead>
+            <TableRow className="table-header" cells={columns} />
+          </thead>
+        )}
 
         <tbody>
           {rows.map((row, rowIndex) => {
