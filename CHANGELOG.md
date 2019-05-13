@@ -1,3 +1,6 @@
+### Version 0.1.32
+- only rendering table header if available
+
 ### Version 0.1.31
 - patching in text input for search queries
 
