@@ -1,3 +1,6 @@
+### Version 0.1.33
+- adding story for no table columns
+
 ### Version 0.1.32
 - only rendering table header if available
 
