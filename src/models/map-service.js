@@ -2,7 +2,7 @@ import mapProjections from '../data/map-projections';
 import mapServices from '../data/map-services';
 
 class MapService {
-  constructor (name, { services = [], projections = [] }) {
+  constructor (name, { services = [], projections = [] } = {}) {
     this.name = name;
 
     // Combine user specified projections with our defaults
