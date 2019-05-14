@@ -41,3 +41,11 @@ stories.add('Padded Rows', () => {
     </>
   );
 });
+
+stories.add('No Header', () => {
+  return (
+    <>
+      <Table rows={rows} />
+    </>
+  );
+});
