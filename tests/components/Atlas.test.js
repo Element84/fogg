@@ -23,10 +23,6 @@ describe('Atlas', () => {
       expect(atlas.find('Map').prop('zoom')).toEqual(zoom);
     });
 
-    it('should render a MapMarker with the starting position of the center', () => {
-      expect(atlas.find('MapMarker').prop('position')).toEqual(position);
-    });
-
     it('should render a SearchComplete component', () => {
       expect(atlas.find('SearchComplete').exists()).toEqual(true);
     });

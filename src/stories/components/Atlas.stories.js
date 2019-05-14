@@ -10,9 +10,9 @@ import Request from '../../models/request';
 
 const stories = storiesOf('Components|Atlas', module);
 
-const ALEXANDRIA = {
-  lat: 38.8048,
-  lng: -77.0469
+const DEFAULT_CENTER = {
+  lat: 0,
+  lng: 0
 };
 
 stories.add('Default', () => {
@@ -42,8 +42,8 @@ stories.add('Default', () => {
   return (
     <>
       <Atlas
-        defaultCenter={ALEXANDRIA}
-        zoom={3}
+        defaultCenter={DEFAULT_CENTER}
+        zoom={2}
         resolveOnSearch={testPatchTextQuery}
         SidebarComponents={SidebarPanels}
       />
@@ -63,8 +63,8 @@ stories.add('Open Street Map', () => {
   return (
     <>
       <Atlas
-        defaultCenter={ALEXANDRIA}
-        zoom={3}
+        defaultCenter={DEFAULT_CENTER}
+        zoom={2}
         services={services}
         map="open_street_map"
       />
@@ -125,8 +125,8 @@ stories.add('Earth Search', () => {
   return (
     <>
       <Atlas
-        defaultCenter={ALEXANDRIA}
-        zoom={3}
+        defaultCenter={DEFAULT_CENTER}
+        zoom={2}
         resolveOnSearch={handleResolveOnSearch}
         SidebarComponents={SidebarPanels}
       />

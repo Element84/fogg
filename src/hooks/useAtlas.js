@@ -1,9 +1,18 @@
 import { useState } from 'react';
 import uuidv1 from 'uuid/v1';
 
-import { geocodePlacename, geoJsonFromLatLn } from '../lib/leaflet';
+import {
+  geocodePlacename,
+  geoJsonFromLatLn,
+  clearLeafletElementLayers,
+  addLeafletMarkerLayer
+} from '../lib/leaflet';
 
-export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
+export default function useAtlas ({
+  defaultCenter = {},
+  resolveOnSearch,
+  refMapDraw
+}) {
   const [mapConfig, updateMapConfig] = useState({
     center: defaultCenter,
     textInput: '',
@@ -60,6 +69,8 @@ export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
       lat: y
     };
 
+    addSearchMarker(center);
+
     search(
       {
         geoJson: geoJsonFromLatLn(center),
@@ -68,6 +79,15 @@ export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
       date,
       textInput
     );
+  }
+
+  function addSearchMarker (position) {
+    const { current } = refMapDraw;
+    const { leafletElement } = current || {};
+    if (leafletElement) {
+      clearLeafletElementLayers(leafletElement);
+      addLeafletMarkerLayer(position, leafletElement);
+    }
   }
 
   /**

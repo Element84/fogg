@@ -10,8 +10,8 @@ import {
   reduceDrawEventToLayer
 } from '../lib/leaflet';
 
-const MapDraw = ({ children, onCreated }) => {
-  const refFeatureGroup = createRef();
+const MapDraw = React.forwardRef(({ children, onCreated }, ref) => {
+  const refFeatureGroup = ref || createRef();
   const { icon } = useMapMarkerIcon();
 
   /**
@@ -55,7 +55,7 @@ const MapDraw = ({ children, onCreated }) => {
       />
     </FeatureGroup>
   );
-};
+});
 
 MapDraw.propTypes = {
   children: PropTypes.node,

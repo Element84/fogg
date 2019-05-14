@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { useAtlas } from '../hooks';
 
 import Map from './Map';
-import MapMarker from './MapMarker';
 import MapDraw from './MapDraw';
 import Panel from './Panel';
 import SearchComplete from './SearchComplete';
@@ -18,9 +17,11 @@ const Atlas = ({
   services,
   map = 'blue_marble'
 }) => {
+  const refMapDraw = createRef();
   const atlas = useAtlas({
     defaultCenter,
-    resolveOnSearch
+    resolveOnSearch,
+    refMapDraw
   });
 
   const { mapConfig, results, handlers } = atlas;
@@ -42,11 +43,6 @@ const Atlas = ({
     map
   };
 
-  const markerSettings = {
-    position,
-    draggable: false
-  };
-
   return (
     <div className="atlas" data-has-results={hasResults}>
       <div className="atlas-sidebar">
@@ -63,9 +59,7 @@ const Atlas = ({
       </div>
 
       <Map className="atlas-map" {...mapSettings}>
-        <MapDraw onCreated={handleOnCreated}>
-          <MapMarker {...markerSettings} />
-        </MapDraw>
+        <MapDraw ref={refMapDraw} onCreated={handleOnCreated} />
       </Map>
 
       <div className="atlas-extensions">{children}</div>
