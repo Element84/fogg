@@ -51,7 +51,7 @@ stories.add('Default', () => {
   );
 });
 
-stories.add('Open Street Map', () => {
+stories.add('Open Street Map - No Search', () => {
   const services = [
     {
       name: 'open_street_map',
@@ -63,10 +63,14 @@ stories.add('Open Street Map', () => {
   return (
     <>
       <Atlas
-        defaultCenter={ALEXANDRIA}
+        defaultCenter={{
+          lat: 0,
+          lng: 0
+        }}
         zoom={3}
         services={services}
         map="open_street_map"
+        search={false}
       />
     </>
   );
