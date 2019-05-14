@@ -3,35 +3,34 @@ import Map from './Map';
 import Marker from './MapMarker';
 
 const MapPreview = () => {
-  // put map in smaller area with all of its stuff
-  // add line at the bottom with area of interest and coordinates
-
-  const ALEXANDRIA = {
-    lat: 38.8048,
-    lng: -77.0469
-  };
+  let lat = 0;
+  let lng = 0;
 
   const mapSettings = {
-    center: [ALEXANDRIA.lat, ALEXANDRIA.lng],
-    zoom: 5
+    center: [lat, lng],
+    zoom: 3
   };
 
   const markerSettings = {
-    position: [ALEXANDRIA.lat, ALEXANDRIA.lng],
-    draggable: false
+    position: [lat, lng]
   };
 
   return (
-    <div className="map-preview-container">
-      <Map {...mapSettings}>
-        <Marker {...markerSettings} />
-      </Map>
-      <hr />
-      <h1>Area of Interest</h1>
-      <p className="map-preview-marker-location">
-        {ALEXANDRIA.lat} &deg;N, {ALEXANDRIA.lng} &deg;W
-      </p>
-    </div>
+    <figure>
+      <div className="map-preview">
+        <Map>
+          <Marker />
+        </Map>
+        <figcaption>
+          <p className="area-of-interest-wrapper">
+            <strong className="area-of-interest">Area of Interest</strong>
+            <p className="map-preview-marker-location">
+              {/* {ALEXANDRIA.lat} &deg;N, {ALEXANDRIA.lng} &deg;W */}
+            </p>
+          </p>
+        </figcaption>
+      </div>
+    </figure>
   );
 };
 

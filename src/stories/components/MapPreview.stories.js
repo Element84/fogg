@@ -16,5 +16,10 @@ stories.add('Default', () => {
     zoom: 3
   };
 
-  return <MapPreview {...mapSettings} />;
+  const markerSettings = {
+    position: [ALEXANDRIA.lat, ALEXANDRIA.lng],
+    draggable: false
+  };
+
+  return <MapPreview {...mapSettings} {...markerSettings} />;
 });
