@@ -28,7 +28,7 @@ const MapPreview = () => {
       </Map>
       <hr />
       <h1>Area of Interest</h1>
-      <p className="marker-location">
+      <p className="map-preview-marker-location">
         {ALEXANDRIA.lat} &deg;N, {ALEXANDRIA.lng} &deg;W
       </p>
     </div>
