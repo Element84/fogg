@@ -51,7 +51,7 @@ stories.add('Default', () => {
   );
 });
 
-stories.add('Open Street Map', () => {
+stories.add('Open Street Map - No Search', () => {
   const services = [
     {
       name: 'open_street_map',
@@ -67,6 +67,7 @@ stories.add('Open Street Map', () => {
         zoom={2}
         services={services}
         map="open_street_map"
+        search={false}
       />
     </>
   );

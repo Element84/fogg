@@ -15,7 +15,8 @@ const Atlas = ({
   SidebarComponents,
   resolveOnSearch,
   services,
-  map = 'blue_marble'
+  map = 'blue_marble',
+  search = true
 }) => {
   const refMapDraw = createRef();
   const atlas = useAtlas({
@@ -46,12 +47,14 @@ const Atlas = ({
   return (
     <div className="atlas" data-has-results={hasResults}>
       <div className="atlas-sidebar">
-        <Panel className="panel-clean">
-          <SearchComplete
-            onSearch={handleOnSearch}
-            resolveQueryComplete={resolveAtlasAutocomplete}
-          />
-        </Panel>
+        {search && (
+          <Panel className="panel-clean">
+            <SearchComplete
+              onSearch={handleOnSearch}
+              resolveQueryComplete={resolveAtlasAutocomplete}
+            />
+          </Panel>
+        )}
 
         {SidebarComponents && (
           <SidebarComponents results={results} mapPosition={position} />
@@ -75,7 +78,8 @@ Atlas.propTypes = {
   resolveOnSearch: PropTypes.func,
   map: PropTypes.string,
   projections: PropTypes.array,
-  services: PropTypes.array
+  services: PropTypes.array,
+  search: PropTypes.bool
 };
 
 export default Atlas;

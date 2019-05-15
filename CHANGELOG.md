@@ -1,3 +1,6 @@
+### Version 0.1.35
+- adding ability to disable search
+
 ### Version 0.1.34
 - fixing test
 
