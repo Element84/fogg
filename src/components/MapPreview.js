@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Map from './Map';
 import Marker from './MapMarker';
 
-const MapPreview = () => {
-  let lat = 0;
-  let lng = 0;
+const MapPreview = ({ position }) => {
+  const { lat = 0, lng = 0 } = position;
 
   const mapSettings = {
     center: [lat, lng],
@@ -16,22 +17,24 @@ const MapPreview = () => {
   };
 
   return (
-    <figure>
-      <div className="map-preview">
-        <Map>
-          <Marker />
-        </Map>
-        <figcaption>
-          <p className="area-of-interest-wrapper">
-            <strong className="area-of-interest">Area of Interest</strong>
-            <p className="map-preview-marker-location">
-              {/* {ALEXANDRIA.lat} &deg;N, {ALEXANDRIA.lng} &deg;W */}
-            </p>
-          </p>
-        </figcaption>
-      </div>
+    <figure className="map-preview">
+      <Map {...mapSettings}>
+        <Marker {...markerSettings} />
+      </Map>
+      <figcaption>
+        <p>
+          <strong className="area-of-interest">Area of Interest</strong>
+        </p>
+        <p className="map-preview-marker-location">
+          {lat} &deg;N, {lng} &deg;W
+        </p>
+      </figcaption>
     </figure>
   );
+};
+
+MapPreview.propTypes = {
+  position: PropTypes.object
 };
 
 export default MapPreview;
