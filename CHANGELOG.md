@@ -1,3 +1,5 @@
+### Version 0.1.36
+
 ### Version 0.1.35
 - adding ability to disable search
 
