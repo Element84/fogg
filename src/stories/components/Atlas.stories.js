@@ -5,6 +5,7 @@ import { storiesOf } from '@storybook/react';
 import Atlas from '../../components/Atlas';
 import ItemList from '../../components/ItemList';
 import Panel from '../../components/Panel';
+import Button from '../../components/Button';
 
 import Request from '../../models/request';
 
@@ -16,7 +17,7 @@ const DEFAULT_CENTER = {
 };
 
 stories.add('Default', () => {
-  function handleResolveOnSearch ({ geoJson }) {
+  function handleResolveOnSearch ({ geoJson, page }) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve([
@@ -74,7 +75,7 @@ stories.add('Open Street Map - No Search', () => {
 });
 
 stories.add('Earth Search', () => {
-  async function handleResolveOnSearch ({ geoJson = {}, textInput } = {}) {
+  async function handleResolveOnSearch ({ geoJson = {}, page } = {}) {
     const { features = [] } = geoJson;
     const { geometry } = features[0] || {};
     let response;
@@ -89,7 +90,9 @@ stories.add('Earth Search', () => {
     }
 
     request.setData({
-      intersects: geometry
+      intersects: geometry,
+      limit: 5,
+      page
     });
 
     request.setOptions({
@@ -135,8 +138,14 @@ stories.add('Earth Search', () => {
   );
 });
 
-const SidebarPanels = ({ results }) => {
+const SidebarPanels = ({ results, loadMoreResults }) => {
   const hasResults = Array.isArray(results) && results.length > 0;
+
+  function handleLoadMore (e) {
+    if (typeof loadMoreResults === 'function') {
+      loadMoreResults(e);
+    }
+  }
 
   return (
     <>
@@ -165,6 +174,9 @@ const SidebarPanels = ({ results }) => {
       {hasResults && (
         <Panel header="Results">
           <ItemList items={results} />
+          <p>
+            <Button onClick={handleLoadMore}>Load More</Button>
+          </p>
         </Panel>
       )}
     </>
@@ -172,5 +184,6 @@ const SidebarPanels = ({ results }) => {
 };
 
 SidebarPanels.propTypes = {
-  results: PropTypes.array
+  results: PropTypes.array,
+  loadMoreResults: PropTypes.func
 };

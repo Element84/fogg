@@ -16,7 +16,8 @@ export default function useAtlas ({
   const [mapConfig, updateMapConfig] = useState({
     center: defaultCenter,
     textInput: '',
-    date: {}
+    date: {},
+    page: 1
   });
   const [results, updateResults] = useState();
 
@@ -25,33 +26,41 @@ export default function useAtlas ({
    * @description HAndle search functionality given layer settings and a date
    */
 
-  function search (
-    layer,
+  function search ({
+    layer = {},
     date = mapConfig.date,
-    textInput = mapConfig.textInput
-  ) {
-    const { center, geoJson } = layer;
+    textInput = mapConfig.textInput,
+    page = 1
+  }) {
+    let { center = mapConfig.center, geoJson } = layer;
+
+    if (typeof geoJson === 'undefined') {
+      geoJson = geoJsonFromLatLn(center);
+    }
 
     const mapUpdate = {
       ...mapConfig,
       center,
       geoJson,
       textInput,
-      date
+      date,
+      page
     };
-    updateMapConfig(mapUpdate);
 
     const params = {
-      geoJson: layer.geoJson,
+      geoJson,
       date,
-      textInput
+      textInput,
+      page
     };
 
     if (typeof resolveOnSearch === 'function') {
-      resolveOnSearch(params).then(data => {
-        updateResults(data);
+      resolveOnSearch(params).then((data = []) => {
+        updateResults([...(results || []), ...data]);
       });
     }
+
+    updateMapConfig(mapUpdate);
   }
 
   /**
@@ -71,14 +80,14 @@ export default function useAtlas ({
 
     addSearchMarker(center);
 
-    search(
-      {
+    search({
+      layer: {
         geoJson: geoJsonFromLatLn(center),
         center
       },
       date,
       textInput
-    );
+    });
   }
 
   function addSearchMarker (position) {
@@ -96,7 +105,20 @@ export default function useAtlas ({
    */
 
   function handleOnCreated (layer) {
-    search(layer);
+    search({
+      layer
+    });
+  }
+
+  /**
+   * handleLoadMoreResults
+   * @description Triggers a new search request with an additional argument for page
+   */
+
+  function handleLoadMoreResults () {
+    search({
+      page: mapConfig.page + 1
+    });
   }
 
   return {
@@ -105,7 +127,8 @@ export default function useAtlas ({
     handlers: {
       handleOnCreated,
       handleOnSearch,
-      resolveAtlasAutocomplete
+      resolveAtlasAutocomplete,
+      loadMoreResults: handleLoadMoreResults
     }
   };
 }

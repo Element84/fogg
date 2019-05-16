@@ -19,6 +19,7 @@ const Atlas = ({
   search = true
 }) => {
   const refMapDraw = createRef();
+
   const atlas = useAtlas({
     defaultCenter,
     resolveOnSearch,
@@ -26,11 +27,14 @@ const Atlas = ({
   });
 
   const { mapConfig, results, handlers } = atlas;
+
   const {
     handleOnCreated,
     handleOnSearch,
-    resolveAtlasAutocomplete
+    resolveAtlasAutocomplete,
+    loadMoreResults
   } = handlers;
+
   const { center } = mapConfig || {};
   const { lat = 0, lng = 0 } = center;
 
@@ -57,7 +61,11 @@ const Atlas = ({
         )}
 
         {SidebarComponents && (
-          <SidebarComponents results={results} mapPosition={position} />
+          <SidebarComponents
+            results={results}
+            loadMoreResults={loadMoreResults}
+            mapPosition={position}
+          />
         )}
       </div>
 
