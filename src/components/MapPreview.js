@@ -23,7 +23,9 @@ const MapPreview = ({ position }) => {
       </Map>
       <figcaption>
         <p>
-          <strong className="area-of-interest">Area of Interest</strong>
+          <strong className="map-preview-area-of-interest">
+            Area of Interest
+          </strong>
         </p>
         <p className="map-preview-marker-location">
           {lat} &deg;N, {lng} &deg;W
