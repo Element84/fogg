@@ -32,7 +32,7 @@ export default function useAtlas ({
     textInput = mapConfig.textInput,
     page = 1
   }) {
-    let { center = mapConfig.center, geoJson } = layer;
+    let { center = mapConfig.center, geoJson = mapConfig.geoJson } = layer;
 
     if (typeof geoJson === 'undefined') {
       geoJson = geoJsonFromLatLn(center);
