@@ -1,3 +1,6 @@
+### Version 0.1.38
+- [JAM-234] fixing load more results to reuse geojson instead of only center
+
 ### Version 0.1.37
 - [JAM-234] setting up atlas to have a load more results handler to pass down to the component
 
