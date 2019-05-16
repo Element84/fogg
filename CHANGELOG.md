@@ -1,3 +1,6 @@
+### Version 0.1.40
+- forcing a map refresh if the map ID changes
+
 ### Version 0.1.39
 - [JAM-234] only appending new results in search if the page is greater than 1
 
