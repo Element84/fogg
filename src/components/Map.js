@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, createRef } from 'react';
 import PropTypes from 'prop-types';
 import 'proj4';
 import 'proj4leaflet';
@@ -7,6 +7,7 @@ import L from 'leaflet';
 import { Map as BaseMap, TileLayer, ZoomControl } from 'react-leaflet';
 
 import MapService from '../models/map-service';
+import { usePrevious } from '../hooks';
 
 const Map = ({
   children,
@@ -27,6 +28,16 @@ const Map = ({
       </div>
     );
   }
+
+  const mapRef = createRef();
+  const mapId = usePrevious(map);
+
+  useEffect(() => {
+    if (typeof mapId === 'undefined') return;
+    if (mapId === map) return;
+    const { current } = mapRef;
+    current.forceUpdate();
+  }, []);
 
   // Set up a new map service given the name of the map
 
@@ -76,7 +87,7 @@ const Map = ({
 
   return (
     <div className={mapClassName}>
-      <BaseMap {...mapSettings}>
+      <BaseMap ref={mapRef} {...mapSettings}>
         {children}
         <TileLayer {...tileSettings} />
         <ZoomControl position="bottomright" />
