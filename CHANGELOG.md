@@ -1,3 +1,6 @@
+### Version 0.1.39
+- [JAM-234] only appending new results in search if the page is greater than 1
+
 ### Version 0.1.38
 - [JAM-234] fixing load more results to reuse geojson instead of only center
 
