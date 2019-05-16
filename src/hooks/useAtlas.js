@@ -56,7 +56,10 @@ export default function useAtlas ({
 
     if (typeof resolveOnSearch === 'function') {
       resolveOnSearch(params).then((data = []) => {
-        updateResults([...(results || []), ...data]);
+        // If the page is greater than 1, we should append the results
+        const baseResults = Array.isArray(results) && page > 1 ? results : [];
+        const updatedResults = [...baseResults, ...data];
+        updateResults(updatedResults);
       });
     }
 
