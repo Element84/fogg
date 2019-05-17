@@ -1,0 +1,66 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  Environment:
+    Type: String
+  Name:
+    Type: String
+    Description: Bucket name
+  Role:
+    Type: String
+    Description: Role that AWS lambda uses to publish to Elasticsearch
+  LambdaARN:
+    Type: String
+    Description: ARN of AWS lambda that moves access logs to Elasticsearch
+
+Resources:
+  WebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${Name}"
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+      LoggingConfiguration:
+        DestinationBucketName: !Sub ${Name}-logs
+      
+
+  WebsiteBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref WebsiteBucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: "PublicReadGetObject"
+            Effect: "Allow"
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Join [ "", [ !GetAtt WebsiteBucket.Arn, "/*" ] ]
+        
+  WebsiteLogsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${Name}-logs"
+      AccessControl: LogDeliveryWrite
+
+  WebsiteLogsBucketPolicy:
+    Type: AWS::IAM::Policy
+    Properties:        
+      PolicyName: WebsiteLogsBucketPolicy
+      Roles:
+        - !Sub "${Role}"
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: AllowLambdaToRead
+            Effect: Allow
+            Action: 
+              - s3:GetObject
+            Resource: !Join [ "", [ !GetAtt WebsiteLogsBucket.Arn, "/*" ]]
+          - Sid: AllowLambdaToAttach
+            Effect: Allow
+            Action:
+              - s3:GetBucketNotification
+              - s3:PutBucketNotification
+            Resource: !GetAtt WebsiteLogsBucket.Arn
