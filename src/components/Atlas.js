@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { useAtlas } from '../hooks';
 
 import Map from './Map';
-import MapMarker from './MapMarker';
 import MapDraw from './MapDraw';
 import Panel from './Panel';
 import SearchComplete from './SearchComplete';
@@ -14,103 +13,64 @@ const Atlas = ({
   defaultCenter = {},
   zoom = 4,
   SidebarComponents,
-  resolveOnSearch
+  resolveOnSearch,
+  services,
+  map = 'blue_marble',
+  search = true
 }) => {
-  const atlasSettings = {
-    defaultCenter
-  };
+  const refMapDraw = createRef();
 
-  const { mapPosition, updateMapPosition, resolveAtlasAutocomplete } = useAtlas(
-    atlasSettings
-  );
+  const atlas = useAtlas({
+    defaultCenter,
+    resolveOnSearch,
+    refMapDraw
+  });
 
-  const [results, updateResults] = useState();
+  const { mapConfig, results, handlers } = atlas;
+
+  const {
+    handleOnCreated,
+    handleOnSearch,
+    resolveAtlasAutocomplete,
+    loadMoreResults
+  } = handlers;
+
+  const { center } = mapConfig || {};
+  const { lat = 0, lng = 0 } = center;
+
   const hasResults = Array.isArray(results) && results.length > 0;
-
-  const { lat = 0, lng = 0 } = mapPosition;
+  const position = [lat, lng];
 
   const mapSettings = {
-    center: [lat, lng],
-    zoom
+    center: position,
+    zoom,
+    services,
+    map
   };
-
-  const markerSettings = {
-    position: [lat, lng],
-    draggable: true,
-    onDragEnd
-  };
-
-  /**
-   * onDragEnd
-   * @description Fires after a marker is dragged. Updates current position of map
-   */
-
-  function onDragEnd (event, ref) {
-    const { current } = ref;
-    const currentLatLng = current && current.leafletElement.getLatLng();
-
-    updateMapPosition(currentLatLng);
-  }
-
-  /**
-   * handleOnCreated
-   * @description Fires when a layer is created
-   */
-
-  function handleOnCreated ({ center }) {
-    updateMapPosition(center);
-  }
-
-  /**
-   * handleOnEdited
-   * @description Fires when a layer is edited
-   */
-
-  function handleOnEdited ({ center }) {
-    updateMapPosition(center);
-  }
-
-  /**
-   * handleOnSearch
-   * @description Fires when a search is performed via SearchComplete
-   */
-
-  function handleOnSearch ({ x, y } = {}, date) {
-    if (typeof x === 'undefined' || typeof y === 'undefined') {
-      return;
-    }
-
-    const coordinates = {
-      lat: y,
-      lng: x
-    };
-
-    updateMapPosition(coordinates);
-
-    resolveOnSearch(coordinates).then(data => {
-      updateResults(data);
-    });
-  }
 
   return (
     <div className="atlas" data-has-results={hasResults}>
       <div className="atlas-sidebar">
-        <Panel className="panel-clean">
-          <SearchComplete
-            onSearch={handleOnSearch}
-            resolveQueryComplete={resolveAtlasAutocomplete}
-          />
-        </Panel>
+        {search && (
+          <Panel className="panel-clean">
+            <SearchComplete
+              onSearch={handleOnSearch}
+              resolveQueryComplete={resolveAtlasAutocomplete}
+            />
+          </Panel>
+        )}
 
         {SidebarComponents && (
-          <SidebarComponents results={results} mapPosition={mapPosition} />
+          <SidebarComponents
+            results={results}
+            loadMoreResults={loadMoreResults}
+            mapPosition={position}
+          />
         )}
       </div>
 
       <Map className="atlas-map" {...mapSettings}>
-        <MapDraw onCreated={handleOnCreated} onEdited={handleOnEdited}>
-          <MapMarker {...markerSettings} />
-        </MapDraw>
+        <MapDraw ref={refMapDraw} onCreated={handleOnCreated} />
       </Map>
 
       <div className="atlas-extensions">{children}</div>
@@ -123,7 +83,11 @@ Atlas.propTypes = {
   defaultCenter: PropTypes.object,
   zoom: PropTypes.number,
   SidebarComponents: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  resolveOnSearch: PropTypes.func
+  resolveOnSearch: PropTypes.func,
+  map: PropTypes.string,
+  projections: PropTypes.array,
+  services: PropTypes.array,
+  search: PropTypes.bool
 };
 
 export default Atlas;

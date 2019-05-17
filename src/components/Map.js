@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, createRef } from 'react';
 import PropTypes from 'prop-types';
 import 'proj4';
 import 'proj4leaflet';
@@ -7,15 +7,19 @@ import L from 'leaflet';
 import { Map as BaseMap, TileLayer, ZoomControl } from 'react-leaflet';
 
 import MapService from '../models/map-service';
+import { usePrevious } from '../hooks';
 
 const Map = ({
   children,
   className,
   map = 'blue_marble',
   center = [0, 0],
-  zoom = 2
+  zoom = 2,
+  projections = [],
+  services = []
 }) => {
   const mapClassName = `map ${className || ''}`;
+  let projection;
 
   if (typeof window === 'undefined') {
     return (
@@ -25,38 +29,65 @@ const Map = ({
     );
   }
 
+  const mapRef = createRef();
+  const mapId = usePrevious(map);
+
+  useEffect(() => {
+    if (typeof mapId === 'undefined') return;
+    if (mapId === map) return;
+    const { current } = mapRef;
+    current.forceUpdate();
+  }, []);
+
   // Set up a new map service given the name of the map
 
-  const service = new MapService(map);
+  const service = new MapService(map, {
+    services,
+    projections
+  });
 
   // Construct a CRS projection given the service properties
 
-  const projection = new L.Proj.CRS(service.crs.code, service.crs.definition, {
-    origin: service.crs.origin,
-    resolutions: service.crs.resolutions,
-    bounds: L.Bounds(service.crs.bounds)
-  });
+  if (service.crs) {
+    projection = new L.Proj.CRS(service.crs.code, service.crs.definition, {
+      origin: service.crs.origin,
+      resolutions: service.crs.resolutions,
+      bounds: L.Bounds(service.crs.bounds)
+    });
+  }
 
   const mapSettings = {
     className: 'map-base',
-    crs: projection,
     center,
     zoom,
     zoomControl: false
   };
 
+  if (projection) {
+    mapSettings.crs = projection;
+  }
+
   const tileSettings = {
-    attribution: service.attribution,
-    url: service.tile,
     bounds: [[-89.9999, -179.9999], [89.9999, 179.9999]],
-    tileSize: service.tileSize,
     continuousWorld: true,
     noWrap: true
   };
 
+  if (service.attribution) {
+    tileSettings.attribution = service.attribution;
+  }
+
+  if (service.tileSize) {
+    tileSettings.tileSize = service.tileSize;
+  }
+
+  if (service.tile) {
+    tileSettings.url = service.tile;
+  }
+
   return (
     <div className={mapClassName}>
-      <BaseMap {...mapSettings}>
+      <BaseMap ref={mapRef} {...mapSettings}>
         {children}
         <TileLayer {...tileSettings} />
         <ZoomControl position="bottomright" />
@@ -70,7 +101,9 @@ Map.propTypes = {
   children: PropTypes.node,
   map: PropTypes.string,
   zoom: PropTypes.number,
-  className: PropTypes.string
+  className: PropTypes.string,
+  projections: PropTypes.array,
+  services: PropTypes.array
 };
 
 export default Map;

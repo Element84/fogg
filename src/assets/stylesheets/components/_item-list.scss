@@ -22,12 +22,9 @@ $item-list-top-padding: .8em;
   }
 
   a {
-    display: block;
-    overflow: hidden;
-    white-space: nowrap;
+    display: flex;
     color: inherit;
     text-decoration: none;
-    text-overflow: ellipsis;
     padding: $item-list-top-padding 2.4em $item-list-top-padding 1em;
   }
 
@@ -35,6 +32,39 @@ $item-list-top-padding: .8em;
 
 .item-list-item {
   position: relative;
+}
+
+.item-list-item-thumb {
+
+  display: block;
+  width: 4em;
+  height: 4em;
+  margin-right: .5em;
+
+  img {
+    display: block;
+    width: 100%;
+  }
+
+}
+
+.item-list-item-content {
+  flex-grow: 1;
+}
+
+.item-list-item-label,
+.item-list-item-sublabel {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-decoration: none;
+  text-overflow: ellipsis;
+}
+
+.item-list-item-sublabel {
+  color: $color-gray;
+  font-size: .8em;
+  margin-top: .4em;
 }
 
 .item-list-item-action {

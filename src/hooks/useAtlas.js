@@ -1,15 +1,138 @@
 import { useState } from 'react';
 import uuidv1 from 'uuid/v1';
 
-import { geocodePlacename } from '../lib/leaflet';
+import {
+  geocodePlacename,
+  geoJsonFromLatLn,
+  clearLeafletElementLayers,
+  addLeafletMarkerLayer
+} from '../lib/leaflet';
 
-export default function useAtlas ({ defaultCenter = {} }) {
-  const [mapPosition, updateMapPosition] = useState(defaultCenter);
+export default function useAtlas ({
+  defaultCenter = {},
+  resolveOnSearch,
+  refMapDraw
+}) {
+  const [mapConfig, updateMapConfig] = useState({
+    center: defaultCenter,
+    textInput: '',
+    date: {},
+    page: 1
+  });
+  const [results, updateResults] = useState();
+
+  /**
+   * search
+   * @description HAndle search functionality given layer settings and a date
+   */
+
+  function search ({
+    layer = {},
+    date = mapConfig.date,
+    textInput = mapConfig.textInput,
+    page = 1
+  }) {
+    let { center = mapConfig.center, geoJson = mapConfig.geoJson } = layer;
+
+    if (typeof geoJson === 'undefined') {
+      geoJson = geoJsonFromLatLn(center);
+    }
+
+    const mapUpdate = {
+      ...mapConfig,
+      center,
+      geoJson,
+      textInput,
+      date,
+      page
+    };
+
+    const params = {
+      geoJson,
+      date,
+      textInput,
+      page
+    };
+
+    if (typeof resolveOnSearch === 'function') {
+      resolveOnSearch(params).then((data = []) => {
+        // If the page is greater than 1, we should append the results
+        const baseResults = Array.isArray(results) && page > 1 ? results : [];
+        const updatedResults = [...baseResults, ...data];
+        updateResults(updatedResults);
+      });
+    }
+
+    updateMapConfig(mapUpdate);
+  }
+
+  /**
+   * handleOnSearch
+   * @description Fires when a search is performed via SearchComplete
+   */
+
+  function handleOnSearch ({ x, y } = {}, date, textInput) {
+    if (typeof x === 'undefined' || typeof y === 'undefined') {
+      return;
+    }
+
+    const center = {
+      lng: x,
+      lat: y
+    };
+
+    addSearchMarker(center);
+
+    search({
+      layer: {
+        geoJson: geoJsonFromLatLn(center),
+        center
+      },
+      date,
+      textInput
+    });
+  }
+
+  function addSearchMarker (position) {
+    const { current } = refMapDraw;
+    const { leafletElement } = current || {};
+    if (leafletElement) {
+      clearLeafletElementLayers(leafletElement);
+      addLeafletMarkerLayer(position, leafletElement);
+    }
+  }
+
+  /**
+   * handleOnCreated
+   * @description Fires when a layer is created
+   */
+
+  function handleOnCreated (layer) {
+    search({
+      layer
+    });
+  }
+
+  /**
+   * handleLoadMoreResults
+   * @description Triggers a new search request with an additional argument for page
+   */
+
+  function handleLoadMoreResults () {
+    search({
+      page: mapConfig.page + 1
+    });
+  }
 
   return {
-    mapPosition,
-    updateMapPosition,
-    resolveAtlasAutocomplete
+    mapConfig,
+    results,
+    handlers: {
+      handleOnCreated,
+      handleOnSearch,
+      resolveAtlasAutocomplete,
+      loadMoreResults: handleLoadMoreResults
+    }
   };
 }
 

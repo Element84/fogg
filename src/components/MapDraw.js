@@ -7,12 +7,11 @@ import { EditControl } from 'react-leaflet-draw';
 import { useMapMarkerIcon } from '../hooks';
 import {
   clearLeafletElementLayers,
-  getShapeType,
   reduceDrawEventToLayer
 } from '../lib/leaflet';
 
-const MapDraw = ({ children, onCreated, onEdited }) => {
-  const refFeatureGroup = createRef();
+const MapDraw = React.forwardRef(({ children, onCreated }, ref) => {
+  const refFeatureGroup = ref || createRef();
   const { icon } = useMapMarkerIcon();
 
   /**
@@ -35,37 +34,12 @@ const MapDraw = ({ children, onCreated, onEdited }) => {
     }
   }
 
-  /**
-   * handleOnEdited
-   * @description Fires when a layer is edited. Triggers a callback of available
-   */
-
-  function handleOnEdited (event = {}) {
-    const { layers } = event;
-    const eventLayers = layers && layers.getLayers();
-    let currentLayer;
-    let layer;
-
-    if (Array.isArray(eventLayers) && eventLayers.length > 0) {
-      currentLayer = eventLayers[0];
-      layer = reduceDrawEventToLayer({
-        layer: currentLayer,
-        layerType: getShapeType(currentLayer)
-      });
-    }
-
-    if (typeof onEdited === 'function') {
-      onEdited(layer);
-    }
-  }
-
   return (
     <FeatureGroup ref={refFeatureGroup}>
       {children}
       <EditControl
         position="bottomright"
         onCreated={handleOnCreated}
-        onEdited={handleOnEdited}
         draw={{
           circle: false,
           circlemarker: false,
@@ -74,15 +48,18 @@ const MapDraw = ({ children, onCreated, onEdited }) => {
             icon
           }
         }}
+        edit={{
+          edit: false,
+          remove: false
+        }}
       />
     </FeatureGroup>
   );
-};
+});
 
 MapDraw.propTypes = {
   children: PropTypes.node,
-  onCreated: PropTypes.func,
-  onEdited: PropTypes.func
+  onCreated: PropTypes.func
 };
 
 export default MapDraw;

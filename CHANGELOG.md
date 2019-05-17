@@ -1,3 +1,48 @@
+### Version 0.1.40
+- forcing a map refresh if the map ID changes
+
+### Version 0.1.39
+- [JAM-234] only appending new results in search if the page is greater than 1
+
+### Version 0.1.38
+- [JAM-234] fixing load more results to reuse geojson instead of only center
+
+### Version 0.1.37
+- [JAM-234] setting up atlas to have a load more results handler to pass down to the component
+
+### Version 0.1.36
+
+### Version 0.1.35
+- adding ability to disable search
+
+### Version 0.1.34
+- fixing test
+
+### Version 0.1.33
+- adding story for no table columns
+
+### Version 0.1.32
+- only rendering table header if available
+
+### Version 0.1.31
+- patching in text input for search queries
+
+### Version 0.1.30
+- [JAM-321] Update orders list to match schema
+- [JAM-321] Update OrderList storybook
+- [JAM-321] Update custom header
+
+### Version 0.1.29
+
+### Version 0.1.28
+
+### Version 0.1.27
+
+### Version 0.1.26
+- [JAM-238] refactoring map queries on atlas to support passing back different search handler options
+- [JAM-238] adding real result data to example, adding support for sublabels
+- [JAM-238] fixing geojson handling for search
+
 ### Version 0.1.25
 - updating all component tests to point to root
 - adding a ui export and updating all component tests to point to it
