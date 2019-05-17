@@ -1,3 +1,6 @@
+### Version 0.1.41
+- [JAM-278] adding tests for mapPreview
+
 ### Version 0.1.40
 - forcing a map refresh if the map ID changes
 
