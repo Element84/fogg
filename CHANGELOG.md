@@ -1,3 +1,6 @@
+### Version 0.1.42
+- Resolve FD-108 "Feature/ access logs"
+
 ### Version 0.1.41
 - [JAM-278] adding tests for mapPreview
 
