@@ -25,9 +25,11 @@ const Table = ({ className, columns, rows }) => {
   return (
     <div className={`table ${className || ''}`}>
       <table>
-        <thead>
-          <TableRow className="table-header" cells={columns} />
-        </thead>
+        {columns && (
+          <thead>
+            <TableRow className="table-header" cells={columns} />
+          </thead>
+        )}
 
         <tbody>
           {rows.map((row, rowIndex) => {
@@ -66,7 +68,7 @@ function tableConfigurationIsValid (columns, rows) {
 
 function fixTableConfiguration (columns, rows) {
   const cellMaxCount = Math.max(...rows.map(row => row.length));
-  const columnsCount = columns.length;
+  const columnsCount = (columns && columns.length) || 0;
   const differenceCellsColumns = cellMaxCount - columnsCount;
 
   if (differenceCellsColumns > 0) {

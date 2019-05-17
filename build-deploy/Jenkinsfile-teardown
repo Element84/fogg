@@ -24,16 +24,16 @@ pipeline {
   }
 }
 
-void performDelete(environment) {
-  env.target_environment = environment.toLowerCase()
+void performDelete(branch) {
+  env.target_branch = branch.toLowerCase()
   withAWS(credentials:'deploy-dev-dashboard', region:'us-west-2') {
       script {
         try {
             sh '''
-                  cd build-deploy && sh ./teardown-bucket.sh ${target_environment}
+                  cd build-deploy && sh ./teardown-branch.sh ${target_branch}
                '''
         } catch (Exception ex) {
-            sh 'echo "Could not find bucket for ${environment}"'
+            sh 'echo "Could not find bucket for ${branch}"'
         }
       }
   }

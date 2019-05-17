@@ -6,9 +6,10 @@ const mapServices = [
     format: 'jpeg',
     time: '',
     resolution: '500m',
-    tileSize: 512,
     attribution: '&copy; NASA Blue Marble, image service by OpenGeo',
-    crs: 'epsg4326'
+    crs: 'epsg4326',
+    tileSize: 512,
+    tileEndpoint: `https://gibs-{s}.earthdata.nasa.gov/wmts/{projection}/best/{product}/default/{time}/{projectionResolution}/{z}/{y}/{x}.{format}`
   }
 ];
 

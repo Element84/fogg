@@ -1,3 +1,43 @@
+### Version 0.1.42
+- Resolve FD-108 "Feature/ access logs"
+
+### Version 0.1.41
+- [JAM-278] adding tests for mapPreview
+
+### Version 0.1.40
+- forcing a map refresh if the map ID changes
+
+### Version 0.1.39
+- [JAM-234] only appending new results in search if the page is greater than 1
+
+### Version 0.1.38
+- [JAM-234] fixing load more results to reuse geojson instead of only center
+
+### Version 0.1.37
+- [JAM-234] setting up atlas to have a load more results handler to pass down to the component
+
+### Version 0.1.36
+
+### Version 0.1.35
+- adding ability to disable search
+
+### Version 0.1.34
+- fixing test
+
+### Version 0.1.33
+- adding story for no table columns
+
+### Version 0.1.32
+- only rendering table header if available
+
+### Version 0.1.31
+- patching in text input for search queries
+
+### Version 0.1.30
+- [JAM-321] Update orders list to match schema
+- [JAM-321] Update OrderList storybook
+- [JAM-321] Update custom header
+
 ### Version 0.1.29
 
 ### Version 0.1.28

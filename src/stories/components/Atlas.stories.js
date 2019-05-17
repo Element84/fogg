@@ -5,58 +5,19 @@ import { storiesOf } from '@storybook/react';
 import Atlas from '../../components/Atlas';
 import ItemList from '../../components/ItemList';
 import Panel from '../../components/Panel';
+import Button from '../../components/Button';
 
 import Request from '../../models/request';
 
 const stories = storiesOf('Components|Atlas', module);
 
-const ALEXANDRIA = {
-  lat: 38.8048,
-  lng: -77.0469
-};
-
-const SidebarPanels = ({ results }) => {
-  const hasResults = Array.isArray(results) && results.length > 0;
-
-  return (
-    <>
-      {!hasResults && (
-        <>
-          <Panel header="Explore">
-            <p>Explore stuff</p>
-          </Panel>
-          <Panel header="Past Searches">
-            <ItemList
-              items={[
-                {
-                  label: 'Alexandria, VA',
-                  to: '#'
-                },
-                {
-                  label: 'Montes Claros, MG',
-                  to: '#'
-                }
-              ]}
-            />
-          </Panel>
-        </>
-      )}
-
-      {hasResults && (
-        <Panel header="Results">
-          <ItemList items={results} />
-        </Panel>
-      )}
-    </>
-  );
-};
-
-SidebarPanels.propTypes = {
-  results: PropTypes.array
+const DEFAULT_CENTER = {
+  lat: 0,
+  lng: 0
 };
 
 stories.add('Default', () => {
-  function handleResolveOnSearch ({ geoJson }) {
+  function handleResolveOnSearch ({ geoJson, page }) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve([
@@ -73,20 +34,48 @@ stories.add('Default', () => {
     });
   }
 
+  function testPatchTextQuery (args) {
+    const { textInput } = args;
+    console.log('testPatchTextQuery', textInput);
+    return handleResolveOnSearch(args);
+  }
+
   return (
     <>
       <Atlas
-        defaultCenter={ALEXANDRIA}
-        zoom={3}
-        resolveOnSearch={handleResolveOnSearch}
+        defaultCenter={DEFAULT_CENTER}
+        zoom={2}
+        resolveOnSearch={testPatchTextQuery}
         SidebarComponents={SidebarPanels}
       />
     </>
   );
 });
 
+stories.add('Open Street Map - No Search', () => {
+  const services = [
+    {
+      name: 'open_street_map',
+      format: 'png',
+      attribution: '&copy; OpenStreetMap contributors',
+      tileEndpoint: `https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`
+    }
+  ];
+  return (
+    <>
+      <Atlas
+        defaultCenter={DEFAULT_CENTER}
+        zoom={2}
+        services={services}
+        map="open_street_map"
+        search={false}
+      />
+    </>
+  );
+});
+
 stories.add('Earth Search', () => {
-  async function handleResolveOnSearch ({ geoJson = {} } = {}) {
+  async function handleResolveOnSearch ({ geoJson = {}, page } = {}) {
     const { features = [] } = geoJson;
     const { geometry } = features[0] || {};
     let response;
@@ -101,7 +90,9 @@ stories.add('Earth Search', () => {
     }
 
     request.setData({
-      intersects: geometry
+      intersects: geometry,
+      limit: 5,
+      page
     });
 
     request.setOptions({
@@ -138,11 +129,61 @@ stories.add('Earth Search', () => {
   return (
     <>
       <Atlas
-        defaultCenter={ALEXANDRIA}
-        zoom={3}
+        defaultCenter={DEFAULT_CENTER}
+        zoom={2}
         resolveOnSearch={handleResolveOnSearch}
         SidebarComponents={SidebarPanels}
       />
     </>
   );
 });
+
+const SidebarPanels = ({ results, loadMoreResults }) => {
+  const hasResults = Array.isArray(results) && results.length > 0;
+
+  function handleLoadMore (e) {
+    if (typeof loadMoreResults === 'function') {
+      loadMoreResults(e);
+    }
+  }
+
+  return (
+    <>
+      {!hasResults && (
+        <>
+          <Panel header="Explore">
+            <p>Explore stuff</p>
+          </Panel>
+          <Panel header="Past Searches">
+            <ItemList
+              items={[
+                {
+                  label: 'Alexandria, VA',
+                  to: '#'
+                },
+                {
+                  label: 'Montes Claros, MG',
+                  to: '#'
+                }
+              ]}
+            />
+          </Panel>
+        </>
+      )}
+
+      {hasResults && (
+        <Panel header="Results">
+          <ItemList items={results} />
+          <p>
+            <Button onClick={handleLoadMore}>Load More</Button>
+          </p>
+        </Panel>
+      )}
+    </>
+  );
+};
+
+SidebarPanels.propTypes = {
+  results: PropTypes.array,
+  loadMoreResults: PropTypes.func
+};

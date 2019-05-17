@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { useAtlas } from '../hooks';
 
 import Map from './Map';
-import MapMarker from './MapMarker';
 import MapDraw from './MapDraw';
 import Panel from './Panel';
 import SearchComplete from './SearchComplete';
@@ -14,21 +13,29 @@ const Atlas = ({
   defaultCenter = {},
   zoom = 4,
   SidebarComponents,
-  resolveOnSearch
+  resolveOnSearch,
+  services,
+  map = 'blue_marble',
+  search = true
 }) => {
+  const refMapDraw = createRef();
+
   const atlas = useAtlas({
     defaultCenter,
-    resolveOnSearch
+    resolveOnSearch,
+    refMapDraw
   });
 
-  const { map, results, handlers } = atlas;
+  const { mapConfig, results, handlers } = atlas;
+
   const {
     handleOnCreated,
-    handleOnEdited,
     handleOnSearch,
-    resolveAtlasAutocomplete
+    resolveAtlasAutocomplete,
+    loadMoreResults
   } = handlers;
-  const { center } = map || {};
+
+  const { center } = mapConfig || {};
   const { lat = 0, lng = 0 } = center;
 
   const hasResults = Array.isArray(results) && results.length > 0;
@@ -36,33 +43,34 @@ const Atlas = ({
 
   const mapSettings = {
     center: position,
-    zoom
-  };
-
-  const markerSettings = {
-    position,
-    draggable: false
+    zoom,
+    services,
+    map
   };
 
   return (
     <div className="atlas" data-has-results={hasResults}>
       <div className="atlas-sidebar">
-        <Panel className="panel-clean">
-          <SearchComplete
-            onSearch={handleOnSearch}
-            resolveQueryComplete={resolveAtlasAutocomplete}
-          />
-        </Panel>
+        {search && (
+          <Panel className="panel-clean">
+            <SearchComplete
+              onSearch={handleOnSearch}
+              resolveQueryComplete={resolveAtlasAutocomplete}
+            />
+          </Panel>
+        )}
 
         {SidebarComponents && (
-          <SidebarComponents results={results} mapPosition={position} />
+          <SidebarComponents
+            results={results}
+            loadMoreResults={loadMoreResults}
+            mapPosition={position}
+          />
         )}
       </div>
 
       <Map className="atlas-map" {...mapSettings}>
-        <MapDraw onCreated={handleOnCreated} onEdited={handleOnEdited}>
-          <MapMarker {...markerSettings} />
-        </MapDraw>
+        <MapDraw ref={refMapDraw} onCreated={handleOnCreated} />
       </Map>
 
       <div className="atlas-extensions">{children}</div>
@@ -75,7 +83,11 @@ Atlas.propTypes = {
   defaultCenter: PropTypes.object,
   zoom: PropTypes.number,
   SidebarComponents: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  resolveOnSearch: PropTypes.func
+  resolveOnSearch: PropTypes.func,
+  map: PropTypes.string,
+  projections: PropTypes.array,
+  services: PropTypes.array,
+  search: PropTypes.bool
 };
 
 export default Atlas;

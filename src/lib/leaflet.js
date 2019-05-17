@@ -38,6 +38,17 @@ export function clearLeafletElementLayers (leafletElement, excludeIds = []) {
 }
 
 /**
+ * addLeafletMarker
+ * @description Given a LeafletElement, clear all layers
+ */
+
+export function addLeafletMarkerLayer ({ lat, lng }, map) {
+  return L.marker([lat, lng], {
+    icon: buildMapMarkerIcon()
+  }).addTo(map);
+}
+
+/**
  * getShapeType
  * @description Given a Leaflet Layer, produce the shape type
  * @see https://stackoverflow.com/a/25082568/844780
@@ -183,6 +194,16 @@ export function geoJsonFromLatLn ({ lat = 0, lng = 0 }) {
 }
 
 /**
+ * geoJsonLayerFromLatLn
+ * @description Given a lat and long, produce a GeoJSON Leaflet Layer
+ */
+
+export function geoJsonLayerFromLatLn (position) {
+  const geoJson = geoJsonFromLatLn(position);
+  return L.geoJSON(geoJson);
+}
+
+/**
  * geocodePlacename
  * @description Promise that performs a geocode request on the given placename
  */
@@ -200,4 +221,28 @@ export function geocodePlacename (placename) {
       request.abort();
     });
   });
+}
+
+/**
+ * buildMapMarkerIcon
+ * @description Creates a new custom Leaflet map marker icoon
+ */
+
+export function buildMapMarkerIcon () {
+  let icon;
+  // Leaflet uses window to bea ble to set up an icon, so we need to
+  // make sure it's available otherwise don't return anything of value
+  if (!icon && typeof window !== 'undefined') {
+    icon = new L.Icon({
+      iconUrl: require('../assets/images/map-marker.svg'),
+      iconAnchor: [5, 55],
+      popupAnchor: [10, -44],
+      iconSize: [32], // SVG auto scales, ignore 2nd height value
+      shadowUrl: require('../assets/images/map-marker-shadow.svg'),
+      shadowSize: [20], // SVG auto scales, ignore 2nd height value
+      shadowAnchor: [0, 18],
+      className: 'map-marker'
+    });
+  }
+  return icon;
 }

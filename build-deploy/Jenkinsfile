@@ -152,6 +152,7 @@ void deployUAT() {
 void performDeploy(environment, credentials_env = 'dev', createBucket = false) {
   env.target_environment = environment.toLowerCase()
   env.target_bucket = "fogg-${target_environment}"
+  env.credentials_env = credentials_env
   env.s3_bucket = "http://${target_bucket}.s3-website-us-west-2.amazonaws.com"
 
   withAWS(credentials: "deploy-${credentials_env}-dashboard", region:'us-west-2') {
@@ -159,7 +160,7 @@ void performDeploy(environment, credentials_env = 'dev', createBucket = false) {
     if(createBucket) {
       sh '''
           cd build-deploy && \
-          sh ./create-bucket.sh "${target_environment}" "${target_bucket}"
+          sh ./create-bucket.sh "${target_environment}" "${target_bucket}" "${credentials_env}"
           aws lambda invoke --function-name pipeline-service-live-initializeNewEnvironment --region us-west-2 --log-type Tail --payload '{"key":"'${JIRA_TICKET}'", "url":"'${s3_bucket}'"}' /tmp/outfile-${JIRA_TICKET}.txt && cat "/tmp/outfile-${JIRA_TICKET}.txt" && echo "${JIRA_TICKET}\n"
          '''
     }

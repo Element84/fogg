@@ -1,11 +1,23 @@
 import { useState } from 'react';
 import uuidv1 from 'uuid/v1';
 
-import { geocodePlacename, geoJsonFromLatLn } from '../lib/leaflet';
+import {
+  geocodePlacename,
+  geoJsonFromLatLn,
+  clearLeafletElementLayers,
+  addLeafletMarkerLayer
+} from '../lib/leaflet';
 
-export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
-  const [map, updateMap] = useState({
-    center: defaultCenter
+export default function useAtlas ({
+  defaultCenter = {},
+  resolveOnSearch,
+  refMapDraw
+}) {
+  const [mapConfig, updateMapConfig] = useState({
+    center: defaultCenter,
+    textInput: '',
+    date: {},
+    page: 1
   });
   const [results, updateResults] = useState();
 
@@ -14,23 +26,44 @@ export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
    * @description HAndle search functionality given layer settings and a date
    */
 
-  function search (layer, date) {
-    const { center, geoJson } = layer;
+  function search ({
+    layer = {},
+    date = mapConfig.date,
+    textInput = mapConfig.textInput,
+    page = 1
+  }) {
+    let { center = mapConfig.center, geoJson = mapConfig.geoJson } = layer;
 
-    updateMap({
-      ...map,
+    if (typeof geoJson === 'undefined') {
+      geoJson = geoJsonFromLatLn(center);
+    }
+
+    const mapUpdate = {
+      ...mapConfig,
       center,
-      geoJson
-    });
-
-    const params = {
-      geoJson: layer.geoJson,
-      date
+      geoJson,
+      textInput,
+      date,
+      page
     };
 
-    resolveOnSearch(params).then(data => {
-      updateResults(data);
-    });
+    const params = {
+      geoJson,
+      date,
+      textInput,
+      page
+    };
+
+    if (typeof resolveOnSearch === 'function') {
+      resolveOnSearch(params).then((data = []) => {
+        // If the page is greater than 1, we should append the results
+        const baseResults = Array.isArray(results) && page > 1 ? results : [];
+        const updatedResults = [...baseResults, ...data];
+        updateResults(updatedResults);
+      });
+    }
+
+    updateMapConfig(mapUpdate);
   }
 
   /**
@@ -38,7 +71,7 @@ export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
    * @description Fires when a search is performed via SearchComplete
    */
 
-  function handleOnSearch ({ x, y } = {}, date) {
+  function handleOnSearch ({ x, y } = {}, date, textInput) {
     if (typeof x === 'undefined' || typeof y === 'undefined') {
       return;
     }
@@ -48,13 +81,25 @@ export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
       lat: y
     };
 
-    search(
-      {
+    addSearchMarker(center);
+
+    search({
+      layer: {
         geoJson: geoJsonFromLatLn(center),
         center
       },
-      date
-    );
+      date,
+      textInput
+    });
+  }
+
+  function addSearchMarker (position) {
+    const { current } = refMapDraw;
+    const { leafletElement } = current || {};
+    if (leafletElement) {
+      clearLeafletElementLayers(leafletElement);
+      addLeafletMarkerLayer(position, leafletElement);
+    }
   }
 
   /**
@@ -63,26 +108,30 @@ export default function useAtlas ({ defaultCenter = {}, resolveOnSearch }) {
    */
 
   function handleOnCreated (layer) {
-    search(layer);
+    search({
+      layer
+    });
   }
 
   /**
-   * handleOnEdited
-   * @description Fires when a layer is edited
+   * handleLoadMoreResults
+   * @description Triggers a new search request with an additional argument for page
    */
 
-  function handleOnEdited (layer) {
-    search(layer);
+  function handleLoadMoreResults () {
+    search({
+      page: mapConfig.page + 1
+    });
   }
 
   return {
-    map,
+    mapConfig,
     results,
     handlers: {
       handleOnCreated,
-      handleOnEdited,
       handleOnSearch,
-      resolveAtlasAutocomplete
+      resolveAtlasAutocomplete,
+      loadMoreResults: handleLoadMoreResults
     }
   };
 }

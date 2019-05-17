@@ -18,7 +18,7 @@
   left: 0;
   z-index: 1;
   width: 25em;
-  height: 100vh;
+  max-height: 100vh;
   padding: 1em;
 
   .atlas[data-has-results="true"] & {
