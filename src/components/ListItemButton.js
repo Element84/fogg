@@ -3,20 +3,15 @@ import PropTypes from 'prop-types';
 
 import Button from './Button';
 
-const ListItemButton = ({
-  listType = null,
-  id = null,
-  children = 'View Details'
-} = {}) => {
+const ListItemButton = ({ id = null, children = 'View Details' } = {}) => {
   return (
     <>
-      <Button to={`${listType}s/${id}`}>{children}</Button>
+      <Button to={`${id}`}>{children}</Button>
     </>
   );
 };
 
 ListItemButton.propTypes = {
-  listType: PropTypes.string,
   id: PropTypes.string
 };
 

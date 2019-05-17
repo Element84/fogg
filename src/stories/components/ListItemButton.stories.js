@@ -9,7 +9,7 @@ stories.add('Default', () => {
   return (
     <>
       <p>
-        <ListItemButton listType={'item'} id={1} />
+        <ListItemButton id={1} />
       </p>
     </>
   );
@@ -19,9 +19,7 @@ stories.add('Custom Button Text', () => {
   return (
     <>
       <p>
-        <ListItemButton listType={'item'} id={1}>
-          Custom Button Text
-        </ListItemButton>
+        <ListItemButton id={2}>Custom Button Text</ListItemButton>
       </p>
     </>
   );
