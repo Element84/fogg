@@ -9,19 +9,21 @@ import { formatDate } from '../lib/datetime';
 const DEFAULT_HEADERS = ['Name', 'Window Open', 'Window Close', 'Status'];
 
 const TaskList = ({ headers = DEFAULT_HEADERS, tasks }) => {
-  const rows = tasks.map(
-    ({ name, windowOpen, windowClose, status, id }, index) => {
-      return [
-        name,
-        formatDate(windowOpen),
-        formatDate(windowClose),
-        status,
-        <ListItemButton key={`Task-Button-${index}`} listType={'task'} id={id}>
-          View Task Details
-        </ListItemButton>
-      ];
-    }
-  );
+  const rows = tasks.map((task, index) => {
+    return [
+      task.properties.name,
+      formatDate(task.properties.windowOpen),
+      formatDate(task.properties.windowClose),
+      task.properties.status,
+      <ListItemButton
+        key={`Task-Button-${index}`}
+        listType={'task'}
+        id={task.id.toString()}
+      >
+        View Task Details
+      </ListItemButton>
+    ];
+  });
   return <Table columns={headers} rows={rows} />;
 };
 
