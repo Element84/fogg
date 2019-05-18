@@ -15,7 +15,11 @@ const TaskList = ({ headers = DEFAULT_HEADERS, tasks }) => {
       formatDate(task.properties.windowOpen),
       formatDate(task.properties.windowClose),
       task.properties.status,
-      <ListItemButton key={`Task-Button-${index}`} id={task.id.toString()}>
+      <ListItemButton
+        key={`Task-Button-${index}`}
+        itemType="tasks"
+        id={task.id.toString()}
+      >
         View Task Details
       </ListItemButton>
     ];
