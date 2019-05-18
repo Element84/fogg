@@ -10,7 +10,7 @@ const ListItemButton = ({
 } = {}) => {
   return (
     <>
-      <Button to={`${location.host}/${itemType}/${id}`}>{children}</Button>
+      <Button to={`/${itemType}/${id}`}>{children}</Button>
     </>
   );
 };
