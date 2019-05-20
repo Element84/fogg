@@ -1,3 +1,5 @@
+### Version 0.1.44
+
 ### Version 0.1.43
 - [JAM-315] Restructured TaskList to expect a dataset with a properties attribute
 - [JAM-315] Removed listType from URL path
