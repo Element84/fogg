@@ -16,7 +16,8 @@ const Atlas = ({
   resolveOnSearch,
   services,
   map = 'blue_marble',
-  search = true
+  search = true,
+  placeholder = 'Search'
 }) => {
   const refMapDraw = createRef();
 
@@ -56,6 +57,7 @@ const Atlas = ({
             <SearchComplete
               onSearch={handleOnSearch}
               resolveQueryComplete={resolveAtlasAutocomplete}
+              placeholder={placeholder}
             />
           </Panel>
         )}
@@ -87,7 +89,8 @@ Atlas.propTypes = {
   map: PropTypes.string,
   projections: PropTypes.array,
   services: PropTypes.array,
-  search: PropTypes.bool
+  search: PropTypes.bool,
+  placeholder: PropTypes.string
 };
 
 export default Atlas;

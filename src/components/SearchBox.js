@@ -7,7 +7,7 @@ import FormInput from './FormInput';
 import Button from './Button';
 import DatetimeRange from './DatetimeRange';
 
-const SearchBox = ({ onInput, onSearch }) => {
+const SearchBox = ({ onInput, onSearch, placeholder = 'Search' }) => {
   const [query, setQuery] = useState('');
 
   const [date, setDate] = useState({
@@ -99,7 +99,7 @@ const SearchBox = ({ onInput, onSearch }) => {
         <FormInput
           id="search-box-input"
           className="search-box-input"
-          placeholder="Search"
+          placeholder={placeholder}
           onInput={handleSearchInput}
         />
       </Form>
@@ -127,7 +127,8 @@ const SearchBox = ({ onInput, onSearch }) => {
 
 SearchBox.propTypes = {
   onInput: PropTypes.func,
-  onSearch: PropTypes.func
+  onSearch: PropTypes.func,
+  placeholder: PropTypes.string
 };
 
 export default SearchBox;

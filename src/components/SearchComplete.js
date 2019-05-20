@@ -7,7 +7,11 @@ import SearchBox from './SearchBox';
 const MAX_RESULTS = 5;
 const QUERY_COMPLETE_DEBOUNCE = 300;
 
-const SearchComplete = ({ onSearch, resolveQueryComplete }) => {
+const SearchComplete = ({
+  onSearch,
+  resolveQueryComplete,
+  placeholder = 'Search'
+}) => {
   const [isOpen, updateOpenState] = useState(false);
   const [results, updateResults] = useState([]);
   const [date, updateDate] = useState({});
@@ -106,7 +110,11 @@ const SearchComplete = ({ onSearch, resolveQueryComplete }) => {
       className="search-complete"
       data-is-search-complete-open={isOpen && results.length > 0}
     >
-      <SearchBox onSearch={handleSearchboxSearch} onInput={handleOnInput} />
+      <SearchBox
+        onSearch={handleSearchboxSearch}
+        onInput={handleOnInput}
+        placeholder={placeholder}
+      />
 
       <div className="search-complete-results">
         <ul>
@@ -139,7 +147,8 @@ const SearchComplete = ({ onSearch, resolveQueryComplete }) => {
 
 SearchComplete.propTypes = {
   onSearch: PropTypes.func,
-  resolveQueryComplete: PropTypes.func
+  resolveQueryComplete: PropTypes.func,
+  placeholder: PropTypes.string
 };
 
 export default SearchComplete;

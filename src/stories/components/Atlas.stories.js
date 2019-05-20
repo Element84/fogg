@@ -133,6 +133,7 @@ stories.add('Earth Search', () => {
         zoom={2}
         resolveOnSearch={handleResolveOnSearch}
         SidebarComponents={SidebarPanels}
+        placeholder="Look stuffs on Earth Data"
       />
     </>
   );
