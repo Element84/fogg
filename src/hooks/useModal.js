@@ -1,5 +1,4 @@
 import { useReducer } from 'react';
-import { ModalContext } from '../context';
 import { closeModal, openModal } from '../actions';
 import ui from '../reducers/ui';
 
@@ -24,8 +23,7 @@ const useModal = initialState => {
     state,
     dispatch,
     handleModalOpen,
-    handleModalClose,
-    ModalContext
+    handleModalClose
   };
 };
 

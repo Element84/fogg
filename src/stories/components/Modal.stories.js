@@ -5,6 +5,7 @@ import Modal from '../../components/Modal';
 import Button from '../../components/Button';
 import Layout from '../../components/Layout';
 import { useModal } from '../../hooks';
+import ModalContextProvider from '../../components/ModalContextProvider';
 
 const stories = storiesOf('Components|Modal', module);
 
@@ -20,16 +21,12 @@ stories.add('Default', () => {
         }
       }
     };
-    const {
-      state,
-      dispatch,
-      handleModalOpen,
-      handleModalClose,
-      ModalContext
-    } = useModal(initialState);
+    const { state, dispatch, handleModalOpen, handleModalClose } = useModal(
+      initialState
+    );
     return (
       <Layout>
-        <ModalContext.Provider value={dispatch}>
+        <ModalContextProvider value={dispatch}>
           <p>
             <Button onClick={handleModalOpen} data-modal="premium">
               This will trigger the premium modal
@@ -66,7 +63,7 @@ stories.add('Default', () => {
           >
             <h1>This is another modal!</h1>
           </Modal>
-        </ModalContext.Provider>
+        </ModalContextProvider>
       </Layout>
     );
   };
