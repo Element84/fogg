@@ -1,3 +1,10 @@
+### Version 0.1.43
+- [JAM-315] Restructured TaskList to expect a dataset with a properties attribute
+- [JAM-315] Removed listType from URL path
+- [JAM-315] Added itemType back
+- [JAM-315] Changed absolute to relative paths
+- [JAM-315] Updated tests
+
 ### Version 0.1.42
 - Resolve FD-108 "Feature/ access logs"
 
