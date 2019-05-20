@@ -1,6 +1,8 @@
-import { useReducer } from 'react';
+import React, { useReducer } from 'react';
+import PropTypes from 'prop-types';
 import { closeModal, openModal } from '../actions';
 import ui from '../reducers/ui';
+import { ModalContext } from '../context';
 
 const useModal = initialState => {
   const [state, dispatch] = useReducer(ui, initialState);
@@ -19,11 +21,24 @@ const useModal = initialState => {
     dispatch(closeModal(modal));
   };
 
+  const ModalContextProvider = ({ children }) => {
+    return (
+      <ModalContext.Provider value={dispatch}>{children}</ModalContext.Provider>
+    );
+  };
+
+  ModalContextProvider.propTypes = {
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node
+    ])
+  };
+
   return {
     state,
-    dispatch,
     handleModalOpen,
-    handleModalClose
+    handleModalClose,
+    ModalContextProvider
   };
 };
 
