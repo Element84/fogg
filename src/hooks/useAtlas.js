@@ -20,6 +20,7 @@ export default function useAtlas ({
     page: 1
   });
   const [results, updateResults] = useState();
+  const [moreResultsAvailable, updateMoreResultsAvailable] = useState();
 
   /**
    * search
@@ -55,11 +56,12 @@ export default function useAtlas ({
     };
 
     if (typeof resolveOnSearch === 'function') {
-      resolveOnSearch(params).then((data = []) => {
+      resolveOnSearch(params).then(({ features = [], hasMoreResults } = {}) => {
         // If the page is greater than 1, we should append the results
         const baseResults = Array.isArray(results) && page > 1 ? results : [];
-        const updatedResults = [...baseResults, ...data];
+        const updatedResults = [...baseResults, ...features];
         updateResults(updatedResults);
+        updateMoreResultsAvailable(!!hasMoreResults);
       });
     }
 
@@ -131,7 +133,7 @@ export default function useAtlas ({
       handleOnCreated,
       handleOnSearch,
       resolveAtlasAutocomplete,
-      loadMoreResults: handleLoadMoreResults
+      loadMoreResults: moreResultsAvailable ? handleLoadMoreResults : undefined
     }
   };
 }
