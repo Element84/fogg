@@ -13,6 +13,10 @@ const Modal = ({
   handleCloseModal,
   appElement
 }) => {
+  const handleRequestClose = e => {
+    handleCloseModal(e, name);
+  };
+
   ReactModal.setAppElement(appElement);
   let modalProperties = {
     isOpen: isOpen,
@@ -20,7 +24,7 @@ const Modal = ({
     shouldCloseOnOverlayClick: true,
     shouldCloseOnEsc: true,
     portalClassName: 'modal ReactModalPortal',
-    onRequestClose: handleCloseModal
+    onRequestClose: handleRequestClose
   };
   return (
     <ReactModal {...modalProperties}>
