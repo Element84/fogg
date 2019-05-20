@@ -12,7 +12,8 @@ const Button = ({
   className = null,
   eventCategory = null,
   eventAction = null,
-  eventLabel = null
+  eventLabel = null,
+  ...props
 } = {}) => {
   let buttonElement = null;
 
@@ -34,10 +35,14 @@ const Button = ({
   }
 
   if (!to || disabled) {
-    buttonElement = <button {...attributes}>{children}</button>;
+    buttonElement = (
+      <button {...attributes} {...props}>
+        {children}
+      </button>
+    );
   } else {
     buttonElement = (
-      <WonderLink to={to} {...attributes}>
+      <WonderLink to={to} {...attributes} {...props}>
         {children}
       </WonderLink>
     );
