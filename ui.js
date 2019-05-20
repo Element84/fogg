@@ -14,6 +14,7 @@ export { default as Layout } from './src/components/Layout';
 export { default as Map } from './src/components/Map';
 export { default as MapDraw } from './src/components/MapDraw';
 export { default as MapMarker } from './src/components/MapMarker';
+export { default as Modal } from './src/components/Modal';
 export { default as ModInput } from './src/components/ModInput';
 export { default as MapPreview } from './src/components/MapPreview';
 export { default as NavBar } from './src/components/NavBar';
