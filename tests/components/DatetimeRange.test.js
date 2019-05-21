@@ -39,7 +39,7 @@ describe('DatetimeRange', () => {
 
       firstday.simulate('click');
 
-      expect(typeof startDate).toEqual('string');
+      expect(typeof startDate).toEqual('number');
     });
 
     it('should trigger onChange event with updated end date', () => {
@@ -58,7 +58,7 @@ describe('DatetimeRange', () => {
 
       firstday.simulate('click');
 
-      expect(typeof endDate).toEqual('string');
+      expect(typeof endDate).toEqual('number');
     });
   });
 });
