@@ -13,6 +13,7 @@ const Button = ({
   eventCategory = null,
   eventAction = null,
   eventLabel = null,
+  type,
   ...props
 } = {}) => {
   let buttonElement = null;
@@ -32,6 +33,19 @@ const Button = ({
   if (disabled) {
     className += ' button-disabled';
     attributes.disabled = true;
+  }
+
+  // Allow one or more instances of a "type" attribute
+  // The type really just creates a new button class that
+  // we can then style within the buttons SCSS
+
+  if (type) {
+    if (typeof type === 'string') {
+      type = [type];
+    }
+    type.forEach(t => {
+      className += ` button-${t}`;
+    });
   }
 
   if (!to || disabled) {

@@ -1,14 +1,19 @@
+$button-color: $color-blue;
+
 .button {
 
   display: inline-block;
-  background: $color-blue linear-gradient(lighten($color-blue, 3), $color-blue);
+  background: $button-color linear-gradient(lighten($button-color, 3), $button-color);
   border-radius: $border-radius-small;
   box-shadow: $component-shadow-basic;
 
   a,
   button {
 
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
     width: 100%;
     color: white;
     background: transparent;
@@ -31,13 +36,66 @@
 
 }
 
+.button-circle {
+
+  border-radius: 3.2em;
+
+  button,
+  a {
+    display: block;
+    width: 3.2em;
+    height: 3.2em;
+    line-height: 3.2em;
+    text-align: center;
+    padding: 0;
+
+  }
+
+}
+
+.button-text {
+
+  background: none;
+  box-shadow: none;
+
+  a,
+  span,
+  button {
+    color: $button-color;
+    text-transform: none;
+    text-decoration: underline;
+  }
+
+}
+
+.button-icon-after {
+
+  svg {
+    margin-left: .6em;
+  }
+
+}
+
+.button-icon-before {
+
+  svg {
+    margin-right: .6em;
+  }
+
+}
+
 .button-disabled {
 
   &,
   &:hover,
   &:active {
-    background: $color-gray2;
-    box-shadow: $component-shadow-basic;
+
+    box-shadow: none;
+
+    &:not(.button-text) {
+      background: $color-gray2;
+    }
+
   }
 
   a,
@@ -45,20 +103,13 @@
     pointer-events: none;
   }
 
-}
+  &.button-text {
 
-.button-circle {
+    a,
+    button {
+      color: $color-gray2;
+    }
 
-  border-radius: 3.2em;
-
-  button {
-    display: block;
-    width: 3.2em;
-    height: 3.2em;
-    line-height: 3.2em;
-    text-align: center;
-    padding: 0;
-    
   }
 
 }
