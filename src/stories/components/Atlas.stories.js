@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
 import Atlas from '../../components/Atlas';
 import ItemList from '../../components/ItemList';
@@ -36,7 +37,7 @@ stories.add('Default', () => {
 
   function testPatchTextQuery (args) {
     const { textInput } = args;
-    console.log('testPatchTextQuery', textInput);
+    action('test-testPatchTextQuery')(textInput);
     return handleResolveOnSearch(args);
   }
 
@@ -80,6 +81,7 @@ stories.add('Earth Search', () => {
     const { geometry } = features[0] || {};
     let response;
     let responseFeatures;
+    let responseMeta;
 
     const request = new Request(
       'https://earth-search.aws.element84.com/stac/search'
@@ -109,9 +111,10 @@ stories.add('Earth Search', () => {
     }
 
     responseFeatures = response && response.data && response.data.features;
+    responseMeta = response && response.data && response.data.meta;
 
-    return Array.isArray(responseFeatures)
-      ? responseFeatures.map((feature = {}) => {
+    if (Array.isArray(responseFeatures)) {
+      responseFeatures = responseFeatures.map((feature = {}) => {
         const { properties, id } = feature;
         const { collection } = properties;
         return {
@@ -122,8 +125,13 @@ stories.add('Earth Search', () => {
           ],
           to: '#'
         };
-      })
-      : [];
+      });
+    }
+
+    return {
+      features: responseFeatures || [],
+      hasMoreResults: responseHasMoreResults(responseMeta)
+    };
   }
 
   return (
@@ -141,9 +149,10 @@ stories.add('Earth Search', () => {
 
 const SidebarPanels = ({ results, loadMoreResults }) => {
   const hasResults = Array.isArray(results) && results.length > 0;
+  const moreResultsAvailable = typeof loadMoreResults === 'function';
 
   function handleLoadMore (e) {
-    if (typeof loadMoreResults === 'function') {
+    if (moreResultsAvailable) {
       loadMoreResults(e);
     }
   }
@@ -175,9 +184,11 @@ const SidebarPanels = ({ results, loadMoreResults }) => {
       {hasResults && (
         <Panel header="Results">
           <ItemList items={results} />
-          <p>
-            <Button onClick={handleLoadMore}>Load More</Button>
-          </p>
+          {moreResultsAvailable && (
+            <p>
+              <Button onClick={handleLoadMore}>Load More</Button>
+            </p>
+          )}
         </Panel>
       )}
     </>
@@ -188,3 +199,8 @@ SidebarPanels.propTypes = {
   results: PropTypes.array,
   loadMoreResults: PropTypes.func
 };
+
+function responseHasMoreResults ({ page, limit, found } = {}) {
+  if (page * limit < found) return true;
+  return false;
+}

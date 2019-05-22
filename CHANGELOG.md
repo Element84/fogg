@@ -1,3 +1,12 @@
+### Version 0.1.47
+- oops fixing datetime test
+
+### Version 0.1.46
+- fixing datetimerange to pass number for time
+
+### Version 0.1.45
+- adding default value for tasks on tasklist
+
 ### Version 0.1.44
 
 ### Version 0.1.43
