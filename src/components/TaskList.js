@@ -8,7 +8,7 @@ import { formatDate } from '../lib/datetime';
 
 const DEFAULT_HEADERS = ['Name', 'Window Open', 'Window Close', 'Status'];
 
-const TaskList = ({ headers = DEFAULT_HEADERS, tasks }) => {
+const TaskList = ({ headers = DEFAULT_HEADERS, tasks = [] }) => {
   const rows = tasks.map((task, index) => {
     return [
       task.properties.name,

@@ -32,8 +32,9 @@ const DatetimeRange = ({ onChange }) => {
    */
 
   function handleStartChange (moment) {
+    const date = moment.format('x');
     handleUpdateDate({
-      start: moment.format('x')
+      start: parseInt(date)
     });
   }
 
@@ -43,8 +44,9 @@ const DatetimeRange = ({ onChange }) => {
    */
 
   function handleEndChange (moment) {
+    const date = moment.format('x');
     handleUpdateDate({
-      end: moment.format('x')
+      end: parseInt(date)
     });
   }
 
