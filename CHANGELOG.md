@@ -1,3 +1,6 @@
+### Version 0.1.50
+- package upgrades
+
 ### Version 0.1.49
 - adding actions to the panel header ui
 
