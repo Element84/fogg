@@ -16,6 +16,9 @@ $panel-top-padding: .8em;
 
 .panel-header {
 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: white;
   background-color: $color-gray6;
   padding: .6em $panel-side-padding;
@@ -32,6 +35,43 @@ $panel-top-padding: .8em;
       margin-bottom: 0;
     }
 
+  }
+
+}
+
+.panel-header-actions {
+
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+
+    margin: 0 .3em;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+  }
+
+  .button {
+    display: block;
+    background: none;
+    box-shadow: none;
+  }
+
+  button {
+    padding: 0;
   }
 
 }

@@ -1,10 +1,31 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { FaBeer } from 'react-icons/fa';
 
 import Panel from '../../components/Panel';
 import ItemList from '../../components/ItemList';
+import Button from '../../components/Button';
 
 const stories = storiesOf('Components|Panel', module);
+
+const Actions = () => {
+  return (
+    <ul>
+      <li>
+        <Button>
+          <span className="visually-hidden">Beer</span>
+          <FaBeer />
+        </Button>
+      </li>
+      <li>
+        <Button>
+          <span className="visually-hidden">Beer</span>
+          <FaBeer />
+        </Button>
+      </li>
+    </ul>
+  );
+};
 
 stories.add('Default', () => {
   return (
@@ -39,6 +60,10 @@ stories.add('Default', () => {
       </Panel>
 
       <Panel className="panel-clean" header="Content Clean">
+        <p>Should have no padding</p>
+      </Panel>
+
+      <Panel className="panel-clean" header="Actions" actions={<Actions />}>
         <p>Should have no padding</p>
       </Panel>
     </>

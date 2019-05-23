@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Panel = ({ children, header, className }) => {
+const Panel = ({ children, header, actions, className }) => {
   return (
     <div className={`panel ${className || ''}`}>
       {header && (
         <div className="panel-header">
-          <p>{header}</p>
+          <div className="panel-header-title">
+            <p>{header}</p>
+          </div>
+          {actions && <div className="panel-header-actions">{actions}</div>}
         </div>
       )}
 
@@ -18,6 +21,7 @@ const Panel = ({ children, header, className }) => {
 Panel.propTypes = {
   children: PropTypes.node,
   header: PropTypes.string,
+  actions: PropTypes.node,
   className: PropTypes.string
 };
 
