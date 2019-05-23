@@ -142,6 +142,20 @@ stories.add('Earth Search', () => {
         resolveOnSearch={handleResolveOnSearch}
         SidebarComponents={SidebarPanels}
         placeholder="Look stuffs on Earth Data"
+        availableFilters={[
+          {
+            label: 'Is Sentinel',
+            id: 'properties/collection',
+            defaultValue: false
+          },
+          {
+            label: 'Sentinel Grid Square',
+            id: 'properties/sentinel:grid_square',
+            type: 'list',
+            list: ['MD', 'VT', 'ND', 'FV', 'PD', 'WT', 'VU', 'WU', 'NC', 'PC'],
+            defaultValue: false
+          }
+        ]}
       />
     </>
   );

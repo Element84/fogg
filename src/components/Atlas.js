@@ -1,12 +1,15 @@
 import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
+import { FaPlus, FaCheck, FaTimes, FaEdit } from 'react-icons/fa';
 
-import { useAtlas } from '../hooks';
+import { useAtlas, useFilters } from '../hooks';
 
 import Map from './Map';
 import MapDraw from './MapDraw';
 import Panel from './Panel';
 import SearchComplete from './SearchComplete';
+import SearchFilters from './SearchFilters';
+import Button from './Button';
 
 const Atlas = ({
   children,
@@ -17,7 +20,8 @@ const Atlas = ({
   services,
   map = 'blue_marble',
   search = true,
-  placeholder = 'Search'
+  placeholder = 'Search',
+  availableFilters
 }) => {
   const refMapDraw = createRef();
 
@@ -36,11 +40,58 @@ const Atlas = ({
     loadMoreResults
   } = handlers;
 
+  const {
+    filters,
+    openFilters,
+    storeFilterChanges,
+    saveFilterChanges,
+    cancelFilterChanges
+  } = useFilters(availableFilters);
+
   const { center } = mapConfig || {};
   const { lat = 0, lng = 0 } = center;
 
   const hasResults = Array.isArray(results) && results.length > 0;
   const position = [lat, lng];
+
+  const FilterActions = () => {
+    return (
+      <ul>
+        {!filters.isOpen && filters.active.length === 0 && (
+          <li>
+            <Button onClick={openFilters}>
+              <span className="visually-hidden">Add Filter</span>
+              <FaPlus />
+            </Button>
+          </li>
+        )}
+        {!filters.isOpen && filters.active.length > 0 && (
+          <li>
+            <Button onClick={openFilters}>
+              <span className="visually-hidden">Edit Filters</span>
+              <FaEdit />
+            </Button>
+          </li>
+        )}
+        {filters.isOpen && (
+          <>
+            <li>
+              <Button onClick={saveFilterChanges}>
+                <span className="visually-hidden">Save Filter Changes</span>
+                <FaCheck />
+              </Button>
+            </li>
+            <li>
+              <Button onClick={cancelFilterChanges}>
+                <span className="visually-hidden">Cancel Filter Changes</span>
+                <FaTimes />
+              </Button>
+            </li>
+          </>
+        )}
+      </ul>
+    );
+  };
 
   const mapSettings = {
     center: position,
@@ -53,13 +104,19 @@ const Atlas = ({
     <div className="atlas" data-has-results={hasResults}>
       <div className="atlas-sidebar">
         {search && (
-          <Panel className="panel-clean">
-            <SearchComplete
-              onSearch={handleOnSearch}
-              resolveQueryComplete={resolveAtlasAutocomplete}
-              placeholder={placeholder}
-            />
-          </Panel>
+          <div className="atlas-sidebar-search">
+            <Panel className="panel-clean">
+              <SearchComplete
+                onSearch={handleOnSearch}
+                resolveQueryComplete={resolveAtlasAutocomplete}
+                placeholder={placeholder}
+              />
+            </Panel>
+
+            {hasResults && filters.available.length > 0 && (
+              <Panel header="Filters" actions={<FilterActions />} />
+            )}
+          </div>
         )}
 
         {SidebarComponents && (
@@ -70,6 +127,16 @@ const Atlas = ({
           />
         )}
       </div>
+
+      {hasResults && filters.isOpen && filters.available.length > 0 && (
+        <SearchFilters
+          className="atlas-search-filters"
+          filters={filters.available}
+          onCancelChanges={cancelFilterChanges}
+          onSaveChanges={saveFilterChanges}
+          onUpdateChanges={storeFilterChanges}
+        />
+      )}
 
       <Map className="atlas-map" {...mapSettings}>
         <MapDraw ref={refMapDraw} onCreated={handleOnCreated} />
@@ -90,7 +157,8 @@ Atlas.propTypes = {
   projections: PropTypes.array,
   services: PropTypes.array,
   search: PropTypes.bool,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  availableFilters: PropTypes.array
 };
 
 export default Atlas;
