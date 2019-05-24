@@ -24,8 +24,12 @@ const NavBar = ({ orientation, primary, secondary, activePage }) => {
 
   return (
     <div className={'nav-bar ' + orientationClass}>
-      <div className="nav-bar-primary">{primary.map(createButton)}</div>
-      <div className="nav-bar-secondary">{secondary.map(createButton)}</div>
+      <div className="nav-bar-section nav-bar-primary">
+        {primary.map(createButton)}
+      </div>
+      <div className="nav-bar-section nav-bar-secondary">
+        {secondary.map(createButton)}
+      </div>
     </div>
   );
 };

@@ -52,7 +52,13 @@ describe('Task List', () => {
     }
   ];
 
-  const defaultColumns = ['Name', 'Window Open', 'Window Close', 'Status', null];
+  const defaultColumns = [
+    'Name',
+    'Window Open',
+    'Window Close',
+    'Status',
+    null
+  ];
 
   const customColumns = ['Task', 'Planned Date', 'Current Status'];
 
