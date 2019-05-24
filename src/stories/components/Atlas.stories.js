@@ -76,7 +76,8 @@ stories.add('Open Street Map - No Search', () => {
 });
 
 stories.add('Earth Search', () => {
-  async function handleResolveOnSearch ({ geoJson = {}, page } = {}) {
+  async function handleResolveOnSearch ({ geoJson = {}, page, filters } = {}) {
+    console.log('filters', filters);
     const { features = [] } = geoJson;
     const { geometry } = features[0] || {};
     let response;
@@ -121,7 +122,8 @@ stories.add('Earth Search', () => {
           label: `${id}`,
           sublabels: [
             `Collection: ${collection}`,
-            `GeoJSON: ${JSON.stringify(geoJson)}`
+            `GeoJSON: ${JSON.stringify(geoJson)}`,
+            `Sentinel Grid Square: ${properties['sentinel:grid_square']}`
           ],
           to: '#'
         };
@@ -152,7 +154,20 @@ stories.add('Earth Search', () => {
             label: 'Sentinel Grid Square',
             id: 'properties/sentinel:grid_square',
             type: 'list',
-            list: ['MD', 'VT', 'ND', 'FV', 'PD', 'WT', 'VU', 'WU', 'NC', 'PC'],
+            list: [
+              'UH',
+              'UJ',
+              'MD',
+              'VT',
+              'ND',
+              'FV',
+              'PD',
+              'WT',
+              'VU',
+              'WU',
+              'NC',
+              'PC'
+            ],
             defaultValue: false
           }
         ]}

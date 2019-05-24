@@ -11,7 +11,8 @@ import {
 export default function useAtlas ({
   defaultCenter = {},
   resolveOnSearch,
-  refMapDraw
+  refMapDraw,
+  filters
 }) {
   const [mapConfig, updateMapConfig] = useState({
     center: defaultCenter,
@@ -52,7 +53,8 @@ export default function useAtlas ({
       geoJson,
       date,
       textInput,
-      page
+      page,
+      filters
     };
 
     if (typeof resolveOnSearch === 'function') {

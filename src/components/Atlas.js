@@ -9,7 +9,7 @@ import MapDraw from './MapDraw';
 import Panel from './Panel';
 import SearchComplete from './SearchComplete';
 import SearchFilters from './SearchFilters';
-import Button from './Button';
+import PanelActions from './PanelActions';
 
 const Atlas = ({
   children,
@@ -25,7 +25,16 @@ const Atlas = ({
 }) => {
   const refMapDraw = createRef();
 
+  const {
+    filters,
+    openFilters,
+    storeFilterChanges,
+    saveFilterChanges,
+    cancelFilterChanges
+  } = useFilters(availableFilters);
+
   const atlas = useAtlas({
+    filters,
     defaultCenter,
     resolveOnSearch,
     refMapDraw
@@ -40,58 +49,43 @@ const Atlas = ({
     loadMoreResults
   } = handlers;
 
-  const {
-    filters,
-    openFilters,
-    storeFilterChanges,
-    saveFilterChanges,
-    cancelFilterChanges
-  } = useFilters(availableFilters);
-
   const { center } = mapConfig || {};
   const { lat = 0, lng = 0 } = center;
 
   const hasResults = Array.isArray(results) && results.length > 0;
   const position = [lat, lng];
 
-  const FilterActions = () => {
-    return (
-      <ul>
-        {!filters.isOpen && filters.active.length === 0 && (
-          <li>
-            <Button onClick={openFilters}>
-              <span className="visually-hidden">Add Filter</span>
-              <FaPlus />
-            </Button>
-          </li>
-        )}
-        {!filters.isOpen && filters.active.length > 0 && (
-          <li>
-            <Button onClick={openFilters}>
-              <span className="visually-hidden">Edit Filters</span>
-              <FaEdit />
-            </Button>
-          </li>
-        )}
-        {filters.isOpen && (
-          <>
-            <li>
-              <Button onClick={saveFilterChanges}>
-                <span className="visually-hidden">Save Filter Changes</span>
-                <FaCheck />
-              </Button>
-            </li>
-            <li>
-              <Button onClick={cancelFilterChanges}>
-                <span className="visually-hidden">Cancel Filter Changes</span>
-                <FaTimes />
-              </Button>
-            </li>
-          </>
-        )}
-      </ul>
-    );
-  };
+  function handleSaveFilterChanges (e) {
+    saveFilterChanges(e);
+    handleOnSearch();
+  }
+
+  const filterActions = [
+    {
+      label: 'Add Filter',
+      icon: <FaPlus />,
+      onClick: openFilters,
+      isVisible: !filters.isOpen && filters.active.length === 0
+    },
+    {
+      label: 'Edit Filters',
+      icon: <FaEdit />,
+      onClick: openFilters,
+      isVisible: !filters.isOpen && filters.active.length > 0
+    },
+    {
+      label: 'Save Filter Changes',
+      icon: <FaCheck />,
+      onClick: handleSaveFilterChanges,
+      isVisible: filters.isOpen
+    },
+    {
+      label: 'Cancel Filter Changes',
+      icon: <FaTimes />,
+      onClick: cancelFilterChanges,
+      isVisible: filters.isOpen
+    }
+  ];
 
   const mapSettings = {
     center: position,
@@ -114,7 +108,10 @@ const Atlas = ({
             </Panel>
 
             {hasResults && filters.available.length > 0 && (
-              <Panel header="Filters" actions={<FilterActions />} />
+              <Panel
+                header="Filters"
+                actions={<PanelActions actions={filterActions} />}
+              />
             )}
           </div>
         )}
@@ -133,7 +130,7 @@ const Atlas = ({
           className="atlas-search-filters"
           filters={filters.available}
           onCancelChanges={cancelFilterChanges}
-          onSaveChanges={saveFilterChanges}
+          onSaveChanges={handleSaveFilterChanges}
           onUpdateChanges={storeFilterChanges}
         />
       )}
