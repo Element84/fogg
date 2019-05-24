@@ -1,17 +1,16 @@
 import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
-import { FaPlus, FaCheck, FaTimes, FaEdit } from 'react-icons/fa';
 
-import { useAtlas, useFilters } from '../hooks';
+import { useLens } from '../hooks';
 
 import Map from './Map';
 import MapDraw from './MapDraw';
 import Panel from './Panel';
 import SearchComplete from './SearchComplete';
 import SearchFilters from './SearchFilters';
-import PanelActions from './PanelActions';
+import SearchPanelFilters from './SearchPanelFilters';
 
-const Atlas = ({
+const Lens = ({
   children,
   defaultCenter = {},
   zoom = 4,
@@ -25,67 +24,35 @@ const Atlas = ({
 }) => {
   const refMapDraw = createRef();
 
-  const {
-    filters,
-    openFilters,
-    storeFilterChanges,
-    saveFilterChanges,
-    cancelFilterChanges
-  } = useFilters(availableFilters);
-
-  const atlas = useAtlas({
-    filters,
+  const lens = useLens({
+    availableFilters,
     defaultCenter,
     resolveOnSearch,
     refMapDraw
   });
 
-  const { mapConfig, results, handlers } = atlas;
+  const { mapConfig, results, filters, handlers: lensHandlers } = lens;
+  const { handlers: filtersHandlers } = filters;
 
   const {
     handleOnCreated,
     handleOnSearch,
-    resolveAtlasAutocomplete,
-    loadMoreResults
-  } = handlers;
+    resolveLensAutocomplete,
+    loadMoreResults,
+    handleUpdateSearchParams
+  } = lensHandlers;
+
+  const {
+    openFilters,
+    storeFilterChanges,
+    cancelFilterChanges
+  } = filtersHandlers;
 
   const { center } = mapConfig || {};
   const { lat = 0, lng = 0 } = center;
 
   const hasResults = Array.isArray(results) && results.length > 0;
   const position = [lat, lng];
-
-  function handleSaveFilterChanges (e) {
-    saveFilterChanges(e);
-    handleOnSearch();
-  }
-
-  const filterActions = [
-    {
-      label: 'Add Filter',
-      icon: <FaPlus />,
-      onClick: openFilters,
-      isVisible: !filters.isOpen && filters.active.length === 0
-    },
-    {
-      label: 'Edit Filters',
-      icon: <FaEdit />,
-      onClick: openFilters,
-      isVisible: !filters.isOpen && filters.active.length > 0
-    },
-    {
-      label: 'Save Filter Changes',
-      icon: <FaCheck />,
-      onClick: handleSaveFilterChanges,
-      isVisible: filters.isOpen
-    },
-    {
-      label: 'Cancel Filter Changes',
-      icon: <FaTimes />,
-      onClick: cancelFilterChanges,
-      isVisible: filters.isOpen
-    }
-  ];
 
   const mapSettings = {
     center: position,
@@ -95,22 +62,24 @@ const Atlas = ({
   };
 
   return (
-    <div className="atlas" data-has-results={hasResults}>
-      <div className="atlas-sidebar">
+    <div className="lens" data-has-results={hasResults}>
+      <div className="lens-sidebar">
         {search && (
-          <div className="atlas-sidebar-search">
+          <div className="lens-sidebar-search">
             <Panel className="panel-clean">
               <SearchComplete
                 onSearch={handleOnSearch}
-                resolveQueryComplete={resolveAtlasAutocomplete}
+                resolveQueryComplete={resolveLensAutocomplete}
                 placeholder={placeholder}
               />
             </Panel>
 
             {hasResults && filters.available.length > 0 && (
-              <Panel
-                header="Filters"
-                actions={<PanelActions actions={filterActions} />}
+              <SearchPanelFilters
+                filters={filters}
+                onOpenFilters={openFilters}
+                onSaveFiltersChanges={handleUpdateSearchParams}
+                onCancelFilterChanges={cancelFilterChanges}
               />
             )}
           </div>
@@ -127,24 +96,24 @@ const Atlas = ({
 
       {hasResults && filters.isOpen && filters.available.length > 0 && (
         <SearchFilters
-          className="atlas-search-filters"
+          className="lens-search-filters"
           filters={filters.available}
           onCancelChanges={cancelFilterChanges}
-          onSaveChanges={handleSaveFilterChanges}
+          onSaveChanges={handleUpdateSearchParams}
           onUpdateChanges={storeFilterChanges}
         />
       )}
 
-      <Map className="atlas-map" {...mapSettings}>
+      <Map className="lens-map" {...mapSettings}>
         <MapDraw ref={refMapDraw} onCreated={handleOnCreated} />
       </Map>
 
-      <div className="atlas-extensions">{children}</div>
+      <div className="lens-extensions">{children}</div>
     </div>
   );
 };
 
-Atlas.propTypes = {
+Lens.propTypes = {
   children: PropTypes.node,
   defaultCenter: PropTypes.object,
   zoom: PropTypes.number,
@@ -158,4 +127,4 @@ Atlas.propTypes = {
   availableFilters: PropTypes.array
 };
 
-export default Atlas;
+export default Lens;

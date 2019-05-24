@@ -1,0 +1,26 @@
+.search-panel-filters {
+
+  .table {
+
+    &,
+    table {
+      width: 100%;
+    }
+
+    p {
+      font-size: .9em;
+    }
+
+  }
+
+  .table-row-cell {
+
+    padding: .6em 1em;
+
+    &:first-child {
+      font-weight: bold;
+    }
+
+  }
+
+}

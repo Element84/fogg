@@ -56,7 +56,8 @@ export default Table;
  */
 
 function tableConfigurationIsValid (columns, rows) {
-  if (!Array.isArray(rows) || !Array.isArray(columns)) return false;
+  if (!Array.isArray(rows) && !Array.isArray(columns)) return false;
+  if (!Array.isArray(columns)) return true;
   const invalidRows = rows.filter(row => row.length !== columns.length);
   return invalidRows.length === 0;
 }
@@ -71,7 +72,7 @@ function fixTableConfiguration (columns, rows) {
   const columnsCount = (columns && columns.length) || 0;
   const differenceCellsColumns = cellMaxCount - columnsCount;
 
-  if (differenceCellsColumns > 0) {
+  if (columnsCount > 0 && differenceCellsColumns > 0) {
     columns = padArray(columns, differenceCellsColumns);
   }
 

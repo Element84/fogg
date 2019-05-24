@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import Atlas from '../../components/Atlas';
+import Lens from '../../components/Lens';
 import ItemList from '../../components/ItemList';
 import Panel from '../../components/Panel';
 import Button from '../../components/Button';
 
 import Request from '../../models/request';
 
-const stories = storiesOf('Components|Atlas', module);
+const stories = storiesOf('Components|Lens', module);
 
 const DEFAULT_CENTER = {
   lat: 0,
@@ -43,7 +43,7 @@ stories.add('Default', () => {
 
   return (
     <>
-      <Atlas
+      <Lens
         defaultCenter={DEFAULT_CENTER}
         zoom={2}
         resolveOnSearch={testPatchTextQuery}
@@ -64,7 +64,7 @@ stories.add('Open Street Map - No Search', () => {
   ];
   return (
     <>
-      <Atlas
+      <Lens
         defaultCenter={DEFAULT_CENTER}
         zoom={2}
         services={services}
@@ -77,9 +77,9 @@ stories.add('Open Street Map - No Search', () => {
 
 stories.add('Earth Search', () => {
   async function handleResolveOnSearch ({ geoJson = {}, page, filters } = {}) {
-    console.log('filters', filters);
     const { features = [] } = geoJson;
     const { geometry } = features[0] || {};
+    let data;
     let response;
     let responseFeatures;
     let responseMeta;
@@ -92,11 +92,24 @@ stories.add('Earth Search', () => {
       return [];
     }
 
-    request.setData({
+    data = {
       intersects: geometry,
       limit: 5,
       page
-    });
+    };
+
+    if (filters) {
+      data.query = filtersToQuery(filters);
+    }
+
+    function filtersToQuery (filters) {
+      console.log('filters', filters);
+      return {};
+    }
+
+    console.log('filters', filters);
+
+    request.setData(data);
 
     request.setOptions({
       headers: {
@@ -138,7 +151,7 @@ stories.add('Earth Search', () => {
 
   return (
     <>
-      <Atlas
+      <Lens
         defaultCenter={DEFAULT_CENTER}
         zoom={2}
         resolveOnSearch={handleResolveOnSearch}
@@ -146,8 +159,10 @@ stories.add('Earth Search', () => {
         placeholder="Look stuffs on Earth Data"
         availableFilters={[
           {
-            label: 'Is Sentinel',
+            label: 'Collection',
             id: 'properties/collection',
+            type: 'list',
+            list: ['sentinel'],
             defaultValue: false
           },
           {

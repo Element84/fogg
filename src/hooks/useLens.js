@@ -1,18 +1,20 @@
 import { useState } from 'react';
-import uuidv1 from 'uuid/v1';
 
 import {
-  geocodePlacename,
   geoJsonFromLatLn,
   clearLeafletElementLayers,
   addLeafletMarkerLayer
 } from '../lib/leaflet';
 
-export default function useAtlas ({
+import { resolveLensAutocomplete } from '../lib/lens';
+
+import { useFilters } from '.';
+
+export default function useLens ({
   defaultCenter = {},
   resolveOnSearch,
   refMapDraw,
-  filters
+  availableFilters
 }) {
   const [mapConfig, updateMapConfig] = useState({
     center: defaultCenter,
@@ -23,6 +25,14 @@ export default function useAtlas ({
   const [results, updateResults] = useState();
   const [moreResultsAvailable, updateMoreResultsAvailable] = useState();
 
+  const {
+    filters,
+    openFilters,
+    storeFilterChanges,
+    saveFilterChanges,
+    cancelFilterChanges
+  } = useFilters(availableFilters);
+
   /**
    * search
    * @description HAndle search functionality given layer settings and a date
@@ -32,8 +42,9 @@ export default function useAtlas ({
     layer = {},
     date = mapConfig.date,
     textInput = mapConfig.textInput,
-    page = 1
-  }) {
+    page = 1,
+    activeFilters = filters.active
+  } = {}) {
     let { center = mapConfig.center, geoJson = mapConfig.geoJson } = layer;
 
     if (typeof geoJson === 'undefined') {
@@ -54,7 +65,7 @@ export default function useAtlas ({
       date,
       textInput,
       page,
-      filters
+      filters: activeFilters
     };
 
     if (typeof resolveOnSearch === 'function') {
@@ -128,95 +139,37 @@ export default function useAtlas ({
     });
   }
 
+  /**
+   * handleUpdateSearchParams
+   */
+
+  function handleUpdateSearchParams () {
+    // Save and update any filter changes
+    const updatedFilters = saveFilterChanges();
+
+    // Trigger a new search
+    search({
+      activeFilters: updatedFilters.active
+    });
+  }
+
   return {
     mapConfig,
     results,
     handlers: {
       handleOnCreated,
       handleOnSearch,
-      resolveAtlasAutocomplete,
+      resolveLensAutocomplete,
+      handleUpdateSearchParams,
       loadMoreResults: moreResultsAvailable ? handleLoadMoreResults : undefined
+    },
+    filters: {
+      ...filters,
+      handlers: {
+        openFilters,
+        storeFilterChanges,
+        cancelFilterChanges
+      }
     }
-  };
-}
-
-/**
- * resolveAtlasAutocomplete
- * @description Async function used to fetch autocomplete results for SearchBox component
- */
-
-let queryCompleteGlobalNonce;
-let queryCompleteRequests = [];
-
-async function resolveAtlasAutocomplete (query) {
-  // Generate a unique ID and store it as a nonce
-
-  const id = uuidv1();
-  const localNonce = (queryCompleteGlobalNonce = id);
-
-  // If this instance of the local nonce doesn't match
-  // the global one, it means it's stale, so return
-
-  if (localNonce !== queryCompleteGlobalNonce) return;
-
-  let geocode = geocodePlacename(query);
-
-  // Push the current request into a globally stored
-  // variable to allow us to keep track of history
-
-  queryCompleteRequests.push({
-    id,
-    promise: geocode
-  });
-
-  // Run through all previous requests, cancel any thta
-  // didn't complete and remove them from the request array
-
-  queryCompleteRequests
-    .filter(request => request.id !== id && !request.promise.isCanceled)
-    .forEach((request, index) => {
-      request.promise.cancel();
-      queryCompleteRequests.splice(index, 1);
-    });
-
-  try {
-    geocode = await geocode;
-  } catch (e) {
-    // A cancelled request throws an error, so if it's
-    // cancelled, catch it and don't consider it one
-
-    if (geocode.isCanceled) return;
-
-    throw new Error(`Failed to geocode placename: ${e}`);
-  }
-
-  // Again, if this instance of the request doesn't match the
-  // global one, we want to cancel it and return, to avoid
-  // updating the application with stale data
-
-  if (localNonce !== queryCompleteGlobalNonce) {
-    if (typeof geocode.cancel === 'function') {
-      geocode.cancel('Canceling stale geocode placename request');
-    }
-    return;
-  }
-
-  // Finally grab the geocode candidates and return them as our data
-
-  const { candidates = [] } = geocode;
-
-  return candidates.map(mapGeocodeCandidates);
-}
-
-/**
- * mapGeocodeCandidates
- * @description Function that takes a given candidate and returns usable result object
- */
-
-function mapGeocodeCandidates ({ address, location } = {}) {
-  return {
-    label: address,
-    sublabel: `Location: ${location.x}, ${location.y}`,
-    value: location
   };
 }

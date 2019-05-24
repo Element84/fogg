@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FaCheck, FaTimes } from 'react-icons/fa';
 
 import Panel from './Panel';
 import InputButton from './InputButton';
@@ -76,10 +77,17 @@ const SearchFilters = ({
             }
           )}
         </ul>
-        <ul>
+        <ul className="search-filters-actions">
           <li>
-            <Button onClick={onSaveChanges}>Save</Button>
-            <Button onClick={onCancelChanges}>Cancel</Button>
+            <Button type={['text', 'icon-before']} onClick={onSaveChanges}>
+              <FaCheck /> Save
+            </Button>
+          </li>
+          <li>
+            <Button type={['text', 'icon-before']} onClick={onCancelChanges}>
+              <FaTimes />
+              Cancel
+            </Button>
           </li>
         </ul>
       </Panel>

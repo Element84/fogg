@@ -58,3 +58,41 @@
   }
 
 }
+
+.search-filters-actions {
+
+  display: flex;
+  list-style: none;
+  padding: 0;
+
+  li {
+
+    flex-grow: 1;
+
+    &:first-child {
+
+      button {
+        color: $color-gray9;
+      }
+
+    }
+
+    &:last-child {
+
+      button {
+        color: $color-gray4;
+      }
+
+    }
+
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  button {
+    text-decoration: none;
+  }
+
+}
