@@ -6,7 +6,7 @@ import Button from './Button';
 
 import { formatDate } from '../lib/datetime';
 
-const DEFAULT_HEADERS = ['Product', 'Order Date', 'Order Status'];
+const DEFAULT_HEADERS = ['Product', 'Order Date', 'Order Status', null];
 
 const OrdersList = ({ headers = DEFAULT_HEADERS, orders }) => {
   const rows = orders.map(

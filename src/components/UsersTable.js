@@ -4,7 +4,13 @@ import PropTypes from 'prop-types';
 import Table from './Table';
 import Button from './Button';
 
-const DEFAULT_HEADERS = ['Last Name', 'First Name', 'Organization', 'Role'];
+const DEFAULT_HEADERS = [
+  'Last Name',
+  'First Name',
+  'Organization',
+  'Role',
+  null
+];
 
 const UsersTable = ({ headers = DEFAULT_HEADERS, users }) => {
   const rows = users.map(
