@@ -6,7 +6,7 @@ import ListItemButton from './ListItemButton';
 
 import { formatDate } from '../lib/datetime';
 
-const DEFAULT_HEADERS = ['Name', 'Window Open', 'Window Close', 'Status'];
+const DEFAULT_HEADERS = ['Name', 'Window Open', 'Window Close', 'Status', null];
 
 const TaskList = ({ headers = DEFAULT_HEADERS, tasks = [] }) => {
   const rows = tasks.map((task, index) => {

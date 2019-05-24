@@ -1,3 +1,10 @@
+### Version 0.1.52
+- navbar tweaks
+
+### Version 0.1.51
+- fixing table headers on components
+- fixing table header tests
+
 ### Version 0.1.50
 - package upgrades
 
