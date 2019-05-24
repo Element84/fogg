@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Table from './Table';
-import Button from './Button';
+import ListItemButton from './ListItemButton';
 
 import { formatDate } from '../lib/datetime';
 
@@ -15,7 +15,14 @@ const OrdersList = ({ headers = DEFAULT_HEADERS, orders }) => {
         productIdentifier,
         formatDate(orderDate),
         orderStatus,
-        <Button key={`OrdersList-Button-${index}`} />
+        <ListItemButton
+          key={`Order-Button-${index}`}
+          itemType="order"
+          // id={order.id.toString()}
+        >
+          View Order Details
+        </ListItemButton>
+        // <Button key={`OrdersList-Button-${index}`} />
       ];
     }
   );
