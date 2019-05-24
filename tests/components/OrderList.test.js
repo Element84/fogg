@@ -25,7 +25,7 @@ describe('Orders List', () => {
     }
   ];
 
-  const defaultColumns = ['Product', 'Order Date', 'Order Status'];
+  const defaultColumns = ['Product', 'Order Date', 'Order Status', null];
 
   const customColumns = ['Order', 'Date Orders', 'Current Status'];
 
