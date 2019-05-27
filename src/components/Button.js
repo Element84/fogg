@@ -70,8 +70,14 @@ const Button = ({
 };
 
 Button.propTypes = {
-  children: PropTypes.node,
-  type: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
+  type: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.string
+  ]),
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   to: PropTypes.string,
   full: PropTypes.bool,

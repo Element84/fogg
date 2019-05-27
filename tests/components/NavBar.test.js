@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { FaSearch, FaDatabase, FaServer, FaHddO } from 'react-icons/fa';
+import { FaSearch, FaDatabase, FaServer, FaBeer } from 'react-icons/fa';
 
 import { NavBar, Button } from '../../ui';
 
@@ -8,13 +8,13 @@ describe('Nav Bar', () => {
   const orientation = 'vertical';
 
   const primary = [
-    { label: 'Top Link 1', to: '/top1', icon: { FaSearch } },
-    { label: 'Top Link 2', to: '/top2', icon: { FaDatabase } }
+    { label: 'Top Link 1', to: '/top1', icon: <FaSearch /> },
+    { label: 'Top Link 2', to: '/top2', icon: <FaDatabase /> }
   ];
 
   const secondary = [
-    { label: 'Bottom Link 1', to: '/bottom1', icon: { FaServer } },
-    { label: 'Bottom Link 2', to: '/bottom2', icon: { FaHddO } }
+    { label: 'Bottom Link 1', to: '/bottom1', icon: <FaServer /> },
+    { label: 'Bottom Link 2', to: '/bottom2', icon: <FaBeer /> }
   ];
 
   describe('Render', () => {
