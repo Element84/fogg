@@ -18,8 +18,8 @@ const OrdersList = ({ headers = DEFAULT_HEADERS, orders }) => {
         <ListItemButton
           key={`Order-Button-${index}`}
           itemType="orders"
-          // id={orders.OrderId.toString()}
-          id="0123456"
+          id={orders.orderId.toString()}
+          // id="0123456"
         >
           View Order Details
         </ListItemButton>
