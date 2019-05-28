@@ -1,3 +1,7 @@
+### Version 0.1.53
+- [JAM-239] ui tweaks and configuration tweaks for filters
+- [JAM-239] fixing proptypes and tests
+
 ### Version 0.1.52
 - navbar tweaks
 
