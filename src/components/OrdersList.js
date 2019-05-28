@@ -10,7 +10,7 @@ const DEFAULT_HEADERS = ['Product', 'Order Date', 'Order Status'];
 
 const OrdersList = ({ headers = DEFAULT_HEADERS, orders }) => {
   const rows = orders.map(
-    ({ productIdentifier, orderDate, orderStatus }, index) => {
+    ({ productIdentifier, orderDate, orderStatus, orderId }, index) => {
       return [
         productIdentifier,
         formatDate(orderDate),
@@ -18,7 +18,7 @@ const OrdersList = ({ headers = DEFAULT_HEADERS, orders }) => {
         <ListItemButton
           key={`Order-Button-${index}`}
           itemType="orders"
-          id={`orders.orderId`}
+          id={`${orderId}`}
           // id="0123456"
         >
           View Order Details
