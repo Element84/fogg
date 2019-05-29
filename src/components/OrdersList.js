@@ -19,11 +19,9 @@ const OrdersList = ({ headers = DEFAULT_HEADERS, orders }) => {
           key={`Order-Button-${index}`}
           itemType="orders"
           id={`${orderId}`}
-          // id="0123456"
         >
           View Order Details
         </ListItemButton>
-        // <Button key={`OrdersList-Button-${index}`} />
       ];
     }
   );
