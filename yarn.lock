@@ -4064,9 +4064,9 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30000929, can
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000971.tgz#d1000e4546486a6977756547352bc96a4cfd2b13"
   integrity sha512-TQFYFhRS0O5rdsmSbF1Wn+16latXYsQJat66f7S7lizXW1PVpWJeZw9wqqVLIjuxDRz7s7xRUj13QCfd8hKn6g==
 
-"caporal@git://github.com/fabiospampinato/Caporal.js.git#cf0f5eeefb2e04cc07798bf4a45d6bda5e2a2f63":
+"caporal@git://github.com/fabiospampinato/Caporal.js#cf0f5eeefb2e04cc07798bf4a45d6bda5e2a2f63":
   version "0.9.0"
-  resolved "git://github.com/fabiospampinato/Caporal.js.git#cf0f5eeefb2e04cc07798bf4a45d6bda5e2a2f63"
+  resolved "git://github.com/fabiospampinato/Caporal.js#cf0f5eeefb2e04cc07798bf4a45d6bda5e2a2f63"
   dependencies:
     bluebird "^3.4.7"
     chalk "^1.1.3"
