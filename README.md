@@ -1,5 +1,5 @@
 # Fogg
-A Gatsby theme that provides out of the box components and tooling for mapmakers.
+A Gatsby theme that provides out of the box components and tooling for mapmakers!
 
 ## About
 
