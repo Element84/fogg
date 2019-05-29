@@ -1,3 +1,6 @@
+### Version 0.1.54
+- making child toggle default name to id if not set
+
 ### Version 0.1.53
 - [JAM-239] ui tweaks and configuration tweaks for filters
 - [JAM-239] fixing proptypes and tests
