@@ -23,12 +23,7 @@ const intervalOptions = [
 
 stories.add('Default', () => {
   return (
-    <ChildToggle
-      label="Repeat"
-      className="repeater"
-      name="repeater"
-      id="repeater"
-    >
+    <ChildToggle label="Repeat" name="repeater" id="repeater">
       <FormRow className="repeater-row">
         <FormInput type="select" label="Interval" options={intervalOptions} />
       </FormRow>

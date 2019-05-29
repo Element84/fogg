@@ -12,15 +12,22 @@ import { useChildToggle } from '../hooks';
 const ChildToggle = ({ children, className = '', name, label, id }) => {
   const { checked, handleChange } = useChildToggle();
 
+  const inputProps = {
+    type: 'checkbox',
+    name,
+    label,
+    id
+  };
+
+  // If we didn't supply a name, default to the ID
+
+  if (!inputProps.name) {
+    inputProps.name = inputProps.id;
+  }
+
   return (
     <div className={`child-toggle ${className}`}>
-      <InputButton
-        type="checkbox"
-        name={name}
-        label={label}
-        id={id}
-        onChange={handleChange}
-      />
+      <InputButton {...inputProps} onChange={handleChange} />
       <div className="children">{checked && children}</div>
     </div>
   );
