@@ -47,7 +47,7 @@ const OrderStatus = ({ headers = DEFAULT_HEADERS, order = {} }) => {
   return (
     <div className="order-status">
       <section className="order-status-info">
-        <div className="order-status-order-id">{orderId}</div>
+        <div className="order-status-order-id">ID: {orderId}</div>
         <div className="order-status-product-identifier">
           {productIdentifier}
         </div>
