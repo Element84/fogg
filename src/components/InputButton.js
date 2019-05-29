@@ -26,18 +26,26 @@ const InputButton = ({
   required = false,
   disabled = false
 }) => {
+  const inputProps = {
+    id,
+    type,
+    value,
+    name,
+    onChange,
+    required,
+    isChecked,
+    disabled
+  };
+
+  // If we didn't supply a name, default to the ID
+
+  if (!inputProps.name) {
+    inputProps.name = inputProps.id;
+  }
+
   return (
     <div className={`${type}-button`}>
-      <InputButtonInput
-        id={id}
-        type={type}
-        value={value}
-        name={name}
-        onChange={onChange}
-        required={required}
-        isChecked={isChecked}
-        disabled={disabled}
-      />
+      <InputButtonInput {...inputProps} />
 
       <label htmlFor={id}>
         <div className={`${type}-button-checkbox`}>
