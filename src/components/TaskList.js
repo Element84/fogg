@@ -18,7 +18,7 @@ const TaskList = ({ headers = DEFAULT_HEADERS, tasks = [] }) => {
       <ListItemButton
         key={`Task-Button-${index}`}
         itemType="tasks"
-        id={`${task.id.toString()}`}
+        id={`${task.id}`}
       >
         View Task Details
       </ListItemButton>
