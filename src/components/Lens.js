@@ -48,7 +48,7 @@ const Lens = ({
     cancelFilterChanges
   } = filtersHandlers;
 
-  const { center } = mapConfig || {};
+  const { center, geoJson } = mapConfig || {};
   const { lat = 0, lng = 0 } = center;
 
   const hasResults = Array.isArray(results) && results.length > 0;
@@ -90,6 +90,7 @@ const Lens = ({
             results={results}
             loadMoreResults={loadMoreResults}
             mapPosition={position}
+            geoJson={geoJson}
           />
         )}
       </div>
