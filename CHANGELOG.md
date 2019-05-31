@@ -1,3 +1,6 @@
+### Version 0.1.59
+- storing previous path state in wonderlink state
+
 ### Version 0.1.58
 - updating form to update rules validations if it exists instead of nothign at all
 
