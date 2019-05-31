@@ -4,25 +4,25 @@
   background-color: $color-gray0;
   box-shadow: 0 1px 5px 0 rgba(0,0,0,.4);
   border: solid 4px $color-gray0;
-  
+
   .radio-button-checkbox,
   .checkbox-button-checkbox {
-  
+
     span {
       background-color: white;
       color: black;
       border: solid 2px $color-gray;
     }
-  
+
   }
-  
+
 }
-  
+
 .radio-button,
 .checkbox-button {
-  
+
   & > label {
-  
+
     display: flex;
     align-items: center;
     background-color: white;
@@ -31,33 +31,33 @@
     border-radius: $border-radius-medium;
     border: solid 4px white;
     cursor: pointer;
-  
+
     form[data-is-disabled="true"] & {
       cursor: default;
     }
-  
+
   }
-  
+
   input {
-  
+
     &:checked {
-  
+
       & + label {
         @extend %radio-button-checked;
       }
-  
+
     }
-  
+
   }
-  
+
 }
-  
+
 .radio-button-checkbox,
 .checkbox-button-checkbox {
-  
-  padding: 0 .4em;
+
+  padding: 0;
   margin-right: 1em;
-  
+
   span {
     display: block;
     width: 2em;
@@ -69,31 +69,31 @@
     border-radius: 100%;
     border: solid 2px $color-gray4;
   }
-  
+
   svg {
-  
+
     width: 1em;
     height: 1em;
     transform: scale(.4);
     transition: transform .1s ease-out;
-  
+
     :checked + label & {
       transform: scale(1);
     }
-  
+
   }
-  
+
 }
 
 .checkbox-button-checkbox span {
   border-radius: $border-radius-medium;
 }
-  
+
 .input-button-content {
   flex-grow: 1;
   text-align: left;
 }
-  
+
 .radio-button-title {
   display: block;
   color: $color-gray7;
@@ -101,7 +101,7 @@
   font-weight: $font-weight-bold;
   margin-bottom: .2em;
 }
-  
+
 .radio-button-headline {
   font-size: 1.8em;
   font-weight: $font-weight-bold;

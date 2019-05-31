@@ -34,6 +34,18 @@ describe('Validation', () => {
     }
   };
 
+  describe('updateRules', () => {
+    const validate = new Validation({});
+
+    it('should update rules on validation object', () => {
+      expect(validate.rules).toEqual({});
+
+      validate.updateRules(rules);
+
+      expect(validate.rules).toEqual(rules);
+    });
+  });
+
   describe('byField', () => {
     const validate = new Validation(rules);
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 
 import { routeIsInternal } from '../lib/util';
+import { useLocation } from '../hooks';
 
 const ARGS_WHITELIST = ['className'];
 
@@ -12,6 +13,7 @@ const ARGS_WHITELIST = ['className'];
 
 const WonderLink = (args = {}) => {
   const componentArgs = filterArgs(args);
+  const { pathname } = useLocation();
 
   if (typeof args.to !== 'string') return null;
 
@@ -19,6 +21,11 @@ const WonderLink = (args = {}) => {
   // router handle the paging
 
   if (routeIsInternal(args.to)) {
+    componentArgs.state = {
+      ...componentArgs.state,
+      prevPath: pathname
+    };
+
     return (
       <Link to={args.to} {...componentArgs}>
         {args.children}

@@ -2,11 +2,14 @@ import { parseNumber, getRegex } from '../lib/util';
 
 class Validation {
   constructor (rules = {}) {
-    this.rules = {};
-    for (let key in rules) {
-      if (!rules.hasOwnProperty(key)) continue;
-      this.rules[key] = rules[key];
-    }
+    this.rules = { ...rules };
+  }
+
+  updateRules (rules = {}) {
+    this.rules = {
+      ...this.rules,
+      ...rules
+    };
   }
 
   updateRulesByField (name, rules) {
