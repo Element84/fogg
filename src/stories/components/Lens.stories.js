@@ -102,12 +102,28 @@ stories.add('Earth Search', () => {
       data.query = filtersToQuery(filters);
     }
 
-    function filtersToQuery (filters) {
-      console.log('filters', filters);
-      return {};
-    }
+    function filtersToQuery (activeFilters) {
+      let filterQuery = {};
 
-    console.log('filters', filters);
+      activeFilters.forEach(activeFilter => {
+        let parent;
+        let { id, value } = activeFilter;
+
+        if (id.includes('/')) {
+          id = id.split('/');
+          parent = id[0];
+          id = id[1];
+        }
+
+        if (parent === 'properties') {
+          filterQuery[id] = {
+            eq: value
+          };
+        }
+      });
+
+      return filterQuery;
+    }
 
     request.setData(data);
 
@@ -181,7 +197,8 @@ stories.add('Earth Search', () => {
               'VU',
               'WU',
               'NC',
-              'PC'
+              'PC',
+              'GL'
             ],
             defaultValue: false
           }
@@ -191,9 +208,10 @@ stories.add('Earth Search', () => {
   );
 });
 
-const SidebarPanels = ({ results, loadMoreResults }) => {
+const SidebarPanels = ({ results, loadMoreResults, filters }) => {
   const hasResults = Array.isArray(results) && results.length > 0;
   const moreResultsAvailable = typeof loadMoreResults === 'function';
+  const { handlers: filtersHandlers } = filters;
 
   function handleLoadMore (e) {
     if (moreResultsAvailable) {
@@ -201,10 +219,26 @@ const SidebarPanels = ({ results, loadMoreResults }) => {
     }
   }
 
+  function handleClearFilters () {
+    if (typeof filtersHandlers.clearActiveFilters === 'function') {
+      filtersHandlers.clearActiveFilters();
+    }
+  }
+
   return (
     <>
       {!hasResults && (
         <>
+          {Array.isArray(results) && (
+            <Panel header="Explore">
+              <p>Sorry, no results were found.</p>
+              {filters.active.length > 0 && (
+                <p>
+                  <Button onClick={handleClearFilters}>Clear Filters</Button>
+                </p>
+              )}
+            </Panel>
+          )}
           <Panel header="Explore">
             <p>Explore stuff</p>
           </Panel>
@@ -241,7 +275,8 @@ const SidebarPanels = ({ results, loadMoreResults }) => {
 
 SidebarPanels.propTypes = {
   results: PropTypes.array,
-  loadMoreResults: PropTypes.func
+  loadMoreResults: PropTypes.func,
+  filters: PropTypes.object
 };
 
 function responseHasMoreResults ({ page, limit, found } = {}) {

@@ -87,6 +87,7 @@ const Lens = ({
 
         {SidebarComponents && (
           <SidebarComponents
+            filters={filters}
             results={results}
             loadMoreResults={loadMoreResults}
             mapPosition={position}

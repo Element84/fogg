@@ -67,6 +67,17 @@ export default function useFilters (availableFilters) {
     return updatedFilterState;
   }
 
+  function clearActiveFilters () {
+    const updatedFilterState = {
+      ...filters,
+      isOpen: false,
+      unsaved: [],
+      active: []
+    };
+    updateFilters(updatedFilterState);
+    return updatedFilterState;
+  }
+
   function buildAvailableFilters () {
     let filtersSet = concatFilters(
       filters.available.map(filter => ({ ...filter })),
@@ -89,7 +100,8 @@ export default function useFilters (availableFilters) {
     openFilters,
     storeFilterChanges,
     saveFilterChanges,
-    cancelFilterChanges
+    cancelFilterChanges,
+    clearActiveFilters
   };
 }
 

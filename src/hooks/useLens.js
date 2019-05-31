@@ -30,7 +30,8 @@ export default function useLens ({
     openFilters,
     storeFilterChanges,
     saveFilterChanges,
-    cancelFilterChanges
+    cancelFilterChanges,
+    clearActiveFilters
   } = useFilters(availableFilters);
 
   /**
@@ -153,6 +154,17 @@ export default function useLens ({
     });
   }
 
+  /**
+   * handleClearActiveFilters
+   */
+
+  function handleClearActiveFilters () {
+    const updatedFilters = clearActiveFilters();
+    search({
+      activeFilters: updatedFilters.active
+    });
+  }
+
   return {
     mapConfig,
     results,
@@ -168,7 +180,8 @@ export default function useLens ({
       handlers: {
         openFilters,
         storeFilterChanges,
-        cancelFilterChanges
+        cancelFilterChanges,
+        clearActiveFilters: handleClearActiveFilters
       }
     }
   };
