@@ -124,6 +124,10 @@ function concatFilters () {
       }
 
       allFilters[existingIndex].value = filter.value;
+
+      if (allFilters[existingIndex].value === 'All Values') {
+        allFilters[existingIndex].value = undefined;
+      }
     });
   });
 

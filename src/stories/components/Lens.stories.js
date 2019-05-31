@@ -161,14 +161,14 @@ stories.add('Earth Search', () => {
           {
             label: 'Collection',
             id: 'properties/collection',
-            type: 'list',
+            type: 'radiolist',
             list: ['sentinel'],
             defaultValue: false
           },
           {
             label: 'Sentinel Grid Square',
             id: 'properties/sentinel:grid_square',
-            type: 'list',
+            type: 'radiolist',
             list: [
               'UH',
               'UJ',

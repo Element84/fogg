@@ -8,6 +8,8 @@ import Button from './Button';
 
 import { findFilterById } from '../lib/filters';
 
+const ALL_VALUES_ITEM = 'All Values';
+
 const SearchFilters = ({
   className,
   filters = [],
@@ -24,12 +26,12 @@ const SearchFilters = ({
    * @descriptioon Triggers when a filter change is detected
    */
 
-  function handleFilterChange ({ target = {} } = {}) {
+  function handleFilterChange ({ target = {}, ...rest } = {}) {
     const id = target.name;
     const activeFilter = findFilterById(filters, id);
     let value = target.value || target.checked;
 
-    if (typeof value === 'string' && activeFilter.type === 'list') {
+    if (typeof value === 'string' && activeFilter.type === 'checklist') {
       if (!Array.isArray(activeFilter.value)) {
         value = [value];
       } else if (activeFilter.value.includes(value)) {
@@ -57,12 +59,13 @@ const SearchFilters = ({
             ({ label, id, type = 'default', list, value } = {}, index) => {
               return (
                 <li key={`SearchFilters-Available-${index}`}>
-                  {type === 'list' && (
+                  {(type === 'checklist' || type === 'radiolist') && (
                     <SearchFiltersList
                       id={id}
                       label={label}
                       list={list}
                       activeValues={value || []}
+                      type={type}
                       onChange={handleFilterChange}
                     />
                   )}
@@ -115,34 +118,56 @@ const SearchFiltersList = ({
   label,
   list = [],
   onChange,
-  activeValues = []
+  activeValues = [],
+  type = 'checklist'
 }) => {
+  let inputType;
+  let filtersList = [...list];
+  let noActiveValues =
+    typeof activeValues === 'undefined' || activeValues.length === 0;
+
+  if (type === 'radiolist') {
+    inputType = 'radio';
+  } else if (type === 'checklist') {
+    inputType = 'checkbox';
+  }
+
   function handleChange (e) {
     if (typeof onChange === 'function') {
       onChange(e);
     }
   }
 
+  filtersList.push(ALL_VALUES_ITEM);
+
+  Array.isArray(filtersList) && filtersList.sort();
+
   return (
     <>
       {label && (
         <strong className="search-filters-available-label">{label}</strong>
       )}
-      {Array.isArray(list) && (
+      {Array.isArray(filtersList) && (
         <ul className="search-filters-available-list">
-          {list.map((item, index) => {
+          {filtersList.map((item, index) => {
+            let isChecked = false;
+            if (Array.isArray(activeValues) && activeValues.includes(item)) {
+              isChecked = true;
+            } else if (activeValues === item) {
+              isChecked = true;
+            } else if (noActiveValues && item === ALL_VALUES_ITEM) {
+              isChecked = true;
+            }
             return (
               <li key={`SearchFiltersList-Item-${index}`}>
                 <InputButton
-                  type="checkbox"
+                  type={inputType}
                   name={id}
                   label={item}
                   id={`filter-${id}-${item}`}
                   value={item}
                   onChange={handleChange}
-                  isChecked={
-                    Array.isArray(activeValues) && activeValues.includes(item)
-                  }
+                  isChecked={isChecked}
                 />
               </li>
             );
@@ -158,5 +183,6 @@ SearchFiltersList.propTypes = {
   label: PropTypes.string,
   list: PropTypes.array,
   onChange: PropTypes.func,
-  activeValues: PropTypes.array
+  activeValues: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+  type: PropTypes.string
 };
