@@ -16,6 +16,8 @@ const SearchPanelFilters = ({
 }) => {
   const { active, isOpen, available } = filters;
 
+  const panelFilters = isOpen ? available : active;
+
   const filterActions = [
     {
       label: 'Add Filter',
@@ -60,13 +62,44 @@ const SearchPanelFilters = ({
     return [label, value];
   }
 
+  /**
+   * filterActiveFiltersNoValue
+   * @description
+   */
+
+  function filterActiveFiltersNoValue ({ value } = {}) {
+    return valueIsValid(value);
+  }
+
+  /**
+   * hasActiveFilters
+   * @description
+   */
+
+  function hasActiveFilters (filters) {
+    const availableValues = filters.map(({ value } = {}) => value);
+    return availableValues.filter(value => valueIsValid(value)).length > 0;
+  }
+
+  function valueIsValid (value) {
+    if (!value) return false;
+    if (Array.isArray(value) && value.length === 0) return false;
+    return true;
+  }
+
   return (
     <Panel
       className="panel-clean search-panel-filters"
       header="Filters"
       actions={<PanelActions actions={filterActions} />}
     >
-      {active.length > 0 && <Table rows={active.map(mapActiveFiltersToRow)} />}
+      {hasActiveFilters(panelFilters) && (
+        <Table
+          rows={panelFilters
+            .filter(filterActiveFiltersNoValue)
+            .map(mapActiveFiltersToRow)}
+        />
+      )}
     </Panel>
   );
 };
