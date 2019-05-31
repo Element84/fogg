@@ -60,19 +60,23 @@ const OrderStatus = ({ headers = DEFAULT_HEADERS, order = {} }) => {
         <p className="order-status-back-button">
           <WonderLink to="/">{`< Back to Orders`}</WonderLink>
         </p>
-        <FaDatabase />
-        <div className="order-status-product-identifier">
-          {productIdentifier}
-        </div>
-        <div className="order-status-order-id">ID: {orderId}</div>
-        <div className="order-status-status-indicator">
-          <StatusIndicator
-            activeId={orderStatus}
-            statusList={STATUS_LIST}
-            errorList={ERROR_LIST}
-          />
-        </div>
-        <section className="order-status-order-date-download-wrapper">
+        <section className="order-status-order-header">
+          <h1 className="order-status-order-icon">
+            <FaDatabase />
+          </h1>
+          <div className="order-status-product-identifier">
+            {productIdentifier}
+          </div>
+          <div className="order-status-order-id">ID: {orderId}</div>
+        </section>
+        <section className="order-status-status-info-wrapper">
+          <div className="order-status-status-indicator">
+            <StatusIndicator
+              activeId={orderStatus}
+              statusList={STATUS_LIST}
+              errorList={ERROR_LIST}
+            />
+          </div>
           <p className="order-status-info order-status-order-date">
             <strong>Order Date: {formatDate(orderDate)}</strong>
           </p>

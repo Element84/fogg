@@ -5,12 +5,23 @@
     color: black;
   }
 }
-.order-status-product-identifier {
-  margin-left: 5em;
+.order-status-order-header {
+  display: flex;
+  margin-left: 3em;
+  .order-status-product-identifier {
+    margin: 1em;
+  }
+  .order-status-order-id {
+    margin-top: 2.5em;
+    margin-left: -6.8em;
+  }
 }
-.order-status-order-id {
-  margin-left: 5em;
-}
+// .order-status-product-identifier {
+//   margin-left: 5em;
+// }
+// .order-status-order-id {
+//   margin-left: 5em;
+// }
 .order-status-status-indicator {
   display: inline-block;
   border: .1em solid black;
@@ -18,16 +29,26 @@
   margin-top: 1em;
   margin-left: 3em;
 }
-.order-status-order-date-download-wrapper {
-  display: inline-block;
-  margin-left: 1em;
+.order-status-status-info-wrapper {
+  display: flex;
   .order-status-order-date {
-    padding-top: 25px;
+    margin-left: 1em;
   }
-  .order-status-download-button Button {
-    background-color: $color-blue8
+  .order-status-download-button {
+    margin-top: 4em;
+    margin-left: -11em;
   }
 }
+// .order-status-order-date-download-wrapper {
+//   display: inline-block;
+//   margin-left: 1em;
+//   .order-status-order-date {
+//     padding-top: 25px;
+//   }
+//   .order-status-download-button Button {
+//     background-color: $color-blue8
+//   }
+// }
 .order-status-data {
   margin-top: 5em;
   margin-left: 3em;
