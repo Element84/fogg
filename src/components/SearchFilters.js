@@ -19,18 +19,23 @@ const SearchFilters = ({
     return null;
   }
 
+  /**
+   * handleFilterChange
+   * @descriptioon Triggers when a filter change is detected
+   */
+
   function handleFilterChange ({ target = {} } = {}) {
     const id = target.name;
-    const filter = findFilterById(filters, id);
+    const activeFilter = findFilterById(filters, id);
     let value = target.value || target.checked;
 
-    if (typeof value === 'string' && filter.type === 'list') {
-      if (!Array.isArray(filter.value)) {
+    if (typeof value === 'string' && activeFilter.type === 'list') {
+      if (!Array.isArray(activeFilter.value)) {
         value = [value];
-      } else if (filter.value.includes(value)) {
-        value = filter.value.filter(val => val !== value);
+      } else if (activeFilter.value.includes(value)) {
+        value = activeFilter.value.filter(val => val !== value);
       } else {
-        value = filter.value.concat([value]);
+        value = activeFilter.value.concat([value]);
       }
     }
 
