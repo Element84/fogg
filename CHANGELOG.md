@@ -1,3 +1,5 @@
+### Version 0.1.60
+
 ### Version 0.1.59
 - storing previous path state in wonderlink state
 
