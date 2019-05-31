@@ -1,3 +1,6 @@
+### Version 0.1.58
+- updating form to update rules validations if it exists instead of nothign at all
+
 ### Version 0.1.57
 - adding geojson to lense sidebar component props
 
