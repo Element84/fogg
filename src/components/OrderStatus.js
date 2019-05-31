@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FaDatabase } from 'react-icons/fa';
 
+import Button from './Button';
 import StatusIndicator from './StatusIndicator';
+import Table from './Table';
+import WonderLink from './WonderLink';
 
 import { formatDate } from '../lib/datetime';
 
@@ -41,16 +45,26 @@ const ERROR_LIST = [
   }
 ];
 
+const tableColumns = ['Name', 'Value'];
+
+const tableRows = [['Granule ID', 1234567], ['Collection ID', 1234567]];
+// we may not have a productIdentifier (name) to deal with
+
 const OrderStatus = ({ headers = DEFAULT_HEADERS, order = {} }) => {
   const { orderId, productIdentifier, orderStatus, orderDate } = order;
 
   return (
     <div className="order-status">
       <section className="order-status-info">
-        <div className="order-status-order-id">ID: {orderId}</div>
+        {/* TODO make sure that this links back to the orders page */}
+        <p className="order-status-back-button">
+          <WonderLink to="/">{`< Back to Orders`}</WonderLink>
+        </p>
+        <FaDatabase />
         <div className="order-status-product-identifier">
           {productIdentifier}
         </div>
+        <div className="order-status-order-id">ID: {orderId}</div>
         <div className="order-status-status-indicator">
           <StatusIndicator
             activeId={orderStatus}
@@ -58,13 +72,18 @@ const OrderStatus = ({ headers = DEFAULT_HEADERS, order = {} }) => {
             errorList={ERROR_LIST}
           />
         </div>
-        <div className="order-status-order-date">
-          <p className="order-status-info order-status-info-order-date">
-            {headers[0]}
-          </p>
+        <section className="order-status-order-date-download-wrapper">
           <p className="order-status-info order-status-order-date">
-            {formatDate(orderDate)}
+            <strong>Order Date: {formatDate(orderDate)}</strong>
           </p>
+          <div className="order-status-download-button">
+            {/* TODO ensure this button downloads orders */}
+            <Button>Download</Button>
+          </div>
+        </section>
+        <div className="order-status-data">
+          <strong>Data</strong>
+          <Table columns={tableColumns} rows={tableRows} />
         </div>
       </section>
     </div>

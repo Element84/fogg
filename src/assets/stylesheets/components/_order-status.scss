@@ -1,0 +1,38 @@
+.order-status-back-button {
+  color: black;
+  margin-left: 3em;
+  :visited {
+    color: black;
+  }
+}
+.order-status-product-identifier {
+  margin-left: 5em;
+}
+.order-status-order-id {
+  margin-left: 5em;
+}
+.order-status-status-indicator {
+  display: inline-block;
+  border: .1em solid black;
+  width: 20%;
+  margin-top: 1em;
+  margin-left: 3em;
+}
+.order-status-order-date-download-wrapper {
+  display: inline-block;
+  margin-left: 1em;
+  .order-status-order-date {
+    padding-top: 25px;
+  }
+  .order-status-download-button Button {
+    background-color: $color-blue8
+  }
+}
+.order-status-data {
+  margin-top: 5em;
+  margin-left: 3em;
+  Table {
+    width: 30em;
+    margin-top: 1em;
+  }
+}
