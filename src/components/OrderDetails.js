@@ -9,8 +9,6 @@ import WonderLink from './WonderLink';
 
 import { formatDate } from '../lib/datetime';
 
-const DEFAULT_HEADERS = ['Order Date'];
-
 const STATUS_LIST = [
   {
     label: 'Pending',
@@ -50,7 +48,7 @@ const tableColumns = ['Name', 'Value'];
 const tableRows = [['Granule ID', 1234567], ['Collection ID', 1234567]];
 // we may not have a productIdentifier (name) to deal with
 
-const OrderStatus = ({ headers = DEFAULT_HEADERS, order = {} }) => {
+const OrderStatus = ({ order = {}, disabled = false }) => {
   const { orderId, productIdentifier, orderStatus, orderDate } = order;
 
   return (
@@ -82,7 +80,7 @@ const OrderStatus = ({ headers = DEFAULT_HEADERS, order = {} }) => {
           </p>
           <div className="order-status-download-button">
             {/* TODO ensure this button downloads orders */}
-            <Button>Download</Button>
+            <Button disabled={disabled}>Download</Button>
           </div>
         </section>
         <div className="order-status-data">
@@ -96,7 +94,8 @@ const OrderStatus = ({ headers = DEFAULT_HEADERS, order = {} }) => {
 
 OrderStatus.propTypes = {
   headers: PropTypes.array,
-  order: PropTypes.object
+  order: PropTypes.object,
+  disabled: PropTypes.bool
 };
 
 export default OrderStatus;
