@@ -1,3 +1,6 @@
+### Version 0.1.57
+- adding geojson to lense sidebar component props
+
 ### Version 0.1.56
 - testing commit
 - setting name as id for input button if not available
