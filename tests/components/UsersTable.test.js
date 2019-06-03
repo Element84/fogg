@@ -46,7 +46,13 @@ describe('Users Table', () => {
     }
   ];
 
-  const defaultColumns = ['Last Name', 'First Name', 'Organization', 'Role'];
+  const defaultColumns = [
+    'Last Name',
+    'First Name',
+    'Organization',
+    'Role',
+    null
+  ];
 
   const customColumns = [
     'Last of Her Name',

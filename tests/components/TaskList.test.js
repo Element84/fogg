@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import { TaskList } from '../../ui';
 
-describe('Task', () => {
+describe('Task List', () => {
   const data = [
     {
       id: 1,
@@ -52,7 +52,13 @@ describe('Task', () => {
     }
   ];
 
-  const defaultColumns = ['Name', 'Window Open', 'Window Close', 'Status'];
+  const defaultColumns = [
+    'Name',
+    'Window Open',
+    'Window Close',
+    'Status',
+    null
+  ];
 
   const customColumns = ['Task', 'Planned Date', 'Current Status'];
 

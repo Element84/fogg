@@ -1,3 +1,40 @@
+### Version 0.1.60
+
+### Version 0.1.59
+- storing previous path state in wonderlink state
+
+### Version 0.1.58
+- updating form to update rules validations if it exists instead of nothign at all
+
+### Version 0.1.57
+- adding geojson to lense sidebar component props
+
+### Version 0.1.56
+- testing commit
+- setting name as id for input button if not available
+
+### Version 0.1.55
+
+### Version 0.1.54
+- making child toggle default name to id if not set
+
+### Version 0.1.53
+- [JAM-239] ui tweaks and configuration tweaks for filters
+- [JAM-239] fixing proptypes and tests
+
+### Version 0.1.52
+- navbar tweaks
+
+### Version 0.1.51
+- fixing table headers on components
+- fixing table header tests
+
+### Version 0.1.50
+- package upgrades
+
+### Version 0.1.49
+- adding actions to the panel header ui
+
 ### Version 0.1.48
 
 ### Version 0.1.47

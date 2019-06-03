@@ -12,6 +12,8 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
 
   if (!validate) {
     validate = new Validation(rules);
+  } else {
+    validate.updateRules(rules);
   }
 
   /**

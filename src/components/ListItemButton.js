@@ -16,6 +16,7 @@ const ListItemButton = ({
 };
 
 ListItemButton.propTypes = {
+  children: PropTypes.node,
   itemType: PropTypes.string,
   id: PropTypes.string
 };

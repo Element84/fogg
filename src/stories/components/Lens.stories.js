@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import Atlas from '../../components/Atlas';
+import Lens from '../../components/Lens';
 import ItemList from '../../components/ItemList';
 import Panel from '../../components/Panel';
 import Button from '../../components/Button';
 
 import Request from '../../models/request';
 
-const stories = storiesOf('Components|Atlas', module);
+const stories = storiesOf('Components|Lens', module);
 
 const DEFAULT_CENTER = {
   lat: 0,
@@ -43,7 +43,7 @@ stories.add('Default', () => {
 
   return (
     <>
-      <Atlas
+      <Lens
         defaultCenter={DEFAULT_CENTER}
         zoom={2}
         resolveOnSearch={testPatchTextQuery}
@@ -64,7 +64,7 @@ stories.add('Open Street Map - No Search', () => {
   ];
   return (
     <>
-      <Atlas
+      <Lens
         defaultCenter={DEFAULT_CENTER}
         zoom={2}
         services={services}
@@ -76,9 +76,10 @@ stories.add('Open Street Map - No Search', () => {
 });
 
 stories.add('Earth Search', () => {
-  async function handleResolveOnSearch ({ geoJson = {}, page } = {}) {
+  async function handleResolveOnSearch ({ geoJson = {}, page, filters } = {}) {
     const { features = [] } = geoJson;
     const { geometry } = features[0] || {};
+    let data;
     let response;
     let responseFeatures;
     let responseMeta;
@@ -91,11 +92,40 @@ stories.add('Earth Search', () => {
       return [];
     }
 
-    request.setData({
+    data = {
       intersects: geometry,
       limit: 5,
       page
-    });
+    };
+
+    if (filters) {
+      data.query = filtersToQuery(filters);
+    }
+
+    function filtersToQuery (activeFilters) {
+      let filterQuery = {};
+
+      activeFilters.forEach(activeFilter => {
+        let parent;
+        let { id, value } = activeFilter;
+
+        if (id.includes('/')) {
+          id = id.split('/');
+          parent = id[0];
+          id = id[1];
+        }
+
+        if (parent === 'properties') {
+          filterQuery[id] = {
+            eq: value
+          };
+        }
+      });
+
+      return filterQuery;
+    }
+
+    request.setData(data);
 
     request.setOptions({
       headers: {
@@ -121,7 +151,8 @@ stories.add('Earth Search', () => {
           label: `${id}`,
           sublabels: [
             `Collection: ${collection}`,
-            `GeoJSON: ${JSON.stringify(geoJson)}`
+            `GeoJSON: ${JSON.stringify(geoJson)}`,
+            `Sentinel Grid Square: ${properties['sentinel:grid_square']}`
           ],
           to: '#'
         };
@@ -136,20 +167,51 @@ stories.add('Earth Search', () => {
 
   return (
     <>
-      <Atlas
+      <Lens
         defaultCenter={DEFAULT_CENTER}
         zoom={2}
         resolveOnSearch={handleResolveOnSearch}
         SidebarComponents={SidebarPanels}
         placeholder="Look stuffs on Earth Data"
+        availableFilters={[
+          {
+            label: 'Collection',
+            id: 'properties/collection',
+            type: 'radiolist',
+            list: ['sentinel'],
+            defaultValue: false
+          },
+          {
+            label: 'Sentinel Grid Square',
+            id: 'properties/sentinel:grid_square',
+            type: 'radiolist',
+            list: [
+              'UH',
+              'UJ',
+              'MD',
+              'VT',
+              'ND',
+              'FV',
+              'PD',
+              'WT',
+              'VU',
+              'WU',
+              'NC',
+              'PC',
+              'GL'
+            ],
+            defaultValue: false
+          }
+        ]}
       />
     </>
   );
 });
 
-const SidebarPanels = ({ results, loadMoreResults }) => {
+const SidebarPanels = ({ results, loadMoreResults, filters }) => {
   const hasResults = Array.isArray(results) && results.length > 0;
   const moreResultsAvailable = typeof loadMoreResults === 'function';
+  const { handlers: filtersHandlers } = filters;
 
   function handleLoadMore (e) {
     if (moreResultsAvailable) {
@@ -157,10 +219,26 @@ const SidebarPanels = ({ results, loadMoreResults }) => {
     }
   }
 
+  function handleClearFilters () {
+    if (typeof filtersHandlers.clearActiveFilters === 'function') {
+      filtersHandlers.clearActiveFilters();
+    }
+  }
+
   return (
     <>
       {!hasResults && (
         <>
+          {Array.isArray(results) && (
+            <Panel header="Explore">
+              <p>Sorry, no results were found.</p>
+              {filters.active.length > 0 && (
+                <p>
+                  <Button onClick={handleClearFilters}>Clear Filters</Button>
+                </p>
+              )}
+            </Panel>
+          )}
           <Panel header="Explore">
             <p>Explore stuff</p>
           </Panel>
@@ -197,7 +275,8 @@ const SidebarPanels = ({ results, loadMoreResults }) => {
 
 SidebarPanels.propTypes = {
   results: PropTypes.array,
-  loadMoreResults: PropTypes.func
+  loadMoreResults: PropTypes.func,
+  filters: PropTypes.object
 };
 
 function responseHasMoreResults ({ page, limit, found } = {}) {

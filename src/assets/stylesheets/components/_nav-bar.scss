@@ -3,48 +3,64 @@
   padding: 0;
   margin: .8em 0;
 
-  .nav-bar-primary,
-  .nav-bar-secondary  {
-    display: flex;
-    margin: 10px 0px;
-  }
-
-  &.nav-bar-vertical {
-
-    .nav-bar-primary,
-    .nav-bar-secondary  {
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-  }
-
   .button {
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
     background: white;
     border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    box-shadow: 0px 3px 5px $color-gray2;
+    width: 2.2em;
+    height: 2.2em;
+    box-shadow: $component-shadow-basic;
     margin: .3em;
 
     a {
-      padding: 0px;
-      color: #000;
+      width: 100%;
+      height: 100%;
+      color: $color-gray7;
       text-align: center;
-      position: relative;
-      top: 20%;
+      padding: 0;
     }
+
   }
 
   .nav-bar-active-button {
-    background: gray;
-    box-shadow: 0px 5px 5px $color-gray2;
+
+    background: $color-gray;
+    box-shadow: $component-shadow-basic;
 
     a {
-      color: #fff;
+      color: white;
     }
+
   }
 
+}
 
+.nav-bar-section {
+
+  margin: 1em 0;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+}
+
+.nav-bar-primary,
+.nav-bar-secondary  {
+
+  display: flex;
+
+  .nav-bar-vertical & {
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
 }

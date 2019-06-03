@@ -1,4 +1,4 @@
-export { default as Atlas } from './src/components/Atlas';
+export { default as Atlas } from './src/components/Lens';
 export { default as Button } from './src/components/Button';
 export { default as ChildToggle } from './src/components/ChildToggle';
 export { default as Datetime } from './src/components/Datetime';
@@ -11,6 +11,7 @@ export { default as Input } from './src/components/Input';
 export { default as InputButton } from './src/components/InputButton';
 export { default as ItemList } from './src/components/ItemList';
 export { default as Layout } from './src/components/Layout';
+export { default as Lens } from './src/components/Lens';
 export { default as Map } from './src/components/Map';
 export { default as MapDraw } from './src/components/MapDraw';
 export { default as MapMarker } from './src/components/MapMarker';
