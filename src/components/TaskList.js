@@ -11,7 +11,7 @@ const DEFAULT_HEADERS = ['Name', 'Window Open', 'Window Close', 'Status', null];
 const TaskList = ({ headers = DEFAULT_HEADERS, tasks = [] }) => {
   const rows = tasks.map((task, index) => {
     return [
-      task.properties.name,
+      task.properties.targetName,
       formatDate(task.properties.windowOpen),
       formatDate(task.properties.windowClose),
       task.properties.status,

@@ -73,7 +73,7 @@ describe('Task List', () => {
     it('should render a table with the right row values', () => {
       const propRows = taskList.find('Table').prop('rows');
       const firstRow = propRows[0];
-      expect(firstRow[0]).toEqual(data[0].properties.name);
+      expect(firstRow[0]).toEqual(data[0].properties.targetName);
       expect(firstRow[1]).toEqual(data[0].properties.windowOpen);
       expect(firstRow[2]).toEqual(data[0].properties.windowClose);
       expect(firstRow[3]).toEqual(data[0].properties.status);
