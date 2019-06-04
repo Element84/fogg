@@ -46,20 +46,24 @@ const OrderStatus = ({ order = {}, disabled = false }) => {
   return (
     <div className="order-status">
       <section className="order-status-status-info-wrapper">
-        <div className="order-status-status-indicator">
-          <StatusIndicator
-            activeId={orderStatus}
-            statusList={STATUS_LIST}
-            errorList={ERROR_LIST}
-          />
-        </div>
-        <p className="order-status-order-date">
-          <strong>Order Date: {formatDate(orderDate)}</strong>
-        </p>
-        <div className="order-status-download-button">
-          {/* TODO ensure this button downloads orders */}
-          <Button disabled={disabled}>Download</Button>
-        </div>
+        <section className="order-status-column">
+          <div className="order-status-status-indicator">
+            <StatusIndicator
+              activeId={orderStatus}
+              statusList={STATUS_LIST}
+              errorList={ERROR_LIST}
+            />
+          </div>
+        </section>
+        <section className="order-status-column">
+          <p className="order-status-order-date">
+            <strong>Order Date: {formatDate(orderDate)}</strong>
+          </p>
+          <div className="order-status-download-button">
+            {/* TODO ensure this button downloads orders */}
+            <Button disabled={disabled}>Download</Button>
+          </div>
+        </section>
       </section>
     </div>
   );
