@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Table from './Table';
-import Button from './Button';
+import ListItemButton from './ListItemButton';
 
 import { formatDate } from '../lib/datetime';
 
@@ -10,12 +10,18 @@ const DEFAULT_HEADERS = ['Product', 'Order Date', 'Order Status', null];
 
 const OrdersList = ({ headers = DEFAULT_HEADERS, orders }) => {
   const rows = orders.map(
-    ({ productIdentifier, orderDate, orderStatus }, index) => {
+    ({ productIdentifier, orderDate, orderStatus, orderId }, index) => {
       return [
         productIdentifier,
         formatDate(orderDate),
         orderStatus,
-        <Button key={`OrdersList-Button-${index}`} />
+        <ListItemButton
+          key={`Order-Button-${index}`}
+          itemType="orders"
+          id={`${orderId}`}
+        >
+          View Order Details
+        </ListItemButton>
       ];
     }
   );

@@ -18,9 +18,27 @@ export default function useFilters (availableFilters) {
   }
 
   function storeFilterChanges (changes = []) {
+    const filterChanges = [...filters.unsaved];
+
+    changes.forEach(filter => {
+      const oldFilter = filterChanges.find(
+        filterChange => filterChange.id === filter.id
+      );
+      if (!oldFilter) {
+        filterChanges.push(filter);
+      }
+    });
+
     const updatedFilterState = {
       ...filters,
-      unsaved: changes
+      unsaved: filterChanges.map(filterChange => {
+        const newFilterChange =
+          changes.find(filter => filter.id === filterChange.id) || {};
+        return {
+          ...filterChange,
+          ...newFilterChange
+        };
+      })
     };
     updateFilters(updatedFilterState);
     return updatedFilterState;
@@ -49,19 +67,41 @@ export default function useFilters (availableFilters) {
     return updatedFilterState;
   }
 
+  function clearActiveFilters () {
+    const updatedFilterState = {
+      ...filters,
+      isOpen: false,
+      unsaved: [],
+      active: []
+    };
+    updateFilters(updatedFilterState);
+    return updatedFilterState;
+  }
+
+  function buildAvailableFilters () {
+    let filtersSet = concatFilters(
+      filters.available.map(filter => ({ ...filter })),
+      filters.active.map(filter => ({ ...filter }))
+    );
+    if (filters.isOpen) {
+      filtersSet = concatFilters(
+        filtersSet,
+        filters.unsaved.map(filter => ({ ...filter }))
+      );
+    }
+    return filtersSet;
+  }
+
   return {
     filters: {
       ...filters,
-      available: concatFilters(
-        filters.available,
-        filters.active,
-        filters.unsaved
-      )
+      available: buildAvailableFilters()
     },
     openFilters,
     storeFilterChanges,
     saveFilterChanges,
-    cancelFilterChanges
+    cancelFilterChanges,
+    clearActiveFilters
   };
 }
 
@@ -96,6 +136,10 @@ function concatFilters () {
       }
 
       allFilters[existingIndex].value = filter.value;
+
+      if (allFilters[existingIndex].value === 'All Values') {
+        allFilters[existingIndex].value = undefined;
+      }
     });
   });
 
