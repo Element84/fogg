@@ -16,6 +16,7 @@ const SearchComplete = ({
   const [results, updateResults] = useState([]);
   const [date, updateDate] = useState({});
   const [query, updateQuery] = useState('');
+  const [searchInput, updateSearchInput] = useState('');
   const [debouncedUpdateQueryState] = useDebouncedCallback(
     updateQueryState,
     QUERY_COMPLETE_DEBOUNCE
@@ -28,8 +29,10 @@ const SearchComplete = ({
 
   function handleSearchboxSearch (textInput, searchDate) {
     const { value } = results[0] || {};
+    let searchQuery = textInput === searchInput ? query : value;
+
     updateDate(searchDate);
-    handleQuery(value, searchDate, textInput);
+    handleQuery(searchQuery, searchDate, textInput);
     updateOpenState(false);
   }
 
@@ -40,6 +43,7 @@ const SearchComplete = ({
 
   function handleResultClick (e, value) {
     handleQuery(value, null, query);
+    updateQuery(value);
     updateOpenState(false);
   }
 
@@ -76,6 +80,7 @@ const SearchComplete = ({
   function updateQueryState ({ target }, searchDate) {
     updateDate(searchDate);
     updateQuery(target.value);
+    updateSearchInput(target.value);
     handleFetchQueryComplete(target.value);
   }
 
