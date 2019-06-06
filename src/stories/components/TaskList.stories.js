@@ -12,7 +12,7 @@ const data = [
   {
     id: 1,
     properties: {
-      name: 'Put nickles in Dwights phone',
+      targetName: 'Put nickles in Dwights phone',
       windowOpen: 1554416208102,
       windowClose: 1554416208102,
       status: 'Completed'
@@ -21,7 +21,7 @@ const data = [
   {
     id: 2,
     properties: {
-      name: 'Defeat Dwight in a snowball fight',
+      targetName: 'Defeat Dwight in a snowball fight',
       windowOpen: 1554416208102,
       windowClose: 1554416208102,
       status: 'Anomaly'
@@ -30,7 +30,7 @@ const data = [
   {
     id: 3,
     properties: {
-      name: 'Put more nickles in Dwights phone',
+      targetName: 'Put more nickles in Dwights phone',
       windowOpen: 1554416208102,
       windowClose: 1554468784443,
       status: 'Pending'
@@ -39,7 +39,7 @@ const data = [
   {
     id: 4,
     properties: {
-      name: 'Yet more nickles',
+      targetName: 'Yet more nickles',
       windowOpen: 1554416208102,
       windowClose: 1554696000000,
       status: 'Pending'
@@ -48,7 +48,7 @@ const data = [
   {
     id: 5,
     properties: {
-      name: 'Remove nickles so he smacks himself in the face',
+      targetName: 'Remove nickles so he smacks himself in the face',
       windowOpen: 1554416208102,
       windowClose: 1554782400000,
       status: 'Partially Completed'
