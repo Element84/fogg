@@ -1,3 +1,6 @@
+### Version 0.1.62
+- [JAM-70] Fixed merge conflict
+
 ### Version 0.1.61
 - [JAM-428] Preseve input when changing date
 - Fix OrderList test

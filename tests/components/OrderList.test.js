@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { OrdersList, Button } from '../../ui';
+import { OrdersList } from '../../ui';
 
 describe('Orders List', () => {
   const ordersData = [
@@ -46,11 +46,17 @@ describe('Orders List', () => {
       expect(firstRow[2]).toEqual(ordersData[0].orderStatus);
     });
 
-    it('should render a button in the last cell', () => {
+    it('should render a ListItemButton in the last cell', () => {
       const propRows = orderList.find('Table').prop('rows');
       const lastColumn = propRows[0][propRows[0].length - 1];
-      const button = shallow(lastColumn);
-      expect(button.find(Button).exists()).toBeTruthy();
+      const listItemButton = shallow(lastColumn);
+      expect(listItemButton.find('Button')).toHaveLength(1);
+      expect(
+        listItemButton
+          .find('Button')
+          .findWhere(n => n.prop('to') === '/orders/1')
+          .exists()
+      ).toEqual(true);
     });
   });
 
