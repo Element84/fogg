@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { OrdersList } from '../../ui';
+import { OrdersList, Button } from '../../ui';
 
 describe('Orders List', () => {
   const ordersData = [
@@ -50,7 +50,7 @@ describe('Orders List', () => {
       const propRows = orderList.find('Table').prop('rows');
       const lastColumn = propRows[0][propRows[0].length - 1];
       const button = shallow(lastColumn);
-      expect(button.hasClass('button')).toEqual(true);
+      expect(button.find(Button).exists()).toBeTruthy();
     });
   });
 
