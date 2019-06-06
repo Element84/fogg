@@ -22,7 +22,7 @@ Resources:
       WebsiteConfiguration:
         IndexDocument: index.html
       LoggingConfiguration:
-        DestinationBucketName: !Sub ${Name}-logs
+        DestinationBucketName: !Ref WebsiteLogsBucket
       
 
   WebsiteBucketPolicy:

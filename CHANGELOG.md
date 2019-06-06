@@ -1,3 +1,8 @@
+### Version 0.1.61
+- [JAM-428] Preseve input when changing date
+- Fix OrderList test
+- JAM-70 Fix Cloudformation error
+
 ### Version 0.1.60
 
 ### Version 0.1.59
