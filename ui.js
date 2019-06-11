@@ -24,6 +24,7 @@ export { default as OrderStatus } from './src/components/OrderStatus';
 export { default as OrdersList } from './src/components/OrdersList';
 export { default as PageTemplate } from './src/components/PageTemplate';
 export { default as Panel } from './src/components/Panel';
+export { default as PanelActions } from './src/components/PanelActions';
 export { default as SearchBox } from './src/components/SearchBox';
 export { default as SearchComplete } from './src/components/SearchComplete';
 export { default as Select } from './src/components/Select';
