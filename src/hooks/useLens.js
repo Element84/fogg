@@ -16,12 +16,14 @@ export default function useLens ({
   refMapDraw,
   availableFilters
 }) {
-  const [mapConfig, updateMapConfig] = useState({
+  const mapConfigDefaults = {
     center: defaultCenter,
+    geoJson: geoJsonFromLatLn(defaultCenter),
     textInput: '',
     date: {},
     page: 1
-  });
+  };
+  const [mapConfig, updateMapConfig] = useState(mapConfigDefaults);
   const [results, updateResults] = useState();
   const [moreResultsAvailable, updateMoreResultsAvailable] = useState();
 
@@ -165,6 +167,16 @@ export default function useLens ({
     });
   }
 
+  /**
+   * handleClearSearch
+   */
+
+  function handleClearSearch () {
+    updateMapConfig(mapConfigDefaults);
+    updateResults(undefined);
+    updateMoreResultsAvailable(false);
+  }
+
   return {
     mapConfig,
     results,
@@ -173,7 +185,8 @@ export default function useLens ({
       handleOnSearch,
       resolveLensAutocomplete,
       handleUpdateSearchParams,
-      loadMoreResults: moreResultsAvailable ? handleLoadMoreResults : undefined
+      loadMoreResults: moreResultsAvailable ? handleLoadMoreResults : undefined,
+      clearActiveSearch: handleClearSearch
     },
     filters: {
       ...filters,

@@ -39,6 +39,7 @@ const Lens = ({
     handleOnSearch,
     resolveLensAutocomplete,
     loadMoreResults,
+    clearActiveSearch,
     handleUpdateSearchParams
   } = lensHandlers;
 
@@ -90,6 +91,7 @@ const Lens = ({
             filters={filters}
             results={results}
             loadMoreResults={loadMoreResults}
+            clearActiveSearch={clearActiveSearch}
             mapPosition={position}
             geoJson={geoJson}
           />
