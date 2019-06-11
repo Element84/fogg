@@ -1,3 +1,6 @@
+### Version 0.1.65
+- adding handler in fogg to support clearing a search
+
 ### Version 0.1.64
 - exporting PanelActions
 
