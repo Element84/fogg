@@ -12,7 +12,7 @@ const logger = new Logger('ModInput', {
   isBrowser: true
 });
 
-const ModInput = ({ id, name, defaultValue = '', onSave }) => {
+const ModInput = ({ id, name, defaultValue = '', onSave, forceReset }) => {
   const inputName = name || id;
 
   if (!inputName) {
@@ -26,7 +26,7 @@ const ModInput = ({ id, name, defaultValue = '', onSave }) => {
     updateOriginalValue,
     value,
     updateValue
-  } = useModValue(defaultValue);
+  } = useModValue(defaultValue, forceReset);
 
   let icon = isChangeable ? <FaCheck /> : <FaPencilAlt />;
 
@@ -107,7 +107,8 @@ ModInput.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string,
   defaultValue: PropTypes.string,
-  onSave: PropTypes.func
+  onSave: PropTypes.func,
+  forceReset: PropTypes.bool
 };
 
 export default ModInput;

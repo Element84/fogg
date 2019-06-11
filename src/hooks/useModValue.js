@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-const useModValue = defaultValue => {
-  const [isChangeable, updateChangeable] = useState(false);
+const useModValue = (defaultValue, forceReset) => {
+  const [isChangeable, updateChangeable] = useState(!forceReset);
   const [originalValue, updateOriginalValue] = useState(defaultValue);
   const [value, updateValue] = useState(originalValue);
 

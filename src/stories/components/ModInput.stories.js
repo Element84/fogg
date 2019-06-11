@@ -18,5 +18,10 @@ function handleOnSave (value, name) {
 }
 
 stories.add('Default', () => (
-  <ModInput id="test" defaultValue={defaultValue} onSave={handleOnSave} />
+  <ModInput
+    id="test"
+    defaultValue={defaultValue}
+    onSave={handleOnSave}
+    forceReset={true}
+  />
 ));

@@ -9,7 +9,9 @@ describe('ModInput', () => {
   describe('Render', () => {
     const text = 'Mooncake';
     const id = 'test';
-    const modinput = shallow(<ModInput id={id} defaultValue={text} />);
+    const modinput = shallow(
+      <ModInput id={id} defaultValue={text} forceReset={true} />
+    );
     it('should render a ModInput', () => {
       expect(modinput.find('FormInput').prop('name')).toEqual(id);
     });
