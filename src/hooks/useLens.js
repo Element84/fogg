@@ -30,6 +30,7 @@ export default function useLens ({
     openFilters,
     storeFilterChanges,
     saveFilterChanges,
+    setActiveFilters,
     cancelFilterChanges,
     clearActiveFilters
   } = useFilters(availableFilters);
@@ -87,7 +88,7 @@ export default function useLens ({
    * @description Fires when a search is performed via SearchComplete
    */
 
-  function handleOnSearch ({ x, y } = {}, date, textInput) {
+  function handleOnSearch ({ x, y } = {}, date, textInput, activeFilters = []) {
     if (typeof x === 'undefined' || typeof y === 'undefined') {
       return;
     }
@@ -105,7 +106,8 @@ export default function useLens ({
         center
       },
       date,
-      textInput
+      textInput,
+      activeFilters
     });
   }
 
@@ -165,6 +167,29 @@ export default function useLens ({
     });
   }
 
+  function handleQueryParams () {
+    const urlParams = new URLSearchParams(location.search);
+    const urlQuery = urlParams.get('q');
+
+    // Finds the params that match the available filters
+    // TODO: see if there's a different plan for using filters in the URL
+    let filterParams = filters.available.map(filter => {
+      let param = filter.id.split('/').pop();
+      return { id: `properties/${param}`, value: urlParams.get(param) };
+    });
+
+    // Ensures that we're only using parmas that were actually in the URL query
+    const queriedFilters = filterParams.filter(param => param.value !== null);
+
+    resolveLensAutocomplete(urlQuery).then(queryResults => {
+      if (Array.isArray(queryResults)) {
+        const { value } = queryResults[0];
+        handleOnSearch(value, {}, urlQuery, queriedFilters);
+        setActiveFilters(queriedFilters);
+      }
+    });
+  }
+
   return {
     mapConfig,
     results,
@@ -173,6 +198,7 @@ export default function useLens ({
       handleOnSearch,
       resolveLensAutocomplete,
       handleUpdateSearchParams,
+      handleQueryParams,
       loadMoreResults: moreResultsAvailable ? handleLoadMoreResults : undefined
     },
     filters: {

@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import React, { createRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { useLens } from '../hooks';
@@ -39,6 +39,7 @@ const Lens = ({
     handleOnSearch,
     resolveLensAutocomplete,
     loadMoreResults,
+    handleQueryParams,
     handleUpdateSearchParams
   } = lensHandlers;
 
@@ -60,6 +61,10 @@ const Lens = ({
     services,
     map
   };
+
+  useEffect(() => {
+    handleQueryParams();
+  }, []);
 
   return (
     <div className="lens" data-has-results={hasResults}>

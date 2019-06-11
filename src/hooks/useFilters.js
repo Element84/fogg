@@ -44,6 +44,33 @@ export default function useFilters (availableFilters) {
     return updatedFilterState;
   }
 
+  function setActiveFilters (changes = []) {
+    const filterChanges = [...filters.active];
+
+    changes.forEach(filter => {
+      const oldFilter = filterChanges.find(
+        filterChange => filterChange.id === filter.id
+      );
+      if (!oldFilter) {
+        filterChanges.push(filter);
+      }
+    });
+
+    const updatedFilterState = {
+      ...filters,
+      active: filterChanges.map(filterChange => {
+        const newFilterChange =
+          changes.find(filter => filter.id === filterChange.id) || {};
+        return {
+          ...filterChange,
+          ...newFilterChange
+        };
+      })
+    };
+    updateFilters(updatedFilterState);
+    return updatedFilterState;
+  }
+
   function saveFilterChanges () {
     const updatedFilterState = {
       ...filters,
@@ -100,6 +127,7 @@ export default function useFilters (availableFilters) {
     openFilters,
     storeFilterChanges,
     saveFilterChanges,
+    setActiveFilters,
     cancelFilterChanges,
     clearActiveFilters
   };
