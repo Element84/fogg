@@ -24,8 +24,16 @@ $search-box-height: 3.2em;
   right: 0;
   display: flex;
 
-  button,
-  .button {
+}
+
+.search-box-controls-control {
+
+  &:last-child {
+    border-radius: 0 $border-radius-small $border-radius-small 0;
+  }
+
+  &,
+  button {
     width: $search-box-height;
     height: $search-box-height;
     line-height: $search-box-height;
@@ -37,14 +45,6 @@ $search-box-height: 3.2em;
     padding: 0;
   }
 
-  .button {
-
-    &:last-child {
-      border-radius: 0 $border-radius-small $border-radius-small 0;
-    }
-
-  }
-
 }
 
 .search-box-controls-date {
@@ -53,16 +53,20 @@ $search-box-height: 3.2em;
 
   &[data-is-searchbox-date-open="true"] {
 
-    svg {
-      color: $color-gray9;
+    .search-box-controls-control {
+      svg {
+        color: $color-gray9;
+      }
     }
 
   }
 
   [data-has-active-date-range="true"] & {
 
-    svg {
-      color: $color-blue;
+    .search-box-controls-control {
+      svg {
+        color: $color-blue;
+      }
     }
 
   }
@@ -72,8 +76,12 @@ $search-box-height: 3.2em;
     box-shadow: none;
   }
 
-  svg {
-    color: $color-gray;
+  .search-box-controls-control {
+
+    svg {
+      color: $color-gray;
+    }
+
   }
 
 }

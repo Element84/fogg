@@ -76,7 +76,12 @@ stories.add('Open Street Map - No Search', () => {
 });
 
 stories.add('Earth Search', () => {
-  async function handleResolveOnSearch ({ geoJson = {}, page, filters } = {}) {
+  async function handleResolveOnSearch ({
+    geoJson = {},
+    page,
+    filters,
+    date
+  } = {}) {
     const { features = [] } = geoJson;
     const { geometry } = features[0] || {};
     let data;
@@ -95,6 +100,7 @@ stories.add('Earth Search', () => {
     data = {
       intersects: geometry,
       limit: 5,
+      time: atlasDateToSatTime(date),
       page
     };
 
@@ -152,7 +158,8 @@ stories.add('Earth Search', () => {
           sublabels: [
             `Collection: ${collection}`,
             `GeoJSON: ${JSON.stringify(geoJson)}`,
-            `Sentinel Grid Square: ${properties['sentinel:grid_square']}`
+            `Sentinel Grid Square: ${properties['sentinel:grid_square']}`,
+            `Date: ${properties.datetime}`
           ],
           to: '#'
         };
@@ -304,4 +311,33 @@ SidebarPanels.propTypes = {
 function responseHasMoreResults ({ page, limit, found } = {}) {
   if (page * limit < found) return true;
   return false;
+}
+
+/**
+ * atlasDateToSatTime
+ * @description Converts an Atlas date object to SAT API friendly string
+ * @see http://sat-utils.github.io/sat-api/#search-stac-items-by-simple-filtering-
+ */
+
+export function atlasDateToSatTime ({ start, end } = {}) {
+  let dateStart;
+  let dateEnd;
+  let dateFull;
+
+  if (start) {
+    dateStart = new Date(start).toISOString();
+  }
+
+  if (end) {
+    dateEnd = new Date(end).toISOString();
+  }
+
+  // Return either a period of time or
+  if (dateStart && dateEnd) {
+    dateFull = `${dateStart}/${dateEnd}`;
+  } else {
+    dateFull = dateStart || dateEnd;
+  }
+
+  return dateFull;
 }
