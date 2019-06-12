@@ -2,7 +2,7 @@
   "name": "fogg",
   "private": true,
   "description": "Gatsby theme for E84 Space Jam project",
-  "version": "0.1.62",
+  "version": "0.1.66",
   "author": "Element 84, Inc.",
   "dependencies": {
     "@babel/core": "^7.4.5",
@@ -20,6 +20,7 @@
     "gatsby-source-filesystem": "^2.0.37",
     "gatsby-transformer-sharp": "^2.1.19",
     "geojson": "^0.5.0",
+    "leaflet-active-area": "^1.1.0",
     "leaflet-draw": "^1.0.4",
     "mkdirp": "^0.5.1",
     "moment": "^2.24.0",

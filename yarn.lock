@@ -10467,6 +10467,11 @@ lcid@^2.0.0:
   dependencies:
     invert-kv "^2.0.0"
 
+leaflet-active-area@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/leaflet-active-area/-/leaflet-active-area-1.1.0.tgz#d940e8ea85a3d3c7b5963471b4a268b6d29214ea"
+  integrity sha512-pCqlC0IELUe+eWJXl9HD1lZM6BPNWW4KQ2Vfn9h0dCj1Y13QAL0S3xJz11hdXy9ErcPI0dRx7fZ/HXASnuDfVg==
+
 leaflet-draw@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/leaflet-draw/-/leaflet-draw-1.0.4.tgz#45be92f378ed253e7202fdeda1fcc71885198d46"

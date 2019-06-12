@@ -1,3 +1,14 @@
+### Version 0.1.66
+- [JAM-418] setting up the map component to allow to use an effect, setting an active area to position the marker offset by sidebar
+
+### Version 0.1.65
+- adding handler in fogg to support clearing a search
+
+### Version 0.1.64
+- exporting PanelActions
+
+### Version 0.1.63
+
 ### Version 0.1.62
 - [JAM-70] Fixed merge conflict
 

@@ -20,7 +20,8 @@ const Lens = ({
   map = 'blue_marble',
   search = true,
   placeholder = 'Search',
-  availableFilters
+  availableFilters,
+  useMapEffect
 }) => {
   const refMapDraw = createRef();
 
@@ -40,6 +41,7 @@ const Lens = ({
     resolveLensAutocomplete,
     loadMoreResults,
     handleQueryParams,
+    clearActiveSearch,
     handleUpdateSearchParams
   } = lensHandlers;
 
@@ -59,7 +61,8 @@ const Lens = ({
     center: position,
     zoom,
     services,
-    map
+    map,
+    useMapEffect
   };
 
   useEffect(() => {
@@ -95,6 +98,7 @@ const Lens = ({
             filters={filters}
             results={results}
             loadMoreResults={loadMoreResults}
+            clearActiveSearch={clearActiveSearch}
             mapPosition={position}
             geoJson={geoJson}
           />
@@ -131,7 +135,8 @@ Lens.propTypes = {
   services: PropTypes.array,
   search: PropTypes.bool,
   placeholder: PropTypes.string,
-  availableFilters: PropTypes.array
+  availableFilters: PropTypes.array,
+  useMapEffect: PropTypes.func
 };
 
 export default Lens;

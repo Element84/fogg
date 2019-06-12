@@ -165,6 +165,19 @@ stories.add('Earth Search', () => {
     };
   }
 
+  function handleUseMapEffect ({ leafletElement }) {
+    // By class leafletElement.setActiveArea('map-active-area')
+    // Creates a new div for that area
+    leafletElement.setActiveArea({
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      right: '0',
+      height: '100vh',
+      marginLeft: '385px'
+    });
+  }
+
   return (
     <>
       <Lens
@@ -172,6 +185,7 @@ stories.add('Earth Search', () => {
         zoom={2}
         resolveOnSearch={handleResolveOnSearch}
         SidebarComponents={SidebarPanels}
+        useMapEffect={handleUseMapEffect}
         placeholder="Look stuffs on Earth Data"
         availableFilters={[
           {
@@ -208,7 +222,12 @@ stories.add('Earth Search', () => {
   );
 });
 
-const SidebarPanels = ({ results, loadMoreResults, filters }) => {
+const SidebarPanels = ({
+  results,
+  loadMoreResults,
+  clearActiveSearch,
+  filters
+}) => {
   const hasResults = Array.isArray(results) && results.length > 0;
   const moreResultsAvailable = typeof loadMoreResults === 'function';
   const { handlers: filtersHandlers } = filters;
@@ -225,6 +244,12 @@ const SidebarPanels = ({ results, loadMoreResults, filters }) => {
     }
   }
 
+  function handleClearActiveSearch () {
+    if (typeof clearActiveSearch === 'function') {
+      clearActiveSearch();
+    }
+  }
+
   return (
     <>
       {!hasResults && (
@@ -237,6 +262,9 @@ const SidebarPanels = ({ results, loadMoreResults, filters }) => {
                   <Button onClick={handleClearFilters}>Clear Filters</Button>
                 </p>
               )}
+              <p>
+                <Button onClick={handleClearActiveSearch}>Clear Search</Button>
+              </p>
             </Panel>
           )}
           <Panel header="Explore">
@@ -260,14 +288,21 @@ const SidebarPanels = ({ results, loadMoreResults, filters }) => {
       )}
 
       {hasResults && (
-        <Panel header="Results">
-          <ItemList items={results} />
-          {moreResultsAvailable && (
+        <>
+          <Panel header="Results">
+            <ItemList items={results} />
+            {moreResultsAvailable && (
+              <p>
+                <Button onClick={handleLoadMore}>Load More</Button>
+              </p>
+            )}
+          </Panel>
+          <Panel>
             <p>
-              <Button onClick={handleLoadMore}>Load More</Button>
+              <Button onClick={handleClearActiveSearch}>Clear Search</Button>
             </p>
-          )}
-        </Panel>
+          </Panel>
+        </>
       )}
     </>
   );
@@ -276,6 +311,7 @@ const SidebarPanels = ({ results, loadMoreResults, filters }) => {
 SidebarPanels.propTypes = {
   results: PropTypes.array,
   loadMoreResults: PropTypes.func,
+  clearActiveSearch: PropTypes.func,
   filters: PropTypes.object
 };
 

@@ -5,9 +5,9 @@ import 'proj4leaflet';
 import 'leaflet/dist/leaflet.css'; // This needs to be included for the map to actually work when compiled
 import L from 'leaflet';
 import { Map as BaseMap, TileLayer, ZoomControl } from 'react-leaflet';
+import 'leaflet-active-area';
 
 import MapService from '../models/map-service';
-import { usePrevious } from '../hooks';
 
 const Map = ({
   children,
@@ -16,7 +16,8 @@ const Map = ({
   center = [0, 0],
   zoom = 2,
   projections = [],
-  services = []
+  services = [],
+  useMapEffect
 }) => {
   const mapClassName = `map ${className || ''}`;
   let projection;
@@ -30,14 +31,16 @@ const Map = ({
   }
 
   const mapRef = createRef();
-  const mapId = usePrevious(map);
 
   useEffect(() => {
-    if (typeof mapId === 'undefined') return;
-    if (mapId === map) return;
-    const { current } = mapRef;
-    current.forceUpdate();
-  }, []);
+    const { current = {} } = mapRef;
+    const { leafletElement = {} } = current;
+    if (typeof useMapEffect === 'function') {
+      useMapEffect({
+        leafletElement
+      });
+    }
+  }, [map, mapRef]);
 
   // Set up a new map service given the name of the map
 
@@ -103,7 +106,8 @@ Map.propTypes = {
   zoom: PropTypes.number,
   className: PropTypes.string,
   projections: PropTypes.array,
-  services: PropTypes.array
+  services: PropTypes.array,
+  useMapEffect: PropTypes.func
 };
 
 export default Map;
