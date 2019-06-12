@@ -79,6 +79,7 @@ const Lens = ({
                 onSearch={handleOnSearch}
                 resolveQueryComplete={resolveLensAutocomplete}
                 placeholder={placeholder}
+                defaultValue={mapConfig.textInput}
               />
             </Panel>
 

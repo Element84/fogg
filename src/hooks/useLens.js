@@ -172,24 +172,32 @@ export default function useLens ({
   function handleQueryParams () {
     const urlParams = new URLSearchParams(location.search);
     const urlQuery = urlParams.get('q');
+    const availableFilters = filters.available;
+    const properties = new URLSearchParams(urlParams.get('properties'));
 
-    // Finds the params that match the available filters
-    // TODO: see if there's a different plan for using filters in the URL
-    let filterParams = filters.available.map(filter => {
-      let param = filter.id.split('/').pop();
-      return { id: `properties/${param}`, value: urlParams.get(param) };
-    });
+    let queryFilters = [];
 
-    // Ensures that we're only using parmas that were actually in the URL query
-    const queriedFilters = filterParams.filter(param => param.value !== null);
+    for (let property of properties.entries()) {
+      let key = property[0];
+      let value = property[1];
+      let id = `properties/${key}`;
 
-    resolveLensAutocomplete(urlQuery).then(queryResults => {
-      if (Array.isArray(queryResults)) {
-        const { value } = queryResults[0];
-        handleOnSearch(value, {}, urlQuery, queriedFilters);
-        setActiveFilters(queriedFilters);
-      }
-    });
+      availableFilters.find(element => {
+        if (element.id === id) {
+          queryFilters.push({ id, value });
+        }
+      });
+    }
+
+    if (urlQuery || queryFilters.length > 0) {
+      resolveLensAutocomplete(urlQuery).then(queryResults => {
+        if (Array.isArray(queryResults)) {
+          const { value } = queryResults[0];
+          handleOnSearch(value, {}, urlQuery, queryFilters);
+          setActiveFilters(queryFilters);
+        }
+      });
+    }
   }
   /**
    * handleClearSearch
