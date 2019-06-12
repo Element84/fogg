@@ -20,7 +20,8 @@ const Lens = ({
   map = 'blue_marble',
   search = true,
   placeholder = 'Search',
-  availableFilters
+  availableFilters,
+  useMapEffect
 }) => {
   const refMapDraw = createRef();
 
@@ -59,7 +60,8 @@ const Lens = ({
     center: position,
     zoom,
     services,
-    map
+    map,
+    useMapEffect
   };
 
   return (
@@ -128,7 +130,8 @@ Lens.propTypes = {
   services: PropTypes.array,
   search: PropTypes.bool,
   placeholder: PropTypes.string,
-  availableFilters: PropTypes.array
+  availableFilters: PropTypes.array,
+  useMapEffect: PropTypes.func
 };
 
 export default Lens;
