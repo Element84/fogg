@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FaPencilAlt, FaCheck, FaTimes } from 'react-icons/fa';
 
@@ -12,7 +12,7 @@ const logger = new Logger('ModInput', {
   isBrowser: true
 });
 
-const ModInput = ({ id, name, defaultValue = '', onSave, forceReset }) => {
+const ModInput = ({ id, name, defaultValue = '', onSave, forceDisable }) => {
   const inputName = name || id;
 
   if (!inputName) {
@@ -26,7 +26,7 @@ const ModInput = ({ id, name, defaultValue = '', onSave, forceReset }) => {
     updateOriginalValue,
     value,
     updateValue
-  } = useModValue(defaultValue, forceReset);
+  } = useModValue(defaultValue, forceDisable);
 
   let icon = isChangeable ? <FaCheck /> : <FaPencilAlt />;
 
@@ -75,6 +75,13 @@ const ModInput = ({ id, name, defaultValue = '', onSave, forceReset }) => {
     }
   }
 
+  useEffect(() => {
+    console.log('useEffect');
+    console.log('forceDisable', forceDisable);
+    console.log('isChangeable', isChangeable);
+    updateChangeable(!forceDisable);
+  }, [forceDisable]);
+
   const formInputProps = {
     id,
     name: inputName,
@@ -108,7 +115,7 @@ ModInput.propTypes = {
   name: PropTypes.string,
   defaultValue: PropTypes.string,
   onSave: PropTypes.func,
-  forceReset: PropTypes.bool
+  forceDisable: PropTypes.bool
 };
 
 export default ModInput;

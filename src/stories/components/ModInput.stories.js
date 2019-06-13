@@ -22,6 +22,6 @@ stories.add('Default', () => (
     id="test"
     defaultValue={defaultValue}
     onSave={handleOnSave}
-    forceReset={true}
+    forceDisable={true}
   />
 ));
