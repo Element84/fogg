@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import React, { createRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { useLens } from '../hooks';
@@ -40,6 +40,7 @@ const Lens = ({
     handleOnSearch,
     resolveLensAutocomplete,
     loadMoreResults,
+    handleQueryParams,
     clearActiveSearch,
     handleUpdateSearchParams
   } = lensHandlers;
@@ -64,6 +65,10 @@ const Lens = ({
     useMapEffect
   };
 
+  useEffect(() => {
+    handleQueryParams();
+  }, []);
+
   return (
     <div className="lens" data-has-results={hasResults}>
       <div className="lens-sidebar">
@@ -74,6 +79,7 @@ const Lens = ({
                 onSearch={handleOnSearch}
                 resolveQueryComplete={resolveLensAutocomplete}
                 placeholder={placeholder}
+                defaultValue={mapConfig.textInput}
               />
             </Panel>
 

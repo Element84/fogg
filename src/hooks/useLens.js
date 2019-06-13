@@ -32,6 +32,7 @@ export default function useLens ({
     openFilters,
     storeFilterChanges,
     saveFilterChanges,
+    setActiveFilters,
     cancelFilterChanges,
     clearActiveFilters
   } = useFilters(availableFilters);
@@ -89,7 +90,7 @@ export default function useLens ({
    * @description Fires when a search is performed via SearchComplete
    */
 
-  function handleOnSearch ({ x, y } = {}, date, textInput) {
+  function handleOnSearch ({ x, y } = {}, date, textInput, activeFilters = []) {
     if (typeof x === 'undefined' || typeof y === 'undefined') {
       return;
     }
@@ -107,7 +108,8 @@ export default function useLens ({
         center
       },
       date,
-      textInput
+      textInput,
+      activeFilters
     });
   }
 
@@ -167,6 +169,36 @@ export default function useLens ({
     });
   }
 
+  function handleQueryParams () {
+    const urlParams = new URLSearchParams(location.search);
+    const urlQuery = urlParams.get('q');
+    const availableFilters = filters.available;
+    const properties = new URLSearchParams(urlParams.get('properties'));
+
+    let queryFilters = [];
+
+    for (let property of properties.entries()) {
+      let key = property[0];
+      let value = property[1];
+      let id = `properties/${key}`;
+
+      availableFilters.find(element => {
+        if (element.id === id) {
+          queryFilters.push({ id, value });
+        }
+      });
+    }
+
+    if (urlQuery || queryFilters.length > 0) {
+      resolveLensAutocomplete(urlQuery).then(queryResults => {
+        if (Array.isArray(queryResults)) {
+          const { value } = queryResults[0];
+          handleOnSearch(value, {}, urlQuery, queryFilters);
+          setActiveFilters(queryFilters);
+        }
+      });
+    }
+  }
   /**
    * handleClearSearch
    */
@@ -185,6 +217,7 @@ export default function useLens ({
       handleOnSearch,
       resolveLensAutocomplete,
       handleUpdateSearchParams,
+      handleQueryParams,
       loadMoreResults: moreResultsAvailable ? handleLoadMoreResults : undefined,
       clearActiveSearch: handleClearSearch
     },

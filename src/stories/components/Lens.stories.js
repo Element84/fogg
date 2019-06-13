@@ -192,7 +192,7 @@ stories.add('Earth Search', () => {
             label: 'Collection',
             id: 'properties/collection',
             type: 'radiolist',
-            list: ['sentinel'],
+            list: ['sentinel-2-l1c'],
             defaultValue: false
           },
           {
