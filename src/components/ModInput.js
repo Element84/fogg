@@ -28,7 +28,6 @@ const ModInput = ({ id, name, defaultValue = '', onSave, forceReset }) => {
     updateValue
   } = useModValue(defaultValue, forceReset);
 
-  updateChangeable(!forceReset);
   let icon = isChangeable ? <FaCheck /> : <FaPencilAlt />;
 
   /**
