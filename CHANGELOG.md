@@ -1,3 +1,6 @@
+### Version 0.1.72
+- import order for map.js
+
 ### Version 0.1.71
 - downgrading leaflet
 
