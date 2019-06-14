@@ -54,6 +54,7 @@ const Lens = ({
   const { center, geoJson } = mapConfig || {};
   const { lat = 0, lng = 0 } = center;
 
+  const activeSearch = Array.isArray(results);
   const hasResults = Array.isArray(results) && results.length > 0;
   const position = [lat, lng];
 
@@ -83,7 +84,7 @@ const Lens = ({
               />
             </Panel>
 
-            {hasResults && filters.available.length > 0 && (
+            {activeSearch && filters.available.length > 0 && (
               <SearchPanelFilters
                 filters={filters}
                 onOpenFilters={openFilters}
@@ -106,7 +107,7 @@ const Lens = ({
         )}
       </div>
 
-      {hasResults && filters.isOpen && filters.available.length > 0 && (
+      {activeSearch && filters.isOpen && filters.available.length > 0 && (
         <SearchFilters
           className="lens-search-filters"
           filters={filters.available}
