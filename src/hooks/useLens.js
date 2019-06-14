@@ -10,15 +10,19 @@ import { resolveLensAutocomplete } from '../lib/lens';
 
 import { useFilters } from '.';
 
+const QUERY_SEARCH_PARAMS = ['q', 'properties'];
+
 export default function useLens ({
   defaultCenter = {},
   resolveOnSearch,
   refMapDraw,
   availableFilters
 }) {
+  const geoJsonDefault =
+    typeof geoJsonFromLatLn === 'function' && geoJsonFromLatLn(defaultCenter);
   const mapConfigDefaults = {
     center: defaultCenter,
-    geoJson: geoJsonFromLatLn(defaultCenter),
+    geoJson: geoJsonDefault,
     textInput: '',
     date: {},
     page: 1
@@ -32,6 +36,7 @@ export default function useLens ({
     openFilters,
     storeFilterChanges,
     saveFilterChanges,
+    setActiveFilters,
     cancelFilterChanges,
     clearActiveFilters
   } = useFilters(availableFilters);
@@ -89,7 +94,7 @@ export default function useLens ({
    * @description Fires when a search is performed via SearchComplete
    */
 
-  function handleOnSearch ({ x, y } = {}, date, textInput) {
+  function handleOnSearch ({ x, y } = {}, date, textInput, activeFilters = []) {
     if (typeof x === 'undefined' || typeof y === 'undefined') {
       return;
     }
@@ -107,15 +112,34 @@ export default function useLens ({
         center
       },
       date,
-      textInput
+      textInput,
+      activeFilters
     });
   }
+
+  /**
+   * clearSearchMarkers
+   * @description Clears all marker instances on map
+   */
+
+  function clearSearchMarkers () {
+    const { current } = refMapDraw;
+    const { leafletElement } = current || {};
+    if (leafletElement) {
+      clearLeafletElementLayers(leafletElement);
+    }
+  }
+
+  /**
+   * addSearchMarker
+   * @description Adds a new marker at position on map, clears old
+   */
 
   function addSearchMarker (position) {
     const { current } = refMapDraw;
     const { leafletElement } = current || {};
     if (leafletElement) {
-      clearLeafletElementLayers(leafletElement);
+      clearSearchMarkers();
       addLeafletMarkerLayer(position, leafletElement);
     }
   }
@@ -144,6 +168,7 @@ export default function useLens ({
 
   /**
    * handleUpdateSearchParams
+   * @description Handles lens events upon updating any search params
    */
 
   function handleUpdateSearchParams () {
@@ -158,6 +183,7 @@ export default function useLens ({
 
   /**
    * handleClearActiveFilters
+   * @description Handles lens events upon clearing active filters
    */
 
   function handleClearActiveFilters () {
@@ -168,10 +194,67 @@ export default function useLens ({
   }
 
   /**
+   * handleQueryParams
+   * @description Pulls in search related query params and updates search
+   */
+
+  function handleQueryParams () {
+    const urlParams = new URLSearchParams(location.search);
+    const urlQuery = urlParams.get('q');
+    const availableFilters = filters.available;
+    const properties = new URLSearchParams(urlParams.get('properties'));
+
+    let queryFilters = [];
+
+    // Loops through any available properties and adds to available filters
+
+    for (let property of properties.entries()) {
+      let key = property[0];
+      let value = property[1];
+      let id = `properties/${key}`;
+
+      availableFilters.find(element => {
+        if (element.id === id) {
+          queryFilters.push({ id, value });
+        }
+      });
+    }
+
+    // If we have any available search params, trigger an autocomplete with
+    // the query to grab the first match then trigger a search with it
+
+    if (urlQuery || queryFilters.length > 0) {
+      resolveLensAutocomplete(urlQuery).then(queryResults => {
+        if (Array.isArray(queryResults)) {
+          const { value } = queryResults[0];
+          handleOnSearch(value, {}, urlQuery, queryFilters);
+          setActiveFilters(queryFilters);
+        }
+      });
+    }
+  }
+
+  /**
+   * clearQuerySearchParams
+   * @description Remove all serach related query params from URL
+   */
+
+  function clearQuerySearchParams () {
+    const urlParams = new URLSearchParams(location.search);
+    QUERY_SEARCH_PARAMS.forEach(param => {
+      urlParams.delete(param);
+    });
+    window.history.pushState('', '', `?${urlParams.toString()}`);
+  }
+
+  /**
    * handleClearSearch
+   * @description Clears all aspects of an active search from the state
    */
 
   function handleClearSearch () {
+    clearQuerySearchParams();
+    clearSearchMarkers();
     updateMapConfig(mapConfigDefaults);
     updateResults(undefined);
     updateMoreResultsAvailable(false);
@@ -185,6 +268,7 @@ export default function useLens ({
       handleOnSearch,
       resolveLensAutocomplete,
       handleUpdateSearchParams,
+      handleQueryParams,
       loadMoreResults: moreResultsAvailable ? handleLoadMoreResults : undefined,
       clearActiveSearch: handleClearSearch
     },

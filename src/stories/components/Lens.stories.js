@@ -172,6 +172,19 @@ stories.add('Earth Search', () => {
     };
   }
 
+  function handleUseMapEffect ({ leafletElement }) {
+    // By class leafletElement.setActiveArea('map-active-area')
+    // Creates a new div for that area
+    leafletElement.setActiveArea({
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      right: '0',
+      height: '100vh',
+      marginLeft: '385px'
+    });
+  }
+
   return (
     <>
       <Lens
@@ -179,13 +192,14 @@ stories.add('Earth Search', () => {
         zoom={2}
         resolveOnSearch={handleResolveOnSearch}
         SidebarComponents={SidebarPanels}
+        useMapEffect={handleUseMapEffect}
         placeholder="Look stuffs on Earth Data"
         availableFilters={[
           {
             label: 'Collection',
             id: 'properties/collection',
             type: 'radiolist',
-            list: ['sentinel'],
+            list: ['sentinel-2-l1c'],
             defaultValue: false
           },
           {

@@ -10,7 +10,8 @@ const QUERY_COMPLETE_DEBOUNCE = 300;
 const SearchComplete = ({
   onSearch,
   resolveQueryComplete,
-  placeholder = 'Search'
+  placeholder = 'Search',
+  defaultValue
 }) => {
   const [isOpen, updateOpenState] = useState(false);
   const [results, updateResults] = useState([]);
@@ -119,6 +120,7 @@ const SearchComplete = ({
         onSearch={handleSearchboxSearch}
         onInput={handleOnInput}
         placeholder={placeholder}
+        defaultValue={defaultValue}
       />
 
       <div className="search-complete-results">
@@ -153,7 +155,8 @@ const SearchComplete = ({
 SearchComplete.propTypes = {
   onSearch: PropTypes.func,
   resolveQueryComplete: PropTypes.func,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  defaultValue: PropTypes.string
 };
 
 export default SearchComplete;

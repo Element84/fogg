@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import React, { createRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { useLens } from '../hooks';
@@ -20,7 +20,8 @@ const Lens = ({
   map = 'blue_marble',
   search = true,
   placeholder = 'Search',
-  availableFilters
+  availableFilters,
+  useMapEffect
 }) => {
   const refMapDraw = createRef();
 
@@ -39,6 +40,7 @@ const Lens = ({
     handleOnSearch,
     resolveLensAutocomplete,
     loadMoreResults,
+    handleQueryParams,
     clearActiveSearch,
     handleUpdateSearchParams
   } = lensHandlers;
@@ -59,8 +61,13 @@ const Lens = ({
     center: position,
     zoom,
     services,
-    map
+    map,
+    useMapEffect
   };
+
+  useEffect(() => {
+    handleQueryParams();
+  }, []);
 
   return (
     <div className="lens" data-has-results={hasResults}>
@@ -72,6 +79,7 @@ const Lens = ({
                 onSearch={handleOnSearch}
                 resolveQueryComplete={resolveLensAutocomplete}
                 placeholder={placeholder}
+                defaultValue={mapConfig.textInput}
               />
             </Panel>
 
@@ -128,7 +136,8 @@ Lens.propTypes = {
   services: PropTypes.array,
   search: PropTypes.bool,
   placeholder: PropTypes.string,
-  availableFilters: PropTypes.array
+  availableFilters: PropTypes.array,
+  useMapEffect: PropTypes.func
 };
 
 export default Lens;

@@ -1,3 +1,43 @@
+### Version 0.1.78
+
+### Version 0.1.77
+- leaflet
+
+### Version 0.1.76
+- leaflet
+
+### Version 0.1.75
+- removing unused gatsby dependencis, downgrading gatsby
+
+### Version 0.1.74
+- fixing dependencies
+
+### Version 0.1.73
+- trying to change leaflet import method
+
+### Version 0.1.72
+- import order for map.js
+
+### Version 0.1.71
+- downgrading leaflet
+
+### Version 0.1.70
+- downgrading core-js to fix dependency issue
+
+### Version 0.1.69
+- package upgrades
+
+### Version 0.1.68
+- adding onclick to wonderlink whitelist
+
+### Version 0.1.67
+- [JAM-409] Fix merge conflicts
+- [JAM-409] Query as defaultValue for input and update filter params
+- [JAM-409] updating logic to use reusable function. adding comments
+
+### Version 0.1.66
+- [JAM-418] setting up the map component to allow to use an effect, setting an active area to position the marker offset by sidebar
+
 ### Version 0.1.65
 - adding handler in fogg to support clearing a search
 
