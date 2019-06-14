@@ -10,6 +10,8 @@ import { resolveLensAutocomplete } from '../lib/lens';
 
 import { useFilters } from '.';
 
+const QUERY_SEARCH_PARAMS = ['q', 'properties'];
+
 export default function useLens ({
   defaultCenter = {},
   resolveOnSearch,
@@ -115,11 +117,29 @@ export default function useLens ({
     });
   }
 
-  function addSearchMarker (position) {
+  /**
+   * clearSearchMarkers
+   * @description Clears all marker instances on map
+   */
+
+  function clearSearchMarkers () {
     const { current } = refMapDraw;
     const { leafletElement } = current || {};
     if (leafletElement) {
       clearLeafletElementLayers(leafletElement);
+    }
+  }
+
+  /**
+   * addSearchMarker
+   * @description Adds a new marker at position on map, clears old
+   */
+
+  function addSearchMarker (position) {
+    const { current } = refMapDraw;
+    const { leafletElement } = current || {};
+    if (leafletElement) {
+      clearSearchMarkers();
       addLeafletMarkerLayer(position, leafletElement);
     }
   }
@@ -148,6 +168,7 @@ export default function useLens ({
 
   /**
    * handleUpdateSearchParams
+   * @description Handles lens events upon updating any search params
    */
 
   function handleUpdateSearchParams () {
@@ -162,6 +183,7 @@ export default function useLens ({
 
   /**
    * handleClearActiveFilters
+   * @description Handles lens events upon clearing active filters
    */
 
   function handleClearActiveFilters () {
@@ -171,6 +193,11 @@ export default function useLens ({
     });
   }
 
+  /**
+   * handleQueryParams
+   * @description Pulls in search related query params and updates search
+   */
+
   function handleQueryParams () {
     const urlParams = new URLSearchParams(location.search);
     const urlQuery = urlParams.get('q');
@@ -178,6 +205,8 @@ export default function useLens ({
     const properties = new URLSearchParams(urlParams.get('properties'));
 
     let queryFilters = [];
+
+    // Loops through any available properties and adds to available filters
 
     for (let property of properties.entries()) {
       let key = property[0];
@@ -191,6 +220,9 @@ export default function useLens ({
       });
     }
 
+    // If we have any available search params, trigger an autocomplete with
+    // the query to grab the first match then trigger a search with it
+
     if (urlQuery || queryFilters.length > 0) {
       resolveLensAutocomplete(urlQuery).then(queryResults => {
         if (Array.isArray(queryResults)) {
@@ -201,11 +233,28 @@ export default function useLens ({
       });
     }
   }
+
+  /**
+   * clearQuerySearchParams
+   * @description Remove all serach related query params from URL
+   */
+
+  function clearQuerySearchParams () {
+    const urlParams = new URLSearchParams(location.search);
+    QUERY_SEARCH_PARAMS.forEach(param => {
+      urlParams.delete(param);
+    });
+    window.history.pushState('', '', `?${urlParams.toString()}`);
+  }
+
   /**
    * handleClearSearch
+   * @description Clears all aspects of an active search from the state
    */
 
   function handleClearSearch () {
+    clearQuerySearchParams();
+    clearSearchMarkers();
     updateMapConfig(mapConfigDefaults);
     updateResults(undefined);
     updateMoreResultsAvailable(false);
