@@ -13,7 +13,7 @@ const SearchBox = ({
   placeholder = 'Search',
   searchInput = ''
 }) => {
-  const [query, setQuery] = useState();
+  const [query, setQuery] = useState('');
 
   const [date, setDate] = useState({
     dateIsOpen: false,
