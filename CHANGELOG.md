@@ -1,3 +1,6 @@
+### Version 0.1.68
+- adding onclick to wonderlink whitelist
+
 ### Version 0.1.67
 - [JAM-409] Fix merge conflicts
 - [JAM-409] Query as defaultValue for input and update filter params
