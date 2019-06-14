@@ -23,7 +23,7 @@ describe('DatetimeRange', () => {
   });
 
   describe('Events', () => {
-    it('should trigger onChange event with updated start date', () => {
+    it('should set a start date and trigger onChange when saved', () => {
       const datetimerange = mount(<DatetimeRange onChange={handleOnChange} />);
 
       let startDate = null;
@@ -36,13 +36,17 @@ describe('DatetimeRange', () => {
       const body = startPicker.find('tbody');
       const firstrow = body.find('tr').first();
       const firstday = firstrow.find('td').first();
+      const save = datetimerange.find(
+        '.datetime-range-actions-save .button button'
+      );
 
       firstday.simulate('click');
+      save.simulate('click');
 
       expect(typeof startDate).toEqual('number');
     });
 
-    it('should trigger onChange event with updated end date', () => {
+    it('should set an end date and trigger onChange when saved', () => {
       const datetimerange = mount(<DatetimeRange onChange={handleOnChange} />);
 
       let endDate = null;
@@ -55,8 +59,12 @@ describe('DatetimeRange', () => {
       const body = endPicker.find('tbody');
       const firstrow = body.find('tr').first();
       const firstday = firstrow.find('td').first();
+      const save = datetimerange.find(
+        '.datetime-range-actions-save .button button'
+      );
 
       firstday.simulate('click');
+      save.simulate('click');
 
       expect(typeof endDate).toEqual('number');
     });

@@ -51,9 +51,9 @@ const SearchBox = ({
    * @description Handles performing search and firing onSearch callback with query
    */
 
-  function handleSearch () {
+  function handleSearch (searchQuery = query, searchDate = date.date) {
     if (typeof onSearch === 'function') {
-      onSearch(query, date.date);
+      onSearch(searchQuery, searchDate);
     }
   }
 
@@ -79,7 +79,23 @@ const SearchBox = ({
       ...date,
       date: {
         ...newDate
-      }
+      },
+      dateIsOpen: false
+    });
+    if (typeof query === 'string' && query.length > 0) {
+      handleSearch(query, newDate);
+    }
+  }
+
+  /**
+   * handleDateCancel
+   * @description Fires when the datetime range changes are cancelled
+   */
+
+  function handleDateCancel () {
+    setDate({
+      ...date,
+      dateIsOpen: false
     });
   }
 
@@ -114,15 +130,24 @@ const SearchBox = ({
           className="search-box-controls-date"
           data-is-searchbox-date-open={date.dateIsOpen}
         >
-          <Button onClick={handleDateClick}>
+          <Button
+            className="search-box-controls-control"
+            onClick={handleDateClick}
+          >
             <FaCalendarAlt />
           </Button>
           <div className="search-box-controls-date-picker">
-            <DatetimeRange onChange={handleDateChange} />
+            <DatetimeRange
+              onChange={handleDateChange}
+              onCancel={handleDateCancel}
+            />
           </div>
         </div>
         <div className="search-box-controls-search">
-          <Button onClick={handleSearchClick}>
+          <Button
+            className="search-box-controls-control"
+            onClick={handleSearchClick}
+          >
             <FaSearch />
           </Button>
         </div>

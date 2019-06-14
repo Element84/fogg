@@ -1,14 +1,63 @@
 .datetime-range {
   display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  background-color: white;
+  box-shadow: $component-shadow-lifted;
+}
+
+.datetime-range-actions {
+
+  width: 100%;
+  padding-top: .2em;
+  border-top: solid 1px $color-gray1;
+  margin-top: .6em;
+
+  ul {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .button,
+  button {
+
+    &,
+    span {
+      color: $color-gray5;
+      text-decoration: none;
+    }
+
+  }
+
+  button {
+    padding: .6em .8em
+  }
+
+  svg {
+    margin-right: .25em;
+  }
+
+}
+
+.datetime-range-actions-save {
+
+  svg {
+    margin-right: .4em;
+  }
+
 }
 
 .datetime-range-selection {
 
   flex-grow: 1;
-  margin-right: .5em;
+  margin-left: .5em;
 
-  &:last-child {
-    margin-right: 0;
+  &:first-child {
+    margin-left: 0;
   }
 
   & > strong {
