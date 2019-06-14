@@ -1,9 +1,9 @@
 import React, { useEffect, createRef } from 'react';
 import PropTypes from 'prop-types';
-import 'proj4';
-import 'proj4leaflet';
 import 'leaflet/dist/leaflet.css'; // This needs to be included for the map to actually work when compiled
 import L from 'leaflet';
+import 'proj4';
+import 'proj4leaflet';
 import { Map as BaseMap, TileLayer, ZoomControl } from 'react-leaflet';
 import 'leaflet-active-area';
 
