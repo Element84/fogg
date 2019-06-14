@@ -1,3 +1,6 @@
+### Version 0.1.69
+- package upgrades
+
 ### Version 0.1.68
 - adding onclick to wonderlink whitelist
 
