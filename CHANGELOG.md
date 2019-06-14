@@ -1,3 +1,6 @@
+### Version 0.1.75
+- removing unused gatsby dependencis, downgrading gatsby
+
 ### Version 0.1.74
 - fixing dependencies
 
