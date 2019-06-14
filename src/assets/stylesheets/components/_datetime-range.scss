@@ -2,6 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  background-color: white;
+  box-shadow: $component-shadow-lifted;
 }
 
 .datetime-range-actions {
@@ -52,10 +54,10 @@
 .datetime-range-selection {
 
   flex-grow: 1;
-  margin-right: .5em;
+  margin-left: .5em;
 
-  &:last-child {
-    margin-right: 0;
+  &:first-child {
+    margin-left: 0;
   }
 
   & > strong {

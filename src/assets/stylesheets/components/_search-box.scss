@@ -92,7 +92,6 @@ $search-box-height: 3.2em;
   position: absolute;
   top: 100%;
   right: 0;
-  box-shadow: $component-shadow-lifted;
 
   .search-box-controls-date[data-is-searchbox-date-open="true"] & {
     display: block;
