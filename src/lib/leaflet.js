@@ -1,10 +1,7 @@
+import L from 'leaflet';
 import { geocode } from 'esri-leaflet-geocoder';
 import GeoJSON from 'geojson';
 import PromiseCancelable from 'p-cancelable';
-
-/* eslint-disable */
-const Leaflet = L;
-/* eslint-enable */
 
 const DRAW_SHAPES = ['polygon', 'rectangle'];
 
@@ -46,7 +43,7 @@ export function clearLeafletElementLayers (leafletElement, excludeIds = []) {
  */
 
 export function addLeafletMarkerLayer ({ lat, lng }, map) {
-  return Leaflet.marker([lat, lng], {
+  return L.marker([lat, lng], {
     icon: buildMapMarkerIcon()
   }).addTo(map);
 }
@@ -58,29 +55,23 @@ export function addLeafletMarkerLayer ({ lat, lng }, map) {
  */
 
 export function getShapeType (layer) {
-  if (layer instanceof Leaflet.Circle) {
+  if (layer instanceof L.Circle) {
     return 'circle';
   }
 
-  if (layer instanceof Leaflet.Marker) {
+  if (layer instanceof L.Marker) {
     return 'marker';
   }
 
-  if (
-    layer instanceof Leaflet.Polyline &&
-    !(layer instanceof Leaflet.Polygon)
-  ) {
+  if (layer instanceof L.Polyline && !(layer instanceof L.Polygon)) {
     return 'polyline';
   }
 
-  if (
-    layer instanceof Leaflet.Polygon &&
-    !(layer instanceof Leaflet.Rectangle)
-  ) {
+  if (layer instanceof L.Polygon && !(layer instanceof L.Rectangle)) {
     return 'polygon';
   }
 
-  if (layer instanceof Leaflet.Rectangle) {
+  if (layer instanceof L.Rectangle) {
     return 'rectangle';
   }
 }
@@ -209,7 +200,7 @@ export function geoJsonFromLatLn ({ lat = 0, lng = 0 }) {
 
 export function geoJsonLayerFromLatLn (position) {
   const geoJson = geoJsonFromLatLn(position);
-  return Leaflet.geoJSON(geoJson);
+  return L.geoJSON(geoJson);
 }
 
 /**
@@ -242,7 +233,7 @@ export function buildMapMarkerIcon () {
   // Leaflet uses window to bea ble to set up an icon, so we need to
   // make sure it's available otherwise don't return anything of value
   if (!icon && typeof window !== 'undefined') {
-    icon = new Leaflet.Icon({
+    icon = new L.Icon({
       iconUrl: require('../assets/images/map-marker.svg'),
       iconAnchor: [5, 55],
       popupAnchor: [10, -44],
