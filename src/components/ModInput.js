@@ -76,9 +76,6 @@ const ModInput = ({ id, name, defaultValue = '', onSave, forceDisable }) => {
   }
 
   useEffect(() => {
-    console.log('useEffect');
-    console.log('forceDisable', forceDisable);
-    console.log('isChangeable', isChangeable);
     updateChangeable(!forceDisable);
   }, [forceDisable]);
 
