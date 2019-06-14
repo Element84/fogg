@@ -1,3 +1,6 @@
+### Version 0.1.74
+- fixing dependencies
+
 ### Version 0.1.73
 - trying to change leaflet import method
 
