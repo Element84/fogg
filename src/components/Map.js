@@ -1,13 +1,17 @@
 import React, { useEffect, createRef } from 'react';
 import PropTypes from 'prop-types';
 import 'leaflet/dist/leaflet.css'; // This needs to be included for the map to actually work when compiled
-import L from 'leaflet';
+import 'leaflet';
 import 'proj4';
 import 'proj4leaflet';
 import { Map as BaseMap, TileLayer, ZoomControl } from 'react-leaflet';
 import 'leaflet-active-area';
 
 import MapService from '../models/map-service';
+
+/* eslint-disable */
+const Leaflet = L;
+/* eslint-enable */
 
 const Map = ({
   children,
@@ -52,11 +56,15 @@ const Map = ({
   // Construct a CRS projection given the service properties
 
   if (service.crs) {
-    projection = new L.Proj.CRS(service.crs.code, service.crs.definition, {
-      origin: service.crs.origin,
-      resolutions: service.crs.resolutions,
-      bounds: L.Bounds(service.crs.bounds)
-    });
+    projection = new Leaflet.Proj.CRS(
+      service.crs.code,
+      service.crs.definition,
+      {
+        origin: service.crs.origin,
+        resolutions: service.crs.resolutions,
+        bounds: Leaflet.Bounds(service.crs.bounds)
+      }
+    );
   }
 
   const mapSettings = {
