@@ -16,9 +16,11 @@ export default function useLens ({
   refMapDraw,
   availableFilters
 }) {
+  const geoJsonDefault =
+    typeof geoJsonFromLatLn === 'function' && geoJsonFromLatLn(defaultCenter);
   const mapConfigDefaults = {
     center: defaultCenter,
-    geoJson: geoJsonFromLatLn(defaultCenter),
+    geoJson: geoJsonDefault,
     textInput: '',
     date: {},
     page: 1
