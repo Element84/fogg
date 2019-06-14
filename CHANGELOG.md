@@ -1,3 +1,6 @@
+### Version 0.1.70
+- downgrading core-js to fix dependency issue
+
 ### Version 0.1.69
 - package upgrades
 
