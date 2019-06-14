@@ -1,3 +1,6 @@
+### Version 0.1.73
+- trying to change leaflet import method
+
 ### Version 0.1.72
 - import order for map.js
 
