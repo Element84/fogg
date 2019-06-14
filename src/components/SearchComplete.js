@@ -121,7 +121,7 @@ const SearchComplete = ({
         onSearch={handleSearchboxSearch}
         onInput={handleOnInput}
         placeholder={placeholder}
-        searchInput={searchInput}
+        searchInput={searchInput || defaultValue}
       />
 
       <div className="search-complete-results">
