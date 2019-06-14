@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FaSearch, FaCalendarAlt } from 'react-icons/fa';
 
@@ -11,14 +11,18 @@ const SearchBox = ({
   onInput,
   onSearch,
   placeholder = 'Search',
-  defaultValue = ''
+  searchInput = ''
 }) => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState();
 
   const [date, setDate] = useState({
     dateIsOpen: false,
     date: {}
   });
+
+  useEffect(() => {
+    setQuery(searchInput);
+  }, [searchInput]);
 
   /**
    * handleSearchInput
@@ -106,7 +110,7 @@ const SearchBox = ({
           className="search-box-input"
           placeholder={placeholder}
           onInput={handleSearchInput}
-          defaultValue={defaultValue}
+          value={query}
         />
       </Form>
       <div className="search-box-controls">
@@ -135,7 +139,7 @@ SearchBox.propTypes = {
   onInput: PropTypes.func,
   onSearch: PropTypes.func,
   placeholder: PropTypes.string,
-  defaultValue: PropTypes.string
+  searchInput: PropTypes.string
 };
 
 export default SearchBox;
