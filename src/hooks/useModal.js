@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { closeModal, openModal } from '../actions';
-import ui from '../reducers/ui';
+import { ui } from '../reducers';
 import { ModalContext } from '../context';
 
 const useModal = initialState => {
