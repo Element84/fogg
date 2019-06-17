@@ -94,7 +94,12 @@ export default function useLens ({
    * @description Fires when a search is performed via SearchComplete
    */
 
-  function handleOnSearch ({ x, y } = {}, date, textInput, activeFilters = []) {
+  function handleOnSearch (
+    { x, y } = {},
+    date,
+    textInput,
+    activeFilters = filters.active
+  ) {
     if (typeof x === 'undefined' || typeof y === 'undefined') {
       return;
     }

@@ -42,7 +42,8 @@ const SearchComplete = ({
    * @description Triggers when someone clicks on a result item
    */
 
-  function handleResultClick (e, value) {
+  function handleResultClick (e, value, label) {
+    updateSearchInput(label);
     handleQuery(value, null, query);
     updateQuery(value);
     updateOpenState(false);
@@ -120,7 +121,7 @@ const SearchComplete = ({
         onSearch={handleSearchboxSearch}
         onInput={handleOnInput}
         placeholder={placeholder}
-        defaultValue={defaultValue}
+        searchInput={searchInput || defaultValue}
       />
 
       <div className="search-complete-results">
@@ -133,7 +134,7 @@ const SearchComplete = ({
                   key={`SearchComplete-Result-Item-${index}`}
                   className="search-complete-results-item"
                 >
-                  <button onClick={e => handleResultClick(e, value)}>
+                  <button onClick={e => handleResultClick(e, value, label)}>
                     <span className="search-complete-results-item-label">
                       {label}
                     </span>
