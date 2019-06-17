@@ -26,7 +26,7 @@ const ModInput = ({ id, name, defaultValue = '', onSave, forceDisable }) => {
     updateOriginalValue,
     value,
     updateValue
-  } = useModValue(defaultValue, forceDisable);
+  } = useModValue(defaultValue);
 
   let icon = isChangeable ? <FaCheck /> : <FaPencilAlt />;
 
