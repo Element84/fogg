@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Datetime from 'react-datetime';
-import { FaCheck, FaTimes } from 'react-icons/fa';
+import { FaCheck, FaTimes, FaBan } from 'react-icons/fa';
 
 import Button from './Button';
 
-const DatetimeRange = ({ onChange, onCancel }) => {
-  const [dateTemp, updateDateTemp] = useState({
+const DatetimeRange = ({ onChange, onCancel, onClear }) => {
+  const emptyDate = {
     start: null,
     end: null
-  });
+  };
 
-  const [date, updateDate] = useState({
-    start: null,
-    end: null
-  });
+  const [dateTemp, updateDateTemp] = useState(emptyDate);
+
+  const [date, updateDate] = useState(emptyDate);
 
   /**
    * handleUpdateTempDate
@@ -81,6 +80,19 @@ const DatetimeRange = ({ onChange, onCancel }) => {
     }
   }
 
+  /**
+   * handleDatetimeClear
+   * @description When someone clicks the Cancel button
+   */
+
+  function handleDatetimeClear () {
+    updateDateTemp(emptyDate);
+    updateDate(emptyDate);
+    if (typeof onClear === 'function') {
+      onClear(date);
+    }
+  }
+
   const datetimeActions = [
     {
       label: 'Save',
@@ -93,6 +105,12 @@ const DatetimeRange = ({ onChange, onCancel }) => {
       id: 'cancel',
       onClick: handleDatetimeCancel,
       icon: <FaTimes />
+    },
+    {
+      label: 'Clear',
+      id: 'clear',
+      onClick: handleDatetimeClear,
+      icon: <FaBan />
     }
   ];
 
@@ -136,7 +154,8 @@ const DatetimeRange = ({ onChange, onCancel }) => {
 
 DatetimeRange.propTypes = {
   onChange: PropTypes.func,
-  onCancel: PropTypes.func
+  onCancel: PropTypes.func,
+  onClear: PropTypes.func
 };
 
 export default DatetimeRange;

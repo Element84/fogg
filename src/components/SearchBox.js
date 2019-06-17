@@ -100,6 +100,21 @@ const SearchBox = ({
   }
 
   /**
+   * handleDateClear
+   * @description Fires when the datetime is cleared
+   */
+
+  function handleDateClear () {
+    setDate({
+      date: {
+        start: '',
+        end: ''
+      },
+      dateIsOpen: false
+    });
+  }
+
+  /**
    * handleFormSubmit
    * @description
    */
@@ -140,6 +155,7 @@ const SearchBox = ({
             <DatetimeRange
               onChange={handleDateChange}
               onCancel={handleDateCancel}
+              onClear={handleDateClear}
             />
           </div>
         </div>
