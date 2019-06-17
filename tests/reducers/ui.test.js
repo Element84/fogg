@@ -1,4 +1,4 @@
-import ui from '../../src/reducers/ui';
+import { ui } from '../../src/reducers';
 
 describe('reducers > ui', () => {
   it('should return default state', () => {
