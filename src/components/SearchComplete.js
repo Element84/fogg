@@ -44,7 +44,7 @@ const SearchComplete = ({
 
   function handleResultClick (e, value, label) {
     updateSearchInput(label);
-    handleQuery(value, null, query);
+    handleQuery(value, null, label);
     updateQuery(value);
     updateOpenState(false);
   }
