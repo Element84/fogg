@@ -5,10 +5,9 @@ import {
   clearLeafletElementLayers,
   addLeafletMarkerLayer
 } from '../lib/leaflet';
-
 import { resolveLensAutocomplete } from '../lib/lens';
 
-import { useFilters } from '.';
+import { useFilters, useLocation } from '../hooks';
 
 const QUERY_SEARCH_PARAMS = ['q', 'properties'];
 
@@ -18,11 +17,10 @@ export default function useLens ({
   refMapDraw,
   availableFilters
 }) {
-  const geoJsonDefault =
-    typeof geoJsonFromLatLn === 'function' && geoJsonFromLatLn(defaultCenter);
+  // const defaultGeoJson = typeof geoJsonFromLatLn === 'function' && geoJsonFromLatLn(defaultCenter);
   const mapConfigDefaults = {
     center: defaultCenter,
-    geoJson: geoJsonDefault,
+    geoJson: undefined,
     textInput: '',
     date: {},
     page: 1
@@ -30,6 +28,8 @@ export default function useLens ({
   const [mapConfig, updateMapConfig] = useState(mapConfigDefaults);
   const [results, updateResults] = useState();
   const [moreResultsAvailable, updateMoreResultsAvailable] = useState();
+
+  const { search: locationSearch, history } = useLocation();
 
   const {
     filters,
@@ -204,7 +204,7 @@ export default function useLens ({
    */
 
   function handleQueryParams () {
-    const urlParams = new URLSearchParams(location.search);
+    const urlParams = new URLSearchParams(locationSearch);
     const urlQuery = urlParams.get('q');
     const availableFilters = filters.available;
     const properties = new URLSearchParams(urlParams.get('properties'));
@@ -222,6 +222,7 @@ export default function useLens ({
         if (element.id === id) {
           queryFilters.push({ id, value });
         }
+        return element.id === id;
       });
     }
 
@@ -245,11 +246,14 @@ export default function useLens ({
    */
 
   function clearQuerySearchParams () {
-    const urlParams = new URLSearchParams(location.search);
+    if (typeof locationSearch === 'undefined') return;
+    const urlParams = new URLSearchParams(locationSearch);
     QUERY_SEARCH_PARAMS.forEach(param => {
       urlParams.delete(param);
     });
-    window.history.pushState('', '', `?${urlParams.toString()}`);
+    if (history) {
+      history.pushState('', '', `?${urlParams.toString()}`);
+    }
   }
 
   /**

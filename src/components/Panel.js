@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const Panel = ({ children, header, actions, className }) => {
+  const [mapPreviewState, updateMapPreviewState] = useState();
   return (
     <div className={`panel ${className || ''}`}>
       {header && (

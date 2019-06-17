@@ -21,7 +21,7 @@ const ItemList = ({ items = [], className, actionIcon }) => {
                 <WonderLink to={to}>
                   {thumb && (
                     <span className="item-list-item-thumb">
-                      <img src={thumb} />
+                      <img src={thumb} alt={`${label} Thumbnail`} />
                     </span>
                   )}
                   <span className="item-list-item-content">

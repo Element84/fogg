@@ -5,7 +5,7 @@ const Logger = require('./src/lib/logger');
 
 const THEME_NAME = 'fogg';
 
-exports.onCreateWebpackConfig = ({ loaders, actions }) => {
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   const logger = new Logger(`${THEME_NAME}:onCreateWebpackConfig`);
 
   let themeLocation;
@@ -30,6 +30,29 @@ exports.onCreateWebpackConfig = ({ loaders, actions }) => {
       ]
     }
   });
+
+  if (stage === 'build-html') {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /esri-leaflet/,
+            use: loaders.null()
+          }
+        ]
+      }
+    });
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /proj4/,
+            use: loaders.null()
+          }
+        ]
+      }
+    });
+  }
 };
 
 // make sure src/pages exists for the filesystem source or it will error
