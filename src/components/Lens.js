@@ -32,7 +32,13 @@ const Lens = ({
     refMapDraw
   });
 
-  const { mapConfig, results, filters, handlers: lensHandlers } = lens;
+  const {
+    mapConfig,
+    results,
+    clearSearchInput,
+    filters,
+    handlers: lensHandlers
+  } = lens;
   const { handlers: filtersHandlers } = filters;
 
   const {
@@ -81,6 +87,7 @@ const Lens = ({
                 resolveQueryComplete={resolveLensAutocomplete}
                 placeholder={placeholder}
                 defaultValue={mapConfig.textInput}
+                clearSearchInput={clearSearchInput}
               />
             </Panel>
 

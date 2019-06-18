@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useDebouncedCallback from 'use-debounce/lib/callback';
 
@@ -11,7 +11,8 @@ const SearchComplete = ({
   onSearch,
   resolveQueryComplete,
   placeholder = 'Search',
-  defaultValue
+  defaultValue,
+  clearSearchInput
 }) => {
   const [isOpen, updateOpenState] = useState(false);
   const [results, updateResults] = useState([]);
@@ -22,6 +23,12 @@ const SearchComplete = ({
     updateQueryState,
     QUERY_COMPLETE_DEBOUNCE
   );
+
+  useEffect(() => {
+    if (clearSearchInput) {
+      updateSearchInput('');
+    }
+  }, [clearSearchInput]);
 
   /**
    * handleSearchboxSearch
@@ -157,7 +164,8 @@ SearchComplete.propTypes = {
   onSearch: PropTypes.func,
   resolveQueryComplete: PropTypes.func,
   placeholder: PropTypes.string,
-  defaultValue: PropTypes.string
+  defaultValue: PropTypes.string,
+  clearSearchInput: PropTypes.bool
 };
 
 export default SearchComplete;
