@@ -10,12 +10,6 @@ import SearchComplete from './SearchComplete';
 import SearchFilters from './SearchFilters';
 import SearchPanelFilters from './SearchPanelFilters';
 
-require('react-dom');
-if (typeof window !== 'undefined') {
-  window.React2 = require('react');
-  console.log(window.React1 === window.React2);
-}
-
 const Lens = ({
   children,
   defaultCenter = {},

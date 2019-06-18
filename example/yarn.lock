@@ -2693,6 +2693,11 @@ core-js-pure@3.1.4:
   resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.1.4.tgz#5fa17dc77002a169a3566cc48dc774d2e13e3769"
   integrity sha512-uJ4Z7iPNwiu1foygbcZYJsJs1jiXrTTCvxfLDXNhI/I+NHbSIEyr548y4fcsCEyWY0XgfAG/qqaunJ1SThHenA==
 
+core-js@2.6.5:
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.5.tgz#44bc8d249e7fb2ff5d00e0341a7ffb94fbf67895"
+  integrity sha512-klh/kDpwX8hryYL14M9w/xei6vrv6sE8gTHDG7/T/+SEovB/G4ejwcfE/CBzO6Edsu+OETZMZ3wcX/EjUkrl5A==
+
 core-js@^1.0.0:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
@@ -4469,12 +4474,13 @@ flush-write-stream@^1.0.0:
     readable-stream "^2.3.6"
 
 fogg@../:
-  version "0.1.82"
+  version "0.1.83"
   dependencies:
     "@babel/core" "^7.4.5"
     axios "^0.19.0"
     babel-loader "^8.0.6"
     babel-preset-gatsby "^0.1.11"
+    core-js "2.6.5"
     eslint-plugin-react-hooks "^1.6.0"
     esri-leaflet "^2.2.4"
     esri-leaflet-geocoder "^2.2.14"
