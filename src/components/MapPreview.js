@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Map from './Map';
 import Marker from './MapMarker';
 
-const MapPreview = ({ position }) => {
-  const [mapPreviewState, updateMapPreviewState] = useState();
+const MapPreview = ({ position = {} }) => {
   const { lat = 0, lng = 0 } = position;
 
   const mapSettings = {

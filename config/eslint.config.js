@@ -31,7 +31,7 @@ module.exports = {
     },
   },
 
-  plugins: ['react'],
+  plugins: ['react', 'react-hooks'],
 
   extends: ['semistandard', 'plugin:react/recommended'],
 };

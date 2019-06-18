@@ -237,7 +237,7 @@ const SidebarPanels = ({
 }) => {
   const hasResults = Array.isArray(results) && results.length > 0;
   const moreResultsAvailable = typeof loadMoreResults === 'function';
-  const { handlers: filtersHandlers } = filters;
+  const { handlers: filtersHandlers } = (filters = {});
 
   function handleLoadMore (e) {
     if (moreResultsAvailable) {

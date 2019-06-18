@@ -1,0 +1,24 @@
+{
+  "name": "fogg-example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Element 84, Inc.",
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "clean": "gatsby clean",
+    "cleaner": "yarn clean && rm -rf node_modules && yarn install",
+    "develop": "gatsby clean && gatsby develop"
+  },
+  "dependencies": {
+    "fogg": "../",
+    "gatsby": "^2.9.4",
+    "gatsby-plugin-sass": "^2.0.11",
+    "react": "16.8.6",
+    "react-dom": "16.8.6"
+  },
+  "resolutions": {
+    "**/react": "16.8.6",
+    "**/react-dom": "16.8.6"
+  }
+}

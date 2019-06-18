@@ -7,7 +7,7 @@ import {
 } from '../lib/leaflet';
 import { resolveLensAutocomplete } from '../lib/lens';
 
-import { useFilters, useLocation } from '../hooks';
+import { useFilters, useLocation } from '.';
 
 const QUERY_SEARCH_PARAMS = ['q', 'properties'];
 
@@ -17,10 +17,11 @@ export default function useLens ({
   refMapDraw,
   availableFilters
 }) {
-  // const defaultGeoJson = typeof geoJsonFromLatLn === 'function' && geoJsonFromLatLn(defaultCenter);
+  const defaultGeoJson =
+    typeof geoJsonFromLatLn === 'function' && geoJsonFromLatLn(defaultCenter);
   const mapConfigDefaults = {
     center: defaultCenter,
-    geoJson: undefined,
+    geoJson: defaultGeoJson,
     textInput: '',
     date: {},
     page: 1
@@ -251,6 +252,7 @@ export default function useLens ({
     QUERY_SEARCH_PARAMS.forEach(param => {
       urlParams.delete(param);
     });
+
     if (history) {
       history.pushState('', '', `?${urlParams.toString()}`);
     }

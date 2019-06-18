@@ -237,6 +237,7 @@ export function geocodePlacename (placename) {
 
 export function buildMapMarkerIcon () {
   if (!L) return;
+
   let icon;
   // Leaflet uses window to bea ble to set up an icon, so we need to
   // make sure it's available otherwise don't return anything of value
