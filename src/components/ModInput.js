@@ -36,7 +36,8 @@ const ModInput = ({ id, name, defaultValue = '', onSave, forceDisable }) => {
    *     is going from changeable and is saving, it will trigger a save event
    */
 
-  function handleChangeClick () {
+  function handleChangeClick (e) {
+    e.preventDefault();
     const shouldSave = !!isChangeable;
     updateChangeable(!isChangeable);
     if (shouldSave) {
@@ -76,7 +77,7 @@ const ModInput = ({ id, name, defaultValue = '', onSave, forceDisable }) => {
   }
 
   useEffect(() => {
-    updateChangeable(!forceDisable);
+    updateChangeable(false);
   }, [forceDisable]);
 
   const formInputProps = {

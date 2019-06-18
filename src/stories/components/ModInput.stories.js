@@ -6,13 +6,16 @@ import ModInput from '../../components/ModInput';
 import Form from '../../components/Form';
 import Button from '../../components/Button';
 
+// One of the problems I'm facing here is that the form doesn't know when the ModInputs are made changeable.
+// Ideally when the Save button is clicked, it would assume that they're all changeable and make them all unchangeable
+// To do that it modInputDisabled needs to be set false. Then change them to true.
+
 const stories = storiesOf('Components|ModInput', module);
 
 const defaultValue = 'Chookity';
 
 const FormWrapper = () => {
   const [saveButtonDisabled, updateSaveButtonDisabled] = useState(true);
-
   const [modInputDisabled, updateModInputDisabled] = useState(true);
 
   const user = {
@@ -26,18 +29,19 @@ const FormWrapper = () => {
     e.preventDefault();
 
     Object.entries(fields).forEach(entry => {
-      console.log(entry);
       let name = entry[0];
       let value = entry[1].value;
       handleModInputSave(value, name);
     });
+
     updateSaveButtonDisabled(true);
-    updateModInputDisabled(true);
-    console.log(modInputDisabled);
+    updateModInputDisabled(false);
+    setTimeout(() => {
+      updateModInputDisabled(true);
+    }, 500);
   }
 
   function handleFormInputChange (e) {
-    updateModInputDisabled(false);
     updateSaveButtonDisabled(false);
   }
 
