@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Datetime from 'react-datetime';
 import { FaCheck, FaTimes, FaBan } from 'react-icons/fa';
 
 import Button from './Button';
 
-const DatetimeRange = ({ onChange, onCancel, onClear }) => {
+const DatetimeRange = ({ onChange, onCancel, onClear, clearDate }) => {
   const emptyDate = {
     start: null,
     end: null
@@ -14,6 +14,12 @@ const DatetimeRange = ({ onChange, onCancel, onClear }) => {
   const [dateTemp, updateDateTemp] = useState(emptyDate);
 
   const [date, updateDate] = useState(emptyDate);
+
+  useEffect(() => {
+    if (clearDate) {
+      handleDatetimeClear();
+    }
+  }, [clearDate]);
 
   /**
    * handleUpdateTempDate
@@ -155,7 +161,8 @@ const DatetimeRange = ({ onChange, onCancel, onClear }) => {
 DatetimeRange.propTypes = {
   onChange: PropTypes.func,
   onCancel: PropTypes.func,
-  onClear: PropTypes.func
+  onClear: PropTypes.func,
+  clearDate: PropTypes.bool
 };
 
 export default DatetimeRange;

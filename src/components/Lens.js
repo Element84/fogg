@@ -88,6 +88,7 @@ const Lens = ({
                 placeholder={placeholder}
                 defaultValue={mapConfig.textInput}
                 clearSearchInput={clearSearchInput}
+                defaultDate={mapConfig.date}
               />
             </Panel>
 

@@ -12,7 +12,8 @@ const SearchComplete = ({
   resolveQueryComplete,
   placeholder = 'Search',
   defaultValue,
-  clearSearchInput
+  clearSearchInput,
+  defaultDate
 }) => {
   const [isOpen, updateOpenState] = useState(false);
   const [results, updateResults] = useState([]);
@@ -129,6 +130,7 @@ const SearchComplete = ({
         onInput={handleOnInput}
         placeholder={placeholder}
         searchInput={searchInput || defaultValue}
+        defaultDate={defaultDate}
       />
 
       <div className="search-complete-results">
@@ -165,7 +167,8 @@ SearchComplete.propTypes = {
   resolveQueryComplete: PropTypes.func,
   placeholder: PropTypes.string,
   defaultValue: PropTypes.string,
-  clearSearchInput: PropTypes.bool
+  clearSearchInput: PropTypes.bool,
+  defaultDate: PropTypes.object
 };
 
 export default SearchComplete;

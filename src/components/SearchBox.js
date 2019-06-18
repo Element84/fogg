@@ -11,9 +11,12 @@ const SearchBox = ({
   onInput,
   onSearch,
   placeholder = 'Search',
-  searchInput = ''
+  searchInput = '',
+  defaultDate
 }) => {
   const [query, setQuery] = useState('');
+
+  const [clearDate, setClearDate] = useState(false);
 
   const [date, setDate] = useState({
     dateIsOpen: false,
@@ -23,6 +26,14 @@ const SearchBox = ({
   useEffect(() => {
     setQuery(searchInput);
   }, [searchInput]);
+
+  useEffect(() => {
+    if (!defaultDate.start && !defaultDate.end) {
+      setClearDate(true);
+    } else {
+      setClearDate(false);
+    }
+  }, [defaultDate]);
 
   /**
    * handleSearchInput
@@ -160,6 +171,7 @@ const SearchBox = ({
               onChange={handleDateChange}
               onCancel={handleDateCancel}
               onClear={handleDateClear}
+              clearDate={clearDate}
             />
           </div>
         </div>
@@ -180,7 +192,8 @@ SearchBox.propTypes = {
   onInput: PropTypes.func,
   onSearch: PropTypes.func,
   placeholder: PropTypes.string,
-  searchInput: PropTypes.string
+  searchInput: PropTypes.string,
+  defaultDate: PropTypes.object
 };
 
 export default SearchBox;

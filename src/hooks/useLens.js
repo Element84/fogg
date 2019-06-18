@@ -262,8 +262,8 @@ export default function useLens ({
   function handleClearSearch () {
     clearQuerySearchParams();
     clearSearchMarkers();
-    updateMapConfig(mapConfigDefaults);
     clearActiveFilters();
+    updateMapConfig(mapConfigDefaults);
     updateClearSearchInput(true);
     updateResults(undefined);
     updateMoreResultsAvailable(false);
