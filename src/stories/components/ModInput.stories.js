@@ -14,16 +14,16 @@ const stories = storiesOf('Components|ModInput', module);
 
 const defaultValue = 'Chookity';
 
+const user = {
+  firstName: 'Test',
+  lastName: 'McTest',
+  organization: 'Element 84',
+  plan: 'Testing out this feature'
+};
+
 const FormWrapper = () => {
   const [saveButtonDisabled, updateSaveButtonDisabled] = useState(true);
   const [modInputDisabled, updateModInputDisabled] = useState(true);
-
-  const user = {
-    firstName: 'Test',
-    lastName: 'McTest',
-    organization: 'Element 84',
-    plan: 'Testing out this feature'
-  };
 
   function handleFormSave (e, fields) {
     e.preventDefault();
@@ -52,6 +52,9 @@ const FormWrapper = () => {
       value,
       `Has changed since load: ${hasChanged}`
     );
+    if (hasChanged) {
+      user[name] = value;
+    }
   }
 
   return (

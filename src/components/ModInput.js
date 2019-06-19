@@ -80,6 +80,10 @@ const ModInput = ({ id, name, defaultValue = '', onSave, forceDisable }) => {
     updateChangeable(false);
   }, [forceDisable]);
 
+  useEffect(() => {
+    updateOriginalValue(value);
+  }, [defaultValue]);
+
   const formInputProps = {
     id,
     name: inputName,
