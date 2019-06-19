@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
@@ -32,9 +32,6 @@ const FormWrapper = () => {
 
     updateSaveButtonDisabled(true);
     updateModInputDisabled(false);
-    setTimeout(() => {
-      updateModInputDisabled(true);
-    }, 500);
   }
 
   function handleFormInputChange (e) {
@@ -52,6 +49,12 @@ const FormWrapper = () => {
       user[name] = value;
     }
   }
+
+  useEffect(() => {
+    if (modInputDisabled === false) {
+      updateModInputDisabled(true);
+    }
+  }, [modInputDisabled]);
 
   return (
     <div style={{ width: '50%', margin: '0 auto' }}>
