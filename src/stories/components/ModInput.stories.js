@@ -6,10 +6,6 @@ import ModInput from '../../components/ModInput';
 import Form from '../../components/Form';
 import Button from '../../components/Button';
 
-// One of the problems I'm facing here is that the form doesn't know when the ModInputs are made changeable.
-// Ideally when the Save button is clicked, it would assume that they're all changeable and make them all unchangeable
-// To do that it modInputDisabled needs to be set false. Then change them to true.
-
 const stories = storiesOf('Components|ModInput', module);
 
 const defaultValue = 'Chookity';
