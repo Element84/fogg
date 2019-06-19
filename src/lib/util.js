@@ -3,7 +3,7 @@
  */
 
 function isSmallDevice () {
-  if (typeof window === 'undefined') return;
+  if (!isDomAvailable()) return;
 
   // TODO: base this off of a configurable variable along with SCSS settings
 

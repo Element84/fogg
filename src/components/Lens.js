@@ -32,6 +32,10 @@ const Lens = ({
     refMapDraw
   });
 
+  useEffect(() => {
+    handleQueryParams();
+  }, []);
+
   const {
     mapConfig,
     results,
@@ -57,7 +61,7 @@ const Lens = ({
     cancelFilterChanges
   } = filtersHandlers;
 
-  const { center, geoJson } = mapConfig || {};
+  const { center = {}, geoJson } = mapConfig || {};
   const { lat = 0, lng = 0 } = center;
 
   const activeSearch = Array.isArray(results);
@@ -71,10 +75,6 @@ const Lens = ({
     map,
     useMapEffect
   };
-
-  useEffect(() => {
-    handleQueryParams();
-  }, []);
 
   return (
     <div className="lens" data-has-results={hasResults}>

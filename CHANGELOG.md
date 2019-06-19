@@ -1,3 +1,6 @@
+### Version 0.1.84
+- removing test snippet, fixing tests
+
 ### Version 0.1.83
 
 ### Version 0.1.82

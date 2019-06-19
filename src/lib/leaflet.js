@@ -55,6 +55,8 @@ export function addLeafletMarkerLayer ({ lat, lng }, map) {
  */
 
 export function getShapeType (layer) {
+  if (!L) return;
+
   if (layer instanceof L.Circle) {
     return 'circle';
   }
@@ -182,6 +184,7 @@ export function geoJsonFromLayer (layer) {
  */
 
 export function geoJsonFromLatLn ({ lat = 0, lng = 0 }) {
+  if (!GeoJSON) return;
   return GeoJSON.parse(
     [
       {
@@ -199,6 +202,7 @@ export function geoJsonFromLatLn ({ lat = 0, lng = 0 }) {
  */
 
 export function geoJsonLayerFromLatLn (position) {
+  if (!L) return;
   const geoJson = geoJsonFromLatLn(position);
   return L.geoJSON(geoJson);
 }
@@ -210,6 +214,9 @@ export function geoJsonLayerFromLatLn (position) {
 
 export function geocodePlacename (placename) {
   return new PromiseCancelable((resolve, reject, onCancel) => {
+    if (!geocode) {
+      reject('geocodePlacename Error: Geocode not available.');
+    }
     const request = geocode()
       .text(placename)
       .run((error, body, response) => {
@@ -229,6 +236,8 @@ export function geocodePlacename (placename) {
  */
 
 export function buildMapMarkerIcon () {
+  if (!L) return;
+
   let icon;
   // Leaflet uses window to bea ble to set up an icon, so we need to
   // make sure it's available otherwise don't return anything of value

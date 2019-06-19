@@ -2,12 +2,14 @@ import React, { useEffect, createRef } from 'react';
 import PropTypes from 'prop-types';
 import 'leaflet/dist/leaflet.css'; // This needs to be included for the map to actually work when compiled
 import L from 'leaflet';
+import { Map as BaseMap, TileLayer, ZoomControl } from 'react-leaflet';
 import 'proj4';
 import 'proj4leaflet';
-import { Map as BaseMap, TileLayer, ZoomControl } from 'react-leaflet';
 import 'leaflet-active-area';
 
 import MapService from '../models/map-service';
+
+import { isDomAvailable } from '../lib/util';
 
 const Map = ({
   children,
@@ -22,17 +24,10 @@ const Map = ({
   const mapClassName = `map ${className || ''}`;
   let projection;
 
-  if (typeof window === 'undefined') {
-    return (
-      <div className={mapClassName}>
-        <p className="map-loading">Loading map...</p>
-      </div>
-    );
-  }
-
   const mapRef = createRef();
 
   useEffect(() => {
+    if (!isDomAvailable()) return;
     const { current = {} } = mapRef;
     const { leafletElement = {} } = current;
     if (typeof useMapEffect === 'function') {
@@ -41,6 +36,14 @@ const Map = ({
       });
     }
   }, [map, mapRef]);
+
+  if (!isDomAvailable()) {
+    return (
+      <div className={mapClassName}>
+        <p className="map-loading">Loading map...</p>
+      </div>
+    );
+  }
 
   // Set up a new map service given the name of the map
 
