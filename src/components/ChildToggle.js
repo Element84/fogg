@@ -17,7 +17,7 @@ const ChildToggle = ({
   id,
   defaultValue
 }) => {
-  const { checked, handleChange } = useChildToggle();
+  const { checked, handleChange } = useChildToggle(defaultValue);
 
   const inputProps = {
     type: 'checkbox',
@@ -37,7 +37,7 @@ const ChildToggle = ({
       <InputButton
         {...inputProps}
         onChange={handleChange}
-        defaultValue={defaultValue}
+        isChecked={checked}
       />
       <div className="children">{checked && children}</div>
     </div>

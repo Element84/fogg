@@ -25,14 +25,46 @@ stories.add('Default', () => {
   return (
     <ChildToggle label="Repeat" name="repeater" id="repeater">
       <FormRow className="repeater-row">
-        <FormInput type="select" label="Interval" options={intervalOptions} />
+        <FormInput
+          type="select"
+          id="interval"
+          label="Interval"
+          options={intervalOptions}
+        />
       </FormRow>
       <FormRow className="repeater-row" col={2}>
-        <FormInput type="text" label="Separation Min" />
-        <FormInput type="text" label="Separation Max" />
+        <FormInput type="text" id="separation-min" label="Separation Min" />
+        <FormInput type="text" id="separation-max" label="Separation Max" />
       </FormRow>
       <FormRow className="repeater-row" col={2}>
-        <FormInput type="text" label="Max Collections" />
+        <FormInput type="text" id="max-collections" label="Max Collections" />
+      </FormRow>
+    </ChildToggle>
+  );
+});
+
+stories.add('Checked', () => {
+  return (
+    <ChildToggle
+      label="Repeat"
+      name="repeater"
+      id="repeater"
+      defaultValue={true}
+    >
+      <FormRow className="repeater-row">
+        <FormInput
+          type="select"
+          id="interval"
+          label="Interval"
+          options={intervalOptions}
+        />
+      </FormRow>
+      <FormRow className="repeater-row" col={2}>
+        <FormInput type="text" id="separation-min" label="Separation Min" />
+        <FormInput type="text" id="separation-max" label="Separation Max" />
+      </FormRow>
+      <FormRow className="repeater-row" col={2}>
+        <FormInput type="text" id="max-collections" label="Max Collections" />
       </FormRow>
     </ChildToggle>
   );

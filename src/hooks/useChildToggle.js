@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-const useChildToggle = () => {
-  const [checked, setChecked] = useState(false);
+const useChildToggle = defaultValue => {
+  const [checked, setChecked] = useState(defaultValue);
 
   function handleChange (event) {
     setChecked(event.target.checked);
