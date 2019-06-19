@@ -20,6 +20,7 @@ export { default as ModInput } from './src/components/ModInput';
 export { default as MapPreview } from './src/components/MapPreview';
 export { default as NavBar } from './src/components/NavBar';
 export { default as NavLinks } from './src/components/NavLinks';
+export { default as Notice } from './src/components/Notice';
 export { default as OrderStatus } from './src/components/OrderStatus';
 export { default as OrdersList } from './src/components/OrdersList';
 export { default as PageTemplate } from './src/components/PageTemplate';
