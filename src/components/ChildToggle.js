@@ -9,7 +9,14 @@ import { useChildToggle } from '../hooks';
  * on whether or not checkbox is checked.
  */
 
-const ChildToggle = ({ children, className = '', name, label, id }) => {
+const ChildToggle = ({
+  children,
+  className = '',
+  name,
+  label,
+  id,
+  defaultValue
+}) => {
   const { checked, handleChange } = useChildToggle();
 
   const inputProps = {
@@ -27,7 +34,11 @@ const ChildToggle = ({ children, className = '', name, label, id }) => {
 
   return (
     <div className={`child-toggle ${className}`}>
-      <InputButton {...inputProps} onChange={handleChange} />
+      <InputButton
+        {...inputProps}
+        onChange={handleChange}
+        defaultValue={defaultValue}
+      />
       <div className="children">{checked && children}</div>
     </div>
   );
@@ -41,7 +52,8 @@ ChildToggle.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string,
   label: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.string,
+  defaultValue: PropTypes.bool
 };
 
 export default ChildToggle;
