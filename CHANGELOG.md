@@ -1,3 +1,5 @@
+### Version 0.1.86
+
 ### Version 0.1.85
 - FD-142 Point to the correct region for ECR
 - [JAM-525] Allow search on enter and fix location and filter logic
