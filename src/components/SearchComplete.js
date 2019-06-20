@@ -30,6 +30,7 @@ const SearchComplete = ({
 
   function handleSearchboxSearch (textInput, searchDate) {
     const { value } = results[0] || {};
+
     let searchQuery =
       typeof query !== 'string' && textInput === searchInput ? query : value;
 
