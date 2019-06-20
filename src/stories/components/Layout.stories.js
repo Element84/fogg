@@ -2,7 +2,6 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import Layout from '../../components/Layout';
-import Notice from '../../components/Notice';
 
 const stories = storiesOf('Components|Layout', module);
 
@@ -26,13 +25,6 @@ stories.add('Notice', () => {
             </div>
           ),
           weight: 'bold'
-        }}
-      >
-        I&apos;m in a Layout
-      </Layout>
-      <Layout
-        notice={{
-          text: <Notice align="center">I Am a Notice Notice</Notice>
         }}
       >
         I&apos;m in a Layout

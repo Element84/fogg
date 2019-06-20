@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Layout, Notice } from '../../ui';
+import { Layout } from '../../ui';
 
 describe('Layout', () => {
   describe('Render', () => {
@@ -29,28 +29,6 @@ describe('Layout', () => {
       );
       const layoutNotice = layout.find('LayoutNotice').dive();
       expect(layoutNotice.find('Notice').prop('children')).toEqual(noticeText);
-    });
-
-    it('should not double wrap a Notice around a Notice', () => {
-      const text = 'I am some layout content';
-      const noticeText = 'I am not ice';
-      const layout = shallow(
-        <Layout
-          notice={{
-            text: <Notice>{noticeText}</Notice>
-          }}
-        >
-          {text}
-        </Layout>
-      );
-      const layoutNotice = layout.find('LayoutNotice').dive();
-      expect(layoutNotice.find('Notice').prop('children')).toEqual(noticeText);
-      expect(
-        layoutNotice
-          .find('Notice')
-          .dive()
-          .find('Notice')
-      ).toHaveLength(0);
     });
   });
 });

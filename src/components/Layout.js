@@ -1,19 +1,16 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
 
 import Notice from '../components/Notice';
 
-const Layout = ({ children, notice }) => (
-  <Fragment>
-    <Helmet>
-      <title>Space Jam Gatsby Theme</title>
-    </Helmet>
-    {/* Header/Nav component goes here */}
-    {notice && <LayoutNotice {...notice} />}
-    {children}
-  </Fragment>
-);
+const Layout = ({ children, notice }) => {
+  return (
+    <>
+      {notice && <LayoutNotice {...notice} />}
+      {children}
+    </>
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.oneOfType([
@@ -30,16 +27,10 @@ Layout.propTypes = {
 export default Layout;
 
 const LayoutNotice = ({ text, ...rest }) => {
-  const isString = typeof text === 'string';
-  const isInstanceOfNotice = text && text.type && text.type.name === 'Notice';
-
-  if (isString || !isInstanceOfNotice) {
-    return <Notice {...rest}>{text}</Notice>;
-  }
-  return text;
+  return <Notice {...rest}>{text}</Notice>;
 };
 
-Layout.propTypes = {
+LayoutNotice.propTypes = {
   text: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
