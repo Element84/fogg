@@ -16,6 +16,7 @@ export default function useLocation () {
     location,
     history,
     pathname,
+    search,
     queryParams
   };
 }
