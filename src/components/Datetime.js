@@ -8,6 +8,7 @@ import { useInput } from '../hooks';
 import Input from './Input';
 
 const Datetime = ({ className, props, onChange, onInput }) => {
+  console.log(props);
   const { name } = useInput({ props });
 
   function handleChange (moment) {
@@ -34,8 +35,9 @@ const Datetime = ({ className, props, onChange, onInput }) => {
   }
 
   function renderInput (defaultProps) {
+    console.log(defaultProps);
     const allProps = {
-      value: defaultProps.value || '',
+      value: defaultProps.value || props.value,
       onChange: defaultProps.onChange,
       onInput: defaultProps.onInput,
       onKeyDown: defaultProps.onKeydown,
@@ -61,7 +63,8 @@ Datetime.propTypes = {
   className: PropTypes.string,
   props: PropTypes.object,
   onChange: PropTypes.func,
-  onInput: PropTypes.func
+  onInput: PropTypes.func,
+  value: PropTypes.string
 };
 
 export default Datetime;
