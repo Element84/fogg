@@ -233,11 +233,11 @@ const SidebarPanels = ({
   results,
   loadMoreResults,
   clearActiveSearch,
-  filters
+  filters = {}
 }) => {
   const hasResults = Array.isArray(results) && results.length > 0;
   const moreResultsAvailable = typeof loadMoreResults === 'function';
-  const { handlers: filtersHandlers } = (filters = {});
+  const { handlers: filtersHandlers } = filters;
 
   function handleLoadMore (e) {
     if (moreResultsAvailable) {
@@ -264,7 +264,7 @@ const SidebarPanels = ({
           {Array.isArray(results) && (
             <Panel header="Explore">
               <p>Sorry, no results were found.</p>
-              {filters.active.length > 0 && (
+              {filters.active && filters.active.length > 0 && (
                 <p>
                   <Button onClick={handleClearFilters}>Clear Filters</Button>
                 </p>
