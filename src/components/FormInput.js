@@ -23,8 +23,6 @@ const logger = new Logger('FormInput', {
 const FormInput = props => {
   // TODO: is NoContext a good pattern?
 
-  console.log(props);
-
   const { invalidFields = [], updateField } =
     useContext(FormContext) || FormNoContext;
 
@@ -134,6 +132,9 @@ const FormInput = props => {
   }
 
   function handleOnChange (event) {
+    if (isInputButton) {
+      updateField(event.target.name, event.target.value);
+    }
     if (typeof onChange === 'function') {
       onChange(event);
     }

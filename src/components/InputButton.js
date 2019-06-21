@@ -64,7 +64,7 @@ InputButton.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.array]),
   id: PropTypes.string,
   label: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType(PropTypes.string, PropTypes.bool),
   name: PropTypes.string,
   type: PropTypes.string,
   onChange: PropTypes.func,
@@ -128,7 +128,7 @@ const InputButtonInput = ({
 
 InputButtonInput.propTypes = {
   id: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType(PropTypes.string, PropTypes.bool),
   name: PropTypes.string,
   type: PropTypes.string,
   onChange: PropTypes.func,
