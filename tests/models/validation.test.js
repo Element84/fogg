@@ -15,7 +15,18 @@ describe('Validation', () => {
       regex: regexByFieldName('email')
     },
     password: {
-      minLength: 8
+      minLength: 8,
+      isValid: value => {
+        // Check that the value has "coolbeans" in it
+        // for testing purposes
+        return value.includes('coolbeans');
+      }
+    },
+    number: {
+      required: true
+    },
+    radioList: {
+      required: true
     }
   };
 
@@ -30,7 +41,13 @@ describe('Validation', () => {
       value: 'gus.bus@fring.com'
     },
     password: {
-      value: '12345678'
+      value: 'coolbeans88'
+    },
+    number: {
+      value: 0
+    },
+    radioList: {
+      value: ['blue']
     }
   };
 
@@ -52,12 +69,18 @@ describe('Validation', () => {
     it('should return true a valid input', () => {
       expect(validate.byField('firstName', 'Walter')).toEqual(true);
       expect(validate.byField('password', '')).toEqual(true);
+      expect(validate.byField('radioList', ['white'])).toEqual(true);
+      expect(validate.byField('radioList', [0])).toEqual(true);
+      expect(validate.byField('radioList', ['white', 0])).toEqual(true);
     });
 
     it('should return false with no input', () => {
       expect(validate.byField('firstName')).toEqual(false);
       expect(validate.byField('firstName', undefined)).toEqual(false);
       expect(validate.byField('firstName', null)).toEqual(false);
+      expect(validate.byField('radioList', [undefined])).toEqual(false);
+      expect(validate.byField('radioList', [null])).toEqual(false);
+      expect(validate.byField('radioList', [undefined, null])).toEqual(false);
     });
 
     it('should return true if no value on a not required field', () => {
@@ -87,8 +110,19 @@ describe('Validation', () => {
       expect(validate.byField('email', 'walter@org')).toEqual(false);
     });
 
+    it('should return return true if the custom isValid function is truthy', () => {
+      expect(validate.byField('password', 'coolbeans88')).toEqual(true);
+      expect(validate.byField('password', 'beansthatarenotcool99')).toEqual(
+        false
+      );
+    });
+
     it('should return return true if there is no rule for the field', () => {
       expect(validate.byField('colby', 'cool')).toEqual(true);
+    });
+
+    it('should consider 0 valid input and not empty', () => {
+      expect(validate.byField('number', 0)).toEqual(true);
     });
   });
 

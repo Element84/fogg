@@ -9,14 +9,24 @@ import { useChildToggle } from '../hooks';
  * on whether or not checkbox is checked.
  */
 
-const ChildToggle = ({ children, className = '', name, label, id }) => {
-  const { checked, handleChange } = useChildToggle();
+const ChildToggle = ({
+  children,
+  className = '',
+  name,
+  label,
+  id,
+  value,
+  isChecked = false
+}) => {
+  const { checked, handleChange } = useChildToggle(isChecked);
 
   const inputProps = {
     type: 'checkbox',
     name,
     label,
-    id
+    id,
+    value,
+    isChecked
   };
 
   // If we didn't supply a name, default to the ID
@@ -41,7 +51,9 @@ ChildToggle.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string,
   label: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.string,
+  value: PropTypes.string,
+  isChecked: PropTypes.bool
 };
 
 export default ChildToggle;

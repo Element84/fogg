@@ -11,7 +11,7 @@ const Datetime = ({ className, props, onChange, onInput }) => {
   const { name } = useInput({ props });
 
   function handleChange (moment) {
-    const value = moment.format('x');
+    const value = moment && moment.format('x');
 
     const virtualEvent = {
       target: {
