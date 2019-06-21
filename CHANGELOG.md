@@ -1,3 +1,12 @@
+### Version 0.1.87
+
+### Version 0.1.86
+
+### Version 0.1.85
+- FD-142 Point to the correct region for ECR
+- [JAM-525] Allow search on enter and fix location and filter logic
+- [JAM-525] Add empty line
+
 ### Version 0.1.84
 - removing test snippet, fixing tests
 
