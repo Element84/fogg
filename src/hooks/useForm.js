@@ -9,8 +9,6 @@ let validate;
 const useForm = ({ onSubmit, onChange, rules = {} }) => {
   const [fields, setFields] = useState(copyKeysToEmptyObject(rules, {}));
   const [invalidFields, updateValidity] = useState([]);
-  console.log(validate);
-  console.log(fields);
 
   if (!validate) {
     validate = new Validation(rules);

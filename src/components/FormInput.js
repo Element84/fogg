@@ -9,6 +9,7 @@ import Input from './Input';
 import Select from './Select';
 import Textarea from './Textarea';
 import Datetime from './Datetime';
+import InputButton from './InputButton';
 
 const logger = new Logger('FormInput', {
   isBrowser: true
@@ -22,6 +23,8 @@ const logger = new Logger('FormInput', {
 const FormInput = props => {
   // TODO: is NoContext a good pattern?
 
+  console.log(props);
+
   const { invalidFields = [], updateField } =
     useContext(FormContext) || FormNoContext;
 
@@ -34,6 +37,7 @@ const FormInput = props => {
   const { onChange, onInput, className, disabled } = props;
 
   let input;
+  let isInputButton = !!(type === 'radio' || type === 'checkbox');
   let inputClassName = `form-input ${className || ''}`;
   let fieldClassName = 'form-input-field';
 
@@ -82,6 +86,16 @@ const FormInput = props => {
         onInput={handleOnInput}
       />
     );
+  } else if (isInputButton) {
+    input = (
+      <InputButton
+        className={fieldClassName}
+        type={type}
+        onChange={handleOnChange}
+        onInput={handleOnInput}
+        {...props}
+      />
+    );
   } else {
     input = (
       <Input
@@ -94,15 +108,21 @@ const FormInput = props => {
   }
 
   return (
-    <div className={inputClassName}>
-      {label && (
-        <label className="form-label" htmlFor={id}>
-          {label}
-        </label>
+    <>
+      {!isInputButton && (
+        <div className={inputClassName}>
+          {label && (
+            <label className="form-label" htmlFor={id}>
+              {label}
+            </label>
+          )}
+
+          {input}
+        </div>
       )}
 
-      {input}
-    </div>
+      {isInputButton && input}
+    </>
   );
 
   function handleOnInput (event) {

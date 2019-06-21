@@ -167,3 +167,16 @@ stories.add('Initial Value', () => {
     </BaseForm>
   );
 });
+
+stories.add('Checkbox', () => {
+  return (
+    <BaseForm>
+      <FormInput
+        id="zeroDopplerRequired"
+        label="Zero Doppler Required"
+        type="checkbox"
+        required={true}
+      />
+    </BaseForm>
+  );
+});
