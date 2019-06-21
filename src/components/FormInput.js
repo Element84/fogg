@@ -89,7 +89,7 @@ const FormInput = props => {
       <InputButton
         className={fieldClassName}
         type={type}
-        onChange={handleOnChange}
+        onChange={handleOnInputButtonChange}
         onInput={handleOnInput}
         {...props}
       />
@@ -132,9 +132,14 @@ const FormInput = props => {
   }
 
   function handleOnChange (event) {
-    if (isInputButton) {
-      updateField(event.target.name, event.target.value);
+    if (typeof onChange === 'function') {
+      onChange(event);
     }
+  }
+
+  function handleOnInputButtonChange (event) {
+    updateField(event.target.name, event.target.value);
+
     if (typeof onChange === 'function') {
       onChange(event);
     }
