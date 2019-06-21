@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FaCaretDown } from 'react-icons/fa';
 
 import { useInput } from '../hooks';
 
@@ -9,23 +10,26 @@ const Select = ({ className, props, onChange, onInput }) => {
   const { placeholder } = inputProps;
 
   return (
-    <select
-      className={`select ${className}`}
-      onChange={onChange}
-      onInput={onInput}
-      {...inputProps}
-    >
-      <option value="">{placeholder || '- Please Select -'}</option>
+    <div className="select">
+      <select
+        className={`select ${className}`}
+        onChange={onChange}
+        onInput={onInput}
+        {...inputProps}
+      >
+        <option value="">{placeholder || '- Please Select -'}</option>
 
-      {Array.isArray(options) &&
-        options.map((option, index) => {
-          return (
-            <option key={`Select-Option-${index}`} value={option.value}>
-              {option.label}
-            </option>
-          );
-        })}
-    </select>
+        {Array.isArray(options) &&
+          options.map((option, index) => {
+            return (
+              <option key={`Select-Option-${index}`} value={option.value}>
+                {option.label}
+              </option>
+            );
+          })}
+      </select>
+      <FaCaretDown />
+    </div>
   );
 };
 
