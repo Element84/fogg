@@ -35,7 +35,7 @@ const FormInput = props => {
   const { onChange, onInput, className, disabled } = props;
 
   let input;
-  let isInputButton = !!(type === 'radio' || type === 'checkbox');
+  let isInputButton = type === 'checkbox';
   let inputClassName = `form-input ${className || ''}`;
   let fieldClassName = 'form-input-field';
 
@@ -138,7 +138,7 @@ const FormInput = props => {
   }
 
   function handleOnInputButtonChange (event) {
-    updateField(event.target.name, event.target.value);
+    updateField(event.target.name, event.target.checked);
 
     if (typeof onChange === 'function') {
       onChange(event);

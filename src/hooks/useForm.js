@@ -62,7 +62,6 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
    */
 
   function updateField (name, value, rules) {
-    console.log(name, value);
     if (rules) {
       validate.updateRulesByField(name, rules);
     }
