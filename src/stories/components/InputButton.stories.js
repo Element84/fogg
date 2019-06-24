@@ -14,6 +14,7 @@ stories.add('Default', () => {
           name="inputbutton-checkbox"
           label="InputButton Checkbox"
           type="checkbox"
+          value="inputbutton-checkbox"
         />
       </p>
       <ul>
@@ -23,6 +24,7 @@ stories.add('Default', () => {
             name="inputbutton-radio"
             label="InputButton Radio 1"
             type="radio"
+            value="inputbutton-radio-1"
           />
         </li>
         <li>
@@ -31,6 +33,7 @@ stories.add('Default', () => {
             name="inputbutton-radio"
             label="InputButton Radio 2"
             type="radio"
+            value="inputbutton-radio-2"
           />
         </li>
       </ul>
@@ -42,11 +45,13 @@ stories.add('Prechecked', () => {
   return (
     <>
       <p>
+        Why can&apos;t I uncheck you? 🤔
         <InputButton
           name="inputbutton-checkbox"
           label="InputButton Checkbox"
           type="checkbox"
           isChecked={true}
+          value="inputbutton-checkbox"
         />
       </p>
       <ul>
@@ -57,6 +62,7 @@ stories.add('Prechecked', () => {
             label="InputButton Radio 1"
             type="radio"
             isChecked={true}
+            value="inputbutton-radio-1"
           />
         </li>
         <li>
@@ -65,6 +71,7 @@ stories.add('Prechecked', () => {
             name="inputbutton-radio"
             label="InputButton Radio 2"
             type="radio"
+            value="inputbutton-radio-2"
           />
         </li>
       </ul>

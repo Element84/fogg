@@ -9,9 +9,11 @@
   .checkbox-button-checkbox {
 
     span {
+
       background-color: white;
       color: black;
       border: solid 2px $color-gray;
+
     }
 
   }
@@ -20,6 +22,8 @@
 
 .radio-button,
 .checkbox-button {
+
+  display: block;
 
   & > label {
 
@@ -55,10 +59,12 @@
 .radio-button-checkbox,
 .checkbox-button-checkbox {
 
+  display: block;
   padding: 0;
   margin-right: 1em;
 
   span {
+
     display: block;
     width: 2em;
     height: 2em;
@@ -68,6 +74,11 @@
     background-color: white;
     border-radius: 100%;
     border: solid 2px $color-gray4;
+
+    .input-button-invalid & {
+      border: solid 2px $color-alert;
+    }
+
   }
 
   svg {
@@ -90,6 +101,7 @@
 }
 
 .input-button-content {
+  display: block;
   flex-grow: 1;
   text-align: left;
 }

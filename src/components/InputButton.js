@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
-
 import { FaCheck } from 'react-icons/fa';
+
+import { useInput } from '../hooks';
 
 /**
  * InputButton
@@ -14,49 +15,62 @@ import { FaCheck } from 'react-icons/fa';
  * @param {bool} checked: force the UI to appear checked
  */
 
-const InputButton = ({
-  children,
-  type = 'radio',
-  label,
-  id,
-  value,
-  name,
-  onChange,
-  isChecked = false,
-  required = false,
-  disabled = false
-}) => {
-  const inputProps = {
-    id,
-    type,
-    value,
-    name,
-    onChange,
-    required,
-    isChecked,
-    disabled
-  };
+const InputButton = ({ children, ...rest }) => {
+  const inputRef = createRef();
 
-  // If we didn't supply a name, default to the ID
+  const { className, value, isChecked = false, disabled = false } = rest;
 
-  if (!inputProps.name) {
-    inputProps.name = inputProps.id;
+  const { id, type = 'radio', label, isInvalid, inputProps } = useInput({
+    inputRef,
+    props: rest
+  });
+
+  let inputClassName = `${type}-button`;
+  let extendedAttributes = {};
+
+  if (isInvalid) {
+    inputClassName = `${inputClassName} input-button-invalid`;
+  }
+
+  if (isChecked) {
+    extendedAttributes.defaultChecked = true;
+  }
+
+  if (disabled) {
+    extendedAttributes.disabled = true;
+  }
+
+  if (className) {
+    inputClassName = `${inputClassName} ${className || ''}`;
+  }
+
+  function handleOnChange (event) {
+    if (typeof inputProps.onChange === 'function') {
+      inputProps.onChange(event);
+    }
   }
 
   return (
-    <div className={`${type}-button`}>
-      <InputButtonInput {...inputProps} />
+    <span className={inputClassName}>
+      <input
+        ref={inputRef}
+        className="visually-hidden"
+        value={value}
+        onChange={handleOnChange}
+        {...inputProps}
+        {...extendedAttributes}
+      />
 
       <label htmlFor={id}>
-        <div className={`${type}-button-checkbox`}>
+        <span className={`${type}-button-checkbox`}>
           <span>
             <FaCheck />
           </span>
-        </div>
+        </span>
 
-        <div className="input-button-content">{children || label}</div>
+        <span className="input-button-content">{children || label}</span>
       </label>
-    </div>
+    </span>
   );
 };
 
@@ -74,65 +88,3 @@ InputButton.propTypes = {
 };
 
 export default InputButton;
-
-/**
- * InputButtonInput
- * @description Input element for the radio component. This is visually hidden
- * @param {string} id: input ID
- * @param {string} type: radio or checkbox
- * @param {string} value: value of the input
- * @param {string} name: input name attribute
- */
-
-const InputButtonInput = ({
-  id,
-  type,
-  value,
-  name,
-  required,
-  onChange,
-  isChecked = false,
-  disabled = false
-}) => {
-  if (!name) return null;
-
-  let extendedAttributes = {};
-
-  if (isChecked) {
-    extendedAttributes.defaultChecked = true;
-  }
-
-  if (disabled) {
-    extendedAttributes.disabled = true;
-  }
-
-  return (
-    <input
-      type={type}
-      id={id}
-      className="visually-hidden"
-      value={value}
-      name={name}
-      required={required}
-      onChange={handleOnChange}
-      {...extendedAttributes}
-    />
-  );
-
-  function handleOnChange (event) {
-    if (typeof onChange === 'function') {
-      onChange(event);
-    }
-  }
-};
-
-InputButtonInput.propTypes = {
-  id: PropTypes.string,
-  value: PropTypes.string,
-  name: PropTypes.string,
-  type: PropTypes.string,
-  onChange: PropTypes.func,
-  isChecked: PropTypes.bool,
-  required: PropTypes.bool,
-  disabled: PropTypes.bool
-};

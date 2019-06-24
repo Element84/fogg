@@ -12,8 +12,6 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
 
   if (!validate) {
     validate = new Validation(rules);
-  } else {
-    validate.updateRules(rules);
   }
 
   /**
@@ -28,7 +26,6 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
     const fieldsValidity = validate.bySet(fields, true);
 
     if (fieldsValidity.length > 0) {
-      setFields(fields => fields);
       updateValidity(fieldsValidity);
       return;
     }
@@ -65,12 +62,6 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
     if (rules) {
       validate.updateRulesByField(name, rules);
     }
-
-    // If we're passing in undefined, we probably don't want to update it
-    // in the first place, but most likely this is intentionally passing it
-    // as undefined to solely update the rules above
-
-    if (typeof value === 'undefined') return;
 
     setFields(fields => {
       let fieldAttributes = fields[name] || {};
