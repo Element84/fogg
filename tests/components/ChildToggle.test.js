@@ -30,12 +30,7 @@ describe('ChildToggle', () => {
 
   describe('Checked', () => {
     const checked = shallow(
-      <ChildToggle
-        name="checked"
-        id="checked"
-        label="Checked"
-        defaultValue={true}
-      >
+      <ChildToggle name="checked" id="checked" label="Checked" isChecked={true}>
         <div className="unique" />
       </ChildToggle>
     );

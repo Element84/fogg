@@ -7,7 +7,6 @@ import Input from './Input';
 import Select from './Select';
 import Textarea from './Textarea';
 import Datetime from './Datetime';
-import InputButton from './InputButton';
 
 /**
  * FormInput
@@ -19,7 +18,6 @@ const FormInput = props => {
   const { id, type, label, isInvalid, inputProps } = useInput({ props });
 
   let input;
-  let isInputButton = type === 'checkbox';
   let inputClassName = `form-input ${className || ''}`;
   let fieldClassName = 'form-input-field';
 
@@ -74,15 +72,6 @@ const FormInput = props => {
         onInput={handleOnInput}
       />
     );
-  } else if (isInputButton) {
-    input = (
-      <InputButton
-        className={fieldClassName}
-        type={type}
-        onInput={handleOnInput}
-        {...props}
-      />
-    );
   } else {
     input = (
       <Input
@@ -95,21 +84,15 @@ const FormInput = props => {
   }
 
   return (
-    <>
-      {!isInputButton && (
-        <div className={inputClassName}>
-          {label && (
-            <label className="form-label" htmlFor={id}>
-              {label}
-            </label>
-          )}
-
-          {input}
-        </div>
+    <div className={inputClassName}>
+      {label && (
+        <label className="form-label" htmlFor={id}>
+          {label}
+        </label>
       )}
 
-      {isInputButton && input}
-    </>
+      {input}
+    </div>
   );
 };
 

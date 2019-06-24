@@ -45,12 +45,7 @@ stories.add('Default', () => {
 
 stories.add('Checked', () => {
   return (
-    <ChildToggle
-      label="Repeat"
-      name="repeater"
-      id="repeater"
-      defaultValue={true}
-    >
+    <ChildToggle label="Repeat" name="repeater" id="repeater" isChecked={true}>
       <FormRow className="repeater-row">
         <FormInput
           type="select"
