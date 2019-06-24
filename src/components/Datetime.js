@@ -35,17 +35,16 @@ const Datetime = ({ className, props, onChange, onInput }) => {
 
   function renderInput (defaultProps) {
     const allProps = {
-      value: defaultProps.value || '',
+      value: defaultProps.value || props.value || '',
       onChange: defaultProps.onChange,
       onInput: defaultProps.onInput,
       onKeyDown: defaultProps.onKeydown,
-      onFocus: defaultProps.onFocus,
-      ...props
+      onFocus: defaultProps.onFocus
     };
 
     return (
       <>
-        <FaCalendarAlt {...defaultProps} {...props} />
+        <FaCalendarAlt {...defaultProps} {...allProps} />
         <Input
           className={`datetime ${className}`}
           props={props}
