@@ -1,0 +1,17 @@
+.select {
+
+  position: relative;
+
+  svg {
+    position: absolute;
+    top: 0;
+    right: .7em;
+    width: 1.6em;
+    height: 1.5em;
+    bottom: 0;
+    margin: auto;
+    touch-action: none;
+    pointer-events: none;
+  }
+
+}

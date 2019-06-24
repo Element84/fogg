@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useDebouncedCallback from 'use-debounce/lib/callback';
 
@@ -11,7 +11,9 @@ const SearchComplete = ({
   onSearch,
   resolveQueryComplete,
   placeholder = 'Search',
-  defaultValue
+  defaultValue,
+  clearSearchInput,
+  defaultDate
 }) => {
   const [isOpen, updateOpenState] = useState(false);
   const [results, updateResults] = useState([]);
@@ -23,6 +25,12 @@ const SearchComplete = ({
     QUERY_COMPLETE_DEBOUNCE
   );
 
+  useEffect(() => {
+    if (clearSearchInput) {
+      updateSearchInput('');
+    }
+  }, [clearSearchInput]);
+
   /**
    * handleSearchboxSearch
    * @description Triggers when the search box's search button is clicked
@@ -30,7 +38,9 @@ const SearchComplete = ({
 
   function handleSearchboxSearch (textInput, searchDate) {
     const { value } = results[0] || {};
-    let searchQuery = textInput === searchInput ? query : value;
+
+    let searchQuery =
+      typeof query !== 'string' && textInput === searchInput ? query : value;
 
     updateDate(searchDate);
     handleQuery(searchQuery, searchDate, textInput);
@@ -122,6 +132,7 @@ const SearchComplete = ({
         onInput={handleOnInput}
         placeholder={placeholder}
         searchInput={searchInput || defaultValue}
+        defaultDate={defaultDate}
       />
 
       <div className="search-complete-results">
@@ -157,7 +168,9 @@ SearchComplete.propTypes = {
   onSearch: PropTypes.func,
   resolveQueryComplete: PropTypes.func,
   placeholder: PropTypes.string,
-  defaultValue: PropTypes.string
+  defaultValue: PropTypes.string,
+  clearSearchInput: PropTypes.bool,
+  defaultDate: PropTypes.object
 };
 
 export default SearchComplete;

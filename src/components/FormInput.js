@@ -1,8 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import Logger from '../lib/logger';
-import { FormContext, FormNoContext } from '../context';
 import { useInput } from '../hooks';
 
 import Input from './Input';
@@ -11,45 +9,25 @@ import Textarea from './Textarea';
 import Datetime from './Datetime';
 import InputButton from './InputButton';
 
-const logger = new Logger('FormInput', {
-  isBrowser: true
-});
-
 /**
  * FormInput
  * @description Default input component with variable type option
  */
 
 const FormInput = props => {
-  // TODO: is NoContext a good pattern?
-
-  const { invalidFields = [], updateField } =
-    useContext(FormContext) || FormNoContext;
-
-  const { id, name, type, label, inputRules } = useInput({ props });
-
-  if (!name) {
-    logger.warn(`Missing input name`);
-  }
-
-  const { onChange, onInput, className, disabled } = props;
+  const { className, disabled } = props;
+  const { id, type, label, isInvalid, inputProps } = useInput({ props });
 
   let input;
   let isInputButton = type === 'checkbox';
   let inputClassName = `form-input ${className || ''}`;
   let fieldClassName = 'form-input-field';
 
-  // Update the field immediately with any local rules for validation
-
-  updateField(name, undefined, inputRules);
-
   if (type) {
     inputClassName = `${inputClassName} form-input-${type}`;
   }
 
-  // If the input is invalid, tag an extra class for styling
-
-  if (Array.isArray(invalidFields) && invalidFields.includes(name)) {
+  if (isInvalid) {
     inputClassName = `${inputClassName} form-input-invalid`;
   }
 
@@ -57,11 +35,23 @@ const FormInput = props => {
     inputClassName = `${inputClassName} form-input-disabled`;
   }
 
+  function handleOnInput (event) {
+    if (typeof inputProps.onInput === 'function') {
+      inputProps.onInput(event);
+    }
+  }
+
+  function handleOnChange (event) {
+    if (typeof inputProps.onChange === 'function') {
+      inputProps.onChange(event);
+    }
+  }
+
   if (type === 'select') {
     input = (
       <Select
         className={fieldClassName}
-        props={props}
+        props={inputProps}
         onChange={handleOnChange}
         onInput={handleOnInput}
       />
@@ -70,7 +60,7 @@ const FormInput = props => {
     input = (
       <Textarea
         className={fieldClassName}
-        props={props}
+        props={inputProps}
         onChange={handleOnChange}
         onInput={handleOnInput}
       />
@@ -79,7 +69,7 @@ const FormInput = props => {
     input = (
       <Datetime
         className={fieldClassName}
-        props={props}
+        props={inputProps}
         onChange={handleOnChange}
         onInput={handleOnInput}
       />
@@ -89,7 +79,6 @@ const FormInput = props => {
       <InputButton
         className={fieldClassName}
         type={type}
-        onChange={handleOnInputButtonChange}
         onInput={handleOnInput}
         {...props}
       />
@@ -98,7 +87,7 @@ const FormInput = props => {
     input = (
       <Input
         className={fieldClassName}
-        props={props}
+        props={inputProps}
         onChange={handleOnChange}
         onInput={handleOnInput}
       />
@@ -122,28 +111,6 @@ const FormInput = props => {
       {isInputButton && input}
     </>
   );
-
-  function handleOnInput (event) {
-    updateField(event.target.name, event.target.value);
-
-    if (typeof onInput === 'function') {
-      onInput(event);
-    }
-  }
-
-  function handleOnChange (event) {
-    if (typeof onChange === 'function') {
-      onChange(event);
-    }
-  }
-
-  function handleOnInputButtonChange (event) {
-    updateField(event.target.name, event.target.checked);
-
-    if (typeof onChange === 'function') {
-      onChange(event);
-    }
-  }
 };
 
 FormInput.propTypes = {

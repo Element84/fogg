@@ -29,6 +29,7 @@ export default function useLens ({
   const [mapConfig, updateMapConfig] = useState(mapConfigDefaults);
   const [results, updateResults] = useState();
   const [moreResultsAvailable, updateMoreResultsAvailable] = useState();
+  const [clearSearchInput, updateClearSearchInput] = useState(false);
 
   const { search: locationSearch, history } = useLocation();
 
@@ -88,6 +89,7 @@ export default function useLens ({
     }
 
     updateMapConfig(mapUpdate);
+    updateClearSearchInput(false);
   }
 
   /**
@@ -266,7 +268,9 @@ export default function useLens ({
   function handleClearSearch () {
     clearQuerySearchParams();
     clearSearchMarkers();
+    clearActiveFilters();
     updateMapConfig(mapConfigDefaults);
+    updateClearSearchInput(true);
     updateResults(undefined);
     updateMoreResultsAvailable(false);
   }
@@ -274,6 +278,7 @@ export default function useLens ({
   return {
     mapConfig,
     results,
+    clearSearchInput,
     handlers: {
       handleOnCreated,
       handleOnSearch,

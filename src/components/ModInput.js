@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FaPencilAlt, FaCheck, FaTimes } from 'react-icons/fa';
 
@@ -12,7 +12,7 @@ const logger = new Logger('ModInput', {
   isBrowser: true
 });
 
-const ModInput = ({ id, name, defaultValue = '', onSave }) => {
+const ModInput = ({ id, name, defaultValue = '', onSave, forceDisable }) => {
   const inputName = name || id;
 
   if (!inputName) {
@@ -36,7 +36,8 @@ const ModInput = ({ id, name, defaultValue = '', onSave }) => {
    *     is going from changeable and is saving, it will trigger a save event
    */
 
-  function handleChangeClick () {
+  function handleChangeClick (e) {
+    e.preventDefault();
     const shouldSave = !!isChangeable;
     updateChangeable(!isChangeable);
     if (shouldSave) {
@@ -75,6 +76,14 @@ const ModInput = ({ id, name, defaultValue = '', onSave }) => {
     }
   }
 
+  useEffect(() => {
+    updateChangeable(false);
+  }, [forceDisable]);
+
+  useEffect(() => {
+    updateOriginalValue(value);
+  }, [defaultValue]);
+
   const formInputProps = {
     id,
     name: inputName,
@@ -107,7 +116,8 @@ ModInput.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string,
   defaultValue: PropTypes.string,
-  onSave: PropTypes.func
+  onSave: PropTypes.func,
+  forceDisable: PropTypes.bool
 };
 
 export default ModInput;
