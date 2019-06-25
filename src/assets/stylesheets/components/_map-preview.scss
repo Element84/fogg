@@ -2,9 +2,18 @@
   height: 35em;
   width: 35em;
 }
+
 .map-preview-area-of-interest {
   font-size: 1.4em;
 }
-.map-preview-marker-location {
+
+.map-preview-coordinates {
+
   font-size: 1em;
+
+  ul {
+    padding-left: 1.2em;
+    margin: 0;
+  }
+
 }

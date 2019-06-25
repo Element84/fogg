@@ -2,6 +2,7 @@ import L from 'leaflet';
 import { geocode } from 'esri-leaflet-geocoder';
 import GeoJSON from 'geojson';
 import PromiseCancelable from 'p-cancelable';
+import { getGeom } from '@turf/turf';
 
 const DRAW_SHAPES = ['polygon', 'rectangle'];
 
@@ -254,4 +255,52 @@ export function buildMapMarkerIcon () {
     });
   }
   return icon;
+}
+
+/**
+ * latLngFromGeoJson
+ * @description Grabs Lat and Lng sets from GeoJSON
+ */
+
+export function latLngFromGeoJson (geoJson) {
+  const coordinates = coordinatesFromGeoJson(geoJson);
+  return coordinates.map(set => {
+    return {
+      lng: set[0],
+      lat: set[1]
+    };
+  });
+}
+
+/**
+ * geometryTypeFromGeoJson
+ * @description Grabs the types of geometries available in the GeoJSON
+ */
+
+export function geometryTypeFromGeoJson ({ features = [] } = {}) {
+  return features.map((feature = {}) => {
+    const { type } = getGeom(feature);
+    return type;
+  });
+}
+
+/**
+ * coordinatesFromGeoJson
+ * @description Grabs the coordinate sets from the GeoJSON
+ */
+
+export function coordinatesFromGeoJson (geoJson) {
+  let { features } = geoJson;
+
+  // If we don't have any top level features but has a geometry,
+  // grab that instead and wrap it in an array for normalization
+
+  if (!features && geoJson.geometry) {
+    features = [geoJson.geometry];
+  }
+
+  return features.map((feature = {}) => {
+    const { coordinates = [] } = getGeom(feature);
+    return coordinates;
+  });
 }
