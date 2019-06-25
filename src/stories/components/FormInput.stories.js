@@ -164,6 +164,12 @@ stories.add('Initial Value', () => {
         type="textarea"
         value="My Textarea"
       />
+      <FormInput
+        id="initial-datetime"
+        label="Initial Datetime"
+        type="datetime"
+        value="6/7/19 12:00 PM"
+      />
     </BaseForm>
   );
 });

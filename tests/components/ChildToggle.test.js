@@ -1,7 +1,7 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
-import { ChildToggle } from '../../ui';
+import { ChildToggle, InputButton } from '../../ui';
 
 describe('ChildToggle', () => {
   describe('Default', () => {
@@ -25,6 +25,22 @@ describe('ChildToggle', () => {
       });
 
       expect(repeater.contains(<div className="unique" />)).toBeTruthy();
+    });
+  });
+
+  describe('Checked', () => {
+    const checked = shallow(
+      <ChildToggle name="checked" id="checked" label="Checked" isChecked={true}>
+        <div className="unique" />
+      </ChildToggle>
+    );
+
+    it('does should render the children', () => {
+      expect(checked.contains(<div className="unique" />)).toBeTruthy();
+    });
+
+    it('should set FormInput to isChecked', () => {
+      expect(checked.find(InputButton).prop('isChecked')).toEqual(true);
     });
   });
 });

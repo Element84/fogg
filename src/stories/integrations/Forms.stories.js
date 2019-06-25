@@ -135,6 +135,16 @@ stories.add('Default', () => {
       </FormRow>
 
       <FormRow>
+        <FormInput
+          id="datetime-2"
+          label="Datetime 2"
+          type="datetime"
+          required={true}
+          value="06/07/19 12:00 PM"
+        />
+      </FormRow>
+
+      <FormRow>
         <InputButton
           id="inputbutton-checkbox-1"
           name="inputbutton-checkbox"
