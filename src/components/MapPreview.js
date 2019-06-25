@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Polygon } from 'react-leaflet';
+import { center as turfCenter } from '@turf/turf';
 
 import Logger from '../lib/logger';
-import { geoJsonFromLatLn } from '../lib/leaflet';
+import {
+  geoJsonFromLatLn,
+  latLngFromGeoJson,
+  geometryTypeFromGeoJson,
+  coordinatesFromGeoJson
+} from '../lib/leaflet';
 
 import Map from './Map';
 import Marker from './MapMarker';
@@ -13,26 +19,49 @@ const logger = new Logger('FormInput', {
   isBrowser: true
 });
 
-const MapPreview = ({ center = {}, geoJson, zoom = 3 }) => {
-  const { lat = 0, lng = 0 } = center;
+const AVAILABLE_COLORS = ['blue', 'red', 'green'];
 
-  if (!lat && !lng && !geoJson) {
-    logger.warn(`Could not find location data when rendering MapPreview`);
+const MapPreview = ({ center, geoJson, zoom = 3 }) => {
+  if (!center && !geoJson) {
+    logger.warn(
+      `Could not find location data when attempting to render MapPreview`
+    );
+    return null;
   }
 
-  if (!geoJson) {
-    geoJson = geoJsonFromLatLn(center);
+  // Create a geoJson document for the center of our map
+
+  let centerGeoJson = center && geoJsonFromLatLn(center);
+
+  // If we don't have a user provided center and have a geoJson
+  // doc passed in from the user, use the geoJson to calculate
+  // the center of all points to determine our center
+
+  if (!centerGeoJson && geoJson) {
+    centerGeoJson = turfCenter(geoJson);
   }
 
-  const { features = [] } = geoJson;
-  const firstFeature = features[0];
-  const { geometry = {} } = firstFeature;
-  const { type } = geometry;
-  const { coordinates = [] } = geometry;
+  // If we don't have a user provided geoJson but we do have our
+  // center document, use that as our geoJson
+
+  if (!geoJson && centerGeoJson) {
+    geoJson = centerGeoJson;
+  }
+
+  const centerLatLng = latLngFromGeoJson(centerGeoJson)[0] || {};
+  const type = geometryTypeFromGeoJson(geoJson)[0] || {};
+  let geoJsonLatLng;
+  let geoJsonCoordinates;
+
+  if (type === 'Point') {
+    geoJsonLatLng = latLngFromGeoJson(geoJson)[0] || {};
+    geoJsonCoordinates = [geoJsonLatLng.lat, geoJsonLatLng.lng];
+  } else if (type === 'Polygon') {
+    geoJsonCoordinates = coordinatesFromGeoJson(geoJson);
+  }
 
   const mapSettings = {
-    // TODO: make center based off of geojson
-    center: [lat, lng],
+    center: [centerLatLng.lat, centerLatLng.lng],
     zoom
   };
 
@@ -40,20 +69,22 @@ const MapPreview = ({ center = {}, geoJson, zoom = 3 }) => {
     <figure className="map-preview">
       <Map {...mapSettings}>
         <MapDraw disableEditControls={true}>
-          {type === 'Point' && <Marker position={[lat, lng]} />}
+          {type === 'Point' && <Marker position={geoJsonCoordinates} />}
           {type === 'Polygon' &&
-            coordinates.map((position, index) => {
-              const fixedPosition = position.map(coordinates => [
-                coordinates[1],
-                coordinates[0]
-              ]);
-              return (
-                <Polygon
-                  key={`MapPreview-Polygon-${index}`}
-                  color="blue"
-                  positions={fixedPosition}
-                />
-              );
+            geoJsonCoordinates.map((set = []) => {
+              return set.map((position, index) => {
+                const fixedPosition = position.map(coordinates => [
+                  coordinates[1],
+                  coordinates[0]
+                ]);
+                return (
+                  <Polygon
+                    key={`MapPreview-Polygon-${index}`}
+                    color={AVAILABLE_COLORS[index]}
+                    positions={fixedPosition}
+                  />
+                );
+              });
             })}
         </MapDraw>
       </Map>
@@ -72,22 +103,27 @@ const MapPreview = ({ center = {}, geoJson, zoom = 3 }) => {
                 {/* Add an extra space to prevent a single coordinate from bumping against */}
                 {` `}
                 <span className="map-preview-coordinates-item">
-                  {lat} &deg;N, {lng} &deg;W
+                  {geoJsonLatLng.lat} &deg;N, {geoJsonLatLng.lng} &deg;W
                 </span>
               </>
             )}
           </p>
-          {type === 'Polygon' && (
-            <ul>
-              {coordinates[0].map(([posLng, posLat], index) => {
-                return (
-                  <li key={`MapPreview-Coordinates-${index}`}>
-                    {posLat} &deg;N, {posLng} &deg;W
-                  </li>
-                );
-              })}
-            </ul>
-          )}
+          {type === 'Polygon' &&
+            geoJsonCoordinates.map((set = [], coordinatesIndex) => {
+              return (
+                <ul key={`MapPreview-Coordinates-${coordinatesIndex}`}>
+                  {set.map((positions = []) => {
+                    return positions.map(([posLng, posLat], setIndex) => {
+                      return (
+                        <li key={`MapPreview-Coordinates-${setIndex}`}>
+                          {posLat} &deg;N, {posLng} &deg;W
+                        </li>
+                      );
+                    });
+                  })}
+                </ul>
+              );
+            })}
         </div>
       </figcaption>
     </figure>

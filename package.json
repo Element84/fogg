@@ -6,6 +6,7 @@
   "author": "Element 84, Inc.",
   "dependencies": {
     "@babel/core": "^7.4.5",
+    "@turf/turf": "^5.1.6",
     "axios": "^0.19.0",
     "babel-loader": "^8.0.6",
     "babel-preset-gatsby": "^0.1.11",

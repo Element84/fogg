@@ -17,7 +17,5 @@ stories.add('Lat Lng', () => {
 });
 
 stories.add('GeoJSON', () => {
-  return (
-    <MapPreview center={ALEXANDRIA} geoJson={featureCollection} zoom={5} />
-  );
+  return <MapPreview geoJson={featureCollection} zoom={5} />;
 });
