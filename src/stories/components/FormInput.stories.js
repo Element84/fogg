@@ -168,7 +168,7 @@ stories.add('Initial Value', () => {
         id="initial-datetime"
         label="Initial Datetime"
         type="datetime"
-        value="6/7/19 12:00 PM"
+        value="06/07/2019 12:00 PM"
       />
     </BaseForm>
   );
