@@ -4,7 +4,7 @@ import { Link } from 'gatsby';
 import { routeIsInternal } from '../lib/util';
 import { useLocation } from '../hooks';
 
-const ARGS_WHITELIST = ['className', 'onClick'];
+const ARGS_WHITELIST = ['className', 'onClick', 'state'];
 
 /**
  * WonderLink
