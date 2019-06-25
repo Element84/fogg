@@ -78,7 +78,7 @@ const useInput = ({ inputRef = {}, props = {} }) => {
 
   useEffect(() => {
     const { current } = inputRef;
-    let value = inputProps.defaultValue || inputProps.value;
+    let value = inputProps.value || inputProps.defaultValue;
     if (type === 'radio' || type === 'checkbox') {
       value = getFormListValuesByName(current.form, inputProps.name);
     }
