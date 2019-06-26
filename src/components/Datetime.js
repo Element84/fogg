@@ -58,7 +58,7 @@ const Datetime = ({ className, props, onChange, onInput }) => {
     <ReactDatetime
       renderInput={renderInput}
       onChange={handleChange}
-      value={props.value || ''}
+      defaultValue={props.value || ''}
     />
   );
 };
