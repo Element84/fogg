@@ -42,6 +42,16 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
         ]
       }
     });
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /esri-leaflet/,
+            use: loaders.null()
+          }
+        ]
+      }
+    });
   }
 };
 
