@@ -54,7 +54,13 @@ const Datetime = ({ className, props, onChange, onInput }) => {
     );
   }
 
-  return <ReactDatetime renderInput={renderInput} onChange={handleChange} />;
+  return (
+    <ReactDatetime
+      renderInput={renderInput}
+      onChange={handleChange}
+      defaultValue={props.value || ''}
+    />
+  );
 };
 
 Datetime.propTypes = {
