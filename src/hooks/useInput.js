@@ -103,7 +103,6 @@ const useInput = ({ inputRef = {}, props = {} }) => {
 
     if (INPUT_LIST_TYPES.includes(type)) {
       value = getFormListValuesByName(event.target.form, name);
-      console.info('list', type, name, value);
       updateField(event.target.name, [...value]);
     }
 
