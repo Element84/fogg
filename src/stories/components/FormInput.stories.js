@@ -149,20 +149,20 @@ stories.add('Initial Value', () => {
         id="initial-email"
         label="Initial Email"
         type="email"
-        value="My Email"
+        defaultValue="My Email"
       />
       <FormInput
         id="initial-select"
         label="Initial Select"
         type="select"
         options={SELECT_OPTIONS}
-        value="zoidberg"
+        defaultValue="zoidberg"
       />
       <FormInput
         id="initial-textarea"
         label="Initial Textarea"
         type="textarea"
-        value="My Textarea"
+        defaultValue="My Textarea"
       />
       <FormInput
         id="initial-datetime"
