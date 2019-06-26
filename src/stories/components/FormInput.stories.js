@@ -144,7 +144,11 @@ stories.add('Placeholder', () => {
 stories.add('Initial Value', () => {
   return (
     <BaseForm>
-      <FormInput id="initial-text" label="Initial Text" value="My Text" />
+      <FormInput
+        id="initial-text"
+        label="Initial Text"
+        defaultValue="My Text"
+      />
       <FormInput
         id="initial-email"
         label="Initial Email"
