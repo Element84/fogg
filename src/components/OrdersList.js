@@ -8,7 +8,12 @@ import { formatDate } from '../lib/datetime';
 
 const DEFAULT_HEADERS = ['Product', 'Order Date', 'Order Status', null];
 
-const OrdersList = ({ className, headers = DEFAULT_HEADERS, orders }) => {
+const OrdersList = ({
+  children,
+  className,
+  headers = DEFAULT_HEADERS,
+  orders = []
+}) => {
   const rows = orders.map(
     ({ productIdentifier, orderDate, orderStatus, orderId }, index) => {
       return [
@@ -32,11 +37,17 @@ const OrdersList = ({ className, headers = DEFAULT_HEADERS, orders }) => {
       className={`orders-list ${className || ''}`}
       columns={headers}
       rows={rows}
-    />
+    >
+      {rows.length === 0 && <>{children || <p>No available orders</p>}</>}
+    </Table>
   );
 };
 
 OrdersList.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
   headers: PropTypes.array,
   orders: PropTypes.array,
   className: PropTypes.string

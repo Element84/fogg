@@ -89,6 +89,17 @@ stories.add('Custom Headers', () => {
   return <TaskList headers={columns} tasks={data} />;
 });
 
-stories.add('Empty', () => {
+stories.add('Filler', () => {
   return <TaskList headers={columns} tasks={dataEmpty} />;
+});
+
+stories.add('Empty', () => {
+  return (
+    <>
+      <TaskList tasks={[]} />
+      <TaskList tasks={[]}>
+        <p>Custom Empty</p>
+      </TaskList>
+    </>
+  );
 });

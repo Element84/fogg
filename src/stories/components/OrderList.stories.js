@@ -51,6 +51,17 @@ stories.add('Custom Headers', () => {
   return <OrdersList headers={columns} orders={ordersData} />;
 });
 
-stories.add('Empty', () => {
+stories.add('Filler', () => {
   return <OrdersList headers={columns} orders={dataEmpty} />;
+});
+
+stories.add('Empty', () => {
+  return (
+    <>
+      <OrdersList tasks={[]} />
+      <OrdersList tasks={[]}>
+        <p>Custom Empty</p>
+      </OrdersList>
+    </>
+  );
 });
