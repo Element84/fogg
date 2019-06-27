@@ -13,15 +13,17 @@ const OrdersList = ({ headers = DEFAULT_HEADERS, orders }) => {
     ({ productIdentifier, orderDate, orderStatus, orderId }, index) => {
       return [
         productIdentifier,
-        formatDate(orderDate),
+        orderDate && formatDate(orderDate),
         orderStatus,
-        <ListItemButton
-          key={`Order-Button-${index}`}
-          itemType="orders"
-          id={`${orderId}`}
-        >
-          View Order Details
-        </ListItemButton>
+        orderId && (
+          <ListItemButton
+            key={`Order-Button-${index}`}
+            itemType="orders"
+            id={`${orderId}`}
+          >
+            View Order Details
+          </ListItemButton>
+        )
       ];
     }
   );
