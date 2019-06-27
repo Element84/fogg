@@ -1,3 +1,6 @@
+### Version 0.1.97
+- [JAM-515] empty orders and tasks lists
+
 ### Version 0.1.96
 - [JAM-486] adding icon configuration for item list
 
