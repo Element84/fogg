@@ -1,3 +1,7 @@
+### Version 0.1.100
+- [JAM-470] Update notice PropTypes for Layout
+- [JAM-486] adding ability to pass class on item list item
+
 ### Version 0.1.99
 - [JAM-515] empty copy for tasks and orders
 
