@@ -1,3 +1,6 @@
+### Version 0.1.95
+- [JAM-486] setting up wonderlink to return a span if no to
+
 ### Version 0.1.94
 - Add state to WonderLink ARGS_WHITELIST
 - [JAM-317] Fix Datetime value
