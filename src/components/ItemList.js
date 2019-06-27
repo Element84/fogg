@@ -11,6 +11,15 @@ const ItemList = ({ items = [], className, actionIcon }) => {
         {Array.isArray(items) &&
           items.map((item, index) => {
             const { thumb, label, sublabels, to } = item;
+            let { icon } = item;
+
+            if (actionIcon) {
+              icon = actionIcon;
+            }
+
+            if (!icon && icon !== false) {
+              icon = <FaChevronRight />;
+            }
 
             const additional = Array.isArray(sublabels)
               ? sublabels
@@ -37,9 +46,14 @@ const ItemList = ({ items = [], className, actionIcon }) => {
                           </span>
                         );
                       })}
-                    <span className="item-list-item-action" aria-hidden="true">
-                      {actionIcon || <FaChevronRight />}
-                    </span>
+                    {icon !== false && (
+                      <span
+                        className="item-list-item-action"
+                        aria-hidden="true"
+                      >
+                        {icon || <FaChevronRight />}
+                      </span>
+                    )}
                   </span>
                 </WonderLink>
               </li>
