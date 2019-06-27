@@ -1,3 +1,6 @@
+### Version 0.1.99
+- [JAM-515] empty copy for tasks and orders
+
 ### Version 0.1.98
 - [JAM-515] classname for orders and task lists
 
