@@ -15,7 +15,9 @@ const WonderLink = (args = {}) => {
   const componentArgs = filterArgs(args);
   const { pathname } = useLocation();
 
-  if (typeof args.to !== 'string') return null;
+  if (typeof args.to !== 'string') {
+    return <span {...componentArgs}>{args.children}</span>;
+  }
 
   // If the first character is /, it's an internal link and we want to let the client
   // router handle the paging

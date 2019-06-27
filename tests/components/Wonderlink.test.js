@@ -64,10 +64,11 @@ describe('WonderLink', () => {
   });
 
   describe('No Link', () => {
-    const wonderlink = shallow(<WonderLink>Chookity!</WonderLink>);
+    const text = 'Chookity!';
+    const wonderlink = shallow(<WonderLink>{text}</WonderLink>);
 
     it('should not render without a link', () => {
-      expect(wonderlink.html()).toEqual(null);
+      expect(wonderlink.html()).toEqual(`<span>${text}</span>`);
     });
   });
 });
