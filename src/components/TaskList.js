@@ -8,7 +8,7 @@ import { formatDate } from '../lib/datetime';
 
 const DEFAULT_HEADERS = ['Name', 'Window Open', 'Window Close', 'Status', null];
 
-const TaskList = ({ headers = DEFAULT_HEADERS, tasks = [] }) => {
+const TaskList = ({ className, headers = DEFAULT_HEADERS, tasks = [] }) => {
   const rows = tasks.map((task = {}, index) => {
     const { id, properties = {} } = task;
     return [
@@ -27,12 +27,19 @@ const TaskList = ({ headers = DEFAULT_HEADERS, tasks = [] }) => {
       )
     ];
   });
-  return <Table columns={headers} rows={rows} />;
+  return (
+    <Table
+      className={`task-list ${className || ''}`}
+      columns={headers}
+      rows={rows}
+    />
+  );
 };
 
 TaskList.propTypes = {
   headers: PropTypes.array,
-  tasks: PropTypes.array
+  tasks: PropTypes.array,
+  className: PropTypes.string
 };
 
 export default TaskList;
