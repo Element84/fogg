@@ -1,3 +1,6 @@
+### Version 0.1.96
+- [JAM-486] adding icon configuration for item list
+
 ### Version 0.1.95
 - [JAM-486] setting up wonderlink to return a span if no to
 
