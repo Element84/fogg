@@ -1,3 +1,6 @@
+### Version 0.1.101
+- [JAM-486] adding ability to add className to lens
+
 ### Version 0.1.100
 - [JAM-470] Update notice PropTypes for Layout
 - [JAM-486] adding ability to pass class on item list item
