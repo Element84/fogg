@@ -1,3 +1,6 @@
+### Version 0.1.102
+- updating useForm to update rules on validate instnacE
+
 ### Version 0.1.101
 - [JAM-486] adding ability to add className to lens
 
