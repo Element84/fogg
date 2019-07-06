@@ -12,6 +12,7 @@ import SearchPanelFilters from './SearchPanelFilters';
 
 const Lens = ({
   children,
+  className,
   defaultCenter = {},
   zoom = 4,
   SidebarComponents,
@@ -24,6 +25,11 @@ const Lens = ({
   useMapEffect
 }) => {
   const refMapDraw = createRef();
+  let lensClassName = 'lens';
+
+  if (className) {
+    lensClassName = `${lensClassName} ${className}`;
+  }
 
   const lens = useLens({
     availableFilters,
@@ -77,7 +83,11 @@ const Lens = ({
   };
 
   return (
-    <div className="lens" data-has-results={hasResults}>
+    <div
+      className={lensClassName}
+      data-active-search={activeSearch}
+      data-has-results={hasResults}
+    >
       <div className="lens-sidebar">
         {search && (
           <div className="lens-sidebar-search">
@@ -136,6 +146,7 @@ const Lens = ({
 
 Lens.propTypes = {
   children: PropTypes.node,
+  className: PropTypes.string,
   defaultCenter: PropTypes.object,
   zoom: PropTypes.number,
   SidebarComponents: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),

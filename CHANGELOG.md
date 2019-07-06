@@ -1,3 +1,38 @@
+### Version 0.1.103
+- upgrading package
+
+### Version 0.1.102
+- updating useForm to update rules on validate instnacE
+
+### Version 0.1.101
+- [JAM-486] adding ability to add className to lens
+
+### Version 0.1.100
+- [JAM-470] Update notice PropTypes for Layout
+- [JAM-486] adding ability to pass class on item list item
+
+### Version 0.1.99
+- [JAM-515] empty copy for tasks and orders
+
+### Version 0.1.98
+- [JAM-515] classname for orders and task lists
+
+### Version 0.1.97
+- [JAM-515] empty orders and tasks lists
+
+### Version 0.1.96
+- [JAM-486] adding icon configuration for item list
+
+### Version 0.1.95
+- [JAM-486] setting up wonderlink to return a span if no to
+
+### Version 0.1.94
+- Add state to WonderLink ARGS_WHITELIST
+- [JAM-317] Fix Datetime value
+- [JAM-317] forminput stories initial value
+- [JAM-317] Set ReactDatetime defaultValue
+- [JAM-317] fixing field on form input stories
+
 ### Version 0.1.93
 
 ### Version 0.1.92

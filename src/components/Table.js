@@ -5,7 +5,7 @@ import TableRow from './TableRow';
 
 import Logger from '../lib/logger';
 
-const Table = ({ className, columns, rows }) => {
+const Table = ({ children, className, columns, rows }) => {
   const logger = new Logger('Table', {
     isBrowser: true
   });
@@ -37,11 +37,16 @@ const Table = ({ className, columns, rows }) => {
           })}
         </tbody>
       </table>
+      {children}
     </div>
   );
 };
 
 Table.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
   className: PropTypes.string,
   columns: PropTypes.array,
   rows: PropTypes.array

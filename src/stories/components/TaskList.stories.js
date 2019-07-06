@@ -56,7 +56,28 @@ const data = [
   }
 ];
 
-const columns = ['Task', 'Start Date', 'End Date', 'Current Status'];
+const dataEmpty = [
+  {
+    id: undefined,
+    properties: {
+      targetName: undefined,
+      windowOpen: undefined,
+      windowClose: undefined,
+      status: undefined
+    }
+  },
+  {
+    id: undefined,
+    properties: {
+      targetName: undefined,
+      windowOpen: undefined,
+      windowClose: undefined,
+      status: undefined
+    }
+  }
+];
+
+const columns = ['Task', 'Start Date', 'End Date', 'Current Status', 'Test'];
 
 const stories = storiesOf('Components|TaskList', module);
 
@@ -66,4 +87,19 @@ stories.add('Default', () => {
 
 stories.add('Custom Headers', () => {
   return <TaskList headers={columns} tasks={data} />;
+});
+
+stories.add('Filler', () => {
+  return <TaskList headers={columns} tasks={dataEmpty} />;
+});
+
+stories.add('Empty', () => {
+  return (
+    <>
+      <TaskList tasks={[]} />
+      <TaskList tasks={[]}>
+        <p>Custom Empty</p>
+      </TaskList>
+    </>
+  );
 });

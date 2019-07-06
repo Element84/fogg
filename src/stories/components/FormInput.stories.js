@@ -144,31 +144,35 @@ stories.add('Placeholder', () => {
 stories.add('Initial Value', () => {
   return (
     <BaseForm>
-      <FormInput id="initial-text" label="Initial Text" value="My Text" />
+      <FormInput
+        id="initial-text"
+        label="Initial Text"
+        defaultValue="My Text"
+      />
       <FormInput
         id="initial-email"
         label="Initial Email"
         type="email"
-        value="My Email"
+        defaultValue="My Email"
       />
       <FormInput
         id="initial-select"
         label="Initial Select"
         type="select"
         options={SELECT_OPTIONS}
-        value="zoidberg"
+        defaultValue="zoidberg"
       />
       <FormInput
         id="initial-textarea"
         label="Initial Textarea"
         type="textarea"
-        value="My Textarea"
+        defaultValue="My Textarea"
       />
       <FormInput
         id="initial-datetime"
         label="Initial Datetime"
         type="datetime"
-        value="6/7/19 12:00 PM"
+        value="06/07/2019 12:00 PM"
       />
     </BaseForm>
   );

@@ -14,6 +14,12 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
     validate = new Validation(rules);
   }
 
+  // Update validate with the latest and greatest rules
+  // Note: this was previously removed, was this causing issues? We need
+  // this to prevent overwriting between page renders
+
+  validate.updateRules(rules);
+
   /**
    * handleSubmit
    * @description Manages event handler for submit type events on the form

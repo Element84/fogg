@@ -21,17 +21,20 @@ $item-list-top-padding: .8em;
 
   }
 
-  a {
+}
+
+.item-list-item {
+
+  position: relative;
+
+  & > a,
+  & > span {
     display: flex;
     color: inherit;
     text-decoration: none;
     padding: $item-list-top-padding 2.4em $item-list-top-padding 1em;
   }
 
-}
-
-.item-list-item {
-  position: relative;
 }
 
 .item-list-item-thumb {

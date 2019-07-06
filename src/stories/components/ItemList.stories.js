@@ -23,12 +23,11 @@ stories.add('Default', () => {
             to: '#'
           },
           {
-            label: 'Meeeeeeeeeee',
-            to: '#'
+            label: 'Meeeeeeeeeee (No Icon, No To)',
+            icon: false
           },
           {
-            label: 'Haaaaaaaaaaaaaaaaaa',
-            to: '#'
+            label: 'Haaaaaaaaaaaaaaaaaa (No To)'
           }
         ]}
       />
@@ -58,13 +57,12 @@ stories.add('Thumbnails', () => {
           },
           {
             thumb: 'https://www.placecage.com/500/500',
-            label: 'Cage',
-            to: '#'
+            label: 'Cage (No Icon, No To)',
+            icon: false
           },
           {
             thumb: 'https://www.placecage.com/600/600',
-            label: '?',
-            to: '#'
+            label: '?  (No To)'
           }
         ]}
       />

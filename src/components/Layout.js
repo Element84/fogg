@@ -20,6 +20,7 @@ Layout.propTypes = {
   notice: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
+    PropTypes.object,
     PropTypes.string
   ])
 };

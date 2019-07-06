@@ -24,7 +24,22 @@ const ordersData = [
   }
 ];
 
-const columns = ['Order', 'Date Ordered', 'Current Status'];
+const dataEmpty = [
+  {
+    orderId: undefined,
+    productIdentifier: undefined,
+    orderDate: undefined,
+    orderStatus: undefined
+  },
+  {
+    orderId: undefined,
+    productIdentifier: undefined,
+    orderDate: undefined,
+    orderStatus: undefined
+  }
+];
+
+const columns = ['Order', 'Date Ordered', 'Current Status', 'Test'];
 
 const stories = storiesOf('Components|OrdersList', module);
 
@@ -34,4 +49,19 @@ stories.add('Default', () => {
 
 stories.add('Custom Headers', () => {
   return <OrdersList headers={columns} orders={ordersData} />;
+});
+
+stories.add('Filler', () => {
+  return <OrdersList headers={columns} orders={dataEmpty} />;
+});
+
+stories.add('Empty', () => {
+  return (
+    <>
+      <OrdersList tasks={[]} />
+      <OrdersList tasks={[]}>
+        <p>Custom Empty</p>
+      </OrdersList>
+    </>
+  );
 });
