@@ -6,19 +6,19 @@ import { OrdersList } from '../../ui';
 describe('Orders List', () => {
   const ordersData = [
     {
-      orderId: '153265-435436',
+      id: '153265-435436',
       orderDate: '04/04/2019',
-      orderStatus: 'accepted'
+      status: 'accepted'
     },
     {
-      orderId: '243263-345436',
+      id: '243263-345436',
       orderDate: '04/07/2019',
-      orderStatus: 'accepted'
+      status: 'accepted'
     },
     {
-      orderId: '3436256-436236',
+      id: '3436256-436236',
       orderDate: '04/12/2019',
-      orderStatus: 'accepted'
+      status: 'accepted'
     }
   ];
 
@@ -38,9 +38,9 @@ describe('Orders List', () => {
     it('should render a table with the right row values', () => {
       const propRows = orderList.find('Table').prop('rows');
       const firstRow = propRows[0];
-      expect(firstRow[0]).toEqual(ordersData[0].orderId);
+      expect(firstRow[0]).toEqual(ordersData[0].id);
       expect(firstRow[1]).toEqual(ordersData[0].orderDate);
-      expect(firstRow[2]).toEqual(ordersData[0].orderStatus);
+      expect(firstRow[2]).toEqual(ordersData[0].status);
     });
 
     it('should render a ListItemButton in the last cell', () => {

@@ -5,32 +5,32 @@ import OrdersList from '../../components/OrdersList';
 
 const ordersData = [
   {
-    orderId: '1234-325245',
+    id: '1234-325245',
     orderDate: '04/04/2019',
-    orderStatus: 'accepted'
+    status: 'accepted'
   },
   {
-    orderId: '2346256-342632',
+    id: '2346256-342632',
     orderDate: '04/07/2019',
-    orderStatus: 'accepted'
+    status: 'accepted'
   },
   {
-    orderId: '3345324-45274',
+    id: '3345324-45274',
     orderDate: '04/12/2019',
-    orderStatus: 'accepted'
+    status: 'accepted'
   }
 ];
 
 const dataEmpty = [
   {
-    orderId: undefined,
+    id: undefined,
     orderDate: undefined,
-    orderStatus: undefined
+    status: undefined
   },
   {
-    orderId: undefined,
+    id: undefined,
     orderDate: undefined,
-    orderStatus: undefined
+    status: undefined
   }
 ];
 
