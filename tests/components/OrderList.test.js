@@ -6,26 +6,23 @@ import { OrdersList } from '../../ui';
 describe('Orders List', () => {
   const ordersData = [
     {
-      orderId: 1,
-      productIdentifier: 'Two Reams Premium Copy Paper',
+      id: '153265-435436',
       orderDate: '04/04/2019',
-      orderStatus: 'accepted'
+      status: 'accepted'
     },
     {
-      orderId: 2,
-      productIdentifier: 'One Ream Premium Glossy Paper',
+      id: '243263-345436',
       orderDate: '04/07/2019',
-      orderStatus: 'accepted'
+      status: 'accepted'
     },
     {
-      orderId: 3,
-      productIdentifier: ' 20 Pads Sticky Squares',
+      id: '3436256-436236',
       orderDate: '04/12/2019',
-      orderStatus: 'accepted'
+      status: 'accepted'
     }
   ];
 
-  const defaultColumns = ['Product', 'Order Date', 'Order Status', null];
+  const defaultColumns = ['Order Id', 'Order Date', 'Order Status', null];
 
   const customColumns = ['Order', 'Date Orders', 'Current Status'];
 
@@ -41,9 +38,9 @@ describe('Orders List', () => {
     it('should render a table with the right row values', () => {
       const propRows = orderList.find('Table').prop('rows');
       const firstRow = propRows[0];
-      expect(firstRow[0]).toEqual(ordersData[0].productIdentifier);
+      expect(firstRow[0]).toEqual(ordersData[0].id);
       expect(firstRow[1]).toEqual(ordersData[0].orderDate);
-      expect(firstRow[2]).toEqual(ordersData[0].orderStatus);
+      expect(firstRow[2]).toEqual(ordersData[0].status);
     });
 
     it('should render a ListItemButton in the last cell', () => {
@@ -51,12 +48,9 @@ describe('Orders List', () => {
       const lastColumn = propRows[0][propRows[0].length - 1];
       const listItemButton = shallow(lastColumn);
       expect(listItemButton.find('Button')).toHaveLength(1);
-      expect(
-        listItemButton
-          .find('Button')
-          .findWhere(n => n.prop('to') === '/orders/1')
-          .exists()
-      ).toEqual(true);
+      expect(listItemButton.find('Button').prop('to')).toEqual(
+        '/orders/153265-435436'
+      );
     });
   });
 

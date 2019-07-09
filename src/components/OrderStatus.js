@@ -41,7 +41,7 @@ const ERROR_LIST = [
 ];
 
 const OrderStatus = ({ order = {}, disabled = false }) => {
-  const { orderStatus, orderDate } = order;
+  const { status, orderDate } = order;
 
   return (
     <div className="order-status">
@@ -49,7 +49,7 @@ const OrderStatus = ({ order = {}, disabled = false }) => {
         <div className="order-status-column">
           <div className="order-status-status-indicator">
             <StatusIndicator
-              activeId={orderStatus}
+              activeId={status}
               statusList={STATUS_LIST}
               errorList={ERROR_LIST}
             />

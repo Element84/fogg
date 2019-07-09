@@ -5,9 +5,8 @@ import { OrderStatus } from '../../ui';
 
 describe('Order Status', () => {
   const data = {
-    orderId: 123456,
-    productIdentifier: 'Hylian Shield',
-    orderStatus: 'delivered',
+    id: 123456,
+    status: 'delivered',
     orderDate: 1554782400000
   };
   describe('Render', () => {

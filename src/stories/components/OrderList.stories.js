@@ -5,37 +5,32 @@ import OrdersList from '../../components/OrdersList';
 
 const ordersData = [
   {
-    orderId: 1,
-    productIdentifier: 'Two Reams Premium Copy Paper',
+    id: '1234-325245',
     orderDate: '04/04/2019',
-    orderStatus: 'accepted'
+    status: 'accepted'
   },
   {
-    orderId: 2,
-    productIdentifier: 'One Ream Premium Glossy Paper',
+    id: '2346256-342632',
     orderDate: '04/07/2019',
-    orderStatus: 'accepted'
+    status: 'accepted'
   },
   {
-    orderId: 3,
-    productIdentifier: ' 20 Pads Sticky Squares',
+    id: '3345324-45274',
     orderDate: '04/12/2019',
-    orderStatus: 'accepted'
+    status: 'accepted'
   }
 ];
 
 const dataEmpty = [
   {
-    orderId: undefined,
-    productIdentifier: undefined,
+    id: undefined,
     orderDate: undefined,
-    orderStatus: undefined
+    status: undefined
   },
   {
-    orderId: undefined,
-    productIdentifier: undefined,
+    id: undefined,
     orderDate: undefined,
-    orderStatus: undefined
+    status: undefined
   }
 ];
 
