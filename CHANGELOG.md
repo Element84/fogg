@@ -1,3 +1,8 @@
+### Version 0.1.105
+- [JAM-464] Remove productIdentifer
+- [JAM-464] Fix failing test
+- [JAM-464] orderId and orderStaus > id and status
+
 ### Version 0.1.104
 
 ### Version 0.1.103
