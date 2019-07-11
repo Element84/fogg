@@ -1,3 +1,8 @@
+### Version 0.1.106
+- [JAM-347] Log values
+- [JAM-347] Update defaultValue effect
+- [JAM-347] Update value when default changes
+
 ### Version 0.1.105
 - [JAM-464] Remove productIdentifer
 - [JAM-464] Fix failing test
