@@ -13,6 +13,7 @@ const logger = new Logger('ModInput', {
 });
 
 const ModInput = ({ id, name, defaultValue = '', onSave, forceDisable }) => {
+  console.log(defaultValue);
   const inputName = name || id;
 
   if (!inputName) {
@@ -27,6 +28,10 @@ const ModInput = ({ id, name, defaultValue = '', onSave, forceDisable }) => {
     value,
     updateValue
   } = useModValue(defaultValue);
+
+  console.log(isChangeable);
+  console.log(originalValue);
+  console.log(value);
 
   let icon = isChangeable ? <FaCheck /> : <FaPencilAlt />;
 
