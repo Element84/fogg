@@ -1,3 +1,6 @@
+### Version 0.1.107
+- [JAM-466] adding datalist capabilities to form inputs
+
 ### Version 0.1.106
 - [JAM-347] Log values
 - [JAM-347] Update defaultValue effect
