@@ -14,7 +14,7 @@ import Datetime from './Datetime';
  */
 
 const FormInput = props => {
-  const { className, disabled } = props;
+  const { className, disabled, dataList } = props;
   const { id, type, label, isInvalid, inputProps } = useInput({ props });
 
   let input;
@@ -79,6 +79,7 @@ const FormInput = props => {
         props={inputProps}
         onChange={handleOnChange}
         onInput={handleOnInput}
+        dataList={dataList}
       />
     );
   }
@@ -103,6 +104,7 @@ FormInput.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string,
   placeholder: PropTypes.string,
+  dataList: PropTypes.array,
   autoComplete: PropTypes.string,
   autoCorrect: PropTypes.string,
   autoCapitalize: PropTypes.string,
