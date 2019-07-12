@@ -48,6 +48,11 @@ stories.add('Default', () => {
         label="Default Datetime"
         type="datetime"
       />
+      <FormInput
+        id="default-datalist"
+        label="Default Datalist"
+        dataList={['Fry', 'Leela', 'Zoidberg', 'Bender']}
+      />
     </BaseForm>
   );
 });
@@ -73,6 +78,12 @@ stories.add('Required', () => {
         id="required-textarea"
         label="Required Textarea"
         type="textarea"
+        required={true}
+      />
+      <FormInput
+        id="required-datalist"
+        label="Required Datalist"
+        dataList={['Fry', 'Leela', 'Zoidberg', 'Bender']}
         required={true}
       />
     </BaseForm>
@@ -101,6 +112,12 @@ stories.add('Disabled', () => {
         label="Disabled Textarea"
         type="textarea"
         disabled={true}
+      />
+      <FormInput
+        id="disabled-datalist"
+        label="Disabled Datalist"
+        disabled={true}
+        dataList={['Fry', 'Leela', 'Zoidberg', 'Bender']}
       />
     </BaseForm>
   );
@@ -136,6 +153,12 @@ stories.add('Placeholder', () => {
         label="Placeholder Textarea"
         type="textarea"
         placeholder="Enter your textarea"
+      />
+      <FormInput
+        id="placeholder-datalist"
+        label="Placeholder Datalist"
+        placeholder="Why not?"
+        dataList={['Fry', 'Leela', 'Zoidberg', 'Bender']}
       />
     </BaseForm>
   );
@@ -173,6 +196,12 @@ stories.add('Initial Value', () => {
         label="Initial Datetime"
         type="datetime"
         value="06/07/2019 12:00 PM"
+      />
+      <FormInput
+        id="initial-datalist"
+        label="Initial Datalist"
+        value="Fry"
+        dataList={['Fry', 'Leela', 'Zoidberg', 'Bender']}
       />
     </BaseForm>
   );

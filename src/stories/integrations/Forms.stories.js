@@ -108,6 +108,14 @@ stories.add('Default', () => {
 
       <FormRow>
         <FormInput
+          id="datalist"
+          label="Datalist"
+          dataList={['Fry', 'Leela', 'Zoidberg', 'Bender']}
+        />
+      </FormRow>
+
+      <FormRow>
+        <FormInput
           id="admin-only"
           label="Admin Only"
           defaultValue="oh hai"

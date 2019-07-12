@@ -47,7 +47,10 @@ const Datetime = ({ className, props, onChange, onInput }) => {
         <FaCalendarAlt {...defaultProps} {...allProps} />
         <Input
           className={`datetime ${className}`}
-          props={props}
+          props={{
+            ...props,
+            autoComplete: 'off'
+          }}
           {...allProps}
         />
       </>
