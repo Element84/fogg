@@ -70,7 +70,6 @@ const OrderStatus = ({ order = {}, disabled = false, onClick }) => {
             <strong>Order Date: {formatDate(orderDate)}</strong>
           </p>
           <div className="order-status-download-button">
-            {/* TODO ensure this button downloads orders */}
             <Button disabled={disabled} onClick={handleClick}>
               Download
             </Button>
