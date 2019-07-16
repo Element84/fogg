@@ -20,8 +20,8 @@ const STATUS_LIST = [
     id: 'shipped'
   },
   {
-    label: 'Delivered',
-    id: 'delivered'
+    label: 'Completed',
+    id: 'completed'
   }
 ];
 
@@ -35,13 +35,23 @@ const ERROR_LIST = [
     id: 'cancelled'
   },
   {
+    label: 'Failed',
+    id: 'failed'
+  },
+  {
     label: 'Unavailable',
     id: 'unavailable'
   }
 ];
 
-const OrderStatus = ({ order = {}, disabled = false }) => {
+const OrderStatus = ({ order = {}, disabled = false, onClick }) => {
   const { status, orderDate } = order;
+
+  function handleClick (e) {
+    if (typeof onClick === 'function') {
+      onClick(e);
+    }
+  }
 
   return (
     <div className="order-status">
@@ -60,8 +70,9 @@ const OrderStatus = ({ order = {}, disabled = false }) => {
             <strong>Order Date: {formatDate(orderDate)}</strong>
           </p>
           <div className="order-status-download-button">
-            {/* TODO ensure this button downloads orders */}
-            <Button disabled={disabled}>Download</Button>
+            <Button disabled={disabled} onClick={handleClick}>
+              Download
+            </Button>
           </div>
         </div>
       </div>
@@ -71,7 +82,8 @@ const OrderStatus = ({ order = {}, disabled = false }) => {
 
 OrderStatus.propTypes = {
   order: PropTypes.object,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  onClick: PropTypes.func
 };
 
 export default OrderStatus;
