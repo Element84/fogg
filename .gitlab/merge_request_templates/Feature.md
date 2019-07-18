@@ -20,9 +20,15 @@
 
 ## Checklist
 - [ ] Merge Request description contains review and testing instructions
-- [ ] Remove console.logs() or any other no longer needed comments
+
+- [ ] Remove `console.logs()` or any other no longer needed comments
+
 - [ ] Refactor if needed
+
 - [ ] Add any comments your code needs
+
 - [ ] All code has been pushed to Gitlab
+
 - [ ] Update JIRA status
+
 - [ ] Have a small celebration 
