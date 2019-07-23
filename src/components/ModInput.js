@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FaPencilAlt, FaCheck, FaTimes } from 'react-icons/fa';
 
@@ -7,19 +7,13 @@ import Logger from '../lib/logger';
 
 import FormInput from './FormInput';
 import Button from './Button';
+import { ModFormContext } from '../context';
 
 const logger = new Logger('ModInput', {
   isBrowser: true
 });
 
-const ModInput = ({
-  id,
-  name,
-  defaultValue = '',
-  onSave,
-  forceDisable,
-  label
-}) => {
+const ModInput = ({ id, name, defaultValue = '', onSave, label }) => {
   const inputName = name || id;
 
   if (!inputName) {
@@ -35,6 +29,24 @@ const ModInput = ({
     updateValue
   } = useModValue(defaultValue);
 
+  const {
+    isFormEditable,
+    setIsFormEditable,
+    isAllFieldsEditable,
+    shouldSaveForm
+  } = useContext(ModFormContext) || {};
+
+  useEffect(() => {
+    if (isAllFieldsEditable === isFormEditable) {
+      updateChangeable(!!isAllFieldsEditable);
+    }
+    if (shouldSaveForm) {
+      handleOnSave();
+    } else {
+      updateValue(originalValue);
+    }
+  }, [isAllFieldsEditable, isFormEditable]);
+
   let icon = isChangeable ? <FaCheck /> : <FaPencilAlt />;
 
   /**
@@ -47,6 +59,7 @@ const ModInput = ({
     e.preventDefault();
     const shouldSave = !!isChangeable;
     updateChangeable(!isChangeable);
+    setIsFormEditable(!isChangeable);
     if (shouldSave) {
       handleOnSave();
     }
@@ -82,10 +95,6 @@ const ModInput = ({
       onSave(value, inputName);
     }
   }
-
-  useEffect(() => {
-    updateChangeable(false);
-  }, [forceDisable]);
 
   useEffect(() => {
     updateOriginalValue(defaultValue);
@@ -128,8 +137,7 @@ ModInput.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
   defaultValue: PropTypes.string,
-  onSave: PropTypes.func,
-  forceDisable: PropTypes.bool
+  onSave: PropTypes.func
 };
 
 export default ModInput;
