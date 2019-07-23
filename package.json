@@ -41,6 +41,7 @@
     "react-leaflet-draw": "^0.19.0",
     "react-modal": "^3.8.2",
     "sass": "^1.22.3",
+    "togeojson": "^0.16.0",
     "use-debounce": "^2.1.0",
     "uuid": "^3.3.2",
     "yarn": "^1.16.0"
@@ -102,7 +103,7 @@
     "precommit": "lint-staged",
     "serve": "gatsby serve",
     "start": "npm run develop",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -s ./src/stories/static -p 6006",
     "test-watch": "jest --watchAll --config ./config/jest.config.js",
     "test": "jest --config ./config/jest.config.js && echo '> Finished testing ✅'"
   },

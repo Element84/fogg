@@ -1,0 +1,109 @@
+{
+    "type": "Feature Collection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -115.99226,
+                    46.41733
+                ]
+            },
+            "properties": {
+                "type": "Missing Person",
+                "time": "2018-11-08 04:53:38",
+                "reporter": "Colby Fayock",
+                "metadata": {
+                    "name": "John Johnson",
+                    "contact": "(555) 123-4321",
+                    "notes": "Last seen riding north on Stanly Blvd."
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -116.34476,
+                    47.26195
+                ]
+            },
+            "properties": {
+                "type": "Missing Animal",
+                "time": "2018-11-08 05:43:44",
+                "reporter": "Paul Pilone",
+                "metadata": {
+                    "name": "Fido",
+                    "species": "Canine",
+                    "contact": "(555) 324-1235",
+                    "notes": "Missing since evening of 2018-11-07"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.01961,
+                    47.81829
+                ]
+            },
+            "properties": {
+                "type": "Missing Animal",
+                "time": "2018-11-07 09:26:34",
+                "reporter": "John Cromartie",
+                "metadata": {
+                    "name": "Stacey",
+                    "species": "Horse",
+                    "contact": "(555) 734-6527",
+                    "notes": "In stable in backyard"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -118.02,
+                    46.80
+                ]
+            },
+            "properties": {
+                "type": "Missing Animal",
+                "time": "2018-11-07 09:26:34",
+                "reporter": "George Kastanza",
+                "metadata": {
+                    "name": "Stacey",
+                    "species": "Dog",
+                    "contact": "(555) 734-6527",
+                    "notes": "In stable in backyard"
+                }
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -115.345,
+                    48.263
+                ]
+            },
+            "properties": {
+                "type": "Missing Animal",
+                "time": "2018-11-08 05:43:44",
+                "reporter": "Spongebob Squarepants",
+                "metadata": {
+                    "name": "Fido",
+                    "species": "Canine",
+                    "contact": "(555) 324-1235",
+                    "notes": "Missing since evening of 2018-11-07"
+                }
+            }
+        }
+    ]
+}

@@ -5,6 +5,7 @@ export { default as useLocation } from './useLocation';
 export { default as useFilters } from './useFilters';
 export { default as useForm } from './useForm';
 export { default as useInput } from './useInput';
+export { default as useLayers } from './useLayers';
 export { default as useMapMarkerIcon } from './useMapMarkerIcon';
 export { default as useModal } from './useModal';
 export { default as useModValue } from './useModValue';

@@ -7,7 +7,7 @@ import {
 } from '../lib/leaflet';
 import { resolveLensAutocomplete } from '../lib/lens';
 
-import { useFilters, useLocation } from '.';
+import { useFilters, useLayers, useLocation } from '.';
 
 const QUERY_SEARCH_PARAMS = ['q', 'properties'];
 
@@ -15,7 +15,9 @@ export default function useLens ({
   defaultCenter = {},
   resolveOnSearch,
   refMapDraw,
-  availableFilters
+  availableFilters,
+  availableLayers = null,
+  fetchLayerData
 }) {
   const defaultGeoJson =
     typeof geoJsonFromLatLn === 'function' && geoJsonFromLatLn(defaultCenter);
@@ -43,9 +45,14 @@ export default function useLens ({
     clearActiveFilters
   } = useFilters(availableFilters);
 
+  const { layers, toggleLayer, getDataForLayers } = useLayers(
+    availableLayers,
+    fetchLayerData
+  );
+
   /**
    * search
-   * @description HAndle search functionality given layer settings and a date
+   * @description Handle search functionality given layer settings and a date
    */
 
   function search ({
@@ -295,6 +302,13 @@ export default function useLens ({
         storeFilterChanges,
         cancelFilterChanges,
         clearActiveFilters: handleClearActiveFilters
+      }
+    },
+    layers: {
+      ...layers,
+      handlers: {
+        toggleLayer,
+        getDataForLayers
       }
     }
   };

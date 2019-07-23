@@ -15,13 +15,19 @@ const Lens = ({
   className,
   defaultCenter = {},
   zoom = 4,
+  maxZoom,
+  minZoom,
   SidebarComponents,
   resolveOnSearch,
-  services,
-  map = 'blue_marble',
+  projection,
+  availableServices,
   search = true,
   placeholder = 'Search',
   availableFilters,
+  availableLayers = null,
+  hideNativeLayers = false,
+  fetchLayerData,
+  disableMapDraw,
   useMapEffect
 }) => {
   const refMapDraw = createRef();
@@ -35,21 +41,22 @@ const Lens = ({
     availableFilters,
     defaultCenter,
     resolveOnSearch,
-    refMapDraw
+    refMapDraw,
+    availableLayers,
+    fetchLayerData
   });
-
-  useEffect(() => {
-    handleQueryParams();
-  }, []);
 
   const {
     mapConfig,
     results,
     clearSearchInput,
     filters,
+    layers,
     handlers: lensHandlers
   } = lens;
+
   const { handlers: filtersHandlers } = filters;
+  const { handlers: layersHandlers } = layers;
 
   const {
     handleOnCreated,
@@ -67,6 +74,8 @@ const Lens = ({
     cancelFilterChanges
   } = filtersHandlers;
 
+  const { toggleLayer, getDataForLayers } = layersHandlers;
+
   const { center = {}, geoJson } = mapConfig || {};
   const { lat = 0, lng = 0 } = center;
 
@@ -77,10 +86,19 @@ const Lens = ({
   const mapSettings = {
     center: position,
     zoom,
-    services,
-    map,
+    maxZoom,
+    minZoom,
+    projection,
+    services: availableServices,
+    layers,
+    toggleLayer,
+    hideNativeLayers,
     useMapEffect
   };
+
+  useEffect(() => {
+    handleQueryParams();
+  }, []);
 
   return (
     <div
@@ -121,6 +139,9 @@ const Lens = ({
             clearActiveSearch={clearActiveSearch}
             mapPosition={position}
             geoJson={geoJson}
+            layers={layers}
+            toggleLayer={toggleLayer}
+            getDataForLayers={getDataForLayers}
           />
         )}
       </div>
@@ -136,7 +157,9 @@ const Lens = ({
       )}
 
       <Map className="lens-map" {...mapSettings}>
-        <MapDraw ref={refMapDraw} onCreated={handleOnCreated} />
+        {!disableMapDraw && (
+          <MapDraw ref={refMapDraw} onCreated={handleOnCreated} />
+        )}
       </Map>
 
       <div className="lens-extensions">{children}</div>
@@ -144,19 +167,54 @@ const Lens = ({
   );
 };
 
+const LayerProps = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  serviceName: PropTypes.string,
+  defaultIsVisible: PropTypes.bool
+});
+
 Lens.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   defaultCenter: PropTypes.object,
   zoom: PropTypes.number,
+  maxZoom: PropTypes.number,
+  minZoom: PropTypes.number,
   SidebarComponents: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   resolveOnSearch: PropTypes.func,
-  map: PropTypes.string,
-  projections: PropTypes.array,
-  services: PropTypes.array,
+  availableLayers: PropTypes.oneOfType([
+    PropTypes.arrayOf(LayerProps).isRequired,
+    PropTypes.shape({
+      base: PropTypes.arrayOf(LayerProps).isRequired,
+      overlay: PropTypes.arrayOf(LayerProps).isRequired
+    })
+  ]),
+  availableServices: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      format: PropTypes.string,
+      attribution: PropTypes.string,
+      projections: PropTypes.oneOfType([
+        PropTypes.string.isRequired,
+        PropTypes.arrayOf(PropTypes.string.isRequired)
+      ]).isRequired,
+      maxZoom: PropTypes.number,
+      nativeZoom: PropTypes.number,
+      tileSize: PropTypes.number,
+      resolution: PropTypes.string
+    }).isRequired
+  ),
+  projection: PropTypes.string,
   search: PropTypes.bool,
   placeholder: PropTypes.string,
   availableFilters: PropTypes.array,
+  hideNativeLayers: PropTypes.bool,
+  fetchLayerData: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.arrayOf(PropTypes.func)
+  ]),
+  disableMapDraw: PropTypes.bool,
   useMapEffect: PropTypes.func
 };
 

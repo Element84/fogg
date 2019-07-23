@@ -1,5 +1,7 @@
 .map {
 
+  position: relative;
+
   &,
   .map-base {
     width: 100%;
@@ -7,10 +9,12 @@
     background: black;
   }
 
-}
+  &.hide-layers-control {
+    .leaflet-control-layers {
+      display: none;
+    }
+  }
 
-.map {
-  position: relative;
 }
 
 .map-loading {

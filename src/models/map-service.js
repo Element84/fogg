@@ -2,8 +2,8 @@ import mapProjections from '../data/map-projections';
 import mapServices from '../data/map-services';
 
 class MapService {
-  constructor (name, { services = [], projections = [] } = {}) {
-    this.name = name;
+  constructor (projection, { services = [], projections = [] } = {}) {
+    this.projection = projection;
 
     // Combine user specified projections with our defaults
 
@@ -25,29 +25,43 @@ class MapService {
   }
 
   configure () {
-    const service = serviceByName(this.services, this.name);
+    this.crs = projectionByName(this.projection);
 
-    if (!service) {
-      throw new Error(`Map: Can not find service "${this.name}"`);
-    }
+    const availableServices = this.services.filter(service => {
+      if (service.projections && Array.isArray(service.projections)) {
+        return service.projections.indexOf(this.projection) > -1;
+      }
+      return service.projections === this.projection;
+    });
 
-    this.product = service && service.product;
-    this.projection = service && service.projection;
-    this.format = service && service.format;
-    this.time = service && service.time;
-    this.resolution = service && service.resolution;
-    this.tileSize = service && service.tileSize;
-    this.attribution = service && service.attribution;
-    this.crs = service && projectionByName(service.crs);
+    this.services = availableServices.map(service => {
+      const configuredService = { ...service };
 
-    // Disable prettier here to preserve the strings as human readable
+      configuredService.product = service && service.product;
+      configuredService.projection = service && this.projection;
+      configuredService.format = service && service.format;
+      configuredService.time = service && service.time;
+      configuredService.resolution = service && service.resolution;
+      configuredService.tileSize = service && service.tileSize;
+      configuredService.attribution = service && service.attribution;
 
-    if (typeof this.projection === 'string' && this.resolution) {
-      // prettier-ignore
-      this.projectionResolution = `${this.projection.toUpperCase()}_${this.resolution}`;
-    }
+      // Disable prettier here to preserve the strings as human readable
 
-    this.tile = service && configureTileEndpoint(this, service.tileEndpoint);
+      if (typeof this.projection === 'string' && service.resolution) {
+        // prettier-ignore
+        configuredService.projectionResolution = `${this.projection.toUpperCase()}_${service.resolution}`;
+      }
+
+      configuredService.url =
+        service &&
+        configureTileEndpoint(configuredService, service.tileEndpoint);
+
+      return configuredService;
+    });
+  }
+
+  serviceByName (name) {
+    return serviceByName(this.services, name);
   }
 
   setService (name) {
