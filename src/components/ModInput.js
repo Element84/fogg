@@ -12,7 +12,14 @@ const logger = new Logger('ModInput', {
   isBrowser: true
 });
 
-const ModInput = ({ id, name, defaultValue = '', onSave, forceDisable }) => {
+const ModInput = ({
+  id,
+  name,
+  defaultValue = '',
+  onSave,
+  forceDisable,
+  label
+}) => {
   const inputName = name || id;
 
   if (!inputName) {
@@ -87,6 +94,7 @@ const ModInput = ({ id, name, defaultValue = '', onSave, forceDisable }) => {
 
   const formInputProps = {
     id,
+    label,
     name: inputName,
     value: isChangeable ? value : originalValue,
     onChange: handleOnInputchange,
@@ -116,6 +124,7 @@ const ModInput = ({ id, name, defaultValue = '', onSave, forceDisable }) => {
 ModInput.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string,
+  label: PropTypes.string,
   defaultValue: PropTypes.string,
   onSave: PropTypes.func,
   forceDisable: PropTypes.bool
