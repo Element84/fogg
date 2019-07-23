@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button';
 
+import { valueStartsWith, normalizePathname } from '../lib/util';
+
 const NavBar = ({ orientation, primary, secondary, activePage }) => {
   let orientationClass = orientation ? 'nav-bar-vertical' : '';
+  const normalizedActivePage = normalizePathname(activePage);
 
   /**
    * createButton
@@ -11,11 +14,16 @@ const NavBar = ({ orientation, primary, secondary, activePage }) => {
    */
 
   function createButton (link) {
+    const normalizedTo = normalizePathname(link.to);
     return (
       <Button
         key={`${link.id}-${link.to}`}
         to={link.to}
-        className={activePage === link.to ? 'nav-bar-active-button' : ''}
+        className={
+          valueStartsWith(normalizedActivePage, normalizedTo)
+            ? 'nav-bar-active-button'
+            : ''
+        }
       >
         {link.icon}
       </Button>

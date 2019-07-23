@@ -14,10 +14,10 @@ stories.add('Default', () => {
           { label: 'Top Link 1', to: '/top1.html', icon: <FaSearch /> }
         ]}
         secondary={[
-          { label: 'Bottom Link 1', to: '/bottom', icon: <FaDatabase /> },
-          { label: 'Bottom Link 2', to: '/bottom2', icon: <FaServer /> }
+          { label: 'Bottom Link 1', to: '/bottom/', icon: <FaDatabase /> },
+          { label: 'Bottom Link 2', to: '/bottom2/', icon: <FaServer /> }
         ]}
-        activePage="/top1.html"
+        activePage="/bottom"
       />
     </>
   );
@@ -32,8 +32,8 @@ stories.add('Vertical', () => {
           { label: 'Top Link 1', to: '/top1.html', icon: <FaSearch /> }
         ]}
         secondary={[
-          { label: 'Bottom Link 1', to: '/bottom', icon: <FaDatabase /> },
-          { label: 'Bottom Link 2', to: '/bottom2', icon: <FaServer /> }
+          { label: 'Bottom Link 1', to: '/bottom/', icon: <FaDatabase /> },
+          { label: 'Bottom Link 2', to: '/bottom2/', icon: <FaServer /> }
         ]}
         activePage="/top1.html"
       />
