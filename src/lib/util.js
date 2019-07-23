@@ -118,6 +118,18 @@ function getRegex (pattern, flags = '') {
 module.exports.getRegex = getRegex;
 
 /**
+ * valueStartsWith
+ * @description
+ */
+
+function valueStartsWith (value, search) {
+  const regex = getRegex(`^${search}`);
+  return regex.test(value);
+}
+
+module.exports.valueStartsWith = valueStartsWith;
+
+/**
  * copyKeysToEmptyObject
  * @description Create a clone of the top level of an object without values unless a default provided
  */
@@ -274,3 +286,22 @@ function isDomAvailable () {
 }
 
 module.exports.isDomAvailable = isDomAvailable;
+
+/**
+ * normalizePathname
+ * @description
+ */
+
+function normalizePathname (string) {
+  let pathname = string;
+
+  if (typeof pathname !== 'string') return pathname;
+
+  if (pathname.substr(-1) !== '/') {
+    pathname = `${pathname}/`;
+  }
+
+  return pathname;
+}
+
+module.exports.normalizePathname = normalizePathname;

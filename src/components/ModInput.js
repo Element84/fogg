@@ -13,7 +13,7 @@ const logger = new Logger('ModInput', {
   isBrowser: true
 });
 
-const ModInput = ({ id, name, defaultValue = '', onSave }) => {
+const ModInput = ({ id, name, defaultValue = '', onSave, label }) => {
   const inputName = name || id;
 
   if (!inputName) {
@@ -103,6 +103,7 @@ const ModInput = ({ id, name, defaultValue = '', onSave }) => {
 
   const formInputProps = {
     id,
+    label,
     name: inputName,
     value: isChangeable ? value : originalValue,
     onChange: handleOnInputchange,
@@ -114,17 +115,19 @@ const ModInput = ({ id, name, defaultValue = '', onSave }) => {
       <div className="mod-input-value">
         <FormInput {...formInputProps} />
       </div>
-      {isChangeable && (
-        <Button
-          className="button-circle mod-input-cancel"
-          onClick={handleCancelClick}
-        >
-          <FaTimes />
+      <div className="mod-input-actions">
+        {isChangeable && (
+          <Button
+            className="button-circle mod-input-cancel"
+            onClick={handleCancelClick}
+          >
+            <FaTimes />
+          </Button>
+        )}
+        <Button className="button-circle" onClick={handleChangeClick}>
+          {icon}
         </Button>
-      )}
-      <Button className="button-circle" onClick={handleChangeClick}>
-        {icon}
-      </Button>
+      </div>
     </div>
   );
 };
@@ -132,6 +135,7 @@ const ModInput = ({ id, name, defaultValue = '', onSave }) => {
 ModInput.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string,
+  label: PropTypes.string,
   defaultValue: PropTypes.string,
   onSave: PropTypes.func
 };

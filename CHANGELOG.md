@@ -1,3 +1,11 @@
+### Version 0.1.112
+- fixing navbar to recognize base path instead of exact match
+
+### Version 0.1.111
+- tweaking mod input for alignment
+
+### Version 0.1.110
+
 ### Version 0.1.109
 
 ### Version 0.1.108

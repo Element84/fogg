@@ -14,7 +14,7 @@ const user = {
   firstName: 'Test',
   lastName: 'McTest',
   organization: 'Element 84',
-  plan: 'Testing out this feature'
+  plan: 'Plan - Testing out this feature'
 };
 
 const FormWrapper = () => {
@@ -64,34 +64,33 @@ const FormWrapper = () => {
         onChange={handleFormInputChange}
       >
         <div>
-          <p>First Name:</p>
           <ModInput
             id="firstName"
+            label="First Name"
             defaultValue={user.firstName}
             onSave={handleModInputSave}
             forceDisable={modInputDisabled}
           />
         </div>
         <div>
-          <p>Last Name:</p>
           <ModInput
             id="lastName"
+            label="Last Name"
             defaultValue={user.lastName}
             onSave={handleModInputSave}
             forceDisable={modInputDisabled}
           />
         </div>
         <div>
-          <p>Organization:</p>
           <ModInput
             id="organization"
+            label="Organization"
             defaultValue={user.organization}
             onSave={handleModInputSave}
             forceDisable={modInputDisabled}
           />
         </div>
         <div>
-          <p>Plan:</p>
           <ModInput
             id="plan"
             defaultValue={user.plan}

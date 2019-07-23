@@ -3,13 +3,13 @@ $mod-input-button-size: 2.4em;
 .mod-input {
 
   display: flex;
+  align-items: flex-end;
   width: 100%;
-  align-items: center;
 
   &[data-modinput-is-changeable="false"] {
 
     .button {
-      
+
       background: white;
 
       button {
@@ -23,7 +23,7 @@ $mod-input-button-size: 2.4em;
   }
 
   .button {
-    
+
     width: $mod-input-button-size;
     height: $mod-input-button-size;
     line-height: $mod-input-button-size;
@@ -37,7 +37,7 @@ $mod-input-button-size: 2.4em;
     }
 
   }
-  
+
 
   .form-input-disabled {
 
@@ -56,7 +56,7 @@ $mod-input-button-size: 2.4em;
 }
 
 .mod-input-value {
-  
+
   display: block;
   flex-grow: 1;
 
@@ -64,4 +64,8 @@ $mod-input-button-size: 2.4em;
     display: block;
   }
 
+}
+
+.mod-input-actions {
+  padding: .25em 0;
 }
