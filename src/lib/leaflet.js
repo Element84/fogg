@@ -245,7 +245,7 @@ export function buildMapMarkerIcon () {
   if (!icon && typeof window !== 'undefined') {
     icon = new L.Icon({
       iconUrl: require('../assets/images/map-marker.svg'),
-      iconAnchor: [5, 55],
+      iconAnchor: [16, 39],
       popupAnchor: [10, -44],
       iconSize: [32], // SVG auto scales, ignore 2nd height value
       shadowUrl: require('../assets/images/map-marker-shadow.svg'),
