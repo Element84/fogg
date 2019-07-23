@@ -106,17 +106,19 @@ const ModInput = ({
       <div className="mod-input-value">
         <FormInput {...formInputProps} />
       </div>
-      {isChangeable && (
-        <Button
-          className="button-circle mod-input-cancel"
-          onClick={handleCancelClick}
-        >
-          <FaTimes />
+      <div className="mod-input-actions">
+        {isChangeable && (
+          <Button
+            className="button-circle mod-input-cancel"
+            onClick={handleCancelClick}
+          >
+            <FaTimes />
+          </Button>
+        )}
+        <Button className="button-circle" onClick={handleChangeClick}>
+          {icon}
         </Button>
-      )}
-      <Button className="button-circle" onClick={handleChangeClick}>
-        {icon}
-      </Button>
+      </div>
     </div>
   );
 };
