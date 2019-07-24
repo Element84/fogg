@@ -34,6 +34,8 @@ const useModForm = () => {
 
   function updateFormEditable () {
     for (let [field, properties] of Object.entries(fields)) {
+      // we want to add fields that have isChangeable set to true
+      // to our set of fields that are editable
       if (properties.isChangeable) {
         editableFields.add(field);
         setEditableFields(editableFields);
@@ -44,8 +46,11 @@ const useModForm = () => {
     }
 
     if (editableFields.size > 0) {
+      // if we have editable fields, the form as a whole is editable
       setIsFormEditable(true);
       if (editableFields.size === Object.keys(fields).length) {
+        // if the number of editable fields == number of fields we have,
+        // then all fields in the form are editable
         setIsAllFieldsEditable(true);
       } else {
         setIsAllFieldsEditable(false);
