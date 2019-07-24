@@ -29,23 +29,27 @@ const ModInput = ({ id, name, defaultValue = '', onSave, label }) => {
     updateValue
   } = useModValue(defaultValue);
 
-  const {
-    isFormEditable,
-    setIsFormEditable,
-    isAllFieldsEditable,
-    shouldSaveForm
-  } = useContext(ModFormContext) || {};
+  const { updateField, isFormEditable, isAllFieldsEditable, shouldSaveForm } =
+    useContext(ModFormContext) || {};
 
   useEffect(() => {
-    if (isAllFieldsEditable === isFormEditable) {
-      updateChangeable(!!isAllFieldsEditable);
+    updateField(inputName, isChangeable);
+  }, [isChangeable]);
+
+  useEffect(() => {
+    if (isFormEditable && isAllFieldsEditable) {
+      updateChangeable(true);
     }
-    if (shouldSaveForm) {
-      handleOnSave();
-    } else {
-      updateValue(originalValue);
+
+    if (!isFormEditable) {
+      updateChangeable(false);
+      if (shouldSaveForm) {
+        handleOnSave();
+      } else {
+        updateValue(originalValue);
+      }
     }
-  }, [isAllFieldsEditable, isFormEditable]);
+  }, [isFormEditable, isAllFieldsEditable]);
 
   let icon = isChangeable ? <FaCheck /> : <FaPencilAlt />;
 
@@ -59,7 +63,6 @@ const ModInput = ({ id, name, defaultValue = '', onSave, label }) => {
     e.preventDefault();
     const shouldSave = !!isChangeable;
     updateChangeable(!isChangeable);
-    setIsFormEditable(!isChangeable);
     if (shouldSave) {
       handleOnSave();
     }

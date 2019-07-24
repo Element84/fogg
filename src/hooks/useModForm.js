@@ -1,10 +1,64 @@
 import { useState } from 'react';
 
-const useModValue = () => {
+const useModForm = () => {
+  const [fields, setFields] = useState({});
+  const [editableFields, setEditableFields] = useState(new Set());
   const [isFormEditable, setIsFormEditable] = useState(false);
   const [isAllFieldsEditable, setIsAllFieldsEditable] = useState(false);
   const [shouldSaveForm, setShouldSaveForm] = useState(false);
+
+  /**
+   * updateField
+   * @description Updates the isChangeable prop for each field
+   */
+
+  function updateField (name, isChangeable) {
+    setFields(fields => {
+      let fieldAttributes = fields[name] || {};
+
+      fieldAttributes = Object.assign({}, fieldAttributes, {
+        isChangeable
+      });
+
+      return {
+        ...fields,
+        [name]: fieldAttributes
+      };
+    });
+  }
+
+  /**
+   * updateFormEditable
+   * @description sets isFormEditable based on isChangeable of all fields
+   */
+
+  function updateFormEditable () {
+    for (let [field, properties] of Object.entries(fields)) {
+      if (properties.isChangeable) {
+        editableFields.add(field);
+        setEditableFields(editableFields);
+      } else {
+        editableFields.delete(field);
+        setEditableFields(editableFields);
+      }
+    }
+
+    if (editableFields.size > 0) {
+      setIsFormEditable(true);
+      if (editableFields.size === Object.keys(fields).length) {
+        setIsAllFieldsEditable(true);
+      } else {
+        setIsAllFieldsEditable(false);
+      }
+    } else {
+      setIsFormEditable(false);
+    }
+  }
+
   return {
+    fields,
+    updateField,
+    updateFormEditable,
     isFormEditable,
     setIsFormEditable,
     isAllFieldsEditable,
@@ -14,4 +68,4 @@ const useModValue = () => {
   };
 };
 
-export default useModValue;
+export default useModForm;
