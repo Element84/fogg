@@ -5,7 +5,13 @@ import { FaCheck, FaTimes, FaBan } from 'react-icons/fa';
 
 import Button from './Button';
 
-const DatetimeRange = ({ onChange, onCancel, onClear, clearDate }) => {
+const DatetimeRange = ({
+  onChange,
+  onCancel,
+  onClear,
+  clearDate,
+  allowPastDate = true
+}) => {
   const emptyDate = {
     start: null,
     end: null
@@ -20,6 +26,17 @@ const DatetimeRange = ({ onChange, onCancel, onClear, clearDate }) => {
       handleDatetimeClear();
     }
   }, [clearDate]);
+
+  /**
+   * isValidDate
+   * @description Returns true if valid date and false if not
+   */
+
+  function isValidDate (currentDate) {
+    if (allowPastDate) return true;
+    let yesterday = Datetime.moment().subtract(1, 'day');
+    return currentDate.isAfter(yesterday);
+  }
 
   /**
    * handleUpdateTempDate
@@ -128,6 +145,7 @@ const DatetimeRange = ({ onChange, onCancel, onClear, clearDate }) => {
           input={false}
           onChange={handleStartChange}
           value={dateTemp.start}
+          isValidDate={isValidDate}
         />
       </div>
       <div className="datetime-range-selection">
@@ -136,6 +154,7 @@ const DatetimeRange = ({ onChange, onCancel, onClear, clearDate }) => {
           input={false}
           onChange={handleEndChange}
           value={dateTemp.end}
+          isValidDate={isValidDate}
         />
       </div>
       <div className="datetime-range-actions">
@@ -162,7 +181,8 @@ DatetimeRange.propTypes = {
   onChange: PropTypes.func,
   onCancel: PropTypes.func,
   onClear: PropTypes.func,
-  clearDate: PropTypes.bool
+  clearDate: PropTypes.bool,
+  allowPastDate: PropTypes.bool
 };
 
 export default DatetimeRange;
