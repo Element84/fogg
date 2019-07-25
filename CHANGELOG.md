@@ -1,3 +1,6 @@
+### Version 0.1.115
+- adding navbar to list elements
+
 ### Version 0.1.114
 - adding helper classes
 
