@@ -8,5 +8,6 @@ export { default as useInput } from './useInput';
 export { default as useLayers } from './useLayers';
 export { default as useMapMarkerIcon } from './useMapMarkerIcon';
 export { default as useModal } from './useModal';
+export { default as useModForm } from './useModForm';
 export { default as useModValue } from './useModValue';
 export { default as usePrevious } from './usePrevious';

@@ -1,0 +1,75 @@
+$spacing-removal-helpers:
+  ( 'top' )
+  ( 'right' )
+  ( 'bottom' )
+  ( 'left' )
+  ( 'all' )
+;
+
+$spacing-addition-helpers:
+  ( 0.5  'half' )
+  ( 1    'one' )
+  ( 1.5  'onehalf' )
+  ( 2    'two' )
+  ( 2.5  'twohalf' )
+  ( 3    'three' )
+  ( 3.5  'threehalf' )
+  ( 4    'four' )
+  ( 4.5  'fourhalf' )
+  ( 5    'five' )
+  ( 5.5  'fivehalf' )
+  ( 6    'six' )
+;
+
+@each $removal in $spacing-removal-helpers {
+
+  $removal-name: nth($removal, 1);
+
+  .flat-#{$removal-name} {
+
+    @if $removal-name == 'all' {
+      margin: 0!important;
+    } @else {
+      margin-#{$removal-name}: 0!important;
+    }
+
+  }
+
+  .trim-#{$removal-name} {
+
+    @if $removal-name == 'all' {
+      padding: 0!important;
+    } @else {
+      padding-#{$removal-name}: 0!important;
+    }
+
+  }
+
+  @each $addition in $spacing-addition-helpers {
+
+    $addition-value: nth($addition, 1);
+    $addition-name: nth($addition, 2);
+
+    .push-#{$removal-name}-#{$addition-name} {
+
+      @if $removal-name == 'all' {
+        margin: #{$addition-value}em!important;
+      } @else {
+        margin-#{$removal-name}: #{$addition-value}em!important;
+      }
+
+    }
+
+    .pad-#{$removal-name}-#{$addition-name} {
+
+      @if $removal-name == 'all' {
+        padding: #{$addition-value}em!important;
+      } @else {
+        padding-#{$removal-name}: #{$addition-value}em!important;
+      }
+
+    }
+
+  }
+
+}
