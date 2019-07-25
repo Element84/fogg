@@ -1,0 +1,3 @@
+@function ratio-padding($w, $h) {
+  @return percentage( $h / $w );
+}
