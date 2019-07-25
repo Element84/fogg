@@ -172,6 +172,11 @@ stories.add('Toggleable Layers (And GeoJSON too!)', () => {
         name: 'Open Street Maps',
         serviceName: 'open_street_map',
         type: 'service'
+      },
+      {
+        name: 'Open Street Maps Test for Story',
+        serviceName: 'open_street_map_test_for_story',
+        type: 'service'
       }
     ],
     overlay: [
@@ -208,51 +213,10 @@ stories.add('Toggleable Layers (And GeoJSON too!)', () => {
 
   const services = [
     {
-      name: 'MODIS_Aqua_CorrectedReflectance_TrueColor',
-      product: 'MODIS_Aqua_CorrectedReflectance_TrueColor',
-      projections: 'epsg3857',
-      time: '2018-11-08',
-      format: 'jpg',
-      attribution: '&copy; NASA - MODIS - Corrected Reflectance (True Color)',
-      tileSize: 256,
-      tileEndpoint:
-        'https://gibs-{s}.earthdata.nasa.gov/wmts/{projection}/best/{product}/default/{time}/{projectionResolution}/{z}/{y}/{x}.{format}',
-      resolution: '250m',
-      maxZoom: 18,
-      maxNativeZoom: 9
-    },
-    {
-      name: 'MODIS_Terra_CorrectedReflectance_TrueColor',
-      product: 'MODIS_Terra_CorrectedReflectance_TrueColor',
-      projections: 'epsg3857',
-      time: '2018-11-08',
-      format: 'jpg',
-      attribution: '&copy; NASA - MODIS - Corrected Reflectance (True Color)',
-      tileSize: 256,
-      tileEndpoint:
-        'https://gibs-{s}.earthdata.nasa.gov/wmts/{projection}/best/{product}/default/{time}/{projectionResolution}/{z}/{y}/{x}.{format}',
-      resolution: '250m',
-      maxZoom: 18,
-      maxNativeZoom: 9
-    },
-    {
-      name: 'coastlines',
-      product: 'Coastlines',
-      projections: 'epsg3857',
-      format: 'png',
-      attribution: '&copy; NASA - Coastlines',
-      tileSize: 256,
-      tileEndpoint:
-        'https://gibs-{s}.earthdata.nasa.gov/wmts/{projection}/all/{product}/default//{projectionResolution}/{z}/{y}/{x}.{format}',
-      resolution: '250m',
-      maxZoom: 18,
-      maxNativeZoom: 9
-    },
-    {
-      name: 'open_street_map',
+      name: 'open_street_map_test_for_story',
       format: 'png',
       projections: 'epsg3857',
-      attribution: '&copy; OpenStreetMap contributors',
+      attribution: 'Test For Story - &copy; OpenStreetMap contributors',
       maxZoom: 18,
       nativeZoom: 18,
       tileSize: 256,
