@@ -60,6 +60,10 @@ const MapPreview = ({ center, geoJson, zoom = 3 }) => {
     geoJsonCoordinates = coordinatesFromGeoJson(geoJson);
   }
 
+  if (!type) {
+    throw new Error('Invalid geometry type');
+  }
+
   const mapSettings = {
     center: [centerLatLng.lat, centerLatLng.lng],
     zoom
