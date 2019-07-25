@@ -42,7 +42,7 @@ const useInput = ({ inputRef = {}, props = {} }) => {
   const { invalidFields = [], updateField } =
     useContext(FormContext) || FormNoContext;
 
-  const { type, label, required, onInput, onChange } = props;
+  const { type, label, required, onInput, onChange, isField = true } = props;
   const inputRules = {};
   let isInvalid = false;
 
@@ -54,13 +54,13 @@ const useInput = ({ inputRef = {}, props = {} }) => {
 
   // If we didn't supply a name, default to the ID
 
-  if (!inputProps.name) {
+  if (!inputProps.name && !!isField) {
     inputProps.name = inputProps.id;
   }
 
   // Missing name prevents form functionality from working so warn about it
 
-  if (!inputProps.name) {
+  if (!inputProps.name && !!isField) {
     logger.warn(`Missing input name: ${JSON.stringify(inputProps)}`);
   }
 

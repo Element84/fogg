@@ -16,7 +16,8 @@ const ChildToggle = ({
   label,
   id,
   value,
-  isChecked = false
+  isChecked = false,
+  isField = false
 }) => {
   const { checked, handleChange } = useChildToggle(isChecked);
 
@@ -26,12 +27,13 @@ const ChildToggle = ({
     label,
     id,
     value,
-    isChecked
+    isChecked,
+    isField
   };
 
-  // If we didn't supply a name, default to the ID
+  // If we didn't supply a name and the button is a field, default to the ID
 
-  if (!inputProps.name) {
+  if (!inputProps.name && !!isField) {
     inputProps.name = inputProps.id;
   }
 
@@ -53,7 +55,8 @@ ChildToggle.propTypes = {
   label: PropTypes.string,
   id: PropTypes.string,
   value: PropTypes.string,
-  isChecked: PropTypes.bool
+  isChecked: PropTypes.bool,
+  isField: PropTypes.bool
 };
 
 export default ChildToggle;
