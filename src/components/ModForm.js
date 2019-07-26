@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Form from './Form';
 import Button from './Button';
 import { useModForm } from '../hooks';
@@ -11,6 +11,9 @@ import { ModFormContext } from '../context';
 
 const ModForm = props => {
   const {
+    fields,
+    updateField,
+    updateFormEditable,
     isFormEditable,
     setIsFormEditable,
     isAllFieldsEditable,
@@ -36,11 +39,15 @@ const ModForm = props => {
     setShouldSaveForm(false);
   }
 
+  useEffect(() => {
+    updateFormEditable();
+  }, [fields]);
+
   return (
     <ModFormContext.Provider
       value={{
+        updateField,
         isFormEditable,
-        setIsFormEditable,
         isAllFieldsEditable,
         shouldSaveForm
       }}
@@ -48,9 +55,9 @@ const ModForm = props => {
       <div className="mod-form">
         <Form {...props} />
         <div className="mod-form-buttons">
-          {!isFormEditable && (
+          {!isAllFieldsEditable && (
             <Button onClick={handleEditClick} className="edit">
-              Edit
+              {!isFormEditable ? 'Edit' : 'Edit All'}
             </Button>
           )}
           {isFormEditable && (
