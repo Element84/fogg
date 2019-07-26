@@ -7,7 +7,13 @@ import { useInput } from '../hooks';
 
 import Input from './Input';
 
-const Datetime = ({ className, props, onChange, onInput }) => {
+const Datetime = ({
+  className,
+  props,
+  onChange,
+  onInput,
+  allowPastDate = true
+}) => {
   const { name } = useInput({ props });
 
   function handleChange (moment) {
@@ -31,6 +37,17 @@ const Datetime = ({ className, props, onChange, onInput }) => {
     if (typeof onInput === 'function') {
       onInput(virtualEvent);
     }
+  }
+
+  /**
+   * isValidDate
+   * @description Returns true if valid date and false if not
+   */
+
+  function isValidDate (currentDate) {
+    if (allowPastDate) return true;
+    let yesterday = ReactDatetime.moment().subtract(1, 'day');
+    return currentDate.isAfter(yesterday);
   }
 
   function renderInput (defaultProps) {
@@ -62,6 +79,7 @@ const Datetime = ({ className, props, onChange, onInput }) => {
       renderInput={renderInput}
       onChange={handleChange}
       defaultValue={props.value || ''}
+      isValidDate={isValidDate}
     />
   );
 };
@@ -71,7 +89,8 @@ Datetime.propTypes = {
   props: PropTypes.object,
   onChange: PropTypes.func,
   onInput: PropTypes.func,
-  value: PropTypes.string
+  value: PropTypes.string,
+  allowPastDate: PropTypes.bool
 };
 
 export default Datetime;
