@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import {
   geoJsonFromLatLn,
@@ -49,6 +49,10 @@ export default function useLens ({
     availableLayers,
     fetchLayerData
   );
+
+  useEffect(() => {
+    handleQueryParams();
+  }, []);
 
   /**
    * search

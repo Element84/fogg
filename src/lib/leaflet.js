@@ -304,3 +304,12 @@ export function coordinatesFromGeoJson (geoJson) {
     return coordinates;
   });
 }
+
+/**
+ * latLngPositionFromCenter
+ * @description Given the center, returns the position [lat, lng]
+ */
+
+export function latLngPositionFromCenter({ lat = 0, lng = 0 } = {}) {
+  return [lat, lng];
+}

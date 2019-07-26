@@ -1,5 +1,4 @@
-import FormContext, { FormNoContext } from './form-context';
-import ModFormContext from './mod-form-context';
-import ModalContext from './modal-context';
-
-export { FormContext, FormNoContext, ModFormContext, ModalContext };
+export { default as FormContext, FormNoContext } from './form-context';
+export { default as LensContext } from './lens-context';
+export { default as ModFormContext } from './mod-form-context';
+export { default as ModalContext } from './modal-context';

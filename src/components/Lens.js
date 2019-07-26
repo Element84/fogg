@@ -1,14 +1,16 @@
-import React, { createRef, useEffect } from 'react';
+import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { useLens } from '../hooks';
+import { LensContext } from '../context';
 
-import Map from './Map';
-import MapDraw from './MapDraw';
 import Panel from './Panel';
-import SearchComplete from './SearchComplete';
-import SearchFilters from './SearchFilters';
-import SearchPanelFilters from './SearchPanelFilters';
+import LensMap from './LensMap';
+import LensMapDraw from './LensMapDraw';
+import LensSearchComplete from './LensSearchComplete';
+import LensSearchFilters from './LensSearchFilters';
+import LensSearchPanelFilters from './LensSearchPanelFilters';
+import LensSidebarComponents from './LensSidebarComponents';
 
 const Lens = ({
   children,
@@ -46,124 +48,58 @@ const Lens = ({
     fetchLayerData
   });
 
-  const {
-    mapConfig,
-    results,
-    clearSearchInput,
-    filters,
-    layers,
-    handlers: lensHandlers
-  } = lens;
-
-  const { handlers: filtersHandlers } = filters;
-  const { handlers: layersHandlers } = layers;
-
-  const {
-    handleOnCreated,
-    handleOnSearch,
-    resolveLensAutocomplete,
-    loadMoreResults,
-    handleQueryParams,
-    clearActiveSearch,
-    handleUpdateSearchParams
-  } = lensHandlers;
-
-  const {
-    openFilters,
-    storeFilterChanges,
-    cancelFilterChanges
-  } = filtersHandlers;
-
-  const { toggleLayer, getDataForLayers } = layersHandlers;
-
-  const { center = {}, geoJson } = mapConfig || {};
-  const { lat = 0, lng = 0 } = center;
+  const { results, filters, layers } = lens;
 
   const activeSearch = Array.isArray(results);
   const hasResults = Array.isArray(results) && results.length > 0;
-  const position = [lat, lng];
+  const displayFilters = activeSearch && filters.isOpen && filters.available.length > 0;
 
   const mapSettings = {
-    center: position,
     zoom,
     maxZoom,
     minZoom,
     projection,
     services: availableServices,
-    layers,
-    toggleLayer,
     hideNativeLayers,
     useMapEffect
   };
 
-  useEffect(() => {
-    handleQueryParams();
-  }, []);
-
   return (
-    <div
-      className={lensClassName}
-      data-active-search={activeSearch}
-      data-has-results={hasResults}
-    >
-      <div className="lens-sidebar">
-        {search && (
-          <div className="lens-sidebar-search">
-            <Panel className="panel-clean">
-              <SearchComplete
-                onSearch={handleOnSearch}
-                resolveQueryComplete={resolveLensAutocomplete}
-                placeholder={placeholder}
-                defaultValue={mapConfig.textInput}
-                clearSearchInput={clearSearchInput}
-                defaultDate={mapConfig.date}
-              />
-            </Panel>
+    <LensContext.Provider value={{ lens, filters, layers }}>
+      <div
+        className={lensClassName}
+        data-active-search={activeSearch}
+        data-has-results={hasResults}
+      >
+        <div className="lens-sidebar">
+          {search && (
+            <div className="lens-sidebar-search">
+              <Panel className="panel-clean">
+                <LensSearchComplete placeholder={placeholder} />
+              </Panel>
 
-            {activeSearch && filters.available.length > 0 && (
-              <SearchPanelFilters
-                filters={filters}
-                onOpenFilters={openFilters}
-                onSaveFiltersChanges={handleUpdateSearchParams}
-                onCancelFilterChanges={cancelFilterChanges}
-              />
-            )}
-          </div>
-        )}
+              {activeSearch && filters.available.length > 0 && (
+                <LensSearchPanelFilters />
+              )}
+            </div>
+          )}
 
-        {SidebarComponents && (
-          <SidebarComponents
-            filters={filters}
-            results={results}
-            loadMoreResults={loadMoreResults}
-            clearActiveSearch={clearActiveSearch}
-            mapPosition={position}
-            geoJson={geoJson}
-            layers={layers}
-            toggleLayer={toggleLayer}
-            getDataForLayers={getDataForLayers}
-          />
-        )}
+          {SidebarComponents && (
+            <LensSidebarComponents SidebarComponents={SidebarComponents} />
+          )}
+        </div>
+
+        { displayFilters && <LensSearchFilters /> }
+
+        <LensMap {...mapSettings}>
+          {!disableMapDraw && (
+            <LensMapDraw ref={refMapDraw} />
+          )}
+        </LensMap>
+
+        <div className="lens-extensions">{children}</div>
       </div>
-
-      {activeSearch && filters.isOpen && filters.available.length > 0 && (
-        <SearchFilters
-          className="lens-search-filters"
-          filters={filters.available}
-          onCancelChanges={cancelFilterChanges}
-          onSaveChanges={handleUpdateSearchParams}
-          onUpdateChanges={storeFilterChanges}
-        />
-      )}
-
-      <Map className="lens-map" {...mapSettings}>
-        {!disableMapDraw && (
-          <MapDraw ref={refMapDraw} onCreated={handleOnCreated} />
-        )}
-      </Map>
-
-      <div className="lens-extensions">{children}</div>
-    </div>
+    </LensContext.Provider>
   );
 };
 
