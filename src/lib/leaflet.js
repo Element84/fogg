@@ -310,6 +310,6 @@ export function coordinatesFromGeoJson (geoJson) {
  * @description Given the center, returns the position [lat, lng]
  */
 
-export function latLngPositionFromCenter({ lat = 0, lng = 0 } = {}) {
+export function latLngPositionFromCenter ({ lat = 0, lng = 0 } = {}) {
   return [lat, lng];
 }

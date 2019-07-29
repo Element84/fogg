@@ -3,11 +3,14 @@ import { LensContext } from '../context';
 
 import SearchComplete from './SearchComplete';
 
-const LensSearchComplete = (props) => {
+const LensSearchComplete = props => {
+  const { lens = {} } = useContext(LensContext) || {};
 
-  const { lens = {} } = useContext(LensContext) || {}
-
-  const { handlers: lensHandlers = {}, clearSearchInput, mapConfig = {} } = lens;
+  const {
+    handlers: lensHandlers = {},
+    clearSearchInput,
+    mapConfig = {}
+  } = lens;
   const { handleOnSearch, resolveLensAutocomplete } = lensHandlers;
   const { textInput, date } = mapConfig;
 
@@ -24,4 +27,3 @@ const LensSearchComplete = (props) => {
 };
 
 export default LensSearchComplete;
-

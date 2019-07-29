@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { Map } from '../../ui';
-import { MapService } from '../../';
 
 const ALEXANDRIA = {
   lat: 38.8048,
@@ -19,8 +18,6 @@ describe('Map', () => {
     const testClass = 'test';
     const testText = 'Hi';
 
-    const service = new MapService('blue_marble');
-
     const map = shallow(
       <Map {...mapSettings}>
         <div className={testClass}>{testText}</div>
@@ -28,7 +25,12 @@ describe('Map', () => {
     ).find('Map');
 
     it('should render a blue_marble map by default', () => {
-      expect(map.prop('crs').code).toEqual(service.crs.code);
+      expect(
+        map
+          .find('Layer')
+          .first()
+          .prop('layer').id
+      ).toEqual('blue_marble');
     });
 
     it('should render with the given center coordinates', () => {

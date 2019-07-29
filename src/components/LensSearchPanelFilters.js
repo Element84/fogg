@@ -3,8 +3,7 @@ import { LensContext } from '../context';
 
 import SearchPanelFilters from './SearchPanelFilters';
 
-const LensSearchPanelFilters = (props) => {
-
+const LensSearchPanelFilters = props => {
   const { filters = {}, lens = {} } = useContext(LensContext) || {};
 
   const { handlers: lensHandlers = {} } = lens;

@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { LensContext } from '../context';
 
 import { latLngPositionFromCenter } from '../lib/leaflet';
 
 const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
-
-  const { lens = {}, filters = {}, layers = {} } = useContext(LensContext) || {}
+  const { lens = {}, filters = {}, layers = {} } =
+    useContext(LensContext) || {};
 
   const { handlers: lensHandlers = {}, results, mapConfig = {} } = lens;
   const { loadMoreResults, clearActiveSearch } = lensHandlers;
@@ -28,6 +29,13 @@ const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
       {...rest}
     />
   );
+};
+
+LensSidebarComponents.propTypes = {
+  SidebarComponents: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ])
 };
 
 export default LensSidebarComponents;

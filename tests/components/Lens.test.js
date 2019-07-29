@@ -14,17 +14,24 @@ describe('Lens', () => {
     const position = [ALEXANDRIA.lat, ALEXANDRIA.lng];
 
     const lens = shallow(<Lens defaultCenter={ALEXANDRIA} zoom={zoom} />);
+    const lensMap = lens.find('LensMap');
+    const lensSearchComplete = lens.find('LensSearchComplete');
 
     it('should pass the given default center to the Map', () => {
-      expect(lens.find('Map').prop('center')).toEqual(position);
+      expect(
+        lensMap
+          .dive()
+          .find('Map')
+          .prop('center')
+      ).toEqual(position);
     });
 
     it('should pass the given zoom to the Map', () => {
-      expect(lens.find('Map').prop('zoom')).toEqual(zoom);
+      expect(lensMap.prop('zoom')).toEqual(zoom);
     });
 
     it('should render a SearchComplete component', () => {
-      expect(lens.find('SearchComplete').exists()).toEqual(true);
+      expect(lensSearchComplete.exists()).toEqual(true);
     });
   });
 });

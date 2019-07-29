@@ -52,7 +52,8 @@ const Lens = ({
 
   const activeSearch = Array.isArray(results);
   const hasResults = Array.isArray(results) && results.length > 0;
-  const displayFilters = activeSearch && filters.isOpen && filters.available.length > 0;
+  const displayFilters =
+    activeSearch && filters.isOpen && filters.available.length > 0;
 
   const mapSettings = {
     zoom,
@@ -89,12 +90,10 @@ const Lens = ({
           )}
         </div>
 
-        { displayFilters && <LensSearchFilters /> }
+        {displayFilters && <LensSearchFilters />}
 
         <LensMap {...mapSettings}>
-          {!disableMapDraw && (
-            <LensMapDraw ref={refMapDraw} />
-          )}
+          {!disableMapDraw && <LensMapDraw ref={refMapDraw} />}
         </LensMap>
 
         <div className="lens-extensions">{children}</div>
