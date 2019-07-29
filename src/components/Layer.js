@@ -8,22 +8,16 @@ const getKey = layerKey => {
   return newKey;
 };
 
-const Layer = ({ layer, layerKey }) => {
-  if (layer.type === 'service') {
+const Layer = ({ layer = {}, layerKey }) => {
+  const { type, data = {} } = layer;
+  if (type === 'service') {
     return <TileLayer {...layer.service} />;
   }
-  if (layer.type === 'data') {
-    if (
-      layer.data.type === 'geojson' &&
-      !!Object.keys(layer.data.data).length
-    ) {
-      let GeoJSONdata = layer.data.data;
+  if (type === 'data') {
+    if (data.type === 'geojson' && !!Object.keys(data.data).length) {
+      let GeoJSONdata = data.data;
       return (
-        <GeoJSON
-          key={getKey(layerKey)}
-          data={GeoJSONdata}
-          {...layer.data.options}
-        />
+        <GeoJSON key={getKey(layerKey)} data={GeoJSONdata} {...data.options} />
       );
     }
   }

@@ -32,10 +32,7 @@ const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
 };
 
 LensSidebarComponents.propTypes = {
-  SidebarComponents: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ])
+  SidebarComponents: PropTypes.any
 };
 
 export default LensSidebarComponents;
