@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
-
 import { TileLayer, GeoJSON } from 'react-leaflet';
 
 const getKey = layerKey => {

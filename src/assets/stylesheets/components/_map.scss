@@ -9,10 +9,12 @@
     background: black;
   }
 
-  &.hide-layers-control {
+  &.map-hide-layers-control {
+
     .leaflet-control-layers {
       display: none;
     }
+
   }
 
 }

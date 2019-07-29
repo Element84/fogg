@@ -10,6 +10,7 @@ import 'leaflet-active-area';
 import MapService from '../models/map-service';
 
 import { isDomAvailable } from '../lib/util';
+import { buildLayerSet, layerSetHasSingleLayer } from '../lib/leaflet';
 
 import Layer from './Layer';
 
@@ -34,7 +35,7 @@ const Map = ({
   const mapRef = createRef();
 
   if (hideNativeLayers) {
-    mapClassName = `${mapClassName} hide-layers-control`;
+    mapClassName = `${mapClassName} map-hide-layers-control`;
   }
 
   useEffect(() => {
@@ -63,48 +64,7 @@ const Map = ({
     projections
   });
 
-  const buildLayers = (availableLayers, availableServices = []) => {
-    // If no layers are provided, use blue marble
-
-    availableLayers = {
-      base: [],
-      overlay: [],
-      ...availableLayers
-    };
-
-    if (!availableLayers.base.length) {
-      availableLayers.base.push({
-        id: 'blue_marble',
-        name: 'Blue Marble',
-        serviceName: 'blue_marble',
-        isActive: true,
-        type: 'service'
-      });
-    }
-
-    return {
-      base: availableLayers.base.map(layer => {
-        const service = availableServices.find(
-          service => service.name === layer.serviceName
-        );
-        return {
-          ...layer,
-          service
-        };
-      }),
-      overlay: availableLayers.overlay.map(layer => {
-        const service = availableServices.find(
-          service => service.name === layer.serviceName
-        );
-        return {
-          ...layer,
-          service
-        };
-      })
-    };
-  };
-
-  const mapLayers = buildLayers(layers, mapService.services);
+  const mapLayers = buildLayerSet(layers, mapService.services);
 
   const mapSettings = {
     className: 'map-base',
@@ -129,20 +89,13 @@ const Map = ({
     );
   }
 
-  const handleBaseLayerChange = id => {
+  function handleBaseLayerChange (id) {
     toggleLayer(id);
-  };
+  }
+
   mapSettings.handleBaseLayerChange = handleBaseLayerChange;
 
-  const isSingleLayer = availableLayers => {
-    return (
-      availableLayers.base &&
-      availableLayers.base.length === 1 &&
-      (availableLayers.overlay && !availableLayers.overlay.length)
-    );
-  };
-
-  const singleLayer = isSingleLayer(mapLayers);
+  const singleLayer = layerSetHasSingleLayer(mapLayers);
 
   return (
     <div className={mapClassName}>
