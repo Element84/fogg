@@ -23,7 +23,29 @@ const intervalOptions = [
 
 stories.add('Default', () => {
   return (
-    <ChildToggle label="Repeat" name="repeater" id="repeater">
+    <ChildToggle label="Repeat" id="repeater">
+      <FormRow className="repeater-row">
+        <FormInput
+          type="select"
+          id="interval"
+          label="Interval"
+          options={intervalOptions}
+        />
+      </FormRow>
+      <FormRow className="repeater-row" col={2}>
+        <FormInput type="text" id="separation-min" abel="Separation Min" />
+        <FormInput type="text" id="separation-max" label="Separation Max" />
+      </FormRow>
+      <FormRow className="repeater-row" col={2}>
+        <FormInput type="text" id="max-collections" label="Max Collections" />
+      </FormRow>
+    </ChildToggle>
+  );
+});
+
+stories.add('Checked', () => {
+  return (
+    <ChildToggle label="Repeat" id="repeater" isChecked={true}>
       <FormRow className="repeater-row">
         <FormInput
           type="select"
@@ -43,9 +65,9 @@ stories.add('Default', () => {
   );
 });
 
-stories.add('Checked', () => {
+stories.add('Is Field', () => {
   return (
-    <ChildToggle label="Repeat" name="repeater" id="repeater" isChecked={true}>
+    <ChildToggle label="Repeat" id="repeater" isField={true}>
       <FormRow className="repeater-row">
         <FormInput
           type="select"
