@@ -11,7 +11,7 @@ const ALEXANDRIA = {
 describe('Lens', () => {
   describe('Render', () => {
     const zoom = 3;
-    const position = [ALEXANDRIA.lat, ALEXANDRIA.lng];
+    const position = [0, 0];
 
     const lens = shallow(<Lens defaultCenter={ALEXANDRIA} zoom={zoom} />);
     const lensMap = lens.find('LensMap');
