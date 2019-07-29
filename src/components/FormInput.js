@@ -14,7 +14,7 @@ import Datetime from './Datetime';
  */
 
 const FormInput = props => {
-  const { className, disabled, dataList } = props;
+  const { className, disabled, dataList, allowPastDate } = props;
   const { id, type, label, isInvalid, inputProps } = useInput({ props });
 
   let input;
@@ -70,6 +70,7 @@ const FormInput = props => {
         props={inputProps}
         onChange={handleOnChange}
         onInput={handleOnInput}
+        allowPastDate={allowPastDate}
       />
     );
   } else {
@@ -116,7 +117,8 @@ FormInput.propTypes = {
   inputMode: PropTypes.string,
   onInput: PropTypes.func,
   onChange: PropTypes.func,
-  onFocus: PropTypes.func
+  onFocus: PropTypes.func,
+  allowPastDate: PropTypes.bool
 };
 
 export default FormInput;

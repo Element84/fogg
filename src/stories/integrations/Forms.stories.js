@@ -151,6 +151,15 @@ stories.add('Default', () => {
           value="06/07/19 12:00 PM"
         />
       </FormRow>
+      <FormRow>
+        <FormInput
+          id="datetime-3"
+          label="Datetime 3"
+          type="datetime"
+          required={true}
+          allowPastDate={false}
+        />
+      </FormRow>
 
       <FormRow>
         <InputButton

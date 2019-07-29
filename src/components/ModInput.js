@@ -29,23 +29,32 @@ const ModInput = ({ id, name, defaultValue = '', onSave, label }) => {
     updateValue
   } = useModValue(defaultValue);
 
-  const {
-    isFormEditable,
-    setIsFormEditable,
-    isAllFieldsEditable,
-    shouldSaveForm
-  } = useContext(ModFormContext) || {};
+  const { updateField, isFormEditable, isAllFieldsEditable, shouldSaveForm } =
+    useContext(ModFormContext) || {};
 
   useEffect(() => {
-    if (isAllFieldsEditable === isFormEditable) {
-      updateChangeable(!!isAllFieldsEditable);
+    updateField(inputName, isChangeable);
+  }, [isChangeable]);
+
+  useEffect(() => {
+    if (isFormEditable && isAllFieldsEditable) {
+      // if all fields are editable, we can set isChangeable
+      // to true for all fields
+      updateChangeable(true);
     }
-    if (shouldSaveForm) {
-      handleOnSave();
-    } else {
-      updateValue(originalValue);
+
+    if (!isFormEditable) {
+      updateChangeable(false);
+      // if the form isn't editable, then not fields should have
+      // isChangeable set to true. we want to save the fields that
+      // should be saved and clear the changes if not
+      if (shouldSaveForm) {
+        handleOnSave();
+      } else {
+        updateValue(originalValue);
+      }
     }
-  }, [isAllFieldsEditable, isFormEditable]);
+  }, [isFormEditable, isAllFieldsEditable]);
 
   let icon = isChangeable ? <FaCheck /> : <FaPencilAlt />;
 
@@ -59,7 +68,6 @@ const ModInput = ({ id, name, defaultValue = '', onSave, label }) => {
     e.preventDefault();
     const shouldSave = !!isChangeable;
     updateChangeable(!isChangeable);
-    setIsFormEditable(!isChangeable);
     if (shouldSave) {
       handleOnSave();
     }

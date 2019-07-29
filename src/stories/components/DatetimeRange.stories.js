@@ -11,3 +11,7 @@ function handleDateChange (date) {
 }
 
 stories.add('Default', () => <DatetimeRange onChange={handleDateChange} />);
+
+stories.add('Disable Past Dates', () => (
+  <DatetimeRange onChange={handleDateChange} allowPastDate={false} />
+));
