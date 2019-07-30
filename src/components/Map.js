@@ -14,7 +14,7 @@ import { buildLayerSet, layerSetHasSingleLayer } from '../lib/leaflet';
 
 import Layer from './Layer';
 
-const Map = React.forwardRef((props, ref) => {
+const Map = (props, ref) => {
   const {
     children,
     className,
@@ -39,7 +39,7 @@ const Map = React.forwardRef((props, ref) => {
   }
 
   useEffect(() => {
-    if (!isDomAvailable()) return;
+    if (!isDomAvailable() || !ref) return;
     const { current = {} } = ref;
     const { leafletElement = {} } = current;
     if (typeof useMapEffect === 'function') {
@@ -140,7 +140,7 @@ const Map = React.forwardRef((props, ref) => {
       </BaseMap>
     </div>
   );
-});
+};
 
 Map.propTypes = {
   center: PropTypes.array,
@@ -181,4 +181,4 @@ Map.propTypes = {
   useMapEffect: PropTypes.func
 };
 
-export default Map;
+export default React.forwardRef(Map);

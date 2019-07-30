@@ -17,11 +17,11 @@ describe('MapPreview', () => {
     const mapPreview = shallow(<MapPreview center={ALEXANDRIA} />);
 
     it('should render a Map component', () => {
-      expect(mapPreview.find('Map')).toHaveLength(1);
+      expect(mapPreview.find('ForwardRef(Map)')).toHaveLength(1);
     });
 
     it('should pass the Map component coordinate props', () => {
-      expect(mapPreview.find('Map').prop('center')).toEqual(
+      expect(mapPreview.find('ForwardRef(Map)').prop('center')).toEqual(
         ALEXANDRIA_COORDINATES
       );
     });
@@ -50,12 +50,7 @@ describe('MapPreview', () => {
     const fcCoordinatesLast = fcCoordinates[fcCoordinates.length - 1];
 
     it('should render a Map component', () => {
-      expect(mapPreview.find('Map')).toHaveLength(1);
-    });
-
-    it('should determine the center from the geoJson document', () => {
-      const expected = [39.239312974951844, -77.4591064453125];
-      expect(mapPreview.find('Map').prop('center')).toEqual(expected);
+      expect(mapPreview.find('ForwardRef(Map)')).toHaveLength(1);
     });
 
     it('should pass the MapMarker component coordinate props', () => {

@@ -4,7 +4,7 @@ import { LensContext } from '../context';
 
 import Map from './Map';
 
-const LensMap = React.forwardRef(({ children, ...rest }, ref) => {
+const LensMap = ({ children, ...rest }, ref) => {
   const { layers = {} } = useContext(LensContext) || {};
 
   const { handlers: layersHandlers = {} } = layers;
@@ -21,7 +21,7 @@ const LensMap = React.forwardRef(({ children, ...rest }, ref) => {
       {children}
     </Map>
   );
-});
+};
 
 LensMap.propTypes = {
   children: PropTypes.oneOfType([
@@ -30,4 +30,4 @@ LensMap.propTypes = {
   ])
 };
 
-export default LensMap;
+export default React.forwardRef(LensMap);

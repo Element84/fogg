@@ -17,8 +17,6 @@ const Lens = ({
   className,
   defaultCenter = {},
   zoom = 4,
-  maxZoom,
-  minZoom,
   SidebarComponents,
   resolveOnSearch,
   projection,

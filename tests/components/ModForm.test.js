@@ -7,7 +7,7 @@ import { ModForm } from '../../ui';
 
 describe('ModForm', () => {
   describe('Render', () => {
-    const modForm = shallow(<ModForm className="mod-form" />);
+    const modForm = shallow(<ModForm className="mod-form">Hi</ModForm>);
     it('should render a ModInput', () => {
       expect(modForm.find('Form').prop('className')).toEqual('mod-form');
     });
