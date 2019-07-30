@@ -1,4 +1,4 @@
-import React, { useEffect, createRef } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import 'leaflet/dist/leaflet.css'; // This needs to be included for the map to actually work when compiled
 import L from 'leaflet';
@@ -14,40 +14,40 @@ import { buildLayerSet, layerSetHasSingleLayer } from '../lib/leaflet';
 
 import Layer from './Layer';
 
-const Map = ({
-  children,
-  className,
-  map = 'blue_marble',
-  center = [0, 0],
-  zoom = 2,
-  maxZoom,
-  minZoom,
-  projection = 'epsg4326',
-  projections = [],
-  services = [],
-  layers,
-  toggleLayer,
-  hideNativeLayers,
-  useMapEffect
-}) => {
-  let mapClassName = `map ${className || ''}`;
+const Map = (props, ref) => {
+  const {
+    children,
+    className,
+    map = 'blue_marble',
+    center = [0, 0],
+    zoom = 2,
+    maxZoom,
+    minZoom,
+    projection = 'epsg4326',
+    projections = [],
+    services = [],
+    layers,
+    toggleLayer,
+    hideNativeLayers,
+    useMapEffect
+  } = props;
 
-  const mapRef = createRef();
+  let mapClassName = `map ${className || ''}`;
 
   if (hideNativeLayers) {
     mapClassName = `${mapClassName} map-hide-layers-control`;
   }
 
   useEffect(() => {
-    if (!isDomAvailable()) return;
-    const { current = {} } = mapRef;
+    if (!isDomAvailable() || !ref) return;
+    const { current = {} } = ref;
     const { leafletElement = {} } = current;
     if (typeof useMapEffect === 'function') {
       useMapEffect({
         leafletElement
       });
     }
-  }, [map, mapRef]);
+  }, [map, ref]);
 
   if (!isDomAvailable()) {
     return (
@@ -65,13 +65,21 @@ const Map = ({
   });
 
   const mapLayers = buildLayerSet(layers, mapService.services);
+  const { base: baseLayer = [] } = mapLayers;
+  const baseService = baseLayer && baseLayer[0] && baseLayer[0].service;
+  const {
+    maxZoom: baseMaxZoom,
+    minZoom: baseMinZoom,
+    maxNativeZoom: baseMaxNativeZoom
+  } = baseService || {};
 
   const mapSettings = {
     className: 'map-base',
     center,
     zoom,
-    maxZoom,
-    minZoom,
+    maxZoom: baseMaxZoom || maxZoom,
+    minZoom: baseMinZoom || minZoom,
+    maxNativeZoom: baseMaxNativeZoom,
     zoomControl: false
   };
 
@@ -99,7 +107,7 @@ const Map = ({
 
   return (
     <div className={mapClassName}>
-      <BaseMap ref={mapRef} {...mapSettings}>
+      <BaseMap ref={ref} {...mapSettings}>
         {children}
         {singleLayer && <Layer layer={mapLayers.base[0]} />}
         {!singleLayer && (
@@ -173,4 +181,4 @@ Map.propTypes = {
   useMapEffect: PropTypes.func
 };
 
-export default Map;
+export default React.forwardRef(Map);

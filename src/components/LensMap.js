@@ -2,15 +2,10 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { LensContext } from '../context';
 
-import { latLngPositionFromCenter } from '../lib/leaflet';
-
 import Map from './Map';
 
-const LensMap = ({ children, ...rest }) => {
-  const { lens = {}, layers = {} } = useContext(LensContext) || {};
-
-  const { mapConfig = {} } = lens;
-  const { center = {} } = mapConfig;
+const LensMap = ({ children, ...rest }, ref) => {
+  const { layers = {} } = useContext(LensContext) || {};
 
   const { handlers: layersHandlers = {} } = layers;
   const { toggleLayer } = layersHandlers;
@@ -18,12 +13,11 @@ const LensMap = ({ children, ...rest }) => {
   const mapSettings = {
     toggleLayer,
     layers,
-    center: latLngPositionFromCenter(center),
     ...rest
   };
 
   return (
-    <Map className="lens-map" {...mapSettings}>
+    <Map ref={ref} className="lens-map" {...mapSettings}>
       {children}
     </Map>
   );
@@ -36,4 +30,4 @@ LensMap.propTypes = {
   ])
 };
 
-export default LensMap;
+export default React.forwardRef(LensMap);

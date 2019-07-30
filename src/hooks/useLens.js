@@ -14,10 +14,12 @@ const QUERY_SEARCH_PARAMS = ['q', 'properties'];
 export default function useLens ({
   defaultCenter = {},
   resolveOnSearch,
+  refMap,
   refMapDraw,
   availableFilters,
   availableLayers = null,
-  fetchLayerData
+  fetchLayerData,
+  zoom
 }) {
   const defaultGeoJson =
     typeof geoJsonFromLatLn === 'function' && geoJsonFromLatLn(defaultCenter);
@@ -50,9 +52,39 @@ export default function useLens ({
     fetchLayerData
   );
 
+  // On first render, parse any query params in the URL
+
   useEffect(() => {
     handleQueryParams();
   }, []);
+
+  // We want to handle any of our map viewport changes using the leaflet element
+  // rather than rerendering to prevent our props from overriding the map, and
+  // generally this should help performance of having to rerender the whole map
+
+  useEffect(() => {
+    const { center } = mapConfig;
+    flyTo(center);
+  }, [mapConfig.center]);
+
+  /**
+   * flyTo
+   * @description Wraps the leaflet flyTo method and triggers on our map ref
+   */
+
+  function flyTo (center) {
+    const { current = {} } = refMap;
+    const { leafletElement = {} } = current;
+
+    // If we can find the existing zoom, use that to prevent changing the zoom
+    // level on someone interacting with the map
+
+    const mapZoom = leafletElement.getZoom();
+
+    // Fly to our new (or old) center with the zoom
+
+    leafletElement.flyTo(center, mapZoom || zoom);
+  }
 
   /**
    * search
@@ -280,7 +312,6 @@ export default function useLens ({
     clearQuerySearchParams();
     clearSearchMarkers();
     clearActiveFilters();
-    updateMapConfig(mapConfigDefaults);
     updateClearSearchInput(true);
     updateResults(undefined);
     updateMoreResultsAvailable(false);
