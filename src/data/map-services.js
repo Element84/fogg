@@ -8,7 +8,10 @@ const mapServices = [
     resolution: '500m',
     attribution: '&copy; NASA Blue Marble, image service by OpenGeo',
     tileSize: 512,
-    tileEndpoint: `https://gibs-{s}.earthdata.nasa.gov/wmts/{projection}/best/{product}/default/{time}/{projectionResolution}/{z}/{y}/{x}.{format}`
+    tileEndpoint: `https://gibs-{s}.earthdata.nasa.gov/wmts/{projection}/best/{product}/default/{time}/{projectionResolution}/{z}/{y}/{x}.{format}`,
+    maxZoom: 6,
+    maxNativeZoom: 6,
+    minNativeZoom: 1
   },
   {
     name: 'coastlines',

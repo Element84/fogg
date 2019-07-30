@@ -32,6 +32,7 @@ const Lens = ({
   disableMapDraw,
   useMapEffect
 }) => {
+  const refMap = createRef();
   const refMapDraw = createRef();
   let lensClassName = 'lens';
 
@@ -43,9 +44,11 @@ const Lens = ({
     availableFilters,
     defaultCenter,
     resolveOnSearch,
+    refMap,
     refMapDraw,
     availableLayers,
-    fetchLayerData
+    fetchLayerData,
+    zoom
   });
 
   const { results, filters, layers } = lens;
@@ -56,9 +59,6 @@ const Lens = ({
     activeSearch && filters.isOpen && filters.available.length > 0;
 
   const mapSettings = {
-    zoom,
-    maxZoom,
-    minZoom,
     projection,
     services: availableServices,
     hideNativeLayers,
@@ -92,7 +92,7 @@ const Lens = ({
 
         {displayFilters && <LensSearchFilters />}
 
-        <LensMap {...mapSettings}>
+        <LensMap ref={refMap} {...mapSettings}>
           {!disableMapDraw && <LensMapDraw ref={refMapDraw} />}
         </LensMap>
 
