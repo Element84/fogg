@@ -1,3 +1,6 @@
+### Version 0.1.122
+- wrapping function with type check, fixing centering of icon buttons
+
 ### Version 0.1.121
 
 ### Version 0.1.120
