@@ -33,7 +33,9 @@ const ModInput = ({ id, name, defaultValue = '', onSave, label }) => {
     useContext(ModFormContext) || {};
 
   useEffect(() => {
-    updateField(inputName, isChangeable);
+    if (typeof updateField === 'function') {
+      updateField(inputName, isChangeable);
+    }
   }, [isChangeable]);
 
   useEffect(() => {
