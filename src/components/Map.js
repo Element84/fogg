@@ -14,7 +14,7 @@ import { buildLayerSet, layerSetHasSingleLayer } from '../lib/leaflet';
 
 import Layer from './Layer';
 
-const Map = (props, ref) => {
+const Map = props => {
   const {
     children,
     className,
@@ -29,7 +29,8 @@ const Map = (props, ref) => {
     layers,
     toggleLayer,
     hideNativeLayers,
-    useMapEffect
+    useMapEffect,
+    forwardedRef
   } = props;
 
   let mapClassName = `map ${className || ''}`;
@@ -39,15 +40,15 @@ const Map = (props, ref) => {
   }
 
   useEffect(() => {
-    if (!isDomAvailable() || !ref) return;
-    const { current = {} } = ref;
+    if (!isDomAvailable() || !forwardedRef) return;
+    const { current = {} } = forwardedRef;
     const { leafletElement = {} } = current;
     if (typeof useMapEffect === 'function') {
       useMapEffect({
         leafletElement
       });
     }
-  }, [map, ref]);
+  }, [map, forwardedRef]);
 
   if (!isDomAvailable()) {
     return (
@@ -107,7 +108,7 @@ const Map = (props, ref) => {
 
   return (
     <div className={mapClassName}>
-      <BaseMap ref={ref} {...mapSettings}>
+      <BaseMap ref={forwardedRef} {...mapSettings}>
         {children}
         {singleLayer && <Layer layer={mapLayers.base[0]} />}
         {!singleLayer && (
@@ -143,8 +144,9 @@ const Map = (props, ref) => {
 };
 
 Map.propTypes = {
-  center: PropTypes.array,
   children: PropTypes.node,
+  forwardedRef: PropTypes.object,
+  center: PropTypes.array,
   map: PropTypes.string,
   zoom: PropTypes.number,
   maxZoom: PropTypes.number,
@@ -181,4 +183,10 @@ Map.propTypes = {
   useMapEffect: PropTypes.func
 };
 
-export default React.forwardRef(Map);
+const MapWithRefs = React.forwardRef(function map (props, ref) {
+  return <Map {...props} forwardedRef={ref} />;
+});
+
+MapWithRefs.displayName = 'MapWithRefs';
+
+export default MapWithRefs;

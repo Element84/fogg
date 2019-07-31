@@ -15,15 +15,14 @@ const ALEXANDRIA_COORDINATES = [ALEXANDRIA.lat, ALEXANDRIA.lng];
 describe('MapPreview', () => {
   describe('Center Point', () => {
     const mapPreview = shallow(<MapPreview center={ALEXANDRIA} />);
+    const map = mapPreview.find('MapWithRefs');
 
     it('should render a Map component', () => {
-      expect(mapPreview.find('ForwardRef(Map)')).toHaveLength(1);
+      expect(map).toHaveLength(1);
     });
 
     it('should pass the Map component coordinate props', () => {
-      expect(mapPreview.find('ForwardRef(Map)').prop('center')).toEqual(
-        ALEXANDRIA_COORDINATES
-      );
+      expect(map.prop('center')).toEqual(ALEXANDRIA_COORDINATES);
     });
 
     it('should pass the MapMarker component coordinate props', () => {
@@ -43,6 +42,7 @@ describe('MapPreview', () => {
 
   describe('Polygon Shape', () => {
     const mapPreview = shallow(<MapPreview geoJson={featureCollection} />);
+    const map = mapPreview.find('MapWithRefs');
     const mapPreviewPolygon = mapPreview.find('ForwardRef(Leaflet(Polygon))');
     const fcCoordinates = featureCollection.features[0].geometry.coordinates[0];
     const fcCoordinatesReverse = fcCoordinates.map(set => [set[1], set[0]]);
@@ -50,7 +50,7 @@ describe('MapPreview', () => {
     const fcCoordinatesLast = fcCoordinates[fcCoordinates.length - 1];
 
     it('should render a Map component', () => {
-      expect(mapPreview.find('ForwardRef(Map)')).toHaveLength(1);
+      expect(map).toHaveLength(1);
     });
 
     it('should pass the MapMarker component coordinate props', () => {

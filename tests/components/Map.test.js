@@ -23,10 +23,11 @@ describe('Map', () => {
         <div className={testClass}>{testText}</div>
       </Map>
     ).find('Map');
+    const mapDive = map.dive();
 
     it('should render a blue_marble map by default', () => {
       expect(
-        map
+        mapDive
           .find('Layer')
           .first()
           .prop('layer').id

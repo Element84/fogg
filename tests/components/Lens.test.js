@@ -6,7 +6,7 @@ import { Lens } from '../../ui';
 describe('Lens', () => {
   describe('Render', () => {
     const lens = shallow(<Lens />);
-    const lensMap = lens.find('ForwardRef(LensMap)');
+    const lensMap = lens.find('LensMapWithRefs');
     const lensSearchComplete = lens.find('LensSearchComplete');
 
     it('should render a LensMap component', () => {

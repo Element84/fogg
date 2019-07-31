@@ -12,8 +12,10 @@ const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
   const { loadMoreResults, clearActiveSearch } = lensHandlers;
   const { center = {}, geoJson } = mapConfig;
 
-  const { handlers: layersHandlers } = layers;
+  const { handlers: layersHandlers = {} } = layers;
   const { toggleLayer, getDataForLayers } = layersHandlers;
+
+  if (!SidebarComponents) return null;
 
   return (
     <SidebarComponents

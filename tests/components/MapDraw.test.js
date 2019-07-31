@@ -13,7 +13,8 @@ describe('MapDraw', () => {
         <div className={testClass}>{testText}</div>
       </MapDraw>
     );
-    const editcontrol = mapdraw.find('ForwardRef(Leaflet(EditControl))');
+    const mapdrawDive = mapdraw.dive();
+    const editcontrol = mapdrawDive.find('ForwardRef(Leaflet(EditControl))');
 
     it('should render with the position prop', () => {
       expect(editcontrol.prop('position')).toEqual('bottomright');
@@ -32,7 +33,8 @@ describe('MapDraw', () => {
 
   describe('Events', () => {
     const mapdraw = shallow(<MapDraw onCreated={handleOnCreated} />);
-    const editcontrol = mapdraw.find('ForwardRef(Leaflet(EditControl))');
+    const mapdrawDive = mapdraw.dive();
+    const editcontrol = mapdrawDive.find('ForwardRef(Leaflet(EditControl))');
 
     let testCreated = 1;
 

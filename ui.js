@@ -12,6 +12,20 @@ export { default as InputButton } from './src/components/InputButton';
 export { default as ItemList } from './src/components/ItemList';
 export { default as Layout } from './src/components/Layout';
 export { default as Lens } from './src/components/Lens';
+export { default as LensMap } from './src/components/LensMap';
+export { default as LensMapDraw } from './src/components/LensMapDraw';
+export {
+  default as LensSearchComplete
+} from './src/components/LensSearchComplete';
+export {
+  default as LensSearchFilters
+} from './src/components/LensSearchFilters';
+export {
+  default as LensSearchPanelFilters
+} from './src/components/LensSearchPanelFilters';
+export {
+  default as LensSidebarComponents
+} from './src/components/LensSidebarComponents';
 export { default as Map } from './src/components/Map';
 export { default as MapDraw } from './src/components/MapDraw';
 export { default as MapMarker } from './src/components/MapMarker';
