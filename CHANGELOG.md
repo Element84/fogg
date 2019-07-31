@@ -1,3 +1,6 @@
+### Version 0.1.124
+- fixing forwardProps, adding tests for components
+
 ### Version 0.1.123
 - [JAM-601] updating map functions to use leaflet functionality instead of rerendering the map whenever the config changes
 - [JAM-601] fixing tests and naming ref forwarding
