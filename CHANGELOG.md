@@ -1,3 +1,6 @@
+### Version 0.1.125
+- adding download to whitelisted prop
+
 ### Version 0.1.124
 - fixing forwardProps, adding tests for components
 
