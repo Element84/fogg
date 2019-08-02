@@ -1,3 +1,6 @@
+### Version 0.1.126
+- [JAM-579] not saving modinput value and reverting if value is empty
+
 ### Version 0.1.125
 - adding download to whitelisted prop
 
