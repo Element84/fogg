@@ -13,7 +13,14 @@ const logger = new Logger('ModInput', {
   isBrowser: true
 });
 
-const ModInput = ({ id, name, defaultValue = '', onSave, label }) => {
+const ModInput = ({
+  id,
+  name,
+  defaultValue = '',
+  onSave,
+  label,
+  allowEmpty = false
+}) => {
   const inputName = name || id;
 
   if (!inputName) {
@@ -100,7 +107,15 @@ const ModInput = ({ id, name, defaultValue = '', onSave, label }) => {
    */
 
   function handleOnSave () {
+    const newValueIsEmpty = !value || value === '';
+
+    if (newValueIsEmpty && !allowEmpty) {
+      updateValue(originalValue);
+      return;
+    }
+
     updateOriginalValue(value);
+
     if (typeof onSave === 'function') {
       onSave(value, inputName);
     }
@@ -147,7 +162,8 @@ ModInput.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
   defaultValue: PropTypes.string,
-  onSave: PropTypes.func
+  onSave: PropTypes.func,
+  allowEmpty: PropTypes.bool
 };
 
 export default ModInput;
