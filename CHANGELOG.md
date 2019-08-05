@@ -1,3 +1,6 @@
+### Version 0.1.127
+- FD-218 Synchronize stack functions
+
 ### Version 0.1.126
 - [JAM-579] not saving modinput value and reverting if value is empty
 
