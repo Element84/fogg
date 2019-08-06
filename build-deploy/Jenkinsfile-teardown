@@ -22,6 +22,12 @@ pipeline {
       }
     }
   }
+
+  post {
+    failure{
+      slackSend color: '#FF0000', channel: "#space-jam-deploys", message: "Build Failed - ${env.JOB_NAME} - ${env.BRANCH_NAME} - ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) :sadpanda:"
+    }
+  }
 }
 
 void performDelete(branch) {
