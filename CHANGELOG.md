@@ -1,3 +1,6 @@
+### Version 0.1.128
+- [JAM-585] adding custom icon capability to input button
+
 ### Version 0.1.127
 - [JAM-585] forwarding refs for input button
 - FD-218 Synchronize stack functions
