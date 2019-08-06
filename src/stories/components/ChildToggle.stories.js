@@ -1,5 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { FaTimes } from 'react-icons/fa';
+
 import ChildToggle from '../../components/ChildToggle';
 import FormInput from '../../components/FormInput';
 import FormRow from '../../components/FormRow';
@@ -43,9 +45,14 @@ stories.add('Default', () => {
   );
 });
 
-stories.add('Checked', () => {
+stories.add('Checked, Custom Icon', () => {
   return (
-    <ChildToggle label="Repeat" id="repeater" isChecked={true}>
+    <ChildToggle
+      label="Repeat"
+      id="repeater"
+      isChecked={true}
+      icon={<FaTimes />}
+    >
       <FormRow className="repeater-row">
         <FormInput
           type="select"

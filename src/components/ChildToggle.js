@@ -17,7 +17,8 @@ const ChildToggle = ({
   id,
   value,
   isChecked = false,
-  isField = false
+  isField = false,
+  icon
 }) => {
   const { checked, handleChange } = useChildToggle(isChecked);
 
@@ -28,7 +29,8 @@ const ChildToggle = ({
     id,
     value,
     isChecked,
-    isField
+    isField,
+    icon
   };
 
   // If we didn't supply a name and the button is a field, default to the ID
@@ -47,6 +49,10 @@ const ChildToggle = ({
 
 ChildToggle.propTypes = {
   children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
+  icon: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
