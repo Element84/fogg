@@ -18,7 +18,8 @@ const ChildToggle = ({
   value,
   isChecked = false,
   isField = false,
-  icon
+  icon,
+  onChange
 }) => {
   const { checked, handleChange } = useChildToggle(isChecked);
 
@@ -39,9 +40,18 @@ const ChildToggle = ({
     inputProps.name = inputProps.id;
   }
 
+  function handleToggleOnChange (e) {
+    const isChecked = handleChange(e);
+    if (typeof onChange === 'function') {
+      onChange(e, {
+        isChecked
+      });
+    }
+  }
+
   return (
     <div className={`child-toggle ${className}`}>
-      <InputButton {...inputProps} onChange={handleChange} />
+      <InputButton {...inputProps} onChange={handleToggleOnChange} />
       <div className="children">{checked && children}</div>
     </div>
   );
@@ -62,7 +72,8 @@ ChildToggle.propTypes = {
   id: PropTypes.string,
   value: PropTypes.string,
   isChecked: PropTypes.bool,
-  isField: PropTypes.bool
+  isField: PropTypes.bool,
+  onChange: PropTypes.func
 };
 
 export default ChildToggle;

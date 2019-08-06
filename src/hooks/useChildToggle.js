@@ -4,7 +4,9 @@ const useChildToggle = defaultChecked => {
   const [checked, setChecked] = useState(defaultChecked);
 
   function handleChange (event) {
-    setChecked(event.target.checked);
+    const isChecked = !!event.target.checked;
+    setChecked(isChecked);
+    return isChecked;
   }
 
   return {
