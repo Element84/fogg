@@ -1,27 +1,32 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import { InputButton } from '../../ui';
 
 describe('InputButton', () => {
-  const inputButton = shallow(
+  const inputButtonShallow = shallow(
     <InputButton>
       <span>hello world</span>
     </InputButton>
   );
-  const checkboxButton = mount(<InputButton type="checkbox" name="checkbox" />);
+  const inputButtonDive = inputButtonShallow.dive();
+
+  const checkboxButtonShallow = shallow(
+    <InputButton type="checkbox" name="checkbox" />
+  );
+  const checkboxButtonDive = checkboxButtonShallow.dive();
 
   it('renders an InputButton', () => {
-    expect(inputButton.find('.input-button-content span').text()).toEqual(
+    expect(inputButtonDive.find('.input-button-content span').text()).toEqual(
       'hello world'
     );
   });
 
   it('renders an radio button by default', () => {
-    expect(inputButton.find('.radio-button').exists()).toEqual(true);
+    expect(inputButtonDive.find('.radio-button').exists()).toEqual(true);
   });
 
   it('renders a checkbox button', () => {
-    expect(checkboxButton.find('.checkbox-button').exists()).toEqual(true);
+    expect(checkboxButtonDive.find('.checkbox-button').exists()).toEqual(true);
   });
 });
