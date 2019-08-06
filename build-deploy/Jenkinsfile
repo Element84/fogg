@@ -174,26 +174,36 @@ void performDeploy(environment, credentials_env = 'dev', createBucket = false) {
 
   }
 
-  notifySlack('success')
-
+   notifySlack('success', environment == "uat" || environment == "prod")
 }
 
 void updateCommitStatus(status) {
-  updateGitlabCommitStatus name: 'build', state: "$status"
+    updateGitlabCommitStatus name: 'build', state: "$status"
 }
 
-void notifySlack(status = 'success') {
+void notifySlack(status = 'success', showChangelog = false) {
+    color = 'good'
+    channel = '#space-jam-deploys'
+    job = "${env.JOB_NAME} - ${env.BRANCH_NAME} - ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
 
-  color = 'good'
-  channel = '#space-jam-deploys'
-  job = "${env.JOB_NAME} - ${env.BRANCH_NAME} - ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
-  message = "Deployed to ${env.target_environment} - ${env.s3_bucket} - ${job} :pikachu:"
+    message = "Deployed to ${env.target_environment} - ${env.s3_bucket} - ${job} :pikachu:"
 
-  if ( status == 'failure' ) {
-    color = '#FF0000'
-    message = "Build Failed - ${job} :alert:"
-  }
+    if ( status == 'failure' ) {
+      color = '#FF0000'
+      message = "Build Failed - ${job} :alert:"
+    }
 
-  slackSend color: color, channel: channel, message: message
+    if (showChangelog) {
+      changelog = sh (
+        script: "cd build-deploy && . ./stack-functions.sh && changelog",
+        returnStdout: true
+      )
 
+      if (changelog != null && changelog != "") {
+        message = message + "\n" + changelog
+      }
+    }
+
+    slackSend color: color, channel: channel, message: message
 }
+

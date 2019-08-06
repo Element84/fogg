@@ -1,5 +1,6 @@
 ### Version 0.1.127
 - [JAM-585] forwarding refs for input button
+- FD-218 Synchronize stack functions
 
 ### Version 0.1.126
 - [JAM-579] not saving modinput value and reverting if value is empty
