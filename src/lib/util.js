@@ -305,3 +305,46 @@ function normalizePathname (string) {
 }
 
 module.exports.normalizePathname = normalizePathname;
+
+/**
+ * updateCheckedSelections
+ * @description
+ */
+
+function updateCheckedSelections (selections, { id, isChecked }) {
+  let newSelections = [...selections];
+
+  if (isChecked && !newSelections.includes(id)) {
+    newSelections.push(id);
+  } else if (!isChecked && newSelections.includes(id)) {
+    newSelections = newSelections.filter(selection => selection !== id);
+  }
+
+  return newSelections;
+}
+
+module.exports.updateCheckedSelections = updateCheckedSelections;
+
+/**
+ * filterIsChecked
+ * @description
+ */
+
+function filterIsChecked (options) {
+  if (!Array.isArray(options)) return [];
+  return options.filter(option => !!option.isChecked);
+}
+
+module.exports.filterIsChecked = filterIsChecked;
+
+/**
+ * findIsCheckedIds
+ * @description
+ */
+
+function findIsCheckedIds (options) {
+  const isChecked = filterIsChecked(options);
+  return isChecked.map(({ id }) => id);
+}
+
+module.exports.findIsCheckedIds = findIsCheckedIds;

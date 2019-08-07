@@ -8,6 +8,7 @@ import Form from '../../components/Form';
 import FormInput from '../../components/FormInput';
 import FormRow from '../../components/FormRow';
 import InputButton from '../../components/InputButton';
+import InputButtonList from '../../components/InputButtonList';
 
 import { regexByFieldName } from '../../lib/input';
 
@@ -162,23 +163,21 @@ stories.add('Default', () => {
       </FormRow>
 
       <FormRow>
-        <InputButton
-          id="inputbutton-checkbox-1"
+        <InputButtonList
           name="inputbutton-checkbox"
-          label="Input Button Checkbox Defualt On"
           type="checkbox"
-          value="inputbutton-checkbox-1"
+          options={[
+            {
+              label: 'Input Button Checkbox Default On',
+              value: 'inputbutton-checkbox-1',
+              isChecked: true
+            },
+            {
+              label: 'Input Button Checkbox 2',
+              value: 'inputbutton-checkbox-2'
+            }
+          ]}
           required={true}
-          isChecked={true}
-        />
-        <InputButton
-          id="inputbutton-checkbox-2"
-          name="inputbutton-checkbox"
-          label="Input Button Checkbox"
-          type="checkbox"
-          value="inputbutton-checkbox-2"
-          required={true}
-          isChecked={false}
         />
       </FormRow>
 
