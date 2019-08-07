@@ -5,7 +5,7 @@ import { LensContext } from '../context';
 import { latLngPositionFromCenter } from '../lib/leaflet';
 
 const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
-  const { lens = {}, filters = {}, layers = {} } =
+  const { lens = {}, filters = {}, layers = {}, numberOfResults } =
     useContext(LensContext) || {};
 
   const { handlers: lensHandlers = {}, results, mapConfig = {} } = lens;
@@ -28,6 +28,7 @@ const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
       layers={layers}
       toggleLayer={toggleLayer}
       getDataForLayers={getDataForLayers}
+      numberOfResults={numberOfResults}
       {...rest}
     />
   );

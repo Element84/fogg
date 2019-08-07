@@ -361,6 +361,7 @@ stories.add('Earth Search', () => {
     let response;
     let responseFeatures;
     let responseMeta;
+    let numberOfResults;
 
     const request = new Request(
       'https://earth-search.aws.element84.com/stac/search'
@@ -421,6 +422,7 @@ stories.add('Earth Search', () => {
 
     responseFeatures = response && response.data && response.data.features;
     responseMeta = response && response.data && response.data.meta;
+    numberOfResults = responseMeta && responseMeta.found;
 
     if (Array.isArray(responseFeatures)) {
       responseFeatures = responseFeatures.map((feature = {}) => {
@@ -441,7 +443,8 @@ stories.add('Earth Search', () => {
 
     return {
       features: responseFeatures || [],
-      hasMoreResults: responseHasMoreResults(responseMeta)
+      hasMoreResults: responseHasMoreResults(responseMeta),
+      numberOfResults
     };
   }
 
@@ -473,7 +476,8 @@ stories.add('Earth Search', () => {
     results,
     loadMoreResults,
     clearActiveSearch,
-    filters = {}
+    filters = {},
+    numberOfResults
   }) => {
     const hasResults = Array.isArray(results) && results.length > 0;
     const moreResultsAvailable = typeof loadMoreResults === 'function';
@@ -538,7 +542,7 @@ stories.add('Earth Search', () => {
 
         {hasResults && (
           <>
-            <Panel header="Results">
+            <Panel header={`Results (${numberOfResults})`}>
               <ItemList items={results} />
               {moreResultsAvailable && (
                 <p>
@@ -559,6 +563,7 @@ stories.add('Earth Search', () => {
 
   SidebarPanels.propTypes = {
     results: PropTypes.array,
+    numberOfResults: PropTypes.number,
     loadMoreResults: PropTypes.func,
     clearActiveSearch: PropTypes.func,
     filters: PropTypes.object
