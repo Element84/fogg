@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Logger from '../lib/logger';
@@ -13,21 +13,36 @@ const logger = new Logger('InputButtonList', {
 const InputButtonList = ({
   id,
   name,
+  label,
   options = [],
   type,
   required,
+  disabled,
+  controlChecked,
   onChange
 }) => {
   const selectionOptions = options.map((option, index) => {
     return {
       ...option,
-      id: `${name}-${index}`
+      id: `${name}-${index}`,
+      isChecked: !!option.isChecked
     };
   });
 
   const defaultSelections = findIsCheckedIds(selectionOptions);
 
   const [selections, updateSelections] = useState(defaultSelections);
+
+  // If we're controlling our input from the outside, sync up any changes
+  // with the local state. This is particularly useful for ModInputButtonList
+  // that allows a user to cancel an editable state from outside of this
+  // component instance
+
+  useEffect(() => {
+    if (controlChecked) {
+      updateSelections(defaultSelections);
+    }
+  }, [controlChecked, defaultSelections]);
 
   if (!name) {
     logger.warn(`Missing input name`);
@@ -38,10 +53,15 @@ const InputButtonList = ({
     const { id: targetId } = target;
     const newSelections = updateCheckedSelections(selections, {
       id: targetId,
-      isChecked: target.checked
+      isChecked: !!target.checked
     });
-    const selectedOptions = newSelections.map(selection => {
-      return selectionOptions.find(option => option.id === selection);
+
+    const selectedOptions = selectionOptions.map(selection => {
+      const isSelected = newSelections.find(option => option === selection.id);
+      return {
+        ...selection,
+        isChecked: !!isSelected
+      };
     });
 
     updateSelections(newSelections);
@@ -52,7 +72,10 @@ const InputButtonList = ({
   }
 
   return (
-    <div className="input-button-list">
+    <div className="form-input input-button-list">
+      <label className="form-label" htmlFor={id}>
+        {label}
+      </label>
       {Array.isArray(selectionOptions) &&
         selectionOptions.map((option, index) => {
           return (
@@ -62,7 +85,9 @@ const InputButtonList = ({
               name={name}
               type={type}
               required={required}
+              disabled={disabled}
               onChange={handleOnChange}
+              controlChecked={controlChecked}
             />
           );
         })}
@@ -73,9 +98,12 @@ const InputButtonList = ({
 InputButtonList.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string,
+  label: PropTypes.string,
   options: PropTypes.array,
   type: PropTypes.string,
   required: PropTypes.bool,
+  disabled: PropTypes.bool,
+  controlChecked: PropTypes.bool,
   onChange: PropTypes.func
 };
 
