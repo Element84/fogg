@@ -1,3 +1,18 @@
+### Version 0.1.131
+- FD-212 Report to slack if teardown fails
+- [JAM-585] adding on change handler to child toggle
+
+### Version 0.1.130
+
+### Version 0.1.129
+
+### Version 0.1.128
+- [JAM-585] adding custom icon capability to input button
+
+### Version 0.1.127
+- [JAM-585] forwarding refs for input button
+- FD-218 Synchronize stack functions
+
 ### Version 0.1.126
 - [JAM-579] not saving modinput value and reverting if value is empty
 

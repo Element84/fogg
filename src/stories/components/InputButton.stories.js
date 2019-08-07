@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { FaTimes } from 'react-icons/fa';
 
 import InputButton from '../../components/InputButton';
 
@@ -34,6 +35,16 @@ stories.add('Default', () => {
             label="InputButton Radio 2"
             type="radio"
             value="inputbutton-radio-2"
+          />
+        </li>
+        <li>
+          <InputButton
+            id="inputbutton-radio-3"
+            name="inputbutton-radio"
+            label="InputButton Radio 3"
+            type="radio"
+            value="inputbutton-radio-3"
+            icon={<FaTimes />}
           />
         </li>
       </ul>

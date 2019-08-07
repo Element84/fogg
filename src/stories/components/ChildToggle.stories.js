@@ -1,5 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { FaTimes } from 'react-icons/fa';
+import { action } from '@storybook/addon-actions';
+
 import ChildToggle from '../../components/ChildToggle';
 import FormInput from '../../components/FormInput';
 import FormRow from '../../components/FormRow';
@@ -22,8 +25,12 @@ const intervalOptions = [
 ];
 
 stories.add('Default', () => {
+  function handleToggleOnChange (e, { isChecked }) {
+    action('toggle')(e, `Is Checked: ${isChecked}`);
+  }
+
   return (
-    <ChildToggle label="Repeat" id="repeater">
+    <ChildToggle label="Repeat" id="repeater" onChange={handleToggleOnChange}>
       <FormRow className="repeater-row">
         <FormInput
           type="select"
@@ -43,9 +50,14 @@ stories.add('Default', () => {
   );
 });
 
-stories.add('Checked', () => {
+stories.add('Checked, Custom Icon', () => {
   return (
-    <ChildToggle label="Repeat" id="repeater" isChecked={true}>
+    <ChildToggle
+      label="Repeat"
+      id="repeater"
+      isChecked={true}
+      icon={<FaTimes />}
+    >
       <FormRow className="repeater-row">
         <FormInput
           type="select"

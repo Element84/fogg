@@ -17,7 +17,9 @@ const ChildToggle = ({
   id,
   value,
   isChecked = false,
-  isField = false
+  isField = false,
+  icon,
+  onChange
 }) => {
   const { checked, handleChange } = useChildToggle(isChecked);
 
@@ -28,7 +30,8 @@ const ChildToggle = ({
     id,
     value,
     isChecked,
-    isField
+    isField,
+    icon
   };
 
   // If we didn't supply a name and the button is a field, default to the ID
@@ -37,9 +40,18 @@ const ChildToggle = ({
     inputProps.name = inputProps.id;
   }
 
+  function handleToggleOnChange (e) {
+    const isChecked = handleChange(e);
+    if (typeof onChange === 'function') {
+      onChange(e, {
+        isChecked
+      });
+    }
+  }
+
   return (
     <div className={`child-toggle ${className}`}>
-      <InputButton {...inputProps} onChange={handleChange} />
+      <InputButton {...inputProps} onChange={handleToggleOnChange} />
       <div className="children">{checked && children}</div>
     </div>
   );
@@ -50,13 +62,18 @@ ChildToggle.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
+  icon: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
   className: PropTypes.string,
   name: PropTypes.string,
   label: PropTypes.string,
   id: PropTypes.string,
   value: PropTypes.string,
   isChecked: PropTypes.bool,
-  isField: PropTypes.bool
+  isField: PropTypes.bool,
+  onChange: PropTypes.func
 };
 
 export default ChildToggle;

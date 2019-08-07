@@ -15,8 +15,13 @@ import { useInput } from '../hooks';
  * @param {bool} checked: force the UI to appear checked
  */
 
-const InputButton = ({ children, ...rest }) => {
-  const inputRef = createRef();
+const InputButton = ({
+  children,
+  forwardedRef,
+  icon = <FaCheck />,
+  ...rest
+}) => {
+  const inputRef = forwardedRef || createRef();
 
   const { className, value, isChecked = false, disabled = false } = rest;
 
@@ -63,9 +68,7 @@ const InputButton = ({ children, ...rest }) => {
 
       <label htmlFor={id}>
         <span className={`${type}-button-checkbox`}>
-          <span>
-            <FaCheck />
-          </span>
+          <span>{icon}</span>
         </span>
 
         <span className="input-button-content">{children || label}</span>
@@ -76,6 +79,8 @@ const InputButton = ({ children, ...rest }) => {
 
 InputButton.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.array]),
+  icon: PropTypes.oneOfType([PropTypes.element, PropTypes.array]),
+  forwardedRef: PropTypes.object,
   id: PropTypes.string,
   label: PropTypes.string,
   value: PropTypes.string,
@@ -87,4 +92,10 @@ InputButton.propTypes = {
   disabled: PropTypes.bool
 };
 
-export default InputButton;
+const InputButtonWithRefs = React.forwardRef(function inputButton (props, ref) {
+  return <InputButton {...props} forwardedRef={ref} />;
+});
+
+InputButtonWithRefs.displayName = 'InputButtonWithRefs';
+
+export default InputButtonWithRefs;
