@@ -49,7 +49,7 @@ const Lens = ({
     zoom
   });
 
-  const { results, filters, layers, numberOfResults } = lens;
+  const { results, filters, layers } = lens;
 
   const activeSearch = Array.isArray(results);
   const hasResults = Array.isArray(results) && results.length > 0;
@@ -64,7 +64,7 @@ const Lens = ({
   };
 
   return (
-    <LensContext.Provider value={{ lens, filters, layers, numberOfResults }}>
+    <LensContext.Provider value={{ lens, filters, layers }}>
       <div
         className={lensClassName}
         data-active-search={activeSearch}

@@ -5,10 +5,15 @@ import { LensContext } from '../context';
 import { latLngPositionFromCenter } from '../lib/leaflet';
 
 const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
-  const { lens = {}, filters = {}, layers = {}, numberOfResults } =
+  const { lens = {}, filters = {}, layers = {} } =
     useContext(LensContext) || {};
 
-  const { handlers: lensHandlers = {}, results, mapConfig = {} } = lens;
+  const {
+    handlers: lensHandlers = {},
+    results,
+    mapConfig = {},
+    numberOfResults
+  } = lens;
   const { loadMoreResults, clearActiveSearch } = lensHandlers;
   const { center = {}, geoJson } = mapConfig;
 
