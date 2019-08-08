@@ -96,7 +96,23 @@ const useInput = ({ inputRef = {}, props = {} }) => {
     }
   };
 
-  inputProps.onChange = function (event) {
+  inputProps.onChange = function (event, selectEvent) {
+    // React-select does not surface the original event when
+    // onChange is called. It passes the selected option(s) as
+    // the first argument. Its second argument is an object
+    // with the action, name, and selected option(s).
+    if (selectEvent) {
+      let value;
+      if (selectEvent.action === 'clear') {
+        value = '';
+      } else {
+        const selections = Array.isArray(event) ? event : [event];
+        value = selections.map(selection => selection.value);
+      }
+      updateField(selectEvent.name, value);
+      return;
+    }
+
     const type = event.target.type;
     const name = event.target.name;
     let value = event.target.value;

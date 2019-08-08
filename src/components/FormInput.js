@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useInput } from '../hooks';
 
 import Input from './Input';
-import Select from './Select';
+import SelectInput from './Select';
 import Textarea from './Textarea';
 import Datetime from './Datetime';
 
@@ -46,14 +46,7 @@ const FormInput = props => {
   }
 
   if (type === 'select') {
-    input = (
-      <Select
-        className={fieldClassName}
-        props={inputProps}
-        onChange={handleOnChange}
-        onInput={handleOnInput}
-      />
-    );
+    input = <SelectInput className={fieldClassName} props={inputProps} />;
   } else if (type === 'textarea') {
     input = (
       <Textarea

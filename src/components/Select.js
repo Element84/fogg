@@ -1,43 +1,55 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FaCaretDown } from 'react-icons/fa';
+import Select from 'react-select';
 
 import { useInput } from '../hooks';
 
-const Select = ({ className, props, onChange, onInput }) => {
-  const { options, inputProps } = useInput({ props });
+const SelectInput = ({ className, props }) => {
+  const { inputProps } = useInput({ props });
+  const {
+    placeholder,
+    disabled: isDisabled,
+    required: isRequired,
+    options,
+    defaultValue
+  } = inputProps;
 
-  const { placeholder } = inputProps;
+  const isClearable = true;
+  const isSearchable = true;
+
+  const defaultVal = options.filter(option => option.value === defaultValue);
+  delete inputProps.defaultValue;
 
   return (
     <div className="select">
-      <select
+      <Select
         className={`select ${className}`}
-        onChange={onChange}
-        onInput={onInput}
+        options={options}
+        isClearable={isClearable}
+        isSearchable={isSearchable}
+        isDisabled={isDisabled}
+        placeholder={placeholder || '- Please Select -'}
+        defaultValue={defaultVal}
         {...inputProps}
-      >
-        <option value="">{placeholder || '- Please Select -'}</option>
-
-        {Array.isArray(options) &&
-          options.map((option, index) => {
-            return (
-              <option key={`Select-Option-${index}`} value={option.value}>
-                {option.label}
-              </option>
-            );
-          })}
-      </select>
-      <FaCaretDown />
+      />
+      <input
+        required={isRequired}
+        style={{
+          opacity: 0,
+          width: 0,
+          height: 0,
+          position: 'absolute'
+        }}
+      ></input>
     </div>
   );
 };
 
-Select.propTypes = {
+SelectInput.propTypes = {
   className: PropTypes.string,
   props: PropTypes.object,
   onChange: PropTypes.func,
   onInput: PropTypes.func
 };
 
-export default Select;
+export default SelectInput;
