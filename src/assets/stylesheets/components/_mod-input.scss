@@ -10,7 +10,8 @@ $mod-input-button-size: 2.4em;
 
     .button {
 
-      background: white;
+      background: none;
+      background-color: transparent;
 
       button {
         color: $color-gray;
@@ -43,6 +44,44 @@ $mod-input-button-size: 2.4em;
       background-color: white;
       border: solid 2px transparent;
       box-shadow: none;
+    }
+
+  }
+
+}
+
+.mod-input-button-list {
+
+  &[data-modinput-is-changeable="false"] {
+
+    input:checked + label,
+    label {
+
+      box-shadow: none;
+      background: none;
+      background-color: transparent;
+      cursor: default;
+
+      .checkbox-button-checkbox {
+
+        & > span {
+          border: solid 2px $color-gray2;
+        }
+
+      }
+
+    }
+
+    input:checked + label {
+
+      .checkbox-button-checkbox {
+
+        &,
+        svg {
+          color: $color-gray4;
+        }
+
+      }
     }
 
   }

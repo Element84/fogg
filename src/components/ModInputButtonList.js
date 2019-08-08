@@ -4,16 +4,17 @@ import { FaPencilAlt, FaCheck, FaTimes } from 'react-icons/fa';
 
 import { useModValue } from '../hooks';
 
-import FormInput from './FormInput';
+import InputButtonList from './InputButtonList';
 import Button from './Button';
 
-const ModInput = ({
+const ModInputButtonList = ({
   id,
   name,
-  defaultValue = '',
-  onSave,
+  type,
   label,
-  allowEmpty = false
+  required,
+  onSave,
+  options = []
 }) => {
   const inputName = name || id;
 
@@ -21,14 +22,13 @@ const ModInput = ({
     isChangeable,
     updateChangeable,
     originalValue,
-    value,
     updateValue,
-    handlers
+    handlers,
+    value
   } = useModValue({
+    defaultValue: options,
     inputName,
-    onSave,
-    defaultValue,
-    allowEmpty
+    onSave
   });
 
   const { handleOnModSave } = handlers;
@@ -65,23 +65,40 @@ const ModInput = ({
    * @description Fires when form input has been modified
    */
 
-  function handleOnInputchange ({ target } = {}) {
-    updateValue(target.value || '');
+  function handleOnInputchange (e, updatedValue) {
+    updateValue(updatedValue || []);
   }
+
+  const optionsMap = options.map(option => {
+    const optionValue = value.find(val => val.value === option.value);
+    return {
+      ...option,
+      isChecked: optionValue ? optionValue.isChecked : false
+    };
+  });
 
   const formInputProps = {
     id,
     label,
     name: inputName,
-    value: isChangeable ? value : originalValue,
+    options: optionsMap,
+    type,
+    required,
     onChange: handleOnInputchange,
     disabled: !isChangeable
   };
 
   return (
-    <div className="mod-input" data-modinput-is-changeable={!!isChangeable}>
+    <div
+      className="mod-input mod-input-button-list"
+      data-modinput-is-changeable={!!isChangeable}
+    >
       <div className="mod-input-value">
-        <FormInput {...formInputProps} />
+        <InputButtonList
+          {...formInputProps}
+          disabled={!isChangeable}
+          controlChecked={true}
+        />
       </div>
       <div className="mod-input-actions">
         {isChangeable && (
@@ -100,13 +117,14 @@ const ModInput = ({
   );
 };
 
-ModInput.propTypes = {
+ModInputButtonList.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string,
+  type: PropTypes.string,
   label: PropTypes.string,
-  defaultValue: PropTypes.string,
+  required: PropTypes.bool,
   onSave: PropTypes.func,
-  allowEmpty: PropTypes.bool
+  options: PropTypes.array
 };
 
-export default ModInput;
+export default ModInputButtonList;

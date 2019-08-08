@@ -9,6 +9,7 @@ export { default as FormInput } from './src/components/FormInput';
 export { default as FormRow } from './src/components/FormRow';
 export { default as Input } from './src/components/Input';
 export { default as InputButton } from './src/components/InputButton';
+export { default as InputButtonList } from './src/components/InputButtonList';
 export { default as ItemList } from './src/components/ItemList';
 export { default as Layout } from './src/components/Layout';
 export { default as Lens } from './src/components/Lens';

@@ -5,6 +5,7 @@ import { action } from '@storybook/addon-actions';
 import Button from '../../components/Button';
 import FormRow from '../../components/FormRow';
 import ModInput from '../../components/ModInput';
+import ModInputButtonList from '../../components/ModInputButtonList';
 
 import ModForm from '../../components/ModForm';
 
@@ -36,6 +37,26 @@ stories.add('Default', () => {
           defaultValue="Simpson"
           //   forceDisable={forceDisable}
           //   forceEnable={forceEnable}
+        />
+      </FormRow>
+      <FormRow>
+        <ModInputButtonList
+          label="Test Checkbox"
+          name="modinputbuttonlist-checkbox"
+          type="checkbox"
+          options={[
+            {
+              label: 'Input Button Checkbox Default On',
+              value: 'inputbutton-checkbox-1',
+              isChecked: true
+            },
+            {
+              label: 'Input Button Checkbox 2',
+              value: 'inputbutton-checkbox-2'
+            }
+          ]}
+          required={true}
+          // onChange={handleCheckboxOnChange}
         />
       </FormRow>
       <FormRow>

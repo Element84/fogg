@@ -23,7 +23,13 @@ const InputButton = ({
 }) => {
   const inputRef = forwardedRef || createRef();
 
-  const { className, value, isChecked = false, disabled = false } = rest;
+  const {
+    className,
+    value,
+    isChecked = false,
+    controlChecked = false,
+    disabled = false
+  } = rest;
 
   const { id, type = 'radio', label, isInvalid, inputProps } = useInput({
     inputRef,
@@ -37,8 +43,10 @@ const InputButton = ({
     inputClassName = `${inputClassName} input-button-invalid`;
   }
 
-  if (isChecked) {
-    extendedAttributes.defaultChecked = true;
+  if (controlChecked) {
+    extendedAttributes.checked = !!isChecked;
+  } else {
+    extendedAttributes.defaultChecked = !!isChecked;
   }
 
   if (disabled) {
@@ -49,19 +57,12 @@ const InputButton = ({
     inputClassName = `${inputClassName} ${className || ''}`;
   }
 
-  function handleOnChange (event) {
-    if (typeof inputProps.onChange === 'function') {
-      inputProps.onChange(event);
-    }
-  }
-
   return (
     <span className={inputClassName}>
       <input
         ref={inputRef}
         className="visually-hidden"
         value={value}
-        onChange={handleOnChange}
         {...inputProps}
         {...extendedAttributes}
       />
