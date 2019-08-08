@@ -3,8 +3,10 @@ $mod-input-button-size: 2.4em;
 .mod-input {
 
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  position: relative;
   width: 100%;
+  padding-top: 1.2em;
 
   &[data-modinput-is-changeable="false"] {
 
@@ -21,6 +23,14 @@ $mod-input-button-size: 2.4em;
 
     }
 
+  }
+
+  .form-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-bottom: 0;
   }
 
   .button {
@@ -51,6 +61,8 @@ $mod-input-button-size: 2.4em;
 }
 
 .mod-input-button-list {
+
+  align-items: flex-start;
 
   &[data-modinput-is-changeable="false"] {
 
@@ -86,6 +98,7 @@ $mod-input-button-size: 2.4em;
 
   }
 
+
 }
 
 .mod-input-cancel {
@@ -101,8 +114,4 @@ $mod-input-button-size: 2.4em;
     display: block;
   }
 
-}
-
-.mod-input-actions {
-  padding: .25em 0;
 }
