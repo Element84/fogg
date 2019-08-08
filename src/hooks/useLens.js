@@ -33,6 +33,7 @@ export default function useLens ({
   const [mapConfig, updateMapConfig] = useState(mapConfigDefaults);
   const [results, updateResults] = useState();
   const [moreResultsAvailable, updateMoreResultsAvailable] = useState();
+  const [totalResults, updateTotalResults] = useState();
   const [clearSearchInput, updateClearSearchInput] = useState(false);
 
   const { search: locationSearch, history } = useLocation();
@@ -122,13 +123,16 @@ export default function useLens ({
     };
 
     if (typeof resolveOnSearch === 'function') {
-      resolveOnSearch(params).then(({ features = [], hasMoreResults } = {}) => {
-        // If the page is greater than 1, we should append the results
-        const baseResults = Array.isArray(results) && page > 1 ? results : [];
-        const updatedResults = [...baseResults, ...features];
-        updateResults(updatedResults);
-        updateMoreResultsAvailable(!!hasMoreResults);
-      });
+      resolveOnSearch(params).then(
+        ({ features = [], hasMoreResults, numberOfResults } = {}) => {
+          // If the page is greater than 1, we should append the results
+          const baseResults = Array.isArray(results) && page > 1 ? results : [];
+          const updatedResults = [...baseResults, ...features];
+          updateResults(updatedResults);
+          updateTotalResults(numberOfResults);
+          updateMoreResultsAvailable(!!hasMoreResults);
+        }
+      );
     }
 
     updateMapConfig(mapUpdate);
@@ -320,6 +324,7 @@ export default function useLens ({
   return {
     mapConfig,
     results,
+    numberOfResults: totalResults,
     clearSearchInput,
     handlers: {
       handleOnCreated,

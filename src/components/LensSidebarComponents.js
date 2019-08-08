@@ -8,7 +8,12 @@ const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
   const { lens = {}, filters = {}, layers = {} } =
     useContext(LensContext) || {};
 
-  const { handlers: lensHandlers = {}, results, mapConfig = {} } = lens;
+  const {
+    handlers: lensHandlers = {},
+    results,
+    mapConfig = {},
+    numberOfResults
+  } = lens;
   const { loadMoreResults, clearActiveSearch } = lensHandlers;
   const { center = {}, geoJson } = mapConfig;
 
@@ -28,6 +33,7 @@ const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
       layers={layers}
       toggleLayer={toggleLayer}
       getDataForLayers={getDataForLayers}
+      numberOfResults={numberOfResults}
       {...rest}
     />
   );
