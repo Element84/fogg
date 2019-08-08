@@ -1,3 +1,6 @@
+### Version 0.1.132
+- [JAM-637] Pull numberOfResults from lens object
+
 ### Version 0.1.131
 - FD-212 Report to slack if teardown fails
 - [JAM-585] adding on change handler to child toggle
