@@ -12,14 +12,14 @@ const SearchComplete = ({
   resolveQueryComplete,
   placeholder = 'Search',
   defaultValue,
-  clearSearchInput,
-  defaultDate
+  defaultDate,
+  clearSearchInput
 }) => {
   const [isOpen, updateOpenState] = useState(false);
   const [results, updateResults] = useState([]);
-  const [date, updateDate] = useState({});
+  const [date, updateDate] = useState(defaultDate);
   const [query, updateQuery] = useState('');
-  const [searchInput, updateSearchInput] = useState('');
+  const [searchInput, updateSearchInput] = useState(defaultValue);
   const [debouncedUpdateQueryState] = useDebouncedCallback(
     updateQueryState,
     QUERY_COMPLETE_DEBOUNCE
@@ -28,8 +28,12 @@ const SearchComplete = ({
   useEffect(() => {
     if (clearSearchInput) {
       updateSearchInput('');
+      updateDate({});
+    } else {
+      updateSearchInput(defaultValue);
+      updateDate(defaultDate);
     }
-  }, [clearSearchInput]);
+  }, [clearSearchInput, defaultValue]);
 
   /**
    * handleSearchboxSearch
@@ -131,8 +135,8 @@ const SearchComplete = ({
         onSearch={handleSearchboxSearch}
         onInput={handleOnInput}
         placeholder={placeholder}
-        searchInput={searchInput || defaultValue}
-        defaultDate={defaultDate}
+        searchInput={searchInput}
+        defaultDate={date}
       />
 
       <div className="search-complete-results">
