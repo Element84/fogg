@@ -33,7 +33,7 @@ const SearchComplete = ({
       updateSearchInput(defaultValue);
       updateDate(defaultDate);
     }
-  }, [clearSearchInput, defaultValue]);
+  }, [clearSearchInput, defaultValue, defaultDate]);
 
   /**
    * handleSearchboxSearch
