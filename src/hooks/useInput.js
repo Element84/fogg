@@ -35,7 +35,8 @@ const INPUT_PROPS_WHITELIST = [
   'placeholder',
   'required',
   'type',
-  'value'
+  'value',
+  'isMulti'
 ];
 
 const INPUT_LIST_TYPES = ['radio', 'checkbox'];
