@@ -128,6 +128,7 @@ const SearchBox = ({
       date: clearDate,
       dateIsOpen: false
     });
+
     if (typeof query === 'string' && query.length > 0) {
       handleSearch(query, clearDate);
     }
