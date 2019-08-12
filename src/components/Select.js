@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Select from 'react-select';
+import { default as ReactSelect } from 'react-select';
 
 import { useInput } from '../hooks';
 
-const SelectInput = ({ className, props }) => {
+const Select = ({ className, props }) => {
   const { inputProps } = useInput({ props });
+
   const {
     placeholder,
     disabled: isDisabled,
-    required: isRequired,
     options,
     defaultValue
   } = inputProps;
@@ -22,7 +22,7 @@ const SelectInput = ({ className, props }) => {
 
   return (
     <div className="select">
-      <Select
+      <ReactSelect
         className={`select ${className}`}
         options={options}
         isClearable={isClearable}
@@ -32,24 +32,15 @@ const SelectInput = ({ className, props }) => {
         defaultValue={defaultVal}
         {...inputProps}
       />
-      <input
-        required={isRequired}
-        style={{
-          opacity: 0,
-          width: 0,
-          height: 0,
-          position: 'absolute'
-        }}
-      ></input>
     </div>
   );
 };
 
-SelectInput.propTypes = {
+Select.propTypes = {
   className: PropTypes.string,
   props: PropTypes.object,
   onChange: PropTypes.func,
   onInput: PropTypes.func
 };
 
-export default SelectInput;
+export default Select;

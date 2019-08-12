@@ -15,6 +15,7 @@ module.exports = {
   },
 
   rules: {
+    'import/no-named-default': 0,
     'no-warning-comments': [
       'warn',
       {

@@ -13,6 +13,12 @@ function getFormListValuesByName (form, name) {
   return values;
 }
 
+function isReactSelect (argumentsObject) {
+  return (
+    argumentsObject.length === 2 && argumentsObject[1].hasOwnProperty('action')
+  );
+}
+
 const INPUT_PROPS_WHITELIST = [
   'autoCapitalize',
   'autoComplete',
@@ -101,10 +107,10 @@ const useInput = ({ inputRef = {}, props = {} }) => {
     // onChange is called. It passes the selected option(s) as
     // the first argument. Its second argument is an object
     // with the action, name, and selected option(s).
-    if (selectEvent) {
+    if (isReactSelect(arguments)) {
       let value;
       if (selectEvent.action === 'clear') {
-        value = '';
+        value = [];
       } else {
         const selections = Array.isArray(event) ? event : [event];
         value = selections.map(selection => selection.value);
