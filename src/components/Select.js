@@ -21,18 +21,16 @@ const Select = ({ className, props }) => {
   delete inputProps.defaultValue;
 
   return (
-    <div className="select">
-      <ReactSelect
-        className={`select ${className}`}
-        options={options}
-        isClearable={isClearable}
-        isSearchable={isSearchable}
-        isDisabled={isDisabled}
-        placeholder={placeholder || '- Please Select -'}
-        defaultValue={defaultVal}
-        {...inputProps}
-      />
-    </div>
+    <ReactSelect
+      className={`select ${className}`}
+      options={options}
+      isClearable={isClearable}
+      isSearchable={isSearchable}
+      isDisabled={isDisabled}
+      placeholder={placeholder || '- Please Select -'}
+      defaultValue={defaultVal}
+      {...inputProps}
+    />
   );
 };
 

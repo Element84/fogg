@@ -1,5 +1,43 @@
 .select {
 
   position: relative;
+  padding: 0;
+  border: 0;
+
+  & > [class*="-control"] {
+
+    @extend .form-input-field;
+    display: flex;
+    padding-top: .2em;
+    padding-bottom: .2em;
+
+    .form-not-valid .form-input-invalid & {
+      border: 0;
+    }
+
+    .form-input-disabled & {
+      background-color: $color-gray1;
+      pointer-events: none;
+    }
+
+    &:hover {
+      border: solid 2px $color-gray;
+    }
+
+    & > div {
+      padding: 0;
+    }
+
+  }
+
+  [class*="a11yText"] {
+
+    & + [class*="-control"] {
+      // Focus styles from _form-input.scss
+      border: solid 2px $color-blue;
+      box-shadow: 0 0 7px 1px rgba($color-blue, .6);
+    }
+
+  }
 
 }
