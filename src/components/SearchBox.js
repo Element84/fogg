@@ -120,13 +120,18 @@ const SearchBox = ({
    */
 
   function handleDateClear () {
+    const clearDate = {
+      start: '',
+      end: ''
+    };
     setDate({
-      date: {
-        start: '',
-        end: ''
-      },
+      date: clearDate,
       dateIsOpen: false
     });
+
+    if (typeof query === 'string' && query.length > 0) {
+      handleSearch(query, clearDate);
+    }
   }
 
   /**
