@@ -46,14 +46,7 @@ const FormInput = props => {
   }
 
   if (type === 'select') {
-    input = (
-      <Select
-        className={fieldClassName}
-        props={inputProps}
-        onChange={handleOnChange}
-        onInput={handleOnInput}
-      />
-    );
+    input = <Select className={fieldClassName} props={inputProps} />;
   } else if (type === 'textarea') {
     input = (
       <Textarea

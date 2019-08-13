@@ -1,35 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FaCaretDown } from 'react-icons/fa';
+import { default as ReactSelect } from 'react-select';
 
 import { useInput } from '../hooks';
 
-const Select = ({ className, props, onChange, onInput }) => {
-  const { options, inputProps } = useInput({ props });
+const Select = ({ className, props }) => {
+  const { inputProps } = useInput({ props });
 
-  const { placeholder } = inputProps;
+  const {
+    placeholder,
+    disabled: isDisabled,
+    options,
+    defaultValue
+  } = inputProps;
+
+  const isClearable = true;
+  const isSearchable = true;
+
+  const defaultVal = options.filter(option => option.value === defaultValue);
+  delete inputProps.defaultValue;
 
   return (
-    <div className="select">
-      <select
-        className={`select ${className}`}
-        onChange={onChange}
-        onInput={onInput}
-        {...inputProps}
-      >
-        <option value="">{placeholder || '- Please Select -'}</option>
-
-        {Array.isArray(options) &&
-          options.map((option, index) => {
-            return (
-              <option key={`Select-Option-${index}`} value={option.value}>
-                {option.label}
-              </option>
-            );
-          })}
-      </select>
-      <FaCaretDown />
-    </div>
+    <ReactSelect
+      className={`select ${className}`}
+      options={options}
+      isClearable={isClearable}
+      isSearchable={isSearchable}
+      isDisabled={isDisabled}
+      placeholder={placeholder || '- Please Select -'}
+      defaultValue={defaultVal}
+      {...inputProps}
+    />
   );
 };
 

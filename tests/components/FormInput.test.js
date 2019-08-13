@@ -158,19 +158,20 @@ describe('FormInput', () => {
       )
         .find('Select')
         .dive()
-        .find('select');
+        .find('StateManager');
 
-      it('should fire the change handler', () => {
-        input.find('select').simulate('change', {
-          target: {
-            value: selectOptions[0].value
-          }
-        });
-        expect(changeTest).toEqual(selectOptions[0].value);
+      it('does not fire the change handler', () => {
+        const selectEvent = {
+          action: 'select-option',
+          name: 'organization',
+          option: selectOptions[0]
+        };
+        input.simulate('change', selectOptions[0], selectEvent);
+        expect(changeTest).toEqual(null);
       });
 
       it('should fire the input handler', () => {
-        input.find('select').simulate('input', {
+        input.simulate('input', {
           target: {
             value: selectOptions[1].value
           }
@@ -257,7 +258,13 @@ describe('FormInput', () => {
       );
 
       it('should not throw an error when trying to fire the change handler', () => {
-        expect(input.simulate('change')).toEqual({});
+        const event = selectOptions[0];
+        const selectEvent = {
+          action: 'select-option',
+          name: 'organization',
+          option: selectOptions[0]
+        };
+        expect(input.simulate('change', event, selectEvent)).toEqual({});
       });
 
       it('should not throw an error when trying to fire the input handler', () => {
