@@ -40,6 +40,7 @@
     "react-leaflet": "^2.3.0",
     "react-leaflet-draw": "^0.19.0",
     "react-modal": "^3.8.2",
+    "react-table": "^7.0.0-alpha.21",
     "sass": "^1.22.3",
     "togeojson": "^0.16.0",
     "use-debounce": "^2.1.0",
