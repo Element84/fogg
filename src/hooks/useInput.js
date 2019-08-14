@@ -13,6 +13,12 @@ function getFormListValuesByName (form, name) {
   return values;
 }
 
+function isReactSelect (argumentsObject) {
+  return (
+    argumentsObject.length === 2 && argumentsObject[1].hasOwnProperty('action')
+  );
+}
+
 const INPUT_PROPS_WHITELIST = [
   'autoCapitalize',
   'autoComplete',
@@ -29,7 +35,8 @@ const INPUT_PROPS_WHITELIST = [
   'placeholder',
   'required',
   'type',
-  'value'
+  'value',
+  'isMulti'
 ];
 
 const INPUT_LIST_TYPES = ['radio', 'checkbox'];
@@ -96,7 +103,23 @@ const useInput = ({ inputRef = {}, props = {} }) => {
     }
   };
 
-  inputProps.onChange = function (event) {
+  inputProps.onChange = function (event, selectEvent) {
+    // React-select does not surface the original event when
+    // onChange is called. It passes the selected option(s) as
+    // the first argument. Its second argument is an object
+    // with the action, name, and selected option(s).
+    if (isReactSelect(arguments)) {
+      let value;
+      if (selectEvent.action === 'clear') {
+        value = [];
+      } else {
+        const selections = Array.isArray(event) ? event : [event];
+        value = selections.map(selection => selection.value);
+      }
+      updateField(selectEvent.name, value);
+      return;
+    }
+
     const type = event.target.type;
     const name = event.target.name;
     let value = event.target.value;

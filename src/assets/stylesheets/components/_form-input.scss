@@ -23,7 +23,7 @@
   -webkit-appearance: none;
 
   &:disabled {
-    background-color: lighten($color-gray, 20);
+    background-color: $color-gray1;
     pointer-events: none;
   }
 
