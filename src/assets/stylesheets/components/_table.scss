@@ -5,31 +5,3 @@
   }
 
 }
-
-.table-header.table-row {
-
-  color: $color-gray5;
-  font-weight: bold;
-  font-size: .8em;
-
-  td {
-    padding: 1.25em;
-  }
-
-  .filters {
-    margin: 0 0.5em 0.3em;
-  }
-
-  .table-filter {
-    width: 100%;
-    padding: .5em .7em;
-    border: 0;
-    border-bottom: 1px solid $color-gray3;
-
-    &:focus {
-      outline: none;
-    }
-
-  }
-
-}

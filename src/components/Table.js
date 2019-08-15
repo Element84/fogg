@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
-import TableHeaders from './TableHeaders';
+import TableHead from './TableHead';
 import TableRow from './TableRow';
 
 import { useTable, useFilters, useSortBy } from 'react-table';
@@ -16,10 +16,10 @@ const Table = ({
   enableSorting = false,
   enableFiltering = false
 }) => {
-  const memoizedColumns = useMemo(() => columns, []);
-  const memoizedData = useMemo(() => data, []);
-  const memoizedDefaultColumn = useMemo(() => defaultColumn, []);
-  const memoizedFilterTypes = useMemo(() => filterTypes, []);
+  const memoizedColumns = useMemo(() => columns, [columns]);
+  const memoizedData = useMemo(() => data, [data]);
+  const memoizedDefaultColumn = useMemo(() => defaultColumn, [defaultColumn]);
+  const memoizedFilterTypes = useMemo(() => filterTypes, [filterTypes]);
 
   const { rows, getTableProps, prepareRow, headerGroups } = useTable(
     {
@@ -40,7 +40,7 @@ const Table = ({
         <thead>
           {headerGroups.map((headerGroup, headerIndex) => {
             return (
-              <TableHeaders
+              <TableHead
                 className="table-header"
                 key={`Table-Header-${headerIndex}`}
                 headers={headerGroup.headers}

@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { TableHeaders } from '../../ui';
+import { TableHead } from '../../ui';
 
-describe('TableHeaders', () => {
+describe('TableHead', () => {
   const headers = [
     {
       render: function (item) {
@@ -70,19 +70,19 @@ describe('TableHeaders', () => {
   const rowClassName = 'row-test';
 
   describe('Render', () => {
-    const tableHeaders = shallow(
-      <TableHeaders className={rowClassName} headers={headers} />
+    const tableHead = shallow(
+      <TableHead className={rowClassName} headers={headers} />
     );
-    const tableHeadersWithSort = shallow(
-      <TableHeaders className={rowClassName} headers={headersWithSort} />
+    const tableHeadWithSort = shallow(
+      <TableHead className={rowClassName} headers={headersWithSort} />
     );
-    const tableHeadersWithFilter = shallow(
-      <TableHeaders className={rowClassName} headers={headersWithFilter} />
+    const tableHeadWithFilter = shallow(
+      <TableHead className={rowClassName} headers={headersWithFilter} />
     );
 
     it('should render a th with the header/call the render function for the first header', () => {
       expect(
-        tableHeaders
+        tableHead
           .find('tr')
           .find('th')
           .first()
@@ -91,12 +91,12 @@ describe('TableHeaders', () => {
     });
 
     it('should have an updated className', () => {
-      expect(tableHeaders.find('tr').hasClass(rowClassName)).toEqual(true);
+      expect(tableHead.find('tr').hasClass(rowClassName)).toEqual(true);
     });
 
     it('should not render the sort icon when sort is not enabled', () => {
       expect(
-        tableHeaders
+        tableHead
           .find('tr')
           .find('th')
           .first()
@@ -107,7 +107,7 @@ describe('TableHeaders', () => {
 
     it('should render the sort icon when sort is enabled', () => {
       expect(
-        tableHeadersWithSort
+        tableHeadWithSort
           .find('tr')
           .find('th')
           .first()
@@ -118,7 +118,7 @@ describe('TableHeaders', () => {
 
     it('should not render the filter when filter is not enabled', () => {
       expect(
-        tableHeaders
+        tableHead
           .find('tr')
           .find('th')
           .first()
@@ -129,7 +129,7 @@ describe('TableHeaders', () => {
 
     it('should render the filter when filter is enabled', () => {
       expect(
-        tableHeadersWithFilter
+        tableHeadWithFilter
           .find('tr')
           .find('th')
           .first()
@@ -137,7 +137,7 @@ describe('TableHeaders', () => {
           .exists()
       ).toEqual(true);
       expect(
-        tableHeadersWithFilter
+        tableHeadWithFilter
           .find('tr')
           .find('th')
           .first()

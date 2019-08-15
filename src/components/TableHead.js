@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaSort, FaSortUp, FaSortDown } from 'react-icons/fa';
 
-const TableHeaders = ({ className, headers }) => {
+const TableHead = ({ className, headers }) => {
+  console.log(headers);
+  if (headers.length === 0) {
+    return null;
+  }
   return (
     <tr className={`table-row ${className || ''}`}>
       {headers.map((column, index) => {
@@ -39,9 +43,9 @@ const TableHeaders = ({ className, headers }) => {
   );
 };
 
-TableHeaders.propTypes = {
+TableHead.propTypes = {
   className: PropTypes.string,
   headers: PropTypes.array
 };
 
-export default TableHeaders;
+export default TableHead;

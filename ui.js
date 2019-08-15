@@ -50,7 +50,7 @@ export { default as SearchComplete } from './src/components/SearchComplete';
 export { default as Select } from './src/components/Select';
 export { default as StatusIndicator } from './src/components/StatusIndicator';
 export { default as Table } from './src/components/Table';
-export { default as TableHeaders } from './src/components/TableHeaders';
+export { default as TableHead } from './src/components/TableHead';
 export { default as TableRow } from './src/components/TableRow';
 export { default as TaskList } from './src/components/TaskList';
 export { default as TaskStatus } from './src/components/TaskStatus';

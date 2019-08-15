@@ -49,7 +49,7 @@ describe('Table', () => {
       expect(
         table
           .find('thead')
-          .find('TableHeaders')
+          .find('TableHead')
           .props().headers[0].id
       ).toEqual(columns[0].accessor);
     });
