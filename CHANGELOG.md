@@ -1,3 +1,7 @@
+### Version 0.1.138
+- [JAM-633] Disabled date styles
+- [JAM-633] Reduce datepicker day border radius
+
 ### Version 0.1.137
 
 ### Version 0.1.136
