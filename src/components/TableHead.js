@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import { FaSort, FaSortUp, FaSortDown } from 'react-icons/fa';
 
 const TableHead = ({ className, headers }) => {
-  if (headers.length === 0) {
-    return null;
-  }
   return (
     <tr className={`table-row ${className || ''}`}>
       {headers.map((column, index) => {

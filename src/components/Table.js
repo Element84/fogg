@@ -34,16 +34,25 @@ const Table = ({
     useFilters
   );
 
+  function headerIsEmpty (header) {
+    return typeof header.Header === 'function' && header.Header() === null;
+  }
+
   return (
     <div className={`table ${className || ''}`}>
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup, headerIndex) => {
+            const { headers } = headerGroup;
+            // check for all empty headers before rendering row
+            if (headers.every(headerIsEmpty)) {
+              return null;
+            }
             return (
               <TableHead
                 className="table-header"
                 key={`Table-Header-${headerIndex}`}
-                headers={headerGroup.headers}
+                headers={headers}
               />
             );
           })}
