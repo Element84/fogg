@@ -1,3 +1,8 @@
+### Version 0.1.139
+- [JAM-662] Update css, update useMemo dependencies
+- [JAM-662] Remove console log
+- [JAM-662] Don't render TableHead with empty headers
+
 ### Version 0.1.138
 - [JAM-633] Disabled date styles
 - [JAM-633] Reduce datepicker day border radius
