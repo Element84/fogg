@@ -6,7 +6,7 @@
     border-bottom: solid 1px $color-gray1;
   }
 
-  td {
+  td, th {
     padding: 1em;
   }
 
@@ -20,6 +20,30 @@
       margin-bottom: 0;
     }
 
+  }
+
+  &.table-header {
+
+    color: $color-gray5;
+    font-weight: bold;
+    font-size: .8em;
+  
+    .filters {
+      margin: 0.5em 0 0;
+    }
+  
+    .table-filter {
+      width: 100%;
+      padding: .5em .7em;
+      border: 0;
+      border-bottom: 1px solid $color-gray3;
+  
+      &:focus {
+        outline: none;
+      }
+  
+    }
+  
   }
 
 }

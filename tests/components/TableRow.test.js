@@ -5,56 +5,42 @@ import { TableRow } from '../../ui';
 
 describe('TableRow', () => {
   const rowClassName = 'row-test';
-  const rowTextOne = 'Gary';
-  const rowTextTwo = 'Godspeed';
-  const buttonText = 'View';
 
-  const row = [
-    rowTextOne,
-    <span key={'cell-1-span'}>{rowTextTwo}</span>,
-    <button key={'cell-2-button'}>{buttonText}</button>
+  const cells = [
+    {
+      render: function (item) {
+        return this[item];
+      },
+      Cell: 'Gary'
+    },
+    {
+      render: function (item) {
+        return this[item];
+      },
+      Cell: 'Godspeed'
+    }
   ];
 
   describe('Render', () => {
-    const tableRow = shallow(<TableRow className={rowClassName} cells={row} />);
+    const tableRow = shallow(
+      <TableRow className={rowClassName} cells={cells} />
+    );
 
-    it('should render a tr with a button in it', () => {
-      expect(
-        tableRow
-          .find('tr')
-          .find('button')
-          .text()
-      ).toEqual(buttonText);
-    });
-
-    it('should render a string wrapped with a p tag', () => {
+    it('should render a tr with the cell values', () => {
       expect(
         tableRow
           .find('tr')
           .find('td')
           .first()
-          .find('p')
           .text()
-      ).toEqual(rowTextOne);
-    });
-
-    it('should not wrap a string in a p tag if its already a component', () => {
+      ).toEqual('Gary');
       expect(
         tableRow
           .find('tr')
           .find('td')
-          .at(1)
-          .find('p')
-          .exists()
-      ).toEqual(false);
-      expect(
-        tableRow
-          .find('tr')
-          .find('td')
-          .at(1)
-          .find('span')
+          .last()
           .text()
-      ).toEqual(rowTextTwo);
+      ).toEqual('Godspeed');
     });
 
     it('should have an updated className', () => {

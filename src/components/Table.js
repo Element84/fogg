@@ -1,39 +1,69 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
+import TableHead from './TableHead';
 import TableRow from './TableRow';
 
-import Logger from '../lib/logger';
+import { useTable, useFilters, useSortBy } from 'react-table';
 
-const Table = ({ children, className, columns, rows }) => {
-  const logger = new Logger('Table', {
-    isBrowser: true
-  });
+const Table = ({
+  children,
+  className,
+  columns,
+  data,
+  filterTypes = {},
+  defaultColumn = {},
+  enableSorting = false,
+  enableFiltering = false
+}) => {
+  const memoizedColumns = useMemo(() => columns, [columns]);
+  const memoizedData = useMemo(() => data, [data]);
+  const memoizedDefaultColumn = useMemo(() => defaultColumn, [defaultColumn]);
+  const memoizedFilterTypes = useMemo(() => filterTypes, [filterTypes]);
 
-  // If a table doesn't have the proper number of columns and rows,
-  // it will end up messed up in one way or another. We can protect
-  // against this and just fail right away returning null
+  const { rows, getTableProps, prepareRow, headerGroups } = useTable(
+    {
+      columns: memoizedColumns,
+      data: memoizedData,
+      filterTypes: memoizedFilterTypes,
+      defaultColumn: memoizedDefaultColumn,
+      disableFilters: !enableFiltering,
+      disableSorting: !enableSorting
+    },
+    useSortBy,
+    useFilters
+  );
 
-  if (!tableConfigurationIsValid(columns, rows)) {
-    logger.warn(`Invalid table configuration, trying to fix`);
-
-    const configuration = fixTableConfiguration(columns, rows);
-    columns = configuration.columns;
-    rows = configuration.rows;
+  function headerIsEmpty (header) {
+    return typeof header.Header === 'function' && header.Header() === null;
   }
 
   return (
     <div className={`table ${className || ''}`}>
-      <table>
-        {columns && (
-          <thead>
-            <TableRow className="table-header" cells={columns} />
-          </thead>
-        )}
-
+      <table {...getTableProps()}>
+        <thead>
+          {headerGroups.map((headerGroup, headerIndex) => {
+            const { headers } = headerGroup;
+            // check for all empty headers before rendering row
+            if (headers.every(headerIsEmpty)) {
+              return null;
+            }
+            return (
+              <TableHead
+                className="table-header"
+                key={`Table-Header-${headerIndex}`}
+                headers={headers}
+              />
+            );
+          })}
+        </thead>
         <tbody>
           {rows.map((row, rowIndex) => {
-            return <TableRow key={`Table-Row-${rowIndex}`} cells={row} />;
+            return (
+              prepareRow(row) || (
+                <TableRow key={`Table-Row-${rowIndex}`} cells={row.cells} />
+              )
+            );
           })}
         </tbody>
       </table>
@@ -49,73 +79,11 @@ Table.propTypes = {
   ]),
   className: PropTypes.string,
   columns: PropTypes.array,
-  rows: PropTypes.array
+  data: PropTypes.array,
+  filterTypes: PropTypes.object,
+  defaultColumn: PropTypes.object,
+  enableFiltering: PropTypes.bool,
+  enableSorting: PropTypes.bool
 };
 
 export default Table;
-
-/**
- * tableConfigurationIsValid
- * @description Validate that the table config is properly formatted. Currently checks
- *     if there are any equal row to column distributions
- */
-
-function tableConfigurationIsValid (columns, rows) {
-  if (!Array.isArray(rows) && !Array.isArray(columns)) return false;
-  if (!Array.isArray(columns)) return true;
-  const invalidRows = rows.filter(row => row.length !== columns.length);
-  return invalidRows.length === 0;
-}
-
-/**
- * fixTableConfiguration
- * @description Attempts to fix table configuration to keep all rows with an equal length
- */
-
-function fixTableConfiguration (columns, rows) {
-  const cellMaxCount = Math.max(...rows.map(row => row.length));
-  const columnsCount = (columns && columns.length) || 0;
-  const differenceCellsColumns = cellMaxCount - columnsCount;
-
-  if (columnsCount > 0 && differenceCellsColumns > 0) {
-    columns = padArray(columns, differenceCellsColumns);
-  }
-
-  rows = rows.map(cells => {
-    // If the number of cells is less than the row with the
-    // most cells, pad to equalize
-
-    const differenceCellMax = cellMaxCount - cells.length;
-
-    if (differenceCellMax > 0) {
-      cells = padArray(cells, differenceCellMax);
-    }
-
-    // If the number of columns is greater than the cell count
-    // pad to equalize
-
-    const differenceColumnMax = columnsCount - cells.length;
-
-    if (differenceColumnMax > 0) {
-      cells = padArray(cells, differenceColumnMax);
-    }
-
-    return cells;
-  });
-
-  return {
-    columns,
-    rows
-  };
-}
-
-/**
- * padArray
- * @description Adds n number of items to the end of an array with provided value
- */
-
-function padArray (array, n, value = null) {
-  if (!Array.isArray(array)) return [];
-
-  return array.concat([...Array(n)].map(item => value));
-}
