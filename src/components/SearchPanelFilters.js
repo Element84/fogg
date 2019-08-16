@@ -59,7 +59,10 @@ const SearchPanelFilters = ({
       value = value.join(', ');
     }
 
-    return [label, value];
+    return {
+      label,
+      value
+    };
   }
 
   /**
@@ -95,7 +98,15 @@ const SearchPanelFilters = ({
     >
       {hasActiveFilters(panelFilters) && (
         <Table
-          rows={panelFilters
+          columns={[
+            {
+              accessor: 'label'
+            },
+            {
+              accessor: 'value'
+            }
+          ]}
+          data={panelFilters
             .filter(filterActiveFiltersNoValue)
             .map(mapActiveFiltersToRow)}
         />
