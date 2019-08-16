@@ -38,11 +38,15 @@ const InputButtonList = ({
   // that allows a user to cancel an editable state from outside of this
   // component instance
 
+  // As our depenencies, we need to make sure to use options instead of defaultSelections
+  // because defaultSelections returns a new array each render, meaning it will never
+  // be the same and cause endless firing
+
   useEffect(() => {
     if (controlChecked) {
       updateSelections(defaultSelections);
     }
-  }, [controlChecked, defaultSelections]);
+  }, [controlChecked, options]);
 
   if (!name) {
     logger.warn(`Missing input name`);
