@@ -1,3 +1,7 @@
+### Version 0.1.140
+- Lock react-table version
+- [JAM-662] Update filter table and remove unecessary components
+
 ### Version 0.1.139
 - [JAM-662] Update css, update useMemo dependencies
 - [JAM-662] Remove console log
