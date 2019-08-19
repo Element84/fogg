@@ -1,3 +1,5 @@
+### Version 0.1.141
+
 ### Version 0.1.140
 - Lock react-table version
 - [JAM-662] Update filter table and remove unecessary components
