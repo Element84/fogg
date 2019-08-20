@@ -8,30 +8,32 @@ const TableHead = ({ className, headers }) => {
       {headers.map((column, index) => {
         return (
           <th key={`TableRow-Cell-${index}`} className="table-row-cell">
-            <div
-              {...column.getHeaderProps({
-                ...column.getSortByToggleProps(),
-                className: 'column-header'
-              })}
-            >
-              {column.render('Header')}
-              {column.canSort && (
-                <span>
-                  {column.sorted ? (
-                    column.sortedDesc ? (
-                      <FaSortDown />
+            <div className="table-row-cell-inner">
+              <div
+                {...column.getHeaderProps({
+                  ...column.getSortByToggleProps(),
+                  className: 'column-header'
+                })}
+              >
+                {column.render('Header')}
+                {column.canSort && (
+                  <span>
+                    {column.sorted ? (
+                      column.sortedDesc ? (
+                        <FaSortDown />
+                      ) : (
+                        <FaSortUp />
+                      )
                     ) : (
-                      <FaSortUp />
-                    )
-                  ) : (
-                    <FaSort />
-                  )}
-                </span>
+                      <FaSort />
+                    )}
+                  </span>
+                )}
+              </div>
+              {column.canFilter && (
+                <div className="filters">{column.render('Filter')}</div>
               )}
             </div>
-            {column.canFilter && (
-              <div className="filters">{column.render('Filter')}</div>
-            )}
           </th>
         );
       })}
