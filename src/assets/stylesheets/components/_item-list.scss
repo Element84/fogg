@@ -52,6 +52,7 @@ $item-list-top-padding: .8em;
 }
 
 .item-list-item-content {
+  max-width: 100%;
   flex-grow: 1;
 }
 

@@ -7,7 +7,11 @@ describe('Lens', () => {
   describe('Render', () => {
     const lens = shallow(<Lens />);
     const lensMap = lens.find('LensMapWithRefs');
-    const lensSearchComplete = lens.find('LensSearchComplete');
+    const lensSearchCompleteWithRefs = lens.find('LensSearchCompleteWithRefs');
+    const lensSearchCompleteWithRefsDive = lensSearchCompleteWithRefs.dive();
+    const lensSearchComplete = lensSearchCompleteWithRefsDive.find(
+      'LensSearchComplete'
+    );
 
     it('should render a LensMap component', () => {
       expect(lensMap.exists()).toEqual(true);

@@ -7,13 +7,15 @@ import SearchBox from './SearchBox';
 const MAX_RESULTS = 5;
 const QUERY_COMPLETE_DEBOUNCE = 300;
 
+const CLEAR_SEARCH_EVENT = 'clear.search-complete';
+
 const SearchComplete = ({
   onSearch,
   resolveQueryComplete,
   placeholder = 'Search',
   defaultValue,
   defaultDate,
-  clearSearchInput
+  forwardedRef
 }) => {
   const [isOpen, updateOpenState] = useState(false);
   const [results, updateResults] = useState([]);
@@ -24,16 +26,6 @@ const SearchComplete = ({
     updateQueryState,
     QUERY_COMPLETE_DEBOUNCE
   );
-
-  useEffect(() => {
-    if (clearSearchInput) {
-      updateSearchInput('');
-      updateDate({});
-    } else {
-      updateSearchInput(defaultValue);
-      updateDate(defaultDate);
-    }
-  }, [clearSearchInput, defaultValue, defaultDate]);
 
   /**
    * handleSearchboxSearch
@@ -126,8 +118,31 @@ const SearchComplete = ({
     }
   }
 
+  /**
+   * handleClearSearch
+   * @description When triggered, clears the search state
+   */
+
+  function handleClearSearch () {
+    updateSearchInput('');
+    updateDate({});
+  }
+
+  useEffect(() => {
+    const { current } = forwardedRef || {};
+
+    if (!current) return;
+
+    current.addEventListener('clear.search-complete', handleClearSearch);
+
+    return () => {
+      current.removeEventListener('clear.search-complete', handleClearSearch);
+    };
+  }, [forwardedRef, handleClearSearch]);
+
   return (
     <div
+      ref={forwardedRef}
       className="search-complete"
       data-is-search-complete-open={isOpen && results.length > 0}
     >
@@ -174,7 +189,18 @@ SearchComplete.propTypes = {
   placeholder: PropTypes.string,
   defaultValue: PropTypes.string,
   clearSearchInput: PropTypes.bool,
-  defaultDate: PropTypes.object
+  defaultDate: PropTypes.object,
+  forwardedRef: PropTypes.object
 };
 
 export default SearchComplete;
+
+/**
+ * clearSearchComplete
+ * @description Creates a new event to clear search on given target
+ */
+
+export function clearSearchComplete (target) {
+  const event = new Event(CLEAR_SEARCH_EVENT);
+  target.dispatchEvent(event);
+}

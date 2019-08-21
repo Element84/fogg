@@ -32,6 +32,8 @@ const Lens = ({
 }) => {
   const refMap = createRef();
   const refMapDraw = createRef();
+  const refSearchComplete = createRef();
+
   let lensClassName = 'lens';
 
   if (className) {
@@ -44,6 +46,7 @@ const Lens = ({
     resolveOnSearch,
     refMap,
     refMapDraw,
+    refSearchComplete,
     availableLayers,
     fetchLayerData,
     zoom
@@ -74,7 +77,10 @@ const Lens = ({
           {search && (
             <div className="lens-sidebar-search">
               <Panel className="panel-clean">
-                <LensSearchComplete placeholder={placeholder} />
+                <LensSearchComplete
+                  ref={refSearchComplete}
+                  placeholder={placeholder}
+                />
               </Panel>
 
               {activeSearch && filters.available.length > 0 && (
