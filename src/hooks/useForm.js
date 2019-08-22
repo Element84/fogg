@@ -69,20 +69,39 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
       validate.updateRulesByField(name, rules);
     }
 
+    const validateRules = validate.rules[name];
+    const { dependencies } = validateRules || [];
+
     setFields(fields => {
       let fieldAttributes = fields[name] || {};
+      let filteredInvalidFields = invalidFields;
 
       fieldAttributes = Object.assign({}, fieldAttributes, {
         value,
         isValid: validate.byField(name, value)
       });
 
+      const shouldUpdateValidity =
+        fieldAttributes.isValid &&
+        Array.isArray(filteredInvalidFields) &&
+        filteredInvalidFields.includes(name);
+
+      if (dependencies) {
+        dependencies.forEach(dependency => {
+          const { field: dependencyName } = dependency;
+          if (shouldUpdateValidity) {
+            filteredInvalidFields = filteredInvalidFields.filter(
+              field => field !== dependencyName
+            );
+          }
+        });
+      }
       if (
         fieldAttributes.isValid &&
         Array.isArray(invalidFields) &&
         invalidFields.includes(name)
       ) {
-        updateValidity(invalidFields.filter(field => field !== name));
+        updateValidity(filteredInvalidFields.filter(field => field !== name));
       }
 
       return {

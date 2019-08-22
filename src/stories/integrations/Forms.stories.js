@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
@@ -313,4 +313,121 @@ stories.add('Default', () => {
       </pre>
     </Form>
   );
+});
+
+stories.add('Compare Fields', () => {
+  const FormCompareValues = () => {
+    const [emailValue, updateEmailValue] = useState('');
+    const [confirmEmailValue, updateConfirmEmailValue] = useState('');
+
+    function handleEmailChange ({ target = {} } = {}) {
+      updateEmailValue(target.value);
+    }
+
+    function handleConfirmEmailChange ({ target = {} } = {}) {
+      updateConfirmEmailValue(target.value);
+    }
+
+    function handleSubmit (event, fields) {
+      action('form-submit')(event, JSON.stringify(fields));
+    }
+
+    function handleChange (event) {
+      action('form-change')(event);
+    }
+
+    // If making changes, please C&P this to the bottom printed output
+    // for people to see the rules easily
+
+    const validationRules = {
+      email: {
+        required: true,
+        regex: regexByFieldName('email'),
+        isValid: value => value === confirmEmailValue,
+        dependencies: [
+          {
+            field: 'confirmEmail'
+          }
+        ]
+      },
+      confirmEmail: {
+        required: true,
+        regex: regexByFieldName('email'),
+        isValid: value => value === emailValue,
+        dependencies: [
+          {
+            field: 'email'
+          }
+        ]
+      }
+    };
+    return (
+      <Form
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+        rules={validationRules}
+      >
+        <FormRow>
+          <p>
+            See bottom for active form rules. All fields should be required via
+            rules object or via prop for testing purposes. Have fun!
+          </p>
+        </FormRow>
+
+        <FormRow>
+          <FormInput
+            id="email"
+            label="Email"
+            type="email"
+            required={true}
+            onChange={handleEmailChange}
+          />
+        </FormRow>
+
+        <FormRow>
+          <FormInput
+            id="confirmEmail"
+            label="Confirm Email"
+            type="email"
+            required={true}
+            onChange={handleConfirmEmailChange}
+          />
+        </FormRow>
+
+        <FormRow>
+          <Button>Submit</Button>
+        </FormRow>
+
+        <h2>Validation Rules</h2>
+        <pre>
+          <code>
+            {`    const validationRules = {
+      email: {
+        required: true,
+        regex: regexByFieldName('email'),
+        isValid: value => value === confirmEmailValue,
+        dependencies: [
+          {
+            field: 'confirmEmail'
+          }
+        ]
+      },
+      confirmEmail: {
+        required: true,
+        regex: regexByFieldName('email'),
+        isValid: value => value === emailValue,
+        dependencies: [
+          {
+            field: 'email'
+          }
+        ]
+      }
+    };`}
+          </code>
+        </pre>
+      </Form>
+    );
+  };
+
+  return <FormCompareValues />;
 });
