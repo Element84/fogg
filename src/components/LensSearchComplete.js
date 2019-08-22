@@ -1,16 +1,13 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { LensContext } from '../context';
 
 import SearchComplete from './SearchComplete';
 
-const LensSearchComplete = props => {
+const LensSearchComplete = ({ forwardedRef, ...props }) => {
   const { lens = {} } = useContext(LensContext) || {};
 
-  const {
-    handlers: lensHandlers = {},
-    clearSearchInput,
-    mapConfig = {}
-  } = lens;
+  const { handlers: lensHandlers = {}, mapConfig = {} } = lens;
   const { handleOnSearch, resolveLensAutocomplete } = lensHandlers;
   const { textInput, date } = mapConfig;
 
@@ -20,10 +17,23 @@ const LensSearchComplete = props => {
       defaultDate={date}
       onSearch={handleOnSearch}
       resolveQueryComplete={resolveLensAutocomplete}
-      clearSearchInput={clearSearchInput}
+      forwardedRef={forwardedRef}
       {...props}
     />
   );
 };
 
-export default LensSearchComplete;
+LensSearchComplete.propTypes = {
+  forwardedRef: PropTypes.object
+};
+
+const LensSearchCompleteWithRefs = React.forwardRef(function lensMap (
+  props,
+  ref
+) {
+  return <LensSearchComplete {...props} forwardedRef={ref} />;
+});
+
+LensSearchCompleteWithRefs.displayName = 'LensSearchCompleteWithRefs';
+
+export default LensSearchCompleteWithRefs;
