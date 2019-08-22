@@ -10,12 +10,11 @@ const Select = ({ className, props }) => {
   const {
     placeholder,
     disabled: isDisabled,
+    searchable: isSearchable = true,
+    clearable: isClearable = true,
     options,
     defaultValue
   } = inputProps;
-
-  const isClearable = true;
-  const isSearchable = true;
 
   const defaultVal = options.filter(option => option.value === defaultValue);
   delete inputProps.defaultValue;

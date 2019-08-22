@@ -109,6 +109,31 @@ stories.add('Default', () => {
 
       <FormRow>
         <FormInput
+          id="shows"
+          label="Shows"
+          type="select"
+          clearable={false}
+          searchable={false}
+          options={[
+            {
+              label: 'Futurama',
+              value: 'futurama'
+            },
+            {
+              label: 'Rick & Morty',
+              value: 'rick-morty'
+            },
+            {
+              label: 'Final Space',
+              value: 'final-space'
+            }
+          ]}
+          required={true}
+        />
+      </FormRow>
+
+      <FormRow>
+        <FormInput
           id="datalist"
           label="Datalist"
           dataList={['Fry', 'Leela', 'Zoidberg', 'Bender']}
