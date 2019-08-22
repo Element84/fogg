@@ -340,7 +340,6 @@ export default function useLens ({
       handleOnSearch,
       resolveLensAutocomplete,
       handleUpdateSearchParams,
-      handleQueryParams,
       loadMoreResults: moreResultsAvailable ? handleLoadMoreResults : undefined,
       clearActiveSearch: handleClearSearch
     },

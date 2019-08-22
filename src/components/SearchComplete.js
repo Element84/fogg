@@ -27,6 +27,14 @@ const SearchComplete = ({
     QUERY_COMPLETE_DEBOUNCE
   );
 
+  // When the component renders, update the state with the default values
+  // Particularly useful for grabbing query params and prefilling state
+
+  useEffect(() => {
+    updateSearchInput(defaultValue);
+    updateDate(defaultDate);
+  }, [defaultValue, defaultDate]);
+
   /**
    * handleSearchboxSearch
    * @description Triggers when the search box's search button is clicked
