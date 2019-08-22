@@ -7,6 +7,8 @@ import {
 } from '../lib/leaflet';
 import { resolveLensAutocomplete } from '../lib/lens';
 
+import { clearSearchComplete } from '../components/SearchComplete';
+
 import { useFilters, useLayers, useLocation } from '.';
 
 const QUERY_SEARCH_PARAMS = ['q', 'properties'];
@@ -16,6 +18,7 @@ export default function useLens ({
   resolveOnSearch,
   refMap,
   refMapDraw,
+  refSearchComplete,
   availableFilters,
   availableLayers = null,
   fetchLayerData,
@@ -34,7 +37,6 @@ export default function useLens ({
   const [results, updateResults] = useState();
   const [moreResultsAvailable, updateMoreResultsAvailable] = useState();
   const [totalResults, updateTotalResults] = useState();
-  const [clearSearchInput, updateClearSearchInput] = useState(false);
 
   const { search: locationSearch, history } = useLocation();
 
@@ -136,7 +138,6 @@ export default function useLens ({
     }
 
     updateMapConfig(mapUpdate);
-    updateClearSearchInput(false);
   }
 
   /**
@@ -173,11 +174,11 @@ export default function useLens ({
   }
 
   /**
-   * clearSearchMarkers
+   * clearSearchLayers
    * @description Clears all marker instances on map
    */
 
-  function clearSearchMarkers () {
+  function clearSearchLayers () {
     const { current } = refMapDraw;
     const { leafletElement } = current || {};
     if (leafletElement) {
@@ -194,7 +195,7 @@ export default function useLens ({
     const { current } = refMapDraw;
     const { leafletElement } = current || {};
     if (leafletElement) {
-      clearSearchMarkers();
+      clearSearchLayers();
       addLeafletMarkerLayer(position, leafletElement);
     }
   }
@@ -205,6 +206,10 @@ export default function useLens ({
    */
 
   function handleOnCreated (layer) {
+    handleClearSearch({
+      clearLayers: false
+    });
+
     search({
       layer
     });
@@ -312,26 +317,29 @@ export default function useLens ({
    * @description Clears all aspects of an active search from the state
    */
 
-  function handleClearSearch () {
+  function handleClearSearch ({ clearLayers = true } = {}) {
+    const { current } = refSearchComplete;
+
+    clearSearchComplete(current);
     clearQuerySearchParams();
-    clearSearchMarkers();
     clearActiveFilters();
-    updateClearSearchInput(true);
     updateResults(undefined);
     updateMoreResultsAvailable(false);
+
+    if (clearLayers) {
+      clearSearchLayers();
+    }
   }
 
   return {
     mapConfig,
     results,
     numberOfResults: totalResults,
-    clearSearchInput,
     handlers: {
       handleOnCreated,
       handleOnSearch,
       resolveLensAutocomplete,
       handleUpdateSearchParams,
-      handleQueryParams,
       loadMoreResults: moreResultsAvailable ? handleLoadMoreResults : undefined,
       clearActiveSearch: handleClearSearch
     },
