@@ -1,3 +1,6 @@
+### Version 0.1.144
+- upgrading packages
+
 ### Version 0.1.143
 - [JAM-691] making clearable and searchable an option
 
