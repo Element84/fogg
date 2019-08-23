@@ -23,6 +23,7 @@ const INPUT_PROPS_WHITELIST = [
   'autoCapitalize',
   'autoComplete',
   'autoCorrect',
+  'clearable',
   'defaultValue',
   'disabled',
   'id',
@@ -34,6 +35,7 @@ const INPUT_PROPS_WHITELIST = [
   'pattern',
   'placeholder',
   'required',
+  'searchable',
   'type',
   'value',
   'isMulti'

@@ -16,8 +16,6 @@ module.exports = {
         path: `${__dirname}/src/assets/images` // why does this matter?
       }
     },
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
