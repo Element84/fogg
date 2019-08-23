@@ -19,14 +19,14 @@ class Validation {
     };
   }
 
-  byField (fieldName, value) {
+  byField (fieldName, value, dependencies) {
     const field = this.rules[fieldName];
 
     // By default, if there are no validation rules, we should not
     // validate it and consider it valid input
     if (!field) return true;
 
-    return validate(field, value);
+    return validate(field, value, dependencies);
   }
 
   bySet (set = {}, returnErrors = false) {
@@ -52,7 +52,7 @@ export default Validation;
  * @description Given a set of rules, validate the given value
  */
 
-function validate (rules = {}, value) {
+function validate (rules = {}, value, dependencies = []) {
   const minLength = parseNumber(rules.minLength);
   const maxLength = parseNumber(rules.maxLength);
   const isRequired = !!rules.required;
@@ -61,6 +61,8 @@ function validate (rules = {}, value) {
   const isFalseyNonZero = !value && value !== 0;
   const valueLength = isStringOrList && value.length;
   const hasNoValue = isFalseyNonZero || valueLength === 0;
+
+  let hasInvalidDependencies = false;
 
   // If we don't have a value but it's not required,
 
@@ -89,6 +91,19 @@ function validate (rules = {}, value) {
 
   if (rules.regex && !getRegex(rules.regex, 'i').test(value)) return false;
 
+  if (dependencies.length > 0) {
+    hasInvalidDependencies =
+      dependencies.filter(dependency => {
+        if (!dependency.isValid) return true;
+        if (dependency.exactMatch && value !== dependency.value) return true;
+        return false;
+      }).length > 0;
+  }
+
+  if (hasInvalidDependencies) {
+    return false;
+  }
+
   if (typeof rules.isValid === 'function') {
     return rules.isValid(value, {
       ...rules
@@ -109,11 +124,10 @@ function isValidType (value) {
 
 function validateSet (rules, set) {
   let validatedSet = {};
-
   for (let key in set) {
     if (!set.hasOwnProperty(key)) continue;
     validatedSet[key] = Object.assign({}, set[key], {
-      isValid: validate(rules[key], set[key].value)
+      isValid: validate(rules[key], set[key].value, set[key].dependencies)
     });
   }
 

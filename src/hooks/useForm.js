@@ -36,8 +36,6 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
       return;
     }
 
-    updateValidity(true);
-
     // Returning the passed in function here allows us to return false
     // from the handler, preventing the form from submitting
 
@@ -70,38 +68,30 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
     }
 
     const validateRules = validate.rules[name];
-    const { dependencies } = validateRules || [];
+    const { dependencies = [] } = validateRules || {};
 
     setFields(fields => {
-      let fieldAttributes = fields[name] || {};
-      let filteredInvalidFields = invalidFields;
-
-      fieldAttributes = Object.assign({}, fieldAttributes, {
-        value,
-        isValid: validate.byField(name, value)
+      const fieldDependencies = dependencies.map(dependency => {
+        return {
+          ...dependency,
+          ...fields[dependency.field]
+        };
       });
 
-      const shouldUpdateValidity =
-        fieldAttributes.isValid &&
-        Array.isArray(filteredInvalidFields) &&
-        filteredInvalidFields.includes(name);
+      const fieldAttributes = Object.assign({}, fields[name], {
+        value,
+        isValid: validate.byField(name, value, fieldDependencies),
+        dependencies: fieldDependencies
+      });
 
-      if (dependencies) {
-        dependencies.forEach(dependency => {
-          const { field: dependencyName } = dependency;
-          if (shouldUpdateValidity) {
-            filteredInvalidFields = filteredInvalidFields.filter(
-              field => field !== dependencyName
-            );
-          }
-        });
-      }
+      const { isValid } = fieldAttributes;
+
       if (
-        fieldAttributes.isValid &&
+        isValid &&
         Array.isArray(invalidFields) &&
         invalidFields.includes(name)
       ) {
-        updateValidity(filteredInvalidFields.filter(field => field !== name));
+        updateValidity(invalidFields.filter(field => field !== name));
       }
 
       return {

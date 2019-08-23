@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
@@ -342,17 +342,6 @@ stories.add('Default', () => {
 
 stories.add('Compare Fields', () => {
   const FormCompareValues = () => {
-    const [emailValue, updateEmailValue] = useState('');
-    const [confirmEmailValue, updateConfirmEmailValue] = useState('');
-
-    function handleEmailChange ({ target = {} } = {}) {
-      updateEmailValue(target.value);
-    }
-
-    function handleConfirmEmailChange ({ target = {} } = {}) {
-      updateConfirmEmailValue(target.value);
-    }
-
     function handleSubmit (event, fields) {
       action('form-submit')(event, JSON.stringify(fields));
     }
@@ -367,21 +356,15 @@ stories.add('Compare Fields', () => {
     const validationRules = {
       email: {
         required: true,
-        regex: regexByFieldName('email'),
-        isValid: value => value === confirmEmailValue,
-        dependencies: [
-          {
-            field: 'confirmEmail'
-          }
-        ]
+        regex: regexByFieldName('email')
       },
       confirmEmail: {
         required: true,
         regex: regexByFieldName('email'),
-        isValid: value => value === emailValue,
         dependencies: [
           {
-            field: 'email'
+            field: 'email',
+            exactMatch: true
           }
         ]
       }
@@ -400,13 +383,7 @@ stories.add('Compare Fields', () => {
         </FormRow>
 
         <FormRow>
-          <FormInput
-            id="email"
-            label="Email"
-            type="email"
-            required={true}
-            onChange={handleEmailChange}
-          />
+          <FormInput id="email" label="Email" type="email" required={true} />
         </FormRow>
 
         <FormRow>
@@ -415,7 +392,6 @@ stories.add('Compare Fields', () => {
             label="Confirm Email"
             type="email"
             required={true}
-            onChange={handleConfirmEmailChange}
           />
         </FormRow>
 
