@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import clone from 'clone';
 
 import { copyKeysToEmptyObject } from '../lib/util';
 
@@ -7,8 +8,16 @@ import Validation from '../models/validation';
 let validate;
 
 const useForm = ({ onSubmit, onChange, rules = {} }) => {
+  const [attempts, updateAttempts] = useState(0);
   const [fields, setFields] = useState(copyKeysToEmptyObject(rules, {}));
-  const [invalidFields, updateValidity] = useState([]);
+  let invalidFields = Object.keys(fields).filter(key => !fields[key].isValid);
+
+  // If we haven't submitted the form yet, we don't want to trigger the errors
+  // within the UI
+
+  if (attempts === 0) {
+    invalidFields = [];
+  }
 
   if (!validate) {
     validate = new Validation(rules);
@@ -29,10 +38,16 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
     event.persist();
     event.preventDefault();
 
-    const fieldsValidity = validate.bySet(fields, true);
+    updateAttempts(attempts + 1);
 
-    if (fieldsValidity.length > 0) {
-      updateValidity(fieldsValidity);
+    const failedFields = validate.bySet(fields, true);
+    const updatedFields = clone(fields);
+
+    if (failedFields.length > 0) {
+      failedFields.forEach(key => {
+        updatedFields[key].isValid = false;
+      });
+      setFields(updatedFields);
       return;
     }
 
@@ -67,38 +82,33 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
       validate.updateRulesByField(name, rules);
     }
 
-    const validateRules = validate.rules[name];
-    const { dependencies = [] } = validateRules || {};
+    const dependencies = validate.getDependenciesByName(name);
 
     setFields(fields => {
-      const fieldDependencies = dependencies.map(dependency => {
-        return {
-          ...dependency,
-          ...fields[dependency.field]
-        };
-      });
+      const fieldsToUpdate = {};
 
-      const fieldAttributes = Object.assign({}, fields[name], {
-        value,
-        isValid: validate.byField(name, value, fieldDependencies),
-        dependencies: fieldDependencies
-      });
-
-      const { isValid } = fieldAttributes;
-
-      if (
-        isValid &&
-        Array.isArray(invalidFields) &&
-        invalidFields.includes(name)
-      ) {
-        updateValidity(invalidFields.filter(field => field !== name));
-      }
+      fieldsToUpdate[name] = updateFieldAttributes(name, value, dependencies);
 
       return {
         ...fields,
-        [name]: fieldAttributes
+        ...fieldsToUpdate
       };
     });
+  }
+
+  function updateFieldAttributes (name, value, dependencies) {
+    const fieldDependencies = dependencies.map(dependency => {
+      return {
+        ...dependency,
+        ...fields[dependency.field]
+      };
+    });
+    return {
+      ...fields[name],
+      value,
+      isValid: validate.byField(name, value, fieldDependencies),
+      dependencies: validate.getDependenciesByName(name)
+    };
   }
 
   return {

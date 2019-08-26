@@ -30,7 +30,20 @@ class Validation {
   }
 
   bySet (set = {}, returnErrors = false) {
-    const validatedSet = validateSet(this.rules, set);
+    const setToValidate = {};
+
+    // Update all fields in the set to retrieve the dependencies
+    // from the current rules state
+
+    for (let key in set) {
+      if (!set.hasOwnProperty(key)) continue;
+      setToValidate[key] = {
+        ...set[key],
+        dependencies: this.getDependenciesByName(key)
+      };
+    }
+
+    const validatedSet = validateSet(this.rules, setToValidate);
 
     // Checks through all fields and returns true if there are no invalid fields
     const invalidFields = Object.keys(validatedSet).filter(
@@ -42,6 +55,12 @@ class Validation {
     }
 
     return invalidFields.length === 0;
+  }
+
+  getDependenciesByName (name) {
+    if (!name || !this.rules[name]) return;
+    if (!Array.isArray(this.rules[name].dependencies)) return [];
+    return this.rules[name].dependencies;
   }
 }
 
@@ -94,7 +113,6 @@ function validate (rules = {}, value, dependencies = []) {
   if (dependencies.length > 0) {
     hasInvalidDependencies =
       dependencies.filter(dependency => {
-        if (!dependency.isValid) return true;
         if (dependency.exactMatch && value !== dependency.value) return true;
         return false;
       }).length > 0;
@@ -124,10 +142,26 @@ function isValidType (value) {
 
 function validateSet (rules, set) {
   let validatedSet = {};
+
   for (let key in set) {
     if (!set.hasOwnProperty(key)) continue;
+
+    let fieldDependencies = [];
+
+    // Set up a depenencies clone that includes the latest values from
+    // the given set to validate on
+
+    if (Array.isArray(set[key].dependencies)) {
+      fieldDependencies = set[key].dependencies.map(dependency => {
+        return {
+          ...dependency,
+          ...(dependency.field && set[dependency.field])
+        };
+      });
+    }
+
     validatedSet[key] = Object.assign({}, set[key], {
-      isValid: validate(rules[key], set[key].value, set[key].dependencies)
+      isValid: validate(rules[key], set[key].value, fieldDependencies)
     });
   }
 

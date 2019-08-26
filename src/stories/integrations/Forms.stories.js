@@ -405,21 +405,15 @@ stories.add('Compare Fields', () => {
             {`    const validationRules = {
       email: {
         required: true,
-        regex: regexByFieldName('email'),
-        isValid: value => value === confirmEmailValue,
-        dependencies: [
-          {
-            field: 'confirmEmail'
-          }
-        ]
+        regex: regexByFieldName('email')
       },
       confirmEmail: {
         required: true,
         regex: regexByFieldName('email'),
-        isValid: value => value === emailValue,
         dependencies: [
           {
-            field: 'email'
+            field: 'email',
+            exactMatch: true
           }
         ]
       }
