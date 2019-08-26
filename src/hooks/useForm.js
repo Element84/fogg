@@ -43,11 +43,14 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
     const failedFields = validate.bySet(fields, true);
     const updatedFields = clone(fields);
 
+    for (let key in updatedFields) {
+      if (!updatedFields.hasOwnProperty(key)) continue;
+      updatedFields[key].isValid = !failedFields.includes(key);
+    }
+
+    setFields(updatedFields);
+
     if (failedFields.length > 0) {
-      failedFields.forEach(key => {
-        updatedFields[key].isValid = false;
-      });
-      setFields(updatedFields);
       return;
     }
 
@@ -55,7 +58,7 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
     // from the handler, preventing the form from submitting
 
     if (typeof onSubmit === 'function') {
-      return onSubmit(event, fields);
+      return onSubmit(event, updatedFields);
     }
   }
 
@@ -83,28 +86,66 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
     }
 
     const dependencies = validate.getDependenciesByName(name);
+    const depdendentFields = getDependendentFieldsByName(name);
 
     setFields(fields => {
-      const fieldsToUpdate = {};
+      const fieldsToUpdate = {
+        ...fields
+      };
 
       fieldsToUpdate[name] = updateFieldAttributes(name, value, dependencies);
 
-      return {
-        ...fields,
-        ...fieldsToUpdate
-      };
+      depdendentFields.forEach(fieldName => {
+        const fieldValue = fields[fieldName].value;
+        const fieldDependencies = validate.getDependenciesByName(fieldName);
+        fieldsToUpdate[fieldName] = updateFieldAttributes(
+          fieldName,
+          fieldValue,
+          fieldDependencies,
+          fieldsToUpdate
+        );
+      });
+
+      return fieldsToUpdate;
     });
   }
 
-  function updateFieldAttributes (name, value, dependencies) {
+  /**
+   * getDependendentFieldsByName
+   * @description Given the field name, finds all fields that has it as a dependency
+   */
+
+  function getDependendentFieldsByName (name) {
+    if (!name || !fields[name]) return;
+    let dependentFields = new Set();
+
+    for (let key in fields) {
+      if (!fields.hasOwnProperty(key)) continue;
+      if (!Array.isArray(fields[key].dependencies)) continue;
+      const depKeys = fields[key].dependencies.map(
+        dependency => dependency.field
+      );
+      if (depKeys.includes(name)) dependentFields.add(key);
+    }
+
+    return Array.from(dependentFields);
+  }
+
+  /**
+   * updateFieldAttributes
+   * @description Performs updates and validation returning new object for given field
+   */
+
+  function updateFieldAttributes (name, value, dependencies, fieldSet = fields) {
     const fieldDependencies = dependencies.map(dependency => {
       return {
         ...dependency,
-        ...fields[dependency.field]
+        ...fieldSet[dependency.field]
       };
     });
+
     return {
-      ...fields[name],
+      ...fieldSet[name],
       value,
       isValid: validate.byField(name, value, fieldDependencies),
       dependencies: validate.getDependenciesByName(name)
