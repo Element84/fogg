@@ -14,6 +14,16 @@ describe('Validation', () => {
       required: true,
       regex: regexByFieldName('email')
     },
+    confirmEmail: {
+      required: true,
+      regex: regexByFieldName('email'),
+      dependencies: [
+        {
+          field: 'email',
+          exactMatch: true
+        }
+      ]
+    },
     password: {
       minLength: 8,
       isValid: value => {
@@ -38,6 +48,9 @@ describe('Validation', () => {
       value: 'Fring'
     },
     email: {
+      value: 'gus.bus@fring.com'
+    },
+    confirmEmail: {
       value: 'gus.bus@fring.com'
     },
     password: {
@@ -124,6 +137,32 @@ describe('Validation', () => {
     it('should consider 0 valid input and not empty', () => {
       expect(validate.byField('number', 0)).toEqual(true);
     });
+
+    describe('Dependencies', () => {
+      it('should validate exactMatch dependencies', () => {
+        const fieldDependencies = [
+          {
+            ...rules.confirmEmail.dependencies[0],
+            value: 'walter.white@greymatter.tech.org'
+          }
+        ];
+
+        expect(
+          validate.byField(
+            'confirmEmail',
+            'walter.white@greymatter.tech.org',
+            fieldDependencies
+          )
+        ).toEqual(true);
+        expect(
+          validate.byField(
+            'confirmEmail',
+            'walter@greymatter.tech.org',
+            fieldDependencies
+          )
+        ).toEqual(false);
+      });
+    });
   });
 
   describe('bySet', () => {
@@ -170,6 +209,22 @@ describe('Validation', () => {
           })
         )
       ).toEqual(false);
+    });
+
+    describe('Dependencies', () => {
+      it('should validate exactMatch dependencies by the set', () => {
+        const key = 'confirmEmail';
+        const invalidFields = {
+          ...validFields,
+          [key]: {
+            ...validFields[key],
+            value: 'gus@fring.com'
+          }
+        };
+
+        expect(validate.bySet(validFields, true)).toEqual([]);
+        expect(validate.bySet(invalidFields, true)).toEqual([key]);
+      });
     });
   });
 });

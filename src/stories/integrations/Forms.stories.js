@@ -339,3 +339,90 @@ stories.add('Default', () => {
     </Form>
   );
 });
+
+stories.add('Compare Fields', () => {
+  const FormCompareValues = () => {
+    function handleSubmit (event, fields) {
+      action('form-submit')(event, JSON.stringify(fields));
+    }
+
+    function handleChange (event) {
+      action('form-change')(event);
+    }
+
+    // If making changes, please C&P this to the bottom printed output
+    // for people to see the rules easily
+
+    const validationRules = {
+      email: {
+        required: true,
+        regex: regexByFieldName('email')
+      },
+      confirmEmail: {
+        required: true,
+        regex: regexByFieldName('email'),
+        dependencies: [
+          {
+            field: 'email',
+            exactMatch: true
+          }
+        ]
+      }
+    };
+    return (
+      <Form
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+        rules={validationRules}
+      >
+        <FormRow>
+          <p>
+            See bottom for active form rules. All fields should be required via
+            rules object or via prop for testing purposes. Have fun!
+          </p>
+        </FormRow>
+
+        <FormRow>
+          <FormInput id="email" label="Email" type="email" required={true} />
+        </FormRow>
+
+        <FormRow>
+          <FormInput
+            id="confirmEmail"
+            label="Confirm Email"
+            type="email"
+            required={true}
+          />
+        </FormRow>
+
+        <FormRow>
+          <Button>Submit</Button>
+        </FormRow>
+
+        <h2>Validation Rules</h2>
+        <pre>
+          <code>
+            {`    const validationRules = {
+      email: {
+        required: true,
+        regex: regexByFieldName('email')
+      },
+      confirmEmail: {
+        required: true,
+        regex: regexByFieldName('email'),
+        dependencies: [
+          {
+            field: 'email',
+            exactMatch: true
+          }
+        ]
+      }
+    };`}
+          </code>
+        </pre>
+      </Form>
+    );
+  };
+
+  return <FormCompareValues />;
+});

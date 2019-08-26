@@ -19,18 +19,31 @@ class Validation {
     };
   }
 
-  byField (fieldName, value) {
+  byField (fieldName, value, dependencies) {
     const field = this.rules[fieldName];
 
     // By default, if there are no validation rules, we should not
     // validate it and consider it valid input
     if (!field) return true;
 
-    return validate(field, value);
+    return validate(field, value, dependencies);
   }
 
   bySet (set = {}, returnErrors = false) {
-    const validatedSet = validateSet(this.rules, set);
+    const setToValidate = {};
+
+    // Update all fields in the set to retrieve the dependencies
+    // from the current rules state
+
+    for (let key in set) {
+      if (!set.hasOwnProperty(key)) continue;
+      setToValidate[key] = {
+        ...set[key],
+        dependencies: this.getDependenciesByName(key)
+      };
+    }
+
+    const validatedSet = validateSet(this.rules, setToValidate);
 
     // Checks through all fields and returns true if there are no invalid fields
     const invalidFields = Object.keys(validatedSet).filter(
@@ -43,6 +56,12 @@ class Validation {
 
     return invalidFields.length === 0;
   }
+
+  getDependenciesByName (name) {
+    if (!name || !this.rules[name]) return;
+    if (!Array.isArray(this.rules[name].dependencies)) return [];
+    return this.rules[name].dependencies;
+  }
 }
 
 export default Validation;
@@ -52,7 +71,7 @@ export default Validation;
  * @description Given a set of rules, validate the given value
  */
 
-function validate (rules = {}, value) {
+function validate (rules = {}, value, dependencies = []) {
   const minLength = parseNumber(rules.minLength);
   const maxLength = parseNumber(rules.maxLength);
   const isRequired = !!rules.required;
@@ -61,6 +80,8 @@ function validate (rules = {}, value) {
   const isFalseyNonZero = !value && value !== 0;
   const valueLength = isStringOrList && value.length;
   const hasNoValue = isFalseyNonZero || valueLength === 0;
+
+  let hasInvalidDependencies = false;
 
   // If we don't have a value but it's not required,
 
@@ -89,6 +110,18 @@ function validate (rules = {}, value) {
 
   if (rules.regex && !getRegex(rules.regex, 'i').test(value)) return false;
 
+  if (dependencies.length > 0) {
+    hasInvalidDependencies =
+      dependencies.filter(dependency => {
+        if (dependency.exactMatch && value !== dependency.value) return true;
+        return false;
+      }).length > 0;
+  }
+
+  if (hasInvalidDependencies) {
+    return false;
+  }
+
   if (typeof rules.isValid === 'function') {
     return rules.isValid(value, {
       ...rules
@@ -112,8 +145,23 @@ function validateSet (rules, set) {
 
   for (let key in set) {
     if (!set.hasOwnProperty(key)) continue;
+
+    let fieldDependencies = [];
+
+    // Set up a depenencies clone that includes the latest values from
+    // the given set to validate on
+
+    if (Array.isArray(set[key].dependencies)) {
+      fieldDependencies = set[key].dependencies.map(dependency => {
+        return {
+          ...dependency,
+          ...(dependency.field && set[dependency.field])
+        };
+      });
+    }
+
     validatedSet[key] = Object.assign({}, set[key], {
-      isValid: validate(rules[key], set[key].value)
+      isValid: validate(rules[key], set[key].value, fieldDependencies)
     });
   }
 
