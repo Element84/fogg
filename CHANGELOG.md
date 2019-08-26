@@ -1,3 +1,8 @@
+### Version 0.1.147
+- [JAM-635] setting up field dependencies to run through validation method
+- [JAM-635] setting up form validation for dependnecies
+- [JAM-635] updating validation logic and checking dependent fields
+
 ### Version 0.1.146
 
 ### Version 0.1.145
