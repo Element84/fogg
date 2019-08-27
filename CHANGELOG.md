@@ -1,3 +1,6 @@
+### Version 0.1.148
+- [JAM-635] wrapping type check around dependent foreach
+
 ### Version 0.1.147
 - [JAM-635] setting up field dependencies to run through validation method
 - [JAM-635] setting up form validation for dependnecies
