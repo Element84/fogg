@@ -1,3 +1,6 @@
+### Version 0.1.149
+- [JAM-635] wrapping type check around dependent foreach
+
 ### Version 0.1.148
 - [JAM-635] wrapping type check around dependent foreach
 
