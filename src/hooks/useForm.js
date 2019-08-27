@@ -138,13 +138,22 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
    * @description Performs updates and validation returning new object for given field
    */
 
-  function updateFieldAttributes (name, value, dependencies, fieldSet = fields) {
-    const fieldDependencies = dependencies.map(dependency => {
-      return {
-        ...dependency,
-        ...fieldSet[dependency.field]
-      };
-    });
+  function updateFieldAttributes (
+    name,
+    value,
+    dependencies = [],
+    fieldSet = fields
+  ) {
+    let fieldDependencies = [];
+
+    if (Array.isArray(dependencies)) {
+      fieldDependencies = dependencies.map(dependency => {
+        return {
+          ...dependency,
+          ...fieldSet[dependency.field]
+        };
+      });
+    }
 
     return {
       ...fieldSet[name],
