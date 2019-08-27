@@ -95,16 +95,18 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
 
       fieldsToUpdate[name] = updateFieldAttributes(name, value, dependencies);
 
-      depdendentFields.forEach(fieldName => {
-        const fieldValue = fields[fieldName].value;
-        const fieldDependencies = validate.getDependenciesByName(fieldName);
-        fieldsToUpdate[fieldName] = updateFieldAttributes(
-          fieldName,
-          fieldValue,
-          fieldDependencies,
-          fieldsToUpdate
-        );
-      });
+      if (Array.isArray(depdendentFields)) {
+        depdendentFields.forEach(fieldName => {
+          const fieldValue = fields[fieldName].value;
+          const fieldDependencies = validate.getDependenciesByName(fieldName);
+          fieldsToUpdate[fieldName] = updateFieldAttributes(
+            fieldName,
+            fieldValue,
+            fieldDependencies,
+            fieldsToUpdate
+          );
+        });
+      }
 
       return fieldsToUpdate;
     });
