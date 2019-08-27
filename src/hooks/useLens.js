@@ -211,6 +211,7 @@ export default function useLens ({
     });
 
     search({
+      ...mapConfigDefaults,
       layer
     });
   }
@@ -325,6 +326,7 @@ export default function useLens ({
     clearActiveFilters();
     updateResults(undefined);
     updateMoreResultsAvailable(false);
+    updateMapConfig(mapConfigDefaults);
 
     if (clearLayers) {
       clearSearchLayers();
