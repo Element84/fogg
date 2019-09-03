@@ -1,3 +1,6 @@
+### Version 0.1.153
+- updating zoom default for default story
+
 ### Version 0.1.152
 - wrapping pixel fix with check to avoid buidl errors
 
