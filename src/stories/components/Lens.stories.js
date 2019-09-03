@@ -62,7 +62,7 @@ stories.add('Default', () => {
     <>
       <Lens
         defaultCenter={DEFAULT_CENTER}
-        zoom={2}
+        defaultZoom={4}
         resolveOnSearch={testPatchTextQuery}
       />
     </>
