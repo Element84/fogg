@@ -13,6 +13,8 @@ import { useFilters, useLayers, useLocation } from '.';
 
 const QUERY_SEARCH_PARAMS = ['q', 'properties'];
 
+let hasRenderedOnce = false;
+
 export default function useLens ({
   defaultCenter = {},
   resolveOnSearch,
@@ -22,7 +24,8 @@ export default function useLens ({
   availableFilters,
   availableLayers = null,
   fetchLayerData,
-  zoom
+  zoom,
+  defaultZoom
 }) {
   const defaultGeoJson =
     typeof geoJsonFromLatLn === 'function' && geoJsonFromLatLn(defaultCenter);
@@ -67,8 +70,36 @@ export default function useLens ({
 
   useEffect(() => {
     const { center } = mapConfig;
-    flyTo(center);
-  }, [mapConfig.center]);
+    if (!hasRenderedOnce) {
+      setView(center, defaultZoom);
+      hasRenderedOnce = true;
+    } else {
+      flyTo(center);
+    }
+  }, [mapConfig.center, defaultZoom]);
+
+  /**
+   * setView
+   * @description Wraps the leaflet setView method and triggers on our map ref
+   */
+
+  function setView (center, zoom) {
+    const { current = {} } = refMap;
+    const { leafletElement = {} } = current;
+    let mapZoom;
+
+    // If we can find the existing zoom, use that to prevent changing the zoom
+    // level on someone interacting with the map
+    if (zoom) {
+      mapZoom = zoom;
+    } else {
+      mapZoom = leafletElement.getZoom();
+    }
+
+    // Fly to our new (or old) center with the zoom
+
+    leafletElement.setView(center, mapZoom);
+  }
 
   /**
    * flyTo
@@ -326,7 +357,10 @@ export default function useLens ({
     clearActiveFilters();
     updateResults(undefined);
     updateMoreResultsAvailable(false);
-    updateMapConfig(mapConfigDefaults);
+    updateMapConfig({
+      ...mapConfigDefaults,
+      center: mapConfig.center
+    });
 
     if (clearLayers) {
       clearSearchLayers();

@@ -20,6 +20,11 @@ const DEFAULT_CENTER = {
   lng: 0
 };
 
+const ALEXANDRIA = {
+  lat: 38.8048,
+  lng: -77.0469
+};
+
 stories.add('Default', () => {
   // Function that gets used to handle any async lookups
   // or search requests. Resolves as a promise. Most
@@ -57,14 +62,14 @@ stories.add('Default', () => {
     <>
       <Lens
         defaultCenter={DEFAULT_CENTER}
-        zoom={2}
+        defaultZoom={4}
         resolveOnSearch={testPatchTextQuery}
       />
     </>
   );
 });
 
-stories.add('Open Street Map - No Search', () => {
+stories.add('Open Street Map - No Search, Zoom - Alexandria', () => {
   const layers = [
     {
       name: 'Open Street Maps',
@@ -89,8 +94,8 @@ stories.add('Open Street Map - No Search', () => {
   return (
     <>
       <Lens
-        defaultCenter={DEFAULT_CENTER}
-        zoom={2}
+        defaultCenter={ALEXANDRIA}
+        defaultZoom={8}
         projection="epsg3857"
         services={services}
         availableLayers={layers}
@@ -607,7 +612,7 @@ stories.add('Earth Search', () => {
     <>
       <Lens
         defaultCenter={DEFAULT_CENTER}
-        zoom={2}
+        defaultZoom={2}
         resolveOnSearch={handleResolveOnSearch}
         SidebarComponents={SidebarPanels}
         useMapEffect={handleUseMapEffect}
