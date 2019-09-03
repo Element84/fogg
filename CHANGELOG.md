@@ -1,3 +1,6 @@
+### Version 0.1.152
+- wrapping pixel fix with check to avoid buidl errors
+
 ### Version 0.1.151
 
 ### Version 0.1.150
