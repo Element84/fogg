@@ -1,15 +1,19 @@
 // Fix via https://github.com/Leaflet/Leaflet/issues/3575#issuecomment-150544739
 import L from 'leaflet';
 
-var originalInitTile = L.GridLayer.prototype._initTile;
+(function () {
+  if (!L || !L.GridLayer || !L.GridLayer.prototype) return;
 
-L.GridLayer.include({
-  _initTile: function (tile) {
-    originalInitTile.call(this, tile);
+  var originalInitTile = L.GridLayer.prototype._initTile;
 
-    var tileSize = this.getTileSize();
+  L.GridLayer.include({
+    _initTile: function (tile) {
+      originalInitTile.call(this, tile);
 
-    tile.style.width = tileSize.x + 1 + 'px';
-    tile.style.height = tileSize.y + 1 + 'px';
-  }
-});
+      var tileSize = this.getTileSize();
+
+      tile.style.width = tileSize.x + 1 + 'px';
+      tile.style.height = tileSize.y + 1 + 'px';
+    }
+  });
+})();
