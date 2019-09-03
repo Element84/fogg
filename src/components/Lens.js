@@ -17,6 +17,7 @@ const Lens = ({
   className,
   defaultCenter = {},
   zoom = 4,
+  defaultZoom = 4,
   SidebarComponents,
   resolveOnSearch,
   projection,
@@ -49,7 +50,8 @@ const Lens = ({
     refSearchComplete,
     availableLayers,
     fetchLayerData,
-    zoom
+    zoom,
+    defaultZoom
   });
 
   const { results, filters, layers } = lens;
@@ -118,6 +120,7 @@ Lens.propTypes = {
   className: PropTypes.string,
   defaultCenter: PropTypes.object,
   zoom: PropTypes.number,
+  defaultZoom: PropTypes.number,
   maxZoom: PropTypes.number,
   minZoom: PropTypes.number,
   SidebarComponents: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
