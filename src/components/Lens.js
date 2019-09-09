@@ -29,7 +29,8 @@ const Lens = ({
   hideNativeLayers = false,
   fetchLayerData,
   disableMapDraw,
-  useMapEffect
+  useMapEffect,
+  hasFilterCancel = true
 }) => {
   const refMap = createRef();
   const refMapDraw = createRef();
@@ -86,7 +87,7 @@ const Lens = ({
               </Panel>
 
               {activeSearch && filters.available.length > 0 && (
-                <LensSearchPanelFilters />
+                <LensSearchPanelFilters hasFilterCancel={hasFilterCancel} />
               )}
             </div>
           )}
@@ -96,7 +97,9 @@ const Lens = ({
           )}
         </div>
 
-        {displayFilters && <LensSearchFilters />}
+        {displayFilters && (
+          <LensSearchFilters hasFilterCancel={hasFilterCancel} />
+        )}
 
         <LensMap ref={refMap} {...mapSettings}>
           {!disableMapDraw && <LensMapDraw ref={refMapDraw} />}
@@ -157,7 +160,8 @@ Lens.propTypes = {
     PropTypes.arrayOf(PropTypes.func)
   ]),
   disableMapDraw: PropTypes.bool,
-  useMapEffect: PropTypes.func
+  useMapEffect: PropTypes.func,
+  hasFilterCancel: PropTypes.bool
 };
 
 export default Lens;
