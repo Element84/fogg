@@ -14,7 +14,11 @@ const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
     mapConfig = {},
     numberOfResults
   } = lens;
-  const { loadMoreResults, clearActiveSearch } = lensHandlers;
+  const {
+    loadMoreResults,
+    clearActiveSearch,
+    handleUpdateSearchParams
+  } = lensHandlers;
   const { center = {}, geoJson } = mapConfig;
 
   const { handlers: layersHandlers = {} } = layers;
@@ -29,6 +33,7 @@ const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
       results={results}
       loadMoreResults={loadMoreResults}
       clearActiveSearch={clearActiveSearch}
+      handleUpdateSearchParams={handleUpdateSearchParams}
       filters={filters}
       layers={layers}
       toggleLayer={toggleLayer}
