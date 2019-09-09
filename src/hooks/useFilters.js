@@ -55,10 +55,10 @@ export default function useFilters (availableFilters) {
    * @description Stores any new unsaved changes to active and clears unsaved
    */
 
-  function saveFilterChanges () {
+  function saveFilterChanges ({ closeFilters = true }) {
     const updatedFilterState = {
       ...filters,
-      isOpen: false,
+      isOpen: !closeFilters,
       unsaved: [],
       active: concatFilters(filters.active, filters.unsaved)
     };
