@@ -383,6 +383,7 @@ export default function useLens ({
       ...filters,
       handlers: {
         openFilters,
+        saveFilterChanges,
         storeFilterChanges,
         cancelFilterChanges,
         clearActiveFilters: handleClearActiveFilters
