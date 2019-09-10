@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { Polygon } from 'react-leaflet';
 import { center as turfCenter } from '@turf/turf';
 
+import { useLayers } from '../hooks';
+import { LayersContext } from '../context';
+
 import Logger from '../lib/logger';
 import {
   geoJsonFromLatLn,
@@ -21,7 +24,17 @@ const logger = new Logger('FormInput', {
 
 const AVAILABLE_COLORS = ['blue', 'red', 'green'];
 
-const MapPreview = ({ center, geoJson, zoom = 3 }) => {
+const MapPreview = ({
+  center,
+  geoJson,
+  zoom = 3,
+  availableLayers,
+  availableServices,
+  projection,
+  fetchLayerData
+}) => {
+  const layers = useLayers(availableLayers, fetchLayerData);
+
   if (!center && !geoJson) {
     logger.warn(
       `Could not find location data when attempting to render MapPreview`
@@ -66,78 +79,86 @@ const MapPreview = ({ center, geoJson, zoom = 3 }) => {
 
   const mapSettings = {
     center: [centerLatLng.lat, centerLatLng.lng],
-    zoom
+    services: availableServices,
+    zoom,
+    projection
   };
 
   return (
-    <figure className="map-preview">
-      <Map {...mapSettings}>
-        <MapDraw disableEditControls={true}>
-          {type === 'Point' && <Marker position={geoJsonCoordinates} />}
-          {type === 'Polygon' &&
-            geoJsonCoordinates.map((set = []) => {
-              return set.map((position, index) => {
-                const fixedPosition = position.map(coordinates => [
-                  coordinates[1],
-                  coordinates[0]
-                ]);
-                return (
-                  <Polygon
-                    key={`MapPreview-Polygon-${index}`}
-                    color={AVAILABLE_COLORS[index]}
-                    positions={fixedPosition}
-                  />
-                );
-              });
-            })}
-        </MapDraw>
-      </Map>
-      <figcaption>
-        <p className="map-preview-area-of-interest">
-          <strong>Area of Interest</strong>
-        </p>
-        <p className="map-preview-geometry">
-          <strong>Geometry:</strong> {type}
-        </p>
-        <div className="map-preview-coordinates">
-          <p>
-            <strong>Coordinates:</strong>
-            {type === 'Point' && (
-              <>
-                {/* Add an extra space to prevent a single coordinate from bumping against */}
-                {` `}
-                <span className="map-preview-coordinates-item">
-                  {geoJsonLatLng.lat} &deg;N, {geoJsonLatLng.lng} &deg;W
-                </span>
-              </>
-            )}
+    <LayersContext.Provider value={{ ...layers }}>
+      <figure className="map-preview">
+        <Map {...mapSettings}>
+          <MapDraw disableEditControls={true}>
+            {type === 'Point' && <Marker position={geoJsonCoordinates} />}
+            {type === 'Polygon' &&
+              geoJsonCoordinates.map((set = []) => {
+                return set.map((position, index) => {
+                  const fixedPosition = position.map(coordinates => [
+                    coordinates[1],
+                    coordinates[0]
+                  ]);
+                  return (
+                    <Polygon
+                      key={`MapPreview-Polygon-${index}`}
+                      color={AVAILABLE_COLORS[index]}
+                      positions={fixedPosition}
+                    />
+                  );
+                });
+              })}
+          </MapDraw>
+        </Map>
+        <figcaption>
+          <p className="map-preview-area-of-interest">
+            <strong>Area of Interest</strong>
           </p>
-          {type === 'Polygon' &&
-            geoJsonCoordinates.map((set = [], coordinatesIndex) => {
-              return (
-                <ul key={`MapPreview-Coordinates-${coordinatesIndex}`}>
-                  {set.map((positions = []) => {
-                    return positions.map(([posLng, posLat], setIndex) => {
-                      return (
-                        <li key={`MapPreview-Coordinates-${setIndex}`}>
-                          {posLat} &deg;N, {posLng} &deg;W
-                        </li>
-                      );
-                    });
-                  })}
-                </ul>
-              );
-            })}
-        </div>
-      </figcaption>
-    </figure>
+          <p className="map-preview-geometry">
+            <strong>Geometry:</strong> {type}
+          </p>
+          <div className="map-preview-coordinates">
+            <p>
+              <strong>Coordinates:</strong>
+              {type === 'Point' && (
+                <>
+                  {/* Add an extra space to prevent a single coordinate from bumping against */}
+                  {` `}
+                  <span className="map-preview-coordinates-item">
+                    {geoJsonLatLng.lat} &deg;N, {geoJsonLatLng.lng} &deg;W
+                  </span>
+                </>
+              )}
+            </p>
+            {type === 'Polygon' &&
+              geoJsonCoordinates.map((set = [], coordinatesIndex) => {
+                return (
+                  <ul key={`MapPreview-Coordinates-${coordinatesIndex}`}>
+                    {set.map((positions = []) => {
+                      return positions.map(([posLng, posLat], setIndex) => {
+                        return (
+                          <li key={`MapPreview-Coordinates-${setIndex}`}>
+                            {posLat} &deg;N, {posLng} &deg;W
+                          </li>
+                        );
+                      });
+                    })}
+                  </ul>
+                );
+              })}
+          </div>
+        </figcaption>
+      </figure>
+    </LayersContext.Provider>
   );
 };
 
 MapPreview.propTypes = {
   center: PropTypes.object,
   geoJson: PropTypes.object,
-  zoom: PropTypes.number
+  zoom: PropTypes.number,
+  availableLayers: PropTypes.array,
+  availableServices: PropTypes.array,
+  projection: PropTypes.string,
+  fetchLayerData: PropTypes.func
 };
 
 export default MapPreview;

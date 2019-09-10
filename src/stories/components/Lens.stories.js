@@ -97,7 +97,6 @@ stories.add('Open Street Map - No Search, Zoom - Alexandria', () => {
         defaultCenter={ALEXANDRIA}
         defaultZoom={8}
         projection="epsg3857"
-        services={services}
         availableLayers={layers}
         availableServices={services}
         map="open_street_map"

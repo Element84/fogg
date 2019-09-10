@@ -1,8 +1,8 @@
 import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { useLens } from '../hooks';
-import { LensContext } from '../context';
+import { useLens, useLayers } from '../hooks';
+import { LensContext, LayersContext } from '../context';
 
 import Panel from './Panel';
 import LensMap from './LensMap';
@@ -49,13 +49,13 @@ const Lens = ({
     refMap,
     refMapDraw,
     refSearchComplete,
-    availableLayers,
-    fetchLayerData,
     zoom,
     defaultZoom
   });
 
-  const { results, filters, layers } = lens;
+  const layers = useLayers(availableLayers, fetchLayerData);
+
+  const { results, filters } = lens;
 
   const activeSearch = Array.isArray(results);
   const hasResults = Array.isArray(results) && results.length > 0;
@@ -71,42 +71,44 @@ const Lens = ({
 
   return (
     <LensContext.Provider value={{ lens, filters, layers }}>
-      <div
-        className={lensClassName}
-        data-active-search={activeSearch}
-        data-has-results={hasResults}
-      >
-        <div className="lens-sidebar">
-          {search && (
-            <div className="lens-sidebar-search">
-              <Panel className="panel-clean">
-                <LensSearchComplete
-                  ref={refSearchComplete}
-                  placeholder={placeholder}
-                />
-              </Panel>
+      <LayersContext.Provider value={{ ...layers }}>
+        <div
+          className={lensClassName}
+          data-active-search={activeSearch}
+          data-has-results={hasResults}
+        >
+          <div className="lens-sidebar">
+            {search && (
+              <div className="lens-sidebar-search">
+                <Panel className="panel-clean">
+                  <LensSearchComplete
+                    ref={refSearchComplete}
+                    placeholder={placeholder}
+                  />
+                </Panel>
 
-              {activeSearch && filters.available.length > 0 && (
-                <LensSearchPanelFilters hasFilterCancel={hasFilterCancel} />
-              )}
-            </div>
+                {activeSearch && filters.available.length > 0 && (
+                  <LensSearchPanelFilters hasFilterCancel={hasFilterCancel} />
+                )}
+              </div>
+            )}
+
+            {SidebarComponents && (
+              <LensSidebarComponents SidebarComponents={SidebarComponents} />
+            )}
+          </div>
+
+          {displayFilters && (
+            <LensSearchFilters hasFilterCancel={hasFilterCancel} />
           )}
 
-          {SidebarComponents && (
-            <LensSidebarComponents SidebarComponents={SidebarComponents} />
-          )}
+          <LensMap ref={refMap} {...mapSettings}>
+            {!disableMapDraw && <LensMapDraw ref={refMapDraw} />}
+          </LensMap>
+
+          <div className="lens-extensions">{children}</div>
         </div>
-
-        {displayFilters && (
-          <LensSearchFilters hasFilterCancel={hasFilterCancel} />
-        )}
-
-        <LensMap ref={refMap} {...mapSettings}>
-          {!disableMapDraw && <LensMapDraw ref={refMapDraw} />}
-        </LensMap>
-
-        <div className="lens-extensions">{children}</div>
-      </div>
+      </LayersContext.Provider>
     </LensContext.Provider>
   );
 };

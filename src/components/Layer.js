@@ -10,7 +10,11 @@ const getKey = layerKey => {
 
 const Layer = ({ layer = {}, layerKey }) => {
   const { type, data = {} } = layer;
+
   if (type === 'service') {
+    if (!layer.service) {
+      throw new Error(`Layer error: can not find service ${layer.serviceName}`);
+    }
     return <TileLayer {...layer.service} />;
   }
   if (type === 'data') {
