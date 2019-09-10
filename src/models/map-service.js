@@ -17,13 +17,9 @@ class MapService {
 
     this.services = mapServices;
 
-    console.log('this.services', this.services);
-
     if (Array.isArray(services)) {
-      console.log('serbivces', services);
       this.services = this.services.concat(services);
     }
-    console.log('this.services', this.services);
 
     this.configure();
   }
@@ -32,8 +28,6 @@ class MapService {
     this.crs = projectionByName(this.projection);
 
     const availableServices = this.services.filter(service => {
-      console.log('service', service);
-      console.log('this.projection', this.projection);
       if (service.projections && Array.isArray(service.projections)) {
         return service.projections.indexOf(this.projection) > -1;
       }
