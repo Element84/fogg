@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import 'leaflet/dist/leaflet.css'; // This needs to be included for the map to actually work when compiled
 import L from 'leaflet';
@@ -9,6 +9,7 @@ import 'leaflet-active-area';
 import '../plugins/leaflet-tilelayer-subpixel-fix';
 
 import MapService from '../models/map-service';
+import { LayersContext } from '../context';
 
 import { isDomAvailable } from '../lib/util';
 import { buildLayerSet, layerSetHasSingleLayer } from '../lib/leaflet';
@@ -27,12 +28,12 @@ const Map = props => {
     projection = 'epsg4326',
     projections = [],
     services = [],
-    layers,
-    toggleLayer,
     hideNativeLayers,
     useMapEffect,
     forwardedRef
   } = props;
+
+  const { layers = {}, toggleLayer } = useContext(LayersContext) || {};
 
   let mapClassName = `map ${className || ''}`;
 
@@ -114,27 +115,32 @@ const Map = props => {
         {singleLayer && <Layer layer={mapLayers.base[0]} />}
         {!singleLayer && (
           <LayersControl>
-            {mapLayers.base.map(layer => (
-              <LayersControl.BaseLayer
-                key={`base_layer_${layer.id}`}
-                name={layer.name}
-                checked={layer.isActive}
-              >
-                <Layer layerKey={`base_layer_item_${layer.id}`} layer={layer} />
-              </LayersControl.BaseLayer>
-            ))}
-            {mapLayers.overlay.map(layer => (
-              <LayersControl.Overlay
-                key={`overlay_layer_${layer.id}`}
-                name={layer.name}
-                checked={layer.isActive}
-              >
-                <Layer
-                  layerKey={`overlay_layer_item_${layer.id}`}
-                  layer={layer}
-                />
-              </LayersControl.Overlay>
-            ))}
+            {mapLayers.base &&
+              mapLayers.base.map(layer => (
+                <LayersControl.BaseLayer
+                  key={`base_layer_${layer.id}`}
+                  name={layer.name}
+                  checked={layer.isActive}
+                >
+                  <Layer
+                    layerKey={`base_layer_item_${layer.id}`}
+                    layer={layer}
+                  />
+                </LayersControl.BaseLayer>
+              ))}
+            {mapLayers.overlay &&
+              mapLayers.overlay.map(layer => (
+                <LayersControl.Overlay
+                  key={`overlay_layer_${layer.id}`}
+                  name={layer.name}
+                  checked={layer.isActive}
+                >
+                  <Layer
+                    layerKey={`overlay_layer_item_${layer.id}`}
+                    layer={layer}
+                  />
+                </LayersControl.Overlay>
+              ))}
           </LayersControl>
         )}
 

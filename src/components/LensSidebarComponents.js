@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { LensContext } from '../context';
+import { LensContext, LayersContext } from '../context';
 
 import { latLngPositionFromCenter } from '../lib/leaflet';
 
 const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
-  const { lens = {}, filters = {}, layers = {} } =
-    useContext(LensContext) || {};
+  const { lens = {}, filters = {} } = useContext(LensContext) || {};
+  const { layers = {}, getDataForLayers, toggleLayer } =
+    useContext(LayersContext) || {};
 
   const {
     handlers: lensHandlers = {},
@@ -16,9 +17,6 @@ const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
   } = lens;
   const { loadMoreResults, clearActiveSearch } = lensHandlers;
   const { center = {}, geoJson } = mapConfig;
-
-  const { handlers: layersHandlers = {} } = layers;
-  const { toggleLayer, getDataForLayers } = layersHandlers;
 
   if (!SidebarComponents) return null;
 

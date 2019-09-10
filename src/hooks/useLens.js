@@ -9,7 +9,7 @@ import { resolveLensAutocomplete } from '../lib/lens';
 
 import { clearSearchComplete } from '../components/SearchComplete';
 
-import { useFilters, useLayers, useLocation } from '.';
+import { useFilters, useLocation } from '.';
 
 const QUERY_SEARCH_PARAMS = ['q', 'properties'];
 
@@ -22,8 +22,6 @@ export default function useLens ({
   refMapDraw,
   refSearchComplete,
   availableFilters,
-  availableLayers = null,
-  fetchLayerData,
   zoom,
   defaultZoom
 }) {
@@ -52,11 +50,6 @@ export default function useLens ({
     cancelFilterChanges,
     clearActiveFilters
   } = useFilters(availableFilters);
-
-  const { layers, toggleLayer, getDataForLayers } = useLayers(
-    availableLayers,
-    fetchLayerData
-  );
 
   // On first render, parse any query params in the URL
 
@@ -386,13 +379,6 @@ export default function useLens ({
         storeFilterChanges,
         cancelFilterChanges,
         clearActiveFilters: handleClearActiveFilters
-      }
-    },
-    layers: {
-      ...layers,
-      handlers: {
-        toggleLayer,
-        getDataForLayers
       }
     }
   };

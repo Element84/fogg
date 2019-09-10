@@ -2,45 +2,6 @@ import { useState, useEffect } from 'react';
 import { castArray, isPlainObject, snakeCase } from 'lodash';
 
 export default function useLayers (availableLayers, fetchLayerData) {
-  function constructLayer (layer, visibilityForLayer) {
-    return {
-      id: snakeCase(layer.name),
-      name: layer.name,
-      type: layer.type,
-      serviceName: layer.serviceName,
-      data: layer.data,
-      isActive: layer.defaultIsActive || !!visibilityForLayer
-    };
-  }
-
-  function buildDefaultLayers (availableLayers) {
-    const defaultLayers = {
-      base: [],
-      overlay: []
-    };
-
-    if (Array.isArray(availableLayers)) {
-      // Available layers can also be an array, which assumes each layer as a base layer
-
-      availableLayers.forEach((layer, i) => {
-        defaultLayers.base.push(constructLayer(layer, i === 0));
-      });
-    } else if (isPlainObject(availableLayers)) {
-      // Otherwise assume availableLayers is an object that has the keys 'base' and 'overlay'
-
-      castArray(availableLayers.base).forEach((layer, i) => {
-        defaultLayers.base.push(constructLayer(layer, i === 0));
-      });
-      // Set all overlay layers to false, unless defaultIsActive is set to override
-
-      castArray(availableLayers.overlay).forEach(layer => {
-        defaultLayers.overlay.push(constructLayer(layer, false));
-      });
-    }
-
-    return defaultLayers;
-  }
-
   const defaultLayers = buildDefaultLayers(availableLayers);
 
   const [layers, updateLayers] = useState(defaultLayers);
@@ -49,55 +10,46 @@ export default function useLayers (availableLayers, fetchLayerData) {
     getDataForLayers(fetchLayerData);
   }, []);
 
-  function getDataForLayer (fetchFn) {
+  /**
+   * getDataForLayers
+   */
+
+  function getDataForLayers (layers, fetchFns) {
+    castArray(fetchFns).forEach(fetchFn => {
+      getDataForLayer(layers, fetchFn);
+    });
+  }
+
+  /**
+   * getDataForLayer
+   */
+
+  function getDataForLayer (layers, fetchFn) {
     if (typeof fetchFn === 'function') {
       const getLayerData = async () => {
         return fetchFn();
       };
 
       getLayerData().then(response => {
-        const newLayer = getLayerById(getLayerIdByName(response.name));
+        const newLayer = getLayerById(layers, getLayerIdByName(response.name));
         newLayer.data = response;
         updateLayers(
-          replaceInLayersByType(newLayer, getLayerTypeById(newLayer.id))
+          replaceInLayersByType(
+            layers,
+            newLayer,
+            getLayerTypeById(layers, newLayer.id)
+          )
         );
       });
     }
   }
 
-  function getDataForLayers (fetchFns) {
-    castArray(fetchFns).forEach(fetchFn => {
-      getDataForLayer(fetchFn);
-    });
-  }
-
-  function replaceInLayersByType (newLayer, type) {
-    return {
-      ...layers,
-      [type]: [
-        ...layers[type].map(layer => {
-          if (layer.id === newLayer.id) return newLayer;
-          return layer;
-        })
-      ]
-    };
-  }
-
-  function getLayerById (id) {
-    return [...layers.base, ...layers.overlay].find(layer => id === layer.id);
-  }
-
-  function getLayerIdByName (name) {
-    return snakeCase(name);
-  }
-
-  function getLayerTypeById (id) {
-    if (layers.base.find(layer => id === layer.id)) return 'base';
-    if (layers.overlay.find(layer => id === layer.id)) return 'overlay';
-  }
+  /**
+   * toggleLayer
+   */
 
   function toggleLayer (id) {
-    const layerType = getLayerTypeById(id);
+    const layerType = getLayerTypeById(layers, id);
     const newLayers = {
       ...layers
     };
@@ -139,4 +91,98 @@ export default function useLayers (availableLayers, fetchLayerData) {
     toggleLayer,
     getDataForLayers
   };
+}
+
+/**
+ * getLayerTypeById
+ */
+
+function getLayerTypeById (layers, id) {
+  if (layers.base.find(layer => id === layer.id)) return 'base';
+  if (layers.overlay.find(layer => id === layer.id)) return 'overlay';
+}
+
+/**
+ * getLayerIdByName
+ */
+
+function getLayerIdByName (name) {
+  return snakeCase(name);
+}
+
+/**
+ * replaceInLayersByType
+ */
+
+function replaceInLayersByType (layers, newLayer, type) {
+  return {
+    ...layers,
+    [type]: [
+      ...layers[type].map(layer => {
+        if (layer.id === newLayer.id) return newLayer;
+        return layer;
+      })
+    ]
+  };
+}
+
+/**
+ * constructLayer
+ */
+
+function constructLayer (layer, visibilityForLayer) {
+  const { name, type, serviceName, data, defaultIsActive } = layer;
+  return {
+    id: snakeCase(name),
+    name,
+    type,
+    serviceName,
+    data,
+    isActive: defaultIsActive || !!visibilityForLayer
+  };
+}
+
+/**
+ * getLayerById
+ */
+
+function getLayerById (layers, id) {
+  return [...layers.base, ...layers.overlay].find(layer => id === layer.id);
+}
+
+/**
+ * buildDefaultLayers
+ */
+
+function buildDefaultLayers (availableLayers) {
+  const defaultLayers = {
+    base: [],
+    overlay: []
+  };
+
+  if (Array.isArray(availableLayers)) {
+    // Available layers can also be an array, which assumes each layer as a base layer
+
+    availableLayers.forEach((layer, i) => {
+      defaultLayers.base.push(constructLayer(layer, i === 0));
+    });
+  } else if (isPlainObject(availableLayers)) {
+    // Otherwise assume availableLayers is an object that has the keys 'base' and 'overlay'
+
+    if (Array.isArray(availableLayers.base)) {
+      availableLayers.base.forEach((layer, i) => {
+        defaultLayers.base.push(constructLayer(layer, i === 0));
+      });
+    }
+
+    // Set all overlay layers to false, unless defaultIsActive is set to override
+
+    if (Array.isArray(availableLayers.overlay)) {
+      availableLayers.overlay.forEach(layer => {
+        defaultLayers.overlay.push(constructLayer(layer, false));
+      });
+    }
+  }
+
+  return defaultLayers;
 }

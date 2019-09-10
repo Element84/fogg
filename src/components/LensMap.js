@@ -1,18 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { LensContext } from '../context';
 
 import Map from './Map';
 
 const LensMap = ({ children, forwardedRef, ...rest }) => {
-  const { layers = {} } = useContext(LensContext) || {};
-
-  const { handlers: layersHandlers = {} } = layers;
-  const { toggleLayer } = layersHandlers;
-
   const mapSettings = {
-    toggleLayer,
-    layers,
     ...rest
   };
 
