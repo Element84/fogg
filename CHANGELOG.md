@@ -1,3 +1,6 @@
+### Version 0.1.155
+- [JAM-719] console logs
+
 ### Version 0.1.154
 - [JAM-683] Export saveFilterChanges
 - [JAM-683] Export handleUpdateSearchParams
