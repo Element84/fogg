@@ -15,7 +15,8 @@ const SearchFilters = ({
   filters = [],
   onSaveChanges,
   onCancelChanges,
-  onUpdateChanges
+  onUpdateChanges,
+  hasFilterCancel = true
 }) => {
   if (!Array.isArray(filters) || filters.length === 0) {
     return null;
@@ -91,12 +92,14 @@ const SearchFilters = ({
               <FaCheck /> Save
             </Button>
           </li>
-          <li>
-            <Button type={['text', 'icon-before']} onClick={onCancelChanges}>
-              <FaTimes />
-              Cancel
-            </Button>
-          </li>
+          {hasFilterCancel && (
+            <li>
+              <Button type={['text', 'icon-before']} onClick={onCancelChanges}>
+                <FaTimes />
+                Cancel
+              </Button>
+            </li>
+          )}
         </ul>
       </Panel>
     </div>
@@ -108,7 +111,8 @@ SearchFilters.propTypes = {
   filters: PropTypes.array,
   onSaveChanges: PropTypes.func,
   onCancelChanges: PropTypes.func,
-  onUpdateChanges: PropTypes.func
+  onUpdateChanges: PropTypes.func,
+  hasFilterCancel: PropTypes.bool
 };
 
 export default SearchFilters;

@@ -263,9 +263,9 @@ export default function useLens ({
    * @description Handles lens events upon updating any search params
    */
 
-  function handleUpdateSearchParams () {
+  function handleUpdateSearchParams ({ closeFilters = true }) {
     // Save and update any filter changes
-    const updatedFilters = saveFilterChanges();
+    const updatedFilters = saveFilterChanges({ closeFilters });
 
     // Trigger a new search
     search({
@@ -383,6 +383,7 @@ export default function useLens ({
       ...filters,
       handlers: {
         openFilters,
+        saveFilterChanges,
         storeFilterChanges,
         cancelFilterChanges,
         clearActiveFilters: handleClearActiveFilters

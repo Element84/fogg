@@ -12,7 +12,8 @@ const SearchPanelFilters = ({
   filters = {},
   onOpenFilters,
   onSaveFiltersChanges,
-  onCancelFilterChanges
+  onCancelFilterChanges,
+  hasFilterCancel = true
 }) => {
   const { active, isOpen, available } = filters;
 
@@ -41,7 +42,7 @@ const SearchPanelFilters = ({
       label: 'Cancel Filter Changes',
       icon: <FaTimes />,
       onClick: onCancelFilterChanges,
-      isVisible: isOpen
+      isVisible: hasFilterCancel && isOpen
     }
   ];
 
@@ -119,7 +120,8 @@ SearchPanelFilters.propTypes = {
   filters: PropTypes.object,
   onOpenFilters: PropTypes.func,
   onSaveFiltersChanges: PropTypes.func,
-  onCancelFilterChanges: PropTypes.func
+  onCancelFilterChanges: PropTypes.func,
+  hasFilterCancel: PropTypes.bool
 };
 
 export default SearchPanelFilters;
