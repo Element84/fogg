@@ -151,11 +151,24 @@ const MapPreview = ({
   );
 };
 
+const LayerProps = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  serviceName: PropTypes.string,
+  defaultIsVisible: PropTypes.bool
+});
+
 MapPreview.propTypes = {
   center: PropTypes.object,
   geoJson: PropTypes.object,
   zoom: PropTypes.number,
-  availableLayers: PropTypes.array,
+  availableLayers: PropTypes.oneOfType([
+    PropTypes.arrayOf(LayerProps).isRequired,
+    PropTypes.shape({
+      base: PropTypes.arrayOf(LayerProps).isRequired,
+      overlay: PropTypes.arrayOf(LayerProps).isRequired
+    })
+  ]),
   availableServices: PropTypes.array,
   projection: PropTypes.string,
   fetchLayerData: PropTypes.func
