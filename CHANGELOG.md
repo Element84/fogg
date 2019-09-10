@@ -1,3 +1,6 @@
+### Version 0.1.157
+- proptype
+
 ### Version 0.1.156
 - proptypes
 
