@@ -1,3 +1,6 @@
+### Version 0.1.156
+- proptypes
+
 ### Version 0.1.155
 - [JAM-719] console logs
 
