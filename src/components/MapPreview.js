@@ -166,7 +166,7 @@ MapPreview.propTypes = {
     PropTypes.arrayOf(LayerProps).isRequired,
     PropTypes.shape({
       base: PropTypes.arrayOf(LayerProps).isRequired,
-      overlay: PropTypes.arrayOf(LayerProps).isRequired
+      overlay: PropTypes.arrayOf(LayerProps)
     })
   ]),
   availableServices: PropTypes.array,
