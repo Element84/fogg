@@ -348,275 +348,33 @@ stories.add('Toggleable Layers (And GeoJSON too!)', () => {
 });
 
 stories.add('Earth Search', () => {
-  // Function that gets used to handle any async lookups
-  // or search requests. Resolves as a promise. Here we're
-  // using Earth Search as an example endpoint, which
-  // makes a request to a STAC API, and resolves the results
-
-  async function handleResolveOnSearch ({
-    geoJson = {},
-    page,
-    filters,
-    date
-  } = {}) {
-    const { features = [] } = geoJson;
-    const { geometry } = features[0] || {};
-    let data;
-    let response;
-    let responseFeatures;
-    let responseMeta;
-    let numberOfResults;
-
-    const request = new Request(
-      'https://earth-search.aws.element84.com/stac/search'
-    );
-
-    if (!geometry) {
-      return [];
-    }
-
-    data = {
-      intersects: geometry,
-      limit: 5,
-      time: atlasDateToSatTime(date),
-      page
-    };
-
-    if (filters) {
-      data.query = filtersToQuery(filters);
-    }
-
-    function filtersToQuery (activeFilters) {
-      let filterQuery = {};
-
-      activeFilters.forEach(activeFilter => {
-        let parent;
-        let { id, value } = activeFilter;
-
-        if (id.includes('/')) {
-          id = id.split('/');
-          parent = id[0];
-          id = id[1];
-        }
-
-        if (parent === 'properties') {
-          filterQuery[id] = {
-            eq: value
-          };
-        }
-      });
-
-      return filterQuery;
-    }
-
-    request.setData(data);
-
-    request.setOptions({
-      headers: {
-        Accept: 'application/geo+json',
-        'Content-Type': 'application/json'
-      }
-    });
-
-    try {
-      response = await request.post();
-    } catch (e) {
-      throw new Error(`Failed to get search results: ${e}`);
-    }
-
-    responseFeatures = response && response.data && response.data.features;
-    responseMeta = response && response.data && response.data.meta;
-    numberOfResults = responseMeta && responseMeta.found;
-
-    if (Array.isArray(responseFeatures)) {
-      responseFeatures = responseFeatures.map((feature = {}) => {
-        const { properties, id } = feature;
-        const { collection } = properties;
-        return {
-          label: `${id}`,
-          sublabels: [
-            `Collection: ${collection}`,
-            `GeoJSON: ${JSON.stringify(geoJson)}`,
-            `Sentinel Grid Square: ${properties['sentinel:grid_square']}`,
-            `Date: ${properties.datetime}`
-          ],
-          to: '#'
-        };
-      });
-    }
-
-    return {
-      features: responseFeatures || [],
-      hasMoreResults: responseHasMoreResults(responseMeta),
-      numberOfResults
-    };
-  }
-
-  // Lens has an effect hook that we can set up that will fire after
-  // the Map component renders. Here we're using a plugin to set
-  // the active area of the Map UI to the space to the right
-  // of the sidebar, so that the center of the map is centered
-  // within that space
-
-  function handleUseMapEffect ({ leafletElement }) {
-    // By class leafletElement.setActiveArea('map-active-area')
-    // Creates a new div for that area
-    leafletElement.setActiveArea({
-      position: 'absolute',
-      top: '0',
-      left: '0',
-      right: '0',
-      height: '100vh',
-      marginLeft: '385px'
-    });
-  }
-
-  // Lens lets us pass in a component for our Sidebar. The component
-  // takes a few props as arguments such as the given results and some
-  // actions that allow us to create a unique sidebar experience for
-  // whatever app thats getting built
-
-  const SidebarPanels = ({
-    results,
-    loadMoreResults,
-    clearActiveSearch,
-    filters = {},
-    numberOfResults
-  }) => {
-    const hasResults = Array.isArray(results) && results.length > 0;
-    const moreResultsAvailable = typeof loadMoreResults === 'function';
-    const { handlers: filtersHandlers } = filters;
-
-    function handleLoadMore (e) {
-      if (moreResultsAvailable) {
-        loadMoreResults(e);
-      }
-    }
-
-    function handleClearFilters () {
-      if (typeof filtersHandlers.clearActiveFilters === 'function') {
-        filtersHandlers.clearActiveFilters();
-      }
-    }
-
-    function handleClearActiveSearch () {
-      if (typeof clearActiveSearch === 'function') {
-        clearActiveSearch();
-      }
-    }
-
-    return (
-      <>
-        {!hasResults && (
-          <>
-            {Array.isArray(results) && (
-              <Panel header="Explore">
-                <p>Sorry, no results were found.</p>
-                {filters.active && filters.active.length > 0 && (
-                  <p>
-                    <Button onClick={handleClearFilters}>Clear Filters</Button>
-                  </p>
-                )}
-                <p>
-                  <Button onClick={handleClearActiveSearch}>
-                    Clear Search
-                  </Button>
-                </p>
-              </Panel>
-            )}
-            <Panel header="Explore">
-              <p>Explore stuff</p>
-            </Panel>
-            <Panel header="Past Searches">
-              <ItemList
-                items={[
-                  {
-                    label: 'Alexandria, VA',
-                    to: '#'
-                  },
-                  {
-                    label: 'Montes Claros, MG',
-                    to: '#'
-                  }
-                ]}
-              />
-            </Panel>
-          </>
-        )}
-
-        {hasResults && (
-          <>
-            <Panel header={`Results (${numberOfResults})`}>
-              <ItemList items={results} />
-              {moreResultsAvailable && (
-                <p>
-                  <Button onClick={handleLoadMore}>Load More</Button>
-                </p>
-              )}
-            </Panel>
-            <Panel>
-              <p>
-                <Button onClick={handleClearActiveSearch}>Clear Search</Button>
-              </p>
-            </Panel>
-          </>
-        )}
-      </>
-    );
-  };
-
-  SidebarPanels.propTypes = {
-    results: PropTypes.array,
-    numberOfResults: PropTypes.number,
-    loadMoreResults: PropTypes.func,
-    clearActiveSearch: PropTypes.func,
-    filters: PropTypes.object
-  };
-
-  // Setting up our available filters array let's Lens know what the
-  // filter UI can use to set the options available in the filters pane
-
-  const availableFilters = [
-    {
-      label: 'Collection',
-      id: 'properties/collection',
-      type: 'radiolist',
-      list: ['sentinel-2-l1c'],
-      defaultValue: false
-    },
-    {
-      label: 'Sentinel Grid Square',
-      id: 'properties/sentinel:grid_square',
-      type: 'radiolist',
-      list: [
-        'UH',
-        'UJ',
-        'MD',
-        'VT',
-        'ND',
-        'FV',
-        'PD',
-        'WT',
-        'VU',
-        'WU',
-        'NC',
-        'PC',
-        'GL'
-      ],
-      defaultValue: false
-    }
-  ];
-
   return (
     <>
       <Lens
         defaultCenter={DEFAULT_CENTER}
         defaultZoom={2}
-        resolveOnSearch={handleResolveOnSearch}
-        SidebarComponents={SidebarPanels}
-        useMapEffect={handleUseMapEffect}
+        resolveOnSearch={handleResolveOnEarthSearch}
+        SidebarComponents={EarthSearchSidebarPanels}
+        useMapEffect={handleEarthSearchUseMapEffect}
         placeholder="Look stuffs on Earth Data"
-        availableFilters={availableFilters}
+        availableFilters={earthSearchAvailableFilters}
+      />
+    </>
+  );
+});
+
+stories.add('Earth Search with No Filter Cancel', () => {
+  return (
+    <>
+      <Lens
+        defaultCenter={DEFAULT_CENTER}
+        defaultZoom={2}
+        resolveOnSearch={handleResolveOnEarthSearch}
+        SidebarComponents={EarthSearchSidebarPanels}
+        hasFilterCancel={false}
+        useMapEffect={handleEarthSearchUseMapEffect}
+        placeholder="Look stuffs on Earth Data"
+        availableFilters={earthSearchAvailableFilters}
       />
     </>
   );
@@ -655,3 +413,260 @@ export function atlasDateToSatTime ({ start, end } = {}) {
 
   return dateFull;
 }
+
+// Function that gets used to handle any async lookups
+// or search requests. Resolves as a promise. Here we're
+// using Earth Search as an example endpoint, which
+// makes a request to a STAC API, and resolves the results
+
+async function handleResolveOnEarthSearch ({
+  geoJson = {},
+  page,
+  filters,
+  date
+} = {}) {
+  const { features = [] } = geoJson;
+  const { geometry } = features[0] || {};
+  let data;
+  let response;
+  let responseFeatures;
+  let responseMeta;
+  let numberOfResults;
+
+  const request = new Request(
+    'https://earth-search.aws.element84.com/stac/search'
+  );
+
+  if (!geometry) {
+    return [];
+  }
+
+  data = {
+    intersects: geometry,
+    limit: 5,
+    time: atlasDateToSatTime(date),
+    page
+  };
+
+  if (filters) {
+    data.query = filtersToQuery(filters);
+  }
+
+  function filtersToQuery (activeFilters) {
+    let filterQuery = {};
+
+    activeFilters.forEach(activeFilter => {
+      let parent;
+      let { id, value } = activeFilter;
+
+      if (id.includes('/')) {
+        id = id.split('/');
+        parent = id[0];
+        id = id[1];
+      }
+
+      if (parent === 'properties') {
+        filterQuery[id] = {
+          eq: value
+        };
+      }
+    });
+
+    return filterQuery;
+  }
+
+  request.setData(data);
+
+  request.setOptions({
+    headers: {
+      Accept: 'application/geo+json',
+      'Content-Type': 'application/json'
+    }
+  });
+
+  try {
+    response = await request.post();
+  } catch (e) {
+    throw new Error(`Failed to get search results: ${e}`);
+  }
+
+  responseFeatures = response && response.data && response.data.features;
+  responseMeta = response && response.data && response.data.meta;
+  numberOfResults = responseMeta && responseMeta.found;
+
+  if (Array.isArray(responseFeatures)) {
+    responseFeatures = responseFeatures.map((feature = {}) => {
+      const { properties, id } = feature;
+      const { collection } = properties;
+      return {
+        label: `${id}`,
+        sublabels: [
+          `Collection: ${collection}`,
+          `GeoJSON: ${JSON.stringify(geoJson)}`,
+          `Sentinel Grid Square: ${properties['sentinel:grid_square']}`,
+          `Date: ${properties.datetime}`
+        ],
+        to: '#'
+      };
+    });
+  }
+
+  return {
+    features: responseFeatures || [],
+    hasMoreResults: responseHasMoreResults(responseMeta),
+    numberOfResults
+  };
+}
+
+// Lens has an effect hook that we can set up that will fire after
+// the Map component renders. Here we're using a plugin to set
+// the active area of the Map UI to the space to the right
+// of the sidebar, so that the center of the map is centered
+// within that space
+
+function handleEarthSearchUseMapEffect ({ leafletElement }) {
+  // By class leafletElement.setActiveArea('map-active-area')
+  // Creates a new div for that area
+  leafletElement.setActiveArea({
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    right: '0',
+    height: '100vh',
+    marginLeft: '385px'
+  });
+}
+
+// Lens lets us pass in a component for our Sidebar. The component
+// takes a few props as arguments such as the given results and some
+// actions that allow us to create a unique sidebar experience for
+// whatever app thats getting built
+
+const EarthSearchSidebarPanels = ({
+  results,
+  loadMoreResults,
+  clearActiveSearch,
+  filters = {},
+  numberOfResults
+}) => {
+  const hasResults = Array.isArray(results) && results.length > 0;
+  const moreResultsAvailable = typeof loadMoreResults === 'function';
+  const { handlers: filtersHandlers } = filters;
+
+  function handleLoadMore (e) {
+    if (moreResultsAvailable) {
+      loadMoreResults(e);
+    }
+  }
+
+  function handleClearFilters () {
+    if (typeof filtersHandlers.clearActiveFilters === 'function') {
+      filtersHandlers.clearActiveFilters();
+    }
+  }
+
+  function handleClearActiveSearch () {
+    if (typeof clearActiveSearch === 'function') {
+      clearActiveSearch();
+    }
+  }
+
+  return (
+    <>
+      {!hasResults && (
+        <>
+          {Array.isArray(results) && (
+            <Panel header="Explore">
+              <p>Sorry, no results were found.</p>
+              {filters.active && filters.active.length > 0 && (
+                <p>
+                  <Button onClick={handleClearFilters}>Clear Filters</Button>
+                </p>
+              )}
+              <p>
+                <Button onClick={handleClearActiveSearch}>Clear Search</Button>
+              </p>
+            </Panel>
+          )}
+          <Panel header="Explore">
+            <p>Explore stuff</p>
+          </Panel>
+          <Panel header="Past Searches">
+            <ItemList
+              items={[
+                {
+                  label: 'Alexandria, VA',
+                  to: '#'
+                },
+                {
+                  label: 'Montes Claros, MG',
+                  to: '#'
+                }
+              ]}
+            />
+          </Panel>
+        </>
+      )}
+
+      {hasResults && (
+        <>
+          <Panel header={`Results (${numberOfResults})`}>
+            <ItemList items={results} />
+            {moreResultsAvailable && (
+              <p>
+                <Button onClick={handleLoadMore}>Load More</Button>
+              </p>
+            )}
+          </Panel>
+          <Panel>
+            <p>
+              <Button onClick={handleClearActiveSearch}>Clear Search</Button>
+            </p>
+          </Panel>
+        </>
+      )}
+    </>
+  );
+};
+
+EarthSearchSidebarPanels.propTypes = {
+  results: PropTypes.array,
+  numberOfResults: PropTypes.number,
+  loadMoreResults: PropTypes.func,
+  clearActiveSearch: PropTypes.func,
+  filters: PropTypes.object
+};
+
+// Setting up our available filters array let's Lens know what the
+// filter UI can use to set the options available in the filters pane
+
+const earthSearchAvailableFilters = [
+  {
+    label: 'Collection',
+    id: 'properties/collection',
+    type: 'radiolist',
+    list: ['sentinel-2-l1c'],
+    defaultValue: false
+  },
+  {
+    label: 'Sentinel Grid Square',
+    id: 'properties/sentinel:grid_square',
+    type: 'radiolist',
+    list: [
+      'UH',
+      'UJ',
+      'MD',
+      'VT',
+      'ND',
+      'FV',
+      'PD',
+      'WT',
+      'VU',
+      'WU',
+      'NC',
+      'PC',
+      'GL'
+    ],
+    defaultValue: false
+  }
+];

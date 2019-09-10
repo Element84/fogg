@@ -1,3 +1,10 @@
+### Version 0.1.154
+- [JAM-683] Export saveFilterChanges
+- [JAM-683] Export handleUpdateSearchParams
+- [JAM-683] Add closeFilters param to saveFilterChanges
+- [JAM-683] Add hasFilterCancel option to Lens
+- [JAM-683] Update Lens stories
+
 ### Version 0.1.153
 - updating zoom default for default story
 
