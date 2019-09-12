@@ -32,7 +32,8 @@ export default function useLens ({
     geoJson: defaultGeoJson,
     textInput: '',
     date: {},
-    page: 1
+    page: 1,
+    marker: false
   };
   const [mapConfig, updateMapConfig] = useState(mapConfigDefaults);
   const [results, updateResults] = useState();
@@ -70,6 +71,15 @@ export default function useLens ({
       flyTo(center);
     }
   }, [mapConfig.center, defaultZoom]);
+
+  // We need to drop map markers using the effect hook as we don't always have the
+  // leaflet element available via a ref if it's the first time rendering
+
+  useEffect(() => {
+    if (mapConfig.marker) {
+      addSearchMarker(mapConfig.center);
+    }
+  }, [mapConfig.marker, mapConfig.center]);
 
   /**
    * setView
@@ -123,7 +133,8 @@ export default function useLens ({
     date = mapConfig.date,
     textInput = mapConfig.textInput,
     page = 1,
-    activeFilters = filters.active
+    activeFilters = filters.active,
+    dropMarker = false
   } = {}) {
     let { center = mapConfig.center, geoJson = mapConfig.geoJson } = layer;
 
@@ -137,7 +148,8 @@ export default function useLens ({
       geoJson,
       textInput,
       date,
-      page
+      page,
+      marker: dropMarker
     };
 
     const params = {
@@ -184,8 +196,6 @@ export default function useLens ({
       lat: y
     };
 
-    addSearchMarker(center);
-
     search({
       layer: {
         geoJson: geoJsonFromLatLn(center),
@@ -193,7 +203,8 @@ export default function useLens ({
       },
       date,
       textInput,
-      activeFilters
+      activeFilters,
+      dropMarker: true
     });
   }
 
