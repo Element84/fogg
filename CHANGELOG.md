@@ -1,3 +1,6 @@
+### Version 0.1.159
+- not rendering mapPreview if dom isn't available
+
 ### Version 0.1.158
 - [JAM-678] updating search marker to drop on useEffect
 
