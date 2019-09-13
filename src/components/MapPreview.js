@@ -7,6 +7,7 @@ import { useLayers } from '../hooks';
 import { LayersContext } from '../context';
 
 import Logger from '../lib/logger';
+import { isDomAvailable } from '../lib/util';
 import {
   geoJsonFromLatLn,
   latLngFromGeoJson,
@@ -40,6 +41,14 @@ const MapPreview = ({
       `Could not find location data when attempting to render MapPreview`
     );
     return null;
+  }
+
+  if (!isDomAvailable()) {
+    return (
+      <figure className="map-preview">
+        <p className="map-loading">Loading map...</p>
+      </figure>
+    );
   }
 
   // Create a geoJson document for the center of our map
