@@ -232,7 +232,6 @@ function addParamsToUrl (url, object, encodeComponents) {
   const urlSearch = urlSplit[1];
   let urlSearchObject = urlSearch ? queryParamsToObject(urlSearch) : {};
   let objectParams = {};
-  let urlSearchObjectKeys = [];
 
   for (let key in object) {
     if (!object.hasOwnProperty(key)) continue;
@@ -242,34 +241,46 @@ function addParamsToUrl (url, object, encodeComponents) {
   }
 
   urlSearchObject = Object.assign(urlSearchObject, objectParams);
-  urlSearchObjectKeys = Object.keys(urlSearchObject);
 
   // If we don't have any url params, just pass back the URL as is
 
-  if (urlSearchObjectKeys.length === 0) {
+  if (Object.keys(urlSearchObject).length === 0) {
     return urlBase;
   }
 
   // Take the keys and map them into key value pairs into the string form
 
-  return (
-    urlBase +
-    '?' +
-    urlSearchObjectKeys
-      .map(function (k) {
-        if (encodeComponents) {
-          return (
-            encodeURIComponent(k) + '=' + encodeURIComponent(urlSearchObject[k])
-          );
-        }
-
-        return k + '=' + urlSearchObject[k];
-      })
-      .join('&')
-  );
+  return `${urlBase}?${objectToQueryString(urlSearchObject)}`;
 }
 
 module.exports.addParamsToUrl = addParamsToUrl;
+
+/**
+ * objectToQueryString
+ * @description takes an object of key / values and returns a url param string
+ */
+
+function objectToQueryString (
+  object,
+  { encodeKey = true, encodeValues = true } = {}
+) {
+  const keys = Object.keys(object);
+
+  const params = keys.map(key => {
+    let value = object[key];
+    if (encodeValues) {
+      value = encodeURIComponent(value);
+    }
+    if (encodeKey) {
+      key = encodeURIComponent(key);
+    }
+    return `${key}=${value}`;
+  });
+
+  return params.join('&');
+}
+
+module.exports.objectToQueryString = objectToQueryString;
 
 /**
  * isDomAvailable
