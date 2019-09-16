@@ -6,6 +6,7 @@ import {
   addLeafletMarkerLayer
 } from '../lib/leaflet';
 import { resolveLensAutocomplete } from '../lib/lens';
+import { queryParamsToObject, objectToQueryString } from '../lib/util';
 
 import { clearSearchComplete } from '../components/SearchComplete';
 
@@ -295,26 +296,28 @@ export default function useLens ({
    */
 
   function handleQueryParams () {
-    const urlParams = new URLSearchParams(locationSearch);
-    const urlQuery = urlParams.get('q');
+    const urlParams = queryParamsToObject(locationSearch) || {};
+    const urlQuery = urlParams.q;
     const availableFilters = filters.available;
-    const properties = new URLSearchParams(urlParams.get('properties'));
+    const properties = queryParamsToObject(urlParams.properties);
+    const propertyKeys = properties && Object.keys(properties);
 
     let queryFilters = [];
 
     // Loops through any available properties and adds to available filters
+    if (propertyKeys && propertyKeys.length > 0) {
+      for (let property of propertyKeys) {
+        let key = property;
+        let value = properties[property];
+        let id = `properties/${key}`;
 
-    for (let property of properties.entries()) {
-      let key = property[0];
-      let value = property[1];
-      let id = `properties/${key}`;
-
-      availableFilters.find(element => {
-        if (element.id === id) {
-          queryFilters.push({ id, value });
-        }
-        return element.id === id;
-      });
+        availableFilters.find(element => {
+          if (element.id === id) {
+            queryFilters.push({ id, value });
+          }
+          return element.id === id;
+        });
+      }
     }
 
     // If we have any available search params, trigger an autocomplete with
@@ -338,13 +341,15 @@ export default function useLens ({
 
   function clearQuerySearchParams () {
     if (typeof locationSearch === 'undefined') return;
-    const urlParams = new URLSearchParams(locationSearch);
+    const urlParams = queryParamsToObject(locationSearch);
     QUERY_SEARCH_PARAMS.forEach(param => {
-      urlParams.delete(param);
+      if (urlParams[param]) {
+        delete urlParams[param];
+      }
     });
 
     if (history) {
-      history.pushState('', '', `?${urlParams.toString()}`);
+      history.pushState('', '', `?${objectToQueryString(urlParams)}`);
     }
   }
 
