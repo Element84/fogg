@@ -380,6 +380,27 @@ stories.add('Earth Search with No Filter Cancel', () => {
   );
 });
 
+stories.add('Earth Search with Date Only Search', () => {
+  return (
+    <>
+      <Lens
+        defaultCenter={DEFAULT_CENTER}
+        defaultZoom={2}
+        resolveOnSearch={handleResolveOnEarthSearch}
+        SidebarComponents={EarthSearchSidebarPanels}
+        hasFilterCancel={false}
+        dateOnly={{
+          enabled: true,
+          query: { x: -119.27022999999997, y: 36.37410569300005 }
+        }}
+        useMapEffect={handleEarthSearchUseMapEffect}
+        placeholder="Look stuffs on Earth Data"
+        availableFilters={earthSearchAvailableFilters}
+      />
+    </>
+  );
+});
+
 function responseHasMoreResults ({ page, limit, found } = {}) {
   if (page * limit < found) return true;
   return false;

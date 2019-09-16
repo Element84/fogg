@@ -1,0 +1,59 @@
+.search-date-date-picker {
+  display: none;
+  position: absolute;
+  top: 100%;
+
+  .search-date-date[data-is-search-date-open="true"] & {
+    display: block;
+  }
+      
+  .datetime-range {
+    min-width: 30em;
+    padding: .5em;
+  }
+}
+
+.search-date-date {
+
+  position: relative;
+
+  &[data-is-search-date-open="true"] {
+
+    .search-date-control {
+      svg {
+        color: $color-gray9;
+      }
+    }
+
+  }
+
+  [data-has-active-date-range="true"] & {
+
+    .search-date-control {
+      svg {
+        color: $color-blue;
+      }
+    }
+
+  }
+
+  .button {
+    background: none;
+    box-shadow: none;
+  }
+
+  .search-date-control {
+
+    svg {
+      color: $color-gray;
+    }
+
+  }
+
+}
+
+.search-box-controls-date-picker {
+  position: absolute;
+  top: 100%;
+  right: 0;
+}

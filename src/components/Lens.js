@@ -23,6 +23,10 @@ const Lens = ({
   projection,
   availableServices,
   search = true,
+  dateOnly = {
+    enabled: false,
+    query: ''
+  },
   placeholder = 'Search',
   availableFilters,
   availableLayers = null,
@@ -78,12 +82,13 @@ const Lens = ({
           data-has-results={hasResults}
         >
           <div className="lens-sidebar">
-            {search && (
+            {(search || dateOnly.enabled) && (
               <div className="lens-sidebar-search">
                 <Panel className="panel-clean">
                   <LensSearchComplete
                     ref={refSearchComplete}
                     placeholder={placeholder}
+                    dateOnly={dateOnly}
                   />
                 </Panel>
 
@@ -154,6 +159,10 @@ Lens.propTypes = {
   ),
   projection: PropTypes.string,
   search: PropTypes.bool,
+  dateOnly: PropTypes.shape({
+    enabled: PropTypes.bool,
+    query: PropTypes.object
+  }),
   placeholder: PropTypes.string,
   availableFilters: PropTypes.array,
   hideNativeLayers: PropTypes.bool,

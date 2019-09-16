@@ -47,63 +47,8 @@ $search-box-height: 3.2em;
 
 }
 
-.search-box-controls-date {
-
-  position: relative;
-
-  &[data-is-searchbox-date-open="true"] {
-
-    .search-box-controls-control {
-      svg {
-        color: $color-gray9;
-      }
-    }
-
-  }
-
-  [data-has-active-date-range="true"] & {
-
-    .search-box-controls-control {
-      svg {
-        color: $color-blue;
-      }
-    }
-
-  }
-
-  .button {
-    background: none;
-    box-shadow: none;
-  }
-
-  .search-box-controls-control {
-
-    svg {
-      color: $color-gray;
-    }
-
-  }
-
-}
-
 .search-box-controls-date-picker {
-
-  display: none;
   position: absolute;
   top: 100%;
   right: 0;
-
-  .search-box-controls-date[data-is-searchbox-date-open="true"] & {
-    display: block;
-  }
-
-  .datetime-range {
-    min-width: 30em;
-    padding: .5em;
-  }
-
-}
-
-.search-box-controls-search {
-
 }

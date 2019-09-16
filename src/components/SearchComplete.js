@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import useDebouncedCallback from 'use-debounce/lib/callback';
 
 import SearchBox from './SearchBox';
+import SearchDate from './SearchDate';
 
 const MAX_RESULTS = 5;
 const QUERY_COMPLETE_DEBOUNCE = 300;
@@ -13,9 +14,10 @@ const SearchComplete = ({
   onSearch,
   resolveQueryComplete,
   placeholder = 'Search',
-  defaultValue,
+  defaultValue = '',
   defaultDate,
-  forwardedRef
+  forwardedRef,
+  dateOnly
 }) => {
   const [isOpen, updateOpenState] = useState(false);
   const [results, updateResults] = useState([]);
@@ -26,6 +28,8 @@ const SearchComplete = ({
     updateQueryState,
     QUERY_COMPLETE_DEBOUNCE
   );
+
+  const { enabled: dateOnlyEnabled, query: dateOnlyQuery } = dateOnly || {};
 
   // When the component renders, update the state with the default values
   // Particularly useful for grabbing query params and prefilling state
@@ -48,6 +52,19 @@ const SearchComplete = ({
 
     updateDate(searchDate);
     handleQuery(searchQuery, searchDate, textInput);
+    updateOpenState(false);
+  }
+
+  /**
+   * handleSearchDateSearch
+   * @description Triggers when the search date is selected
+   */
+
+  function handleSearchDateSearch (searchDate) {
+    let searchQuery = dateOnlyQuery;
+
+    updateDate(searchDate);
+    handleQuery(searchQuery, searchDate, searchQuery);
     updateOpenState(false);
   }
 
@@ -154,13 +171,24 @@ const SearchComplete = ({
       className="search-complete"
       data-is-search-complete-open={isOpen && results.length > 0}
     >
-      <SearchBox
-        onSearch={handleSearchboxSearch}
-        onInput={handleOnInput}
-        placeholder={placeholder}
-        searchInput={searchInput}
-        defaultDate={date}
-      />
+      {!dateOnlyEnabled && (
+        <SearchBox
+          onSearch={handleSearchboxSearch}
+          onInput={handleOnInput}
+          placeholder={placeholder}
+          searchInput={searchInput}
+          defaultDate={date}
+        />
+      )}
+
+      {dateOnlyEnabled && (
+        <SearchDate
+          onSearch={handleSearchDateSearch}
+          placeholder={placeholder}
+          searchInput={searchInput}
+          defaultDate={date}
+        />
+      )}
 
       <div className="search-complete-results">
         <ul>
@@ -198,7 +226,11 @@ SearchComplete.propTypes = {
   defaultValue: PropTypes.string,
   clearSearchInput: PropTypes.bool,
   defaultDate: PropTypes.object,
-  forwardedRef: PropTypes.object
+  forwardedRef: PropTypes.object,
+  dateOnly: PropTypes.shape({
+    enabled: PropTypes.bool,
+    query: PropTypes.object
+  })
 };
 
 export default SearchComplete;
