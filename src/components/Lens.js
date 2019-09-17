@@ -11,6 +11,7 @@ import LensSearchComplete from './LensSearchComplete';
 import LensSearchFilters from './LensSearchFilters';
 import LensSearchPanelFilters from './LensSearchPanelFilters';
 import LensSidebarComponents from './LensSidebarComponents';
+import LensSearchDate from './LensSearchDate';
 
 const Lens = ({
   children,
@@ -23,10 +24,7 @@ const Lens = ({
   projection,
   availableServices,
   search = true,
-  dateOnly = {
-    enabled: false,
-    query: ''
-  },
+  showDateRange = false,
   placeholder = 'Search',
   availableFilters,
   availableLayers = null,
@@ -82,13 +80,17 @@ const Lens = ({
           data-has-results={hasResults}
         >
           <div className="lens-sidebar">
-            {(search || dateOnly.enabled) && (
+            {showDateRange && (
+              <div className="lens-sidebar-date">
+                <LensSearchDate />
+              </div>
+            )}
+            {search && (
               <div className="lens-sidebar-search">
                 <Panel className="panel-clean">
                   <LensSearchComplete
                     ref={refSearchComplete}
                     placeholder={placeholder}
-                    dateOnly={dateOnly}
                   />
                 </Panel>
 
@@ -159,10 +161,7 @@ Lens.propTypes = {
   ),
   projection: PropTypes.string,
   search: PropTypes.bool,
-  dateOnly: PropTypes.shape({
-    enabled: PropTypes.bool,
-    query: PropTypes.object
-  }),
+  showDateRange: PropTypes.bool,
   placeholder: PropTypes.string,
   availableFilters: PropTypes.array,
   hideNativeLayers: PropTypes.bool,

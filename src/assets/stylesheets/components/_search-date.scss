@@ -16,6 +16,7 @@
 .search-date-date {
 
   position: relative;
+  z-index: 999999;
 
   &[data-is-search-date-open="true"] {
 

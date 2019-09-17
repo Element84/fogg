@@ -12,7 +12,8 @@ const SearchBox = ({
   onSearch,
   placeholder = 'Search',
   searchInput = '',
-  defaultDate = {}
+  defaultDate = {},
+  onDateChange
 }) => {
   const [query, setQuery] = useState('');
 
@@ -42,7 +43,7 @@ const SearchBox = ({
    */
 
   function handleSearchClick (e) {
-    handleSearch(date);
+    handleSearch(query);
     setDateIsOpen(false);
   }
 
@@ -51,14 +52,32 @@ const SearchBox = ({
    * @description Handles performing search and firing onSearch callback with query
    */
 
-  function handleSearch (searchDate = date) {
-    if (
-      typeof onSearch === 'function' &&
-      typeof query === 'string' &&
-      query.length > 0
-    ) {
-      onSearch(query, searchDate);
+  function handleSearch (searchQuery = query, searchDate = date.date) {
+    if (typeof onSearch === 'function') {
+      onSearch(searchQuery, searchDate);
       setDate(searchDate);
+    }
+  }
+
+  /**
+   * handleChange
+   * @description Fires on date change
+   */
+
+  function handleChange (newDate = {}) {
+    if (typeof onDateChange === 'function') {
+      onDateChange(newDate);
+    }
+  }
+
+  /**
+   * handleDateSearch
+   * @description Fires search on date change
+   */
+
+  function handleDateSearch (newDate = {}) {
+    if (typeof query === 'string' && query.length > 0) {
+      handleSearch(query, newDate);
     }
   }
 
@@ -85,7 +104,9 @@ const SearchBox = ({
       </Form>
       <div className="search-box-controls">
         <SearchDate
-          onSearch={handleSearch}
+          onChange={handleChange}
+          onDateChange={handleDateSearch}
+          onDateClear={handleDateSearch}
           dateIsOpen={dateIsOpen}
           defaultDate={defaultDate}
           classPrefix={'search-box-controls'}
@@ -106,6 +127,7 @@ const SearchBox = ({
 SearchBox.propTypes = {
   onInput: PropTypes.func,
   onSearch: PropTypes.func,
+  onDateChange: PropTypes.func,
   placeholder: PropTypes.string,
   searchInput: PropTypes.string,
   defaultDate: PropTypes.object

@@ -388,11 +388,8 @@ stories.add('Earth Search with Date Only Search', () => {
         defaultZoom={2}
         resolveOnSearch={handleResolveOnEarthSearch}
         SidebarComponents={EarthSearchSidebarPanels}
-        hasFilterCancel={false}
-        dateOnly={{
-          enabled: true,
-          query: { x: -119.27022999999997, y: 36.37410569300005 }
-        }}
+        search={false}
+        showDateRange={true}
         useMapEffect={handleEarthSearchUseMapEffect}
         placeholder="Look stuffs on Earth Data"
         availableFilters={earthSearchAvailableFilters}

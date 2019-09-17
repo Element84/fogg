@@ -6,19 +6,22 @@ import Button from './Button';
 import DatetimeRange from './DatetimeRange';
 
 const SearchDate = ({
-  onSearch,
   dateIsOpen,
+  onChange,
+  onDateClear,
+  onDateCancel,
+  onDateChange,
   classPrefix,
   defaultDate = {}
 }) => {
   const [clearDate, setClearDate] = useState(false);
   const [date, setDate] = useState({
     dateIsOpen: false,
-    date: {}
+    date: defaultDate
   });
 
   useEffect(() => {
-    if (!defaultDate.start && !defaultDate.end) {
+    if (!defaultDate.date) {
       setClearDate(true);
     } else {
       setClearDate(false);
@@ -38,10 +41,12 @@ const SearchDate = ({
    */
 
   function handleDateClick () {
-    setDate({
+    const newDate = {
       ...date,
       dateIsOpen: !date.dateIsOpen
-    });
+    };
+    setDate(newDate);
+    handleOnChange(newDate);
   }
 
   /**
@@ -49,15 +54,19 @@ const SearchDate = ({
    * @description Fires when the datetime range changes
    */
 
-  function handleDateChange (newDate = {}) {
-    setDate({
+  function handleDateChange (changedDate = {}) {
+    const newDate = {
       ...date,
       date: {
-        ...newDate
+        ...changedDate
       },
       dateIsOpen: false
-    });
-    handleSearch(newDate);
+    };
+    setDate(newDate);
+    handleOnChange(newDate);
+    if (typeof onDateChange === 'function') {
+      onDateChange(newDate);
+    }
   }
 
   /**
@@ -66,16 +75,18 @@ const SearchDate = ({
    */
 
   function handleDateClear () {
-    const clearDate = {
-      start: '',
-      end: ''
-    };
-    setDate({
-      date: clearDate,
+    const clearedDate = {
+      date: {
+        start: '',
+        end: ''
+      },
       dateIsOpen: false
-    });
-
-    handleSearch(clearDate);
+    };
+    setDate(clearedDate);
+    handleOnChange(clearedDate);
+    if (typeof onDateClear === 'function') {
+      onDateClear(clearedDate);
+    }
   }
 
   /**
@@ -84,20 +95,25 @@ const SearchDate = ({
    */
 
   function handleDateCancel () {
-    setDate({
+    const cancelDate = {
       ...date,
       dateIsOpen: false
-    });
+    };
+    setDate(cancelDate);
+    handleOnChange(cancelDate);
+    if (typeof onDateCancel === 'function') {
+      onDateCancel(cancelDate);
+    }
   }
 
   /**
-   * handleSearch
-   * @description Handles performing search and firing onSearch callback with query
+   * handleDateChange
+   * @description Handles changing the date
    */
 
-  function handleSearch (searchDate = date) {
-    if (typeof onSearch === 'function') {
-      onSearch(searchDate);
+  function handleOnChange (changedDate = date) {
+    if (typeof onChange === 'function') {
+      onChange(changedDate);
     }
   }
 
@@ -141,6 +157,10 @@ const SearchDate = ({
 SearchDate.propTypes = {
   onInput: PropTypes.func,
   onSearch: PropTypes.func,
+  onChange: PropTypes.func,
+  onDateCancel: PropTypes.func,
+  onDateChange: PropTypes.func,
+  onDateClear: PropTypes.func,
   placeholder: PropTypes.string,
   searchInput: PropTypes.string,
   defaultDate: PropTypes.object,

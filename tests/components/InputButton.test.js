@@ -5,7 +5,7 @@ import { InputButton } from '../../ui';
 
 describe('InputButton', () => {
   const inputButtonShallow = shallow(
-    <InputButton>
+    <InputButton name="checkbox">
       <span>hello world</span>
     </InputButton>
   );

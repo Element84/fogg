@@ -46,6 +46,7 @@ export { default as Panel } from './src/components/Panel';
 export { default as PanelActions } from './src/components/PanelActions';
 export { default as SearchBox } from './src/components/SearchBox';
 export { default as SearchComplete } from './src/components/SearchComplete';
+export { default as SearchDate } from './src/components/SearchDate';
 export { default as Select } from './src/components/Select';
 export { default as StatusIndicator } from './src/components/StatusIndicator';
 export { default as Table } from './src/components/Table';

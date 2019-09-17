@@ -13,7 +13,8 @@ const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
     handlers: lensHandlers = {},
     results,
     mapConfig = {},
-    numberOfResults
+    numberOfResults,
+    date
   } = lens;
   const {
     loadMoreResults,
@@ -37,6 +38,7 @@ const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
       toggleLayer={toggleLayer}
       getDataForLayers={getDataForLayers}
       numberOfResults={numberOfResults}
+      date={date}
       {...rest}
     />
   );

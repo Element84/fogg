@@ -12,26 +12,20 @@ describe('SearchBox', () => {
     expect(searchbox.find('FormInput').prop('className')).toEqual(
       'search-box-input'
     );
-    expect(
-      searchbox
-        .find('.search-box-controls-date')
-        .find('Button')
-        .exists()
-    ).toEqual(true);
+    expect(searchbox.find('SearchDate').exists()).toEqual(true);
     expect(
       searchbox
         .find('.search-box-controls-search')
         .find('Button')
         .exists()
     ).toEqual(true);
-    expect(searchbox.find('DatetimeRange').exists()).toEqual(true);
   });
 
   describe('Events', () => {
     describe('Search Box Input', () => {
       const inputTestValue = 'Gary';
 
-      it('should open the date picker when the date button is clicked', () => {
+      it('should have the correct input value', () => {
         const searchbox = shallow(<SearchBox onInput={handleInput} />);
         const searchboxInput = searchbox.find('FormInput');
 
