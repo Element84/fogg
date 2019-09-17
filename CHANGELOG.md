@@ -1,3 +1,6 @@
+### Version 0.1.160
+- [JAM-751] removing instance of urlsearchparam from app
+
 ### Version 0.1.159
 - not rendering mapPreview if dom isn't available
 
