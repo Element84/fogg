@@ -24,7 +24,7 @@ const Lens = ({
   projection,
   availableServices,
   search = true,
-  showDateRange = false,
+  searchType,
   placeholder = 'Search',
   availableFilters,
   availableLayers = null,
@@ -80,26 +80,37 @@ const Lens = ({
           data-has-results={hasResults}
         >
           <div className="lens-sidebar">
-            {showDateRange && (
-              <div className="lens-sidebar-date">
-                <LensSearchDate />
-              </div>
-            )}
             {search && (
-              <div className="lens-sidebar-search">
-                <Panel className="panel-clean">
-                  <LensSearchComplete
-                    ref={refSearchComplete}
-                    placeholder={placeholder}
-                  />
-                </Panel>
+              <>
+                {(() => {
+                  switch (searchType) {
+                    case 'daterange':
+                      return (
+                        <div className="lens-sidebar-date">
+                          <LensSearchDate />
+                        </div>
+                      );
+                    default:
+                      return (
+                        <div className="lens-sidebar-search">
+                          <Panel className="panel-clean">
+                            <LensSearchComplete
+                              ref={refSearchComplete}
+                              placeholder={placeholder}
+                            />
+                          </Panel>
 
-                {activeSearch && filters.available.length > 0 && (
-                  <LensSearchPanelFilters hasFilterCancel={hasFilterCancel} />
-                )}
-              </div>
+                          {activeSearch && filters.available.length > 0 && (
+                            <LensSearchPanelFilters
+                              hasFilterCancel={hasFilterCancel}
+                            />
+                          )}
+                        </div>
+                      );
+                  }
+                })()}
+              </>
             )}
-
             {SidebarComponents && (
               <LensSidebarComponents SidebarComponents={SidebarComponents} />
             )}
@@ -161,7 +172,7 @@ Lens.propTypes = {
   ),
   projection: PropTypes.string,
   search: PropTypes.bool,
-  showDateRange: PropTypes.bool,
+  searchType: PropTypes.string,
   placeholder: PropTypes.string,
   availableFilters: PropTypes.array,
   hideNativeLayers: PropTypes.bool,

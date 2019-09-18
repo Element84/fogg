@@ -41,12 +41,23 @@ const SearchComplete = ({
    * @description Triggers when the search box's search button is clicked
    */
 
-  function handleSearchboxSearch (textInput, searchDate) {
-    const { value } = results[0] || {};
+  async function handleSearchboxSearch (textInput, searchDate) {
+    let autocompleteResults = [];
+
+    if (typeof query === 'string') {
+      try {
+        autocompleteResults = (await resolveQueryComplete(textInput)) || [];
+      } catch (error) {
+        throw new Error(`Error fetching autocomplete results: ${error}`);
+      }
+    }
+
+    const { value } = results[0] || autocompleteResults[0] || {};
 
     let searchQuery =
       typeof query !== 'string' && textInput === searchInput ? query : value;
 
+    updateQuery(searchQuery);
     updateDate(searchDate);
     handleQuery(searchQuery, searchDate, textInput);
     updateOpenState(false);
@@ -125,6 +136,8 @@ const SearchComplete = ({
         updateOpenState(true);
       }
     }
+
+    return results;
   }
 
   /**
@@ -135,6 +148,7 @@ const SearchComplete = ({
   function handleClearSearch () {
     updateSearchInput('');
     updateDate({});
+    updateResults([]);
   }
 
   useEffect(() => {
@@ -212,6 +226,9 @@ export default SearchComplete;
  */
 
 export function clearSearchComplete (target) {
+  if (!target) {
+    return;
+  }
   const event = new Event(CLEAR_SEARCH_EVENT);
   target.dispatchEvent(event);
 }

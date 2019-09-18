@@ -14,19 +14,10 @@ const SearchDate = ({
   classPrefix,
   defaultDate = {}
 }) => {
-  const [clearDate, setClearDate] = useState(false);
   const [date, setDate] = useState({
     dateIsOpen: false,
     date: defaultDate
   });
-
-  useEffect(() => {
-    if (!defaultDate.date) {
-      setClearDate(true);
-    } else {
-      setClearDate(false);
-    }
-  }, [defaultDate]);
 
   useEffect(() => {
     setDate({
@@ -146,7 +137,7 @@ const SearchDate = ({
             onChange={handleDateChange}
             onCancel={handleDateCancel}
             onClear={handleDateClear}
-            clearDate={clearDate}
+            clearDate={!defaultDate.date}
           />
         </div>
       </div>

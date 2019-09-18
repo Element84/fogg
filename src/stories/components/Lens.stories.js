@@ -381,15 +381,109 @@ stories.add('Earth Search with No Filter Cancel', () => {
 });
 
 stories.add('Earth Search with Date Only Search', () => {
+  async function handleResolveOnSearch ({ page, filters, date } = {}) {
+    const geometry = {
+      coordinates: [-77.0469, 38.8048],
+      type: 'Point'
+    };
+    let data;
+    let response;
+    let responseFeatures;
+    let responseMeta;
+    let numberOfResults;
+
+    const request = new Request(
+      'https://earth-search.aws.element84.com/stac/search'
+    );
+
+    if (!geometry) {
+      return [];
+    }
+
+    data = {
+      intersects: geometry,
+      limit: 5,
+      time: atlasDateToSatTime(date),
+      page
+    };
+
+    if (filters) {
+      data.query = filtersToQuery(filters);
+    }
+
+    function filtersToQuery (activeFilters) {
+      let filterQuery = {};
+
+      activeFilters.forEach(activeFilter => {
+        let parent;
+        let { id, value } = activeFilter;
+
+        if (id.includes('/')) {
+          id = id.split('/');
+          parent = id[0];
+          id = id[1];
+        }
+
+        if (parent === 'properties') {
+          filterQuery[id] = {
+            eq: value
+          };
+        }
+      });
+
+      return filterQuery;
+    }
+
+    request.setData(data);
+
+    request.setOptions({
+      headers: {
+        Accept: 'application/geo+json',
+        'Content-Type': 'application/json'
+      }
+    });
+
+    try {
+      response = await request.post();
+    } catch (e) {
+      throw new Error(`Failed to get search results: ${e}`);
+    }
+
+    responseFeatures = response && response.data && response.data.features;
+    responseMeta = response && response.data && response.data.meta;
+    numberOfResults = responseMeta && responseMeta.found;
+
+    if (Array.isArray(responseFeatures)) {
+      responseFeatures = responseFeatures.map((feature = {}) => {
+        const { properties, id } = feature;
+        const { collection } = properties;
+        return {
+          label: `${id}`,
+          sublabels: [
+            `Collection: ${collection}`,
+            `Sentinel Grid Square: ${properties['sentinel:grid_square']}`,
+            `Date: ${properties.datetime}`
+          ],
+          to: '#'
+        };
+      });
+    }
+
+    return {
+      features: responseFeatures || [],
+      hasMoreResults: responseHasMoreResults(responseMeta),
+      numberOfResults
+    };
+  }
   return (
     <>
       <Lens
-        defaultCenter={DEFAULT_CENTER}
+        defaultCenter={ALEXANDRIA}
         defaultZoom={2}
-        resolveOnSearch={handleResolveOnEarthSearch}
+        resolveOnSearch={handleResolveOnSearch}
         SidebarComponents={EarthSearchSidebarPanels}
-        search={false}
-        showDateRange={true}
+        search={true}
+        searchType="daterange"
         useMapEffect={handleEarthSearchUseMapEffect}
         placeholder="Look stuffs on Earth Data"
         availableFilters={earthSearchAvailableFilters}

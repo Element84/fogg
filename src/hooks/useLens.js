@@ -193,18 +193,24 @@ export default function useLens ({
    */
 
   function handleOnSearch (
-    { x, y } = {},
+    query = {},
     date,
     textInput,
     activeFilters = filters.active
   ) {
-    if (typeof x === 'undefined' || typeof y === 'undefined') {
+    // allow user to pass in query as {x,y} or {lng, lat}
+    const { x, y, lng, lat } = query;
+
+    if (
+      (typeof x === 'undefined' || typeof y === 'undefined') &&
+      (typeof lng === 'undefined' || typeof lat === 'undefined')
+    ) {
       return;
     }
 
     const center = {
-      lng: x,
-      lat: y
+      lng: x || lng,
+      lat: y || lat
     };
 
     search({
