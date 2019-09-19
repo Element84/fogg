@@ -1,39 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FaSearch, FaCalendarAlt } from 'react-icons/fa';
+import { FaSearch } from 'react-icons/fa';
 
 import Form from './Form';
 import FormInput from './FormInput';
 import Button from './Button';
-import DatetimeRange from './DatetimeRange';
+import SearchDate from './SearchDate';
 
 const SearchBox = ({
   onInput,
   onSearch,
   placeholder = 'Search',
   searchInput = '',
-  defaultDate
+  date = {},
+  onDateChange
 }) => {
   const [query, setQuery] = useState('');
-
-  const [clearDate, setClearDate] = useState(false);
-
-  const [date, setDate] = useState({
-    dateIsOpen: false,
-    date: {}
-  });
+  const [dateIsOpen, setDateIsOpen] = useState(false);
 
   useEffect(() => {
     setQuery(searchInput);
   }, [searchInput]);
-
-  useEffect(() => {
-    if (!defaultDate.start && !defaultDate.end) {
-      setClearDate(true);
-    } else {
-      setClearDate(false);
-    }
-  }, [defaultDate]);
 
   /**
    * handleSearchInput
@@ -44,7 +31,7 @@ const SearchBox = ({
     const { target } = e;
     setQuery(target.value);
     if (typeof onInput === 'function') {
-      onInput(e, date.date);
+      onInput(e, date);
     }
   }
 
@@ -55,10 +42,7 @@ const SearchBox = ({
 
   function handleSearchClick (e) {
     handleSearch(query);
-    setDate({
-      ...date,
-      dateIsOpen: false
-    });
+    setDateIsOpen(false);
   }
 
   /**
@@ -66,71 +50,31 @@ const SearchBox = ({
    * @description Handles performing search and firing onSearch callback with query
    */
 
-  function handleSearch (searchQuery = query, searchDate = date.date) {
+  function handleSearch (searchQuery = query, searchDate = date) {
     if (typeof onSearch === 'function') {
       onSearch(searchQuery, searchDate);
     }
   }
 
   /**
-   * handleDateClick
-   * @description Fires when the date button is clicked
+   * handleChange
+   * @description Fires on date change
    */
 
-  function handleDateClick () {
-    setDate({
-      ...date,
-      dateIsOpen: !date.dateIsOpen
-    });
-  }
-
-  /**
-   * handleDateChange
-   * @description Fires when the datetime range changes
-   */
-
-  function handleDateChange (newDate = {}) {
-    setDate({
-      ...date,
-      date: {
-        ...newDate
-      },
-      dateIsOpen: false
-    });
-    if (typeof query === 'string' && query.length > 0) {
-      handleSearch(query, newDate);
+  function handleChange (newDate = {}) {
+    if (typeof onDateChange === 'function') {
+      onDateChange(newDate);
     }
   }
 
   /**
-   * handleDateCancel
-   * @description Fires when the datetime range changes are cancelled
+   * handleDateSearch
+   * @description Fires search on date change
    */
 
-  function handleDateCancel () {
-    setDate({
-      ...date,
-      dateIsOpen: false
-    });
-  }
-
-  /**
-   * handleDateClear
-   * @description Fires when the datetime is cleared
-   */
-
-  function handleDateClear () {
-    const clearDate = {
-      start: '',
-      end: ''
-    };
-    setDate({
-      date: clearDate,
-      dateIsOpen: false
-    });
-
+  function handleDateSearch (newDate = {}) {
     if (typeof query === 'string' && query.length > 0) {
-      handleSearch(query, clearDate);
+      handleSearch(query, newDate);
     }
   }
 
@@ -145,12 +89,7 @@ const SearchBox = ({
   }
 
   return (
-    <div
-      className="search-box"
-      data-has-active-date-range={
-        date.date && !!(date.date.start || date.date.end)
-      }
-    >
+    <div className="search-box">
       <Form onSubmit={handleFormSubmit} autoComplete="off">
         <FormInput
           id="search-box-input"
@@ -161,25 +100,14 @@ const SearchBox = ({
         />
       </Form>
       <div className="search-box-controls">
-        <div
-          className="search-box-controls-date"
-          data-is-searchbox-date-open={date.dateIsOpen}
-        >
-          <Button
-            className="search-box-controls-control"
-            onClick={handleDateClick}
-          >
-            <FaCalendarAlt />
-          </Button>
-          <div className="search-box-controls-date-picker">
-            <DatetimeRange
-              onChange={handleDateChange}
-              onCancel={handleDateCancel}
-              onClear={handleDateClear}
-              clearDate={clearDate}
-            />
-          </div>
-        </div>
+        <SearchDate
+          onChange={handleChange}
+          onDateChange={handleDateSearch}
+          onDateClear={handleDateSearch}
+          dateIsOpen={dateIsOpen}
+          defaultDate={date}
+          classPrefix={'search-box-controls'}
+        />
         <div className="search-box-controls-search">
           <Button
             className="search-box-controls-control"
@@ -196,9 +124,10 @@ const SearchBox = ({
 SearchBox.propTypes = {
   onInput: PropTypes.func,
   onSearch: PropTypes.func,
+  onDateChange: PropTypes.func,
   placeholder: PropTypes.string,
   searchInput: PropTypes.string,
-  defaultDate: PropTypes.object
+  date: PropTypes.object
 };
 
 export default SearchBox;

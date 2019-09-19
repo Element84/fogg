@@ -7,7 +7,7 @@ export default function useLayers (availableLayers, fetchLayerData) {
   const [layers, updateLayers] = useState(defaultLayers);
 
   useEffect(() => {
-    getDataForLayers(fetchLayerData);
+    getDataForLayers(layers, fetchLayerData);
   }, []);
 
   /**

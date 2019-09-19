@@ -28,11 +28,15 @@ export default function useLens ({
 }) {
   const defaultGeoJson =
     typeof geoJsonFromLatLn === 'function' && geoJsonFromLatLn(defaultCenter);
+
+  const [date, setDate] = useState({
+    dateIsOpen: false,
+    date: {}
+  });
   const mapConfigDefaults = {
     center: defaultCenter,
     geoJson: defaultGeoJson,
     textInput: '',
-    date: {},
     page: 1,
     marker: false
   };
@@ -83,6 +87,14 @@ export default function useLens ({
   }, [mapConfig.marker, mapConfig.center]);
 
   /**
+   * handleDateChange
+   * @description Handles date change events
+   */
+  function handleDateChange (date) {
+    setDate(date);
+  }
+
+  /**
    * setView
    * @description Wraps the leaflet setView method and triggers on our map ref
    */
@@ -131,7 +143,7 @@ export default function useLens ({
 
   function search ({
     layer = {},
-    date = mapConfig.date,
+    date: searchDate = date,
     textInput = mapConfig.textInput,
     page = 1,
     activeFilters = filters.active,
@@ -148,14 +160,13 @@ export default function useLens ({
       center,
       geoJson,
       textInput,
-      date,
       page,
       marker: dropMarker
     };
 
     const params = {
       geoJson,
-      date,
+      date: searchDate.date ? searchDate.date : searchDate,
       textInput,
       page,
       filters: activeFilters
@@ -183,18 +194,24 @@ export default function useLens ({
    */
 
   function handleOnSearch (
-    { x, y } = {},
+    query = {},
     date,
     textInput,
     activeFilters = filters.active
   ) {
-    if (typeof x === 'undefined' || typeof y === 'undefined') {
+    // allow user to pass in query as {x,y} or {lng, lat}
+    const { x, y, lng, lat } = query;
+
+    if (
+      (typeof x === 'undefined' || typeof y === 'undefined') &&
+      (typeof lng === 'undefined' || typeof lat === 'undefined')
+    ) {
       return;
     }
 
     const center = {
-      lng: x,
-      lat: y
+      lng: x || lng,
+      lat: y || lat
     };
 
     search({
@@ -370,6 +387,7 @@ export default function useLens ({
       ...mapConfigDefaults,
       center: mapConfig.center
     });
+    setDate({});
 
     if (clearLayers) {
       clearSearchLayers();
@@ -378,6 +396,7 @@ export default function useLens ({
 
   return {
     mapConfig,
+    date,
     results,
     numberOfResults: totalResults,
     handlers: {
@@ -386,7 +405,8 @@ export default function useLens ({
       resolveLensAutocomplete,
       handleUpdateSearchParams,
       loadMoreResults: moreResultsAvailable ? handleLoadMoreResults : undefined,
-      clearActiveSearch: handleClearSearch
+      clearActiveSearch: handleClearSearch,
+      handleDateChange
     },
     filters: {
       ...filters,

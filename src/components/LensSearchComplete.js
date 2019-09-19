@@ -7,17 +7,22 @@ import SearchComplete from './SearchComplete';
 const LensSearchComplete = ({ forwardedRef, ...props }) => {
   const { lens = {} } = useContext(LensContext) || {};
 
-  const { handlers: lensHandlers = {}, mapConfig = {} } = lens;
-  const { handleOnSearch, resolveLensAutocomplete } = lensHandlers;
-  const { textInput, date } = mapConfig;
+  const { handlers: lensHandlers = {}, mapConfig = {}, date } = lens;
+  const {
+    handleOnSearch,
+    resolveLensAutocomplete,
+    handleDateChange
+  } = lensHandlers;
+  const { textInput } = mapConfig;
 
   return (
     <SearchComplete
       defaultValue={textInput}
-      defaultDate={date}
+      date={date}
       onSearch={handleOnSearch}
       resolveQueryComplete={resolveLensAutocomplete}
       forwardedRef={forwardedRef}
+      onDateChange={handleDateChange}
       {...props}
     />
   );

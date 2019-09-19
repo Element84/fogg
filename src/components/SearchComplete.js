@@ -11,15 +11,15 @@ const CLEAR_SEARCH_EVENT = 'clear.search-complete';
 
 const SearchComplete = ({
   onSearch,
+  onDateChange,
   resolveQueryComplete,
   placeholder = 'Search',
-  defaultValue,
-  defaultDate,
+  defaultValue = '',
+  date,
   forwardedRef
 }) => {
   const [isOpen, updateOpenState] = useState(false);
   const [results, updateResults] = useState([]);
-  const [date, updateDate] = useState(defaultDate);
   const [query, updateQuery] = useState('');
   const [searchInput, updateSearchInput] = useState(defaultValue);
   const [debouncedUpdateQueryState] = useDebouncedCallback(
@@ -32,21 +32,30 @@ const SearchComplete = ({
 
   useEffect(() => {
     updateSearchInput(defaultValue);
-    updateDate(defaultDate);
-  }, [defaultValue, defaultDate]);
+  }, [defaultValue]);
 
   /**
    * handleSearchboxSearch
    * @description Triggers when the search box's search button is clicked
    */
 
-  function handleSearchboxSearch (textInput, searchDate) {
-    const { value } = results[0] || {};
+  async function handleSearchboxSearch (textInput, searchDate) {
+    let autocompleteResults = [];
+
+    if (typeof query === 'string') {
+      try {
+        autocompleteResults = (await resolveQueryComplete(textInput)) || [];
+      } catch (error) {
+        throw new Error(`Error fetching autocomplete results: ${error}`);
+      }
+    }
+
+    const { value } = results[0] || autocompleteResults[0] || {};
 
     let searchQuery =
       typeof query !== 'string' && textInput === searchInput ? query : value;
 
-    updateDate(searchDate);
+    updateQuery(searchQuery);
     handleQuery(searchQuery, searchDate, textInput);
     updateOpenState(false);
   }
@@ -79,13 +88,13 @@ const SearchComplete = ({
    * @description Handles onInput for the searchbox
    */
 
-  function handleOnInput (e, searchDate) {
+  function handleOnInput (e) {
     e.persist();
     // Use a debounced version of the function that
     // updates the query state and handles the fetching
     // of our autocomplete results to avoid many
     // unneeded calls
-    debouncedUpdateQueryState(e, searchDate);
+    debouncedUpdateQueryState(e);
   }
 
   /**
@@ -93,8 +102,7 @@ const SearchComplete = ({
    * @description Handles onInput for the searchbox
    */
 
-  function updateQueryState ({ target }, searchDate) {
-    updateDate(searchDate);
+  function updateQueryState ({ target }) {
     updateQuery(target.value);
     updateSearchInput(target.value);
     handleFetchQueryComplete(target.value);
@@ -124,6 +132,8 @@ const SearchComplete = ({
         updateOpenState(true);
       }
     }
+
+    return results;
   }
 
   /**
@@ -133,7 +143,7 @@ const SearchComplete = ({
 
   function handleClearSearch () {
     updateSearchInput('');
-    updateDate({});
+    updateResults([]);
   }
 
   useEffect(() => {
@@ -159,7 +169,8 @@ const SearchComplete = ({
         onInput={handleOnInput}
         placeholder={placeholder}
         searchInput={searchInput}
-        defaultDate={date}
+        date={date}
+        onDateChange={onDateChange}
       />
 
       <div className="search-complete-results">
@@ -193,11 +204,12 @@ const SearchComplete = ({
 
 SearchComplete.propTypes = {
   onSearch: PropTypes.func,
+  onDateChange: PropTypes.func,
   resolveQueryComplete: PropTypes.func,
   placeholder: PropTypes.string,
   defaultValue: PropTypes.string,
   clearSearchInput: PropTypes.bool,
-  defaultDate: PropTypes.object,
+  date: PropTypes.object,
   forwardedRef: PropTypes.object
 };
 
@@ -209,6 +221,9 @@ export default SearchComplete;
  */
 
 export function clearSearchComplete (target) {
+  if (!target) {
+    return;
+  }
   const event = new Event(CLEAR_SEARCH_EVENT);
   target.dispatchEvent(event);
 }
