@@ -15,8 +15,8 @@ const SearchDate = ({
   defaultDate = {}
 }) => {
   const [date, setDate] = useState({
-    dateIsOpen: false,
-    date: defaultDate
+    ...defaultDate,
+    dateIsOpen: false
   });
 
   useEffect(() => {

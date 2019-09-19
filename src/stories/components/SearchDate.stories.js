@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
 import SearchDate from '../../components/SearchDate';
 
@@ -12,9 +13,13 @@ stories.add('Default', () => {
       date: {}
     });
 
-    function handleDateChange (date) {
-      setDate(date);
+    function handleDateChange (newDate) {
+      setDate(newDate);
     }
+
+    useEffect(() => {
+      action('searchdate-render')(JSON.stringify(date.date));
+    }, [date.date]);
 
     return <SearchDate defaultDate={date} onChange={handleDateChange} />;
   };
