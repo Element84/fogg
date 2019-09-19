@@ -81,7 +81,7 @@ const Lens = ({
         >
           <div className="lens-sidebar">
             {search && (
-              <>
+              <div className="lens-sidebar-search">
                 {(() => {
                   switch (searchType) {
                     case 'daterange':
@@ -92,7 +92,7 @@ const Lens = ({
                       );
                     default:
                       return (
-                        <div className="lens-sidebar-search">
+                        <>
                           <Panel className="panel-clean">
                             <LensSearchComplete
                               ref={refSearchComplete}
@@ -105,11 +105,11 @@ const Lens = ({
                               hasFilterCancel={hasFilterCancel}
                             />
                           )}
-                        </div>
+                        </>
                       );
                   }
                 })()}
-              </>
+              </div>
             )}
             {SidebarComponents && (
               <LensSidebarComponents SidebarComponents={SidebarComponents} />

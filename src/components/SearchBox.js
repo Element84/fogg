@@ -17,7 +17,7 @@ const SearchBox = ({
 }) => {
   const [query, setQuery] = useState('');
 
-  const [date, setDate] = useState({});
+  const [date, setDate] = useState(defaultDate);
   const [dateIsOpen, setDateIsOpen] = useState(false);
 
   useEffect(() => {
