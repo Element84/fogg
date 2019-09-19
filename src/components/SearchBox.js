@@ -12,12 +12,10 @@ const SearchBox = ({
   onSearch,
   placeholder = 'Search',
   searchInput = '',
-  defaultDate = {},
+  date = {},
   onDateChange
 }) => {
   const [query, setQuery] = useState('');
-
-  const [date, setDate] = useState(defaultDate);
   const [dateIsOpen, setDateIsOpen] = useState(false);
 
   useEffect(() => {
@@ -52,10 +50,9 @@ const SearchBox = ({
    * @description Handles performing search and firing onSearch callback with query
    */
 
-  function handleSearch (searchQuery = query, searchDate = date.date) {
+  function handleSearch (searchQuery = query, searchDate = date) {
     if (typeof onSearch === 'function') {
       onSearch(searchQuery, searchDate);
-      setDate(searchDate);
     }
   }
 
@@ -108,7 +105,7 @@ const SearchBox = ({
           onDateChange={handleDateSearch}
           onDateClear={handleDateSearch}
           dateIsOpen={dateIsOpen}
-          defaultDate={defaultDate}
+          defaultDate={date}
           classPrefix={'search-box-controls'}
         />
         <div className="search-box-controls-search">
@@ -130,7 +127,7 @@ SearchBox.propTypes = {
   onDateChange: PropTypes.func,
   placeholder: PropTypes.string,
   searchInput: PropTypes.string,
-  defaultDate: PropTypes.object
+  date: PropTypes.object
 };
 
 export default SearchBox;

@@ -15,12 +15,11 @@ const SearchComplete = ({
   resolveQueryComplete,
   placeholder = 'Search',
   defaultValue = '',
-  defaultDate,
+  date,
   forwardedRef
 }) => {
   const [isOpen, updateOpenState] = useState(false);
   const [results, updateResults] = useState([]);
-  const [date, updateDate] = useState(defaultDate);
   const [query, updateQuery] = useState('');
   const [searchInput, updateSearchInput] = useState(defaultValue);
   const [debouncedUpdateQueryState] = useDebouncedCallback(
@@ -33,8 +32,7 @@ const SearchComplete = ({
 
   useEffect(() => {
     updateSearchInput(defaultValue);
-    updateDate(defaultDate);
-  }, [defaultValue, defaultDate]);
+  }, [defaultValue]);
 
   /**
    * handleSearchboxSearch
@@ -58,7 +56,6 @@ const SearchComplete = ({
       typeof query !== 'string' && textInput === searchInput ? query : value;
 
     updateQuery(searchQuery);
-    updateDate(searchDate);
     handleQuery(searchQuery, searchDate, textInput);
     updateOpenState(false);
   }
@@ -91,13 +88,13 @@ const SearchComplete = ({
    * @description Handles onInput for the searchbox
    */
 
-  function handleOnInput (e, searchDate) {
+  function handleOnInput (e) {
     e.persist();
     // Use a debounced version of the function that
     // updates the query state and handles the fetching
     // of our autocomplete results to avoid many
     // unneeded calls
-    debouncedUpdateQueryState(e, searchDate);
+    debouncedUpdateQueryState(e);
   }
 
   /**
@@ -105,8 +102,7 @@ const SearchComplete = ({
    * @description Handles onInput for the searchbox
    */
 
-  function updateQueryState ({ target }, searchDate) {
-    updateDate(searchDate);
+  function updateQueryState ({ target }) {
     updateQuery(target.value);
     updateSearchInput(target.value);
     handleFetchQueryComplete(target.value);
@@ -147,7 +143,6 @@ const SearchComplete = ({
 
   function handleClearSearch () {
     updateSearchInput('');
-    updateDate({});
     updateResults([]);
   }
 
@@ -174,7 +169,7 @@ const SearchComplete = ({
         onInput={handleOnInput}
         placeholder={placeholder}
         searchInput={searchInput}
-        defaultDate={date}
+        date={date}
         onDateChange={onDateChange}
       />
 
@@ -214,7 +209,7 @@ SearchComplete.propTypes = {
   placeholder: PropTypes.string,
   defaultValue: PropTypes.string,
   clearSearchInput: PropTypes.bool,
-  defaultDate: PropTypes.object,
+  date: PropTypes.object,
   forwardedRef: PropTypes.object
 };
 

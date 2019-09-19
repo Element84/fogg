@@ -18,7 +18,7 @@ const LensSearchComplete = ({ forwardedRef, ...props }) => {
   return (
     <SearchComplete
       defaultValue={textInput}
-      defaultDate={date}
+      date={date}
       onSearch={handleOnSearch}
       resolveQueryComplete={resolveLensAutocomplete}
       forwardedRef={forwardedRef}
