@@ -11,6 +11,7 @@
     "babel-loader": "^8.0.6",
     "babel-preset-gatsby": "^0.2.1",
     "clone": "^2.1.2",
+    "custom-event": "^1.0.1",
     "esri-leaflet": "^2.2.4",
     "esri-leaflet-geocoder": "^2.2.14",
     "fs": "^0.0.1-security",
