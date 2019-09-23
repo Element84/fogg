@@ -24,14 +24,15 @@ export default function useLens ({
   refSearchComplete,
   availableFilters,
   zoom,
-  defaultZoom
+  defaultZoom,
+  defaultDateRange = {}
 }) {
   const defaultGeoJson =
     typeof geoJsonFromLatLn === 'function' && geoJsonFromLatLn(defaultCenter);
 
   const [date, setDate] = useState({
     dateIsOpen: false,
-    date: {}
+    date: defaultDateRange
   });
   const mapConfigDefaults = {
     center: defaultCenter,

@@ -18,6 +18,8 @@ const LensSearchDate = () => {
     <SearchDate
       onChange={handleOnChange}
       onDateChange={handleOnDateChange}
+      onDateClear={handleOnDateChange}
+      onDateCancel={handleOnDateChange}
       defaultDate={date}
       classPrefix={'search-box-controls'}
     />

@@ -22,9 +22,19 @@ const SearchDate = ({
   useEffect(() => {
     setDate({
       ...date,
-      dateIsOpen
+      dateIsOpen: !!dateIsOpen
     });
   }, [dateIsOpen]);
+
+  // Perform the initial search if a default date is set
+  useEffect(() => {
+    if (defaultDate) {
+      handleOnChange(defaultDate);
+      if (typeof onDateChange === 'function') {
+        onDateChange(defaultDate);
+      }
+    }
+  }, []);
 
   /**
    * handleDateClick
@@ -137,6 +147,7 @@ const SearchDate = ({
             onChange={handleDateChange}
             onCancel={handleDateCancel}
             onClear={handleDateClear}
+            defaultDate={defaultDate.date}
             clearDate={!defaultDate.date}
           />
         </div>
