@@ -26,16 +26,6 @@ const SearchDate = ({
     });
   }, [dateIsOpen]);
 
-  // Perform the initial search if a default date is set
-  useEffect(() => {
-    if (defaultDate) {
-      handleOnChange(defaultDate);
-      if (typeof onDateChange === 'function') {
-        onDateChange(defaultDate);
-      }
-    }
-  }, []);
-
   /**
    * handleDateClick
    * @description Fires when the date button is clicked

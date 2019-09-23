@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { LensContext } from '../context';
 
 import SearchDate from './SearchDate';
@@ -13,6 +13,11 @@ const LensSearchDate = () => {
   function handleOnDateChange (changedDate = {}) {
     handleOnSearch(center, changedDate);
   }
+
+  // Perform the initial search
+  useEffect(() => {
+    handleOnDateChange(date);
+  }, []);
 
   return (
     <SearchDate

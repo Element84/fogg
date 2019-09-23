@@ -345,7 +345,7 @@ export default function useLens ({
       resolveLensAutocomplete(urlQuery).then(queryResults => {
         if (Array.isArray(queryResults)) {
           const { value } = queryResults[0];
-          handleOnSearch(value, {}, urlQuery, queryFilters);
+          handleOnSearch(value, date, urlQuery, queryFilters);
           setActiveFilters(queryFilters);
         }
       });

@@ -18,8 +18,10 @@ const DatetimeRange = ({
     end: null
   };
 
-  const [dateTemp, updateDateTemp] = useState(defaultDate || emptyDate);
-  const [date, updateDate] = useState(defaultDate || emptyDate);
+  const initialDate = { ...emptyDate, ...defaultDate };
+
+  const [dateTemp, updateDateTemp] = useState(initialDate);
+  const [date, updateDate] = useState(dateTemp);
 
   useEffect(() => {
     if (clearDate) {
