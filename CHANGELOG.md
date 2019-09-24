@@ -1,3 +1,7 @@
+### Version 0.1.162
+- [DR-35] Add default date option to Lens
+- [DR-35] Move defaultDate effect to LensSearchDate
+
 ### Version 0.1.161
 
 ### Version 0.1.160
