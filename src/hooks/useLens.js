@@ -74,7 +74,7 @@ export default function useLens ({
       setView(center, defaultZoom);
       hasRenderedOnce = true;
     } else {
-      flyTo(center);
+      panTo(center);
     }
   }, [mapConfig.center, defaultZoom]);
 
@@ -119,22 +119,14 @@ export default function useLens ({
   }
 
   /**
-   * flyTo
-   * @description Wraps the leaflet flyTo method and triggers on our map ref
+   * panTo
+   * @description Wraps the leaflet panTo method and triggers on our map ref
    */
 
-  function flyTo (center) {
+  function panTo (center) {
     const { current = {} } = refMap;
     const { leafletElement = {} } = current;
-
-    // If we can find the existing zoom, use that to prevent changing the zoom
-    // level on someone interacting with the map
-
-    const mapZoom = leafletElement.getZoom();
-
-    // Fly to our new (or old) center with the zoom
-
-    leafletElement.flyTo(center, mapZoom || zoom);
+    leafletElement.panTo(center);
   }
 
   /**

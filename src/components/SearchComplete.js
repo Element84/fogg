@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useDebouncedCallback from 'use-debounce/lib/callback';
+import CustomEvent from 'custom-event';
 
 import SearchBox from './SearchBox';
 
@@ -224,6 +225,6 @@ export function clearSearchComplete (target) {
   if (!target) {
     return;
   }
-  const event = new Event(CLEAR_SEARCH_EVENT);
+  const event = new CustomEvent(CLEAR_SEARCH_EVENT);
   target.dispatchEvent(event);
 }
