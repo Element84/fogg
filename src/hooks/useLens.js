@@ -24,14 +24,15 @@ export default function useLens ({
   refSearchComplete,
   availableFilters,
   zoom,
-  defaultZoom
+  defaultZoom,
+  defaultDateRange = {}
 }) {
   const defaultGeoJson =
     typeof geoJsonFromLatLn === 'function' && geoJsonFromLatLn(defaultCenter);
 
   const [date, setDate] = useState({
     dateIsOpen: false,
-    date: {}
+    date: defaultDateRange
   });
   const mapConfigDefaults = {
     center: defaultCenter,
@@ -344,7 +345,7 @@ export default function useLens ({
       resolveLensAutocomplete(urlQuery).then(queryResults => {
         if (Array.isArray(queryResults)) {
           const { value } = queryResults[0];
-          handleOnSearch(value, {}, urlQuery, queryFilters);
+          handleOnSearch(value, date, urlQuery, queryFilters);
           setActiveFilters(queryFilters);
         }
       });

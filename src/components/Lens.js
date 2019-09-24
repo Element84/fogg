@@ -32,7 +32,8 @@ const Lens = ({
   fetchLayerData,
   disableMapDraw,
   useMapEffect,
-  hasFilterCancel = true
+  hasFilterCancel = true,
+  defaultDateRange = {}
 }) => {
   const refMap = createRef();
   const refMapDraw = createRef();
@@ -52,7 +53,8 @@ const Lens = ({
     refMapDraw,
     refSearchComplete,
     zoom,
-    defaultZoom
+    defaultZoom,
+    defaultDateRange
   });
 
   const layers = useLayers(availableLayers, fetchLayerData);
@@ -182,7 +184,8 @@ Lens.propTypes = {
   ]),
   disableMapDraw: PropTypes.bool,
   useMapEffect: PropTypes.func,
-  hasFilterCancel: PropTypes.bool
+  hasFilterCancel: PropTypes.bool,
+  defaultDateRange: PropTypes.object
 };
 
 export default Lens;

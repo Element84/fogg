@@ -22,7 +22,7 @@ const SearchDate = ({
   useEffect(() => {
     setDate({
       ...date,
-      dateIsOpen
+      dateIsOpen: !!dateIsOpen
     });
   }, [dateIsOpen]);
 
@@ -137,6 +137,7 @@ const SearchDate = ({
             onChange={handleDateChange}
             onCancel={handleDateCancel}
             onClear={handleDateClear}
+            defaultDate={defaultDate.date}
             clearDate={!defaultDate.date}
           />
         </div>

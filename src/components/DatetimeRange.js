@@ -10,16 +10,18 @@ const DatetimeRange = ({
   onCancel,
   onClear,
   clearDate,
-  allowPastDate = true
+  allowPastDate = true,
+  defaultDate
 }) => {
   const emptyDate = {
     start: null,
     end: null
   };
 
-  const [dateTemp, updateDateTemp] = useState(emptyDate);
+  const initialDate = { ...emptyDate, ...defaultDate };
 
-  const [date, updateDate] = useState(emptyDate);
+  const [dateTemp, updateDateTemp] = useState(initialDate);
+  const [date, updateDate] = useState(dateTemp);
 
   useEffect(() => {
     if (clearDate) {
@@ -182,7 +184,8 @@ DatetimeRange.propTypes = {
   onCancel: PropTypes.func,
   onClear: PropTypes.func,
   clearDate: PropTypes.bool,
-  allowPastDate: PropTypes.bool
+  allowPastDate: PropTypes.bool,
+  defaultDate: PropTypes.object
 };
 
 export default DatetimeRange;
