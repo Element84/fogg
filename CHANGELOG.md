@@ -1,3 +1,6 @@
+### Version 0.1.164
+- [DR-33] Change how layers are passed to getDataForLayers
+
 ### Version 0.1.163
 
 ### Version 0.1.162
