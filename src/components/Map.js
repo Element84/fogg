@@ -5,8 +5,8 @@ import L from 'leaflet';
 import { Map as BaseMap, LayersControl, ZoomControl } from 'react-leaflet';
 import 'proj4';
 import 'proj4leaflet';
-import 'leaflet-active-area';
-// import '../plugins/leaflet-tilelayer-subpixel-fix';
+// import 'leaflet-active-area';
+import '../plugins/leaflet-tilelayer-subpixel-fix';
 
 import MapService from '../models/map-service';
 import { LayersContext } from '../context';
