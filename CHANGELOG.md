@@ -1,3 +1,11 @@
+### Version 0.1.165
+- Remove subpixel-fix plugin
+- Remove active area
+- Revert flyTo > panTo
+- Import leaflet-active-area
+- Undo panTo revert
+- Upgrade leaflet-active-area
+
 ### Version 0.1.164
 - [DR-33] Change how layers are passed to getDataForLayers
 
