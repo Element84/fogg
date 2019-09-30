@@ -74,7 +74,7 @@ export default function useLens ({
       setView(center, defaultZoom);
       hasRenderedOnce = true;
     } else {
-      panTo(center);
+      flyTo(center);
     }
   }, [mapConfig.center, defaultZoom]);
 
@@ -119,14 +119,14 @@ export default function useLens ({
   }
 
   /**
-   * panTo
-   * @description Wraps the leaflet panTo method and triggers on our map ref
+   * flyTo
+   * @description Wraps the leaflet flyTo method and triggers on our map ref
    */
 
-  function panTo (center) {
+  function flyTo (center) {
     const { current = {} } = refMap;
     const { leafletElement = {} } = current;
-    leafletElement.panTo(center);
+    leafletElement.flyTo(center);
   }
 
   /**
