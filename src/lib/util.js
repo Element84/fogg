@@ -365,17 +365,17 @@ module.exports.findIsCheckedIds = findIsCheckedIds;
  * @description
  */
 
-function chompFloat (float, maxFix = 0) {
-  let updatedFloat = float;
+function chompFloat (floatToChomp, maxFix = 0) {
+  let updatedFloat = floatToChomp;
 
-  if (typeof float !== 'number') {
-    updatedFloat = parseFloat(float);
+  if (typeof floatToChomp !== 'number') {
+    updatedFloat = parseFloat(floatToChomp);
   }
 
   // If parsing the float didn't work out, return zero
 
   if (isNaN(updatedFloat)) {
-    throw new Error(`Invalid value passed to fixFloat ${float}`);
+    throw new Error(`Invalid value passed to fixFloat ${floatToChomp}`);
   }
 
   updatedFloat = updatedFloat.toFixed(maxFix);
