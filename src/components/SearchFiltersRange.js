@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { chompFloat } from '../lib/util';
+
 import FormInput from './FormInput';
 import InputRange from './InputRange';
 
@@ -40,7 +42,15 @@ const SearchFiltersRange = ({
     handleOnChange(updatedValue);
   }
 
-  function handleOnChange (updatedValue) {
+  function handleOnChange ({ min, max } = {}) {
+    // Before we update, we want to normalize the values to fix
+    // them to a maximum of 2 decimal places
+
+    const updatedValue = {
+      min: typeof min === 'number' ? chompFloat(min, 2) : min,
+      max: typeof max === 'number' ? chompFloat(max, 2) : max
+    };
+
     if (typeof onChange === 'function') {
       onChange({
         target: {
