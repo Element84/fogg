@@ -719,7 +719,7 @@ const earthSearchAvailableFilters = [
     ]
   },
   {
-    label: 'Cloud Clover',
+    label: 'Cloud Cover',
     id: 'properties/eo:cloud_cover',
     type: 'range',
     range: {
