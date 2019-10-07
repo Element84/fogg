@@ -1,3 +1,9 @@
+### Version 0.1.166
+- [JAM-682] adding the ability to set up a range input and slider for filter properties
+- [JAM-682] cloud cover
+- [JAM-682] fixing range input to max of 2 decimal places?
+- [JAM-682] renaming float argument
+
 ### Version 0.1.165
 - Remove subpixel-fix plugin
 - Remove active area
