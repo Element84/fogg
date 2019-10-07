@@ -2,7 +2,8 @@ import {
   routeIsInternal,
   parseNumber,
   copyKeysToEmptyObject,
-  filterObject
+  filterObject,
+  chompFloat
 } from 'lib/util';
 
 describe('Util', () => {
@@ -80,6 +81,39 @@ describe('Util', () => {
       expect(filterObject(object, key => whitelist.includes(key))).toEqual(
         expected
       );
+    });
+  });
+
+  describe('chompFloat', () => {
+    it('should return the number fixed', () => {
+      expect(chompFloat(0.1234, 3)).toEqual(0.123);
+      expect(chompFloat('0.1234', 3)).toEqual(0.123);
+      expect(chompFloat(4321.2, 2)).toEqual(4321.2);
+      expect(chompFloat('4321.2', 2)).toEqual(4321.2);
+      expect(chompFloat(0, 5)).toEqual(0);
+      expect(chompFloat('0', 5)).toEqual(0);
+    });
+
+    it('should return the number fixed', () => {
+      const errorMessage = 'Invalid value passed to fixFloat';
+
+      try {
+        chompFloat(undefined);
+      } catch (e) {
+        expect(e.message).toMatch(errorMessage);
+      }
+
+      try {
+        chompFloat(null);
+      } catch (e) {
+        expect(e.message).toMatch(errorMessage);
+      }
+
+      try {
+        chompFloat(false);
+      } catch (e) {
+        expect(e.message).toMatch(errorMessage);
+      }
     });
   });
 });

@@ -28,9 +28,14 @@ export default function useFilters (availableFilters) {
    */
 
   function storeFilterChanges (changes = []) {
+    const unsavedFilters = applyFilterSetKeyToFilters(
+      filters.unsaved,
+      'available',
+      'defaultValue'
+    );
     const updatedFilterState = {
       ...filters,
-      unsaved: concatFilters(filters.unsaved, changes)
+      unsaved: concatFilters(unsavedFilters, changes)
     };
     updateFilters(updatedFilterState);
     return updatedFilterState;
@@ -42,9 +47,14 @@ export default function useFilters (availableFilters) {
    */
 
   function setActiveFilters (changes = []) {
+    const activeFilters = applyFilterSetKeyToFilters(
+      filters.active,
+      'available',
+      'defaultValue'
+    );
     const updatedFilterState = {
       ...filters,
-      active: concatFilters(filters.active, changes)
+      active: concatFilters(activeFilters, changes)
     };
     updateFilters(updatedFilterState);
     return updatedFilterState;
@@ -117,6 +127,30 @@ export default function useFilters (availableFilters) {
       );
     }
     return filtersSet;
+  }
+
+  /**
+   * applyFilterSetKeyToFilters
+   * @description Given array of filters, applies the key of the filtesr in the given set
+   * @summary Passing in (active, 'available', 'defaultValue') would apply all defaultValues to matching filters from available
+   */
+
+  function applyFilterSetKeyToFilters (filtersToUpdate = [], set, key) {
+    if (!Array.isArray(filtersToUpdate)) return [];
+
+    return filtersToUpdate.map(filter => {
+      const newKeys = {};
+      const setFilter =
+        filters[set] && filters[set].find(sf => filter.id === sf.id);
+      if (setFilter) {
+        newKeys[key] = setFilter[key];
+      }
+
+      return {
+        ...filter,
+        ...newKeys
+      };
+    });
   }
 
   return {

@@ -359,3 +359,28 @@ function findIsCheckedIds (options) {
 }
 
 module.exports.findIsCheckedIds = findIsCheckedIds;
+
+/**
+ * chompFloat
+ * @description
+ */
+
+function chompFloat (floatToChomp, maxFix = 0) {
+  let updatedFloat = floatToChomp;
+
+  if (typeof floatToChomp !== 'number') {
+    updatedFloat = parseFloat(floatToChomp);
+  }
+
+  // If parsing the float didn't work out, return zero
+
+  if (isNaN(updatedFloat)) {
+    throw new Error(`Invalid value passed to fixFloat ${floatToChomp}`);
+  }
+
+  updatedFloat = updatedFloat.toFixed(maxFix);
+
+  return parseFloat(updatedFloat);
+}
+
+module.exports.chompFloat = chompFloat;

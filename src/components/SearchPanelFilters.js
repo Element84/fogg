@@ -58,7 +58,15 @@ const SearchPanelFilters = ({
 
     if (Array.isArray(value)) {
       value = value.join(', ');
+    } else if (typeof value === 'object' && value.constructor === Object) {
+      value = Object.keys(value)
+        .map(key => {
+          return `${key}: ${value[key]}`;
+        })
+        .join(', ');
     }
+
+    value = `${value}`;
 
     return {
       label,
