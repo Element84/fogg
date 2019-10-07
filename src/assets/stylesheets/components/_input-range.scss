@@ -1,0 +1,34 @@
+@import "~react-input-range/lib/css/index.css";
+
+.input-range {
+  width: calc(100% - 1em);
+  margin: 1.4em 0 1.4em .5em;
+}
+
+.input-range__track--background {
+  background: $color-gray1;
+}
+
+.input-range__track--active {
+  background: $color-blue5;
+}
+
+.input-range__label {
+  color: $color-gray6;
+}
+
+.input-range__label--min,
+.input-range__label--max {
+
+  .input-range__label-container {
+    left: auto;
+    right: auto;
+  }
+
+}
+
+.input-range__slider {
+  background: $color-blue7;
+  border: none;
+  box-shadow: $component-shadow-basic;
+}

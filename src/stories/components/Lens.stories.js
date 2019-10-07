@@ -506,9 +506,20 @@ async function handleResolveOnEarthSearch ({
       }
 
       if (parent === 'properties') {
-        filterQuery[id] = {
-          eq: value
-        };
+        if (value.min || value.max) {
+          filterQuery[id] = {
+            ...(value.min && {
+              gt: value.min
+            }),
+            ...(value.max && {
+              lt: value.max
+            })
+          };
+        } else {
+          filterQuery[id] = {
+            eq: value
+          };
+        }
       }
     });
 
@@ -685,8 +696,7 @@ const earthSearchAvailableFilters = [
     label: 'Collection',
     id: 'properties/collection',
     type: 'radiolist',
-    list: ['sentinel-2-l1c'],
-    defaultValue: false
+    list: ['sentinel-2-l1c']
   },
   {
     label: 'Sentinel Grid Square',
@@ -706,7 +716,19 @@ const earthSearchAvailableFilters = [
       'NC',
       'PC',
       'GL'
-    ],
-    defaultValue: false
+    ]
+  },
+  {
+    label: 'Cloud Clover',
+    id: 'properties/eo:cloud_cover',
+    type: 'range',
+    range: {
+      min: 0.1,
+      max: 0.9
+    },
+    defaultValue: {
+      min: 0.2,
+      max: 0.8
+    }
   }
 ];
