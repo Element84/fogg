@@ -2,10 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactInputRange from 'react-input-range';
 
-const InputRange = ({ className, value, minValue, maxValue, ...rest }) => {
+import { useStoredValue } from '../hooks';
+import { chompFloat } from '../lib/util';
+
+const InputRange = (props = {}) => {
+  const {
+    className,
+    value,
+    minValue,
+    maxValue,
+    onChange,
+    onChangeComplete,
+    ...rest
+  } = props;
+  const { step = 0.01 } = rest;
+
+  const { value: storedValue, updateValue, saveChanges } = useStoredValue(
+    value
+  );
+
   const inputValue = {
-    ...value
+    ...storedValue
   };
+
+  // Determine how many decimal places the input range should be set to
+
+  const floatPoint = step && `${parseFloat(step)}`.split('.')[1].length;
 
   let inputClassName = `input-range`;
 
@@ -13,10 +35,10 @@ const InputRange = ({ className, value, minValue, maxValue, ...rest }) => {
     inputClassName = `${inputClassName} ${className}`;
   }
 
-  // If either of the values arre out of their range or not a number, default to
-  // the min/max. If it's not a number, most likely the value is getting set via
-  // another control method like an input, which might mean it's in a state between
-  // the original value and updating the final value, such as "0."
+  // If we dont have a number, we want to use the the min or max value as
+  // we shouldnt attempt to formulate an invalid value type. Additionally,
+  // we don't want to permit a value above or below the min/max, so default
+  // to that min/max value
 
   if (typeof inputValue.min !== 'number' || inputValue.min < minValue) {
     inputValue.min = minValue;
@@ -26,15 +48,42 @@ const InputRange = ({ className, value, minValue, maxValue, ...rest }) => {
     inputValue.max = maxValue;
   }
 
-  const props = {
+  // Take the "step" value and determine how many decimal places we should
+  // normalize out visible value by
+
+  if (typeof inputValue.min === 'number') {
+    inputValue.min = chompFloat(inputValue.min, floatPoint);
+  }
+
+  if (typeof inputValue.max === 'number') {
+    inputValue.max = chompFloat(inputValue.max, floatPoint);
+  }
+
+  function handleOnChange (data) {
+    updateValue(data);
+    if (typeof onChange === 'function') {
+      onChange(data);
+    }
+  }
+
+  function handleOnChangeComplete (data) {
+    saveChanges();
+    if (typeof onChangeComplete === 'function') {
+      onChangeComplete(storedValue);
+    }
+  }
+
+  const inputProps = {
     ...rest,
     className: inputClassName,
     value: inputValue,
     minValue,
-    maxValue
+    maxValue,
+    onChange: handleOnChange,
+    onChangeComplete: handleOnChangeComplete
   };
 
-  return <ReactInputRange {...props} />;
+  return <ReactInputRange {...inputProps} />;
 };
 
 InputRange.propTypes = {
@@ -44,7 +93,9 @@ InputRange.propTypes = {
     max: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
   }),
   minValue: PropTypes.number,
-  maxValue: PropTypes.number
+  maxValue: PropTypes.number,
+  onChange: PropTypes.func,
+  onChangeComplete: PropTypes.func
 };
 
 export default InputRange;

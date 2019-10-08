@@ -87,7 +87,7 @@ const SearchFiltersRange = ({
             maxValue={rangeMax}
             step={0.01}
             value={value}
-            onChange={handleOnSliderChange}
+            onChangeComplete={handleOnSliderChange}
           />
         </div>
       </div>

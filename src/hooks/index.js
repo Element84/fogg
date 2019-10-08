@@ -11,3 +11,4 @@ export { default as useModal } from './useModal';
 export { default as useModForm } from './useModForm';
 export { default as useModValue } from './useModValue';
 export { default as usePrevious } from './usePrevious';
+export { default as useStoredValue } from './useStoredValue';
