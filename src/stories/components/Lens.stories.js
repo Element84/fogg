@@ -509,10 +509,10 @@ async function handleResolveOnEarthSearch ({
         if (value.min || value.max) {
           filterQuery[id] = {
             ...(value.min && {
-              gt: value.min
+              gte: value.min
             }),
             ...(value.max && {
-              lt: value.max
+              lte: value.max
             })
           };
         } else {
