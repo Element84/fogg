@@ -1,3 +1,6 @@
+### Version 0.1.167
+- updating the input range to store a temporary value before committing to avoid constant update rerenders
+
 ### Version 0.1.166
 - [JAM-682] adding the ability to set up a range input and slider for filter properties
 - [JAM-682] cloud cover
