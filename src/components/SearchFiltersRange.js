@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { chompFloat } from '../lib/util';
 
-import FormInput from './FormInput';
+import FormInputDebounced from './FormInputDebounced';
 import InputRange from './InputRange';
 
 const SearchFiltersRange = ({
@@ -18,7 +18,12 @@ const SearchFiltersRange = ({
 
   const namePrefix = `${id}-range`;
 
-  function handleChange ({ target = {} } = {}) {
+  /**
+   * handleInputChange
+   * @description When the text inputs change, fire away
+   */
+
+  function handleInputChange ({ target = {} } = {}) {
     const { id: targetId, value: targetValue } = target;
     const rangeLimit = targetId.replace(`${namePrefix}-`, '');
     const isCompleteFloat = targetValue && targetValue.substr(-1) !== '.';
@@ -38,9 +43,19 @@ const SearchFiltersRange = ({
     });
   }
 
+  /**
+   * handleInputChange
+   * @description When the slider changes, fire away
+   */
+
   function handleOnSliderChange (updatedValue) {
     handleOnChange(updatedValue);
   }
+
+  /**
+   * handleOnChange
+   * @description Manages all changes to bubble up to the parent component
+   */
 
   function handleOnChange ({ min, max } = {}) {
     // Before we update, we want to normalize the values to fix
@@ -68,17 +83,17 @@ const SearchFiltersRange = ({
       )}
       <div className="search-filters-range">
         <div className="search-filters-range-input">
-          <FormInput
+          <FormInputDebounced
             id={`${namePrefix}-min`}
             label="Min"
             value={valueMin}
-            onChange={handleChange}
+            onChange={handleInputChange}
           />
-          <FormInput
+          <FormInputDebounced
             id={`${namePrefix}-max`}
             label="Max"
             value={valueMax}
-            onChange={handleChange}
+            onChange={handleInputChange}
           />
         </div>
         <div className="search-filters-range-slider">

@@ -16,7 +16,6 @@ const InputRange = (props = {}) => {
     ...rest
   } = props;
   const { step = 0.01 } = rest;
-
   const { value: storedValue, updateValue, saveChanges } = useStoredValue(
     value
   );

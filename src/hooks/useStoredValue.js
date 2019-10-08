@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 /**
  * useStoredValue
@@ -6,10 +6,16 @@ import { useState } from 'react';
  */
 
 export default function useStoredValue (defaultValue) {
-  // The ref object is a generic container whose current property is mutable ...
-  // ... and can hold any value, similar to an instance property on a class
   const [value, updateValue] = useState(defaultValue);
   const [tempValue, updateTempValue] = useState(value);
+
+  // If the default value changes, update the stored values to reflect it as
+  // it's being controlled from the parent
+
+  useEffect(() => {
+    handleUpdateValue(defaultValue);
+    handleSaveChanges();
+  }, [defaultValue]);
 
   /**
    * handleUpdateValue
