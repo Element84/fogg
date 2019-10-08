@@ -1,3 +1,6 @@
+### Version 0.1.168
+- debouncing the form input of the range filter to avoid tons of updates in a row
+
 ### Version 0.1.167
 - updating the input range to store a temporary value before committing to avoid constant update rerenders
 
