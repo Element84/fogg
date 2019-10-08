@@ -1,3 +1,6 @@
+### Version 0.1.169
+- fixing range
+
 ### Version 0.1.168
 - debouncing the form input of the range filter to avoid tons of updates in a row
 
