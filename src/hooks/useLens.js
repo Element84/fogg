@@ -399,7 +399,8 @@ export default function useLens ({
       handleUpdateSearchParams,
       loadMoreResults: moreResultsAvailable ? handleLoadMoreResults : undefined,
       clearActiveSearch: handleClearSearch,
-      handleDateChange
+      handleDateChange,
+      refreshQueryParams: handleQueryParams
     },
     filters: {
       ...filters,
