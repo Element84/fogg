@@ -1,3 +1,6 @@
+### Version 0.1.170
+- adding method to refresh query params
+
 ### Version 0.1.169
 - fixing range
 
