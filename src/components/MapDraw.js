@@ -1,7 +1,7 @@
 import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 import 'leaflet-draw/dist/leaflet.draw.css';
-import { FeatureGroup } from 'react-leaflet';
+import { FeatureGroup, Popup } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 
 import { useMapMarkerIcon } from '../hooks';
@@ -21,7 +21,9 @@ const MapDraw = ({
   forwardedRef,
   onCreated,
   disableEditControls = false,
-  controlOptions = DEFAULT_CONTROL_OPTIONS
+  controlOptions = DEFAULT_CONTROL_OPTIONS,
+  PopupContent,
+  ...rest
 }) => {
   const refFeatureGroup = forwardedRef || createRef();
   const { icon } = useMapMarkerIcon();
@@ -53,7 +55,7 @@ const MapDraw = ({
     }
 
     if (typeof onCreated === 'function') {
-      onCreated(layer);
+      onCreated(layer, leafletElement);
     }
   }
 
@@ -61,15 +63,22 @@ const MapDraw = ({
     <FeatureGroup ref={refFeatureGroup}>
       {children}
       {!disableEditControls && (
-        <EditControl
-          position="bottomright"
-          onCreated={handleOnCreated}
-          draw={drawOptions}
-          edit={{
-            edit: false,
-            remove: false
-          }}
-        />
+        <>
+          <EditControl
+            position="bottomright"
+            onCreated={handleOnCreated}
+            draw={drawOptions}
+            edit={{
+              edit: false,
+              remove: false
+            }}
+          />
+          {PopupContent && (
+            <Popup>
+              <PopupContent {...rest} />
+            </Popup>
+          )}
+        </>
       )}
     </FeatureGroup>
   );
@@ -80,7 +89,8 @@ MapDraw.propTypes = {
   forwardedRef: PropTypes.object,
   onCreated: PropTypes.func,
   disableEditControls: PropTypes.bool,
-  controlOptions: PropTypes.object
+  controlOptions: PropTypes.object,
+  PopupContent: PropTypes.any
 };
 
 const MapDrawWithRefs = React.forwardRef(function mapDraw (props, ref) {

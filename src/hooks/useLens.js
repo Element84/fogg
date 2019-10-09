@@ -252,9 +252,9 @@ export default function useLens ({
    * @description Fires when a layer is created
    */
 
-  function handleOnCreated (layer) {
+  function handleOnCreated (layer, leafletElement) {
     if (typeof onCreatedDraw === 'function') {
-      onCreatedDraw(layer);
+      onCreatedDraw(layer, leafletElement);
       return;
     }
     handleClearSearch({

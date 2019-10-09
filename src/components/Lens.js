@@ -35,7 +35,8 @@ const Lens = ({
   hasFilterCancel = true,
   defaultDateRange = {},
   drawControlOptions,
-  onCreatedDraw
+  onCreatedDraw,
+  PopupContent
 }) => {
   const refMap = createRef();
   const refMapDraw = createRef();
@@ -130,6 +131,7 @@ const Lens = ({
               <LensMapDraw
                 ref={refMapDraw}
                 controlOptions={drawControlOptions}
+                PopupContent={PopupContent}
               />
             )}
           </LensMap>
@@ -204,7 +206,11 @@ Lens.propTypes = {
    * Custom onCreated function will override handleOnCreated in useLens that is passed to EditControl
    * @see See [react-leaflet-draw](https://github.com/alex3165/react-leaflet-draw) for component
    */
-  onCreatedDraw: PropTypes.func
+  onCreatedDraw: PropTypes.func,
+  /**
+   * Content of popup for drawn shapes
+   */
+  PopupContent: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
 };
 
 export default Lens;

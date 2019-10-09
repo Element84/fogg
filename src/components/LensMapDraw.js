@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { LensContext } from '../context';
+import { LayersContext, LensContext } from '../context';
 
 import MapDraw from './MapDraw';
 
 const LensMapDraw = props => {
-  const { forwardedRef, controlOptions } = props;
+  const { forwardedRef, controlOptions, PopupContent } = props;
   const { lens = {} } = useContext(LensContext) || {};
+  const layers = useContext(LayersContext) || {};
 
   const { handlers: lensHandlers = {} } = lens;
   const { handleOnCreated } = lensHandlers;
@@ -16,6 +17,8 @@ const LensMapDraw = props => {
       ref={forwardedRef}
       onCreated={handleOnCreated}
       controlOptions={controlOptions}
+      PopupContent={PopupContent}
+      {...layers}
       {...props}
     />
   );
@@ -23,7 +26,8 @@ const LensMapDraw = props => {
 
 LensMapDraw.propTypes = {
   forwardedRef: PropTypes.object,
-  controlOptions: PropTypes.object
+  controlOptions: PropTypes.object,
+  PopupContent: PropTypes.any
 };
 
 const LensMapDrawWithRefs = React.forwardRef(function lensMapDraw (props, ref) {

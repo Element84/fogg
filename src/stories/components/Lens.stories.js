@@ -421,9 +421,14 @@ stories.add('Earth Search with Date Only Search and Default Date', () => {
 });
 
 stories.add('Earth Search with Custom Draw Options', () => {
-  function customHandleOnCreated () {
-    action('Draw::onCreated')('Custom function triggered');
+  function customHandleOnCreated (layer, leafletElement) {
+    action('Draw::onCreated')('Custom function triggered', layer);
+    leafletElement.openPopup();
   }
+
+  const PopupContent = props => {
+    return <div>Test</div>;
+  };
   return (
     <>
       <Lens
@@ -439,6 +444,7 @@ stories.add('Earth Search with Custom Draw Options', () => {
           marker: false
         }}
         onCreatedDraw={customHandleOnCreated}
+        PopupContent={PopupContent}
       />
     </>
   );
