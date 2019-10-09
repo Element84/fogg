@@ -10,14 +10,32 @@ import {
   reduceDrawEventToLayer
 } from '../lib/leaflet';
 
+const DEFAULT_CONTROL_OPTIONS = {
+  circle: false,
+  circlemarker: false,
+  polyline: false
+};
+
 const MapDraw = ({
   children,
   forwardedRef,
   onCreated,
-  disableEditControls = false
+  disableEditControls = false,
+  controlOptions = DEFAULT_CONTROL_OPTIONS
 }) => {
   const refFeatureGroup = forwardedRef || createRef();
   const { icon } = useMapMarkerIcon();
+
+  const markerOptions = {
+    marker: {
+      icon
+    }
+  };
+
+  const drawOptions = {
+    ...markerOptions,
+    ...controlOptions
+  };
 
   /**
    * handleOnCreated
@@ -46,14 +64,7 @@ const MapDraw = ({
         <EditControl
           position="bottomright"
           onCreated={handleOnCreated}
-          draw={{
-            circle: false,
-            circlemarker: false,
-            polyline: false,
-            marker: {
-              icon
-            }
-          }}
+          draw={drawOptions}
           edit={{
             edit: false,
             remove: false
@@ -68,7 +79,8 @@ MapDraw.propTypes = {
   children: PropTypes.node,
   forwardedRef: PropTypes.object,
   onCreated: PropTypes.func,
-  disableEditControls: PropTypes.bool
+  disableEditControls: PropTypes.bool,
+  controlOptions: PropTypes.object
 };
 
 const MapDrawWithRefs = React.forwardRef(function mapDraw (props, ref) {

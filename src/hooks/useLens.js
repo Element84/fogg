@@ -25,7 +25,8 @@ export default function useLens ({
   availableFilters,
   zoom,
   defaultZoom,
-  defaultDateRange = {}
+  defaultDateRange = {},
+  onCreatedDraw
 }) {
   const defaultGeoJson =
     typeof geoJsonFromLatLn === 'function' && geoJsonFromLatLn(defaultCenter);
@@ -252,6 +253,10 @@ export default function useLens ({
    */
 
   function handleOnCreated (layer) {
+    if (typeof onCreatedDraw === 'function') {
+      onCreatedDraw(layer);
+      return;
+    }
     handleClearSearch({
       clearLayers: false
     });

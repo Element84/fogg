@@ -5,17 +5,25 @@ import { LensContext } from '../context';
 import MapDraw from './MapDraw';
 
 const LensMapDraw = props => {
-  const { forwardedRef } = props;
+  const { forwardedRef, controlOptions } = props;
   const { lens = {} } = useContext(LensContext) || {};
 
   const { handlers: lensHandlers = {} } = lens;
   const { handleOnCreated } = lensHandlers;
 
-  return <MapDraw ref={forwardedRef} onCreated={handleOnCreated} {...props} />;
+  return (
+    <MapDraw
+      ref={forwardedRef}
+      onCreated={handleOnCreated}
+      controlOptions={controlOptions}
+      {...props}
+    />
+  );
 };
 
 LensMapDraw.propTypes = {
-  forwardedRef: PropTypes.object
+  forwardedRef: PropTypes.object,
+  controlOptions: PropTypes.object
 };
 
 const LensMapDrawWithRefs = React.forwardRef(function lensMapDraw (props, ref) {

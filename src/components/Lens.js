@@ -33,7 +33,9 @@ const Lens = ({
   disableMapDraw,
   useMapEffect,
   hasFilterCancel = true,
-  defaultDateRange = {}
+  defaultDateRange = {},
+  drawControlOptions,
+  onCreatedDraw
 }) => {
   const refMap = createRef();
   const refMapDraw = createRef();
@@ -54,7 +56,8 @@ const Lens = ({
     refSearchComplete,
     zoom,
     defaultZoom,
-    defaultDateRange
+    defaultDateRange,
+    onCreatedDraw
   });
 
   const layers = useLayers(availableLayers, fetchLayerData);
@@ -123,7 +126,12 @@ const Lens = ({
           )}
 
           <LensMap ref={refMap} {...mapSettings}>
-            {!disableMapDraw && <LensMapDraw ref={refMapDraw} />}
+            {!disableMapDraw && (
+              <LensMapDraw
+                ref={refMapDraw}
+                controlOptions={drawControlOptions}
+              />
+            )}
           </LensMap>
 
           <div className="lens-extensions">{children}</div>
@@ -185,7 +193,18 @@ Lens.propTypes = {
   disableMapDraw: PropTypes.bool,
   useMapEffect: PropTypes.func,
   hasFilterCancel: PropTypes.bool,
-  defaultDateRange: PropTypes.object
+  defaultDateRange: PropTypes.object,
+  /**
+   * Options to pass to EditControl's draw prop
+   * @see See [react-leaflet-draw](https://github.com/alex3165/react-leaflet-draw) for component
+   * @see See [Leaflet Draw](https://leaflet.github.io/Leaflet.draw/docs/leaflet-draw-latest.html#drawoptions) for draw options
+   */
+  drawControlOptions: PropTypes.object,
+  /**
+   * Custom onCreated function will override handleOnCreated in useLens that is passed to EditControl
+   * @see See [react-leaflet-draw](https://github.com/alex3165/react-leaflet-draw) for component
+   */
+  onCreatedDraw: PropTypes.func
 };
 
 export default Lens;

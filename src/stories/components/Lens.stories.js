@@ -420,6 +420,30 @@ stories.add('Earth Search with Date Only Search and Default Date', () => {
   );
 });
 
+stories.add('Earth Search with Custom Draw Options', () => {
+  function customHandleOnCreated () {
+    action('Draw::onCreated')('Custom function triggered');
+  }
+  return (
+    <>
+      <Lens
+        defaultCenter={DEFAULT_CENTER}
+        defaultZoom={2}
+        resolveOnSearch={handleResolveOnEarthSearch}
+        SidebarComponents={EarthSearchSidebarPanels}
+        useMapEffect={handleEarthSearchUseMapEffect}
+        placeholder="Look stuffs on Earth Data"
+        availableFilters={earthSearchAvailableFilters}
+        drawControlOptions={{
+          polygon: false,
+          marker: false
+        }}
+        onCreatedDraw={customHandleOnCreated}
+      />
+    </>
+  );
+});
+
 function responseHasMoreResults ({ page, limit, found } = {}) {
   if (page * limit < found) return true;
   return false;
