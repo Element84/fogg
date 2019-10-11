@@ -65,7 +65,7 @@ export default function useLens ({
     } else {
       panTo(center);
     }
-  }, [mapConfig.center, defaultZoom]);
+  }, [hasRenderedOnce, mapConfig.center, defaultZoom]);
 
   // We need to drop map markers using the effect hook as we don't always have the
   // leaflet element available via a ref if it's the first time rendering
@@ -75,6 +75,15 @@ export default function useLens ({
       addSearchMarker(mapConfig.center);
     }
   }, [mapConfig.marker, mapConfig.center]);
+
+  // If we have a default date range, we want to trigger a search on the first load
+  // to allow us to immediatelly prompt the results
+
+  useEffect(() => {
+    if (!hasRenderedOnce) {
+      search();
+    }
+  }, [hasRenderedOnce, defaultDateRange]);
 
   /**
    * handleDateChange
@@ -200,7 +209,7 @@ export default function useLens ({
       geoJson: mapUpdate.geoJson,
       date: searchDate.date ? searchDate.date : searchDate,
       filters: updatedFilters.active,
-      textInput,
+      textInput: mapUpdate.textInput,
       page
     };
 
@@ -209,8 +218,9 @@ export default function useLens ({
 
     const searchHasQuery = params.textInput && params.textInput.length > 0;
     const searchHasFilters = params.filters.length > 0;
+    const searchHasDate = date.date.start && date.date.end;
 
-    if (!searchHasQuery && !searchHasFilters) {
+    if (!searchHasQuery && !searchHasFilters && !searchHasDate) {
       updateTotalResults(0);
       updateResults(undefined);
       updateMoreResultsAvailable(false);

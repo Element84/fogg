@@ -150,7 +150,7 @@ export async function handleResolveOnEarthSearch ({
           `Sentinel Grid Square: ${properties['sentinel:grid_square']}`,
           `Date: ${properties.datetime}`
         ],
-        to: '#'
+        icon: false
       };
     });
   }

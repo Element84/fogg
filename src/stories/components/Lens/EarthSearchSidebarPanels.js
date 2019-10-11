@@ -87,16 +87,27 @@ const EarthSearchSidebarPanels = ({
             <p>Explore stuff</p>
           </Panel>
           <Panel header="Past Searches">
-            <p>These won&apos;t do anything.</p>
             <ItemList
               items={[
                 {
                   label: 'Alexandria, VA',
-                  to: '#'
+                  onClick: () => {
+                    search({
+                      textInput: 'Alexandria, VA',
+                      activeFilters: [],
+                      dropMarker: true
+                    });
+                  }
                 },
                 {
                   label: 'Montes Claros, MG',
-                  to: '#'
+                  onClick: () => {
+                    search({
+                      textInput: 'Montes Claros, MG',
+                      activeFilters: [],
+                      dropMarker: true
+                    });
+                  }
                 }
               ]}
             />
