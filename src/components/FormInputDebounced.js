@@ -29,7 +29,7 @@ const FormInputDebounced = ({ value, onChange, ...rest }) => {
 };
 
 FormInputDebounced.propTypes = {
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func
 };
 

@@ -6,13 +6,11 @@ import {
   addLeafletMarkerLayer
 } from '../lib/leaflet';
 import { resolveLensAutocomplete } from '../lib/lens';
-import { queryParamsToObject, objectToQueryString } from '../lib/util';
+import { isEmptyObject } from '../lib/util';
 
 import { clearSearchComplete } from '../components/SearchComplete';
 
-import { useFilters, useLocation } from '.';
-
-const QUERY_SEARCH_PARAMS = ['q', 'properties'];
+import { useFilters } from '.';
 
 let hasRenderedOnce = false;
 
@@ -23,7 +21,6 @@ export default function useLens ({
   refMapDraw,
   refSearchComplete,
   availableFilters,
-  zoom,
   defaultZoom,
   defaultDateRange = {}
 }) {
@@ -46,8 +43,6 @@ export default function useLens ({
   const [moreResultsAvailable, updateMoreResultsAvailable] = useState();
   const [totalResults, updateTotalResults] = useState();
 
-  const { search: locationSearch, history } = useLocation();
-
   const {
     filters,
     openFilters,
@@ -57,12 +52,6 @@ export default function useLens ({
     cancelFilterChanges,
     clearActiveFilters
   } = useFilters(availableFilters);
-
-  // On first render, parse any query params in the URL
-
-  useEffect(() => {
-    handleQueryParams();
-  }, []);
 
   // We want to handle any of our map viewport changes using the leaflet element
   // rather than rerendering to prevent our props from overriding the map, and
@@ -134,51 +123,118 @@ export default function useLens ({
    * @description Handle search functionality given layer settings and a date
    */
 
-  function search ({
-    layer = {},
+  async function search ({
+    layer,
     date: searchDate = date,
-    textInput = mapConfig.textInput,
+    textInput,
     page = 1,
-    activeFilters = filters.active,
-    dropMarker = false
+    activeFilters,
+    saveUnsavedFilters = false,
+    dropMarker = false,
+    center = mapConfig.center,
+    geoJson = mapConfig.geoJson
   } = {}) {
-    let { center = mapConfig.center, geoJson = mapConfig.geoJson } = layer;
-
-    if (typeof geoJson === 'undefined') {
-      geoJson = geoJsonFromLatLn(center);
-    }
+    const errorBase = 'Failed to search';
 
     const mapUpdate = {
       ...mapConfig,
+      page,
       center,
       geoJson,
-      textInput,
-      page,
       marker: dropMarker
     };
 
-    const params = {
-      geoJson,
-      date: searchDate.date ? searchDate.date : searchDate,
-      textInput,
-      page,
-      filters: activeFilters
-    };
+    let searchRequest;
+    let autocompleteRequest;
+    let updatedFilters;
 
-    if (typeof resolveOnSearch === 'function') {
-      resolveOnSearch(params).then(
-        ({ features = [], hasMoreResults, numberOfResults } = {}) => {
-          // If the page is greater than 1, we should append the results
-          const baseResults = Array.isArray(results) && page > 1 ? results : [];
-          const updatedResults = [...baseResults, ...features];
-          updateResults(updatedResults);
-          updateTotalResults(numberOfResults);
-          updateMoreResultsAvailable(!!hasMoreResults);
-        }
-      );
+    if (textInput && textInput.length > 0) {
+      mapUpdate.textInput = textInput;
+
+      try {
+        autocompleteRequest = await resolveLensAutocomplete(textInput);
+      } catch (e) {
+        throw new Error(`${errorBase}: Error resolving autocomplete; ${e}`);
+      }
+
+      if (Array.isArray(autocompleteRequest)) {
+        const { value } = autocompleteRequest[0];
+        mapUpdate.center = getCenterFromSearchQuery(value);
+        mapUpdate.geoJson = geoJsonFromLatLn(mapUpdate.center);
+      }
+    }
+
+    // If the search invokation passed in a layer, let's use that to determine
+    // where we want to position and display our search features
+
+    if (layer) {
+      mapUpdate.center = layer.center || mapUpdate.center;
+      mapUpdate.geoJson = layer.geoJson || mapUpdate.geoJson;
+    }
+
+    // If we don't have a geoJson document yet but we have a center, build
+    // that geoJson from the center
+
+    if (
+      (!mapUpdate.geoJson || isEmptyObject(mapUpdate.geoJson)) &&
+      mapUpdate.center
+    ) {
+      mapUpdate.geoJson = geoJsonFromLatLn(mapUpdate.center);
+    }
+
+    // If the original activeFilters argument exists, it probably means
+    // we want to override the existing active filters. In this case,
+    // we'll explicitly set the filters, otherwise, if we're trying to
+    // create a new search, we can assume we're going to leave out any
+    // working changes of the filters
+
+    if (saveUnsavedFilters) {
+      updatedFilters = saveFilterChanges();
+    } else {
+      updatedFilters = setActiveFilters(activeFilters || []);
     }
 
     updateMapConfig(mapUpdate);
+
+    const params = {
+      geoJson: mapUpdate.geoJson,
+      date: searchDate.date ? searchDate.date : searchDate,
+      filters: updatedFilters.active,
+      textInput,
+      page
+    };
+
+    // If we dont haev a query or filters, there's nothing to search, so
+    // clear out the results and just dont make a search
+
+    const searchHasQuery = params.textInput && params.textInput.length > 0;
+    const searchHasFilters = params.filters.length > 0;
+
+    if (!searchHasQuery && !searchHasFilters) {
+      updateTotalResults(0);
+      updateResults(undefined);
+      updateMoreResultsAvailable(false);
+      return;
+    }
+
+    if (typeof resolveOnSearch === 'function') {
+      try {
+        searchRequest = await resolveOnSearch(params);
+      } catch (e) {
+        throw new Error(`${errorBase}: Error resolving search; ${e}`);
+      }
+
+      const { features = [], hasMoreResults, numberOfResults } = searchRequest;
+
+      // If the page is greater than 1, we should append the results
+
+      const baseResults = Array.isArray(results) && page > 1 ? results : [];
+      const updatedResults = [...baseResults, ...features];
+
+      updateResults(updatedResults);
+      updateTotalResults(numberOfResults);
+      updateMoreResultsAvailable(!!hasMoreResults);
+    }
   }
 
   /**
@@ -192,26 +248,14 @@ export default function useLens ({
     textInput,
     activeFilters = filters.active
   ) {
-    // allow user to pass in query as {x,y} or {lng, lat}
-    const { x, y, lng, lat } = query;
-
-    if (
-      (typeof x === 'undefined' || typeof y === 'undefined') &&
-      (typeof lng === 'undefined' || typeof lat === 'undefined')
-    ) {
-      return;
-    }
-
-    const center = {
-      lng: x || lng,
-      lat: y || lat
+    const center = getCenterFromSearchQuery(query);
+    const searchLayer = {
+      center,
+      geoJson: center && geoJsonFromLatLn(center)
     };
 
     search({
-      layer: {
-        geoJson: geoJsonFromLatLn(center),
-        center
-      },
+      layer: searchLayer,
       date,
       textInput,
       activeFilters,
@@ -279,13 +323,8 @@ export default function useLens ({
    */
 
   function handleUpdateSearchParams ({ closeFilters = true }) {
-    // Save and update any filter changes
-    const updatedFilters = saveFilterChanges({ closeFilters });
-
     // Trigger a new search
-    search({
-      activeFilters: updatedFilters.active
-    });
+    search();
   }
 
   /**
@@ -301,69 +340,6 @@ export default function useLens ({
   }
 
   /**
-   * handleQueryParams
-   * @description Pulls in search related query params and updates search
-   */
-
-  function handleQueryParams () {
-    const urlParams = queryParamsToObject(locationSearch) || {};
-    const urlQuery = urlParams.q;
-    const availableFilters = filters.available;
-    const properties = queryParamsToObject(urlParams.properties);
-    const propertyKeys = properties && Object.keys(properties);
-
-    let queryFilters = [];
-
-    // Loops through any available properties and adds to available filters
-    if (propertyKeys && propertyKeys.length > 0) {
-      for (let property of propertyKeys) {
-        let key = property;
-        let value = properties[property];
-        let id = `properties/${key}`;
-
-        availableFilters.find(element => {
-          if (element.id === id) {
-            queryFilters.push({ id, value });
-          }
-          return element.id === id;
-        });
-      }
-    }
-
-    // If we have any available search params, trigger an autocomplete with
-    // the query to grab the first match then trigger a search with it
-
-    if (urlQuery || queryFilters.length > 0) {
-      resolveLensAutocomplete(urlQuery).then(queryResults => {
-        if (Array.isArray(queryResults)) {
-          const { value } = queryResults[0];
-          handleOnSearch(value, date, urlQuery, queryFilters);
-          setActiveFilters(queryFilters);
-        }
-      });
-    }
-  }
-
-  /**
-   * clearQuerySearchParams
-   * @description Remove all serach related query params from URL
-   */
-
-  function clearQuerySearchParams () {
-    if (typeof locationSearch === 'undefined') return;
-    const urlParams = queryParamsToObject(locationSearch);
-    QUERY_SEARCH_PARAMS.forEach(param => {
-      if (urlParams[param]) {
-        delete urlParams[param];
-      }
-    });
-
-    if (history) {
-      history.pushState('', '', `?${objectToQueryString(urlParams)}`);
-    }
-  }
-
-  /**
    * handleClearSearch
    * @description Clears all aspects of an active search from the state
    */
@@ -371,16 +347,19 @@ export default function useLens ({
   function handleClearSearch ({ clearLayers = true } = {}) {
     const { current } = refSearchComplete;
 
-    clearSearchComplete(current);
-    clearQuerySearchParams();
-    clearActiveFilters();
-    updateResults(undefined);
-    updateMoreResultsAvailable(false);
-    updateMapConfig({
+    const mapConfigUpdate = {
       ...mapConfigDefaults,
       center: mapConfig.center
-    });
+    };
+
+    mapConfigUpdate.geoJson = geoJsonFromLatLn(mapConfigUpdate.center);
+
+    updateMapConfig(mapConfigUpdate);
+    clearActiveFilters();
     setDate({});
+    clearSearchComplete(current);
+    updateResults(undefined);
+    updateMoreResultsAvailable(false);
 
     if (clearLayers) {
       clearSearchLayers();
@@ -400,7 +379,7 @@ export default function useLens ({
       loadMoreResults: moreResultsAvailable ? handleLoadMoreResults : undefined,
       clearActiveSearch: handleClearSearch,
       handleDateChange,
-      refreshQueryParams: handleQueryParams
+      search
     },
     filters: {
       ...filters,
@@ -413,4 +392,30 @@ export default function useLens ({
       }
     }
   };
+}
+
+function getCenterFromSearchQuery (query) {
+  // allow user to pass in query as {x,y} or {lng, lat}
+  const { x, y, lng, lat } = query;
+
+  const missingXY = !isDefined(x) || !isDefined(y);
+  const mixxingLatLng = !isDefined(lng) || !isDefined(lat);
+
+  if (!missingXY) {
+    return {
+      lng: x,
+      lat: y
+    };
+  }
+
+  if (!mixxingLatLng) {
+    return {
+      lng,
+      lat
+    };
+  }
+}
+
+function isDefined (value) {
+  return typeof value !== 'undefined';
 }

@@ -46,15 +46,24 @@ export default function useFilters (availableFilters) {
    * @description Applies any new changes to the active filters
    */
 
-  function setActiveFilters (changes = []) {
+  function setActiveFilters (changes = [], { isOpen = false } = {}) {
     const activeFilters = applyFilterSetKeyToFilters(
       filters.active,
       'available',
       'defaultValue'
     );
+    const updatedFilters = changes.map(filter => {
+      const match = activeFilters.find(({ id } = {}) => id === filter.id);
+      return {
+        ...match,
+        ...filter
+      };
+    });
     const updatedFilterState = {
       ...filters,
-      active: concatFilters(activeFilters, changes)
+      isOpen,
+      unsaved: [],
+      active: updatedFilters
     };
     updateFilters(updatedFilterState);
     return updatedFilterState;
@@ -65,12 +74,12 @@ export default function useFilters (availableFilters) {
    * @description Stores any new unsaved changes to active and clears unsaved
    */
 
-  function saveFilterChanges ({ closeFilters = true }) {
+  function saveFilterChanges ({ closeFilters = true } = {}) {
     const updatedFilterState = {
       ...filters,
       isOpen: !closeFilters,
       unsaved: [],
-      active: concatFilters(filters.active, filters.unsaved)
+      active: concatAndCleanFilters(filters.active, filters.unsaved)
     };
 
     updateFilters(updatedFilterState);
@@ -168,6 +177,16 @@ export default function useFilters (availableFilters) {
 }
 
 /**
+ * concatAndCleanFilters
+ * @description Applies the concatFilters function and removes any undefined values
+ */
+
+function concatAndCleanFilters () {
+  const filters = concatFilters.apply(null, arguments);
+  return filters.filter(({ value }) => typeof value !== 'undefined');
+}
+
+/**
  * concatFilters
  * @description Concats all arrays that are passed in and their values
  *     Each ID uses the last available value in the argument arrays
@@ -205,7 +224,7 @@ function concatFilters () {
       allFilters[existingIndex].value = filter.value;
 
       if (allFilters[existingIndex].value === 'All Values') {
-        allFilters[existingIndex].value = undefined;
+        delete allFilters[existingIndex].value;
       }
     });
   });

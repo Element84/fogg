@@ -67,10 +67,7 @@ const SearchDate = ({
 
   function handleDateClear () {
     const clearedDate = {
-      date: {
-        start: '',
-        end: ''
-      },
+      date: {},
       dateIsOpen: false
     };
     setDate(clearedDate);

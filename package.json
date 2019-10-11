@@ -97,7 +97,7 @@
     "build": "yarn clean && gatsby build && yarn build-storybook",
     "build-storybook": "build-storybook",
     "clean": "gatsby clean",
-    "develop": "yarn clean && concurrently --names 'GATSBY,STORYBOOK' -c 'bgCyan.bold,bgMagenta.bold' 'gatsby develop' 'yarn storybook'",
+    "develop": "yarn clean && concurrently --names 'STORYBOOK' -c 'bgMagenta.bold' 'yarn storybook'",
     "format": "yarn format-js && yarn lint-css --fix && echo '> Finished formatting ✅'",
     "format-js": "prettier-eslint --eslint-config-path ./config/eslint.config.js --trailing-comma es5 --single-quote --write '**/*.js'",
     "lint-css": "stylelint 'src/assets/stylesheets/**/*.scss' --config ./config/stylelint.config.js",

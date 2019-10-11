@@ -3,8 +3,10 @@ import {
   parseNumber,
   copyKeysToEmptyObject,
   filterObject,
-  chompFloat
-} from 'lib/util';
+  queryParamsToObject,
+  chompFloat,
+  isEmptyObject
+} from '../../lib';
 
 describe('Util', () => {
   describe('routeIsInternal', () => {
@@ -84,6 +86,26 @@ describe('Util', () => {
     });
   });
 
+  describe('queryParamsToObject', () => {
+    it('should parse a query string to an object', () => {
+      expect(queryParamsToObject('?test=true')).toEqual({
+        test: 'true'
+      });
+      expect(queryParamsToObject('?one=1&2=two&three=free99')).toEqual({
+        one: '1',
+        2: 'two',
+        three: 'free99'
+      });
+      expect(queryParamsToObject('?q=')).toEqual({
+        q: ''
+      });
+    });
+    it('should return an empty object when there are no query params', () => {
+      expect(queryParamsToObject('')).toEqual({});
+      expect(queryParamsToObject('?')).toEqual({});
+    });
+  });
+
   describe('chompFloat', () => {
     it('should return the number fixed', () => {
       expect(chompFloat(0.1234, 3)).toEqual(0.123);
@@ -114,6 +136,19 @@ describe('Util', () => {
       } catch (e) {
         expect(e.message).toMatch(errorMessage);
       }
+    });
+  });
+
+  describe('isEmptyObject', () => {
+    it('should be an empty object', () => {
+      expect(isEmptyObject({})).toEqual(true);
+    });
+    it('should not be an empty object', () => {
+      expect(
+        isEmptyObject({
+          test: true
+        })
+      ).toEqual(false);
     });
   });
 });
