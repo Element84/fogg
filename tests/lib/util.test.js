@@ -1,4 +1,6 @@
-import {
+import { util } from '../../lib';
+
+const {
   routeIsInternal,
   parseNumber,
   copyKeysToEmptyObject,
@@ -6,7 +8,7 @@ import {
   queryParamsToObject,
   chompFloat,
   isEmptyObject
-} from '../../lib';
+} = util;
 
 describe('Util', () => {
   describe('routeIsInternal', () => {
