@@ -217,10 +217,14 @@ export default function useLens ({
     // clear out the results and just dont make a search
 
     const searchHasQuery = params.textInput && params.textInput.length > 0;
+    const searchHasLocation =
+      params.geoJson && params.geoJson.type === 'FeatureCollection';
     const searchHasFilters = params.filters.length > 0;
     const searchHasDate = date.date.start && date.date.end;
+    const searchHasParameter =
+      searchHasQuery || searchHasLocation || searchHasFilters || searchHasDate;
 
-    if (!searchHasQuery && !searchHasFilters && !searchHasDate) {
+    if (!searchHasParameter) {
       updateTotalResults(0);
       updateResults(undefined);
       updateMoreResultsAvailable(false);
