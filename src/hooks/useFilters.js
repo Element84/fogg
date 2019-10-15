@@ -1,11 +1,20 @@
 import { useState } from 'react';
 
-export default function useFilters (availableFilters) {
+export default function useFilters (availableFilters = []) {
+  // Grab all the available filtesr with a defaultValue as the
+  // default active
+  const defaultActiveFilters = availableFilters.map(filter => {
+    return {
+      id: filter.id,
+      value: filter.value || filter.defaultValue
+    };
+  });
+
   const [filters, updateFilters] = useState({
     isOpen: false,
     unsaved: [],
-    active: [],
-    available: availableFilters || []
+    active: concatAndCleanFilters(defaultActiveFilters),
+    available: availableFilters
   });
 
   /**
