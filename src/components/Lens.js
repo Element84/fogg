@@ -204,6 +204,7 @@ Lens.propTypes = {
   drawControlOptions: PropTypes.object,
   /**
    * Custom onCreated function will override handleOnCreated in useLens that is passed to EditControl
+   * Return true to stop Lens from searching after function execution
    * @see See [react-leaflet-draw](https://github.com/alex3165/react-leaflet-draw) for component
    */
   onCreatedDraw: PropTypes.func,

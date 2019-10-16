@@ -312,8 +312,8 @@ export default function useLens ({
 
   function handleOnCreated (layer, leafletElement) {
     if (typeof onCreatedDraw === 'function') {
-      onCreatedDraw(layer, leafletElement);
-      return;
+      const noSearch = onCreatedDraw(layer, leafletElement);
+      if (noSearch) return;
     }
     handleClearSearch({
       clearLayers: false

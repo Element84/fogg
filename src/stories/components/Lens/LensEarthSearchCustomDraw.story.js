@@ -19,6 +19,7 @@ const LensEarthSearchCustomDraw = () => {
   function customHandleOnCreated (layer, leafletElement) {
     action('Draw::onCreated')('Custom function triggered', layer);
     leafletElement.openPopup();
+    return true;
   }
 
   const PopupContent = () => {
