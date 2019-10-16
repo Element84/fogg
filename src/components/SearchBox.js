@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FaSearch } from 'react-icons/fa';
+
+import { useStoredValue } from '../hooks';
 
 import Form from './Form';
 import FormInput from './FormInput';
@@ -15,12 +17,8 @@ const SearchBox = ({
   date = {},
   onDateChange
 }) => {
-  const [query, setQuery] = useState('');
+  const { value: query, updateValue: setQuery } = useStoredValue(searchInput);
   const [dateIsOpen, setDateIsOpen] = useState(false);
-
-  useEffect(() => {
-    setQuery(searchInput);
-  }, [searchInput]);
 
   /**
    * handleSearchInput
@@ -73,6 +71,8 @@ const SearchBox = ({
    */
 
   function handleDateSearch (newDate = {}) {
+    if (isDateRangeEqual(date.date, newDate.date)) return;
+
     if (typeof query === 'string' && query.length > 0) {
       handleSearch(query, newDate);
     }
@@ -131,3 +131,16 @@ SearchBox.propTypes = {
 };
 
 export default SearchBox;
+
+function isDateRangeEqual (one = {}, two = {}) {
+  const keys = ['start', 'end'];
+  let isEqual = true;
+
+  keys.forEach(key => {
+    if (one[key] !== two[key]) {
+      isEqual = false;
+    }
+  });
+
+  return isEqual;
+}

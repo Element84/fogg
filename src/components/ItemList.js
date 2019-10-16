@@ -10,7 +10,7 @@ const ItemList = ({ items = [], className, actionIcon }) => {
       <ul>
         {Array.isArray(items) &&
           items.map((item, index) => {
-            const { className, thumb, label, sublabels, to } = item;
+            const { className, thumb, label, sublabels, to, onClick } = item;
             let { icon } = item;
             let itemClassName = 'item-list-item';
 
@@ -32,7 +32,7 @@ const ItemList = ({ items = [], className, actionIcon }) => {
 
             return (
               <li className={itemClassName} key={`ItemList-Item-${index}`}>
-                <WonderLink to={to}>
+                <WonderLink to={to} onClick={onClick}>
                   {thumb && (
                     <span className="item-list-item-thumb">
                       <img src={thumb} alt={`${label} Thumbnail`} />

@@ -202,8 +202,13 @@ function queryParamsToObject (string) {
   if (typeof string !== 'string') return null;
 
   const queryString = string.replace('?', '');
-  const querySplit = queryString.split('&');
   let queryObject = {};
+
+  if (!queryString || queryString === '') {
+    return queryObject;
+  }
+
+  const querySplit = queryString.split('&');
 
   for (let i = 0, len = querySplit.length; i < len; i++) {
     const currentSplit = querySplit[i].split('=');
@@ -384,3 +389,15 @@ function chompFloat (floatToChomp, maxFix = 0) {
 }
 
 module.exports.chompFloat = chompFloat;
+
+/**
+ * isEmptyObject
+ * @description Checks if an object is empty
+ */
+
+function isEmptyObject (obj) {
+  if (!obj) return true;
+  return Object.keys(obj).length === 0;
+}
+
+module.exports.isEmptyObject = isEmptyObject;

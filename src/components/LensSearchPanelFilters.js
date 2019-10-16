@@ -7,10 +7,16 @@ const LensSearchPanelFilters = props => {
   const { filters = {}, lens = {} } = useContext(LensContext) || {};
 
   const { handlers: lensHandlers = {} } = lens;
-  const { handleUpdateSearchParams } = lensHandlers;
+  const { search } = lensHandlers;
 
   const { handlers: filtersHandlers = {} } = filters;
   const { openFilters, cancelFilterChanges } = filtersHandlers;
+
+  function handleUpdateSearchParams () {
+    search({
+      saveUnsavedFilters: true
+    });
+  }
 
   return (
     <SearchPanelFilters

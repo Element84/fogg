@@ -55,7 +55,6 @@ const SearchComplete = ({
 
     let searchQuery =
       typeof query !== 'string' && textInput === searchInput ? query : value;
-
     updateQuery(searchQuery);
     handleQuery(searchQuery, searchDate, textInput);
     updateOpenState(false);
@@ -152,10 +151,10 @@ const SearchComplete = ({
 
     if (!current) return;
 
-    current.addEventListener('clear.search-complete', handleClearSearch);
+    current.addEventListener(CLEAR_SEARCH_EVENT, handleClearSearch);
 
     return () => {
-      current.removeEventListener('clear.search-complete', handleClearSearch);
+      current.removeEventListener(CLEAR_SEARCH_EVENT, handleClearSearch);
     };
   }, [forwardedRef, handleClearSearch]);
 

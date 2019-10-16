@@ -20,7 +20,11 @@ const Panel = ({ children, header, actions, className }) => {
 
 Panel.propTypes = {
   children: PropTypes.node,
-  header: PropTypes.string,
+  header: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.node
+  ]),
   actions: PropTypes.node,
   className: PropTypes.string
 };
