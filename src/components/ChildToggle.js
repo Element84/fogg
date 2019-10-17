@@ -50,7 +50,7 @@ const ChildToggle = ({
   }
 
   return (
-    <div className={`child-toggle ${className}`}>
+    <div className={`child-toggle ${className}`} data-is-checked={isChecked}>
       <InputButton {...inputProps} onChange={handleToggleOnChange} />
       <div className="children">{checked && children}</div>
     </div>
