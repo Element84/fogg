@@ -1,3 +1,6 @@
+### Version 0.1.172
+- adding data checked to child toggle
+
 ### Version 0.1.171
 - [DR-30] Allow search functionality with custom onCreated function
 - fixing mobile and tweaking header tags
