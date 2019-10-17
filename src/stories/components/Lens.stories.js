@@ -8,6 +8,7 @@ import LensEarthSearchDefault from './Lens/LensEarthSearchDefault.story';
 import LensEarthSearchNoFilter from './Lens/LensEarthSearchNoFilter.story';
 import LensEarthSearchDateOnly from './Lens/LensEarthSearchDateOnly.story';
 import LensEarthSearchCustomDraw from './Lens/LensEarthSearchCustomDraw.story';
+import LensSearchSearchUpdateFilterSelect from './Lens/LensSearchSearchUpdateFilterSelect.story';
 
 const stories = storiesOf('Components|Lens', module);
 
@@ -27,4 +28,8 @@ stories.add('Earth Search - Date Only with Default Date', () => {
     />
   );
 });
-stories.add('Earth Search with Custom Draw Options', LensEarthSearchCustomDraw);
+stories.add('Earth Search - Custom Draw Options', LensEarthSearchCustomDraw);
+stories.add(
+  'Earth Search - Update Filter on Select',
+  LensSearchSearchUpdateFilterSelect
+);

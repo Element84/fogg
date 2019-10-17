@@ -140,6 +140,7 @@ export default function useLens ({
     page = 1,
     activeFilters,
     saveUnsavedFilters = false,
+    closeFilters = true,
     dropMarker = false,
     center = mapConfig.center,
     geoJson = mapConfig.geoJson
@@ -199,9 +200,13 @@ export default function useLens ({
     // working changes of the filters
 
     if (saveUnsavedFilters) {
-      updatedFilters = saveFilterChanges();
+      updatedFilters = saveFilterChanges({
+        closeFilters
+      });
     } else {
-      updatedFilters = setActiveFilters(activeFilters || []);
+      updatedFilters = setActiveFilters(activeFilters || [], {
+        closeFilters
+      });
     }
 
     updateMapConfig(mapUpdate);

@@ -55,7 +55,7 @@ export default function useFilters (availableFilters = []) {
    * @description Applies any new changes to the active filters
    */
 
-  function setActiveFilters (changes = [], { isOpen = false } = {}) {
+  function setActiveFilters (changes = [], { closeFilters = true } = {}) {
     const activeFilters = applyFilterSetKeyToFilters(
       filters.active,
       'available',
@@ -70,7 +70,7 @@ export default function useFilters (availableFilters = []) {
     });
     const updatedFilterState = {
       ...filters,
-      isOpen,
+      isOpen: !closeFilters,
       unsaved: [],
       active: updatedFilters
     };
