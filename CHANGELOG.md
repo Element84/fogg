@@ -1,3 +1,7 @@
+### Version 0.1.171
+- [DR-30] Allow search functionality with custom onCreated function
+- fixing mobile and tweaking header tags
+
 ### Version 0.1.170
 - adding method to refresh query params
 
