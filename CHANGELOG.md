@@ -1,3 +1,6 @@
+### Version 0.1.173
+- fixing checked child toggle
+
 ### Version 0.1.172
 - adding data checked to child toggle
 
