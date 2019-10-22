@@ -50,6 +50,7 @@ const Lens = ({
 
   const lens = useLens({
     availableFilters,
+    availableServices,
     defaultCenter,
     resolveOnSearch,
     refMap,
@@ -63,7 +64,7 @@ const Lens = ({
 
   const layers = useLayers(availableLayers, fetchLayerData);
 
-  const { results, filters } = lens;
+  const { results, filters, mapServices } = lens;
 
   const activeSearch = Array.isArray(results);
   const hasResults = Array.isArray(results) && results.length > 0;
@@ -72,7 +73,7 @@ const Lens = ({
 
   const mapSettings = {
     projection,
-    services: availableServices,
+    services: mapServices,
     hideNativeLayers,
     useMapEffect
   };
