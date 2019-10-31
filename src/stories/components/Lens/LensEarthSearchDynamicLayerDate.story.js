@@ -56,6 +56,7 @@ const LensEarthSearchDynamicLayerDate = props => {
           start: 1568260800000,
           end: 1569007834750
         }}
+        disableFutureDates={true}
         {...props}
       />
     </>

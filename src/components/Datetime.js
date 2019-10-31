@@ -12,7 +12,8 @@ const Datetime = ({
   props,
   onChange,
   onInput,
-  allowPastDate = true
+  allowPastDate = true,
+  allowFutureDate = true
 }) => {
   const { name } = useInput({ props });
 
@@ -45,9 +46,17 @@ const Datetime = ({
    */
 
   function isValidDate (currentDate) {
-    if (allowPastDate) return true;
-    let yesterday = ReactDatetime.moment().subtract(1, 'day');
-    return currentDate.isAfter(yesterday);
+    if (allowPastDate && allowFutureDate) return true;
+    const yesterday = Datetime.moment().subtract(1, 'day');
+    const today = Datetime.moment();
+    const dateIsAfterYesterday = currentDate.isAfter(yesterday);
+    const dateIsBeforeToday = currentDate.isBefore(today);
+    if (!allowPastDate) {
+      return dateIsAfterYesterday;
+    }
+    if (!allowFutureDate) {
+      return dateIsBeforeToday;
+    }
   }
 
   function renderInput (defaultProps) {
@@ -90,7 +99,8 @@ Datetime.propTypes = {
   onChange: PropTypes.func,
   onInput: PropTypes.func,
   value: PropTypes.string,
-  allowPastDate: PropTypes.bool
+  allowPastDate: PropTypes.bool,
+  allowFutureDate: PropTypes.bool
 };
 
 export default Datetime;

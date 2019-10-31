@@ -36,7 +36,8 @@ const Lens = ({
   defaultDateRange = {},
   drawControlOptions,
   onCreatedDraw,
-  PopupContent
+  PopupContent,
+  disableFutureDates = false
 }) => {
   const refMap = createRef();
   const refMapDraw = createRef();
@@ -94,7 +95,9 @@ const Lens = ({
                     case 'daterange':
                       return (
                         <div className="lens-sidebar-date">
-                          <LensSearchDate />
+                          <LensSearchDate
+                            allowFutureDate={!disableFutureDates}
+                          />
                         </div>
                       );
                     default:
@@ -212,7 +215,13 @@ Lens.propTypes = {
   /**
    * Content of popup for drawn shapes
    */
-  PopupContent: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
+  PopupContent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  /**
+   * Determines whether or not the search date range picker allow for selecting future dates
+   * If we ever decide that we should never allow future dates, we can remove this option and
+   * pass allowFutureDate={false} to LensSearchDate directly
+   */
+  disableFutureDates: PropTypes.bool
 };
 
 export default Lens;
