@@ -1,3 +1,6 @@
+### Version 0.1.174
+- [JAM-806] removing unneeded call to set view on map render
+
 ### Version 0.1.173
 - fixing checked child toggle
 
