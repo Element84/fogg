@@ -1,3 +1,9 @@
+### Version 0.1.175
+- upgrade packages
+- upgrade packages
+- fixing zoom options
+- fixing zoom options
+
 ### Version 0.1.174
 - [JAM-806] removing unneeded call to set view on map render
 

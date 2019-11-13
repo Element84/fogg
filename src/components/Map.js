@@ -86,6 +86,8 @@ const Map = props => {
     zoomControl: false
   };
 
+  console.log('mapSettings', mapSettings);
+
   // Only set up a new CRS if one is provided, otherwise fallback to the leaflet defaults (3857)
 
   if (mapService.crs) {
