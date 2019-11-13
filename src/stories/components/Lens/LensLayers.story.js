@@ -37,7 +37,7 @@ const LensLayers = () => {
   // Run http-server --p 8080 --cors ./data/ from the project root to start the example data server
   const fetchVirrsLayerData = async () => {
     const response = await axios(
-      `/data/VNP14IMGTDL_NRT_USA_contiguous_and_Hawaii_24h.kml`
+      '/data/VNP14IMGTDL_NRT_USA_contiguous_and_Hawaii_24h.kml'
     );
 
     const GeoJSON = toGeoJSON.kml(
@@ -55,7 +55,7 @@ const LensLayers = () => {
   };
 
   const fetchInsituLayerData = async () => {
-    const response = await axios(`/data/in-situ-1.geojson`);
+    const response = await axios('/data/in-situ-1.geojson');
     return {
       name: 'Reported Events',
       type: 'geojson',
@@ -130,14 +130,14 @@ const LensLayers = () => {
       maxZoom: 18,
       nativeZoom: 18,
       tileSize: 256,
-      tileEndpoint: `https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`
+      tileEndpoint: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
     }
   ];
 
   const SidebarPanels = ({ layers, toggleLayer, getDataForLayers }) => {
     const getData = () => {
       const fetchInsituLayerData = async () => {
-        const response = await axios(`/data/in-situ-2.geojson`);
+        const response = await axios('/data/in-situ-2.geojson');
         return {
           name: 'Reported Events',
           type: 'geojson',
@@ -150,7 +150,7 @@ const LensLayers = () => {
 
       const fetchVirrsLayerData = async () => {
         const response = await axios(
-          `/data/VNP14IMGTDL_NRT_USA_contiguous_and_Hawaii_24h-2.kml`
+          '/data/VNP14IMGTDL_NRT_USA_contiguous_and_Hawaii_24h-2.kml'
         );
 
         const GeoJSON = toGeoJSON.kml(

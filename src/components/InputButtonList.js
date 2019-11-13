@@ -49,7 +49,7 @@ const InputButtonList = ({
   }, [controlChecked, options]);
 
   if (!name) {
-    logger.warn(`Missing input name`);
+    logger.warn('Missing input name');
   }
 
   function handleOnChange (e = {}) {

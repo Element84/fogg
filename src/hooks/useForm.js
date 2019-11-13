@@ -43,7 +43,7 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
     const failedFields = validate.bySet(fields, true);
     const updatedFields = clone(fields);
 
-    for (let key in updatedFields) {
+    for (const key in updatedFields) {
       if (!updatedFields.hasOwnProperty(key)) continue;
       updatedFields[key].isValid = !failedFields.includes(key);
     }
@@ -119,9 +119,9 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
 
   function getDependendentFieldsByName (name) {
     if (!name || !fields[name]) return;
-    let dependentFields = new Set();
+    const dependentFields = new Set();
 
-    for (let key in fields) {
+    for (const key in fields) {
       if (!fields.hasOwnProperty(key)) continue;
       if (!Array.isArray(fields[key].dependencies)) continue;
       const depKeys = fields[key].dependencies.map(

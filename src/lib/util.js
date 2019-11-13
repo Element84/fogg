@@ -137,7 +137,7 @@ module.exports.valueStartsWith = valueStartsWith;
 function copyKeysToEmptyObject (objectToCopy = {}, defaultValue) {
   const newObject = {};
 
-  for (let key in objectToCopy) {
+  for (const key in objectToCopy) {
     if (!objectToCopy.hasOwnProperty(key)) continue;
     newObject[key] = defaultValue;
   }
@@ -159,7 +159,7 @@ function filterObject (object, evaluator) {
 
   const newObject = {};
 
-  for (let key in object) {
+  for (const key in object) {
     if (!object.hasOwnProperty(key)) continue;
     if (evaluator(key, object[key])) {
       newObject[key] = object[key];
@@ -180,9 +180,9 @@ function filterObjectByAllowedKeys (object = {}, allowedKeys = []) {
   if (typeof object !== 'object') return {};
   if (!Array.isArray(allowedKeys)) return object;
 
-  let newObject = {};
+  const newObject = {};
 
-  for (let key in object) {
+  for (const key in object) {
     if (!object.hasOwnProperty(key)) continue;
     if (!allowedKeys.includes(key)) continue;
     newObject[key] = object[key];
@@ -202,7 +202,7 @@ function queryParamsToObject (string) {
   if (typeof string !== 'string') return null;
 
   const queryString = string.replace('?', '');
-  let queryObject = {};
+  const queryObject = {};
 
   if (!queryString || queryString === '') {
     return queryObject;
@@ -232,13 +232,13 @@ function addParamsToUrl (url, object, encodeComponents) {
 
   if (typeof encodeComponents === 'undefined') encodeComponents = true;
 
-  let urlSplit = url.split('?');
+  const urlSplit = url.split('?');
   const urlBase = urlSplit[0];
   const urlSearch = urlSplit[1];
   let urlSearchObject = urlSearch ? queryParamsToObject(urlSearch) : {};
-  let objectParams = {};
+  const objectParams = {};
 
-  for (let key in object) {
+  for (const key in object) {
     if (!object.hasOwnProperty(key)) continue;
     if (typeof object[key] === 'undefined' || object[key] === null) continue;
 

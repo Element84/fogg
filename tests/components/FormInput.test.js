@@ -201,7 +201,7 @@ describe('FormInput', () => {
   });
 
   describe('Invalid Events', () => {
-    let consoleStub = sinon.stub(console, 'error');
+    const consoleStub = sinon.stub(console, 'error');
 
     describe('Text', () => {
       const input = shallow(

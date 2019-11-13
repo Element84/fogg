@@ -70,7 +70,7 @@ describe('Form', () => {
   });
 
   describe('Invalid Events', () => {
-    let consoleStub = sinon.stub(console, 'error');
+    const consoleStub = sinon.stub(console, 'error');
     const form = shallow(
       <Form onSubmit={'test'} onChange={'test'}>
         {inputs}

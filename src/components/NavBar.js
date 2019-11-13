@@ -5,7 +5,7 @@ import Button from './Button';
 import { valueStartsWith, normalizePathname } from '../lib/util';
 
 const NavBar = ({ orientation, primary, secondary, activePage }) => {
-  let orientationClass = orientation
+  const orientationClass = orientation
     ? 'nav-bar-vertical'
     : 'nav-bar-horizontal';
   const normalizedActivePage = normalizePathname(activePage);

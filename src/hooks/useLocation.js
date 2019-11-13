@@ -3,7 +3,7 @@ import { isDomAvailable, queryParamsToObject } from '../lib/util';
 export default function useLocation () {
   if (!isDomAvailable()) return {};
 
-  let { location, history } = window;
+  const { location, history } = window;
   let { pathname, search } = location;
 
   const queryParams = queryParamsToObject(search);

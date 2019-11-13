@@ -86,7 +86,7 @@ export async function handleResolveOnEarthSearch ({
   }
 
   function filtersToQuery (activeFilters = []) {
-    let filterQuery = {};
+    const filterQuery = {};
 
     activeFilters.forEach(activeFilter => {
       let parent;

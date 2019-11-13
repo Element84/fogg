@@ -22,17 +22,17 @@ export default ui;
  */
 
 function updateModal (state, modals) {
-  let modalState = Object.assign({}, state);
+  const modalState = Object.assign({}, state);
 
   // Turn off all modals before any new updates
 
-  for (let stateKey in modalState.modals) {
+  for (const stateKey in modalState.modals) {
     modalState.modals[stateKey].isOpen = false;
   }
 
   // Loop through and set the new state
 
-  for (let modalKey in modals) {
+  for (const modalKey in modals) {
     modalState.modals[modalKey] = Object.assign(
       modalState.modals[modalKey],
       modals[modalKey]

@@ -19,7 +19,7 @@ const Layer = ({ layer = {}, layerKey }) => {
   }
   if (type === 'data') {
     if (data.type === 'geojson' && !!Object.keys(data.data).length) {
-      let GeoJSONdata = data.data;
+      const GeoJSONdata = data.data;
       return (
         <GeoJSON key={getKey(layerKey)} data={GeoJSONdata} {...data.options} />
       );

@@ -33,7 +33,7 @@ const useModForm = () => {
    */
 
   function updateFormEditable () {
-    for (let [field, properties] of Object.entries(fields)) {
+    for (const [field, properties] of Object.entries(fields)) {
       // we want to add fields that have isChangeable set to true
       // to our set of fields that are editable
       if (properties.isChangeable) {

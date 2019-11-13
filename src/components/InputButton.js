@@ -37,7 +37,7 @@ const InputButton = ({
   });
 
   let inputClassName = `${type}-button`;
-  let extendedAttributes = {};
+  const extendedAttributes = {};
 
   if (isInvalid) {
     inputClassName = `${inputClassName} input-button-invalid`;

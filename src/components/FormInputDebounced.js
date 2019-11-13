@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useDebouncedCallback from 'use-debounce/lib/callback';
+import { useDebouncedCallback } from 'use-debounce';
 
 import FormInput from './FormInput';
 

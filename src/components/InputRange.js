@@ -28,7 +28,7 @@ const InputRange = (props = {}) => {
 
   const floatPoint = step && `${parseFloat(step)}`.split('.')[1].length;
 
-  let inputClassName = `input-range`;
+  let inputClassName = 'input-range';
 
   if (className) {
     inputClassName = `${inputClassName} ${className}`;

@@ -1,3 +1,18 @@
+### Version 0.1.177
+- re-downgrading core-js due to jest tests
+
+### Version 0.1.176
+- removing log
+
+### Version 0.1.175
+- upgrade packages
+- upgrade packages
+- fixing zoom options
+- fixing zoom options
+
+### Version 0.1.174
+- [JAM-806] removing unneeded call to set view on map render
+
 ### Version 0.1.173
 - fixing checked child toggle
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const StatusIndicator = ({ activeId, statusList = [], errorList = [] }) => {
   let activeStatus = statusList.find(status => status.id === activeId);
-  let activeError = errorList.find(status => status.id === activeId);
+  const activeError = errorList.find(status => status.id === activeId);
 
   let isError = null;
 

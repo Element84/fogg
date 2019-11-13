@@ -19,6 +19,8 @@ const Lens = ({
   defaultCenter = {},
   zoom = 4,
   defaultZoom = 4,
+  maxZoom,
+  minZoom,
   SidebarComponents,
   resolveOnSearch,
   projection,
@@ -59,6 +61,8 @@ const Lens = ({
     refSearchComplete,
     zoom,
     defaultZoom,
+    maxZoom,
+    minZoom,
     defaultDateRange,
     onCreatedDraw
   });

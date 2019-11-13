@@ -24,6 +24,8 @@ export default function useLens ({
   availableFilters,
   availableServices = [],
   defaultZoom,
+  maxZoom,
+  minZoom,
   defaultDateRange = {},
   onCreatedDraw
 }) {
@@ -35,7 +37,12 @@ export default function useLens ({
     date: defaultDateRange
   });
   const mapConfigDefaults = {
+    defaultZoom,
+    maxZoom,
+    minZoom,
+    defaultCenter,
     center: defaultCenter,
+    defaultGeoJson,
     geoJson: defaultGeoJson,
     textInput: '',
     page: 1,
@@ -64,11 +71,10 @@ export default function useLens ({
   useEffect(() => {
     const { center } = mapConfig;
     if (!hasRenderedOnce) {
-      setView(center, defaultZoom);
       hasRenderedOnce = true;
-    } else {
-      panTo(center);
+      return;
     }
+    panTo(center);
   }, [hasRenderedOnce, mapConfig.center, defaultZoom]);
 
   // We need to drop map markers using the effect hook as we don't always have the
@@ -106,23 +112,25 @@ export default function useLens ({
    * @description Wraps the leaflet setView method and triggers on our map ref
    */
 
-  function setView (center, zoom) {
-    const { current = {} } = refMap;
-    const { leafletElement = {} } = current;
-    let mapZoom;
+  // Commenting out as it's currently not being used (lint)
 
-    // If we can find the existing zoom, use that to prevent changing the zoom
-    // level on someone interacting with the map
-    if (zoom) {
-      mapZoom = zoom;
-    } else {
-      mapZoom = leafletElement.getZoom();
-    }
+  // function setView (center, zoom) {
+  //   const { current = {} } = refMap;
+  //   const { leafletElement = {} } = current;
+  //   let mapZoom;
 
-    // Fly to our new (or old) center with the zoom
+  //   // If we can find the existing zoom, use that to prevent changing the zoom
+  //   // level on someone interacting with the map
+  //   if (zoom) {
+  //     mapZoom = zoom;
+  //   } else {
+  //     mapZoom = leafletElement.getZoom();
+  //   }
 
-    leafletElement.setView(center, mapZoom);
-  }
+  //   // Fly to our new (or old) center with the zoom
+
+  //   leafletElement.setView(center, mapZoom);
+  // }
 
   /**
    * panTo
