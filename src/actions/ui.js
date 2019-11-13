@@ -16,7 +16,7 @@ export const updateModal = data => {
  */
 
 export const openModal = modal => {
-  let modalSettings = {};
+  const modalSettings = {};
 
   modalSettings[modal] = {
     isOpen: true
@@ -31,7 +31,7 @@ export const openModal = modal => {
  */
 
 export const closeModal = modal => {
-  let modalSettings = {};
+  const modalSettings = {};
 
   modalSettings[modal] = {
     isOpen: false

@@ -35,7 +35,7 @@ class Validation {
     // Update all fields in the set to retrieve the dependencies
     // from the current rules state
 
-    for (let key in set) {
+    for (const key in set) {
       if (!set.hasOwnProperty(key)) continue;
       setToValidate[key] = {
         ...set[key],
@@ -141,9 +141,9 @@ function isValidType (value) {
 }
 
 function validateSet (rules, set) {
-  let validatedSet = {};
+  const validatedSet = {};
 
-  for (let key in set) {
+  for (const key in set) {
     if (!set.hasOwnProperty(key)) continue;
 
     let fieldDependencies = [];

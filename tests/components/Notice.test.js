@@ -13,7 +13,7 @@ describe('Notice', () => {
       };
       const text = 'Guess what? I am a notice';
       const notice = shallow(<Notice {...props}>{text}</Notice>);
-      let noticeProps = { ...notice.find('NoticeWrapper').props() };
+      const noticeProps = { ...notice.find('NoticeWrapper').props() };
       delete noticeProps.children;
       expect(noticeProps).toEqual(props);
     });

@@ -8,7 +8,7 @@ import { geocodePlacename } from './leaflet';
  */
 
 let queryCompleteGlobalNonce;
-let queryCompleteRequests = [];
+const queryCompleteRequests = [];
 
 export async function resolveLensAutocomplete (query) {
   // Generate a unique ID and store it as a nonce

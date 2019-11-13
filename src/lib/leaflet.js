@@ -150,7 +150,7 @@ export function geoJsonFromLayer (layer) {
   const type = SHAPE_TO_GEOTYPE_MAP[shape];
   const coordinates = coordinatesFromLayer(layer);
 
-  let data = [];
+  const data = [];
 
   if (type === 'Point') {
     data.push({
@@ -366,5 +366,5 @@ export function buildLayerSet (availableLayers, availableServices = []) {
  */
 
 export function layerSetHasSingleLayer ({ base, overlay } = {}) {
-  return base && base.length === 1 && (overlay && !overlay.length);
+  return base && base.length === 1 && overlay && !overlay.length;
 }

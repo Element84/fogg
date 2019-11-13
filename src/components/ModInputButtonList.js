@@ -33,7 +33,7 @@ const ModInputButtonList = ({
 
   const { handleOnModSave } = handlers;
 
-  let icon = isChangeable ? <FaCheck /> : <FaPencilAlt />;
+  const icon = isChangeable ? <FaCheck /> : <FaPencilAlt />;
 
   /**
    * handleChangeClick

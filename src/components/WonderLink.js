@@ -55,9 +55,9 @@ export default WonderLink;
  */
 
 function filterArgs (args) {
-  let newArgs = {};
+  const newArgs = {};
 
-  for (let key in args) {
+  for (const key in args) {
     if (!args.hasOwnProperty(key)) continue;
 
     if (ARGS_WHITELIST.includes(key)) {

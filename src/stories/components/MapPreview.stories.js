@@ -40,7 +40,7 @@ stories.add('Layer', () => {
       maxZoom: 18,
       nativeZoom: 18,
       tileSize: 256,
-      tileEndpoint: `https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`
+      tileEndpoint: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
     }
   ];
   return (

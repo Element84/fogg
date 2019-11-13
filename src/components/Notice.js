@@ -29,7 +29,7 @@ const NoticeWrapper = ({
   align = 'left',
   onClose
 }) => {
-  let noticeClassName = `notice notice-${type} notice-${weight} notice-${align}`;
+  const noticeClassName = `notice notice-${type} notice-${weight} notice-${align}`;
 
   return (
     <div className={noticeClassName}>

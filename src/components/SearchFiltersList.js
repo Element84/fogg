@@ -14,8 +14,8 @@ const SearchFiltersList = ({
   type = 'checklist'
 }) => {
   let inputType;
-  let filtersList = [...list];
-  let noActiveValues =
+  const filtersList = [...list];
+  const noActiveValues =
     typeof activeValues === 'undefined' || activeValues.length === 0;
 
   if (type === 'radiolist') {

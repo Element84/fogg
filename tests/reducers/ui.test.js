@@ -7,7 +7,7 @@ describe('reducers > ui', () => {
 
   describe('UPDATE_MODAL', () => {
     it('should return modal', () => {
-      let initialState = {
+      const initialState = {
         modals: {
           test: {
             isOpen: true

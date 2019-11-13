@@ -46,7 +46,7 @@ const Datetime = ({
 
   function isValidDate (currentDate) {
     if (allowPastDate) return true;
-    let yesterday = ReactDatetime.moment().subtract(1, 'day');
+    const yesterday = ReactDatetime.moment().subtract(1, 'day');
     return currentDate.isAfter(yesterday);
   }
 

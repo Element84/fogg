@@ -19,7 +19,7 @@ const FormInput = props => {
 
   let input;
   let inputClassName = `form-input ${className || ''}`;
-  let fieldClassName = 'form-input-field';
+  const fieldClassName = 'form-input-field';
 
   if (type) {
     inputClassName = `${inputClassName} form-input-${type}`;

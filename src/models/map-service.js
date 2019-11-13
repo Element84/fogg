@@ -95,7 +95,7 @@ function projectionByName (name) {
 function configureTileEndpoint (properties = {}, endpoint) {
   if (typeof endpoint !== 'string') return '';
   let tile = endpoint;
-  for (let key in properties) {
+  for (const key in properties) {
     if (!properties.hasOwnProperty(key)) continue;
     tile = tile.replace(`{${key}}`, properties[key]);
   }

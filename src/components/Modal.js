@@ -18,7 +18,7 @@ const Modal = ({
   };
 
   ReactModal.setAppElement(appElement);
-  let modalProperties = {
+  const modalProperties = {
     isOpen: isOpen,
     contentLabel: contentLabel,
     shouldCloseOnOverlayClick: true,

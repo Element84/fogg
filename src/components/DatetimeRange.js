@@ -36,7 +36,7 @@ const DatetimeRange = ({
 
   function isValidDate (currentDate) {
     if (allowPastDate) return true;
-    let yesterday = Datetime.moment().subtract(1, 'day');
+    const yesterday = Datetime.moment().subtract(1, 'day');
     return currentDate.isAfter(yesterday);
   }
 
