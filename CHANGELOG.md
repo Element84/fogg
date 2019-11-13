@@ -1,3 +1,6 @@
+### Version 0.1.177
+- re-downgrading core-js due to jest tests
+
 ### Version 0.1.176
 - removing log
 
