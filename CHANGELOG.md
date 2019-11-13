@@ -1,3 +1,6 @@
+### Version 0.1.178
+- [DR-53] Fix merge conflicts
+
 ### Version 0.1.177
 - re-downgrading core-js due to jest tests
 
