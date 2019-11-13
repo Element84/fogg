@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import useDebouncedCallback from 'use-debounce/lib/callback';
+import {useDebouncedCallback} from 'use-debounce';
 import CustomEvent from 'custom-event';
 
 import SearchBox from './SearchBox';
