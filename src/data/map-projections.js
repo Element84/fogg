@@ -4,10 +4,7 @@ const mapProjections = [
     code: 'EPSG:4326',
     definition: '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs',
     origin: [-180, 90],
-    bounds: [
-      [-180, -90],
-      [180, 90]
-    ],
+    bounds: [[-180, -90], [180, 90]],
     resolutions: [
       0.5625,
       0.28125,

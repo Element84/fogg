@@ -129,8 +129,7 @@ const MapPreview = ({
               <strong>Coordinates:</strong>
               {type === 'Point' && (
                 <>
-                  {/* Add an extra space to prevent a single coordinate from bumping against */}
-                  {' '}
+                  {/* Add an extra space to prevent a single coordinate from bumping against */}{' '}
                   <span className="map-preview-coordinates-item">
                     {geoJsonLatLng.lat} &deg;N, {geoJsonLatLng.lng} &deg;W
                   </span>
