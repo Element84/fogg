@@ -22,6 +22,8 @@ export default function useLens ({
   refSearchComplete,
   availableFilters,
   defaultZoom,
+  maxZoom,
+  minZoom,
   defaultDateRange = {},
   onCreatedDraw
 }) {
@@ -33,7 +35,12 @@ export default function useLens ({
     date: defaultDateRange
   });
   const mapConfigDefaults = {
+    defaultZoom,
+    maxZoom,
+    minZoom,
+    defaultCenter,
     center: defaultCenter,
+    defaultGeoJson,
     geoJson: defaultGeoJson,
     textInput: '',
     page: 1,

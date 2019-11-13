@@ -80,8 +80,8 @@ const Map = props => {
     className: 'map-base',
     center,
     zoom,
-    maxZoom: baseMaxZoom || maxZoom,
-    minZoom: baseMinZoom || minZoom,
+    maxZoom: maxZoom || baseMaxZoom,
+    minZoom: minZoom || baseMinZoom,
     maxNativeZoom: baseMaxNativeZoom,
     zoomControl: false
   };

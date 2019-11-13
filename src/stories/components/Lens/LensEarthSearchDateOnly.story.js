@@ -19,7 +19,8 @@ const LensEarthSearchDateOnly = props => {
     <>
       <Lens
         defaultCenter={ALEXANDRIA}
-        defaultZoom={2}
+        defaultZoom={4}
+        maxZoom={24}
         resolveOnSearch={handleResolveOnEarthSearch}
         SidebarComponents={EarthSearchSidebarPanels}
         search={true}
