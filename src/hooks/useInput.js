@@ -15,10 +15,9 @@ function getFormListValuesByName (form, name) {
 
 function isReactSelect (argumentsObject) {
   const hasLengthOfTwo = argumentsObject.length === 2;
-  const hasOwnProperty = Object.prototype.hasOwnProperty.call(
-    argumentsObject[1],
-    'action'
-  );
+  const hasOwnProperty =
+    hasLengthOfTwo &&
+    Object.prototype.hasOwnProperty.call(argumentsObject[1], 'action');
   return hasLengthOfTwo && hasOwnProperty;
 }
 
