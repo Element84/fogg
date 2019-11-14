@@ -1,3 +1,6 @@
+### Version 0.1.181
+- adding textInput to sidebar component
+
 ### Version 0.1.180
 - preventing immediate refire of effect
 
