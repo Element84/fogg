@@ -1,3 +1,6 @@
+### Version 0.1.183
+- clearing text input on layer created
+
 ### Version 0.1.182
 - adding way to clear textinput for search
 
