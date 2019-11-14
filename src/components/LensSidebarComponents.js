@@ -23,13 +23,14 @@ const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
     refreshQueryParams,
     search
   } = lensHandlers;
-  const { center = {}, geoJson } = mapConfig;
+  const { center = {}, geoJson, textInput } = mapConfig;
 
   if (!SidebarComponents) return null;
 
   return (
     <SidebarComponents
       mapPosition={latLngPositionFromCenter(center)}
+      textInput={textInput}
       geoJson={geoJson}
       results={results}
       loadMoreResults={loadMoreResults}
