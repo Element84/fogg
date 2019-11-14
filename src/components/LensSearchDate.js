@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { LensContext } from '../context';
 
 import SearchDate from './SearchDate';
 
-const LensSearchDate = () => {
+const LensSearchDate = ({ allowFutureDate }) => {
   const { lens = {} } = useContext(LensContext) || {};
   const { handlers: lensHandlers = {}, date, mapConfig } = lens;
   const { handleOnSearch, handleDateChange: handleOnChange } = lensHandlers;
@@ -27,8 +28,13 @@ const LensSearchDate = () => {
       onDateCancel={handleOnDateChange}
       defaultDate={date}
       classPrefix={'search-box-controls'}
+      allowFutureDate={allowFutureDate}
     />
   );
+};
+
+LensSearchDate.propTypes = {
+  allowFutureDate: PropTypes.bool
 };
 
 export default LensSearchDate;

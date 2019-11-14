@@ -14,6 +14,7 @@ import { isEmptyObject } from '../lib/util';
 import { clearSearchComplete } from '../components/SearchComplete';
 
 import { useFilters } from '.';
+import { formatMapServiceDate } from '../lib/datetime';
 
 let hasRenderedOnce = false;
 
@@ -24,6 +25,7 @@ export default function useLens ({
   refMapDraw,
   refSearchComplete,
   availableFilters,
+  availableServices = [],
   defaultZoom,
   maxZoom,
   minZoom,
@@ -54,6 +56,7 @@ export default function useLens ({
   const [results, updateResults] = useState();
   const [moreResultsAvailable, updateMoreResultsAvailable] = useState();
   const [totalResults, updateTotalResults] = useState();
+  const [mapServices, updateMapServices] = useState(availableServices);
 
   const {
     filters,
@@ -94,7 +97,11 @@ export default function useLens ({
     if (!hasRenderedOnce) {
       search();
     }
-  }, [hasRenderedOnce, defaultDateRange]);
+  }, [hasRenderedOnce]);
+
+  useEffect(() => {
+    updateTileDate(date);
+  }, [date]);
 
   /**
    * handleDateChange
@@ -245,7 +252,8 @@ export default function useLens ({
         throw new Error(`${errorBase}: Error resolving search; ${e}`);
       }
 
-      const { features = [], hasMoreResults, numberOfResults } = searchRequest;
+      const { features = [], hasMoreResults, numberOfResults } =
+        searchRequest || {};
 
       // If the page is greater than 1, we should append the results
 
@@ -403,9 +411,27 @@ export default function useLens ({
     }
   }
 
+  function updateTileDate (date) {
+    const { date: dateRange = {} } = date || {};
+    const tileDate =
+      formatMapServiceDate(dateRange.end) ||
+      formatMapServiceDate(dateRange.start);
+    updateMapServices(
+      availableServices.map(service => {
+        return {
+          ...service,
+          time: service.enableDynamicTime
+            ? tileDate || service.time
+            : service.time
+        };
+      })
+    );
+  }
+
   return {
     mapConfig,
     date,
+    mapServices,
     results,
     numberOfResults: totalResults,
     handlers: {

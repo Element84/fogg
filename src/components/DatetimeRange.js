@@ -10,8 +10,9 @@ const DatetimeRange = ({
   onCancel,
   onClear,
   clearDate,
+  defaultDate,
   allowPastDate = true,
-  defaultDate
+  allowFutureDate = true
 }) => {
   const emptyDate = {
     start: null,
@@ -35,9 +36,17 @@ const DatetimeRange = ({
    */
 
   function isValidDate (currentDate) {
-    if (allowPastDate) return true;
+    if (allowPastDate && allowFutureDate) return true;
     const yesterday = Datetime.moment().subtract(1, 'day');
-    return currentDate.isAfter(yesterday);
+    const today = Datetime.moment();
+    const dateIsAfterYesterday = currentDate.isAfter(yesterday);
+    const dateIsBeforeToday = currentDate.isBefore(today);
+    if (!allowPastDate) {
+      return dateIsAfterYesterday;
+    }
+    if (!allowFutureDate) {
+      return dateIsBeforeToday;
+    }
   }
 
   /**
@@ -184,8 +193,9 @@ DatetimeRange.propTypes = {
   onCancel: PropTypes.func,
   onClear: PropTypes.func,
   clearDate: PropTypes.bool,
+  defaultDate: PropTypes.object,
   allowPastDate: PropTypes.bool,
-  defaultDate: PropTypes.object
+  allowFutureDate: PropTypes.bool
 };
 
 export default DatetimeRange;
