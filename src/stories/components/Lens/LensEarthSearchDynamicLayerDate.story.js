@@ -43,7 +43,7 @@ const LensEarthSearchDynamicLayerDate = props => {
     <>
       <Lens
         defaultCenter={ALEXANDRIA}
-        defaultZoom={2}
+        defaultZoom={3}
         resolveOnSearch={handleResolveOnEarthSearch}
         SidebarComponents={EarthSearchSidebarPanels}
         search={true}

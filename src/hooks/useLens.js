@@ -79,7 +79,7 @@ export default function useLens ({
       return;
     }
     setView(center, customZoom);
-  }, [hasRenderedOnce, mapConfig.center, mapConfig.customZoom]);
+  }, [mapConfig.center, mapConfig.customZoom]);
 
   // We need to drop map markers using the effect hook as we don't always have the
   // leaflet element available via a ref if it's the first time rendering
