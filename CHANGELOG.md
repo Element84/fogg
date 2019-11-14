@@ -1,3 +1,6 @@
+### Version 0.1.182
+- adding way to clear textinput for search
+
 ### Version 0.1.181
 - adding textInput to sidebar component
 
