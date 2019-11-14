@@ -1,3 +1,6 @@
+### Version 0.1.180
+- preventing immediate refire of effect
+
 ### Version 0.1.179
 - [JAM-806] dropping bounding box on map when search provides shapes, setting up custom zoom option, fixing linting issues
 - bug
