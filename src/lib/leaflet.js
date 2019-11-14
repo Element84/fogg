@@ -2,7 +2,7 @@ import L from 'leaflet';
 import { geocode } from 'esri-leaflet-geocoder';
 import GeoJSON from 'geojson';
 import PromiseCancelable from 'p-cancelable';
-import { getGeom } from '@turf/turf';
+import { getGeom, center } from '@turf/turf';
 
 const DRAW_SHAPES = ['polygon', 'rectangle'];
 
@@ -47,6 +47,35 @@ export function addLeafletMarkerLayer ({ lat, lng }, map) {
   return L.marker([lat, lng], {
     icon: buildMapMarkerIcon()
   }).addTo(map);
+}
+
+/**
+ * addLeafletShapeLayer
+ * @description Given a LeafletElement, clear all layers
+ */
+
+export function addLeafletShapeLayer (geoJson = {}, map) {
+  const baseError = 'Failed to add shape to map';
+  const { type, features } = geoJson;
+
+  if (!type || !Array.isArray(features)) {
+    throw new Error(`${baseError}: Invalid geoJson; ${geoJson}`);
+  }
+
+  const shapes = features.map((feature = {}) => {
+    const { geometry = {} } = feature;
+    const latLngs = latLngsFromFeatures([feature])[0];
+    const { type } = geometry;
+    const typeLower = typeof type === 'string' && type.toLowerCase();
+    const leafletCreator = L[typeLower];
+    if (!typeLower || !leafletCreator) {
+      throw new Error(`${baseError}: Invalid shape type; ${typeLower}`);
+    }
+    return latLngs.map(latLng => {
+      leafletCreator(latLng).addTo(map);
+    });
+  });
+  return shapes;
 }
 
 /**
@@ -96,7 +125,6 @@ export function reduceDrawEventToLayer ({ layer, layerType } = {}) {
 
   let coordinates;
   let center;
-  let geoJson;
 
   // Grab the coordinates and center based on the type of layer
   // Shapes have different methods than markers
@@ -111,7 +139,8 @@ export function reduceDrawEventToLayer ({ layer, layerType } = {}) {
   // Further reduce data to pure objects
   coordinates = coordinatesFromLayer(layer);
   center = center && { ...center };
-  geoJson = geoJsonFromLayer(layer);
+
+  const geoJson = geoJsonFromLayer(layer);
 
   return {
     ...data,
@@ -262,13 +291,33 @@ export function buildMapMarkerIcon () {
  * @description Grabs Lat and Lng sets from GeoJSON
  */
 
-export function latLngFromGeoJson (geoJson) {
+export function latLngFromGeoJson (geoJson, type = 'object') {
   const coordinates = coordinatesFromGeoJson(geoJson);
   return coordinates.map(set => {
+    if (type === 'array') {
+      return [set[1], set[0]];
+    }
     return {
       lng: set[0],
       lat: set[1]
     };
+  });
+}
+
+export function latLngsFromFeatures (features) {
+  if (!Array.isArray(features)) {
+    features = [features];
+  }
+  return features.map(({ geometry = {} } = {}) => {
+    const { coordinates = [] } = geometry;
+    if (!coordinates || coordinates.length === 0) {
+      return [];
+    }
+    return coordinates.map(set => {
+      return set.map(([lng, lat]) => {
+        return [lat, lng];
+      });
+    });
   });
 }
 
@@ -367,4 +416,16 @@ export function buildLayerSet (availableLayers, availableServices = []) {
 
 export function layerSetHasSingleLayer ({ base, overlay } = {}) {
   return base && base.length === 1 && overlay && !overlay.length;
+}
+
+/**
+ * getGeoJsonCenter
+ * @description
+ */
+
+export function getGeoJsonCenter (geoJson) {
+  if (!geoJson || !geoJson.type) {
+    throw new Error('Failed to get geoJson center: Invalid geoJson type');
+  }
+  return center(geoJson);
 }

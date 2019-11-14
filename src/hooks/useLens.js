@@ -3,7 +3,10 @@ import { useState, useEffect } from 'react';
 import {
   geoJsonFromLatLn,
   clearLeafletElementLayers,
-  addLeafletMarkerLayer
+  addLeafletMarkerLayer,
+  addLeafletShapeLayer,
+  geometryTypeFromGeoJson,
+  latLngFromGeoJson
 } from '../lib/leaflet';
 import { resolveLensAutocomplete } from '../lib/lens';
 import { isEmptyObject } from '../lib/util';
@@ -38,6 +41,7 @@ export default function useLens ({
     defaultZoom,
     maxZoom,
     minZoom,
+    customZoom: undefined,
     defaultCenter,
     center: defaultCenter,
     defaultGeoJson,
@@ -66,22 +70,22 @@ export default function useLens ({
   // generally this should help performance of having to rerender the whole map
 
   useEffect(() => {
-    const { center } = mapConfig;
+    const { center, customZoom } = mapConfig;
     if (!hasRenderedOnce) {
       hasRenderedOnce = true;
       return;
     }
-    panTo(center);
-  }, [hasRenderedOnce, mapConfig.center, defaultZoom]);
+    setView(center, customZoom);
+  }, [hasRenderedOnce, mapConfig.center, mapConfig.customZoom]);
 
   // We need to drop map markers using the effect hook as we don't always have the
   // leaflet element available via a ref if it's the first time rendering
 
   useEffect(() => {
     if (mapConfig.marker) {
-      addSearchMarker(mapConfig.center);
+      addSearchMarker(mapConfig.geoJson);
     }
-  }, [mapConfig.marker, mapConfig.center]);
+  }, [mapConfig.marker, mapConfig.geoJson]);
 
   // If we have a default date range, we want to trigger a search on the first load
   // to allow us to immediatelly prompt the results
@@ -105,35 +109,22 @@ export default function useLens ({
    * @description Wraps the leaflet setView method and triggers on our map ref
    */
 
-  // Commenting out as it's currently not being used (lint)
-
-  // function setView (center, zoom) {
-  //   const { current = {} } = refMap;
-  //   const { leafletElement = {} } = current;
-  //   let mapZoom;
-
-  //   // If we can find the existing zoom, use that to prevent changing the zoom
-  //   // level on someone interacting with the map
-  //   if (zoom) {
-  //     mapZoom = zoom;
-  //   } else {
-  //     mapZoom = leafletElement.getZoom();
-  //   }
-
-  //   // Fly to our new (or old) center with the zoom
-
-  //   leafletElement.setView(center, mapZoom);
-  // }
-
-  /**
-   * panTo
-   * @description Wraps the leaflet panTo method and triggers on our map ref
-   */
-
-  function panTo (center) {
+  function setView (center, zoom) {
     const { current = {} } = refMap;
     const { leafletElement = {} } = current;
-    leafletElement.panTo(center);
+    let mapZoom;
+
+    // If we can find the existing zoom, use that to prevent changing the zoom
+    // level on someone interacting with the map
+    if (zoom) {
+      mapZoom = zoom;
+    } else {
+      mapZoom = leafletElement.getZoom();
+    }
+
+    // Fly to our new (or old) center with the zoom
+
+    leafletElement.setView(center, mapZoom);
   }
 
   /**
@@ -151,7 +142,8 @@ export default function useLens ({
     closeFilters = true,
     dropMarker = false,
     center = mapConfig.center,
-    geoJson = mapConfig.geoJson
+    geoJson = mapConfig.geoJson,
+    zoom
   } = {}) {
     const errorBase = 'Failed to search';
 
@@ -160,7 +152,8 @@ export default function useLens ({
       page,
       center,
       geoJson,
-      marker: dropMarker
+      marker: dropMarker,
+      customZoom: zoom
     };
 
     let searchRequest;
@@ -234,7 +227,7 @@ export default function useLens ({
     const searchHasLocation =
       params.geoJson && params.geoJson.type === 'FeatureCollection';
     const searchHasFilters = params.filters.length > 0;
-    const searchHasDate = date.date.start && date.date.end;
+    const searchHasDate = date.date && date.date.start && date.date.end;
     const searchHasParameter =
       searchHasQuery || searchHasLocation || searchHasFilters || searchHasDate;
 
@@ -306,15 +299,27 @@ export default function useLens ({
 
   /**
    * addSearchMarker
-   * @description Adds a new marker at position on map, clears old
+   * @description Adds a new marker or shape at position on map, clears old
    */
 
-  function addSearchMarker (position) {
+  function addSearchMarker (geoJson) {
     const { current } = refMapDraw;
     const { leafletElement } = current || {};
+
+    const geometries = geometryTypeFromGeoJson(geoJson);
+
     if (leafletElement) {
       clearSearchLayers();
-      addLeafletMarkerLayer(position, leafletElement);
+      geometries.forEach(geometry => {
+        if (geometry === 'Point') {
+          const latLngs = latLngFromGeoJson(geoJson);
+          latLngs.forEach(latLng => {
+            addLeafletMarkerLayer(latLng, leafletElement);
+          });
+        } else {
+          addLeafletShapeLayer(geoJson, leafletElement);
+        }
+      });
     }
   }
 

@@ -58,7 +58,7 @@ function filterArgs (args) {
   const newArgs = {};
 
   for (const key in args) {
-    if (!args.hasOwnProperty(key)) continue;
+    if (!Object.prototype.hasOwnProperty.call(args, key)) continue;
 
     if (ARGS_WHITELIST.includes(key)) {
       newArgs[key] = args[key];

@@ -36,7 +36,7 @@ class Validation {
     // from the current rules state
 
     for (const key in set) {
-      if (!set.hasOwnProperty(key)) continue;
+      if (!Object.prototype.hasOwnProperty.call(set, key)) continue;
       setToValidate[key] = {
         ...set[key],
         dependencies: this.getDependenciesByName(key)
@@ -144,7 +144,7 @@ function validateSet (rules, set) {
   const validatedSet = {};
 
   for (const key in set) {
-    if (!set.hasOwnProperty(key)) continue;
+    if (!Object.prototype.hasOwnProperty.call(set, key)) continue;
 
     let fieldDependencies = [];
 

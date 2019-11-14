@@ -15,18 +15,10 @@ export { default as Layout } from './src/components/Layout';
 export { default as Lens } from './src/components/Lens';
 export { default as LensMap } from './src/components/LensMap';
 export { default as LensMapDraw } from './src/components/LensMapDraw';
-export {
-  default as LensSearchComplete
-} from './src/components/LensSearchComplete';
-export {
-  default as LensSearchFilters
-} from './src/components/LensSearchFilters';
-export {
-  default as LensSearchPanelFilters
-} from './src/components/LensSearchPanelFilters';
-export {
-  default as LensSidebarComponents
-} from './src/components/LensSidebarComponents';
+export { default as LensSearchComplete } from './src/components/LensSearchComplete';
+export { default as LensSearchFilters } from './src/components/LensSearchFilters';
+export { default as LensSearchPanelFilters } from './src/components/LensSearchPanelFilters';
+export { default as LensSidebarComponents } from './src/components/LensSidebarComponents';
 export { default as Map } from './src/components/Map';
 export { default as MapDraw } from './src/components/MapDraw';
 export { default as MapMarker } from './src/components/MapMarker';
@@ -34,9 +26,7 @@ export { default as MapPreview } from './src/components/MapPreview';
 export { default as Modal } from './src/components/Modal';
 export { default as ModForm } from './src/components/ModForm';
 export { default as ModInput } from './src/components/ModInput';
-export {
-  default as ModInputButtonList
-} from './src/components/ModInputButtonList';
+export { default as ModInputButtonList } from './src/components/ModInputButtonList';
 export { default as NavBar } from './src/components/NavBar';
 export { default as NavLinks } from './src/components/NavLinks';
 export { default as Notice } from './src/components/Notice';

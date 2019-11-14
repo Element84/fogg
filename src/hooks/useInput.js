@@ -14,9 +14,12 @@ function getFormListValuesByName (form, name) {
 }
 
 function isReactSelect (argumentsObject) {
-  return (
-    argumentsObject.length === 2 && argumentsObject[1].hasOwnProperty('action')
+  const hasLengthOfTwo = argumentsObject.length === 2;
+  const hasOwnProperty = Object.prototype.hasOwnProperty.call(
+    argumentsObject[1],
+    'action'
   );
+  return hasLengthOfTwo && hasOwnProperty;
 }
 
 const INPUT_PROPS_WHITELIST = [

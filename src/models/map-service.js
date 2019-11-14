@@ -96,7 +96,7 @@ function configureTileEndpoint (properties = {}, endpoint) {
   if (typeof endpoint !== 'string') return '';
   let tile = endpoint;
   for (const key in properties) {
-    if (!properties.hasOwnProperty(key)) continue;
+    if (!Object.prototype.hasOwnProperty.call(properties, key)) continue;
     tile = tile.replace(`{${key}}`, properties[key]);
   }
   return tile;

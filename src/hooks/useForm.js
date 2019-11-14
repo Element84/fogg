@@ -44,7 +44,7 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
     const updatedFields = clone(fields);
 
     for (const key in updatedFields) {
-      if (!updatedFields.hasOwnProperty(key)) continue;
+      if (!Object.prototype.hasOwnProperty.call(updatedFields, key)) continue;
       updatedFields[key].isValid = !failedFields.includes(key);
     }
 
@@ -122,7 +122,7 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
     const dependentFields = new Set();
 
     for (const key in fields) {
-      if (!fields.hasOwnProperty(key)) continue;
+      if (!Object.prototype.hasOwnProperty.call(fields, key)) continue;
       if (!Array.isArray(fields[key].dependencies)) continue;
       const depKeys = fields[key].dependencies.map(
         dependency => dependency.field

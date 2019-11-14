@@ -138,7 +138,7 @@ function copyKeysToEmptyObject (objectToCopy = {}, defaultValue) {
   const newObject = {};
 
   for (const key in objectToCopy) {
-    if (!objectToCopy.hasOwnProperty(key)) continue;
+    if (!Object.prototype.hasOwnProperty.call(objectToCopy, key)) continue;
     newObject[key] = defaultValue;
   }
 
@@ -160,7 +160,7 @@ function filterObject (object, evaluator) {
   const newObject = {};
 
   for (const key in object) {
-    if (!object.hasOwnProperty(key)) continue;
+    if (!Object.prototype.hasOwnProperty.call(object, key)) continue;
     if (evaluator(key, object[key])) {
       newObject[key] = object[key];
     }
@@ -183,7 +183,7 @@ function filterObjectByAllowedKeys (object = {}, allowedKeys = []) {
   const newObject = {};
 
   for (const key in object) {
-    if (!object.hasOwnProperty(key)) continue;
+    if (!Object.prototype.hasOwnProperty.call(object, key)) continue;
     if (!allowedKeys.includes(key)) continue;
     newObject[key] = object[key];
   }
@@ -239,7 +239,7 @@ function addParamsToUrl (url, object, encodeComponents) {
   const objectParams = {};
 
   for (const key in object) {
-    if (!object.hasOwnProperty(key)) continue;
+    if (!Object.prototype.hasOwnProperty.call(object, key)) continue;
     if (typeof object[key] === 'undefined' || object[key] === null) continue;
 
     objectParams[key] = object[key];

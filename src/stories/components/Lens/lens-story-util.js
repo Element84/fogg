@@ -60,11 +60,8 @@ export async function handleResolveOnEarthSearch ({
 } = {}) {
   const { features = [] } = geoJson;
   const { geometry } = features[0] || {};
-  let data;
   let response;
   let responseFeatures;
-  let responseMeta;
-  let numberOfResults;
 
   const request = new Request(
     'https://earth-search.aws.element84.com/stac/search'
@@ -74,7 +71,7 @@ export async function handleResolveOnEarthSearch ({
     return [];
   }
 
-  data = {
+  const data = {
     intersects: geometry,
     limit: 5,
     time: atlasDateToSatTime(date),
@@ -135,8 +132,9 @@ export async function handleResolveOnEarthSearch ({
   }
 
   responseFeatures = response && response.data && response.data.features;
-  responseMeta = response && response.data && response.data.meta;
-  numberOfResults = responseMeta && responseMeta.found;
+
+  const responseMeta = response && response.data && response.data.meta;
+  const numberOfResults = responseMeta && responseMeta.found;
 
   if (Array.isArray(responseFeatures)) {
     responseFeatures = responseFeatures.map((feature = {}) => {

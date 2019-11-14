@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaRocket } from 'react-icons/fa';
 
+import { getGeoJsonCenter, latLngFromGeoJson } from '../../../lib/leaflet';
+
 import Panel from '../../../components/Panel';
 import ItemList from '../../../components/ItemList';
 import Button from '../../../components/Button';
@@ -10,6 +12,35 @@ import Button from '../../../components/Button';
 // takes a few props as arguments such as the given results and some
 // actions that allow us to create a unique sidebar experience for
 // whatever app thats getting built
+
+const GEOJSON_MONTES_CLAROS_POLYGON = {
+  type: 'FeatureCollection',
+  features: [
+    {
+      type: 'Feature',
+      properties: {},
+      geometry: {
+        type: 'Polygon',
+        coordinates: [
+          [
+            [-126.298828125, 36.03133177633187],
+            [-118.21289062499999, 36.03133177633187],
+            [-118.21289062499999, 40.17887331434696],
+            [-126.298828125, 40.17887331434696],
+            [-126.298828125, 36.03133177633187]
+          ]
+        ]
+      }
+    }
+  ]
+};
+
+const GEOJSON_MONTES_CLAROS_CENTER = getGeoJsonCenter(
+  GEOJSON_MONTES_CLAROS_POLYGON
+);
+const GEOJSON_MONTES_CLAROS_LAT_LNG = latLngFromGeoJson(
+  GEOJSON_MONTES_CLAROS_CENTER
+)[0];
 
 const EarthSearchSidebarPanels = ({
   results,
@@ -100,12 +131,14 @@ const EarthSearchSidebarPanels = ({
                   }
                 },
                 {
-                  label: 'Montes Claros, MG',
+                  label: 'Montes Claros, MG - Polygon',
                   onClick: () => {
                     search({
-                      textInput: 'Montes Claros, MG',
+                      geoJson: GEOJSON_MONTES_CLAROS_POLYGON,
+                      center: GEOJSON_MONTES_CLAROS_LAT_LNG,
                       activeFilters: [],
-                      dropMarker: true
+                      dropMarker: true,
+                      zoom: 4
                     });
                   }
                 }
