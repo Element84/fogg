@@ -1,3 +1,7 @@
+### Version 0.1.179
+- [JAM-806] dropping bounding box on map when search provides shapes, setting up custom zoom option, fixing linting issues
+- bug
+
 ### Version 0.1.178
 - [JAM-806] dropping bounding box on map when search provides shapes, setting up custom zoom option, fixing linting issues
 - [DR-53] Fix merge conflicts
