@@ -1,3 +1,6 @@
+### Version 0.1.178
+- [JAM-806] dropping bounding box on map when search provides shapes, setting up custom zoom option, fixing linting issues
+
 ### Version 0.1.177
 - re-downgrading core-js due to jest tests
 
