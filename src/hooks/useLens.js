@@ -351,6 +351,7 @@ export default function useLens ({
 
     search({
       ...mapConfigDefaults,
+      textInput: false,
       layer
     });
   }
