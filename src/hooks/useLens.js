@@ -181,6 +181,10 @@ export default function useLens ({
         mapUpdate.center = getCenterFromSearchQuery(value);
         mapUpdate.geoJson = geoJsonFromLatLn(mapUpdate.center);
       }
+    } else if (textInput === false) {
+      // Hacky way to give us the option to clear the textInput until we
+      // can refactor this function
+      mapUpdate.textInput = undefined;
     }
 
     // If the search invokation passed in a layer, let's use that to determine
