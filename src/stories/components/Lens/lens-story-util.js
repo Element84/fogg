@@ -166,7 +166,16 @@ export async function handleResolveOnEarthSearch ({
 // of the sidebar, so that the center of the map is centered
 // within that space
 
-export function handleEarthSearchUseMapEffect ({ leafletElement }) {
+export function handleEarthSearchUseMapEffect ({
+  leafletControls = {},
+  leafletElement,
+  layersControl = {}
+}) {
+  // const { tileLayer } = leafletControls;
+
+  // const { controlProps = {} } = layersControl;
+  // const { addOverlay } = controlProps;
+
   // By class leafletElement.setActiveArea('map-active-area')
   // Creates a new div for that area
   leafletElement.setActiveArea({
@@ -177,6 +186,15 @@ export function handleEarthSearchUseMapEffect ({ leafletElement }) {
     height: '100vh',
     marginLeft: '385px'
   });
+
+  // const layer = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  //   attribution: 'OSM Test'
+  // })
+
+  // if (typeof addOverlay === 'function' ) {
+  //   addOverlay(layer);
+  //   layer.addTo(leafletElement)
+  // }
 }
 
 export function responseHasMoreResults ({ page, limit, found } = {}) {

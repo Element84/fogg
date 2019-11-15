@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 import 'leaflet/dist/leaflet.css'; // This needs to be included for the map to actually work when compiled
 import L from 'leaflet';
@@ -12,7 +12,7 @@ import MapService from '../models/map-service';
 import { LayersContext } from '../context';
 
 import { isDomAvailable } from '../lib/util';
-import { buildLayerSet, layerSetHasSingleLayer } from '../lib/leaflet';
+import { buildLayerSet } from '../lib/leaflet';
 
 import Layer from './Layer';
 
@@ -28,12 +28,13 @@ const Map = props => {
     projection = 'epsg4326',
     projections = [],
     services = [],
-    hideNativeLayers,
+    hideNativeLayers = true,
     useMapEffect,
     forwardedRef
   } = props;
 
   const { layers = {}, toggleLayer } = useContext(LayersContext) || {};
+  const mapControlRef = useRef();
 
   let mapClassName = `map ${className || ''}`;
 
@@ -43,13 +44,27 @@ const Map = props => {
 
   useEffect(() => {
     if (!isDomAvailable() || !forwardedRef) return;
+
+    const mapEffect = Array.isArray(useMapEffect)
+      ? useMapEffect
+      : [useMapEffect];
+
     const { current = {} } = forwardedRef;
     const { leafletElement = {} } = current;
-    if (typeof useMapEffect === 'function') {
-      useMapEffect({
-        leafletElement
-      });
-    }
+
+    const { current: layersControl } = mapControlRef;
+
+    mapEffect.forEach(effect => {
+      if (typeof effect === 'function') {
+        effect({
+          leafletControls: {
+            tileLayer: L.tileLayer
+          },
+          leafletElement,
+          layersControl
+        });
+      }
+    });
   }, [map, forwardedRef]);
 
   if (!isDomAvailable()) {
@@ -106,44 +121,35 @@ const Map = props => {
 
   mapSettings.handleBaseLayerChange = handleBaseLayerChange;
 
-  const singleLayer = layerSetHasSingleLayer(mapLayers);
-
   return (
     <div className={mapClassName}>
       <BaseMap ref={forwardedRef} {...mapSettings}>
         {children}
-        {singleLayer && <Layer layer={mapLayers.base[0]} />}
-        {!singleLayer && (
-          <LayersControl>
-            {mapLayers.base &&
-              mapLayers.base.map(layer => (
-                <LayersControl.BaseLayer
-                  key={`base_layer_${layer.id}`}
-                  name={layer.name}
-                  checked={layer.isActive}
-                >
-                  <Layer
-                    layerKey={`base_layer_item_${layer.id}`}
-                    layer={layer}
-                  />
-                </LayersControl.BaseLayer>
-              ))}
-            {mapLayers.overlay &&
-              mapLayers.overlay.map(layer => (
-                <LayersControl.Overlay
-                  key={`overlay_layer_${layer.id}`}
-                  name={layer.name}
-                  checked={layer.isActive}
-                >
-                  <Layer
-                    layerKey={`overlay_layer_item_${layer.id}`}
-                    layer={layer}
-                  />
-                </LayersControl.Overlay>
-              ))}
-          </LayersControl>
-        )}
-
+        <LayersControl ref={mapControlRef}>
+          {mapLayers.base &&
+            mapLayers.base.map(layer => (
+              <LayersControl.BaseLayer
+                key={`base_layer_${layer.id}`}
+                name={layer.name}
+                checked={layer.isActive}
+              >
+                <Layer layerKey={`base_layer_item_${layer.id}`} layer={layer} />
+              </LayersControl.BaseLayer>
+            ))}
+          {mapLayers.overlay &&
+            mapLayers.overlay.map(layer => (
+              <LayersControl.Overlay
+                key={`overlay_layer_${layer.id}`}
+                name={layer.name}
+                checked={layer.isActive}
+              >
+                <Layer
+                  layerKey={`overlay_layer_item_${layer.id}`}
+                  layer={layer}
+                />
+              </LayersControl.Overlay>
+            ))}
+        </LayersControl>
         <ZoomControl position="bottomright" />
       </BaseMap>
     </div>

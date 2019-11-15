@@ -30,7 +30,7 @@ const Lens = ({
   placeholder = 'Search',
   availableFilters,
   availableLayers = null,
-  hideNativeLayers = false,
+  hideNativeLayers = true,
   fetchLayerData,
   disableMapDraw,
   useMapEffect,
