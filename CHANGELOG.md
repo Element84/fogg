@@ -1,3 +1,6 @@
+### Version 0.1.184
+- extending map effect capabilities to add overlays
+
 ### Version 0.1.183
 - clearing text input on layer created
 
