@@ -57,6 +57,26 @@ const SearchFilters = ({
     <div className={`search-filters ${className || ''}`}>
       <Panel>
         <Form>
+          <div className="search-filters-header">
+            <div className="search-filters-header-content">
+              <ul className="search-filters-actions">
+                <li>
+                  <Button type="text" onClick={onSaveChanges}>
+                    <span className="visually-hidden">Save</span>
+                    <FaCheck />
+                  </Button>
+                </li>
+                {hasFilterCancel && (
+                  <li className="search-filters-actions-cancel">
+                    <Button type="text" onClick={onCancelChanges}>
+                      <span className="visually-hidden">Cancel</span>
+                      <FaTimes />
+                    </Button>
+                  </li>
+                )}
+              </ul>
+            </div>
+          </div>
           <ul className="search-filters-available">
             {filters.map((filter = {}, index) => {
               const {
@@ -114,24 +134,26 @@ const SearchFilters = ({
               );
             })}
           </ul>
-          <ul className="search-filters-actions">
-            <li>
-              <Button type={['text', 'icon-before']} onClick={onSaveChanges}>
-                <FaCheck /> Save
-              </Button>
-            </li>
-            {hasFilterCancel && (
+          <div className="search-filters-footer">
+            <ul className="search-filters-actions">
               <li>
-                <Button
-                  type={['text', 'icon-before']}
-                  onClick={onCancelChanges}
-                >
-                  <FaTimes />
-                  Cancel
+                <Button type={['text', 'icon-before']} onClick={onSaveChanges}>
+                  <FaCheck /> Save
                 </Button>
               </li>
-            )}
-          </ul>
+              {hasFilterCancel && (
+                <li className="search-filters-actions-cancel">
+                  <Button
+                    type={['text', 'icon-before']}
+                    onClick={onCancelChanges}
+                  >
+                    <FaTimes />
+                    Cancel
+                  </Button>
+                </li>
+              )}
+            </ul>
+          </div>
         </Form>
       </Panel>
     </div>
