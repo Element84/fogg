@@ -271,6 +271,21 @@ export default function useLens ({
   }
 
   /**
+   * updateActiveSearch
+   * @description Triggers a new search request with current settings and any overrides
+   */
+
+  function updateActiveSearch (settings) {
+    search({
+      date,
+      activeFilters: filters.active,
+      center: mapConfig.center,
+      geoJson: mapConfig.geoJson,
+      ...settings
+    });
+  }
+
+  /**
    * handleOnSearch
    * @description Fires when a search is performed via SearchComplete
    */
@@ -362,7 +377,7 @@ export default function useLens ({
    */
 
   function handleLoadMoreResults () {
-    search({
+    updateActiveSearch({
       page: mapConfig.page + 1
     });
   }
@@ -447,7 +462,8 @@ export default function useLens ({
       loadMoreResults: moreResultsAvailable ? handleLoadMoreResults : undefined,
       clearActiveSearch: handleClearSearch,
       handleDateChange,
-      search
+      search,
+      updateActiveSearch
     },
     filters: {
       ...filters,
