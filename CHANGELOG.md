@@ -1,3 +1,7 @@
+### Version 0.1.185
+- [JAM-885] adding a header to the search panel filters
+- package upgrades
+
 ### Version 0.1.184
 - extending map effect capabilities to add overlays
 
