@@ -63,7 +63,7 @@
     "@storybook/react": "^5.2.6",
     "babel-jest": "^24.8.0",
     "concurrently": "^5.0.0",
-    "core-js": "3.4.1",
+    "core-js": "2.6.5",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.6.0",
