@@ -1,3 +1,7 @@
+### Version 0.1.186
+- [JAM-816] new handler function to trigger a refresh of the active search with overrides, using it to load more results, passing it into the components
+- [JAM-816] reverting core-js
+
 ### Version 0.1.185
 - [JAM-885] adding a header to the search panel filters
 - package upgrades
