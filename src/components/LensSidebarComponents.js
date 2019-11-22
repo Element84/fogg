@@ -21,7 +21,8 @@ const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
     clearActiveSearch,
     handleUpdateSearchParams,
     refreshQueryParams,
-    search
+    search,
+    updateActiveSearch
   } = lensHandlers;
   const { center = {}, geoJson, textInput } = mapConfig;
 
@@ -44,6 +45,7 @@ const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
       numberOfResults={numberOfResults}
       date={date}
       search={search}
+      updateActiveSearch={updateActiveSearch}
       {...rest}
     />
   );
