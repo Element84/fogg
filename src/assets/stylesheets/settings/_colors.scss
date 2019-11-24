@@ -68,6 +68,18 @@ $color-map: (
   blue9: #0D47A1,
   blue: blue5,
 
+  purple0: #ede7f7,
+  purple1: #D1C4E9,
+  purple2: #B39DDB,
+  purple3: #9575CD,
+  purple4: #7E57C2,
+  purple5: #673AB7,
+  purple6: #5E35B1,
+  purple7: #512DA8,
+  purple8: #4527A0,
+  purple9: #311B92,
+  purple: purple5,
+
   gray0: #ECEFF1,
   gray1: #CFD8DC,
   gray2: #B0BEC5,
@@ -164,6 +176,18 @@ $color-blue7: colorByKey(blue7);
 $color-blue8: colorByKey(blue8);
 $color-blue9: colorByKey(blue9);
 $color-blue: colorByKey(blue);
+
+$color-purple0: colorByKey(purple0);
+$color-purple1: colorByKey(purple1);
+$color-purple2: colorByKey(purple2);
+$color-purple3: colorByKey(purple3);
+$color-purple4: colorByKey(purple4);
+$color-purple5: colorByKey(purple5);
+$color-purple6: colorByKey(purple6);
+$color-purple7: colorByKey(purple7);
+$color-purple8: colorByKey(purple8);
+$color-purple9: colorByKey(purple9);
+$color-purple: colorByKey(purple);
 
 $color-gray0: colorByKey(gray0);
 $color-gray1: colorByKey(gray1);
