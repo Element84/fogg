@@ -17,7 +17,13 @@ const SearchPanelFilters = ({
 }) => {
   const { active, isOpen, available } = filters;
 
-  const panelFilters = isOpen ? available : active;
+  let panelFilters = isOpen ? available : active;
+
+  // We don't want to show multiple matches of an ID. This shouldn't necessarily
+  // happen, but there are instances where we'll an ID with 2 property names, where
+  // we'll want them to be the same value, but as 1 active ID to filter on
+
+  panelFilters = dedupFiltersById(panelFilters);
 
   const filterActions = [
     {
@@ -84,6 +90,24 @@ const SearchPanelFilters = ({
   }
 
   /**
+   * dedupFiltersById
+   * @description Remove any excessive instance of a filter ID
+   */
+
+  function dedupFiltersById (filters) {
+    const deduped = {};
+    filters.forEach(filter => {
+      if (!filter.id) return;
+      if (!deduped[filter.id]) {
+        deduped[filter.id] = filter;
+      }
+    });
+    return Object.keys(deduped).map(key => {
+      return deduped[key];
+    });
+  }
+
+  /**
    * hasActiveFilters
    * @description
    */
@@ -98,6 +122,8 @@ const SearchPanelFilters = ({
     if (Array.isArray(value) && value.length === 0) return false;
     return true;
   }
+
+  console.log('panelFilters', panelFilters);
 
   return (
     <Panel

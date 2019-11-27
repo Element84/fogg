@@ -66,9 +66,10 @@
     "core-js": "2.6.5",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
-    "eslint": "^6.6.0",
+    "eslint": "6.0.1",
     "eslint-config-semistandard": "^15.0.0",
     "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.3.0",
@@ -98,7 +99,8 @@
     "build-storybook": "build-storybook",
     "clean": "gatsby clean",
     "develop": "yarn clean && concurrently --names 'STORYBOOK' -c 'bgMagenta.bold' 'yarn storybook'",
-    "format": "yarn format-js && yarn lint-css --fix && echo '> Finished formatting ✅'",
+    "format": "yarn format-js && yarn format-css && echo '> Finished formatting ✅'",
+    "format-css": "yarn lint-css --fix",
     "format-js": "prettier-eslint --eslint-config-path ./config/eslint.config.js --trailing-comma es5 --single-quote --write '**/*.js'",
     "lint-css": "stylelint 'src/assets/stylesheets/**/*.scss' --config ./config/stylelint.config.js",
     "lint-js": "eslint -c ./config/eslint.config.js . --ext .js",
@@ -112,8 +114,13 @@
   },
   "lint-staged": {
     "**/*.js": [
-      "yarn format",
-      "yarn lint",
+      "yarn format-js",
+      "yarn lint-js",
+      "git add"
+    ],
+    "**/*.scss": [
+      "yarn format-css",
+      "yarn lint-css",
       "git add"
     ]
   },
