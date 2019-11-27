@@ -123,8 +123,6 @@ const SearchPanelFilters = ({
     return true;
   }
 
-  console.log('panelFilters', panelFilters);
-
   return (
     <Panel
       className="panel-clean search-panel-filters"
