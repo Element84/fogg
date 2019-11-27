@@ -1,3 +1,5 @@
+### Version 0.1.189
+
 ### Version 0.1.188
 - deduping filters in panel by id
 - upgrading packages
