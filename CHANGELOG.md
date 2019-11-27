@@ -1,5 +1,6 @@
 ### Version 0.1.188
 - deduping filters in panel by id
+- upgrading packages
 
 ### Version 0.1.187
 - adding purple
