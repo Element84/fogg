@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
 import FormInput from '../../components/FormInput';
 import BaseForm from '../helpers/BaseForm';
@@ -22,6 +23,9 @@ const SELECT_OPTIONS = [
 const stories = storiesOf('Components|FormInput', module);
 
 stories.add('Default', () => {
+  function handleSelectOnChange (field, selectEvent) {
+    action('select :: onchange')(field, selectEvent);
+  }
   return (
     <BaseForm>
       <FormInput id="default-text" label="Default Text" />
@@ -37,6 +41,7 @@ stories.add('Default', () => {
         label="Default Select"
         type="select"
         options={SELECT_OPTIONS}
+        onChange={handleSelectOnChange}
       />
       <FormInput
         id="default-textarea"
