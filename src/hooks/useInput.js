@@ -121,6 +121,9 @@ const useInput = ({ inputRef = {}, props = {} }) => {
         value = selections.map(selection => selection.value);
       }
       updateField(selectEvent.name, value);
+      if (typeof onChange === 'function') {
+        onChange(event, selectEvent);
+      }
       return;
     }
 

@@ -140,7 +140,7 @@ describe('FormInput', () => {
       let inputTest = null;
 
       function handleChange (event) {
-        changeTest = event.target.value;
+        changeTest = selectOptions[0];
       }
 
       function handleInput (event) {
@@ -160,14 +160,14 @@ describe('FormInput', () => {
         .dive()
         .find('StateManager');
 
-      it('does not fire the change handler', () => {
+      it('does fire the change handler', () => {
         const selectEvent = {
           action: 'select-option',
           name: 'organization',
           option: selectOptions[0]
         };
         input.simulate('change', selectOptions[0], selectEvent);
-        expect(changeTest).toEqual(null);
+        expect(changeTest).toEqual(selectOptions[0]);
       });
 
       it('should fire the input handler', () => {
