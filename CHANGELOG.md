@@ -1,3 +1,6 @@
+### Version 0.1.191
+- Call onChange for select fields
+
 ### Version 0.1.190
 - stray log
 
