@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 
-import { routeIsInternal } from '../lib/util';
+import { routeIsInternal } from '../lib/routes';
 import { useLocation } from '../hooks';
 
 const ARGS_WHITELIST = ['className', 'onClick', 'state', 'download'];

@@ -1,26 +1,49 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { LensContext } from '../context';
+
+import { useLens } from '../hooks';
 
 import SearchComplete from './SearchComplete';
 
 const LensSearchComplete = ({ forwardedRef, ...props }) => {
-  const { lens = {} } = useContext(LensContext) || {};
+  const { geoSearch = {} } = useLens();
+  const { queryParams = {}, search, updateSearch, resolveOnAutocomplete } = geoSearch;
+  const { date, textInput } = queryParams;
 
-  const { handlers: lensHandlers = {}, mapConfig = {}, date } = lens;
-  const {
-    handleOnSearch,
-    resolveLensAutocomplete,
-    handleDateChange
-  } = lensHandlers;
-  const { textInput } = mapConfig;
+  /**
+   * handleDateChange
+   * @description Manages triggering a search based off of date change
+   */
+
+  function handleDateChange(dateConfig = {}) {
+    updateSearch({
+      date: dateConfig.date
+    });
+  }
+
+  /**
+   * handleSearch
+   * @description Manages creating a search based off of the search complete's values
+   */
+
+  function handleSearch(location, date, textInput) {
+    const center = location && {
+      lat: location.y,
+      lng: location.x
+    };
+    search({
+      textInput,
+      center,
+      date
+    });
+  }
 
   return (
     <SearchComplete
       defaultValue={textInput}
       date={date}
-      onSearch={handleOnSearch}
-      resolveQueryComplete={resolveLensAutocomplete}
+      onSearch={handleSearch}
+      resolveQueryComplete={resolveOnAutocomplete}
       forwardedRef={forwardedRef}
       onDateChange={handleDateChange}
       {...props}

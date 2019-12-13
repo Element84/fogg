@@ -6,7 +6,6 @@ import { EditControl } from 'react-leaflet-draw';
 
 import { useMapMarkerIcon } from '../hooks';
 import {
-  clearLeafletElementLayers,
   reduceDrawEventToLayer
 } from '../lib/leaflet';
 
@@ -45,15 +44,9 @@ const MapDraw = ({
    *     Clears all other layers except the newly created one.
    */
 
-  function handleOnCreated (event = {}) {
-    const layer = reduceDrawEventToLayer(event);
-    const { current } = refFeatureGroup;
-    const { leafletElement } = current || {};
-
-    if (leafletElement) {
-      clearLeafletElementLayers(leafletElement, [layer.id]);
-    }
-
+  function handleOnCreated ({ layer } = {}) {
+    const { current = {} } = refFeatureGroup || {};
+    const { leafletElement } = current;
     if (typeof onCreated === 'function') {
       onCreated(layer, leafletElement);
     }

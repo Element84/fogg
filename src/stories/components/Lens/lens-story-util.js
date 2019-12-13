@@ -1,4 +1,5 @@
 import Request from '../../../models/request';
+import { action } from '@storybook/addon-actions';
 
 // Setting up our available filters array let's Lens know what the
 // filter UI can use to set the options available in the filters pane
@@ -59,6 +60,7 @@ export async function handleResolveOnEarthSearch ({
   date
 } = {}) {
   const { features = [] } = geoJson;
+  // FIXME support more than one feature
   const { geometry } = features[0] || {};
   let response;
   let responseFeatures;
@@ -67,16 +69,15 @@ export async function handleResolveOnEarthSearch ({
     'https://earth-search.aws.element84.com/stac/search'
   );
 
-  if (!geometry) {
-    return [];
-  }
-
   const data = {
-    intersects: geometry,
     limit: 5,
-    time: atlasDateToSatTime(date),
+    time: lensDateToSatTime(date),
     page
   };
+
+  if ( geometry ) {
+    data.intersects = geometry;
+  }
 
   if (filters) {
     data.query = filtersToQuery(filters);
@@ -125,6 +126,10 @@ export async function handleResolveOnEarthSearch ({
     }
   });
 
+  action('lens-handleResolveOnEarthSearch')({
+    data
+  });
+console.log('asdfasdf')
   try {
     response = await request.post();
   } catch (e) {
@@ -203,12 +208,12 @@ export function responseHasMoreResults ({ page, limit, found } = {}) {
 }
 
 /**
- * atlasDateToSatTime
+ * lensDateToSatTime
  * @description Converts an Atlas date object to SAT API friendly string
  * @see http://sat-utils.github.io/sat-api/#search-stac-items-by-simple-filtering-
  */
 
-export function atlasDateToSatTime ({ start, end } = {}) {
+export function lensDateToSatTime ({ start, end } = {}) {
   let dateStart;
   let dateEnd;
   let dateFull;

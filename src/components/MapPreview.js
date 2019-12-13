@@ -7,7 +7,7 @@ import { useLayers } from '../hooks';
 import { LayersContext } from '../context';
 
 import Logger from '../lib/logger';
-import { isDomAvailable } from '../lib/util';
+import { isDomAvailable } from '../lib/device';
 import {
   geoJsonFromLatLn,
   latLngFromGeoJson,

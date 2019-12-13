@@ -1,4 +1,5 @@
-import { isDomAvailable, queryParamsToObject } from '../lib/util';
+import { isDomAvailable } from '../lib/device';
+import { queryParamsToObject } from '../lib/location';
 
 export default function useLocation () {
   if (!isDomAvailable()) return {};

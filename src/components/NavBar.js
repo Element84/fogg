@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button';
 
-import { valueStartsWith, normalizePathname } from '../lib/util';
+import { valueStartsWith } from '../lib/util';
+import { normalizePathname } from '../lib/location';
 
 const NavBar = ({ orientation, primary, secondary, activePage }) => {
   const orientationClass = orientation

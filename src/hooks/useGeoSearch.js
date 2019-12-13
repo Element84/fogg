@@ -1,0 +1,331 @@
+import React, { useState } from 'react';
+
+import { isEmptyObject } from '../lib/util';
+import { geoJsonFromLatLn, latLngFromGeoJson } from '../lib/leaflet';
+
+/**
+ * useGeoSearch
+ */
+
+// These defaults serve both as the set of default values that will be used
+// for a search as well as a reference to the params that are available to search
+
+const QUERY_DEFAULT_PARAMS = {
+  textInput: '',
+  geoJson: undefined,
+  center: undefined,
+  date: {},
+  page: 1,
+  filters: []
+};
+
+const QUERY_AVAILABLE_PARAMS = Object.keys(QUERY_DEFAULT_PARAMS);
+
+export default function useGeoSearch(geoSearchSettings = {}) {
+  const {
+    resolveOnSearch,
+    resolveOnAutocomplete
+  } = geoSearchSettings
+
+  const defaultQueryParams = {};
+
+  QUERY_AVAILABLE_PARAMS.forEach(param => {
+    defaultQueryParams[param] = geoSearchSettings[param] || QUERY_DEFAULT_PARAMS[param];
+  });
+
+  const defaultResults = {
+    features: undefined,
+    hasMoreResults: false,
+    numberOfResults: 0
+  };
+
+  const [queryParams, setQueryParams] = useState(defaultQueryParams);
+  const [results, setResults] = useState(defaultResults);
+
+  const { features } = results;
+
+  const isActiveSearch = Array.isArray(features);
+  const hasResults = isActiveSearch && features.length > 0;
+
+  console.group('$$$$ useGeoSearch');
+  console.log('state', {
+    results,
+    queryParams,
+    isActiveSearch,
+    hasResults
+  })
+  console.groupEnd('$$$$ useGeoSearch');
+
+  /**
+   * handleSearchPlacename
+   * @description
+   */
+
+  async function handleSearchPlacename(settings, options = {}) {
+    console.log('>>>>>>> geosearch - handleSearchPlacename');
+
+    const errorBase = 'Failed to search for placename';
+    const { textInput } = settings;
+    const { exactMatch = false, resolveBeforeSearch } = options;
+
+    let autocompleteResponse;
+    let entry;
+
+    try {
+      autocompleteResponse = await resolveOnAutocomplete(textInput);
+
+      if ( exactMatch ) {
+        entry = autocompleteResponse.find(({label} = {}) => label === textInput);
+      } else {
+        entry = autocompleteResponse[0];
+      }
+    } catch(e) {
+      throw new Error(`${errorBase}: Error resolving autocomplete; ${e}`)
+    }
+
+    // Without an entry, we can't actually make a plcaename search as we have no location
+    // to search on
+
+    if ( !entry || isEmptyObject(entry) ) {
+      throw new Error(`${errorBase}: Can not find placename ${textInput}; ${e}`);
+    }
+
+    // Once we have an entry, determine the center
+
+    const { value = {} } = entry;
+    const { x, y } = value;
+
+    settings.center = {
+      lat: y,
+      lng: x
+    };
+
+    // If the settings payload includes geoJson, remove it here, as our search can't conflict
+    // with the center we're grabbing from the autocomplete result
+
+    if ( settings.geoJson ) {
+      delete settings.geoJson;
+    }
+
+    // Provide a callback option where we can perform some function before creating our actual search
+
+    if ( typeof resolveBeforeSearch === 'function') {
+      try {
+        await resolveBeforeSearch({
+          autocomplete: {
+            entry,
+            response: autocompleteResponse,
+          },
+          settings
+        });
+      } catch(e) {
+        throw new Error(`${errorBase}: Error resolving placename autocomplete option; ${e}`)
+      }
+    }
+
+    try {
+      return await handleSearch(settings, resolveOnSearch);
+    } catch(e) {
+      throw new Error(`${errorBase}: ${e}`);
+    }
+  }
+
+  /**
+   * handleSearch
+   * @description
+   */
+
+  async function handleSearch(settings) {
+    console.group('>>>>>>> geosearch - handleSearch');
+
+    const errorBase = 'Failed to make search';
+    const searchSettings = configureSearchSettings({
+      ...QUERY_DEFAULT_PARAMS,
+      ...settings
+    });
+
+    let searchResults;
+
+    console.log('settings', settings);
+    console.log('searchSettings', searchSettings);
+
+    console.groupEnd('>>>>>>> geosearch - handleSearch');
+
+    try {
+      searchResults = await search(searchSettings, resolveOnSearch);
+    } catch(e) {
+      throw new Error(`${errorBase}: ${e}; ${searchSettings}`)
+    }
+
+    setQueryParams(searchSettings);
+
+    // if ( )
+    setResults(searchResults);
+
+    return {
+      settings: searchSettings,
+      results: searchResults
+    }
+  }
+
+  /**
+   * handleUpdateSearch
+   * @description
+   */
+
+  async function handleUpdateSearch(settings) {
+    console.group('>>>>>>> handleUpdateSearch settings');
+    console.log('settings', settings);
+    console.groupEnd('>>>>>>> handleUpdateSearch settings');
+    const errorBase = 'Failed to update search';
+    try {
+      return await handleSearch({
+        ...queryParams,
+        ...settings
+      });
+    } catch(e) {
+      throw new Error(`${errorBase}: ${e}`)
+    }
+  }
+
+  /**
+   * handleLoadMoreResults
+   * @description
+   */
+
+  async function handleLoadMoreResults() {
+    const errorBase = 'Failed to load more results';
+    try {
+      return await handleSearch({
+        ...queryParams,
+        page: queryParams.page + 1
+      });
+    } catch(e) {
+      throw new Error(`${errorBase}: ${e}`)
+    }
+  }
+
+  /**
+   * handleClearSearch
+   * @description
+   */
+
+  function handleClearSearch() {
+    setQueryParams(defaultQueryParams)
+    setResults(defaultResults);
+  }
+
+  /**
+   * resolveOnAutocomplete
+   * @description
+   */
+
+  async function handleResolveOnAutocomplete() {
+    const errorBase = 'Failed to resolve autocomplete';
+    try {
+      return await resolveOnAutocomplete.apply(this, Array.prototype.slice.call(arguments, 0));
+    } catch(e) {
+      throw new Error(`${errorBase}: ${e}`)
+    }
+  }
+
+  return {
+    search: handleSearch,
+    updateSearch: handleUpdateSearch,
+    loadMoreResults: handleLoadMoreResults,
+    clearSearch: handleClearSearch,
+    searchPlacename: handleSearchPlacename,
+    resolveOnAutocomplete: handleResolveOnAutocomplete,
+    queryParams,
+    results: {
+      ...results,
+      hasResults
+    },
+    isActiveSearch
+  }
+
+}
+
+/**
+ * configureSearchSettings
+ * @description
+ */
+
+export function configureSearchSettings(settings) {
+  const searchSettings = {};
+
+  const {
+    center,
+    geoJson
+  } = settings;
+
+  const hasGeoJson = geoJson && !isEmptyObject(geoJson);
+  const hasCenter = center && !isEmptyObject(center);
+
+  // Loop through all of the keys that are available to search
+  // on and populate the search settings with it's value if available
+
+  QUERY_AVAILABLE_PARAMS.forEach(param => {
+    if (settings[param]) {
+      searchSettings[param] = settings[param];
+    }
+  });
+
+  // If our geoJson doc is just 1 singular feature, we want to wrap it
+  // in a feature collection for search
+
+  if ( hasGeoJson && searchSettings.geoJson.type === 'Feature' ) {
+    searchSettings.geoJson = {
+      type: 'FeatureCollection',
+      features: [searchSettings.geoJson]
+    }
+  }
+
+  // If we don't have a center currently set but we have a GeoJSON doc,
+  // lets go ahead and populate that center
+
+  if (!searchSettings.center && hasGeoJson) {
+    searchSettings.center = latLngFromGeoJson(searchSettings.geoJson);
+  }
+
+  // Alternatively, if we don't have a GeoJSON but we have a center,
+  // create a GeoJSON doc to search for
+
+  if (!searchSettings.geoJson && hasCenter) {
+    searchSettings.geoJson = geoJsonFromLatLn(searchSettings.center);
+  }
+
+  console.log('searchSettings', searchSettings)
+
+  return searchSettings;
+}
+
+/**
+ * search
+ * @description
+ */
+
+export async function search(settings = {}, resolveOnSearch) {
+  const errorBase = 'Failed to make search';
+
+  console.group('>>> geoSearch - search');
+  console.log('settigns', settings)
+  console.groupEnd('>>> geoSearch - search');
+
+  // If we have a resolve function, let's try to make the request here
+  // and simply return the response
+
+  if ( typeof resolveOnSearch  === 'function' ) {
+    let searchResponse;
+
+    try {
+      searchResponse = await resolveOnSearch(settings);
+    } catch(e) {
+      throw new Error(`${errorBase}: Error resolving search; ${e}`, e);
+    }
+
+    return searchResponse;
+  }
+
+}
+

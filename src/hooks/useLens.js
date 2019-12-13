@@ -1,15 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import {
+  isValidLeafletElement,
+  currentLeafletRef,
+  addGeoJsonLayer,
+  centerMapOnGeoJson,
   geoJsonFromLatLn,
-  clearLeafletElementLayers,
+
   addLeafletMarkerLayer,
   addLeafletShapeLayer,
   geometryTypeFromGeoJson,
   latLngFromGeoJson
 } from '../lib/leaflet';
-import { resolveLensAutocomplete } from '../lib/lens';
-import { isEmptyObject } from '../lib/util';
+
+import { LensContext } from '../context';
 
 import { clearSearchComplete } from '../components/SearchComplete';
 
@@ -18,45 +22,85 @@ import { formatMapServiceDate } from '../lib/datetime';
 
 let hasRenderedOnce = false;
 
-export default function useLens ({
-  defaultCenter = {},
-  resolveOnSearch,
-  refMap,
-  refMapDraw,
-  refSearchComplete,
-  availableFilters,
-  availableServices = [],
-  defaultZoom,
-  maxZoom,
-  minZoom,
-  defaultDateRange = {},
-  onCreatedDraw
-}) {
-  const defaultGeoJson =
-    typeof geoJsonFromLatLn === 'function' && geoJsonFromLatLn(defaultCenter);
+/**
+ * mapGeocodeCandidates
+ * @description Function that takes a given candidate and returns usable result object
+ */
 
-  const [date, setDate] = useState({
-    dateIsOpen: false,
-    date: defaultDateRange
-  });
-  const mapConfigDefaults = {
-    defaultZoom,
-    maxZoom,
-    minZoom,
-    customZoom: undefined,
-    defaultCenter,
-    center: defaultCenter,
-    defaultGeoJson,
-    geoJson: defaultGeoJson,
-    textInput: '',
-    page: 1,
-    marker: false
+export function mapGeocodeCandidates({ address, location } = {}) {
+  return {
+    label: address,
+    sublabel: `Location: ${location.x}, ${location.y}`,
+    value: location
   };
-  const [mapConfig, updateMapConfig] = useState(mapConfigDefaults);
-  const [results, updateResults] = useState();
-  const [moreResultsAvailable, updateMoreResultsAvailable] = useState();
-  const [totalResults, updateTotalResults] = useState();
-  const [mapServices, updateMapServices] = useState(availableServices);
+}
+
+export default function useLens (lensSettings = {}) {
+  const {
+    refMapDraw = {},
+    refSearchComplete,
+    availableFilters,
+    availableServices = []
+  } = lensSettings;
+
+
+  const { geoSearch = {}, map = {}, lensTempVariable = {} } = useContext(LensContext) || {};
+  const { search, searchPlacename } = geoSearch;
+  const { refMap, mapConfig = {} } = map;
+  const { defaultCenter } = mapConfig;
+
+  /**
+   * handleSearch
+   */
+
+  async function handleSearch() {
+    const request = await search.apply(this, Array.prototype.slice.call(arguments, 0));
+    console.log('request', request);
+
+    // addGeoJsonLayer()
+    // console.log('handleSearch', arguments);
+    return request;
+  }
+
+  /**
+   * handleSearch
+   */
+
+  async function handleSearchPlacename(settings = {}, options) {
+    return await searchPlacename(settings, {
+      ...options,
+      resolveBeforeSearch: handleResolveOnPlacenameAutocomplete
+    })
+  }
+
+  /**
+   * handleResolveOnPlacenameAutocomplete
+   */
+
+  async function handleResolveOnPlacenameAutocomplete({ settings } = {}) {
+    const map = currentLeafletRef(refMap);
+
+    const { center = {} } = settings;
+    const geoJson = geoJsonFromLatLn(center);
+
+    if ( isValidLeafletElement(map)) {
+      addGeoJsonLayer(geoJson, map);
+      centerMapOnGeoJson(geoJson, map);
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   const {
     filters,
@@ -68,329 +112,148 @@ export default function useLens ({
     clearActiveFilters
   } = useFilters(availableFilters);
 
+
+
+
+
+
+  const [mapServices, updateMapServices] = useState(availableServices);
+
+
+
+
   // We want to handle any of our map viewport changes using the leaflet element
   // rather than rerendering to prevent our props from overriding the map, and
   // generally this should help performance of having to rerender the whole map
 
-  useEffect(() => {
-    const { center, customZoom } = mapConfig;
-    if (!hasRenderedOnce) {
-      hasRenderedOnce = true;
-      return;
-    }
-    setView(center, customZoom);
-  }, [mapConfig.center, mapConfig.customZoom]);
+  // useEffect(() => {
+  //   const { customZoom } = mapConfig;
+  //   if (!hasRenderedOnce) {
+  //     hasRenderedOnce = true;
+  //     return;
+  //   }
+  //   console.log('defaultCenter', defaultCenter)
+  //   setView(defaultCenter, customZoom);
+  // }, [mapConfig.center, mapConfig.customZoom]);
 
   // We need to drop map markers using the effect hook as we don't always have the
   // leaflet element available via a ref if it's the first time rendering
 
-  useEffect(() => {
-    if (mapConfig.marker) {
-      addSearchMarker(mapConfig.geoJson);
-    }
-  }, [mapConfig.marker, mapConfig.geoJson]);
+  // useEffect(() => {
+  //   if (mapConfig.marker) {
+  //     addSearchMarker(mapConfig.geoJson);
+  //   }
+  // }, [mapConfig.marker, mapConfig.geoJson]);
 
   // If we have a default date range, we want to trigger a search on the first load
   // to allow us to immediatelly prompt the results
 
-  useEffect(() => {
-    if (!hasRenderedOnce) {
-      search();
-    }
-  }, [hasRenderedOnce]);
+  // useEffect(() => {
+  //   if (!hasRenderedOnce) {
+  //     console.log('useEffect')
+  //     search();
+  //   }
+  // }, [hasRenderedOnce]);
 
-  useEffect(() => {
-    updateTileDate(date);
-  }, [date]);
+  // useEffect(() => {
+  //   updateTileDate(date);
+  // }, [date]);
 
-  /**
-   * handleDateChange
-   * @description Handles date change events
-   */
-  function handleDateChange (date) {
-    setDate(date);
-  }
 
-  /**
-   * setView
-   * @description Wraps the leaflet setView method and triggers on our map ref
-   */
+  // /**
+  //  * search
+  //  * @description Handle search functionality given layer settings and a date
+  //  */
 
-  function setView (center, zoom) {
-    const { current = {} } = refMap;
-    const { leafletElement = {} } = current;
-    let mapZoom;
+  // async function search ({
+  //   layer,
+  //   date: searchDate = date,
+  //   textInput,
+  //   page = 1,
+  //   activeFilters,
+  //   saveUnsavedFilters = false,
+  //   closeFilters = true,
+  //   dropMarker = false,
+  //   center = mapConfig.center,
+  //   geoJson = mapConfig.geoJson,
+  //   zoom
+  // } = {}) {
+  //   const errorBase = 'Failed to search';
 
-    // If we can find the existing zoom, use that to prevent changing the zoom
-    // level on someone interacting with the map
-    if (zoom) {
-      mapZoom = zoom;
-    } else {
-      mapZoom = leafletElement.getZoom();
-    }
+  //   const mapUpdate = {
+  //     ...mapConfig,
+  //     page,
+  //     center,
+  //     geoJson,
+  //     marker: dropMarker,
+  //     customZoom: zoom
+  //   };
 
-    // Fly to our new (or old) center with the zoom
+  //   let searchRequest;
+  //   let autocompleteRequest;
+  //   let updatedFilters;
 
-    leafletElement.setView(center, mapZoom);
-  }
+  //   if (textInput && textInput.length > 0) {
+  //     mapUpdate.textInput = textInput;
 
-  /**
-   * search
-   * @description Handle search functionality given layer settings and a date
-   */
+  //     try {
+  //       autocompleteRequest = await resolveLensAutocomplete(textInput);
+  //     } catch (e) {
+  //       throw new Error(`${errorBase}: Error resolving autocomplete; ${e}`);
+  //     }
 
-  async function search ({
-    layer,
-    date: searchDate = date,
-    textInput,
-    page = 1,
-    activeFilters,
-    saveUnsavedFilters = false,
-    closeFilters = true,
-    dropMarker = false,
-    center = mapConfig.center,
-    geoJson = mapConfig.geoJson,
-    zoom
-  } = {}) {
-    const errorBase = 'Failed to search';
+  //     if (Array.isArray(autocompleteRequest)) {
+  //       const { value } = autocompleteRequest[0];
+  //       mapUpdate.center = getCenterFromSearchQuery(value);
+  //       mapUpdate.geoJson = geoJsonFromLatLn(mapUpdate.center);
+  //     }
+  //   } else if (textInput === false) {
+  //     // Hacky way to give us the option to clear the textInput until we
+  //     // can refactor this function
+  //     mapUpdate.textInput = undefined;
+  //   }
 
-    const mapUpdate = {
-      ...mapConfig,
-      page,
-      center,
-      geoJson,
-      marker: dropMarker,
-      customZoom: zoom
-    };
 
-    let searchRequest;
-    let autocompleteRequest;
-    let updatedFilters;
+  //   // If the original activeFilters argument exists, it probably means
+  //   // we want to override the existing active filters. In this case,
+  //   // we'll explicitly set the filters, otherwise, if we're trying to
+  //   // create a new search, we can assume we're going to leave out any
+  //   // working changes of the filters
 
-    if (textInput && textInput.length > 0) {
-      mapUpdate.textInput = textInput;
+  //   if (saveUnsavedFilters) {
+  //     updatedFilters = saveFilterChanges({
+  //       closeFilters
+  //     });
+  //   } else {
+  //     updatedFilters = setActiveFilters(activeFilters || [], {
+  //       closeFilters
+  //     });
+  //   }
 
-      try {
-        autocompleteRequest = await resolveLensAutocomplete(textInput);
-      } catch (e) {
-        throw new Error(`${errorBase}: Error resolving autocomplete; ${e}`);
-      }
 
-      if (Array.isArray(autocompleteRequest)) {
-        const { value } = autocompleteRequest[0];
-        mapUpdate.center = getCenterFromSearchQuery(value);
-        mapUpdate.geoJson = geoJsonFromLatLn(mapUpdate.center);
-      }
-    } else if (textInput === false) {
-      // Hacky way to give us the option to clear the textInput until we
-      // can refactor this function
-      mapUpdate.textInput = undefined;
-    }
+  //   const params = {
+  //     geoJson: mapUpdate.geoJson,
+  //     date: searchDate.date ? searchDate.date : searchDate,
+  //     filters: updatedFilters.active,
+  //     textInput: mapUpdate.textInput,
+  //     page
+  //   };
 
-    // If the search invokation passed in a layer, let's use that to determine
-    // where we want to position and display our search features
+  //   // If we dont haev a query or filters, there's nothing to search, so
+  //   // clear out the results and just dont make a search
 
-    if (layer) {
-      mapUpdate.center = layer.center || mapUpdate.center;
-      mapUpdate.geoJson = layer.geoJson || mapUpdate.geoJson;
-    }
+  //   const searchHasQuery = params.textInput && params.textInput.length > 0;
+  //   const searchHasLocation =
+  //     params.geoJson && params.geoJson.type === 'FeatureCollection';
+  //   const searchHasFilters = params.filters.length > 0;
+  //   const searchHasDate = date.date && date.date.start && date.date.end;
+  //   const searchHasParameter =
+  //     searchHasQuery || searchHasLocation || searchHasFilters || searchHasDate;
 
-    // If we don't have a geoJson document yet but we have a center, build
-    // that geoJson from the center
+  // }
 
-    if (
-      (!mapUpdate.geoJson || isEmptyObject(mapUpdate.geoJson)) &&
-      mapUpdate.center
-    ) {
-      mapUpdate.geoJson = geoJsonFromLatLn(mapUpdate.center);
-    }
 
-    // If the original activeFilters argument exists, it probably means
-    // we want to override the existing active filters. In this case,
-    // we'll explicitly set the filters, otherwise, if we're trying to
-    // create a new search, we can assume we're going to leave out any
-    // working changes of the filters
 
-    if (saveUnsavedFilters) {
-      updatedFilters = saveFilterChanges({
-        closeFilters
-      });
-    } else {
-      updatedFilters = setActiveFilters(activeFilters || [], {
-        closeFilters
-      });
-    }
-
-    updateMapConfig(mapUpdate);
-
-    const params = {
-      geoJson: mapUpdate.geoJson,
-      date: searchDate.date ? searchDate.date : searchDate,
-      filters: updatedFilters.active,
-      textInput: mapUpdate.textInput,
-      page
-    };
-
-    // If we dont haev a query or filters, there's nothing to search, so
-    // clear out the results and just dont make a search
-
-    const searchHasQuery = params.textInput && params.textInput.length > 0;
-    const searchHasLocation =
-      params.geoJson && params.geoJson.type === 'FeatureCollection';
-    const searchHasFilters = params.filters.length > 0;
-    const searchHasDate = date.date && date.date.start && date.date.end;
-    const searchHasParameter =
-      searchHasQuery || searchHasLocation || searchHasFilters || searchHasDate;
-
-    if (!searchHasParameter) {
-      updateTotalResults(0);
-      updateResults(undefined);
-      updateMoreResultsAvailable(false);
-      return;
-    }
-
-    if (typeof resolveOnSearch === 'function') {
-      try {
-        searchRequest = await resolveOnSearch(params);
-      } catch (e) {
-        throw new Error(`${errorBase}: Error resolving search; ${e}`);
-      }
-
-      const { features = [], hasMoreResults, numberOfResults } =
-        searchRequest || {};
-
-      // If the page is greater than 1, we should append the results
-
-      const baseResults = Array.isArray(results) && page > 1 ? results : [];
-      const updatedResults = [...baseResults, ...features];
-
-      updateResults(updatedResults);
-      updateTotalResults(numberOfResults);
-      updateMoreResultsAvailable(!!hasMoreResults);
-    }
-  }
-
-  /**
-   * updateActiveSearch
-   * @description Triggers a new search request with current settings and any overrides
-   */
-
-  function updateActiveSearch (settings) {
-    search({
-      date,
-      activeFilters: filters.active,
-      center: mapConfig.center,
-      geoJson: mapConfig.geoJson,
-      ...settings
-    });
-  }
-
-  /**
-   * handleOnSearch
-   * @description Fires when a search is performed via SearchComplete
-   */
-
-  function handleOnSearch (
-    query = {},
-    date,
-    textInput,
-    activeFilters = filters.active
-  ) {
-    const center = getCenterFromSearchQuery(query);
-    const searchLayer = {
-      center,
-      geoJson: center && geoJsonFromLatLn(center)
-    };
-
-    search({
-      layer: searchLayer,
-      date,
-      textInput,
-      activeFilters,
-      dropMarker: true
-    });
-  }
-
-  /**
-   * clearSearchLayers
-   * @description Clears all marker instances on map
-   */
-
-  function clearSearchLayers () {
-    const { current } = refMapDraw;
-    const { leafletElement } = current || {};
-    if (leafletElement) {
-      clearLeafletElementLayers(leafletElement);
-    }
-  }
-
-  /**
-   * addSearchMarker
-   * @description Adds a new marker or shape at position on map, clears old
-   */
-
-  function addSearchMarker (geoJson) {
-    const { current } = refMapDraw;
-    const { leafletElement } = current || {};
-
-    const geometries = geometryTypeFromGeoJson(geoJson);
-
-    if (leafletElement) {
-      clearSearchLayers();
-      geometries.forEach(geometry => {
-        if (geometry === 'Point') {
-          const latLngs = latLngFromGeoJson(geoJson);
-          latLngs.forEach(latLng => {
-            addLeafletMarkerLayer(latLng, leafletElement);
-          });
-        } else {
-          addLeafletShapeLayer(geoJson, leafletElement);
-        }
-      });
-    }
-  }
-
-  /**
-   * handleOnCreated
-   * @description Fires when a layer is created
-   */
-
-  function handleOnCreated (layer, leafletElement) {
-    if (typeof onCreatedDraw === 'function') {
-      const noSearch = onCreatedDraw(layer, leafletElement);
-      if (noSearch) return;
-    }
-    handleClearSearch({
-      clearLayers: false
-    });
-
-    search({
-      ...mapConfigDefaults,
-      textInput: false,
-      layer
-    });
-  }
-
-  /**
-   * handleLoadMoreResults
-   * @description Triggers a new search request with an additional argument for page
-   */
-
-  function handleLoadMoreResults () {
-    updateActiveSearch({
-      page: mapConfig.page + 1
-    });
-  }
-
-  /**
-   * handleUpdateSearchParams
-   * @description Handles lens events upon updating any search params
-   */
-
-  function handleUpdateSearchParams ({ closeFilters = true }) {
-    // Trigger a new search
-    search();
-  }
 
   /**
    * handleClearActiveFilters
@@ -398,37 +261,11 @@ export default function useLens ({
    */
 
   function handleClearActiveFilters () {
+    console.log('handleClearActiveFilters')
     const updatedFilters = clearActiveFilters();
     search({
       activeFilters: updatedFilters.active
     });
-  }
-
-  /**
-   * handleClearSearch
-   * @description Clears all aspects of an active search from the state
-   */
-
-  function handleClearSearch ({ clearLayers = true } = {}) {
-    const { current } = refSearchComplete;
-
-    const mapConfigUpdate = {
-      ...mapConfigDefaults,
-      center: mapConfig.center
-    };
-
-    mapConfigUpdate.geoJson = geoJsonFromLatLn(mapConfigUpdate.center);
-
-    updateMapConfig(mapConfigUpdate);
-    clearActiveFilters();
-    setDate({});
-    clearSearchComplete(current);
-    updateResults(undefined);
-    updateMoreResultsAvailable(false);
-
-    if (clearLayers) {
-      clearSearchLayers();
-    }
   }
 
   function updateTileDate (date) {
@@ -449,22 +286,26 @@ export default function useLens ({
   }
 
   return {
-    mapConfig,
-    date,
-    mapServices,
-    results,
-    numberOfResults: totalResults,
-    handlers: {
-      handleOnCreated,
-      handleOnSearch,
-      resolveLensAutocomplete,
-      handleUpdateSearchParams,
-      loadMoreResults: moreResultsAvailable ? handleLoadMoreResults : undefined,
-      clearActiveSearch: handleClearSearch,
-      handleDateChange,
-      search,
-      updateActiveSearch
+
+    geoSearch: {
+      ...geoSearch,
+      search: handleSearch,
+      searchPlacename: handleSearchPlacename
     },
+
+    map: {
+      ...map
+    },
+
+    lens: {
+      ...lensTempVariable
+    },
+
+
+
+
+
+    mapServices,
     filters: {
       ...filters,
       handlers: {

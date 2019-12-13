@@ -1,8 +1,10 @@
 import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { useLens, useLayers } from '../hooks';
+import { useLens, useLayers, useGeoSearch, useMap } from '../hooks';
 import { LensContext, LayersContext } from '../context';
+
+import { resolveLensAutocomplete } from '../lib/lens';
 
 import Panel from './Panel';
 import LensMap from './LensMap';
@@ -16,6 +18,11 @@ import LensSearchDate from './LensSearchDate';
 const Lens = ({
   children,
   className,
+
+  draw,
+
+
+
   defaultCenter = {},
   zoom = 4,
   defaultZoom = 4,
@@ -51,6 +58,7 @@ const Lens = ({
     lensClassName = `${lensClassName} ${className}`;
   }
 
+
   const lens = useLens({
     availableFilters,
     availableServices,
@@ -71,10 +79,55 @@ const Lens = ({
 
   const { results, filters, mapServices } = lens;
 
-  const activeSearch = Array.isArray(results);
+
+
+
+
+
+
+
+
+
+
+  const defaultGeoSearchSettings = {
+    resolveOnSearch,
+    resolveOnAutocomplete: resolveLensAutocomplete,
+    filters: filters.active
+  }
+
+  const geoSearch = useGeoSearch(defaultGeoSearchSettings);
+  const { isActiveSearch } = geoSearch;
+
+  const defaultMapSettings = {
+    defaultCenter,
+    defaultZoom,
+    maxZoom,
+    minZoom,
+    refMap,
+    refMapDraw,
+    onCreatedDraw
+  }
+
+  const map = useMap(defaultMapSettings);
+
+  const lensTempVariable = {
+    draw: {
+      searchOnDraw: true,
+      clearOnDraw: true
+    }
+  }
+
+
+
+
+
+
+
+
+
   const hasResults = Array.isArray(results) && results.length > 0;
   const displayFilters =
-    activeSearch && filters.isOpen && filters.available.length > 0;
+    isActiveSearch && filters.isOpen && filters.available.length > 0;
 
   const mapSettings = {
     projection,
@@ -84,11 +137,11 @@ const Lens = ({
   };
 
   return (
-    <LensContext.Provider value={{ lens, filters, layers }}>
+    <LensContext.Provider value={{ lens, filters, layers, geoSearch, map, lensTempVariable }}>
       <LayersContext.Provider value={{ ...layers }}>
         <div
           className={lensClassName}
-          data-active-search={activeSearch}
+          data-active-search={isActiveSearch}
           data-has-results={hasResults}
         >
           <div className="lens-sidebar">
@@ -114,7 +167,7 @@ const Lens = ({
                             />
                           </Panel>
 
-                          {activeSearch && filters.available.length > 0 && (
+                          {isActiveSearch && filters.available.length > 0 && (
                             <LensSearchPanelFilters
                               hasFilterCancel={hasFilterCancel}
                             />

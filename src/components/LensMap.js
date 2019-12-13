@@ -1,14 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import { LensContext } from '../context';
+import { useLens } from '../hooks';
 
 import Map from './Map';
 
 const LensMap = ({ children, forwardedRef, ...rest }) => {
-  const { lens = {} } = useContext(LensContext) || {};
-  const { mapConfig = {} } = lens;
-  const { defaultZoom, defaultCenter, maxZoom, minZoom } = mapConfig;
+  const { map } = useLens();
+  const { defaultZoom, defaultCenter, maxZoom, minZoom } = map;
 
   const mapSettings = {
     ...rest,

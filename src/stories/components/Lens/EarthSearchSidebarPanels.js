@@ -43,19 +43,20 @@ const GEOJSON_MONTES_CLAROS_LAT_LNG = latLngFromGeoJson(
 )[0];
 
 const EarthSearchSidebarPanels = ({
-  results,
-  loadMoreResults,
-  clearActiveSearch,
-  filters = {},
-  numberOfResults,
-  search
+  geoSearch = {},
+  lens = {},
+
+
+  filters = {}
 }) => {
-  const hasResults = Array.isArray(results) && results.length > 0;
-  const moreResultsAvailable = typeof loadMoreResults === 'function';
+  const { results = {}, search, searchPlacename, loadMoreResults, clearSearch } = geoSearch;
+  const { features, hasResults, hasMoreResults, numberOfResults } = results;
+
+  // FIXME filters
   const { handlers: filtersHandlers } = filters;
 
   function handleLoadMore (e) {
-    if (moreResultsAvailable) {
+    if (hasMoreResults) {
       loadMoreResults(e);
     }
   }
@@ -66,17 +67,15 @@ const EarthSearchSidebarPanels = ({
     }
   }
 
-  function handleClearActiveSearch () {
-    if (typeof clearActiveSearch === 'function') {
-      clearActiveSearch();
+  function handleClearSearch () {
+    if (typeof clearSearch === 'function') {
+      clearSearch();
     }
   }
 
   function handleTriggerQuerySearchTextOnly () {
-    search({
+    searchPlacename({
       textInput: 'Alexandria, VA',
-      activeFilters: [],
-      dropMarker: true
     });
   }
 
@@ -101,7 +100,7 @@ const EarthSearchSidebarPanels = ({
     <>
       {!hasResults && (
         <>
-          {Array.isArray(results) && (
+          {Array.isArray(features) && (
             <Panel header="Explore">
               <p>Sorry, no results were found.</p>
               {filters.active && filters.active.length > 0 && (
@@ -110,7 +109,7 @@ const EarthSearchSidebarPanels = ({
                 </p>
               )}
               <p>
-                <Button onClick={handleClearActiveSearch}>Clear Search</Button>
+                <Button onClick={handleClearSearch}>Clear Search</Button>
               </p>
             </Panel>
           )}
@@ -121,13 +120,11 @@ const EarthSearchSidebarPanels = ({
             <ItemList
               items={[
                 {
-                  label: 'Alexandria, VA',
+                  label: 'Alexandria, VA - Placename Search',
                   onClick: () => {
-                    search({
-                      textInput: 'Alexandria, VA',
-                      activeFilters: [],
-                      dropMarker: true
-                    });
+                    searchPlacename({
+                      textInput: 'Alexandria, VA'
+                    })
                   }
                 },
                 {
@@ -159,8 +156,8 @@ const EarthSearchSidebarPanels = ({
               </>
             }
           >
-            <ItemList items={results} />
-            {moreResultsAvailable && (
+            <ItemList items={features} />
+            {hasMoreResults && (
               <p>
                 <Button onClick={handleLoadMore}>Load More</Button>
               </p>
@@ -168,7 +165,7 @@ const EarthSearchSidebarPanels = ({
           </Panel>
           <Panel>
             <p>
-              <Button onClick={handleClearActiveSearch}>Clear Search</Button>
+              <Button onClick={handleClearSearch}>Clear Search</Button>
             </p>
           </Panel>
         </>
@@ -221,7 +218,6 @@ EarthSearchSidebarPanels.propTypes = {
   results: PropTypes.array,
   numberOfResults: PropTypes.number,
   loadMoreResults: PropTypes.func,
-  clearActiveSearch: PropTypes.func,
   search: PropTypes.func,
   filters: PropTypes.object
 };

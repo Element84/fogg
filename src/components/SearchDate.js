@@ -7,6 +7,8 @@ import DatetimeRange from './DatetimeRange';
 
 const SearchDate = ({
   dateIsOpen,
+  onOpen,
+  onClose,
   onChange,
   onDateClear,
   onDateCancel,
@@ -27,18 +29,31 @@ const SearchDate = ({
     });
   }, [dateIsOpen]);
 
+  useEffect(() => {
+    setDate(defaultDate);
+  }, [defaultDate]);
+
   /**
    * handleDateClick
    * @description Fires when the date button is clicked
    */
 
   function handleDateClick () {
-    const newDate = {
+    console.group('>>>> searchDate - handleDateClick')
+    console.groupEnd('>>>> searchDate - handleDateClick')
+    const state = {
       ...date,
       dateIsOpen: !date.dateIsOpen
     };
-    setDate(newDate);
-    handleOnChange(newDate);
+
+    if (date.dateIsOpen ) {
+      handleDateCancel();
+      handleOnClose(state);
+    } else {
+      handleOnOpen(state);
+    }
+
+    setDate(state);
   }
 
   /**
@@ -47,6 +62,9 @@ const SearchDate = ({
    */
 
   function handleDateChange (changedDate = {}) {
+    console.group('>>>> searchDate - handleDateChange')
+    console.log('changedDate', changedDate);
+    console.groupEnd('>>>> searchDate - handleDateChange')
     const newDate = {
       ...date,
       date: {
@@ -67,6 +85,8 @@ const SearchDate = ({
    */
 
   function handleDateClear () {
+    console.group('>>>> searchDate - handleDateClear')
+    console.groupEnd('>>>> searchDate - handleDateClear')
     const clearedDate = {
       date: {},
       dateIsOpen: false
@@ -84,14 +104,15 @@ const SearchDate = ({
    */
 
   function handleDateCancel () {
-    const cancelDate = {
+    console.group('>>>> searchDate - handleDateCancel')
+    console.groupEnd('>>>> searchDate - handleDateCancel')
+    const state = {
       ...date,
       dateIsOpen: false
     };
-    setDate(cancelDate);
-    handleOnChange(cancelDate);
+    setDate(state);
     if (typeof onDateCancel === 'function') {
-      onDateCancel(cancelDate);
+      onDateCancel(state);
     }
   }
 
@@ -101,8 +122,33 @@ const SearchDate = ({
    */
 
   function handleOnChange (changedDate = date) {
+    console.group('>>>> searchDate - handleOnChange')
+    console.log('typeof onChange', typeof onChange)
+    console.groupEnd('>>>> searchDate - handleOnChange')
     if (typeof onChange === 'function') {
       onChange(changedDate);
+    }
+  }
+
+  /**
+   * handleOnOpen
+   * @description
+   */
+
+  function handleOnOpen() {
+    if ( typeof onOpen === 'function' ) {
+      onOpen();
+    }
+  }
+
+  /**
+   * handleOnClose
+   * @description
+   */
+
+  function handleOnClose() {
+    if ( typeof onClose === 'function' ) {
+      onClose();
     }
   }
 
@@ -136,7 +182,6 @@ const SearchDate = ({
             onCancel={handleDateCancel}
             onClear={handleDateClear}
             defaultDate={defaultDate.date}
-            clearDate={!defaultDate.date}
             allowFutureDate={allowFutureDate}
           />
         </div>

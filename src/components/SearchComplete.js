@@ -77,9 +77,9 @@ const SearchComplete = ({
    * @description Manges making the actual query search
    */
 
-  function handleQuery (query, searchDate, textInput) {
+  function handleQuery (query, searchDate = date, textInput = query) {
     if (typeof onSearch === 'function') {
-      onSearch(query, searchDate || date, textInput || query);
+      onSearch(query, searchDate && searchDate.date, textInput);
     }
   }
 

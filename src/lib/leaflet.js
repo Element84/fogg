@@ -1,7 +1,5 @@
 import L from 'leaflet';
-import { geocode } from 'esri-leaflet-geocoder';
 import GeoJSON from 'geojson';
-import PromiseCancelable from 'p-cancelable';
 import { getGeom, center } from '@turf/turf';
 
 const DRAW_SHAPES = ['polygon', 'rectangle'];
@@ -24,18 +22,156 @@ const GEOJSON_PARSE_SETTINGS = {
   Polygon: 'polygon'
 };
 
+const geoJsonLayerGroup = L.layerGroup();
+
+export function isValidLeafletElement(el) {
+  return !!el._leaflet_id;
+}
+
+
+/**
+ * createMarkerIcon
+ * @description Creates a new custom Leaflet map marker icoon
+ */
+
+export function createMarkerIcon() {
+  if (!L) return;
+
+  let icon;
+  // Leaflet uses window to be able to set up an icon, so we need to
+  // make sure it's available otherwise don't return anything of value
+  if (!icon && typeof window !== 'undefined') {
+    icon = new L.Icon({
+      iconUrl: require('../assets/images/map-marker.svg'),
+      iconAnchor: [16, 39],
+      popupAnchor: [10, -44],
+      iconSize: [32], // SVG auto scales, ignore 2nd height value
+      shadowUrl: require('../assets/images/map-marker-shadow.svg'),
+      shadowSize: [20], // SVG auto scales, ignore 2nd height value
+      shadowAnchor: [0, 18],
+      className: 'map-marker'
+    });
+  }
+  return icon;
+}
+
+/**
+ * createMapMarker
+ */
+
+export function createMapMarker(latlng) {
+  return L.marker(latlng, {
+    icon: createMarkerIcon()
+  });
+}
+
+/**
+ * createGeoJsonLayer
+ */
+
+export function createGeoJsonLayer(geoJson) {
+  return L.geoJson(geoJson, {
+    pointToLayer: (geoJsonPoint, latlng) => {
+      return createMapMarker(latlng);
+    }
+  });
+}
+
+/**
+ * addGeoJsonLayer
+ */
+
+export function addGeoJsonLayer(geoJson, map) {
+  const layer = createGeoJsonLayer(geoJson);
+  clearFeatureGroupLayers(geoJsonLayerGroup, map)
+  geoJsonLayerGroup.addLayer(layer);
+  geoJsonLayerGroup.addTo(map);
+  return layer;
+}
+
+/**
+ * clearFeatureGroupLayers
+ */
+
+export function clearFeatureGroupLayers(featureGroup, map, excludeLayers = []) {
+  const excludeIds = excludeLayers.map(({ _leaflet_id } = {}) => _leaflet_id);
+  let layers = featureGroup.getLayers();
+
+  layers = layers.filter(({ _leaflet_id } = {}) => !excludeIds.includes(_leaflet_id));
+
+  layers.forEach(layer => {
+    map.removeLayer(layer);
+    featureGroup.removeLayer(layer);
+  });
+}
+
+/**
+ * centerMapOnGeoJson
+ * @description
+ */
+
+export function centerMapOnGeoJson(geoJson, map = {}, settings = {}) {
+  const latLngs = latLngFromGeoJson(geoJson);
+  const center = latLngs[0];
+  setMapView(map, {
+    center,
+    ...settings
+  });
+  return center;
+}
+
+
+/**
+ * setMapView
+ * @description Wraps the leaflet setView method and triggers on our map ref
+ */
+
+export function setMapView (map, { center, zoom } = {}) {
+  // If we can find the existing zoom, use that to prevent changing the zoom
+  // level on someone interacting with the map
+  if (!zoom && typeof map.getZoom === 'function') {
+    zoom = map.getZoom();
+  }
+
+  if (typeof map.setView === 'function') {
+    map.setView(center, zoom);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * clearLeafletElementLayers
  * @description Given a LeafletElement, clear all layers
  */
 
 export function clearLeafletElementLayers (leafletElement, excludeIds = []) {
+  console.log('layerGroup', layerGroup)
   const layers = leafletElement.getLayers();
+  console.log('layers', layers)
   const layersToRemove = layers.filter(
     layer => !excludeIds.includes(layer._leaflet_id)
-  );
+    );
 
-  layersToRemove.forEach(layer => leafletElement.removeLayer(layer));
+    console.log('layersToRemove', layersToRemove)
+  layersToRemove.forEach(layer => {
+    console.log('remove', layer)
+    leafletElement.removeLayer(layer)
+  });
 }
 
 /**
@@ -45,7 +181,7 @@ export function clearLeafletElementLayers (leafletElement, excludeIds = []) {
 
 export function addLeafletMarkerLayer ({ lat, lng }, map) {
   return L.marker([lat, lng], {
-    icon: buildMapMarkerIcon()
+    icon: createMarkerIcon()
   }).addTo(map);
 }
 
@@ -237,54 +373,6 @@ export function geoJsonLayerFromLatLn (position) {
   return L.geoJSON(geoJson);
 }
 
-/**
- * geocodePlacename
- * @description Promise that performs a geocode request on the given placename
- */
-
-export function geocodePlacename (placename) {
-  return new PromiseCancelable((resolve, reject, onCancel) => {
-    if (!geocode) {
-      reject('geocodePlacename Error: Geocode not available.');
-    }
-    const request = geocode()
-      .text(placename)
-      .run((error, body, response) => {
-        if (error) reject(error);
-        resolve(response);
-      }, this);
-
-    onCancel(() => {
-      request.abort();
-    });
-  });
-}
-
-/**
- * buildMapMarkerIcon
- * @description Creates a new custom Leaflet map marker icoon
- */
-
-export function buildMapMarkerIcon () {
-  if (!L) return;
-
-  let icon;
-  // Leaflet uses window to bea ble to set up an icon, so we need to
-  // make sure it's available otherwise don't return anything of value
-  if (!icon && typeof window !== 'undefined') {
-    icon = new L.Icon({
-      iconUrl: require('../assets/images/map-marker.svg'),
-      iconAnchor: [16, 39],
-      popupAnchor: [10, -44],
-      iconSize: [32], // SVG auto scales, ignore 2nd height value
-      shadowUrl: require('../assets/images/map-marker-shadow.svg'),
-      shadowSize: [20], // SVG auto scales, ignore 2nd height value
-      shadowAnchor: [0, 18],
-      className: 'map-marker'
-    });
-  }
-  return icon;
-}
 
 /**
  * latLngFromGeoJson
@@ -428,4 +516,15 @@ export function getGeoJsonCenter (geoJson) {
     throw new Error('Failed to get geoJson center: Invalid geoJson type');
   }
   return center(geoJson);
+}
+
+/**
+ * currentLeafletRef
+ * @description Helper to grab the current leaflet element available
+ */
+
+export function currentLeafletRef(ref = {}) {
+  const { current = {} } = ref;
+  const { leafletElement } = current;
+  return leafletElement;
 }

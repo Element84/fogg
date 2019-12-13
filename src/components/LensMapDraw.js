@@ -1,20 +1,44 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { LensContext } from '../context';
+
+import { useLens } from '../hooks';
 
 import MapDraw from './MapDraw';
 
 const LensMapDraw = props => {
   const { forwardedRef, controlOptions, PopupContent } = props;
-  const { lens = {} } = useContext(LensContext) || {};
 
-  const { handlers: lensHandlers = {} } = lens;
-  const { handleOnCreated } = lensHandlers;
+  const { geoSearch, map = {}, lens = {} } = useLens();
+  const { search } = geoSearch;
+  const { clearLayers } = map;
+  const { draw = {} } = lens;
+  const { clearOnDraw, searchOnDraw } = draw;
+
+  /**
+   * handleOnDrawCreate
+   */
+
+  async function handleOnDrawCreate(layer = {}, featureGroup) {
+    const geoJson = layer.toGeoJSON();
+
+    if (clearOnDraw) {
+      clearLayers({
+        featureGroup,
+        excludeLayers: [layer]
+      });
+    }
+
+    if (searchOnDraw) {
+      search({
+        geoJson
+      });
+    }
+  }
 
   return (
     <MapDraw
       ref={forwardedRef}
-      onCreated={handleOnCreated}
+      onCreated={handleOnDrawCreate}
       controlOptions={controlOptions}
       PopupContent={PopupContent}
       {...props}
