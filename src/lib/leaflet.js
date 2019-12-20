@@ -1,8 +1,14 @@
 import L from 'leaflet';
+
 import { latLngFromGeoJson } from './map';
+import { isDomAvailable } from './util';
 
 export function leafletIsReady () {
-  return typeof L !== 'undefined' && typeof L.version === 'string';
+  return (
+    isDomAvailable() &&
+    typeof L !== 'undefined' &&
+    typeof L.version === 'string'
+  );
 }
 
 /**
