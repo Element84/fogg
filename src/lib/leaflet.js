@@ -1,6 +1,10 @@
 import L from 'leaflet';
 import { latLngFromGeoJson } from './map';
 
+export function leafletIsReady () {
+  return typeof L !== 'undefined' && typeof L.version === 'string';
+}
+
 /**
  * isValidLeafletElement
  * @description Helper to check if the element is a valid leaflet element
@@ -16,7 +20,7 @@ export function isValidLeafletElement (el) {
  */
 
 export function createMarkerIcon () {
-  if (!L) return;
+  if (!leafletIsReady()) return;
 
   let icon;
   // Leaflet uses window to be able to set up an icon, so we need to
@@ -41,6 +45,7 @@ export function createMarkerIcon () {
  */
 
 export function createMapMarker (latlng) {
+  if (!leafletIsReady()) return;
   return L.marker(latlng, {
     icon: createMarkerIcon()
   });
@@ -51,6 +56,7 @@ export function createMapMarker (latlng) {
  */
 
 export function createGeoJsonLayer (geoJson, options = {}) {
+  if (!leafletIsReady()) return;
   return L.geoJson(geoJson, {
     pointToLayer: (geoJsonPoint, latlng) => {
       return createMapMarker(latlng);
@@ -155,7 +161,7 @@ export function setMapView ({ map, settings = {} }) {
  */
 
 export function getShapeType (layer) {
-  if (!L) return;
+  if (!leafletIsReady()) return;
 
   if (layer instanceof L.Circle) {
     return 'circle';

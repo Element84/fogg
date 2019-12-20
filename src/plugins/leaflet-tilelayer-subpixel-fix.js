@@ -1,8 +1,10 @@
 // Fix via https://github.com/Leaflet/Leaflet/issues/3575#issuecomment-150544739
 import L from 'leaflet';
+import { leafletIsReady } from '../lib/leaflet';
 
 (function () {
-  if (!L || !L.GridLayer || !L.GridLayer.prototype) return;
+  if (!leafletIsReady()) return;
+  if (L.GridLayer || !L.GridLayer.prototype) return;
 
   var originalInitTile = L.GridLayer.prototype._initTile;
 
