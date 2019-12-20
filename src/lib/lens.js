@@ -6,9 +6,8 @@ import { resolveMostRecent } from './request';
  * @description Async function used to fetch autocomplete results for SearchBox component
  */
 
-
 export async function resolveLensAutocomplete (query) {
-  const response = await resolveMostRecent(geocodePlacename(query))
+  const response = await resolveMostRecent(geocodePlacename(query));
 
   const { candidates = [] } = response;
 

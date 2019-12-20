@@ -13,7 +13,7 @@ import {
   latLngFromGeoJson,
   geometryTypeFromGeoJson,
   coordinatesFromGeoJson
-} from '../lib/leaflet';
+} from '../lib/map';
 
 import Map from './Map';
 import Marker from './MapMarker';

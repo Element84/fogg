@@ -1,22 +1,25 @@
-import React, { useContext } from 'react';
-import { LensContext } from '../context';
+import React from 'react';
 
 import { useLens } from '../hooks';
 
 import SearchPanelFilters from './SearchPanelFilters';
 
 const LensSearchPanelFilters = props => {
-  const { geoSearch = {} } = useLens();
-  const { search } = geoSearch;
-
-
-  const { filters = {} } = useContext(LensContext) || {};
-  const { handlers: filtersHandlers = {} } = filters;
-  const { openFilters, cancelFilterChanges } = filtersHandlers;
+  const { geoSearch = {}, geoFilters = {} } = useLens();
+  const { updateSearch } = geoSearch;
+  const {
+    filters = {},
+    openFilters,
+    cancelFilterChanges,
+    saveFilterChanges
+  } = geoFilters;
 
   function handleSaveFilters () {
-    search({
-      saveUnsavedFilters: true
+    const { active } = saveFilterChanges({
+      closeFilters: true
+    });
+    updateSearch({
+      filters: active
     });
   }
 

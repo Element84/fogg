@@ -7,14 +7,17 @@ import Map from './Map';
 
 const LensMap = ({ children, forwardedRef, ...rest }) => {
   const { map } = useLens();
-  const { defaultZoom, defaultCenter, maxZoom, minZoom } = map;
+  const { mapConfig = {}, services, projection } = map;
+  const { defaultZoom, defaultCenter, maxZoom, minZoom } = mapConfig;
 
   const mapSettings = {
     ...rest,
     zoom: defaultZoom,
     maxZoom,
     minZoom,
-    center: defaultCenter && [defaultCenter.lat, defaultCenter.lng]
+    center: defaultCenter && [defaultCenter.lat, defaultCenter.lng],
+    services,
+    projection
   };
 
   return (

@@ -6,31 +6,35 @@ import Button from './Button';
 import DatetimeRange from './DatetimeRange';
 
 const SearchDate = ({
-  dateIsOpen,
+  classPrefix,
   onOpen,
   onClose,
   onChange,
   onDateClear,
   onDateCancel,
   onDateChange,
-  classPrefix,
+  defaultIsOpen = false,
   defaultDate = {},
   allowFutureDate
 }) => {
-  const [date, setDate] = useState({
-    ...defaultDate,
-    dateIsOpen: false
+  const [state, updateState] = useState({
+    date: defaultDate,
+    isOpen: defaultIsOpen
   });
+  const { isOpen, date } = state;
 
   useEffect(() => {
-    setDate({
-      ...date,
-      dateIsOpen: !!dateIsOpen
+    updateState({
+      ...state,
+      isOpen: defaultIsOpen
     });
-  }, [dateIsOpen]);
+  }, [defaultIsOpen]);
 
   useEffect(() => {
-    setDate(defaultDate);
+    updateState({
+      ...state,
+      date: defaultDate
+    });
   }, [defaultDate]);
 
   /**
@@ -39,21 +43,19 @@ const SearchDate = ({
    */
 
   function handleDateClick () {
-    console.group('>>>> searchDate - handleDateClick')
-    console.groupEnd('>>>> searchDate - handleDateClick')
-    const state = {
-      ...date,
-      dateIsOpen: !date.dateIsOpen
+    const newState = {
+      ...state,
+      isOpen: !isOpen
     };
 
-    if (date.dateIsOpen ) {
+    if (isOpen) {
       handleDateCancel();
-      handleOnClose(state);
+      handleOnClose(newState);
     } else {
-      handleOnOpen(state);
+      handleOnOpen(newState);
     }
 
-    setDate(state);
+    updateState(newState);
   }
 
   /**
@@ -62,20 +64,17 @@ const SearchDate = ({
    */
 
   function handleDateChange (changedDate = {}) {
-    console.group('>>>> searchDate - handleDateChange')
-    console.log('changedDate', changedDate);
-    console.groupEnd('>>>> searchDate - handleDateChange')
-    const newDate = {
-      ...date,
+    const newState = {
+      ...state,
       date: {
         ...changedDate
       },
-      dateIsOpen: false
+      isOpen: false
     };
-    setDate(newDate);
-    handleOnChange(newDate);
+    updateState(newState);
+    handleOnChange(newState);
     if (typeof onDateChange === 'function') {
-      onDateChange(newDate);
+      onDateChange(newState);
     }
   }
 
@@ -85,16 +84,16 @@ const SearchDate = ({
    */
 
   function handleDateClear () {
-    console.group('>>>> searchDate - handleDateClear')
-    console.groupEnd('>>>> searchDate - handleDateClear')
-    const clearedDate = {
+    const newState = {
       date: {},
-      dateIsOpen: false
+      isOpen: false
     };
-    setDate(clearedDate);
-    handleOnChange(clearedDate);
+
+    updateState(newState);
+    handleOnChange(newState);
+
     if (typeof onDateClear === 'function') {
-      onDateClear(clearedDate);
+      onDateClear(newState);
     }
   }
 
@@ -104,15 +103,15 @@ const SearchDate = ({
    */
 
   function handleDateCancel () {
-    console.group('>>>> searchDate - handleDateCancel')
-    console.groupEnd('>>>> searchDate - handleDateCancel')
-    const state = {
-      ...date,
-      dateIsOpen: false
+    const newState = {
+      ...state,
+      isOpen: false
     };
-    setDate(state);
+
+    updateState(newState);
+
     if (typeof onDateCancel === 'function') {
-      onDateCancel(state);
+      onDateCancel(newState);
     }
   }
 
@@ -122,9 +121,6 @@ const SearchDate = ({
    */
 
   function handleOnChange (changedDate = date) {
-    console.group('>>>> searchDate - handleOnChange')
-    console.log('typeof onChange', typeof onChange)
-    console.groupEnd('>>>> searchDate - handleOnChange')
     if (typeof onChange === 'function') {
       onChange(changedDate);
     }
@@ -135,8 +131,8 @@ const SearchDate = ({
    * @description
    */
 
-  function handleOnOpen() {
-    if ( typeof onOpen === 'function' ) {
+  function handleOnOpen () {
+    if (typeof onOpen === 'function') {
       onOpen();
     }
   }
@@ -146,8 +142,8 @@ const SearchDate = ({
    * @description
    */
 
-  function handleOnClose() {
-    if ( typeof onClose === 'function' ) {
+  function handleOnClose () {
+    if (typeof onClose === 'function') {
       onClose();
     }
   }
@@ -162,13 +158,11 @@ const SearchDate = ({
   return (
     <div
       className="search-date"
-      data-has-active-date-range={
-        date.date && !!(date.date.start || date.date.end)
-      }
+      data-has-active-date-range={date && !!(date.start || date.end)}
     >
       <div
         className={appendClassPrefix('date')}
-        data-is-search-date-open={date.dateIsOpen}
+        data-is-search-date-open={isOpen}
       >
         <Button
           className={appendClassPrefix('control')}
@@ -181,7 +175,7 @@ const SearchDate = ({
             onChange={handleDateChange}
             onCancel={handleDateCancel}
             onClear={handleDateClear}
-            defaultDate={defaultDate.date}
+            defaultDate={defaultDate}
             allowFutureDate={allowFutureDate}
           />
         </div>
@@ -191,17 +185,15 @@ const SearchDate = ({
 };
 
 SearchDate.propTypes = {
-  onInput: PropTypes.func,
-  onSearch: PropTypes.func,
+  classPrefix: PropTypes.string,
+  onOpen: PropTypes.func,
+  onClose: PropTypes.func,
   onChange: PropTypes.func,
+  onDateClear: PropTypes.func,
   onDateCancel: PropTypes.func,
   onDateChange: PropTypes.func,
-  onDateClear: PropTypes.func,
-  placeholder: PropTypes.string,
-  searchInput: PropTypes.string,
   defaultDate: PropTypes.object,
-  dateIsOpen: PropTypes.bool,
-  classPrefix: PropTypes.string,
+  defaultIsOpen: PropTypes.bool,
   allowFutureDate: PropTypes.bool
 };
 

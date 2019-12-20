@@ -5,9 +5,6 @@ import { FeatureGroup, Popup } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 
 import { useMapMarkerIcon } from '../hooks';
-import {
-  reduceDrawEventToLayer
-} from '../lib/leaflet';
 
 const DEFAULT_CONTROL_OPTIONS = {
   circle: false,

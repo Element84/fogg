@@ -1,9 +1,19 @@
 import { useState } from 'react';
 
-export default function useFilters (availableFilters = []) {
+import Logger from '../lib/logger';
+import { sortByKey } from '../lib/util';
+
+const logger = new Logger('useGeoFilters', {
+  isBrowser: true
+});
+
+export default function useGeoFilters (filterSettings) {
+  const { available = [] } = filterSettings;
+
   // Grab all the available filtesr with a defaultValue as the
   // default active
-  const defaultActiveFilters = availableFilters.map(filter => {
+
+  const defaultActiveFilters = available.map(filter => {
     return {
       id: filter.id,
       value: filter.value || filter.defaultValue
@@ -14,7 +24,11 @@ export default function useFilters (availableFilters = []) {
     isOpen: false,
     unsaved: [],
     active: concatAndCleanFilters(defaultActiveFilters),
-    available: availableFilters
+    available
+  });
+
+  logger.info('State', {
+    filters
   });
 
   /**
@@ -27,7 +41,9 @@ export default function useFilters (availableFilters = []) {
       ...filters,
       isOpen: true
     };
+
     updateFilters(updatedFilterState);
+
     return updatedFilterState;
   }
 
@@ -42,11 +58,14 @@ export default function useFilters (availableFilters = []) {
       'available',
       'defaultValue'
     );
+
     const updatedFilterState = {
       ...filters,
       unsaved: concatFilters(unsavedFilters, changes)
     };
+
     updateFilters(updatedFilterState);
+
     return updatedFilterState;
   }
 
@@ -76,6 +95,16 @@ export default function useFilters (availableFilters = []) {
     };
     updateFilters(updatedFilterState);
     return updatedFilterState;
+  }
+
+  /**
+   * addActiveFilters
+   * @description
+   */
+
+  function addActiveFilters (changes = [], options) {
+    const newFilters = concatFilters(filters.active, changes);
+    return setActiveFilters(newFilters, options);
   }
 
   /**
@@ -174,12 +203,14 @@ export default function useFilters (availableFilters = []) {
   return {
     filters: {
       ...filters,
+      active: sortByKey(filters.active, 'id'),
       available: buildAvailableFilters()
     },
     openFilters,
     storeFilterChanges,
     saveFilterChanges,
     setActiveFilters,
+    addActiveFilters,
     cancelFilterChanges,
     clearActiveFilters
   };

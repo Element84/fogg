@@ -8,7 +8,7 @@ import uuidv1 from 'uuid/v1';
 let resolveMostRecentRequestGlobalNonce;
 const resolveMostRecentRequestQueue = [];
 
-export async function resolveMostRecent(promiseInvocation) {
+export async function resolveMostRecent (promiseInvocation) {
   // Generate a unique ID and store it as a nonce
 
   const id = uuidv1();

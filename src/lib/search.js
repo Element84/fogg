@@ -6,7 +6,7 @@ import { geocode } from 'esri-leaflet-geocoder';
  * @description Cancellable promise that performs a geocode request on the given placename
  */
 
-export function geocodePlacename(placename) {
+export function geocodePlacename (placename) {
   return new PromiseCancelable((resolve, reject, onCancel) => {
     if (!geocode) {
       reject('geocodePlacename Error: Geocode not available.');

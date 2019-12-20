@@ -139,3 +139,39 @@ export function isEmptyObject (obj) {
   if (!obj) return true;
   return Object.keys(obj).length === 0;
 }
+
+/**
+ * sortByKey
+ * @description Sort the given array by the object key
+ */
+
+export function sortByKey (array = [], key) {
+  function compare (a, b) {
+    let keyA = a[key];
+    let keyB = b[key];
+
+    if (typeof keyA === 'string') {
+      keyA = keyA.toLowerCase();
+    }
+
+    if (typeof keyB === 'string') {
+      keyB = keyB.toLowerCase();
+    }
+
+    if (keyA < keyB) {
+      return -1;
+    }
+
+    if (keyA > keyB) {
+      return 1;
+    }
+
+    return 0;
+  }
+
+  const newArray = [...array];
+
+  if (typeof key !== 'string') return newArray;
+
+  return newArray.sort(compare);
+}

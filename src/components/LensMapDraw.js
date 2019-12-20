@@ -6,19 +6,18 @@ import { useLens } from '../hooks';
 import MapDraw from './MapDraw';
 
 const LensMapDraw = props => {
-  const { forwardedRef, controlOptions, PopupContent } = props;
+  const { forwardedRefFeatureGroup, PopupContent } = props;
 
-  const { geoSearch, map = {}, lens = {} } = useLens();
-  const { search } = geoSearch;
-  const { clearLayers } = map;
-  const { draw = {} } = lens;
-  const { clearOnDraw, searchOnDraw } = draw;
+  const { geoSearch, map = {} } = useLens();
+  const { updateSearch } = geoSearch;
+  const { clearLayers, draw = {} } = map;
+  const { clearOnDraw, searchOnDraw, controlOptions } = draw;
 
   /**
    * handleOnDrawCreate
    */
 
-  async function handleOnDrawCreate(layer = {}, featureGroup) {
+  async function handleOnDrawCreate (layer = {}, featureGroup) {
     const geoJson = layer.toGeoJSON();
 
     if (clearOnDraw) {
@@ -29,15 +28,16 @@ const LensMapDraw = props => {
     }
 
     if (searchOnDraw) {
-      search({
-        geoJson
+      updateSearch({
+        geoJson,
+        textInput: ''
       });
     }
   }
 
   return (
     <MapDraw
-      ref={forwardedRef}
+      ref={forwardedRefFeatureGroup}
       onCreated={handleOnDrawCreate}
       controlOptions={controlOptions}
       PopupContent={PopupContent}
@@ -47,13 +47,13 @@ const LensMapDraw = props => {
 };
 
 LensMapDraw.propTypes = {
-  forwardedRef: PropTypes.object,
+  forwardedRefFeatureGroup: PropTypes.object,
   controlOptions: PropTypes.object,
   PopupContent: PropTypes.any
 };
 
 const LensMapDrawWithRefs = React.forwardRef(function lensMapDraw (props, ref) {
-  return <LensMapDraw {...props} forwardedRef={ref} />;
+  return <LensMapDraw {...props} forwardedRefFeatureGroup={ref} />;
 });
 
 LensMapDrawWithRefs.displayName = 'LensMapDrawWithRefs';

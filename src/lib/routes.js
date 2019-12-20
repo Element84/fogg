@@ -2,6 +2,6 @@
  * routeIsInternal
  */
 
-export function routeIsInternal(route) {
+export function routeIsInternal (route) {
   return route.charAt(0) === '/';
 }

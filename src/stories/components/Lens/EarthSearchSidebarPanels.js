@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaRocket } from 'react-icons/fa';
 
-import { getGeoJsonCenter, latLngFromGeoJson } from '../../../lib/leaflet';
+import { getGeoJsonCenter, latLngFromGeoJson } from '../../../lib/map';
 
 import Panel from '../../../components/Panel';
 import ItemList from '../../../components/ItemList';
@@ -42,18 +42,17 @@ const GEOJSON_MONTES_CLAROS_LAT_LNG = latLngFromGeoJson(
   GEOJSON_MONTES_CLAROS_CENTER
 )[0];
 
-const EarthSearchSidebarPanels = ({
-  geoSearch = {},
-  lens = {},
-
-
-  filters = {}
-}) => {
-  const { results = {}, search, searchPlacename, loadMoreResults, clearSearch } = geoSearch;
+const EarthSearchSidebarPanels = ({ geoSearch = {}, geoFilters = {} }) => {
+  const {
+    results = {},
+    search,
+    searchPlacename,
+    loadMoreResults,
+    clearSearch
+  } = geoSearch;
   const { features, hasResults, hasMoreResults, numberOfResults } = results;
 
-  // FIXME filters
-  const { handlers: filtersHandlers } = filters;
+  const { filters, clearActiveFilters } = geoFilters;
 
   function handleLoadMore (e) {
     if (hasMoreResults) {
@@ -62,8 +61,8 @@ const EarthSearchSidebarPanels = ({
   }
 
   function handleClearFilters () {
-    if (typeof filtersHandlers.clearActiveFilters === 'function') {
-      filtersHandlers.clearActiveFilters();
+    if (typeof clearActiveFilters === 'function') {
+      clearActiveFilters();
     }
   }
 
@@ -75,14 +74,14 @@ const EarthSearchSidebarPanels = ({
 
   function handleTriggerQuerySearchTextOnly () {
     searchPlacename({
-      textInput: 'Alexandria, VA',
+      textInput: 'Alexandria, VA'
     });
   }
 
   function handleTriggerQuerySearchTextAndFilters () {
-    search({
+    searchPlacename({
       textInput: 'San Francisco, CA',
-      activeFilters: [
+      filters: [
         {
           id: 'properties/sentinel:grid_square',
           value: 'EG'
@@ -91,8 +90,7 @@ const EarthSearchSidebarPanels = ({
           id: 'properties/collection',
           value: 'sentinel-2-l1c'
         }
-      ],
-      dropMarker: true
+      ]
     });
   }
 
@@ -124,7 +122,7 @@ const EarthSearchSidebarPanels = ({
                   onClick: () => {
                     searchPlacename({
                       textInput: 'Alexandria, VA'
-                    })
+                    });
                   }
                 },
                 {
@@ -133,8 +131,7 @@ const EarthSearchSidebarPanels = ({
                     search({
                       geoJson: GEOJSON_MONTES_CLAROS_POLYGON,
                       center: GEOJSON_MONTES_CLAROS_LAT_LNG,
-                      activeFilters: [],
-                      dropMarker: true,
+                      filters: [],
                       zoom: 4
                     });
                   }
@@ -215,11 +212,8 @@ const EarthSearchSidebarPanels = ({
 };
 
 EarthSearchSidebarPanels.propTypes = {
-  results: PropTypes.array,
-  numberOfResults: PropTypes.number,
-  loadMoreResults: PropTypes.func,
-  search: PropTypes.func,
-  filters: PropTypes.object
+  geoSearch: PropTypes.object,
+  geoFilters: PropTypes.object
 };
 
 export default EarthSearchSidebarPanels;

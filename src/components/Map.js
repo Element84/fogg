@@ -12,7 +12,7 @@ import MapService from '../models/map-service';
 import { LayersContext } from '../context';
 
 import { isDomAvailable } from '../lib/device';
-import { buildLayerSet } from '../lib/leaflet';
+import { buildLayerSet } from '../lib/layers';
 
 import Layer from './Layer';
 

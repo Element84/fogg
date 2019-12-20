@@ -1,14 +1,13 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import { LensContext, LayersContext } from '../context';
+import { LayersContext } from '../context';
 
 import { useLens } from '../hooks';
 
 const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
-  const { geoSearch = {} } = useLens();
+  const { geoSearch = {}, geoFilters = {} } = useLens();
 
-  const { filters = {} } = useContext(LensContext) || {};
   const { layers = {}, getDataForLayers, toggleLayer } =
     useContext(LayersContext) || {};
 
@@ -17,9 +16,7 @@ const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
   return (
     <SidebarComponents
       geoSearch={geoSearch}
-
-
-      filters={filters}
+      geoFilters={geoFilters}
       layers={layers}
       toggleLayer={toggleLayer}
       getDataForLayers={getDataForLayers}

@@ -14,13 +14,12 @@ export function regexByFieldName (fieldName) {
   return FIELD_REGEX[fieldName];
 }
 
-
 /**
  * updateCheckedSelections
  * @description
  */
 
-export function updateCheckedSelections(selections, { id, isChecked }) {
+export function updateCheckedSelections (selections, { id, isChecked }) {
   let newSelections = [...selections];
 
   if (isChecked && !newSelections.includes(id)) {
@@ -37,7 +36,7 @@ export function updateCheckedSelections(selections, { id, isChecked }) {
  * @description
  */
 
-export function filterIsChecked(options) {
+export function filterIsChecked (options) {
   if (!Array.isArray(options)) return [];
   return options.filter(option => !!option.isChecked);
 }
@@ -47,7 +46,7 @@ export function filterIsChecked(options) {
  * @description
  */
 
-export function findIsCheckedIds(options) {
+export function findIsCheckedIds (options) {
   const isChecked = filterIsChecked(options);
   return isChecked.map(({ id }) => id);
 }

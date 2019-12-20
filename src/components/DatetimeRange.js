@@ -28,10 +28,10 @@ const DatetimeRange = ({
     const updatedDate = {
       ...emptyDate,
       ...defaultDate
-    }
+    };
     updateDateTemp(updatedDate);
-    updateDate(updatedDate)
-  }, [defaultDate, emptyDate])
+    updateDate(updatedDate);
+  }, [defaultDate, emptyDate]);
 
   /**
    * isValidDate

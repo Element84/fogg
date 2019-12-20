@@ -3,7 +3,7 @@
  * @description Takes the URL param string and turns it into an oobject
  */
 
-export function queryParamsToObject(string) {
+export function queryParamsToObject (string) {
   if (typeof string !== 'string') return null;
 
   const queryString = string.replace('?', '');
@@ -25,13 +25,12 @@ export function queryParamsToObject(string) {
   return queryObject;
 }
 
-
 /**
  * addParamsToUrl
  * @description takes a url and query param object and adds the params to the url
  */
 
-export function addParamsToUrl(url, object, encodeComponents) {
+export function addParamsToUrl (url, object, encodeComponents) {
   if (typeof url !== 'string' || typeof object !== 'object') return url;
 
   if (typeof encodeComponents === 'undefined') encodeComponents = true;
@@ -67,7 +66,7 @@ export function addParamsToUrl(url, object, encodeComponents) {
  * @description takes an object of key / values and returns a url param string
  */
 
-export function objectToQueryString(
+export function objectToQueryString (
   object,
   { encodeKey = true, encodeValues = true } = {}
 ) {
@@ -92,7 +91,7 @@ export function objectToQueryString(
  * @description
  */
 
-export function normalizePathname(string) {
+export function normalizePathname (string) {
   let pathname = string;
 
   if (typeof pathname !== 'string') return pathname;

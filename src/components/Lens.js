@@ -1,7 +1,7 @@
 import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { useLens, useLayers, useGeoSearch, useMap } from '../hooks';
+import { useLayers, useGeoSearch, useMap, useGeoFilters } from '../hooks';
 import { LensContext, LayersContext } from '../context';
 
 import { resolveLensAutocomplete } from '../lib/lens';
@@ -18,13 +18,8 @@ import LensSearchDate from './LensSearchDate';
 const Lens = ({
   children,
   className,
-
   draw,
-
-
-
   defaultCenter = {},
-  zoom = 4,
   defaultZoom = 4,
   maxZoom,
   minZoom,
@@ -39,17 +34,14 @@ const Lens = ({
   availableLayers = null,
   hideNativeLayers = true,
   fetchLayerData,
-  disableMapDraw,
   useMapEffect,
   hasFilterCancel = true,
   defaultDateRange = {},
-  drawControlOptions,
-  onCreatedDraw,
   PopupContent,
   disableFutureDates = false
 }) => {
   const refMap = createRef();
-  const refMapDraw = createRef();
+  const refFeatureGroup = createRef();
   const refSearchComplete = createRef();
 
   let lensClassName = 'lens';
@@ -58,86 +50,58 @@ const Lens = ({
     lensClassName = `${lensClassName} ${className}`;
   }
 
-
-  const lens = useLens({
-    availableFilters,
-    availableServices,
-    defaultCenter,
-    resolveOnSearch,
-    refMap,
-    refMapDraw,
-    refSearchComplete,
-    zoom,
-    defaultZoom,
-    maxZoom,
-    minZoom,
-    defaultDateRange,
-    onCreatedDraw
-  });
-
   const layers = useLayers(availableLayers, fetchLayerData);
 
-  const { results, filters, mapServices } = lens;
+  const geoFilters = useGeoFilters({
+    available: availableFilters
+  });
 
-
-
-
-
-
-
-
-
-
+  const { filters = {} } = geoFilters;
 
   const defaultGeoSearchSettings = {
     resolveOnSearch,
     resolveOnAutocomplete: resolveLensAutocomplete,
-    filters: filters.active
-  }
+    filters: filters.active,
+    date: defaultDateRange
+  };
 
   const geoSearch = useGeoSearch(defaultGeoSearchSettings);
-  const { isActiveSearch } = geoSearch;
+  const { isActiveSearch, results = {}, queryParams = {} } = geoSearch;
+  const { hasResults } = results;
+  const { date = {} } = queryParams;
 
   const defaultMapSettings = {
+    refMap,
+    refFeatureGroup,
     defaultCenter,
     defaultZoom,
     maxZoom,
     minZoom,
-    refMap,
-    refMapDraw,
-    onCreatedDraw
-  }
-
-  const map = useMap(defaultMapSettings);
-
-  const lensTempVariable = {
+    availableServices,
+    projection,
+    date,
     draw: {
+      ...draw,
       searchOnDraw: true,
       clearOnDraw: true
     }
-  }
+  };
 
+  const map = useMap(defaultMapSettings) || {};
+  const { draw: mapDraw = {} } = map;
+  const { disableMapDraw } = mapDraw;
 
-
-
-
-
-
-
-
-  const hasResults = Array.isArray(results) && results.length > 0;
   const displayFilters =
     isActiveSearch && filters.isOpen && filters.available.length > 0;
 
   const mapSettings = {
     projection,
-    services: mapServices,
     hideNativeLayers,
     useMapEffect
   };
 
   return (
-    <LensContext.Provider value={{ lens, filters, layers, geoSearch, map, lensTempVariable }}>
+    <LensContext.Provider value={{ geoFilters, layers, geoSearch, map }}>
       <LayersContext.Provider value={{ ...layers }}>
         <div
           className={lensClassName}
@@ -189,11 +153,7 @@ const Lens = ({
 
           <LensMap ref={refMap} {...mapSettings}>
             {!disableMapDraw && (
-              <LensMapDraw
-                ref={refMapDraw}
-                controlOptions={drawControlOptions}
-                PopupContent={PopupContent}
-              />
+              <LensMapDraw ref={refFeatureGroup} PopupContent={PopupContent} />
             )}
           </LensMap>
 
@@ -214,6 +174,7 @@ const LayerProps = PropTypes.shape({
 Lens.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  draw: PropTypes.object,
   defaultCenter: PropTypes.object,
   zoom: PropTypes.number,
   defaultZoom: PropTypes.number,
@@ -253,22 +214,9 @@ Lens.propTypes = {
     PropTypes.func,
     PropTypes.arrayOf(PropTypes.func)
   ]),
-  disableMapDraw: PropTypes.bool,
   useMapEffect: PropTypes.func,
   hasFilterCancel: PropTypes.bool,
   defaultDateRange: PropTypes.object,
-  /**
-   * Options to pass to EditControl's draw prop
-   * @see See [react-leaflet-draw](https://github.com/alex3165/react-leaflet-draw) for component
-   * @see See [Leaflet Draw](https://leaflet.github.io/Leaflet.draw/docs/leaflet-draw-latest.html#drawoptions) for draw options
-   */
-  drawControlOptions: PropTypes.object,
-  /**
-   * Custom onCreated function will override handleOnCreated in useLens that is passed to EditControl
-   * Return true to stop Lens from searching after function execution
-   * @see See [react-leaflet-draw](https://github.com/alex3165/react-leaflet-draw) for component
-   */
-  onCreatedDraw: PropTypes.func,
   /**
    * Content of popup for drawn shapes
    */

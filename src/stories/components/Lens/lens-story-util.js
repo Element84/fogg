@@ -55,13 +55,13 @@ export const earthSearchAvailableFilters = [
 
 export async function handleResolveOnEarthSearch ({
   geoJson = {},
-  page,
   filters,
+  page,
   date
 } = {}) {
   const { features = [] } = geoJson;
-  // FIXME support more than one feature
   const { geometry } = features[0] || {};
+
   let response;
   let responseFeatures;
 
@@ -75,7 +75,7 @@ export async function handleResolveOnEarthSearch ({
     page
   };
 
-  if ( geometry ) {
+  if (geometry) {
     data.intersects = geometry;
   }
 
@@ -129,7 +129,7 @@ export async function handleResolveOnEarthSearch ({
   action('lens-handleResolveOnEarthSearch')({
     data
   });
-console.log('asdfasdf')
+
   try {
     response = await request.post();
   } catch (e) {

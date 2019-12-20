@@ -104,7 +104,7 @@ const SearchBox = ({
           onChange={handleChange}
           onDateChange={handleDateSearch}
           onDateClear={handleDateSearch}
-          dateIsOpen={dateIsOpen}
+          defaultIsOpen={dateIsOpen}
           defaultDate={date}
           classPrefix={'search-box-controls'}
         />

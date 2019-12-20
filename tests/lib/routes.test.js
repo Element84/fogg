@@ -1,8 +1,6 @@
 import { routes } from '../../lib';
 
-const {
-  routeIsInternal
-} = routes;
+const { routeIsInternal } = routes;
 
 describe('Routes', () => {
   describe('routeIsInternal', () => {

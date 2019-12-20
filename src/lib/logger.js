@@ -14,7 +14,7 @@ class Logger {
     return process.env.gatsby_log_level === 'verbose';
   }
 
-  log (message) {
+  log (message, data = {}) {
     if (!this.shouldLog()) return;
     if (!this.isVerbose()) return;
 
@@ -25,26 +25,40 @@ class Logger {
     /* eslint-enable */
   }
 
-  warn (message) {
+  info (message, data = {}) {
     if (!this.shouldLog()) return;
+
     message = `[${this.namespace}] ${message}`;
+
     /* eslint-disable */
     if (this.isBrowser) {
-      console.warn(message);
+      console.info(message, data);
     } else {
-      console.log(message);
+      console.log(`INFO: ${message}`, data);
     }
     /* eslint-enable */
   }
 
-  error (message) {
+  warn (message, data = {}) {
     if (!this.shouldLog()) return;
     message = `[${this.namespace}] ${message}`;
     /* eslint-disable */
     if (this.isBrowser) {
-      console.error(message);
+      console.warn(message, data);
     } else {
-      console.log(message);
+      console.log(`WARNING: ${message}`, data);
+    }
+    /* eslint-enable */
+  }
+
+  error (message, data = {}) {
+    if (!this.shouldLog()) return;
+    message = `[${this.namespace}] ${message}`;
+    /* eslint-disable */
+    if (this.isBrowser) {
+      console.error(message, data);
+    } else {
+      console.log(`ERROR: ${message}`, data);
     }
     /* eslint-enable */
   }

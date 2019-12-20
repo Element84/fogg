@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDebouncedCallback } from 'use-debounce';
-import CustomEvent from 'custom-event';
 
 import SearchBox from './SearchBox';
 
 const MAX_RESULTS = 5;
 const QUERY_COMPLETE_DEBOUNCE = 300;
-
-const CLEAR_SEARCH_EVENT = 'clear.search-complete';
 
 const SearchComplete = ({
   onSearch,
@@ -136,28 +133,6 @@ const SearchComplete = ({
     return results;
   }
 
-  /**
-   * handleClearSearch
-   * @description When triggered, clears the search state
-   */
-
-  function handleClearSearch () {
-    updateSearchInput('');
-    updateResults([]);
-  }
-
-  useEffect(() => {
-    const { current } = forwardedRef || {};
-
-    if (!current) return;
-
-    current.addEventListener(CLEAR_SEARCH_EVENT, handleClearSearch);
-
-    return () => {
-      current.removeEventListener(CLEAR_SEARCH_EVENT, handleClearSearch);
-    };
-  }, [forwardedRef, handleClearSearch]);
-
   return (
     <div
       ref={forwardedRef}
@@ -214,16 +189,3 @@ SearchComplete.propTypes = {
 };
 
 export default SearchComplete;
-
-/**
- * clearSearchComplete
- * @description Creates a new event to clear search on given target
- */
-
-export function clearSearchComplete (target) {
-  if (!target) {
-    return;
-  }
-  const event = new CustomEvent(CLEAR_SEARCH_EVENT);
-  target.dispatchEvent(event);
-}

@@ -1,8 +1,6 @@
 import { location } from '../../lib';
 
-const {
-  queryParamsToObject
-} = location;
+const { queryParamsToObject } = location;
 
 describe('Location', () => {
   describe('queryParamsToObject', () => {

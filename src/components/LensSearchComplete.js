@@ -7,7 +7,12 @@ import SearchComplete from './SearchComplete';
 
 const LensSearchComplete = ({ forwardedRef, ...props }) => {
   const { geoSearch = {} } = useLens();
-  const { queryParams = {}, search, updateSearch, resolveOnAutocomplete } = geoSearch;
+  const {
+    queryParams = {},
+    search,
+    updateSearch,
+    resolveOnAutocomplete
+  } = geoSearch;
   const { date, textInput } = queryParams;
 
   /**
@@ -15,7 +20,7 @@ const LensSearchComplete = ({ forwardedRef, ...props }) => {
    * @description Manages triggering a search based off of date change
    */
 
-  function handleDateChange(dateConfig = {}) {
+  function handleDateChange (dateConfig = {}) {
     updateSearch({
       date: dateConfig.date
     });
@@ -26,7 +31,7 @@ const LensSearchComplete = ({ forwardedRef, ...props }) => {
    * @description Manages creating a search based off of the search complete's values
    */
 
-  function handleSearch(location, date, textInput) {
+  function handleSearch (location, date, textInput) {
     const center = location && {
       lat: location.y,
       lng: location.x
