@@ -1,7 +1,7 @@
 import L from 'leaflet';
 
 import { latLngFromGeoJson } from './map';
-import { isDomAvailable } from './util';
+import { isDomAvailable } from './device';
 
 export function leafletIsReady () {
   return (
