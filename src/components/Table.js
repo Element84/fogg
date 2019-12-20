@@ -30,8 +30,8 @@ const Table = ({
       disableFilters: !enableFiltering,
       disableSorting: !enableSorting
     },
-    useSortBy,
-    useFilters
+    useFilters,
+    useSortBy
   );
 
   function headerIsEmpty (header) {
