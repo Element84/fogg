@@ -33,7 +33,7 @@ export default function useLens () {
     useContext(LensContext) || {};
   const { search, searchPlacename, updateSearch, clearSearch } = geoSearch;
   const { filters, clearActiveFilters } = geoFilters;
-  const { refMap, refFeatureGroup, draw, clearLayers } = map;
+  const { refMap, refFeatureGroup, draw = {}, clearLayers } = map;
   const { shapeOptions } = draw;
 
   /**

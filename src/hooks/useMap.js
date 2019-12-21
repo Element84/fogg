@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 
-import Logger from '../lib/logger';
 import {
   isValidLeafletElement,
   clearFeatureGroupLayers,
@@ -9,10 +8,6 @@ import {
 } from '../lib/leaflet';
 
 // import { formatMapServiceDate } from '../lib/datetime';
-
-const logger = new Logger('useMap', {
-  isBrowser: true
-});
 
 /**
  * useMap
@@ -65,11 +60,6 @@ export default function useMap (mapSettings = {}) {
       defaultCenter
     });
   }, [defaultCenter]);
-
-  logger.info('State', {
-    mapConfig,
-    mapServices
-  });
 
   /**
    * setMapViewToCoordinates

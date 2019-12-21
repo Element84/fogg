@@ -15,7 +15,8 @@ const columns = [
   },
   {
     accessor: 'actions',
-    disableSorting: true
+    disableSorting: true,
+    Header: false
   }
 ];
 
@@ -50,7 +51,8 @@ const columnsWithFilters = [
   },
   {
     accessor: 'actions',
-    disableFilters: true
+    disableFilters: true,
+    Header: false
   }
 ];
 
@@ -126,5 +128,5 @@ stories.add('Sort', () => {
 });
 
 stories.add('No Header', () => {
-  return <Table columns={columnsNoLabels} data={data} />;
+  return <Table hideHeader={true} columns={columnsNoLabels} data={data} />;
 });

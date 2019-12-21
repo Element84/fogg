@@ -5,6 +5,7 @@ import { FeatureGroup, Popup } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 
 import { useMapMarkerIcon } from '../hooks';
+import { currentLeafletRef } from '../lib/leaflet';
 
 const DEFAULT_CONTROL_OPTIONS = {
   circle: false,
@@ -42,10 +43,9 @@ const MapDraw = ({
    */
 
   function handleOnCreated ({ layer } = {}) {
-    const { current = {} } = refFeatureGroup || {};
-    const { leafletElement } = current;
+    const featureGroup = currentLeafletRef(refFeatureGroup);
     if (typeof onCreated === 'function') {
-      onCreated(layer, leafletElement);
+      onCreated(layer, featureGroup);
     }
   }
 

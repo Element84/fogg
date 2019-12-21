@@ -1,12 +1,7 @@
 import { useState } from 'react';
 
-import Logger from '../lib/logger';
 import { isEmptyObject } from '../lib/util';
 import { geoJsonFromLatLn, latLngFromGeoJson } from '../lib/map';
-
-const logger = new Logger('useGeoSearch', {
-  isBrowser: true
-});
 
 /**
  * useGeoSearch
@@ -49,11 +44,6 @@ export default function useGeoSearch (geoSearchSettings = {}) {
 
   const isActiveSearch = Array.isArray(features);
   const hasResults = isActiveSearch && features.length > 0;
-
-  logger.info('State', {
-    queryParams,
-    results
-  });
 
   /**
    * handleSearchPlacename

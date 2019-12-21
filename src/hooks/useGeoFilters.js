@@ -1,11 +1,6 @@
 import { useState } from 'react';
 
-import Logger from '../lib/logger';
 import { sortByKey } from '../lib/util';
-
-const logger = new Logger('useGeoFilters', {
-  isBrowser: true
-});
 
 export default function useGeoFilters (filterSettings) {
   const { available = [] } = filterSettings;
@@ -25,10 +20,6 @@ export default function useGeoFilters (filterSettings) {
     unsaved: [],
     active: concatAndCleanFilters(defaultActiveFilters),
     available
-  });
-
-  logger.info('State', {
-    filters
   });
 
   /**

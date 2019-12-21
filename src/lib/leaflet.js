@@ -197,6 +197,11 @@ export function getShapeType (layer) {
 
 export function currentLeafletRef (ref = {}) {
   const { current = {} } = ref;
-  const { leafletElement } = current;
+
+  // Current returns null if unavialable, so we need to additionally
+  // add an option for a falsy current value
+
+  const { leafletElement } = current || {};
+
   return leafletElement;
 }
