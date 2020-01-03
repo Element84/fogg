@@ -54,6 +54,12 @@ stories.add('Default', () => {
         type="datetime"
       />
       <FormInput
+        id="default-datetime-utc"
+        label="Default Datetime UTC"
+        type="datetime"
+        utc={true}
+      />
+      <FormInput
         id="default-datalist"
         label="Default Datalist"
         dataList={['Fry', 'Leela', 'Zoidberg', 'Bender']}
