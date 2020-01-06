@@ -10,12 +10,12 @@ import Form from '../../components/Form';
  */
 
 const BaseForm = ({ children }) => {
-  function handleSubmit (event) {
-    action('form-submit')(event);
+  function handleSubmit (event, fields) {
+    action('form-submit')(event, fields);
   }
 
-  function handleChange (event) {
-    action('form-change')(event);
+  function handleChange (event, fields) {
+    action('form-change')(event, fields);
   }
 
   return (

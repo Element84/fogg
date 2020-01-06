@@ -13,7 +13,8 @@ const Datetime = ({
   onChange,
   onInput,
   allowPastDate = true,
-  allowFutureDate = true
+  allowFutureDate = true,
+  utc = false
 }) => {
   const { name } = useInput({ props });
 
@@ -89,6 +90,7 @@ const Datetime = ({
       onChange={handleChange}
       defaultValue={props.value || ''}
       isValidDate={isValidDate}
+      utc={utc}
     />
   );
 };
@@ -100,7 +102,8 @@ Datetime.propTypes = {
   onInput: PropTypes.func,
   value: PropTypes.string,
   allowPastDate: PropTypes.bool,
-  allowFutureDate: PropTypes.bool
+  allowFutureDate: PropTypes.bool,
+  utc: PropTypes.bool
 };
 
 export default Datetime;
