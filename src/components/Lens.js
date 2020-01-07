@@ -81,9 +81,9 @@ const Lens = ({
     projection,
     date,
     draw: {
-      ...draw,
       searchOnDraw: true,
-      clearOnDraw: true
+      clearOnDraw: true,
+      ...draw
     }
   };
 
