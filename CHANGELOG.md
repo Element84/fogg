@@ -1,3 +1,6 @@
+### Version 0.2.8
+- [JAM-896] syncing state with zoom when user zooms on map
+
 ### Version 0.2.7
 - [JAM-896] fixing zoom option passthrough, fixing loading more results
 
