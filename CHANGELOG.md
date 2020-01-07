@@ -1,3 +1,6 @@
+### Version 0.2.7
+- [JAM-896] fixing zoom option passthrough, fixing loading more results
+
 ### Version 0.1.192
 - adding prop to allow UTC on datetime
 
