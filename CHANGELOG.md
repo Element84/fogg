@@ -1,3 +1,6 @@
+### Version 0.2.11
+- [JAM-896] hardening logic for handling clearing leaflet layers
+
 ### Version 0.2.10
 - [JAM-896] fixing layer add function bug
 
