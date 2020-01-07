@@ -20,13 +20,14 @@ const columns = [
   }
 ];
 
-function DefaultColumnFilter ({ filterValue, setFilter }) {
+function DefaultColumnFilter ({ filterValue, setFilter, column = {}, ...rest }) {
+  const { id } = column;
   return (
     <input
       className="table-filter"
       value={filterValue || ''}
       onChange={e => {
-        setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+        setFilter(id, e.target.value || undefined); // Set undefined to remove the filter entirely
       }}
       placeholder="Filter..."
     />
@@ -34,6 +35,7 @@ function DefaultColumnFilter ({ filterValue, setFilter }) {
 }
 
 DefaultColumnFilter.propTypes = {
+  column: PropTypes.object,
   filterValue: PropTypes.any,
   setFilter: PropTypes.func
 };

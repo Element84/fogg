@@ -23,11 +23,12 @@ const GEOJSON_MONTES_CLAROS_POLYGON = {
         type: 'Polygon',
         coordinates: [
           [
-            [-126.298828125, 36.03133177633187],
-            [-118.21289062499999, 36.03133177633187],
-            [-118.21289062499999, 40.17887331434696],
-            [-126.298828125, 40.17887331434696],
-            [-126.298828125, 36.03133177633187]
+            [-43.8739013671875, -16.599345725849386],
+            [-44.1046142578125, -16.65198092045974],
+            [-44.088134765625, -16.86237670846054],
+            [-43.670654296875, -16.914939206301646],
+            [-43.59375, -16.66776866124074],
+            [-43.8739013671875, -16.599345725849386]
           ]
         ]
       }
@@ -126,13 +127,13 @@ const EarthSearchSidebarPanels = ({ geoSearch = {}, geoFilters = {} }) => {
                   }
                 },
                 {
-                  label: 'Montes Claros, MG - Polygon',
+                  label: 'Montes Claros, MG - Polygon, Zoom 6',
                   onClick: () => {
                     search({
                       geoJson: GEOJSON_MONTES_CLAROS_POLYGON,
                       center: GEOJSON_MONTES_CLAROS_LAT_LNG,
                       filters: [],
-                      zoom: 4
+                      zoom: 6
                     });
                   }
                 }

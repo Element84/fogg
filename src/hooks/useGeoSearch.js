@@ -16,7 +16,8 @@ const QUERY_DEFAULT_PARAMS = {
   center: undefined,
   date: {},
   page: 1,
-  filters: []
+  filters: [],
+  zoom: undefined
 };
 
 const QUERY_AVAILABLE_PARAMS = Object.keys(QUERY_DEFAULT_PARAMS);
@@ -114,7 +115,7 @@ export default function useGeoSearch (geoSearchSettings = {}) {
       ...QUERY_DEFAULT_PARAMS,
       ...settings
     });
-    const { resolveBeforeSearch } = options;
+    const { resolveBeforeSearch, concatResults = false } = options;
 
     let searchResults;
 
@@ -136,6 +137,18 @@ export default function useGeoSearch (geoSearchSettings = {}) {
       searchResults = await search(searchSettings, resolveOnSearch);
     } catch (e) {
       throw new Error(`${errorBase}: ${e}; ${searchSettings}`);
+    }
+
+    // In some situations, we don't want to fully replace the search results,
+    // we would want to tack them on to the end, so when true, we'll take the
+    // original features and add the new features on the end. Particularly
+    // useful for "load more results"
+
+    if (concatResults) {
+      searchResults = {
+        ...searchResults,
+        features: [...features, ...searchResults.features]
+      };
     }
 
     setQueryParams(searchSettings);
@@ -172,10 +185,15 @@ export default function useGeoSearch (geoSearchSettings = {}) {
   async function handleLoadMoreResults () {
     const errorBase = 'Failed to load more results';
     try {
-      return await handleSearch({
-        ...queryParams,
-        page: queryParams.page + 1
-      });
+      return await handleSearch(
+        {
+          ...queryParams,
+          page: queryParams.page + 1
+        },
+        {
+          concatResults: true
+        }
+      );
     } catch (e) {
       throw new Error(`${errorBase}: ${e}`);
     }

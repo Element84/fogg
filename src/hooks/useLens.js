@@ -114,7 +114,7 @@ export default function useLens () {
       return;
     }
 
-    const { center = {}, geoJson = {} } = settings;
+    const { center = {}, geoJson = {}, zoom } = settings;
     const centerGeoJson = geoJsonFromLatLn(center);
 
     const layer = addGeoJsonLayer({
@@ -126,7 +126,10 @@ export default function useLens () {
 
     centerMapOnGeoJson({
       geoJson: centerGeoJson,
-      map
+      map,
+      settings: {
+        zoom
+      }
     });
 
     clearLayers({
