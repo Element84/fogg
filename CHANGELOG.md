@@ -1,3 +1,6 @@
+### Version 0.2.10
+- [JAM-896] fixing layer add function bug
+
 ### Version 0.2.9
 - [JAM-896] valid leaflet check
 
