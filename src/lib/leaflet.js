@@ -92,7 +92,7 @@ export function addGeoJsonLayer ({
     featureGroup.addLayer(layer);
     featureGroup.addTo(map);
   } else {
-    layer.addto(map);
+    layer.addTo(map);
   }
   return layer;
 }
