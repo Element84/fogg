@@ -6,7 +6,7 @@ import { LensContext } from '../context';
 import Map from './Map';
 
 const LensMap = ({ children, forwardedRef, ...rest }) => {
-  const { lens = {} } = useContext(LensContext) || {};
+  const { activeDateRange = {}, lens = {} } = useContext(LensContext) || {};
   const { mapConfig = {} } = lens;
   const { defaultZoom, defaultCenter, maxZoom, minZoom } = mapConfig;
 
@@ -15,7 +15,8 @@ const LensMap = ({ children, forwardedRef, ...rest }) => {
     zoom: defaultZoom,
     maxZoom,
     minZoom,
-    center: defaultCenter && [defaultCenter.lat, defaultCenter.lng]
+    center: defaultCenter && [defaultCenter.lat, defaultCenter.lng],
+    activeDateRange
   };
 
   return (

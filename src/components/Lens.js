@@ -35,6 +35,7 @@ const Lens = ({
   disableMapDraw,
   useMapEffect,
   hasFilterCancel = true,
+  activeDateRange = {},
   defaultDateRange = {},
   drawControlOptions,
   onCreatedDraw,
@@ -63,6 +64,7 @@ const Lens = ({
     defaultZoom,
     maxZoom,
     minZoom,
+    activeDateRange,
     defaultDateRange,
     onCreatedDraw
   });
@@ -84,7 +86,7 @@ const Lens = ({
   };
 
   return (
-    <LensContext.Provider value={{ lens, filters, layers }}>
+    <LensContext.Provider value={{ lens, filters, layers, activeDateRange }}>
       <LayersContext.Provider value={{ ...layers }}>
         <div
           className={lensClassName}
@@ -203,6 +205,7 @@ Lens.propTypes = {
   disableMapDraw: PropTypes.bool,
   useMapEffect: PropTypes.func,
   hasFilterCancel: PropTypes.bool,
+  activeDateRange: PropTypes.object,
   defaultDateRange: PropTypes.object,
   /**
    * Options to pass to EditControl's draw prop

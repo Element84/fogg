@@ -248,6 +248,9 @@ const LensLayers = () => {
         SidebarComponents={SidebarPanels}
         hideNativeLayers={true}
         fetchLayerData={[fetchVirrsLayerData, fetchInsituLayerData]}
+        activeDateRange={{
+          end: '2018-11-08 5:00:00'
+        }}
       />
     </>
   );
