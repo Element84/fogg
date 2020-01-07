@@ -35,15 +35,7 @@ export default function useMap (mapSettings = {}) {
   } = mapSettings;
   const { onCreatedDraw } = draw;
 
-  const defaultMapSettings = {};
-
-  // Loop through the controls we make available as a setting and populate
-  // our default settings object with them from the mapSettings argument
-
-  AVAILABLE_MAP_CONTROLS.forEach(control => {
-    defaultMapSettings[control] =
-      mapSettings[control] || MAP_CONFIG_DEFAULTS[control];
-  });
+  const defaultMapSettings = buildDefaultMapSettings(mapSettings);
 
   const [mapConfig, setMapConfig] = useState(defaultMapSettings);
   const [mapServices] = useState(availableServices);
@@ -60,6 +52,34 @@ export default function useMap (mapSettings = {}) {
       defaultCenter
     });
   }, [defaultCenter]);
+
+  // Using the map instance, create event handlers so we can hook and sync
+  // state for other computers to utilize
+
+  useEffect(() => {
+    const map = currentLeafletRef(refMap);
+
+    if (!isValidLeafletElement(map)) return;
+
+    map.on('zoomend', handleOnZoomEnd);
+
+    return () => {
+      map.off('zoomend', handleOnZoomEnd);
+    };
+  }, [refMap]);
+
+  /**
+   * handleOnZoomEnd
+   */
+
+  function handleOnZoomEnd ({ target } = {}) {
+    setMapConfig(state => {
+      return {
+        ...state,
+        zoom: target.getZoom()
+      };
+    });
+  }
 
   /**
    * setMapViewToCoordinates
@@ -147,6 +167,30 @@ export default function useMap (mapSettings = {}) {
     projection,
     draw
   };
+}
+
+/**
+ * buildDefaultMapSettings
+ * @description Builds a set of default settings given user overrides
+ */
+
+function buildDefaultMapSettings (userSettings) {
+  const defaults = {};
+
+  // Loop through the controls we make available as a setting and populate
+  // our default settings object with them from the mapSettings argument
+
+  AVAILABLE_MAP_CONTROLS.forEach(control => {
+    defaults[control] = userSettings[control] || MAP_CONFIG_DEFAULTS[control];
+  });
+
+  // If we don't have a zoom on the default settings, set it to the defaultZoom
+
+  if (typeof defaults.zoom !== 'number') {
+    defaults.zoom = defaults.defaultZoom;
+  }
+
+  return defaults;
 }
 
 // /**
