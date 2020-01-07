@@ -17,7 +17,7 @@ export function leafletIsReady () {
  */
 
 export function isValidLeafletElement (el) {
-  return !!el._leaflet_id;
+  return !!(el && el._leaflet_id);
 }
 
 /**
