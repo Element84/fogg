@@ -106,6 +106,17 @@ export function clearFeatureGroupLayers ({
   map,
   excludeLayers = []
 } = {}) {
+  const errorBase =
+    'clearFeatureGroupLayers - Failed clear feature group layers';
+
+  if (!isValidLeafletElement(featureGroup)) {
+    throw new Error(`${errorBase}: Invalid feature group`);
+  }
+
+  if (!isValidLeafletElement(map)) {
+    throw new Error(`${errorBase}: Invalid map`);
+  }
+
   const excludeIds = excludeLayers.map(({ _leaflet_id: id } = {}) => id);
   let layers = featureGroup.getLayers();
 

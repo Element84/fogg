@@ -109,6 +109,7 @@ export default function useMap (mapSettings = {}) {
       featureGroup = currentLeafletRef(refFeatureGroup);
     }
 
+    if (!isValidLeafletElement(featureGroup)) return;
     if (!isValidLeafletElement(map)) return;
 
     clearFeatureGroupLayers({
