@@ -160,6 +160,8 @@ const LayerProps = PropTypes.shape({
   defaultIsVisible: PropTypes.bool
 });
 
+Lens.whyDidYouRender = true;
+
 Lens.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
