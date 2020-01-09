@@ -1,3 +1,12 @@
+### Version 0.1.193
+- Enabling date filtering for GeoJSON
+- Adding debugging
+- Debugging layers
+- Removing logs
+- Fixing filtering
+- Removing isEqual check for layers
+- Removing debugging
+
 ### Version 0.1.192
 - adding prop to allow UTC on datetime
 
