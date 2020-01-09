@@ -68,7 +68,7 @@ Layer.propTypes = {
   }),
   layerKey: PropTypes.string,
   activeDateRange: PropTypes.shape({
-    end: PropTypes.string
+    end: PropTypes.number
   })
 };
 
