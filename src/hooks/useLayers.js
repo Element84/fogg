@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { castArray, isPlainObject, snakeCase, isEqual } from 'lodash';
+import { castArray, isPlainObject, snakeCase } from 'lodash';
 
 export default function useLayers (availableLayers, fetchLayerData) {
   const defaultLayers = buildDefaultLayers(availableLayers);
@@ -33,16 +33,13 @@ export default function useLayers (availableLayers, fetchLayerData) {
       getLayerData().then(response => {
         const newLayer = getLayerById(layers, getLayerIdByName(response.name));
         newLayer.data = response;
-
-        const newLayers = replaceInLayersByType(
-          layers,
-          newLayer,
-          getLayerTypeById(layers, newLayer.id)
+        updateLayers(
+          replaceInLayersByType(
+            layers,
+            newLayer,
+            getLayerTypeById(layers, newLayer.id)
+          )
         );
-
-        if (!isEqual(layers, newLayers)) {
-          updateLayers(newLayers);
-        }
       });
     }
   }
