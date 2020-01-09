@@ -40,10 +40,7 @@ export default function useLayers (availableLayers, fetchLayerData) {
           getLayerTypeById(layers, newLayer.id)
         );
 
-        console.log('newLayers', newLayers);
-
         if (!isEqual(layers, newLayers)) {
-          console.log('updating new layers', { layers, newLayers });
           updateLayers(newLayers);
         }
       });
