@@ -30,7 +30,8 @@ const Map = props => {
     services = [],
     hideNativeLayers = true,
     useMapEffect,
-    forwardedRef
+    forwardedRef,
+    activeDateRange
   } = props;
 
   const { layers = {}, toggleLayer } = useContext(LayersContext) || {};
@@ -133,7 +134,11 @@ const Map = props => {
                 name={layer.name}
                 checked={layer.isActive}
               >
-                <Layer layerKey={`base_layer_item_${layer.id}`} layer={layer} />
+                <Layer
+                  layerKey={`base_layer_item_${layer.id}`}
+                  layer={layer}
+                  activeDateRange={activeDateRange}
+                />
               </LayersControl.BaseLayer>
             ))}
           {mapLayers.overlay &&
@@ -146,6 +151,7 @@ const Map = props => {
                 <Layer
                   layerKey={`overlay_layer_item_${layer.id}`}
                   layer={layer}
+                  activeDateRange={activeDateRange}
                 />
               </LayersControl.Overlay>
             ))}
@@ -193,7 +199,8 @@ Map.propTypes = {
   }),
   toggleLayer: PropTypes.func,
   hideNativeLayers: PropTypes.bool,
-  useMapEffect: PropTypes.func
+  useMapEffect: PropTypes.func,
+  activeDateRange: PropTypes.shape({})
 };
 
 const MapWithRefs = React.forwardRef(function map (props, ref) {

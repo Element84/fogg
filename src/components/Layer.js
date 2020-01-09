@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
 import { TileLayer, GeoJSON } from 'react-leaflet';
+import moment from 'moment';
 
 const getKey = layerKey => {
   const newKey = uniqueId(layerKey);
   return newKey;
 };
 
-const Layer = ({ layer = {}, layerKey }) => {
+const Layer = ({ layer = {}, layerKey, activeDateRange }) => {
   const { type, data = {} } = layer;
 
   if (type === 'service') {
@@ -19,7 +20,30 @@ const Layer = ({ layer = {}, layerKey }) => {
   }
   if (type === 'data') {
     if (data.type === 'geojson' && !!Object.keys(data.data).length) {
-      const GeoJSONdata = data.data;
+      let features = data.data.features || data.data.geometries;
+      if (!features) features = [];
+
+      const GeoJSONdata = features.filter(geoItem => {
+        let feature = null;
+
+        if (geoItem.properties && geoItem.properties.time) {
+          const eventTime = geoItem.properties.time;
+          if (activeDateRange && activeDateRange.end) {
+            if (
+              moment(eventTime).isSameOrBefore(
+                activeDateRange.end,
+                'millisecond'
+              )
+            ) {
+              feature = geoItem;
+            }
+          }
+          return feature;
+        }
+
+        return true;
+      });
+
       return (
         <GeoJSON key={getKey(layerKey)} data={GeoJSONdata} {...data.options} />
       );
@@ -42,7 +66,10 @@ Layer.propTypes = {
     serviceName: PropTypes.string,
     type: PropTypes.string.isRequired
   }),
-  layerKey: PropTypes.string
+  layerKey: PropTypes.string,
+  activeDateRange: PropTypes.shape({
+    end: PropTypes.number
+  })
 };
 
 export default Layer;
