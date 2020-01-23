@@ -409,12 +409,15 @@ export default function useLens ({
    * @description Clears all aspects of an active search from the state
    */
 
-  function handleClearSearch ({ clearLayers = true } = {}) {
+  function handleClearSearch ({ clearLayers = true, resetView = false } = {}) {
     const { current } = refSearchComplete;
 
     const mapConfigUpdate = {
       ...mapConfigDefaults,
-      center: mapConfig.center
+      center: resetView ? mapConfigDefaults.center : mapConfig.center,
+      customZoom: resetView
+        ? mapConfigDefaults.defaultZoom
+        : mapConfig.customZoom
     };
 
     mapConfigUpdate.geoJson = geoJsonFromLatLn(mapConfigUpdate.center);
