@@ -1,3 +1,6 @@
+### Version 0.1.194
+- [JAM-970] Add validation message to FormInput
+
 ### Version 0.1.193
 - Enabling date filtering for GeoJSON
 - Adding debugging
