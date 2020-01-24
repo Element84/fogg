@@ -64,7 +64,12 @@ stories.add('Default', () => {
         </p>
       </FormRow>
       <FormRow>
-        <FormInput id="firstName" label="First Name" required={true} />
+        <FormInput
+          id="firstName"
+          label="First Name"
+          required={true}
+          validationMessage="First name is required"
+        />
 
         <FormInput id="lastName" label="Last Name" required={true} />
       </FormRow>

@@ -14,12 +14,20 @@ import Datetime from './Datetime';
  */
 
 const FormInput = props => {
-  const { className, disabled, dataList, allowPastDate, utc } = props;
+  const {
+    className,
+    disabled,
+    dataList,
+    allowPastDate,
+    utc,
+    validationMessage
+  } = props;
   const { id, type, label, isInvalid, inputProps } = useInput({ props });
 
   let input;
   let inputClassName = `form-input ${className || ''}`;
   const fieldClassName = 'form-input-field';
+  const displayValidationMessage = isInvalid && validationMessage;
 
   if (type) {
     inputClassName = `${inputClassName} form-input-${type}`;
@@ -88,6 +96,9 @@ const FormInput = props => {
       )}
 
       {input}
+      {displayValidationMessage && (
+        <p className="form-validation-message">{validationMessage}</p>
+      )}
     </div>
   );
 };
@@ -113,7 +124,8 @@ FormInput.propTypes = {
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
   allowPastDate: PropTypes.bool,
-  utc: PropTypes.bool
+  utc: PropTypes.bool,
+  validationMessage: PropTypes.string
 };
 
 export default FormInput;
