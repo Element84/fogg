@@ -16,17 +16,19 @@ const NavBar = ({ orientation, primary, secondary, activePage }) => {
    */
 
   function createButton (link = {}) {
-    const normalizedTo = normalizePathname(link.to);
+    const { to, icon, ...options } = link;
+    const normalizedTo = normalizePathname(to);
     return (
       <Button
-        to={link.to}
+        to={to}
         className={
           valueStartsWith(normalizedActivePage, normalizedTo)
             ? 'nav-bar-active-button'
             : ''
         }
+        {...options}
       >
-        {link.icon}
+        {icon}
       </Button>
     );
   }
