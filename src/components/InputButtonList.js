@@ -55,10 +55,17 @@ const InputButtonList = ({
   function handleOnChange (e = {}) {
     const { target = {} } = e;
     const { id: targetId } = target;
-    const newSelections = updateCheckedSelections(selections, {
-      id: targetId,
-      isChecked: !!target.checked
-    });
+    let newSelections = [];
+    switch (type) {
+      case 'radio':
+        newSelections.push(targetId);
+        break;
+      default:
+        newSelections = updateCheckedSelections(selections, {
+          id: targetId,
+          isChecked: !!target.checked
+        });
+    }
 
     const selectedOptions = selectionOptions.map(selection => {
       const isSelected = newSelections.find(option => option === selection.id);
