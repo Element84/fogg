@@ -1,0 +1,52 @@
+.table-filter-menu {
+  float: left;
+  padding: 1.5em;
+
+}
+
+.table-filter-option {
+
+  h3 {
+    margin: .5em;
+    font-size: 1em;
+  }
+
+  .radio-button,
+  .checkbox-button {
+    & > label {
+      border: none;
+      box-shadow: none;
+      padding: .5em;
+    }
+
+    input {
+
+      &:checked {
+        
+        & + label {
+          box-shadow: none;
+          border: none;
+          background: initial;
+        }
+        
+      }
+        
+    }
+  }
+
+  .radio-button-checkbox,
+  .checkbox-button-checkbox {
+    span {
+      height: 1em;
+      width: 1em;
+      line-height: .5em;
+    }
+
+    svg {
+      width: .5em;
+      height: .5em;
+    }
+
+  }
+
+}
