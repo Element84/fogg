@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 
 import Table from '../../components/Table';
+import { arrayFilter, setArrayFilterValue } from '../../lib/table';
 
 const columns = [
   {
@@ -51,12 +52,11 @@ const columnsWithFilters = [
   {
     accessor: 'role',
     show: false,
-    filter: 'includes'
+    filter: arrayFilter
   },
   {
     accessor: 'org',
-    show: false,
-    filter: 'includes'
+    show: false
   },
   {
     accessor: 'actions',
@@ -80,14 +80,14 @@ const data = [
   {
     firstName: 'Gary',
     lastName: 'Godspeed',
-    role: 'admin',
+    role: ['admin'],
     org: 'windbreakers',
     actions: <button key={'row-1-button'}>View</button>
   },
   {
     firstName: 'Quinn',
     lastName: 'Airgon',
-    role: 'user',
+    role: ['user'],
     org: 'windbreakers',
     actions: (
       <div key={'row-2-buttons'}>
@@ -99,7 +99,7 @@ const data = [
   {
     firstName: 'Abraham',
     lastName: 'Lincoln',
-    role: 'admin',
+    role: ['admin', 'user'],
     org: 'emancipators'
   }
 ];
@@ -119,7 +119,8 @@ stories.add('Filter', () => {
     {
       columnId: 'role',
       type: 'checkbox',
-      header: 'Role'
+      header: 'Role',
+      setFilterValue: setArrayFilterValue
     },
     {
       columnId: 'org',
