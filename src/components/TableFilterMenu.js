@@ -14,6 +14,7 @@ const TableFilterMenu = ({ options = {}, preFilteredRows, setFilter }) => {
           if (typeof setFilterValue === 'function') {
             filterValue = setFilterValue(checkedOptions);
           } else {
+            // assumes column's filter option is set to 'include'
             filterValue = '';
             checkedOptions.map(option => (filterValue += option.value));
           }

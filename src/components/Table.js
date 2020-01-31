@@ -101,7 +101,7 @@ Table.propTypes = {
   defaultColumn: PropTypes.object,
   enableFiltering: PropTypes.bool,
   enableSorting: PropTypes.bool,
-  filterMenuOptions: PropTypes.object
+  filterMenuOptions: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default Table;

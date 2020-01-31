@@ -6,14 +6,15 @@
 function arrayFilter (rows, id, filterValue) {
   return rows.filter(row => {
     const rowValue = row.values[id];
-    if (Array.isArray(filterValue)) {
+    if (Array.isArray(filterValue) && filterValue.length > 0) {
       for (const value of filterValue) {
-        if (!rowValue.includes(value)) {
-          return false;
+        if (rowValue.includes(value)) {
+          return true;
         }
       }
-      return true;
+      return false;
     }
+    return true;
   });
 }
 
@@ -25,9 +26,7 @@ module.exports.arrayFilter = arrayFilter;
  */
 
 function setArrayFilterValue (checkedOptions) {
-  const filterValue = [];
-  checkedOptions.map(option => filterValue.push(option.value));
-  return filterValue;
+  return checkedOptions.map(option => option.value);
 }
 
 module.exports.setArrayFilterValue = setArrayFilterValue;

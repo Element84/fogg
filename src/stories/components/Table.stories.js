@@ -56,7 +56,8 @@ const columnsWithFilters = [
   },
   {
     accessor: 'org',
-    show: false
+    show: false,
+    filter: 'includes'
   },
   {
     accessor: 'actions',
