@@ -33,7 +33,7 @@ export default function useLens () {
     useContext(LensContext) || {};
   const { search, searchPlacename, updateSearch, clearSearch } = geoSearch;
   const { filters, clearActiveFilters } = geoFilters;
-  const { refMap, refFeatureGroup, draw = {}, clearLayers } = map;
+  const { refMap, refFeatureGroup, draw = {}, clearLayers, resetMapView } = map;
   const { shapeOptions } = draw;
 
   /**
@@ -85,7 +85,7 @@ export default function useLens () {
    * handleClearSearch
    */
 
-  function handleClearSearch () {
+  function handleClearSearch ({ resetView = false }) {
     const errorBase = 'handleClearSearch - Failed to clear search';
     const map = currentLeafletRef(refMap);
 
@@ -98,6 +98,10 @@ export default function useLens () {
     clearActiveFilters();
 
     clearLayers();
+
+    if (resetView) {
+      resetMapView();
+    }
   }
 
   /**

@@ -40,7 +40,7 @@ export default function useMap (mapSettings = {}) {
   const [mapConfig, setMapConfig] = useState(defaultMapSettings);
   const [mapServices] = useState(availableServices);
 
-  const { defaultCenter } = mapConfig;
+  const { defaultCenter, defaultZoom } = mapConfig;
 
   // We don't want to update this prop directly on the map component as it will trigger
   // a rerender, instead, we'll use an effect and update the map via it's API
@@ -82,10 +82,20 @@ export default function useMap (mapSettings = {}) {
   }
 
   /**
+   * handleResetMapView
+   */
+
+  function handleResetMapView () {
+    setMapViewToCoordinates(defaultCenter, {
+      zoom: defaultZoom
+    });
+  }
+
+  /**
    * setMapViewToCoordinates
    */
 
-  function setMapViewToCoordinates (center) {
+  function setMapViewToCoordinates (center, settings = {}) {
     const map = currentLeafletRef(refMap);
 
     if (!isValidLeafletElement(map)) return;
@@ -93,6 +103,7 @@ export default function useMap (mapSettings = {}) {
     setMapView({
       map,
       settings: {
+        ...settings,
         center
       }
     });
@@ -164,6 +175,7 @@ export default function useMap (mapSettings = {}) {
     mapConfig,
     clearLayers: handleClearLayers,
     onLayerCreate: handleOnLayerCreate,
+    resetMapView: handleResetMapView,
     services: mapServices,
     projection,
     draw
