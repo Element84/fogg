@@ -36,6 +36,7 @@ const Lens = ({
   fetchLayerData,
   useMapEffect,
   hasFilterCancel = true,
+  activeDateRange = {},
   defaultDateRange = {},
   PopupContent,
   disableFutureDates = false
@@ -101,7 +102,9 @@ const Lens = ({
   };
 
   return (
-    <LensContext.Provider value={{ geoFilters, layers, geoSearch, map }}>
+    <LensContext.Provider
+      value={{ geoFilters, layers, geoSearch, map, activeDateRange }}
+    >
       <LayersContext.Provider value={{ ...layers }}>
         <div
           className={lensClassName}
@@ -216,6 +219,7 @@ Lens.propTypes = {
   ]),
   useMapEffect: PropTypes.func,
   hasFilterCancel: PropTypes.bool,
+  activeDateRange: PropTypes.object,
   defaultDateRange: PropTypes.object,
   /**
    * Content of popup for drawn shapes

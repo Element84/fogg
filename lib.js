@@ -19,3 +19,5 @@ export {
   routes,
   util
 };
+
+export { default as table } from './src/lib/table';

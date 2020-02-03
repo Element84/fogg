@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 
 import Table from '../../components/Table';
+import { arrayFilter, setArrayFilterValue } from '../../lib/table';
 
 const columns = [
   {
@@ -52,6 +53,16 @@ const columnsWithFilters = [
     Filter: DefaultColumnFilter
   },
   {
+    accessor: 'role',
+    show: false,
+    filter: arrayFilter
+  },
+  {
+    accessor: 'org',
+    show: false,
+    filter: 'includes'
+  },
+  {
     accessor: 'actions',
     disableFilters: true,
     Header: false
@@ -74,11 +85,15 @@ const data = [
   {
     firstName: 'Gary',
     lastName: 'Godspeed',
+    role: ['admin'],
+    org: 'windbreakers',
     actions: <button key={'row-1-button'}>View</button>
   },
   {
     firstName: 'Quinn',
     lastName: 'Airgon',
+    role: ['user'],
+    org: 'windbreakers',
     actions: (
       <div key={'row-2-buttons'}>
         <button>View</button>
@@ -88,7 +103,9 @@ const data = [
   },
   {
     firstName: 'Abraham',
-    lastName: 'Lincoln'
+    lastName: 'Lincoln',
+    role: ['admin', 'user'],
+    org: 'emancipators'
   }
 ];
 
@@ -103,6 +120,19 @@ stories.add('Default', () => {
 });
 
 stories.add('Filter', () => {
+  const FILTER_MENU_OPTIONS = [
+    {
+      columnId: 'role',
+      type: 'checkbox',
+      header: 'Role',
+      setFilterValue: setArrayFilterValue
+    },
+    {
+      columnId: 'org',
+      type: 'checkbox',
+      header: 'Organization'
+    }
+  ];
   const filterTypes = {
     text: (rows, id, filterValue) => {
       return rows.filter(row => {
@@ -121,6 +151,7 @@ stories.add('Filter', () => {
       data={data}
       filterTypes={filterTypes}
       enableFiltering={true}
+      filterMenuOptions={FILTER_MENU_OPTIONS}
     />
   );
 });

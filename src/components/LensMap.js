@@ -6,7 +6,7 @@ import { useLens } from '../hooks';
 import Map from './Map';
 
 const LensMap = ({ children, forwardedRef, ...rest }) => {
-  const { map } = useLens();
+  const { map, activeDateRange = {} } = useLens();
   const { mapConfig = {}, services, projection } = map;
   const { defaultZoom, defaultCenter, maxZoom, minZoom } = mapConfig;
 
@@ -17,7 +17,8 @@ const LensMap = ({ children, forwardedRef, ...rest }) => {
     minZoom,
     center: defaultCenter && [defaultCenter.lat, defaultCenter.lng],
     services,
-    projection
+    projection,
+    activeDateRange
   };
 
   return (

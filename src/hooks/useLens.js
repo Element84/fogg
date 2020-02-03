@@ -29,7 +29,7 @@ export function mapGeocodeCandidates ({ address, location } = {}) {
 }
 
 export default function useLens () {
-  const { geoSearch = {}, map = {}, geoFilters = {} } =
+  const { geoSearch = {}, map = {}, geoFilters = {}, activeDateRange = {} } =
     useContext(LensContext) || {};
   const { search, searchPlacename, updateSearch, clearSearch } = geoSearch;
   const { filters, clearActiveFilters } = geoFilters;
@@ -165,6 +165,8 @@ export default function useLens () {
     geoFilters: {
       ...geoFilters,
       clearActiveFilters: handleClearActiveFilters
-    }
+    },
+
+    activeDateRange
   };
 }

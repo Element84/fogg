@@ -13,6 +13,26 @@
 ### Version 0.2.7
 - [JAM-896] fixing zoom option passthrough, fixing loading more results
 
+### Version 0.1.197
+- [JAM-980] Tweaks to make table filters work with array fields
+- [JAM-980] Fix field logic
+
+### Version 0.1.196
+
+### Version 0.1.195
+
+### Version 0.1.194
+- [JAM-970] Add validation message to FormInput
+
+### Version 0.1.193
+- Enabling date filtering for GeoJSON
+- Adding debugging
+- Debugging layers
+- Removing logs
+- Fixing filtering
+- Removing isEqual check for layers
+- Removing debugging
+
 ### Version 0.1.192
 - adding prop to allow UTC on datetime
 

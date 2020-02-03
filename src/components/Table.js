@@ -5,6 +5,8 @@ import TableHead from './TableHead';
 import TableRow from './TableRow';
 
 import { useTable, useFilters, useSortBy } from 'react-table';
+import TableFilterMenu from './TableFilterMenu';
+import { isEmptyObject } from '../lib/util';
 
 const Table = ({
   children,
@@ -15,14 +17,22 @@ const Table = ({
   defaultColumn = {},
   enableSorting = false,
   enableFiltering = false,
-  hideHeader = false
+  hideHeader = false,
+  filterMenuOptions = {}
 }) => {
   const memoizedColumns = useMemo(() => columns, [columns]);
   const memoizedData = useMemo(() => data, [data]);
   const memoizedDefaultColumn = useMemo(() => defaultColumn, [defaultColumn]);
   const memoizedFilterTypes = useMemo(() => filterTypes, [filterTypes]);
 
-  const { rows, getTableProps, prepareRow, headerGroups } = useTable(
+  const {
+    rows,
+    getTableProps,
+    prepareRow,
+    headerGroups,
+    preFilteredRows,
+    setFilter
+  } = useTable(
     {
       columns: memoizedColumns,
       data: memoizedData,
@@ -41,6 +51,13 @@ const Table = ({
 
   return (
     <div className={`table ${className || ''}`}>
+      {!isEmptyObject(filterMenuOptions) && (
+        <TableFilterMenu
+          options={filterMenuOptions}
+          preFilteredRows={preFilteredRows}
+          setFilter={setFilter}
+        />
+      )}
       <table {...getTableProps()}>
         {!hideHeader && (
           <thead>
@@ -87,7 +104,8 @@ Table.propTypes = {
   defaultColumn: PropTypes.object,
   enableFiltering: PropTypes.bool,
   enableSorting: PropTypes.bool,
-  hideHeader: PropTypes.bool
+  hideHeader: PropTypes.bool,
+  filterMenuOptions: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default Table;
