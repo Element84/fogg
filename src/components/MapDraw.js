@@ -10,7 +10,17 @@ import { currentLeafletRef } from '../lib/leaflet';
 const DEFAULT_CONTROL_OPTIONS = {
   circle: false,
   circlemarker: false,
-  polyline: false
+  marker: true,
+  polygon: true,
+  polyline: false,
+  rectangle: true
+};
+
+const SHAPE_CONTROLS = ['circle', 'polygon', 'polyline', 'rectangle'];
+
+const DEFAULT_SHAPE_OPTIONS = {
+  opacity: 1,
+  weight: 3
 };
 
 const MapDraw = ({
@@ -18,7 +28,8 @@ const MapDraw = ({
   forwardedRef,
   onCreated,
   disableEditControls = false,
-  controlOptions = DEFAULT_CONTROL_OPTIONS,
+  controlOptions,
+  shapeOptions,
   PopupContent,
   ...rest
 }) => {
@@ -32,9 +43,32 @@ const MapDraw = ({
   };
 
   const drawOptions = {
+    ...DEFAULT_CONTROL_OPTIONS,
     ...markerOptions,
     ...controlOptions
   };
+
+  // Loop through all of our configured options and determine the
+  // shape configuration for each if a valid shape
+
+  Object.keys(drawOptions).forEach(key => {
+    // Check if the option is turned off or if it's a valid shape
+
+    if (!drawOptions[key] || !SHAPE_CONTROLS.includes(key)) return;
+
+    // If it's set to true, we want to initialize the object for the shape
+    // to set our options on
+
+    if (drawOptions[key] === true) {
+      drawOptions[key] = {};
+    }
+
+    drawOptions[key].shapeOptions = {
+      ...DEFAULT_SHAPE_OPTIONS,
+      ...drawOptions[key].shapeOptions,
+      ...(shapeOptions && shapeOptions.style)
+    };
+  });
 
   /**
    * handleOnCreated
@@ -80,6 +114,7 @@ MapDraw.propTypes = {
   onCreated: PropTypes.func,
   disableEditControls: PropTypes.bool,
   controlOptions: PropTypes.object,
+  shapeOptions: PropTypes.object,
   PopupContent: PropTypes.any
 };
 

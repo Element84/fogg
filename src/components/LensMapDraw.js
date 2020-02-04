@@ -11,7 +11,7 @@ const LensMapDraw = props => {
   const { geoSearch, map = {} } = useLens();
   const { updateSearch } = geoSearch;
   const { clearLayers, draw = {} } = map;
-  const { clearOnDraw, searchOnDraw, controlOptions } = draw;
+  const { clearOnDraw, searchOnDraw, controlOptions, shapeOptions } = draw;
 
   /**
    * handleOnDrawCreate
@@ -40,6 +40,7 @@ const LensMapDraw = props => {
       ref={forwardedRefFeatureGroup}
       onCreated={handleOnDrawCreate}
       controlOptions={controlOptions}
+      shapeOptions={shapeOptions}
       PopupContent={PopupContent}
       {...props}
     />

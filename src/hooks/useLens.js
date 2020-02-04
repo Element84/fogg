@@ -85,7 +85,7 @@ export default function useLens () {
    * handleClearSearch
    */
 
-  function handleClearSearch ({ resetView = false }) {
+  function handleClearSearch ({ resetView = false } = {}) {
     const errorBase = 'handleClearSearch - Failed to clear search';
     const map = currentLeafletRef(refMap);
 
