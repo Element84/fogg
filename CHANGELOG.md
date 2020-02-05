@@ -1,3 +1,6 @@
+### Version 0.2.15
+- [JAM-896] fixing bug where featuregroup wouldn't be avialable for clearing
+
 ### Version 0.2.14
 - [JAM-896] fixing bug where map would re-set the map coordinates on render
 
