@@ -46,7 +46,6 @@ export default function useMap (mapSettings = {}) {
   // a rerender, instead, we'll use an effect and update the map via it's API
 
   useEffect(() => {
-    setMapViewToCoordinates(defaultCenter);
     setMapConfig({
       ...mapConfig,
       defaultCenter
