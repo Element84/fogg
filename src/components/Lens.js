@@ -42,7 +42,6 @@ const Lens = ({
   disableFutureDates = false
 }) => {
   const refMap = createRef();
-  const refFeatureGroup = createRef();
   const refSearchComplete = createRef();
 
   let lensClassName = 'lens';
@@ -73,7 +72,6 @@ const Lens = ({
 
   const defaultMapSettings = {
     refMap,
-    refFeatureGroup,
     defaultCenter,
     defaultZoom,
     maxZoom,
@@ -155,9 +153,7 @@ const Lens = ({
           )}
 
           <LensMap ref={refMap} {...mapSettings}>
-            {!disableMapDraw && (
-              <LensMapDraw ref={refFeatureGroup} PopupContent={PopupContent} />
-            )}
+            {!disableMapDraw && <LensMapDraw PopupContent={PopupContent} />}
           </LensMap>
 
           <div className="lens-extensions">{children}</div>

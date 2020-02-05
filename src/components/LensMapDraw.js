@@ -6,11 +6,11 @@ import { useLens } from '../hooks';
 import MapDraw from './MapDraw';
 
 const LensMapDraw = props => {
-  const { forwardedRefFeatureGroup, PopupContent } = props;
+  const { PopupContent } = props;
 
   const { geoSearch, map = {} } = useLens();
   const { updateSearch } = geoSearch;
-  const { clearLayers, draw = {} } = map;
+  const { clearLayers, draw = {}, mapFeatureGroup } = map;
   const { clearOnDraw, searchOnDraw, controlOptions, shapeOptions } = draw;
 
   /**
@@ -37,26 +37,19 @@ const LensMapDraw = props => {
 
   return (
     <MapDraw
-      ref={forwardedRefFeatureGroup}
       onCreated={handleOnDrawCreate}
       controlOptions={controlOptions}
       shapeOptions={shapeOptions}
       PopupContent={PopupContent}
+      featureGroup={mapFeatureGroup}
       {...props}
     />
   );
 };
 
 LensMapDraw.propTypes = {
-  forwardedRefFeatureGroup: PropTypes.object,
   controlOptions: PropTypes.object,
   PopupContent: PropTypes.any
 };
 
-const LensMapDrawWithRefs = React.forwardRef(function lensMapDraw (props, ref) {
-  return <LensMapDraw {...props} forwardedRefFeatureGroup={ref} />;
-});
-
-LensMapDrawWithRefs.displayName = 'LensMapDrawWithRefs';
-
-export default LensMapDrawWithRefs;
+export default LensMapDraw;

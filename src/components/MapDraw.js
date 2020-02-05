@@ -1,11 +1,12 @@
-import React, { createRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import 'leaflet-draw/dist/leaflet.draw.css';
-import { FeatureGroup, Popup } from 'react-leaflet';
+import { Popup } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 
 import { useMapMarkerIcon } from '../hooks';
-import { currentLeafletRef } from '../lib/leaflet';
+
+import FeatureGroup from '../components/FeatureGroup';
 
 const DEFAULT_CONTROL_OPTIONS = {
   circle: false,
@@ -31,9 +32,9 @@ const MapDraw = ({
   controlOptions,
   shapeOptions,
   PopupContent,
+  featureGroup,
   ...rest
 }) => {
-  const refFeatureGroup = forwardedRef || createRef();
   const { icon } = useMapMarkerIcon();
 
   const markerOptions = {
@@ -77,14 +78,13 @@ const MapDraw = ({
    */
 
   function handleOnCreated ({ layer } = {}) {
-    const featureGroup = currentLeafletRef(refFeatureGroup);
     if (typeof onCreated === 'function') {
       onCreated(layer, featureGroup);
     }
   }
 
   return (
-    <FeatureGroup ref={refFeatureGroup}>
+    <FeatureGroup featureGroup={featureGroup}>
       {children}
       {!disableEditControls && (
         <>
@@ -115,6 +115,7 @@ MapDraw.propTypes = {
   disableEditControls: PropTypes.bool,
   controlOptions: PropTypes.object,
   shapeOptions: PropTypes.object,
+  featureGroup: PropTypes.object,
   PopupContent: PropTypes.any
 };
 

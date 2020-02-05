@@ -108,13 +108,10 @@ export function clearFeatureGroupLayers ({
 } = {}) {
   const errorBase =
     'clearFeatureGroupLayers - Failed clear feature group layers';
+  const isValidMap = isValidLeafletElement(map);
 
   if (!isValidLeafletElement(featureGroup)) {
     throw new Error(`${errorBase}: Invalid feature group`);
-  }
-
-  if (!isValidLeafletElement(map)) {
-    throw new Error(`${errorBase}: Invalid map`);
   }
 
   const excludeIds = excludeLayers.map(({ _leaflet_id: id } = {}) => id);
@@ -126,7 +123,7 @@ export function clearFeatureGroupLayers ({
 
   layers.forEach(layer => {
     featureGroup.removeLayer(layer);
-    map.removeLayer(layer);
+    if (isValidMap) map.removeLayer(layer);
   });
 }
 

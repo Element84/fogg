@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import L from 'leaflet';
 
 import {
   isValidLeafletElement,
@@ -25,14 +26,10 @@ const MAP_CONFIG_DEFAULTS = {
 
 const AVAILABLE_MAP_CONTROLS = Object.keys(MAP_CONFIG_DEFAULTS);
 
+const mapFeatureGroup = new L.FeatureGroup();
+
 export default function useMap (mapSettings = {}) {
-  const {
-    refMap,
-    refFeatureGroup,
-    availableServices = [],
-    projection,
-    draw = {}
-  } = mapSettings;
+  const { refMap, availableServices = [], projection, draw = {} } = mapSettings;
   const { onCreatedDraw } = draw;
 
   const defaultMapSettings = buildDefaultMapSettings(mapSettings);
@@ -41,6 +38,14 @@ export default function useMap (mapSettings = {}) {
   const [mapServices] = useState(availableServices);
 
   const { defaultCenter, defaultZoom } = mapConfig;
+
+  // Upon component cleanup, clear any feature group layers to avoid stale layer state
+
+  useEffect(() => {
+    return () => {
+      handleClearLayers();
+    };
+  }, []);
 
   // We don't want to update this prop directly on the map component as it will trigger
   // a rerender, instead, we'll use an effect and update the map via it's API
@@ -112,15 +117,13 @@ export default function useMap (mapSettings = {}) {
    * handleClearLayers
    */
 
-  async function handleClearLayers ({ featureGroup, excludeLayers = [] } = {}) {
+  async function handleClearLayers ({
+    featureGroup = mapFeatureGroup,
+    excludeLayers = []
+  } = {}) {
     const map = currentLeafletRef(refMap);
 
-    if (!featureGroup) {
-      featureGroup = currentLeafletRef(refFeatureGroup);
-    }
-
     if (!isValidLeafletElement(featureGroup)) return;
-    if (!isValidLeafletElement(map)) return;
 
     clearFeatureGroupLayers({
       featureGroup,
@@ -133,14 +136,10 @@ export default function useMap (mapSettings = {}) {
    * handleOnLayerCreate
    */
 
-  function handleOnLayerCreate ({ layer, featureGroup }) {
+  function handleOnLayerCreate ({ layer, featureGroup = mapFeatureGroup }) {
     const map = currentLeafletRef(refMap);
 
     if (!isValidLeafletElement(map)) return;
-
-    if (!featureGroup) {
-      featureGroup = currentLeafletRef(refFeatureGroup);
-    }
 
     if (typeof onCreatedDraw === 'function') {
       onCreatedDraw({ layer, featureGroup, map });
@@ -170,7 +169,7 @@ export default function useMap (mapSettings = {}) {
 
   return {
     refMap,
-    refFeatureGroup,
+    mapFeatureGroup,
     mapConfig,
     clearLayers: handleClearLayers,
     onLayerCreate: handleOnLayerCreate,

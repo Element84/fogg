@@ -33,7 +33,7 @@ export default function useLens () {
     useContext(LensContext) || {};
   const { search, searchPlacename, updateSearch, clearSearch } = geoSearch;
   const { filters, clearActiveFilters } = geoFilters;
-  const { refMap, refFeatureGroup, draw = {}, clearLayers, resetMapView } = map;
+  const { refMap, mapFeatureGroup, draw = {}, clearLayers, resetMapView } = map;
   const { shapeOptions } = draw;
 
   /**
@@ -111,7 +111,6 @@ export default function useLens () {
   async function handleResolveBeforeSearch ({ settings = {} } = {}) {
     const errorBase = 'handleResolveBeforeSearch - Failed to resolve';
     const map = currentLeafletRef(refMap);
-    const featureGroup = currentLeafletRef(refFeatureGroup);
 
     if (!isValidLeafletElement(map)) {
       logger.warn(`${errorBase}: Invalid leaflet element`);
@@ -124,7 +123,7 @@ export default function useLens () {
     const layer = addGeoJsonLayer({
       geoJson,
       map,
-      featureGroup,
+      featureGroup: mapFeatureGroup,
       options: shapeOptions
     });
 
