@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaRocket } from 'react-icons/fa';
 
-import { getGeoJsonCenter, latLngFromGeoJson } from '../../../lib/map';
-
 import Panel from '../../../components/Panel';
 import ItemList from '../../../components/ItemList';
 import Button from '../../../components/Button';
@@ -35,13 +33,6 @@ const GEOJSON_MONTES_CLAROS_POLYGON = {
     }
   ]
 };
-
-const GEOJSON_MONTES_CLAROS_CENTER = getGeoJsonCenter(
-  GEOJSON_MONTES_CLAROS_POLYGON
-);
-const GEOJSON_MONTES_CLAROS_LAT_LNG = latLngFromGeoJson(
-  GEOJSON_MONTES_CLAROS_CENTER
-)[0];
 
 const EarthSearchSidebarPanels = ({ geoSearch = {}, geoFilters = {} }) => {
   const {
@@ -131,7 +122,6 @@ const EarthSearchSidebarPanels = ({ geoSearch = {}, geoFilters = {} }) => {
                   onClick: () => {
                     search({
                       geoJson: GEOJSON_MONTES_CLAROS_POLYGON,
-                      center: GEOJSON_MONTES_CLAROS_LAT_LNG,
                       filters: [],
                       zoom: 6
                     });

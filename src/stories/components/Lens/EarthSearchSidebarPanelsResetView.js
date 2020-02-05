@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaRocket } from 'react-icons/fa';
 
-import { getGeoJsonCenter, latLngFromGeoJson } from '../../../lib/map';
-
 import Panel from '../../../components/Panel';
 import ItemList from '../../../components/ItemList';
 import Button from '../../../components/Button';
@@ -35,13 +33,6 @@ const GEOJSON_MONTES_CLAROS_POLYGON = {
   ]
 };
 
-const GEOJSON_MONTES_CLAROS_CENTER = getGeoJsonCenter(
-  GEOJSON_MONTES_CLAROS_POLYGON
-);
-const GEOJSON_MONTES_CLAROS_LAT_LNG = latLngFromGeoJson(
-  GEOJSON_MONTES_CLAROS_CENTER
-)[0];
-
 const EarthSearchSidebarPanelsResetView = ({
   geoSearch = {},
   geoFilters = {}
@@ -72,8 +63,7 @@ const EarthSearchSidebarPanelsResetView = ({
   function handleTriggerQuerySearchTextOnly () {
     search({
       textInput: 'Alexandria, VA',
-      activeFilters: [],
-      dropMarker: true
+      activeFilters: []
     });
   }
 
@@ -89,8 +79,7 @@ const EarthSearchSidebarPanelsResetView = ({
           id: 'properties/collection',
           value: 'sentinel-2-l1c'
         }
-      ],
-      dropMarker: true
+      ]
     });
   }
 
@@ -122,8 +111,7 @@ const EarthSearchSidebarPanelsResetView = ({
                   onClick: () => {
                     search({
                       textInput: 'Alexandria, VA',
-                      activeFilters: [],
-                      dropMarker: true
+                      activeFilters: []
                     });
                   }
                 },
@@ -132,9 +120,7 @@ const EarthSearchSidebarPanelsResetView = ({
                   onClick: () => {
                     search({
                       geoJson: GEOJSON_MONTES_CLAROS_POLYGON,
-                      center: GEOJSON_MONTES_CLAROS_LAT_LNG,
                       activeFilters: [],
-                      dropMarker: true,
                       zoom: 4
                     });
                   }

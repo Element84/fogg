@@ -32,10 +32,29 @@ const LensSearchComplete = ({ forwardedRef, ...props }) => {
    */
 
   function handleSearch (location, date, textInput) {
+    const hasTextInput = textInput && textInput !== '';
+
+    // If we dont have a location or a text input, we can't actually make a search.
+    // So instead, try to find the search input in the DOM and focus on it to
+    // prompt the user to enter a query
+
+    if (!location && !hasTextInput) {
+      const { current: searchComplete } = forwardedRef;
+      const searchInput =
+        searchComplete && searchComplete.querySelector('input');
+
+      if (searchInput) {
+        searchInput.focus();
+      }
+
+      return;
+    }
+
     const center = location && {
       lat: location.y,
       lng: location.x
     };
+
     search({
       textInput,
       center,

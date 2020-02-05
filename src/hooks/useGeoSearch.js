@@ -1,7 +1,11 @@
 import { useState } from 'react';
 
 import { isEmptyObject } from '../lib/util';
-import { geoJsonFromLatLn, latLngFromGeoJson } from '../lib/map';
+import {
+  geoJsonFromLatLn,
+  getGeoJsonCenter,
+  latLngFromGeoJson
+} from '../lib/map';
 
 /**
  * useGeoSearch
@@ -251,7 +255,6 @@ export function configureSearchSettings (settings) {
   const searchSettings = {};
 
   const { center, geoJson } = settings;
-
   const hasGeoJson = geoJson && !isEmptyObject(geoJson);
   const hasCenter = center && !isEmptyObject(center);
 
@@ -278,7 +281,8 @@ export function configureSearchSettings (settings) {
   // lets go ahead and populate that center
 
   if (!searchSettings.center && hasGeoJson) {
-    searchSettings.center = latLngFromGeoJson(searchSettings.geoJson);
+    searchSettings.center = getGeoJsonCenter(searchSettings.geoJson);
+    searchSettings.center = latLngFromGeoJson(searchSettings.center)[0];
   }
 
   // Alternatively, if we don't have a GeoJSON but we have a center,
