@@ -120,12 +120,16 @@ export default function useLens () {
     const { center = {}, geoJson = {}, zoom } = settings;
     const centerGeoJson = geoJsonFromLatLn(center);
 
-    const layer = addGeoJsonLayer({
+    const geoJsonLayer = addGeoJsonLayer({
       geoJson,
       map,
       featureGroup: mapFeatureGroup,
       options: shapeOptions
     });
+
+    const layersToExclude = [];
+
+    geoJsonLayer.eachLayer(layer => layersToExclude.push(layer));
 
     centerMapOnGeoJson({
       geoJson: centerGeoJson,
@@ -136,7 +140,7 @@ export default function useLens () {
     });
 
     clearLayers({
-      excludeLayers: [layer]
+      excludeLayers: layersToExclude
     });
   }
 

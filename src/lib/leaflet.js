@@ -21,6 +21,15 @@ export function isValidLeafletElement (el) {
 }
 
 /**
+ * isLeafletLayerGroup
+ * @description Helper to check if the element is a layer group
+ */
+
+export function isLeafletLayerGroup (el) {
+  return !!(el && typeof el.getLayers === 'function');
+}
+
+/**
  * createMarkerIcon
  * @description Creates a new custom Leaflet map marker icoon
  */
@@ -82,19 +91,20 @@ export function addGeoJsonLayer ({
   options = {}
 } = {}) {
   const errorBase = 'addGeoJsonLayer - Failed to add geoJson layer';
-  const layer = createGeoJsonLayer(geoJson, options);
+  const geoJsonLayer = createGeoJsonLayer(geoJson, options);
 
-  if (!isValidLeafletElement(layer)) {
+  if (!isValidLeafletElement(geoJsonLayer)) {
     throw new Error(`${errorBase}: Invalid layer`);
   }
 
-  if (isValidLeafletElement(featureGroup)) {
-    featureGroup.addLayer(layer);
+  if (isLeafletLayerGroup(featureGroup)) {
+    geoJsonLayer.eachLayer(layer => featureGroup.addLayer(layer));
     featureGroup.addTo(map);
   } else {
-    layer.addTo(map);
+    geoJsonLayer.addTo(map);
   }
-  return layer;
+
+  return geoJsonLayer;
 }
 
 /**
