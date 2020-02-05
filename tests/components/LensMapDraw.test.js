@@ -6,8 +6,7 @@ import { LensMapDraw } from '../../ui';
 describe('LensMapDraw', () => {
   describe('Render', () => {
     const lensMapDraw = shallow(<LensMapDraw />);
-    const lensMapDrawDive = lensMapDraw.dive();
-    const mapDraw = lensMapDrawDive.find('MapDrawWithRefs');
+    const mapDraw = lensMapDraw.find('MapDrawWithRefs');
 
     it('should render the component', () => {
       expect(lensMapDraw.exists()).toEqual(true);
