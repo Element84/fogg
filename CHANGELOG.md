@@ -1,3 +1,6 @@
+### Version 0.2.16
+- [JAM-896] fixing geojson layer to respect layers inside object
+
 ### Version 0.2.15
 - [JAM-896] fixing bug where featuregroup wouldn't be avialable for clearing
 
