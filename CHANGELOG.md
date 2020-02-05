@@ -1,3 +1,6 @@
+### Version 0.2.13
+- [JAM-896] preventing search input from firing if no search query or location, fixing map center fvrom geojson search
+
 ### Version 0.2.12
 - [JAM-896] fixing reset map view
 - [JAM-896] fixing shape options to work on draw controls
