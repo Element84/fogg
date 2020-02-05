@@ -2,7 +2,7 @@
   "name": "fogg",
   "private": true,
   "description": "Gatsby theme for mapping!",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "author": "Element 84, Inc.",
   "dependencies": {
     "@babel/core": "^7.7.7",

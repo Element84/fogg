@@ -1,3 +1,7 @@
+### Version 0.2.12
+- [JAM-896] fixing reset map view
+- [JAM-896] fixing shape options to work on draw controls
+
 ### Version 0.2.11
 - [JAM-896] hardening logic for handling clearing leaflet layers
 
