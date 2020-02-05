@@ -1,3 +1,6 @@
+### Version 0.2.14
+- [JAM-896] fixing bug where map would re-set the map coordinates on render
+
 ### Version 0.2.13
 - [JAM-896] preventing search input from firing if no search query or location, fixing map center fvrom geojson search
 
