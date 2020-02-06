@@ -10,6 +10,7 @@ import {
   addGeoJsonLayer
 } from '../lib/leaflet';
 import { geoJsonFromLatLn, getGeoJsonCenter } from '../lib/map';
+import { isDomAvailable } from '../lib/device';
 
 // import { formatMapServiceDate } from '../lib/datetime';
 
@@ -33,7 +34,11 @@ const MAP_STATE_DEFAULT = {
 
 const AVAILABLE_MAP_CONTROLS = Object.keys(MAP_CONFIG_DEFAULTS);
 
-const mapFeatureGroup = new L.FeatureGroup();
+let mapFeatureGroup;
+
+if (isDomAvailable()) {
+  mapFeatureGroup = new L.FeatureGroup();
+}
 
 export default function useMap (mapSettings = {}) {
   const { refMap, availableServices = [], projection, draw = {} } = mapSettings;
