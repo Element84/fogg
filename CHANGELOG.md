@@ -1,3 +1,6 @@
+### Version 0.2.22
+- [JAM-896] fixing table bug
+
 ### Version 0.2.21
 - [JAM-896] removing react-leaflet from null loader
 
