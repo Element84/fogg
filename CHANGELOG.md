@@ -1,3 +1,6 @@
+### Version 0.2.23
+- [JAM-896] fixing sort api for columns
+
 ### Version 0.2.22
 - [JAM-896] fixing table bug
 
