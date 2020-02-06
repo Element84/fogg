@@ -1,3 +1,7 @@
+### Version 0.2.17
+- [JAM-896] fixing map draw test
+- [JAM-896] adding map state with initialized setting
+
 ### Version 0.2.16
 - [JAM-896] fixing geojson layer to respect layers inside object
 
