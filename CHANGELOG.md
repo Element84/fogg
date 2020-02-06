@@ -1,3 +1,6 @@
+### Version 0.2.20
+- [JAM-896] trying to fix undefined extend
+
 ### Version 0.2.19
 - [JAM-896] fixing L call outside of dom
 
