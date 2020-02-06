@@ -1,3 +1,6 @@
+### Version 0.2.21
+- [JAM-896] removing react-leaflet from null loader
+
 ### Version 0.2.20
 - [JAM-896] trying to fix undefined extend
 
