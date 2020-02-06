@@ -1,3 +1,6 @@
+### Version 0.2.18
+- [JAM-896] setting up shape additions to be added in an effect hook to allow consistent availability of the refMap
+
 ### Version 0.2.17
 - [JAM-896] fixing map draw test
 - [JAM-896] adding map state with initialized setting
