@@ -21,8 +21,8 @@ const TableHead = ({ className, headers }) => {
                   {column.render('Header')}
                   {column.canSort && (
                     <span>
-                      {column.sorted ? (
-                        column.sortedDesc ? (
+                      {column.isSorted ? (
+                        column.isSortedDesc ? (
                           <FaSortDown />
                         ) : (
                           <FaSortUp />
