@@ -26,7 +26,7 @@ function DefaultColumnFilter ({ filterValue, setFilter, column = {}, ...rest }) 
   return (
     <input
       className="table-filter"
-      value={filterValue || ''}
+      value={filterValue}
       onChange={e => {
         setFilter(id, e.target.value || undefined); // Set undefined to remove the filter entirely
       }}

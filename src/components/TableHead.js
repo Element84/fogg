@@ -7,6 +7,7 @@ const TableHead = ({ className, headers }) => {
     <tr className={`table-row ${className || ''}`}>
       {headers.map((column, index) => {
         const showHeader = !!column.Header;
+        const showFilter = !!column.Filter;
         return (
           <th key={`TableRow-Cell-${index}`} className="table-row-cell">
             <div className="table-row-cell-inner">
@@ -33,7 +34,7 @@ const TableHead = ({ className, headers }) => {
                   )}
                 </div>
               )}
-              {column.canFilter && (
+              {column.canFilter && showFilter && (
                 <div className="filters">{column.render('Filter')}</div>
               )}
             </div>
