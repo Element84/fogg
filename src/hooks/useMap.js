@@ -5,8 +5,11 @@ import {
   isValidLeafletElement,
   clearFeatureGroupLayers,
   currentLeafletRef,
-  setMapView
+  setMapView,
+  centerMapOnGeoJson,
+  addGeoJsonLayer
 } from '../lib/leaflet';
+import { geoJsonFromLatLn, getGeoJsonCenter } from '../lib/map';
 
 // import { formatMapServiceDate } from '../lib/datetime';
 
@@ -40,6 +43,7 @@ export default function useMap (mapSettings = {}) {
 
   const [mapState, setMapState] = useState(MAP_STATE_DEFAULT);
   const [mapConfig, setMapConfig] = useState(defaultMapSettings);
+  const [mapShape, setMapShape] = useState();
   const [mapServices] = useState(availableServices);
 
   const { defaultCenter, defaultZoom } = mapConfig;
@@ -87,6 +91,52 @@ export default function useMap (mapSettings = {}) {
       map.off('zoomend', handleOnZoomEnd);
     };
   }, [refMap]);
+
+  // To make sure we have acccess to the refMap when adding a shape to the map
+  // we allow the app to define a mapShape that will subsequently be added to the
+  // map. If mapShape isn't available or doesn't change, it won't re-run between
+  // renders to avoid incorrect shape layers
+
+  useEffect(() => {
+    if (!mapShape) return;
+
+    const map = currentLeafletRef(refMap);
+
+    if (!isValidLeafletElement(map)) return;
+
+    const {
+      geoJson,
+      shapeOptions = {},
+      centerGeoJson,
+      panToShape = true,
+      zoom
+    } = mapShape;
+
+    const geoJsonLayer = addGeoJsonLayer({
+      geoJson,
+      map,
+      featureGroup: mapFeatureGroup,
+      options: shapeOptions
+    });
+
+    const layersToExclude = [];
+
+    geoJsonLayer.eachLayer(layer => layersToExclude.push(layer));
+
+    if (panToShape) {
+      centerMapOnGeoJson({
+        geoJson: centerGeoJson,
+        map,
+        settings: {
+          zoom
+        }
+      });
+    }
+
+    handleClearLayers({
+      excludeLayers: layersToExclude
+    });
+  }, [mapShape]);
 
   /**
    * handleOnZoomEnd
@@ -162,6 +212,43 @@ export default function useMap (mapSettings = {}) {
     }
   }
 
+  /**
+   * handleOnLayerCreate
+   */
+
+  function handleAddShapeToMap (settings = {}) {
+    const errorBase =
+      'useMap::handleAddShapeToMap - Failed to add shape to map';
+    const { panToShape, center, geoJson, zoom, shapeOptions = {} } = settings;
+    let centerGeoJson;
+
+    if (!geoJson) {
+      throw new Error(`${errorBase}: Invalid geoJson`);
+    }
+
+    if (center) {
+      centerGeoJson = geoJsonFromLatLn(center);
+    } else {
+      centerGeoJson = getGeoJsonCenter(geoJson);
+    }
+
+    setMapShape({
+      geoJson,
+      shapeOptions,
+      centerGeoJson,
+      panToShape,
+      zoom
+    });
+  }
+
+  function handleCenterMapOnGeoJson (settings = {}) {
+    return centerMapOnGeoJson(settings);
+  }
+
+  function handleAddGeoJsonLayer (settings = {}) {
+    return addGeoJsonLayer(settings);
+  }
+
   // useEffect(() => {
   //   updateTileDate(date);
   // }, [date]);
@@ -188,12 +275,16 @@ export default function useMap (mapSettings = {}) {
     mapFeatureGroup,
     mapConfig,
     mapState,
+    services: mapServices,
+    projection,
+    draw,
+
     clearLayers: handleClearLayers,
     onLayerCreate: handleOnLayerCreate,
     resetMapView: handleResetMapView,
-    services: mapServices,
-    projection,
-    draw
+    centerMapOnGeoJson: handleCenterMapOnGeoJson,
+    addGeoJsonLayer: handleAddGeoJsonLayer,
+    addShapeToMap: handleAddShapeToMap
   };
 }
 

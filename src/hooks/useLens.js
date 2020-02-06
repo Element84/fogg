@@ -1,13 +1,7 @@
 import { useContext } from 'react';
 
 import Logger from '../lib/logger';
-import {
-  isValidLeafletElement,
-  currentLeafletRef,
-  centerMapOnGeoJson,
-  addGeoJsonLayer
-} from '../lib/leaflet';
-import { geoJsonFromLatLn } from '../lib/map';
+import { isValidLeafletElement, currentLeafletRef } from '../lib/leaflet';
 
 import { LensContext } from '../context';
 
@@ -33,7 +27,7 @@ export default function useLens () {
     useContext(LensContext) || {};
   const { search, searchPlacename, updateSearch, clearSearch } = geoSearch;
   const { filters, clearActiveFilters } = geoFilters;
-  const { refMap, mapFeatureGroup, draw = {}, clearLayers, resetMapView } = map;
+  const { refMap, draw = {}, clearLayers, resetMapView, addShapeToMap } = map;
   const { shapeOptions } = draw;
 
   /**
@@ -118,29 +112,13 @@ export default function useLens () {
     }
 
     const { center = {}, geoJson = {}, zoom } = settings;
-    const centerGeoJson = geoJsonFromLatLn(center);
 
-    const geoJsonLayer = addGeoJsonLayer({
+    addShapeToMap({
+      shapeOptions,
+      panToShape: true,
+      center,
       geoJson,
-      map,
-      featureGroup: mapFeatureGroup,
-      options: shapeOptions
-    });
-
-    const layersToExclude = [];
-
-    geoJsonLayer.eachLayer(layer => layersToExclude.push(layer));
-
-    centerMapOnGeoJson({
-      geoJson: centerGeoJson,
-      map,
-      settings: {
-        zoom
-      }
-    });
-
-    clearLayers({
-      excludeLayers: layersToExclude
+      zoom
     });
   }
 
