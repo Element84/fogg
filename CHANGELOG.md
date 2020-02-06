@@ -1,3 +1,6 @@
+### Version 0.2.19
+- [JAM-896] fixing L call outside of dom
+
 ### Version 0.2.18
 - [JAM-896] setting up shape additions to be added in an effect hook to allow consistent availability of the refMap
 
