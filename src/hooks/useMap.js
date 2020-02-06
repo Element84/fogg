@@ -24,6 +24,10 @@ const MAP_CONFIG_DEFAULTS = {
   minZoom: 0
 };
 
+const MAP_STATE_DEFAULT = {
+  initialized: false
+};
+
 const AVAILABLE_MAP_CONTROLS = Object.keys(MAP_CONFIG_DEFAULTS);
 
 const mapFeatureGroup = new L.FeatureGroup();
@@ -34,15 +38,27 @@ export default function useMap (mapSettings = {}) {
 
   const defaultMapSettings = buildDefaultMapSettings(mapSettings);
 
+  const [mapState, setMapState] = useState(MAP_STATE_DEFAULT);
   const [mapConfig, setMapConfig] = useState(defaultMapSettings);
   const [mapServices] = useState(availableServices);
 
   const { defaultCenter, defaultZoom } = mapConfig;
 
-  // Upon component cleanup, clear any feature group layers to avoid stale layer state
+  // Map build and teardown functions
 
   useEffect(() => {
+    // Set as an initialized state after first render to signal the DOM is ready
+    // to be worked with (and refs)
+
+    setMapState({
+      initialized: true
+    });
+
+    // Teardown
+
     return () => {
+      // Clear any feature group layers to avoid stale layer state
+
       handleClearLayers();
     };
   }, []);
@@ -171,6 +187,7 @@ export default function useMap (mapSettings = {}) {
     refMap,
     mapFeatureGroup,
     mapConfig,
+    mapState,
     clearLayers: handleClearLayers,
     onLayerCreate: handleOnLayerCreate,
     resetMapView: handleResetMapView,
