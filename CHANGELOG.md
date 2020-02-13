@@ -1,3 +1,6 @@
+### Version 0.2.24
+- adding initialState option to table
+
 ### Version 0.2.23
 - [JAM-896] fixing sort api for columns
 
