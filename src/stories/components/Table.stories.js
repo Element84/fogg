@@ -54,12 +54,10 @@ const columnsWithFilters = [
   },
   {
     accessor: 'role',
-    show: false,
     filter: arrayFilter
   },
   {
     accessor: 'org',
-    show: false,
     filter: 'includes'
   },
   {
@@ -147,6 +145,9 @@ stories.add('Filter', () => {
   };
   return (
     <Table
+      initialState={{
+        hiddenColumns: ['role', 'org']
+      }}
       columns={columnsWithFilters}
       data={data}
       filterTypes={filterTypes}

@@ -18,7 +18,8 @@ const Table = ({
   enableSorting = false,
   enableFiltering = false,
   hideHeader = false,
-  filterMenuOptions = {}
+  filterMenuOptions = {},
+  initialState
 }) => {
   const memoizedColumns = useMemo(() => columns, [columns]);
   const memoizedData = useMemo(() => data, [data]);
@@ -34,6 +35,7 @@ const Table = ({
     setFilter
   } = useTable(
     {
+      initialState,
       columns: memoizedColumns,
       data: memoizedData,
       filterTypes: memoizedFilterTypes,
@@ -105,7 +107,8 @@ Table.propTypes = {
   enableFiltering: PropTypes.bool,
   enableSorting: PropTypes.bool,
   hideHeader: PropTypes.bool,
-  filterMenuOptions: PropTypes.arrayOf(PropTypes.object)
+  filterMenuOptions: PropTypes.arrayOf(PropTypes.object),
+  initialState: PropTypes.object
 };
 
 export default Table;
