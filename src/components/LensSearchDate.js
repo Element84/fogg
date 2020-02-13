@@ -1,28 +1,27 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { LensContext } from '../context';
+
+import { useLens } from '../hooks';
 
 import SearchDate from './SearchDate';
 
 const LensSearchDate = ({ allowFutureDate }) => {
-  const { lens = {} } = useContext(LensContext) || {};
-  const { handlers: lensHandlers = {}, date, mapConfig } = lens;
-  const { handleOnSearch, handleDateChange: handleOnChange } = lensHandlers;
+  const { geoSearch = {} } = useLens();
+  const { updateSearch, queryParams = {} } = geoSearch;
+  const { date = {} } = queryParams;
 
-  const { center } = mapConfig || {};
+  /**
+   * handleOnDateChange
+   */
 
   function handleOnDateChange (changedDate = {}) {
-    handleOnSearch(center, changedDate);
+    updateSearch({
+      date: changedDate.date
+    });
   }
-
-  // Perform the initial search
-  useEffect(() => {
-    handleOnDateChange(date);
-  }, []);
 
   return (
     <SearchDate
-      onChange={handleOnChange}
       onDateChange={handleOnDateChange}
       onDateClear={handleOnDateChange}
       onDateCancel={handleOnDateChange}

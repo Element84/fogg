@@ -131,6 +131,7 @@ const SearchPanelFilters = ({
     >
       {hasActiveFilters(panelFilters) && (
         <Table
+          hideHeader={true}
           columns={[
             {
               accessor: 'label'

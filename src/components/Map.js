@@ -11,8 +11,8 @@ import '../plugins/leaflet-tilelayer-subpixel-fix';
 import MapService from '../models/map-service';
 import { LayersContext } from '../context';
 
-import { isDomAvailable } from '../lib/util';
-import { buildLayerSet } from '../lib/leaflet';
+import { isDomAvailable } from '../lib/device';
+import { buildLayerSet } from '../lib/layers';
 
 import Layer from './Layer';
 

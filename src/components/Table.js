@@ -17,6 +17,7 @@ const Table = ({
   defaultColumn = {},
   enableSorting = false,
   enableFiltering = false,
+  hideHeader = false,
   filterMenuOptions = {}
 }) => {
   const memoizedColumns = useMemo(() => columns, [columns]);
@@ -40,8 +41,8 @@ const Table = ({
       disableFilters: !enableFiltering,
       disableSorting: !enableSorting
     },
-    useSortBy,
-    useFilters
+    useFilters,
+    useSortBy
   );
 
   function headerIsEmpty (header) {
@@ -58,22 +59,24 @@ const Table = ({
         />
       )}
       <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup, headerIndex) => {
-            const { headers } = headerGroup;
-            // check for all empty headers before rendering row
-            if (headers.every(headerIsEmpty)) {
-              return null;
-            }
-            return (
-              <TableHead
-                className="table-header"
-                key={`Table-Header-${headerIndex}`}
-                headers={headers}
-              />
-            );
-          })}
-        </thead>
+        {!hideHeader && (
+          <thead>
+            {headerGroups.map((headerGroup, headerIndex) => {
+              const { headers } = headerGroup;
+              // check for all empty headers before rendering row
+              if (headers.every(headerIsEmpty)) {
+                return null;
+              }
+              return (
+                <TableHead
+                  className="table-header"
+                  key={`Table-Header-${headerIndex}`}
+                  headers={headers}
+                />
+              );
+            })}
+          </thead>
+        )}
         <tbody>
           {rows.map((row, rowIndex) => {
             return (
@@ -101,6 +104,7 @@ Table.propTypes = {
   defaultColumn: PropTypes.object,
   enableFiltering: PropTypes.bool,
   enableSorting: PropTypes.bool,
+  hideHeader: PropTypes.bool,
   filterMenuOptions: PropTypes.arrayOf(PropTypes.object)
 };
 

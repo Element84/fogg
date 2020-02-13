@@ -5,30 +5,33 @@ import { FaCheck, FaTimes, FaBan } from 'react-icons/fa';
 
 import Button from './Button';
 
+const emptyDate = {
+  start: null,
+  end: null
+};
+
 const DatetimeRange = ({
   onChange,
   onCancel,
   onClear,
-  clearDate,
   defaultDate,
   allowPastDate = true,
   allowFutureDate = true
 }) => {
-  const emptyDate = {
-    start: null,
-    end: null
-  };
-
-  const initialDate = { ...emptyDate, ...defaultDate };
-
-  const [dateTemp, updateDateTemp] = useState(initialDate);
+  const [dateTemp, updateDateTemp] = useState({ ...emptyDate, ...defaultDate });
   const [date, updateDate] = useState(dateTemp);
 
+  // If our defaultDate changes, that most likely means we're using the component
+  // in a controlled state, so we want to sync the local state
+
   useEffect(() => {
-    if (clearDate) {
-      handleDatetimeClear();
-    }
-  }, [clearDate]);
+    const updatedDate = {
+      ...emptyDate,
+      ...defaultDate
+    };
+    updateDateTemp(updatedDate);
+    updateDate(updatedDate);
+  }, [defaultDate, emptyDate]);
 
   /**
    * isValidDate
@@ -60,7 +63,6 @@ const DatetimeRange = ({
       ...dateTemp, // Then anything we have in our temp stored state date
       ...newDate // Then overlay any of our new values
     };
-
     updateDateTemp(updatedDate);
   }
 
@@ -106,9 +108,7 @@ const DatetimeRange = ({
    */
 
   function handleDatetimeCancel () {
-    updateDateTemp({
-      ...date
-    });
+    updateDateTemp(date);
     if (typeof onCancel === 'function') {
       onCancel(date);
     }
@@ -192,7 +192,6 @@ DatetimeRange.propTypes = {
   onChange: PropTypes.func,
   onCancel: PropTypes.func,
   onClear: PropTypes.func,
-  clearDate: PropTypes.bool,
   defaultDate: PropTypes.object,
   allowPastDate: PropTypes.bool,
   allowFutureDate: PropTypes.bool

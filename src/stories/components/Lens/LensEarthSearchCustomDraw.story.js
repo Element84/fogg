@@ -36,11 +36,19 @@ const LensEarthSearchCustomDraw = () => {
         useMapEffect={handleEarthSearchUseMapEffect}
         placeholder="Look stuffs on Earth Data"
         availableFilters={earthSearchAvailableFilters}
-        drawControlOptions={{
-          polygon: false,
-          marker: false
+        draw={{
+          controlOptions: {
+            polygon: false,
+            marker: false
+          },
+          onCreated: customHandleOnCreated,
+          shapeOptions: {
+            style: {
+              color: '#ff0000',
+              fill: false
+            }
+          }
         }}
-        onCreatedDraw={customHandleOnCreated}
         PopupContent={PopupContent}
       />
     </>

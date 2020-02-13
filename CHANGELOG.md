@@ -1,3 +1,56 @@
+### Version 0.2.23
+- [JAM-896] fixing sort api for columns
+
+### Version 0.2.22
+- [JAM-896] fixing table bug
+
+### Version 0.2.21
+- [JAM-896] removing react-leaflet from null loader
+
+### Version 0.2.20
+- [JAM-896] trying to fix undefined extend
+
+### Version 0.2.19
+- [JAM-896] fixing L call outside of dom
+
+### Version 0.2.18
+- [JAM-896] setting up shape additions to be added in an effect hook to allow consistent availability of the refMap
+
+### Version 0.2.17
+- [JAM-896] fixing map draw test
+- [JAM-896] adding map state with initialized setting
+
+### Version 0.2.16
+- [JAM-896] fixing geojson layer to respect layers inside object
+
+### Version 0.2.15
+- [JAM-896] fixing bug where featuregroup wouldn't be avialable for clearing
+
+### Version 0.2.14
+- [JAM-896] fixing bug where map would re-set the map coordinates on render
+
+### Version 0.2.13
+- [JAM-896] preventing search input from firing if no search query or location, fixing map center fvrom geojson search
+
+### Version 0.2.12
+- [JAM-896] fixing reset map view
+- [JAM-896] fixing shape options to work on draw controls
+
+### Version 0.2.11
+- [JAM-896] hardening logic for handling clearing leaflet layers
+
+### Version 0.2.10
+- [JAM-896] fixing layer add function bug
+
+### Version 0.2.9
+- [JAM-896] valid leaflet check
+
+### Version 0.2.8
+- [JAM-896] syncing state with zoom when user zooms on map
+
+### Version 0.2.7
+- [JAM-896] fixing zoom option passthrough, fixing loading more results
+
 ### Version 0.1.197
 - [JAM-980] Tweaks to make table filters work with array fields
 - [JAM-980] Fix field logic

@@ -1,21 +1,54 @@
-import React, { useContext } from 'react';
-import { LensContext } from '../context';
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import { useLens } from '../hooks';
 
 import SearchFilters from './SearchFilters';
 
-const LensSearchFilters = props => {
-  const { filters = {}, lens = {} } = useContext(LensContext) || {};
+const LensSearchFilters = ({
+  searchOnSave = false,
+  searchOnChange = true,
+  ...props
+}) => {
+  const { geoSearch = {}, geoFilters = {} } = useLens();
+  const { updateSearch } = geoSearch;
+  const {
+    filters = {},
+    cancelFilterChanges,
+    saveFilterChanges,
+    addActiveFilters
+  } = geoFilters;
 
-  const { handlers: lensHandlers = {} } = lens;
-  const { search } = lensHandlers;
+  const { available } = filters;
 
-  const { handlers: filtersHandlers = {}, available } = filters;
-  const { storeFilterChanges, cancelFilterChanges } = filtersHandlers;
+  /**
+   * handleSaveFilters
+   */
 
-  function handleUpdateSearchParams () {
-    search({
-      saveUnsavedFilters: true
+  function handleSaveFilters () {
+    const { active } = saveFilterChanges({
+      closeFilters: true
     });
+    if (searchOnSave) {
+      updateSearch({
+        filters: active
+      });
+    }
+  }
+
+  /**
+   * handleStoreFilterChanges
+   */
+
+  function handleStoreFilterChanges (changes) {
+    const { active } = addActiveFilters(changes, {
+      closeFilters: false
+    });
+    if (searchOnChange) {
+      updateSearch({
+        filters: active
+      });
+    }
   }
 
   return (
@@ -23,11 +56,16 @@ const LensSearchFilters = props => {
       className="lens-search-filters"
       filters={available}
       onCancelChanges={cancelFilterChanges}
-      onSaveChanges={handleUpdateSearchParams}
-      onUpdateChanges={storeFilterChanges}
+      onSaveChanges={handleSaveFilters}
+      onUpdateChanges={handleStoreFilterChanges}
       {...props}
     />
   );
+};
+
+LensSearchFilters.propTypes = {
+  searchOnSave: PropTypes.func,
+  searchOnChange: PropTypes.func
 };
 
 export default LensSearchFilters;

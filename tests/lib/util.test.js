@@ -1,26 +1,14 @@
 import { util } from '../../lib';
 
 const {
-  routeIsInternal,
   parseNumber,
   copyKeysToEmptyObject,
   filterObject,
-  queryParamsToObject,
   chompFloat,
   isEmptyObject
 } = util;
 
 describe('Util', () => {
-  describe('routeIsInternal', () => {
-    it('should return true for an internal link', () => {
-      expect(routeIsInternal('/path')).toEqual(true);
-    });
-
-    it('should return false for an external link', () => {
-      expect(routeIsInternal('https://www.element84.com')).toEqual(false);
-    });
-  });
-
   describe('parseNumber', () => {
     it('should return a number given a number', () => {
       const number = 1234;
@@ -85,26 +73,6 @@ describe('Util', () => {
       expect(filterObject(object, key => whitelist.includes(key))).toEqual(
         expected
       );
-    });
-  });
-
-  describe('queryParamsToObject', () => {
-    it('should parse a query string to an object', () => {
-      expect(queryParamsToObject('?test=true')).toEqual({
-        test: 'true'
-      });
-      expect(queryParamsToObject('?one=1&2=two&three=free99')).toEqual({
-        one: '1',
-        2: 'two',
-        three: 'free99'
-      });
-      expect(queryParamsToObject('?q=')).toEqual({
-        q: ''
-      });
-    });
-    it('should return an empty object when there are no query params', () => {
-      expect(queryParamsToObject('')).toEqual({});
-      expect(queryParamsToObject('?')).toEqual({});
     });
   });
 

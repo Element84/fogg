@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaRocket } from 'react-icons/fa';
 
-import { getGeoJsonCenter, latLngFromGeoJson } from '../../../lib/leaflet';
-
 import Panel from '../../../components/Panel';
 import ItemList from '../../../components/ItemList';
 import Button from '../../../components/Button';
@@ -35,48 +33,37 @@ const GEOJSON_MONTES_CLAROS_POLYGON = {
   ]
 };
 
-const GEOJSON_MONTES_CLAROS_CENTER = getGeoJsonCenter(
-  GEOJSON_MONTES_CLAROS_POLYGON
-);
-const GEOJSON_MONTES_CLAROS_LAT_LNG = latLngFromGeoJson(
-  GEOJSON_MONTES_CLAROS_CENTER
-)[0];
-
 const EarthSearchSidebarPanelsResetView = ({
-  results,
-  loadMoreResults,
-  clearActiveSearch,
-  filters = {},
-  numberOfResults,
-  search
+  geoSearch = {},
+  geoFilters = {}
 }) => {
-  const hasResults = Array.isArray(results) && results.length > 0;
-  const moreResultsAvailable = typeof loadMoreResults === 'function';
-  const { handlers: filtersHandlers } = filters;
+  const { results = {}, search, loadMoreResults, clearSearch } = geoSearch;
+  const { features, hasResults, hasMoreResults, numberOfResults } = results;
+
+  const { filters, clearActiveFilters } = geoFilters;
 
   function handleLoadMore (e) {
-    if (moreResultsAvailable) {
+    if (hasMoreResults) {
       loadMoreResults(e);
     }
   }
 
   function handleClearFilters () {
-    if (typeof filtersHandlers.clearActiveFilters === 'function') {
-      filtersHandlers.clearActiveFilters();
+    if (typeof clearActiveFilters === 'function') {
+      clearActiveFilters();
     }
   }
 
   function handleClearActiveSearch () {
-    if (typeof clearActiveSearch === 'function') {
-      clearActiveSearch({ resetView: true });
+    if (typeof clearSearch === 'function') {
+      clearSearch({ resetView: true });
     }
   }
 
   function handleTriggerQuerySearchTextOnly () {
     search({
       textInput: 'Alexandria, VA',
-      activeFilters: [],
-      dropMarker: true
+      activeFilters: []
     });
   }
 
@@ -92,8 +79,7 @@ const EarthSearchSidebarPanelsResetView = ({
           id: 'properties/collection',
           value: 'sentinel-2-l1c'
         }
-      ],
-      dropMarker: true
+      ]
     });
   }
 
@@ -101,7 +87,7 @@ const EarthSearchSidebarPanelsResetView = ({
     <>
       {!hasResults && (
         <>
-          {Array.isArray(results) && (
+          {Array.isArray(features) && (
             <Panel header="Explore">
               <p>Sorry, no results were found.</p>
               {filters.active && filters.active.length > 0 && (
@@ -125,8 +111,7 @@ const EarthSearchSidebarPanelsResetView = ({
                   onClick: () => {
                     search({
                       textInput: 'Alexandria, VA',
-                      activeFilters: [],
-                      dropMarker: true
+                      activeFilters: []
                     });
                   }
                 },
@@ -135,9 +120,7 @@ const EarthSearchSidebarPanelsResetView = ({
                   onClick: () => {
                     search({
                       geoJson: GEOJSON_MONTES_CLAROS_POLYGON,
-                      center: GEOJSON_MONTES_CLAROS_LAT_LNG,
                       activeFilters: [],
-                      dropMarker: true,
                       zoom: 4
                     });
                   }
@@ -159,8 +142,8 @@ const EarthSearchSidebarPanelsResetView = ({
               </>
             }
           >
-            <ItemList items={results} />
-            {moreResultsAvailable && (
+            <ItemList items={features} />
+            {hasMoreResults && (
               <p>
                 <Button onClick={handleLoadMore}>Load More</Button>
               </p>
@@ -218,12 +201,8 @@ const EarthSearchSidebarPanelsResetView = ({
 };
 
 EarthSearchSidebarPanelsResetView.propTypes = {
-  results: PropTypes.array,
-  numberOfResults: PropTypes.number,
-  loadMoreResults: PropTypes.func,
-  clearActiveSearch: PropTypes.func,
-  search: PropTypes.func,
-  filters: PropTypes.object
+  geoSearch: PropTypes.object,
+  geoFilters: PropTypes.object
 };
 
 export default EarthSearchSidebarPanelsResetView;

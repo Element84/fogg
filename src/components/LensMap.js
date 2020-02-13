@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import { LensContext } from '../context';
+import { useLens } from '../hooks';
 
 import Map from './Map';
 
 const LensMap = ({ children, forwardedRef, ...rest }) => {
-  const { activeDateRange = {}, lens = {} } = useContext(LensContext) || {};
-  const { mapConfig = {} } = lens;
+  const { map, activeDateRange = {} } = useLens();
+  const { mapConfig = {}, services, projection } = map;
   const { defaultZoom, defaultCenter, maxZoom, minZoom } = mapConfig;
 
   const mapSettings = {
@@ -16,6 +16,8 @@ const LensMap = ({ children, forwardedRef, ...rest }) => {
     maxZoom,
     minZoom,
     center: defaultCenter && [defaultCenter.lat, defaultCenter.lng],
+    services,
+    projection,
     activeDateRange
   };
 

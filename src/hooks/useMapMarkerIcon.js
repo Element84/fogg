@@ -1,6 +1,6 @@
-import { buildMapMarkerIcon } from '../lib/leaflet';
+import { createMarkerIcon } from '../lib/leaflet';
 
 export default function useMapMarkerIcon () {
-  const icon = buildMapMarkerIcon();
+  const icon = createMarkerIcon();
   return { icon };
 }

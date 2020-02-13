@@ -16,17 +16,19 @@ const columns = [
   },
   {
     accessor: 'actions',
-    disableSorting: true
+    disableSorting: true,
+    Header: false
   }
 ];
 
-function DefaultColumnFilter ({ filterValue, setFilter }) {
+function DefaultColumnFilter ({ filterValue, setFilter, column = {}, ...rest }) {
+  const { id } = column;
   return (
     <input
       className="table-filter"
-      value={filterValue || ''}
+      value={filterValue}
       onChange={e => {
-        setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+        setFilter(id, e.target.value || undefined); // Set undefined to remove the filter entirely
       }}
       placeholder="Filter..."
     />
@@ -34,6 +36,7 @@ function DefaultColumnFilter ({ filterValue, setFilter }) {
 }
 
 DefaultColumnFilter.propTypes = {
+  column: PropTypes.object,
   filterValue: PropTypes.any,
   setFilter: PropTypes.func
 };
@@ -61,7 +64,8 @@ const columnsWithFilters = [
   },
   {
     accessor: 'actions',
-    disableFilters: true
+    disableFilters: true,
+    Header: false
   }
 ];
 
@@ -157,5 +161,5 @@ stories.add('Sort', () => {
 });
 
 stories.add('No Header', () => {
-  return <Table columns={columnsNoLabels} data={data} />;
+  return <Table hideHeader={true} columns={columnsNoLabels} data={data} />;
 });

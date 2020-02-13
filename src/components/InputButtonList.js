@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Logger from '../lib/logger';
-import { updateCheckedSelections, findIsCheckedIds } from '../lib/util';
+import { updateCheckedSelections, findIsCheckedIds } from '../lib/input';
 
 import InputButton from './InputButton';
 

@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaRocket } from 'react-icons/fa';
 
-import { getGeoJsonCenter, latLngFromGeoJson } from '../../../lib/leaflet';
-
 import Panel from '../../../components/Panel';
 import ItemList from '../../../components/ItemList';
 import Button from '../../../components/Button';
@@ -23,11 +21,12 @@ const GEOJSON_MONTES_CLAROS_POLYGON = {
         type: 'Polygon',
         coordinates: [
           [
-            [-126.298828125, 36.03133177633187],
-            [-118.21289062499999, 36.03133177633187],
-            [-118.21289062499999, 40.17887331434696],
-            [-126.298828125, 40.17887331434696],
-            [-126.298828125, 36.03133177633187]
+            [-43.8739013671875, -16.599345725849386],
+            [-44.1046142578125, -16.65198092045974],
+            [-44.088134765625, -16.86237670846054],
+            [-43.670654296875, -16.914939206301646],
+            [-43.59375, -16.66776866124074],
+            [-43.8739013671875, -16.599345725849386]
           ]
         ]
       }
@@ -35,55 +34,46 @@ const GEOJSON_MONTES_CLAROS_POLYGON = {
   ]
 };
 
-const GEOJSON_MONTES_CLAROS_CENTER = getGeoJsonCenter(
-  GEOJSON_MONTES_CLAROS_POLYGON
-);
-const GEOJSON_MONTES_CLAROS_LAT_LNG = latLngFromGeoJson(
-  GEOJSON_MONTES_CLAROS_CENTER
-)[0];
+const EarthSearchSidebarPanels = ({ geoSearch = {}, geoFilters = {} }) => {
+  const {
+    results = {},
+    search,
+    searchPlacename,
+    loadMoreResults,
+    clearSearch
+  } = geoSearch;
+  const { features, hasResults, hasMoreResults, numberOfResults } = results;
 
-const EarthSearchSidebarPanels = ({
-  results,
-  loadMoreResults,
-  clearActiveSearch,
-  filters = {},
-  numberOfResults,
-  search
-}) => {
-  const hasResults = Array.isArray(results) && results.length > 0;
-  const moreResultsAvailable = typeof loadMoreResults === 'function';
-  const { handlers: filtersHandlers } = filters;
+  const { filters, clearActiveFilters } = geoFilters;
 
   function handleLoadMore (e) {
-    if (moreResultsAvailable) {
+    if (hasMoreResults) {
       loadMoreResults(e);
     }
   }
 
   function handleClearFilters () {
-    if (typeof filtersHandlers.clearActiveFilters === 'function') {
-      filtersHandlers.clearActiveFilters();
+    if (typeof clearActiveFilters === 'function') {
+      clearActiveFilters();
     }
   }
 
-  function handleClearActiveSearch () {
-    if (typeof clearActiveSearch === 'function') {
-      clearActiveSearch();
+  function handleClearSearch () {
+    if (typeof clearSearch === 'function') {
+      clearSearch();
     }
   }
 
   function handleTriggerQuerySearchTextOnly () {
-    search({
-      textInput: 'Alexandria, VA',
-      activeFilters: [],
-      dropMarker: true
+    searchPlacename({
+      textInput: 'Alexandria, VA'
     });
   }
 
   function handleTriggerQuerySearchTextAndFilters () {
-    search({
+    searchPlacename({
       textInput: 'San Francisco, CA',
-      activeFilters: [
+      filters: [
         {
           id: 'properties/sentinel:grid_square',
           value: 'EG'
@@ -92,8 +82,7 @@ const EarthSearchSidebarPanels = ({
           id: 'properties/collection',
           value: 'sentinel-2-l1c'
         }
-      ],
-      dropMarker: true
+      ]
     });
   }
 
@@ -101,7 +90,7 @@ const EarthSearchSidebarPanels = ({
     <>
       {!hasResults && (
         <>
-          {Array.isArray(results) && (
+          {Array.isArray(features) && (
             <Panel header="Explore">
               <p>Sorry, no results were found.</p>
               {filters.active && filters.active.length > 0 && (
@@ -110,7 +99,7 @@ const EarthSearchSidebarPanels = ({
                 </p>
               )}
               <p>
-                <Button onClick={handleClearActiveSearch}>Clear Search</Button>
+                <Button onClick={handleClearSearch}>Clear Search</Button>
               </p>
             </Panel>
           )}
@@ -121,24 +110,20 @@ const EarthSearchSidebarPanels = ({
             <ItemList
               items={[
                 {
-                  label: 'Alexandria, VA',
+                  label: 'Alexandria, VA - Placename Search',
                   onClick: () => {
-                    search({
-                      textInput: 'Alexandria, VA',
-                      activeFilters: [],
-                      dropMarker: true
+                    searchPlacename({
+                      textInput: 'Alexandria, VA'
                     });
                   }
                 },
                 {
-                  label: 'Montes Claros, MG - Polygon',
+                  label: 'Montes Claros, MG - Polygon, Zoom 6',
                   onClick: () => {
                     search({
                       geoJson: GEOJSON_MONTES_CLAROS_POLYGON,
-                      center: GEOJSON_MONTES_CLAROS_LAT_LNG,
-                      activeFilters: [],
-                      dropMarker: true,
-                      zoom: 4
+                      filters: [],
+                      zoom: 6
                     });
                   }
                 }
@@ -159,8 +144,8 @@ const EarthSearchSidebarPanels = ({
               </>
             }
           >
-            <ItemList items={results} />
-            {moreResultsAvailable && (
+            <ItemList items={features} />
+            {hasMoreResults && (
               <p>
                 <Button onClick={handleLoadMore}>Load More</Button>
               </p>
@@ -168,7 +153,7 @@ const EarthSearchSidebarPanels = ({
           </Panel>
           <Panel>
             <p>
-              <Button onClick={handleClearActiveSearch}>Clear Search</Button>
+              <Button onClick={handleClearSearch}>Clear Search</Button>
             </p>
           </Panel>
         </>
@@ -218,12 +203,8 @@ const EarthSearchSidebarPanels = ({
 };
 
 EarthSearchSidebarPanels.propTypes = {
-  results: PropTypes.array,
-  numberOfResults: PropTypes.number,
-  loadMoreResults: PropTypes.func,
-  clearActiveSearch: PropTypes.func,
-  search: PropTypes.func,
-  filters: PropTypes.object
+  geoSearch: PropTypes.object,
+  geoFilters: PropTypes.object
 };
 
 export default EarthSearchSidebarPanels;

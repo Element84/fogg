@@ -7,13 +7,13 @@ import { useLayers } from '../hooks';
 import { LayersContext } from '../context';
 
 import Logger from '../lib/logger';
-import { isDomAvailable } from '../lib/util';
+import { isDomAvailable } from '../lib/device';
 import {
   geoJsonFromLatLn,
   latLngFromGeoJson,
   geometryTypeFromGeoJson,
   coordinatesFromGeoJson
-} from '../lib/leaflet';
+} from '../lib/map';
 
 import Map from './Map';
 import Marker from './MapMarker';
