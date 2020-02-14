@@ -6,35 +6,19 @@ import Panel from '../../../components/Panel';
 import ItemList from '../../../components/ItemList';
 import Button from '../../../components/Button';
 
+import GEOJSON_MONTES_CLAROS_POLYGON from '../../../../tests/fixtures/geojson/montes-claros-mg-brazil';
+import GEOJSON_GRAO_MOGOL_POLYGON from '../../../../tests/fixtures/geojson/grao-mogol-mg-brazil';
+
 // Lens lets us pass in a component for our Sidebar. The component
 // takes a few props as arguments such as the given results and some
 // actions that allow us to create a unique sidebar experience for
 // whatever app thats getting built
 
-const GEOJSON_MONTES_CLAROS_POLYGON = {
-  type: 'FeatureCollection',
-  features: [
-    {
-      type: 'Feature',
-      properties: {},
-      geometry: {
-        type: 'Polygon',
-        coordinates: [
-          [
-            [-43.8739013671875, -16.599345725849386],
-            [-44.1046142578125, -16.65198092045974],
-            [-44.088134765625, -16.86237670846054],
-            [-43.670654296875, -16.914939206301646],
-            [-43.59375, -16.66776866124074],
-            [-43.8739013671875, -16.599345725849386]
-          ]
-        ]
-      }
-    }
-  ]
-};
-
-const EarthSearchSidebarPanels = ({ geoSearch = {}, geoFilters = {} }) => {
+const EarthSearchSidebarPanels = ({
+  geoSearch = {},
+  geoFilters = {},
+  map = {}
+}) => {
   const {
     results = {},
     search,
@@ -45,6 +29,8 @@ const EarthSearchSidebarPanels = ({ geoSearch = {}, geoFilters = {} }) => {
   const { features, hasResults, hasMoreResults, numberOfResults } = results;
 
   const { filters, clearActiveFilters } = geoFilters;
+
+  const { addShapeToMap, clearLayers } = map;
 
   function handleLoadMore (e) {
     if (hasMoreResults) {
@@ -84,6 +70,19 @@ const EarthSearchSidebarPanels = ({ geoSearch = {}, geoFilters = {} }) => {
         }
       ]
     });
+  }
+
+  function handleAddShapeToMap (geoJson) {
+    addShapeToMap({
+      panToShape: true,
+      geoJson,
+      zoom: 4,
+      clearOtherLayers: false
+    });
+  }
+
+  function handleClearShapes () {
+    clearLayers();
   }
 
   return (
@@ -197,6 +196,25 @@ const EarthSearchSidebarPanels = ({ geoSearch = {}, geoFilters = {} }) => {
             Trigger Search
           </Button>
         </p>
+
+        <h4 className="flat-bottom">Add a Shape to Map</h4>
+        <p>
+          <Button
+            onClick={() => handleAddShapeToMap(GEOJSON_MONTES_CLAROS_POLYGON)}
+          >
+            Trigger Montes Claros
+          </Button>
+        </p>
+        <p>
+          <Button
+            onClick={() => handleAddShapeToMap(GEOJSON_GRAO_MOGOL_POLYGON)}
+          >
+            Trigger Grão Mogol
+          </Button>
+        </p>
+        <p>
+          <Button onClick={handleClearShapes}>Clear Shapes</Button>
+        </p>
       </Panel>
     </>
   );
@@ -204,7 +222,8 @@ const EarthSearchSidebarPanels = ({ geoSearch = {}, geoFilters = {} }) => {
 
 EarthSearchSidebarPanels.propTypes = {
   geoSearch: PropTypes.object,
-  geoFilters: PropTypes.object
+  geoFilters: PropTypes.object,
+  map: PropTypes.object
 };
 
 export default EarthSearchSidebarPanels;

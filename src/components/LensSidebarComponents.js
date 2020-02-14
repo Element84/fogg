@@ -6,7 +6,7 @@ import { LayersContext } from '../context';
 import { useLens } from '../hooks';
 
 const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
-  const { geoSearch = {}, geoFilters = {} } = useLens();
+  const lens = useLens();
 
   const { layers = {}, getDataForLayers, toggleLayer } =
     useContext(LayersContext) || {};
@@ -15,8 +15,7 @@ const LensSidebarComponents = ({ SidebarComponents, ...rest }) => {
 
   return (
     <SidebarComponents
-      geoSearch={geoSearch}
-      geoFilters={geoFilters}
+      {...lens}
       layers={layers}
       toggleLayer={toggleLayer}
       getDataForLayers={getDataForLayers}

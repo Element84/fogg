@@ -42,7 +42,7 @@ if (isDomAvailable()) {
 
 export default function useMap (mapSettings = {}) {
   const { refMap, availableServices = [], projection, draw = {} } = mapSettings;
-  const { onCreatedDraw } = draw;
+  const { onCreatedDraw, shapeOptions } = draw;
 
   const defaultMapSettings = buildDefaultMapSettings(mapSettings);
 
@@ -111,17 +111,18 @@ export default function useMap (mapSettings = {}) {
 
     const {
       geoJson,
-      shapeOptions = {},
+      shapeOptions: mapShapeOptions = shapeOptions,
       centerGeoJson,
       panToShape = true,
-      zoom
+      zoom,
+      clearOtherLayers = true
     } = mapShape;
 
     const geoJsonLayer = addGeoJsonLayer({
       geoJson,
       map,
       featureGroup: mapFeatureGroup,
-      options: shapeOptions
+      options: mapShapeOptions
     });
 
     const layersToExclude = [];
@@ -138,9 +139,11 @@ export default function useMap (mapSettings = {}) {
       });
     }
 
-    handleClearLayers({
-      excludeLayers: layersToExclude
-    });
+    if (clearOtherLayers) {
+      handleClearLayers({
+        excludeLayers: layersToExclude
+      });
+    }
   }, [mapShape]);
 
   /**
@@ -224,7 +227,14 @@ export default function useMap (mapSettings = {}) {
   function handleAddShapeToMap (settings = {}) {
     const errorBase =
       'useMap::handleAddShapeToMap - Failed to add shape to map';
-    const { panToShape, center, geoJson, zoom, shapeOptions = {} } = settings;
+    const {
+      panToShape,
+      center,
+      geoJson,
+      zoom,
+      shapeOptions: mapShapeOptions = shapeOptions,
+      clearOtherLayers = true
+    } = settings;
     let centerGeoJson;
 
     if (!geoJson) {
@@ -238,11 +248,12 @@ export default function useMap (mapSettings = {}) {
     }
 
     setMapShape({
+      shapeOptions: mapShapeOptions,
       geoJson,
-      shapeOptions,
       centerGeoJson,
       panToShape,
-      zoom
+      zoom,
+      clearOtherLayers
     });
   }
 
