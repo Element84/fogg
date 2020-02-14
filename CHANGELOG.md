@@ -1,3 +1,6 @@
+### Version 0.2.25
+- [JAM-857] setting up configurations to use adding and clearing shape
+
 ### Version 0.2.24
 - adding initialState option to table
 
