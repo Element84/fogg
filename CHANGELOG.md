@@ -1,3 +1,6 @@
+### Version 0.1.198
+- InputRange
+
 ### Version 0.1.197
 - [JAM-980] Tweaks to make table filters work with array fields
 - [JAM-980] Fix field logic
