@@ -4,13 +4,27 @@ import { FaChevronRight } from 'react-icons/fa';
 
 import WonderLink from './WonderLink';
 
-const ItemList = ({ items = [], className, actionIcon }) => {
+const ItemList = ({
+  items = [],
+  className,
+  actionIcon,
+  onItemMouseOver,
+  onItemMouseLeave
+}) => {
   return (
     <div className={`item-list ${className || ''}`}>
       <ul>
         {Array.isArray(items) &&
           items.map((item, index) => {
-            const { className, thumb, label, sublabels, to, onClick } = item;
+            const {
+              className,
+              thumb,
+              label,
+              sublabels,
+              to,
+              onClick,
+              id
+            } = item;
             let { icon } = item;
             let itemClassName = 'item-list-item';
 
@@ -30,8 +44,15 @@ const ItemList = ({ items = [], className, actionIcon }) => {
               ? sublabels
               : [sublabels];
 
+            const itemProps = {
+              id,
+              className: itemClassName,
+              onMouseLeave: onItemMouseLeave,
+              onMouseOver: onItemMouseOver
+            };
+
             return (
-              <li className={itemClassName} key={`ItemList-Item-${index}`}>
+              <li key={`ItemList-Item-${index}`} {...itemProps}>
                 <WonderLink to={to} onClick={onClick}>
                   {thumb && (
                     <span className="item-list-item-thumb">
@@ -72,7 +93,9 @@ const ItemList = ({ items = [], className, actionIcon }) => {
 ItemList.propTypes = {
   items: PropTypes.array,
   className: PropTypes.string,
-  actionIcon: PropTypes.node
+  actionIcon: PropTypes.node,
+  onItemMouseOver: PropTypes.func,
+  onItemMouseLeave: PropTypes.func
 };
 
 export default ItemList;

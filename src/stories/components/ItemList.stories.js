@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
 import ItemList from '../../components/ItemList';
 
@@ -65,6 +66,71 @@ stories.add('Thumbnails', () => {
             label: '?  (No To)'
           }
         ]}
+      />
+    </>
+  );
+});
+
+stories.add('Mouseover', () => {
+  function handleMouseEvent (name, event) {
+    event.persist();
+    const { currentTarget } = event;
+    const label = currentTarget.querySelector('.item-list-item-label')
+      .innerText;
+    action(name)(
+      event,
+      currentTarget,
+      JSON.stringify({
+        label,
+        id: currentTarget.id
+      })
+    );
+  }
+
+  function handleItemOnMouseOver (event) {
+    handleMouseEvent('item-mouseOver', event);
+  }
+
+  function handleItemOnMouseLeave (event) {
+    handleMouseEvent('item-mouseLeave', event);
+  }
+
+  return (
+    <>
+      <ItemList
+        items={[
+          {
+            id: 'item-1',
+            thumb: 'https://www.placecage.com/200/200',
+            label: 'Why',
+            to: '#'
+          },
+          {
+            id: 'item-2',
+            thumb: 'https://www.placecage.com/300/300',
+            label: 'Not',
+            to: '#'
+          },
+          {
+            id: 'item-3',
+            thumb: 'https://www.placecage.com/400/400',
+            label: 'Nic',
+            to: '#'
+          },
+          {
+            id: 'item-4',
+            thumb: 'https://www.placecage.com/500/500',
+            label: 'Cage (No Icon, No To)',
+            icon: false
+          },
+          {
+            id: 'item-5',
+            thumb: 'https://www.placecage.com/600/600',
+            label: '?  (No To)'
+          }
+        ]}
+        onItemMouseOver={handleItemOnMouseOver}
+        onItemMouseLeave={handleItemOnMouseLeave}
       />
     </>
   );
