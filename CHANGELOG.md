@@ -1,3 +1,6 @@
+### Version 0.2.27
+- [JAM-857] adding ability to create and keep track of feature groups for custom layer groups
+
 ### Version 0.2.26
 - [JAM-857] adding mouse events for itemlist
 
