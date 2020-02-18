@@ -1,3 +1,6 @@
+### Version 0.2.28
+- [JAM-857] mouseenter instead of mouseover
+
 ### Version 0.2.27
 - [JAM-857] adding ability to create and keep track of feature groups for custom layer groups
 
