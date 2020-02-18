@@ -71,7 +71,7 @@ stories.add('Thumbnails', () => {
   );
 });
 
-stories.add('Mouseover', () => {
+stories.add('Mouse Events', () => {
   function handleMouseEvent (name, event) {
     event.persist();
     const { currentTarget } = event;
@@ -87,8 +87,8 @@ stories.add('Mouseover', () => {
     );
   }
 
-  function handleItemOnMouseOver (event) {
-    handleMouseEvent('item-mouseOver', event);
+  function handleItemOnMouseEnter (event) {
+    handleMouseEvent('item-mouseEnter', event);
   }
 
   function handleItemOnMouseLeave (event) {
@@ -129,7 +129,7 @@ stories.add('Mouseover', () => {
             label: '?  (No To)'
           }
         ]}
-        onItemMouseOver={handleItemOnMouseOver}
+        onItemMouseEnter={handleItemOnMouseEnter}
         onItemMouseLeave={handleItemOnMouseLeave}
       />
     </>

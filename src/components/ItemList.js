@@ -8,7 +8,7 @@ const ItemList = ({
   items = [],
   className,
   actionIcon,
-  onItemMouseOver,
+  onItemMouseEnter,
   onItemMouseLeave
 }) => {
   return (
@@ -48,7 +48,7 @@ const ItemList = ({
               id,
               className: itemClassName,
               onMouseLeave: onItemMouseLeave,
-              onMouseOver: onItemMouseOver
+              onMouseEnter: onItemMouseEnter
             };
 
             return (
@@ -94,7 +94,7 @@ ItemList.propTypes = {
   items: PropTypes.array,
   className: PropTypes.string,
   actionIcon: PropTypes.node,
-  onItemMouseOver: PropTypes.func,
+  onItemMouseEnter: PropTypes.func,
   onItemMouseLeave: PropTypes.func
 };
 
