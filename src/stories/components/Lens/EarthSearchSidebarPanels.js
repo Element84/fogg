@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import L from 'leaflet';
 import { FaRocket } from 'react-icons/fa';
 
 import Panel from '../../../components/Panel';
 import ItemList from '../../../components/ItemList';
 import Button from '../../../components/Button';
+
+import { isDomAvailable } from '../../../lib/device';
 
 import GEOJSON_MONTES_CLAROS_POLYGON from '../../../../tests/fixtures/geojson/montes-claros-mg-brazil';
 import GEOJSON_GRAO_MOGOL_POLYGON from '../../../../tests/fixtures/geojson/grao-mogol-mg-brazil';
@@ -13,6 +16,12 @@ import GEOJSON_GRAO_MOGOL_POLYGON from '../../../../tests/fixtures/geojson/grao-
 // takes a few props as arguments such as the given results and some
 // actions that allow us to create a unique sidebar experience for
 // whatever app thats getting built
+
+let mapFeatureGroup;
+
+if (isDomAvailable()) {
+  mapFeatureGroup = new L.FeatureGroup();
+}
 
 const EarthSearchSidebarPanels = ({
   geoSearch = {},
@@ -72,17 +81,20 @@ const EarthSearchSidebarPanels = ({
     });
   }
 
-  function handleAddShapeToMap (geoJson) {
+  function handleAddShapeToMap (geoJson, featureGroup) {
     addShapeToMap({
       panToShape: true,
       geoJson,
       zoom: 4,
-      clearOtherLayers: false
+      clearOtherLayers: false,
+      featureGroup
     });
   }
 
-  function handleClearShapes () {
-    clearLayers();
+  function handleClearShapes (featureGroup) {
+    clearLayers({
+      featureGroup
+    });
   }
 
   return (
@@ -213,7 +225,37 @@ const EarthSearchSidebarPanels = ({
           </Button>
         </p>
         <p>
-          <Button onClick={handleClearShapes}>Clear Shapes</Button>
+          <Button onClick={() => handleClearShapes()}>Clear Shapes</Button>
+        </p>
+
+        <h4 className="flat-bottom">
+          Add a Shape to Map with Custom Feature Group
+        </h4>
+        <p>
+          <Button
+            onClick={() =>
+              handleAddShapeToMap(
+                GEOJSON_MONTES_CLAROS_POLYGON,
+                mapFeatureGroup
+              )
+            }
+          >
+            Trigger Montes Claros
+          </Button>
+        </p>
+        <p>
+          <Button
+            onClick={() =>
+              handleAddShapeToMap(GEOJSON_GRAO_MOGOL_POLYGON, mapFeatureGroup)
+            }
+          >
+            Trigger Grão Mogol
+          </Button>
+        </p>
+        <p>
+          <Button onClick={() => handleClearShapes(mapFeatureGroup)}>
+            Clear Shapes
+          </Button>
         </p>
       </Panel>
     </>

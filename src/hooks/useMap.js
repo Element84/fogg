@@ -34,10 +34,15 @@ const MAP_STATE_DEFAULT = {
 
 const AVAILABLE_MAP_CONTROLS = Object.keys(MAP_CONFIG_DEFAULTS);
 
-let mapFeatureGroup;
+let defaultMapFeatureGroup;
+const mapFeatureGroups = [];
 
 if (isDomAvailable()) {
-  mapFeatureGroup = new L.FeatureGroup();
+  mapFeatureGroups.push({
+    id: 'default',
+    featureGroup: new L.FeatureGroup()
+  });
+  defaultMapFeatureGroup = mapFeatureGroups[0].featureGroup;
 }
 
 export default function useMap (mapSettings = {}) {
@@ -115,13 +120,14 @@ export default function useMap (mapSettings = {}) {
       centerGeoJson,
       panToShape = true,
       zoom,
-      clearOtherLayers = true
+      clearOtherLayers = true,
+      featureGroup = defaultMapFeatureGroup
     } = mapShape;
 
     const geoJsonLayer = addGeoJsonLayer({
       geoJson,
       map,
-      featureGroup: mapFeatureGroup,
+      featureGroup,
       options: mapShapeOptions
     });
 
@@ -192,7 +198,7 @@ export default function useMap (mapSettings = {}) {
    */
 
   async function handleClearLayers ({
-    featureGroup = mapFeatureGroup,
+    featureGroup = defaultMapFeatureGroup,
     excludeLayers = []
   } = {}) {
     const map = currentLeafletRef(refMap);
@@ -210,7 +216,10 @@ export default function useMap (mapSettings = {}) {
    * handleOnLayerCreate
    */
 
-  function handleOnLayerCreate ({ layer, featureGroup = mapFeatureGroup }) {
+  function handleOnLayerCreate ({
+    layer,
+    featureGroup = defaultMapFeatureGroup
+  }) {
     const map = currentLeafletRef(refMap);
 
     if (!isValidLeafletElement(map)) return;
@@ -233,7 +242,8 @@ export default function useMap (mapSettings = {}) {
       geoJson,
       zoom,
       shapeOptions: mapShapeOptions = shapeOptions,
-      clearOtherLayers = true
+      clearOtherLayers = true,
+      featureGroup
     } = settings;
     let centerGeoJson;
 
@@ -253,16 +263,59 @@ export default function useMap (mapSettings = {}) {
       centerGeoJson,
       panToShape,
       zoom,
-      clearOtherLayers
+      clearOtherLayers,
+      featureGroup
     });
   }
+
+  /**
+   * handleOnLayerCreate
+   */
 
   function handleCenterMapOnGeoJson (settings = {}) {
     return centerMapOnGeoJson(settings);
   }
 
+  /**
+   * handleOnLayerCreate
+   */
+
   function handleAddGeoJsonLayer (settings = {}) {
     return addGeoJsonLayer(settings);
+  }
+
+  /**
+   * handleCreateFeatureGroup
+   */
+
+  function handleCreateFeatureGroup (id) {
+    const errorBase = 'Failed to create new feature group';
+
+    if (typeof id !== 'string') {
+      throw new Error(`${errorBase}: Invalid ID ${id}`);
+    }
+    const featureGroup = new L.FeatureGroup();
+
+    mapFeatureGroups.push({
+      id,
+      featureGroup
+    });
+
+    return featureGroup;
+  }
+
+  /**
+   * handleFeatureGroupById
+   */
+
+  function handleFeatureGroupById (id) {
+    const errorBase = 'Failed to find feature group';
+
+    if (typeof id !== 'string') {
+      throw new Error(`${errorBase}: Invalid ID ${id}`);
+    }
+
+    return mapFeatureGroups.find(fg => fg.id === id);
   }
 
   // useEffect(() => {
@@ -288,7 +341,7 @@ export default function useMap (mapSettings = {}) {
 
   return {
     refMap,
-    mapFeatureGroup,
+    mapFeatureGroup: defaultMapFeatureGroup,
     mapConfig,
     mapState,
     services: mapServices,
@@ -300,7 +353,9 @@ export default function useMap (mapSettings = {}) {
     resetMapView: handleResetMapView,
     centerMapOnGeoJson: handleCenterMapOnGeoJson,
     addGeoJsonLayer: handleAddGeoJsonLayer,
-    addShapeToMap: handleAddShapeToMap
+    addShapeToMap: handleAddShapeToMap,
+    createFeatureGroup: handleCreateFeatureGroup,
+    featureGroupById: handleFeatureGroupById
   };
 }
 
