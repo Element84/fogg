@@ -1,3 +1,6 @@
+### Version 0.2.26
+- [JAM-857] adding mouse events for itemlist
+
 ### Version 0.2.25
 - [JAM-857] setting up configurations to use adding and clearing shape
 
