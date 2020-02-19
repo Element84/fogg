@@ -1,3 +1,7 @@
+### Version 0.2.29
+- [JAM-857] passing featuregroup through to clear layer handler
+- [JAM-857] clearing all feature groups of layers on unmount
+
 ### Version 0.2.28
 - [JAM-857] mouseenter instead of mouseover
 
