@@ -73,7 +73,16 @@ export default function useMap (mapSettings = {}) {
     return () => {
       // Clear any feature group layers to avoid stale layer state
 
-      handleClearLayers();
+      if (!Array.isArray(mapFeatureGroups) || mapFeatureGroups.length === 0) {
+        handleClearLayers();
+        return;
+      }
+
+      mapFeatureGroups.forEach(({ featureGroup } = {}) => {
+        handleClearLayers({
+          featureGroup
+        });
+      });
     };
   }, []);
 
