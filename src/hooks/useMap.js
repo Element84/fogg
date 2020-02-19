@@ -147,6 +147,7 @@ export default function useMap (mapSettings = {}) {
 
     if (clearOtherLayers) {
       handleClearLayers({
+        featureGroup,
         excludeLayers: layersToExclude
       });
     }
