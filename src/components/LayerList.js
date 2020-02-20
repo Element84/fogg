@@ -25,14 +25,14 @@ const LayerList = ({ layers, onChange }) => {
 };
 
 const LayerProps = PropTypes.shape({
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired
 });
 
 LayerList.propTypes = {
   layers: PropTypes.arrayOf(LayerProps).isRequired,
-  onChange: PropTypes.function
+  onChange: PropTypes.func
 };
 
 export default LayerList;
