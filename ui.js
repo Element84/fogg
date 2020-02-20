@@ -12,6 +12,7 @@ export { default as InputButton } from './src/components/InputButton';
 export { default as InputButtonList } from './src/components/InputButtonList';
 export { default as InputRange } from './src/components/InputRange';
 export { default as ItemList } from './src/components/ItemList';
+export { default as LayerList } from './src/components/LayerList';
 export { default as Layout } from './src/components/Layout';
 export { default as Lens } from './src/components/Lens';
 export { default as LensMap } from './src/components/LensMap';
