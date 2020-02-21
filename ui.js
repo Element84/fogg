@@ -42,6 +42,7 @@ export { default as StatusIndicator } from './src/components/StatusIndicator';
 export { default as Table } from './src/components/Table';
 export { default as TableHead } from './src/components/TableHead';
 export { default as TableRow } from './src/components/TableRow';
+export { default as TaskAction } from './src/components/TaskAction';
 export { default as TaskStatus } from './src/components/TaskStatus';
 export { default as Textarea } from './src/components/Textarea';
 export { default as WonderLink } from './src/components/WonderLink';
