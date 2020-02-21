@@ -2,23 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button';
 
-const TaskAction = ({
-  children,
-  onPositiveSubmit,
-  onNegativeSubmit,
-  className
-}) => {
+const TaskAction = ({ children, positive, negative, className }) => {
   function handlePositiveClick (e) {
-    if (typeof onPositiveSubmit === 'function') {
-      onPositiveSubmit(e);
+    if (positive.onSubmit && typeof positive.onSubmit === 'function') {
+      positive.onSubmit(e);
     }
   }
 
   function handleNegativeClick (e) {
-    if (typeof onNegativeSubmit === 'function') {
-      onNegativeSubmit(e);
+    if (negative.onSubmit && typeof negative.onSubmit === 'function') {
+      negative.onSubmit(e);
     }
   }
+
+  const positiveLabel =
+    positive && positive.label ? positive.label : 'Submit Request';
+  const negativeLabel =
+    negative && negative.label ? negative.label : 'Cancel Request';
 
   return (
     <div className={`task-action ${className || ''}`}>
@@ -28,14 +28,14 @@ const TaskAction = ({
         </div>
         <div className="task-action-column">
           <div className="task-action-buttons">
-            {onPositiveSubmit && (
+            {positive && (
               <Button type="postive" onClick={handlePositiveClick}>
-                Submit Request
+                {positiveLabel}
               </Button>
             )}
-            {onNegativeSubmit && (
+            {negative && (
               <Button type="negative" onClick={handleNegativeClick}>
-                Cancel Request
+                {negativeLabel}
               </Button>
             )}
           </div>
@@ -47,8 +47,8 @@ const TaskAction = ({
 
 TaskAction.propTypes = {
   children: PropTypes.node,
-  onPositiveSubmit: PropTypes.func,
-  onNegativeSubmit: PropTypes.func,
+  positive: PropTypes.object,
+  negative: PropTypes.object,
   className: PropTypes.string
 };
 

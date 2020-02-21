@@ -13,13 +13,27 @@ function handlePositiveClick (e) {
 function handleNegativeClick (e) {
   action('TaskAction::onNegativeClick')(e);
 }
+const positiveDefault = {
+  onSubmit: handlePositiveClick
+};
+
+const negativeDefault = {
+  onSubmit: handleNegativeClick
+};
+
+const positiveCustom = {
+  onSubmit: handlePositiveClick,
+  label: 'Request Positive'
+};
+
+const negativeCustom = {
+  onSubmit: handleNegativeClick,
+  label: 'Cancel Negative'
+};
 
 stories.add('Default', () => {
   return (
-    <TaskAction
-      onPositiveSubmit={handlePositiveClick}
-      onNegativeSubmit={handleNegativeClick}
-    >
+    <TaskAction positive={positiveDefault} negative={negativeDefault}>
       <div className="task-action-children-example">
         <span>Estimated Total*</span>
         <span>$970.12</span>
@@ -41,9 +55,9 @@ stories.add('Info only', () => {
   );
 });
 
-stories.add('Positive', () => {
+stories.add('Positive Custom Text', () => {
   return (
-    <TaskAction onPositiveSubmit={handlePositiveClick}>
+    <TaskAction positive={positiveCustom}>
       <div className="task-action-children-example">
         <span>Estimated Total*</span>
         <span>$970.12</span>
@@ -53,9 +67,9 @@ stories.add('Positive', () => {
   );
 });
 
-stories.add('Negative', () => {
+stories.add('Negative Custom Text', () => {
   return (
-    <TaskAction onNegativeSubmit={handleNegativeClick}>
+    <TaskAction negative={negativeCustom}>
       <div className="task-action-children-example">
         <span>Estimated Total*</span>
         <span>$970.12</span>

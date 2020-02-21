@@ -9,10 +9,17 @@ describe('TaskAction', () => {
     const bodyText = 'Chookity';
     const body = <p className={bodyClass}>{bodyText}</p>;
 
-    // Buttons will only render if a function is provided (handleSubmit is just a dummy function here)
-    function handleSubmit () {
-      console.log('task action test');
-    }
+    function handleSubmit () {}
+
+    const positive = {
+      onSubmit: handleSubmit,
+      label: 'Test label'
+    };
+
+    const negative = {
+      onSubmit: handleSubmit,
+      label: 'Test label'
+    };
 
     it('should render children only', () => {
       const taskAction = shallow(<TaskAction>{body}</TaskAction>);
@@ -22,7 +29,7 @@ describe('TaskAction', () => {
 
     it('should render one button (positive in this case)', () => {
       const taskAction = shallow(
-        <TaskAction onPositiveSubmit={handleSubmit}>{body}</TaskAction>
+        <TaskAction positive={positive}>{body}</TaskAction>
       );
       expect(taskAction.find(`.${bodyClass}`).text()).toEqual(bodyText);
       expect(taskAction.find(Button)).toHaveLength(1);
@@ -30,10 +37,7 @@ describe('TaskAction', () => {
 
     it('should render both buttons', () => {
       const taskAction = shallow(
-        <TaskAction
-          onPositiveSubmit={handleSubmit}
-          onNegativeSubmit={handleSubmit}
-        >
+        <TaskAction positive={positive} negative={negative}>
           {body}
         </TaskAction>
       );
