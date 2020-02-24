@@ -1,3 +1,8 @@
+### Version 0.2.30
+- [JAM-953] Tasking request cost component
+- [JAM-953] adding button config options into task action component
+- [FD-289] publish registry
+
 ### Version 0.2.29
 - [JAM-857] passing featuregroup through to clear layer handler
 - [JAM-857] clearing all feature groups of layers on unmount
