@@ -1,0 +1,9 @@
+.gitlab
+.storybook
+build-deploy
+config
+coverage
+example
+node_modules
+storybook-static
+tests
