@@ -19,6 +19,14 @@ $item-list-top-padding: .8em;
       border-bottom: 0;
     }
 
+    .checkbox-button {
+      label {
+        box-shadow: none;
+        border-radius: 0;
+        border: none;
+      }
+    }
+
   }
 
 }
