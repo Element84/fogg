@@ -56,17 +56,17 @@ const ItemList = ({
 
             return (
               <li key={`ItemList-Item-${index}`} {...itemProps}>
+                {onCheck && (
+                  <InputButton
+                    id={`item-list-checkbox-${index}`}
+                    name={`item-list-checkbox-${index}`}
+                    type="checkbox"
+                    value={id}
+                    onChange={onCheck}
+                    isChecked={isChecked || false}
+                  />
+                )}
                 <WonderLink to={to} onClick={onClick}>
-                  {onCheck && (
-                    <InputButton
-                      id={`item-list-checkbox-${index}`}
-                      name={`item-list-checkbox-${index}`}
-                      type="checkbox"
-                      value={id}
-                      onChange={onCheck}
-                      isChecked={isChecked || false}
-                    />
-                  )}
                   {thumb && (
                     <span className="item-list-item-thumb">
                       <img src={thumb} alt={`${label} Thumbnail`} />

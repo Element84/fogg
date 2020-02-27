@@ -14,16 +14,19 @@ $item-list-top-padding: .8em;
     padding: 0;
     border-bottom: solid 1px $color-gray1;
     margin: 0;
+    display: flex;
 
     &:last-child {
       border-bottom: 0;
     }
 
     .checkbox-button {
+      padding-right: 0;
       label {
         box-shadow: none;
         border-radius: 0;
         border: none;
+        background-color: white;
       }
     }
 
