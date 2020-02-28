@@ -4,48 +4,58 @@ import { FaBeer } from 'react-icons/fa';
 
 import Button from '../';
 
-const stories = storiesOf('Components|Button|Default', module);
+const STORY_COMPONENT = 'Button';
+const STORY_NAME = 'Disabled';
 
-stories.add('Default', () => {
+const stories = storiesOf(
+  `Components|${STORY_COMPONENT}|${STORY_NAME}`,
+  module
+);
+
+stories.add(STORY_NAME, () => {
   return (
     <>
+      <h1>{STORY_COMPONENT}</h1>
+      <h2>{STORY_NAME}</h2>
       <p>
-        <Button>Button No Link</Button>
+        <Button disabled={true}>Button No Link</Button>
       </p>
       <p>
-        <Button to="/">Button With Link</Button>
+        <Button to="/" disabled={true}>
+          Button With Link
+        </Button>
       </p>
       <p>
-        <Button to="/" type="icon-before">
+        <Button to="/" type="icon-before" disabled={true}>
           <FaBeer />
           Button With Icon Before
         </Button>
       </p>
       <p>
-        <Button to="/" type="icon-after">
+        <Button to="/" type="icon-after" disabled={true}>
           Button With Icon After
           <FaBeer />
         </Button>
       </p>
       <p>
-        <Button type="circle" to="/">
+        <Button type="circle" to="/" disabled={true}>
           <span className="visually-hidden">Button Circle</span>
           <FaBeer />
         </Button>
       </p>
       <p>
-        <Button type="text" to="/">
+        <Button type="text" to="/" disabled={true}>
           Button Link
         </Button>
       </p>
       <p>
-        <Button type={['text', 'icon-before']} to="/">
+        <Button type={['text', 'icon-before']} to="/" disabled={true}>
           <FaBeer />
           Button Link with Icon
         </Button>
       </p>
       <p>
-        <Button type={['text', 'icon-after']} to="/">
+        <Button type={['text', 'icon-after']} to="/" disabled={true}>
           Button Link with Icon
           <FaBeer />
         </Button>

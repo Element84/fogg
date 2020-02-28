@@ -1,3 +1,48 @@
+@import "settings/__settings";
+@import "util/__util";
+
 .sb-show-main {
+
   padding: 2em;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+  }
+
+  h1 {
+
+    font-size: 1.8em;
+    text-align: left;
+
+    & + h2 {
+      margin-top: -.5em;
+    }
+
+  }
+
+  h2 {
+    color: $color-gray6;
+    font-size: 1.4em;
+    font-weight: $font-weight-normal;
+    margin-bottom: 1.5em;
+  }
+
+  pre {
+    background-color: $color-gray0;
+    padding: 1em;
+  }
+
+  code {
+    line-height: 1.6;
+  }
+
 }
