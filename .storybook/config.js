@@ -2,11 +2,12 @@
 
 import { configure } from '@storybook/react';
 
+import '../src/assets/stylesheets/storybook.scss';
 import '../src/assets/stylesheets/theme.scss';
 
 // automatically import all files ending in *.stories.js
 
-const req = require.context('../src', true, /.stories.js$/);
+const req = require.context('../src', true, /.stories.(js|mdx)/);
 
 function loadStories() {
   req.keys().forEach(filename => req(filename));
