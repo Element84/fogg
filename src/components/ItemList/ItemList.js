@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import { FaChevronRight } from 'react-icons/fa';
 
 import WonderLink from '../WonderLink';
+import InputButton from '../InputButton';
 
 const ItemList = ({
   items = [],
   className,
   actionIcon,
   onItemMouseEnter,
-  onItemMouseLeave
+  onItemMouseLeave,
+  onCheck
 }) => {
   return (
     <div className={`item-list ${className || ''}`}>
@@ -23,7 +25,8 @@ const ItemList = ({
               sublabels,
               to,
               onClick,
-              id
+              id,
+              isChecked
             } = item;
             let { icon } = item;
             let itemClassName = 'item-list-item';
@@ -53,6 +56,16 @@ const ItemList = ({
 
             return (
               <li key={`ItemList-Item-${index}`} {...itemProps}>
+                {onCheck && (
+                  <InputButton
+                    id={`item-list-checkbox-${index}`}
+                    name={`item-list-checkbox-${index}`}
+                    type="checkbox"
+                    value={id}
+                    onChange={onCheck}
+                    isChecked={isChecked || false}
+                  />
+                )}
                 <WonderLink to={to} onClick={onClick}>
                   {thumb && (
                     <span className="item-list-item-thumb">
@@ -95,7 +108,8 @@ ItemList.propTypes = {
   className: PropTypes.string,
   actionIcon: PropTypes.node,
   onItemMouseEnter: PropTypes.func,
-  onItemMouseLeave: PropTypes.func
+  onItemMouseLeave: PropTypes.func,
+  onCheck: PropTypes.func
 };
 
 export default ItemList;
