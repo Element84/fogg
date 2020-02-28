@@ -1,3 +1,5 @@
+### Version 0.2.31
+
 ### Version 0.2.30
 - [JAM-953] Tasking request cost component
 - moving all components into their own directory with stories and tests
