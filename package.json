@@ -1,9 +1,11 @@
 {
   "name": "fogg",
-  "private": true,
   "description": "Gatsby theme for mapping!",
   "version": "0.2.31",
   "author": "Element 84, Inc.",
+  "publishConfig": {
+    "registry": "https://artifactory.prod.element84.com/artifactory/api/npm/space-jam-virtual/"
+  },
   "dependencies": {
     "@babel/core": "^7.7.7",
     "@turf/turf": "^5.1.6",
