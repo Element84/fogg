@@ -2,11 +2,19 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import InputButtonList from './';
+import Story from '../../../../stories/helpers/Story';
 
-const stories = storiesOf('Components|InputButtonList', module);
+import InputButtonList from '../';
 
-stories.add('Default', () => {
+const STORY_COMPONENT = 'Input Button List';
+const STORY_NAME = 'Default';
+
+const stories = storiesOf(
+  `Components|${STORY_COMPONENT}|${STORY_NAME}`,
+  module
+);
+
+stories.add(STORY_NAME, () => {
   function handleCheckboxOnChange (event, selections) {
     action('inputbuttonlist--checkbox-change')(
       event,
@@ -19,7 +27,7 @@ stories.add('Default', () => {
   }
 
   return (
-    <>
+    <Story component={STORY_COMPONENT} name={STORY_NAME}>
       <InputButtonList
         name="inputbutton-checkbox"
         type="checkbox"
@@ -54,6 +62,6 @@ stories.add('Default', () => {
         required={true}
         onChange={handleRadioOnChange}
       />
-    </>
+    </Story>
   );
 });
