@@ -2,6 +2,8 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
+import Story from '../../../../stories/helpers/Story';
+
 import Datetime from '../';
 
 const STORY_COMPONENT = 'Datetime';
@@ -18,15 +20,12 @@ function handleDateChange (date) {
 
 stories.add(STORY_NAME, () => {
   return (
-    <>
-      <h1>{STORY_COMPONENT}</h1>
-      <h2>{STORY_NAME}</h2>
-
+    <Story component={STORY_COMPONENT} name={STORY_NAME}>
       <Datetime
         input={false}
         onChange={handleDateChange}
         value={1582918169553}
       />
-    </>
+    </Story>
   );
 });

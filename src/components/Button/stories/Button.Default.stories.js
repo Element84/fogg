@@ -2,6 +2,8 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { FaBeer } from 'react-icons/fa';
 
+import Story from '../../../../stories/helpers/Story';
+
 import Button from '../';
 
 const STORY_COMPONENT = 'Button';
@@ -14,9 +16,7 @@ const stories = storiesOf(
 
 stories.add(STORY_NAME, () => {
   return (
-    <>
-      <h1>{STORY_COMPONENT}</h1>
-      <h2>{STORY_NAME}</h2>
+    <Story component={STORY_COMPONENT} name={STORY_NAME}>
       <p>
         <Button>Button No Link</Button>
       </p>
@@ -58,6 +58,6 @@ stories.add(STORY_NAME, () => {
           <FaBeer />
         </Button>
       </p>
-    </>
+    </Story>
   );
 });

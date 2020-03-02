@@ -2,6 +2,8 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
+import Story from '../../../../stories/helpers/Story';
+
 import ChildToggle from '../';
 import FormInput from '../../FormInput';
 import FormRow from '../../FormRow';
@@ -35,10 +37,7 @@ stories.add('Default', () => {
   }
 
   return (
-    <>
-      <h1>{STORY_COMPONENT}</h1>
-      <h2>{STORY_NAME}</h2>
-
+    <Story component={STORY_COMPONENT} name={STORY_NAME}>
       <ChildToggle label="Repeat" id="repeater" onChange={handleToggleOnChange}>
         <FormRow className="repeater-row">
           <FormInput
@@ -56,6 +55,6 @@ stories.add('Default', () => {
           <FormInput type="text" id="max-collections" label="Max Collections" />
         </FormRow>
       </ChildToggle>
-    </>
+    </Story>
   );
 });

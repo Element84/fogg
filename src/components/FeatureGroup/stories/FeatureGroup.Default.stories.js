@@ -1,6 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
+import Story from '../../../../stories/helpers/Story';
+
 const STORY_COMPONENT = 'Feature Group';
 const STORY_NAME = 'Default';
 
@@ -18,10 +20,7 @@ stories.add(
   STORY_NAME,
   () => {
     return (
-      <div>
-        <h1>{STORY_COMPONENT}</h1>
-        <h2>{STORY_NAME}</h2>
-
+      <Story component={STORY_COMPONENT} name={STORY_NAME}>
         <p>
           The Feature Group component is a wrapper around the react-leaflet
           basically recreating the component functionality with the added
@@ -45,7 +44,7 @@ stories.add(
             {'<FeatureGroup featureGroup={featureGroup} />'}
           </code>
         </pre>
-      </div>
+      </Story>
     );
   },
   parameters
