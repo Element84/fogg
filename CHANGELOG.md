@@ -1,4 +1,5 @@
 ### Version 0.2.31
+- [FD-289] publish registry
 
 ### Version 0.2.30
 - [JAM-953] Tasking request cost component
