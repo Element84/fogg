@@ -11,10 +11,7 @@ import FormRow from '../../FormRow';
 const STORY_COMPONENT = 'Child Toggle';
 const STORY_NAME = 'Default';
 
-const stories = storiesOf(
-  `Components|${STORY_COMPONENT}|${STORY_NAME}`,
-  module
-);
+const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 const intervalOptions = [
   {

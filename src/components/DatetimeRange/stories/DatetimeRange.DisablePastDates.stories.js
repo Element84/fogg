@@ -9,10 +9,7 @@ import DatetimeRange from '../';
 const STORY_COMPONENT = 'Datetime Range';
 const STORY_NAME = 'Disable Past Dates';
 
-const stories = storiesOf(
-  `Components|${STORY_COMPONENT}|${STORY_NAME}`,
-  module
-);
+const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 function handleDateChange (date) {
   action('DatetimeRange::onChange')(JSON.stringify(date));

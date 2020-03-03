@@ -8,10 +8,7 @@ import Form from '../';
 const STORY_COMPONENT = 'Form';
 const STORY_NAME = 'Default';
 
-const stories = storiesOf(
-  `Components|${STORY_COMPONENT}|${STORY_NAME}`,
-  module
-);
+const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 stories.add(STORY_NAME, () => {
   return (

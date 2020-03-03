@@ -9,10 +9,7 @@ import InputButtonList from '../';
 const STORY_COMPONENT = 'Input Button List';
 const STORY_NAME = 'Default';
 
-const stories = storiesOf(
-  `Components|${STORY_COMPONENT}|${STORY_NAME}`,
-  module
-);
+const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 stories.add(STORY_NAME, () => {
   function handleCheckboxOnChange (event, selections) {

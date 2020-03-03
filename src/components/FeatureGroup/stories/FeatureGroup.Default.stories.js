@@ -6,10 +6,7 @@ import Story from '../../../../stories/helpers/Story';
 const STORY_COMPONENT = 'Feature Group';
 const STORY_NAME = 'Default';
 
-const stories = storiesOf(
-  `Components|${STORY_COMPONENT}|${STORY_NAME}`,
-  module
-);
+const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 const parameters = {
   actions: {
     disabled: true

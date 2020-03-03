@@ -1,9 +1,13 @@
 // Gatsby setup docs: via https://www.gatsbyjs.org/docs/visual-testing-with-storybook/
 
 import { configure } from '@storybook/react';
+import { addDecorator, addParameters } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
 
 import '../src/assets/stylesheets/storybook.scss';
 import '../src/assets/stylesheets/theme.scss';
+
+import Story from '../stories/helpers/Story';
 
 // automatically import all files ending in *.stories.js
 
@@ -32,3 +36,12 @@ window.___navigate = pathname => {
 }
 
 configure(loadStories, module);
+
+addDecorator(withInfo({
+  source: false,
+  propTablesExclude: [ Story ]
+}));
+
+addParameters({
+  info: {}
+})

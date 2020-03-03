@@ -9,10 +9,7 @@ import Button from '../';
 const STORY_COMPONENT = 'Button';
 const STORY_NAME = 'Disabled';
 
-const stories = storiesOf(
-  `Components|${STORY_COMPONENT}|${STORY_NAME}`,
-  module
-);
+const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 stories.add(STORY_NAME, () => {
   return (

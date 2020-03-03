@@ -9,10 +9,7 @@ import Datetime from '../';
 const STORY_COMPONENT = 'Datetime';
 const STORY_NAME = 'Default';
 
-const stories = storiesOf(
-  `Components|${STORY_COMPONENT}|${STORY_NAME}`,
-  module
-);
+const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 function handleDateChange (date) {
   action(`${STORY_COMPONENT}::onChange`)(JSON.stringify(date));

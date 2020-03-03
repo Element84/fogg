@@ -9,10 +9,7 @@ import FormInput from '../';
 const STORY_COMPONENT = 'Form Input';
 const STORY_NAME = 'Disabled';
 
-const stories = storiesOf(
-  `Components|${STORY_COMPONENT}|${STORY_NAME}`,
-  module
-);
+const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 const SELECT_OPTIONS = [
   {

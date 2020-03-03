@@ -10,10 +10,7 @@ import BaseForm from '../../../../stories/helpers/BaseForm';
 const STORY_COMPONENT = 'Form Row';
 const STORY_NAME = 'Default';
 
-const stories = storiesOf(
-  `Components|${STORY_COMPONENT}|${STORY_NAME}`,
-  module
-);
+const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 stories.add(STORY_NAME, () => {
   return (

@@ -8,10 +8,7 @@ import Layout from '../';
 const STORY_COMPONENT = 'Layout';
 const STORY_NAME = 'Notice';
 
-const stories = storiesOf(
-  `Components|${STORY_COMPONENT}|${STORY_NAME}`,
-  module
-);
+const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 stories.add(STORY_NAME, () => {
   return (
