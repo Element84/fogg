@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import L from 'leaflet';
 
 import {
@@ -46,14 +46,15 @@ if (isDomAvailable()) {
 }
 
 export default function useMap (mapSettings = {}) {
-  const { refMap, availableServices = [], projection, draw = {} } = mapSettings;
+  const refMap = useRef();
+
+  const { availableServices = [], projection, draw = {} } = mapSettings;
   const { onCreatedDraw, shapeOptions } = draw;
 
   const defaultMapSettings = buildDefaultMapSettings(mapSettings);
 
   const [mapState, setMapState] = useState(MAP_STATE_DEFAULT);
   const [mapConfig, setMapConfig] = useState(defaultMapSettings);
-  const [mapShape, setMapShape] = useState();
   const [mapServices] = useState(availableServices);
 
   const { defaultCenter, defaultZoom } = mapConfig;
@@ -110,57 +111,6 @@ export default function useMap (mapSettings = {}) {
       map.off('zoomend', handleOnZoomEnd);
     };
   }, [refMap]);
-
-  // To make sure we have acccess to the refMap when adding a shape to the map
-  // we allow the app to define a mapShape that will subsequently be added to the
-  // map. If mapShape isn't available or doesn't change, it won't re-run between
-  // renders to avoid incorrect shape layers
-
-  useEffect(() => {
-    if (!mapShape) return;
-
-    const map = currentLeafletRef(refMap);
-
-    if (!isValidLeafletElement(map)) return;
-
-    const {
-      geoJson,
-      shapeOptions: mapShapeOptions = shapeOptions,
-      centerGeoJson,
-      panToShape = true,
-      zoom,
-      clearOtherLayers = true,
-      featureGroup = defaultMapFeatureGroup
-    } = mapShape;
-
-    const geoJsonLayer = addGeoJsonLayer({
-      geoJson,
-      map,
-      featureGroup,
-      options: mapShapeOptions
-    });
-
-    const layersToExclude = [];
-
-    geoJsonLayer.eachLayer(layer => layersToExclude.push(layer));
-
-    if (panToShape) {
-      centerMapOnGeoJson({
-        geoJson: centerGeoJson,
-        map,
-        settings: {
-          zoom
-        }
-      });
-    }
-
-    if (clearOtherLayers) {
-      handleClearLayers({
-        featureGroup,
-        excludeLayers: layersToExclude
-      });
-    }
-  }, [mapShape]);
 
   /**
    * handleOnZoomEnd
@@ -244,6 +194,10 @@ export default function useMap (mapSettings = {}) {
    */
 
   function handleAddShapeToMap (settings = {}) {
+    const map = currentLeafletRef(refMap);
+
+    if (!isValidLeafletElement(map)) return;
+
     const errorBase =
       'useMap::handleAddShapeToMap - Failed to add shape to map';
     const {
@@ -253,7 +207,7 @@ export default function useMap (mapSettings = {}) {
       zoom,
       shapeOptions: mapShapeOptions = shapeOptions,
       clearOtherLayers = true,
-      featureGroup
+      featureGroup = defaultMapFeatureGroup
     } = settings;
     let centerGeoJson;
 
@@ -267,15 +221,33 @@ export default function useMap (mapSettings = {}) {
       centerGeoJson = getGeoJsonCenter(geoJson);
     }
 
-    setMapShape({
-      shapeOptions: mapShapeOptions,
+    const geoJsonLayer = addGeoJsonLayer({
       geoJson,
-      centerGeoJson,
-      panToShape,
-      zoom,
-      clearOtherLayers,
-      featureGroup
+      map,
+      featureGroup,
+      options: mapShapeOptions
     });
+
+    const layersToExclude = [];
+
+    geoJsonLayer.eachLayer(layer => layersToExclude.push(layer));
+
+    if (panToShape) {
+      centerMapOnGeoJson({
+        geoJson: centerGeoJson,
+        map,
+        settings: {
+          zoom
+        }
+      });
+    }
+
+    if (clearOtherLayers) {
+      handleClearLayers({
+        featureGroup,
+        excludeLayers: layersToExclude
+      });
+    }
   }
 
   /**
