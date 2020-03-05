@@ -37,6 +37,7 @@ $item-list-top-padding: .8em;
 .item-list-item {
 
   position: relative;
+  overflow: hidden;
 
   & > a,
   & > span {
