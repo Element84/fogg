@@ -1,3 +1,8 @@
+### Version 0.2.32
+- removing yarn lock
+- Revert "removing yarn lock"
+- updating lens map to create a ref and feature group to be used for all map shapes without using state
+
 ### Version 0.2.31
 - [FD-289] publish registry
 
