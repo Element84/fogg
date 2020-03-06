@@ -7,7 +7,7 @@ import Map from '../Map';
 
 const LensMap = ({ children, forwardedRef, ...rest }) => {
   const { map, activeDateRange = {} } = useLens();
-  const { mapConfig = {}, services, projection } = map;
+  const { mapConfig = {}, services, projection, refMap } = map;
   const { defaultZoom, defaultCenter, maxZoom, minZoom } = mapConfig;
 
   const mapSettings = {
@@ -22,7 +22,7 @@ const LensMap = ({ children, forwardedRef, ...rest }) => {
   };
 
   return (
-    <Map ref={forwardedRef} className="lens-map" {...mapSettings}>
+    <Map ref={refMap} className="lens-map" {...mapSettings}>
       {children}
     </Map>
   );

@@ -1,3 +1,17 @@
+### Version 0.2.34
+- [CD-137] default resolve function to ersolve a non-search lookup
+- [CD-137] using const to return instead of new object inf unction
+
+### Version 0.2.33
+- [JAM-998] adding function that allows setting a tilelayer on the map with clear controls
+- [JAM-988] adding a function to allow clearing a tile layer by name
+- [JAM-988] contorlling check of item list
+
+### Version 0.2.32
+- removing yarn lock
+- Revert "removing yarn lock"
+- updating lens map to create a ref and feature group to be used for all map shapes without using state
+
 ### Version 0.2.31
 - [FD-289] publish registry
 

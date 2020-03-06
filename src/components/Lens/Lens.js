@@ -41,7 +41,6 @@ const Lens = ({
   PopupContent,
   disableFutureDates = false
 }) => {
-  const refMap = createRef();
   const refSearchComplete = createRef();
 
   let lensClassName = 'lens';
@@ -66,12 +65,11 @@ const Lens = ({
   };
 
   const geoSearch = useGeoSearch(defaultGeoSearchSettings);
-  const { isActiveSearch, results = {}, queryParams = {} } = geoSearch;
+  const { isActiveSearch = false, results = {}, queryParams = {} } = geoSearch;
   const { hasResults } = results;
   const { date = {} } = queryParams;
 
   const defaultMapSettings = {
-    refMap,
     defaultCenter,
     defaultZoom,
     maxZoom,
@@ -152,7 +150,7 @@ const Lens = ({
             <LensSearchFilters hasFilterCancel={hasFilterCancel} />
           )}
 
-          <LensMap ref={refMap} {...mapSettings}>
+          <LensMap {...mapSettings}>
             {!disableMapDraw && <LensMapDraw PopupContent={PopupContent} />}
           </LensMap>
 

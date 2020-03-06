@@ -27,7 +27,14 @@ export default function useLens () {
     useContext(LensContext) || {};
   const { search, searchPlacename, updateSearch, clearSearch } = geoSearch;
   const { filters, clearActiveFilters } = geoFilters;
-  const { refMap, draw = {}, clearLayers, resetMapView, addShapeToMap } = map;
+  const {
+    refMap,
+    draw = {},
+    clearLayers,
+    resetMapView,
+    addShapeToMap,
+    mapFeatureGroup
+  } = map;
   const { shapeOptions } = draw;
 
   /**
@@ -35,6 +42,7 @@ export default function useLens () {
    */
 
   async function handleSearch (settings = {}, options) {
+    if (typeof search !== 'function') return {};
     const response = await search(
       {
         filters: [...filters.active],
@@ -111,9 +119,15 @@ export default function useLens () {
       return;
     }
 
-    const { center = {}, geoJson = {}, zoom } = settings;
+    const {
+      center = {},
+      geoJson = {},
+      zoom,
+      featureGroup = mapFeatureGroup
+    } = settings;
 
     addShapeToMap({
+      featureGroup,
       shapeOptions,
       panToShape: true,
       center,

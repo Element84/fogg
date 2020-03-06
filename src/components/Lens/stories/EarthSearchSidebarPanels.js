@@ -17,10 +17,10 @@ import GEOJSON_GRAO_MOGOL_POLYGON from '../../../../tests/fixtures/geojson/grao-
 // actions that allow us to create a unique sidebar experience for
 // whatever app thats getting built
 
-let mapFeatureGroup;
+let customMapFeatureGroup;
 
 if (isDomAvailable()) {
-  mapFeatureGroup = new L.FeatureGroup();
+  customMapFeatureGroup = new L.FeatureGroup();
 }
 
 const EarthSearchSidebarPanels = ({
@@ -236,7 +236,7 @@ const EarthSearchSidebarPanels = ({
             onClick={() =>
               handleAddShapeToMap(
                 GEOJSON_MONTES_CLAROS_POLYGON,
-                mapFeatureGroup
+                customMapFeatureGroup
               )
             }
           >
@@ -246,14 +246,17 @@ const EarthSearchSidebarPanels = ({
         <p>
           <Button
             onClick={() =>
-              handleAddShapeToMap(GEOJSON_GRAO_MOGOL_POLYGON, mapFeatureGroup)
+              handleAddShapeToMap(
+                GEOJSON_GRAO_MOGOL_POLYGON,
+                customMapFeatureGroup
+              )
             }
           >
             Trigger Grão Mogol
           </Button>
         </p>
         <p>
-          <Button onClick={() => handleClearShapes(mapFeatureGroup)}>
+          <Button onClick={() => handleClearShapes(customMapFeatureGroup)}>
             Clear Shapes
           </Button>
         </p>

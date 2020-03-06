@@ -40,7 +40,10 @@ const SearchComplete = ({
   async function handleSearchboxSearch (textInput, searchDate) {
     let autocompleteResults = [];
 
-    if (typeof query === 'string') {
+    if (
+      typeof resolveQueryComplete === 'function' &&
+      typeof query === 'string'
+    ) {
       try {
         autocompleteResults = (await resolveQueryComplete(textInput)) || [];
       } catch (error) {
