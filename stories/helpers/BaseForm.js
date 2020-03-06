@@ -11,11 +11,11 @@ import Form from '../../src/components/Form';
 
 const BaseForm = ({ children }) => {
   function handleSubmit (event, fields) {
-    action('form-submit')(event, fields);
+    action('BaseForm::onSubmit')(event, fields);
   }
 
-  function handleChange (event, fields) {
-    action('form-change')(event, fields);
+  function handleChange (event) {
+    action('BaseForm::onChange')(event);
   }
 
   return (

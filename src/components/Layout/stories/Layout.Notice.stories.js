@@ -1,15 +1,18 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Layout from './';
+import Story from '../../../../stories/helpers/Story';
 
-const stories = storiesOf('Components|Layout', module);
+import Layout from '../';
 
-stories.add('Default', () => <Layout>I&apos;m in a Layout</Layout>);
+const STORY_COMPONENT = 'Layout';
+const STORY_NAME = 'Notice';
 
-stories.add('Notice', () => {
+const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
+
+stories.add(STORY_NAME, () => {
   return (
-    <>
+    <Story component={STORY_COMPONENT} name={STORY_NAME}>
       <Layout
         notice={{
           text: 'I Am a Text String Notice'
@@ -29,6 +32,6 @@ stories.add('Notice', () => {
       >
         I&apos;m in a Layout
       </Layout>
-    </>
+    </Story>
   );
 });

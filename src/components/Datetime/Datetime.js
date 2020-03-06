@@ -9,7 +9,7 @@ import Input from '../Input';
 
 const Datetime = ({
   className,
-  props,
+  props = {},
   onChange,
   onInput,
   allowPastDate = true,
