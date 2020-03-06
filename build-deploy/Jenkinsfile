@@ -129,7 +129,7 @@ void deployFeature() {
   sh 'echo "Feature"'
   script {
     echo("Branch: " + env.BRANCH_NAME)
-    def match = (env.BRANCH_NAME =~ /^(?i)feature\/((jam|fd)-\d+).*/)
+    def match = (env.BRANCH_NAME =~ /^(?i)feature\/((jam|fd|cd)-\d+).*/)
 
     if(!match.hasGroup() || match.size() == 0) {
           error "Unable to find Jira ticket in branch name"
