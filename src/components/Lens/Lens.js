@@ -65,7 +65,7 @@ const Lens = ({
   };
 
   const geoSearch = useGeoSearch(defaultGeoSearchSettings);
-  const { isActiveSearch, results = {}, queryParams = {} } = geoSearch;
+  const { isActiveSearch = false, results = {}, queryParams = {} } = geoSearch;
   const { hasResults } = results;
   const { date = {} } = queryParams;
 

@@ -42,6 +42,7 @@ export default function useLens () {
    */
 
   async function handleSearch (settings = {}, options) {
+    if (typeof search !== 'function') return {};
     const response = await search(
       {
         filters: [...filters.active],

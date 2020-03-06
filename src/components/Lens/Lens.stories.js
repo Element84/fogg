@@ -12,6 +12,7 @@ import LensEarthSearchCustomDraw from './stories/LensEarthSearchCustomDraw.story
 import LensSearchSearchUpdateFilterSelect from './stories/LensSearchSearchUpdateFilterSelect.story';
 import LensEarthSearchResetView from './stories/LensEarthSearchResetView.story';
 import LensEarthSearchInitialSearch from './stories/LensEarthSearchInitialSearch.story';
+import LensEarthSearchNoGeoSearch from './stories/LensEarthSearchNoGeoSearch.story';
 
 const stories = storiesOf('Components|Lens', module);
 
@@ -47,3 +48,4 @@ stories.add(
 );
 
 stories.add('Earth Search - Initial Search', LensEarthSearchInitialSearch);
+stories.add('Earth Search - No Geo Search', LensEarthSearchNoGeoSearch);
