@@ -26,13 +26,13 @@ const QUERY_DEFAULT_PARAMS = {
 
 const QUERY_AVAILABLE_PARAMS = Object.keys(QUERY_DEFAULT_PARAMS);
 
-const resolveUndefinedSearch = () => {
-  return {
-    features: undefined,
-    hasMoreResults: false,
-    numberOfResults: 0
-  };
+const UNDEFINED_SEARCH_RESULTS = {
+  features: undefined,
+  hasMoreResults: false,
+  numberOfResults: 0
 };
+
+const resolveUndefinedSearch = () => UNDEFINED_SEARCH_RESULTS;
 
 export default function useGeoSearch (geoSearchSettings = {}) {
   const {
