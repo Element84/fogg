@@ -1,3 +1,8 @@
+### Version 0.2.33
+- [JAM-998] adding function that allows setting a tilelayer on the map with clear controls
+- [JAM-988] adding a function to allow clearing a tile layer by name
+- [JAM-988] contorlling check of item list
+
 ### Version 0.2.32
 - removing yarn lock
 - Revert "removing yarn lock"
