@@ -1,3 +1,5 @@
+### Version 0.2.35
+
 ### Version 0.2.34
 - [CD-137] default resolve function to ersolve a non-search lookup
 - [CD-137] using const to return instead of new object inf unction
