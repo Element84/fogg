@@ -64,10 +64,7 @@ const Lens = ({
     date: defaultDateRange
   };
 
-  let geoSearch = {};
-  if (resolveOnSearch) {
-    geoSearch = useGeoSearch(defaultGeoSearchSettings);
-  }
+  const geoSearch = useGeoSearch(defaultGeoSearchSettings);
   const { isActiveSearch = false, results = {}, queryParams = {} } = geoSearch;
   const { hasResults } = results;
   const { date = {} } = queryParams;
