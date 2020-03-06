@@ -4,11 +4,13 @@ import L from 'leaflet';
 import {
   isValidLeafletElement,
   clearFeatureGroupLayers,
+  clearFeatureGroupLayer,
   currentLeafletRef,
   setMapView,
   centerMapOnGeoJson,
   addGeoJsonLayer,
-  addTileLayer
+  addTileLayer,
+  findLayerByName
 } from '../lib/leaflet';
 import { geoJsonFromLatLn, getGeoJsonCenter } from '../lib/map';
 import { isDomAvailable } from '../lib/device';
@@ -183,6 +185,19 @@ export default function useMap (mapSettings = {}) {
   }
 
   /**
+   * handleClearLayer
+   */
+
+  function handleClearLayer (settings) {
+    const map = currentLeafletRef(refMap);
+    clearFeatureGroupLayer({
+      map,
+      featureGroup: defaultMapFeaturesGroup,
+      ...settings
+    });
+  }
+
+  /**
    * handleOnLayerCreate
    */
 
@@ -317,6 +332,25 @@ export default function useMap (mapSettings = {}) {
   }
 
   /**
+   * handleClearTileLayer
+   */
+
+  function handleClearTileLayer ({
+    featureGroup = defaultMapOverlaysGroup,
+    name
+  } = {}) {
+    const layer = findLayerByName({
+      name,
+      featureGroup
+    });
+
+    handleClearLayer({
+      featureGroup,
+      layer: layer
+    });
+  }
+
+  /**
    * handleOnLayerCreate
    */
 
@@ -406,6 +440,7 @@ export default function useMap (mapSettings = {}) {
     clearShapeLayers: handleClearShapeLayers,
     addTileLayerToMap: handleAddTileLayerToMap,
     clearTileLayers: handleClearTileLayers,
+    clearTileLayer: handleClearTileLayer,
     createFeatureGroup: handleCreateFeatureGroup,
     featureGroupById: handleFeatureGroupById
   };

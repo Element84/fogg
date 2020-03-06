@@ -30,7 +30,7 @@ if (isDomAvailable()) {
 const SidebarWrapper = props => {
   const { geoSearch = {}, map = {} } = useLens();
   const { search } = geoSearch;
-  const { addTileLayerToMap, clearTileLayers } = map;
+  const { addTileLayerToMap, clearTileLayers, clearTileLayer } = map;
 
   const populationEndpoint =
     'https://gibs-{s}.earthdata.nasa.gov/wmts/epsg3857/best/GPW_Population_Density_2020/default/2018-11-08/EPSG3857_1km/{z}/{y}/{x}.png';
@@ -57,14 +57,23 @@ const SidebarWrapper = props => {
     });
   }, []);
 
-  function handleOnClearTileLayer () {
+  function handleOnClearAllTileLayers () {
     clearTileLayers();
+  }
+
+  function handleClearPopulationDensity () {
+    clearTileLayer({
+      name: 'Population Density, 2020'
+    });
   }
 
   return (
     <>
       <p>
-        <Button onClick={handleOnClearTileLayer}>Clear Tile Layer</Button>
+        <Button onClick={handleOnClearAllTileLayers}>Clear Tile Layer</Button>
+        <Button onClick={handleClearPopulationDensity}>
+          Clear Population Density
+        </Button>
       </p>
       <EarthSearchSidebarPanels {...props} />;
     </>

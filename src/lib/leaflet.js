@@ -199,6 +199,42 @@ export function clearFeatureGroupLayers ({
 }
 
 /**
+ * clearFeatureGroupLayer
+ */
+
+export function clearFeatureGroupLayer ({ layer, featureGroup, map } = {}) {
+  const errorBase =
+    'clearFeatureGroupLayer - Failed clear layer from feature group';
+  const isValidMap = isValidLeafletElement(map);
+
+  if (!isValidLeafletElement(featureGroup)) {
+    throw new Error(`${errorBase}: Invalid feature group`);
+  }
+
+  featureGroup.removeLayer(layer);
+  if (isValidMap) map.removeLayer(layer);
+}
+
+/**
+ * findLayerByName
+ */
+
+export function findLayerByName ({ name: layerName, featureGroup } = {}) {
+  const errorBase = 'findLayerByName - Failed to find layer';
+
+  if (!isLeafletLayerGroup(featureGroup)) {
+    throw new Error(`${errorBase}: Invalid feature group`);
+  }
+
+  const featureLayers = featureGroup.getLayers();
+
+  return featureLayers.find(({ options = {} } = {}) => {
+    const { name } = options;
+    return layerName === name;
+  });
+}
+
+/**
  * centerMapOnGeoJson
  * @description
  */
