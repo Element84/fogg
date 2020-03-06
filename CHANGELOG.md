@@ -1,3 +1,6 @@
+### Version 0.2.36
+- story documentation cleanup
+
 ### Version 0.2.35
 
 ### Version 0.2.34
