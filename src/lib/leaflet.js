@@ -2,6 +2,11 @@ import L from 'leaflet';
 
 import { latLngFromGeoJson } from './map';
 import { isDomAvailable } from './device';
+import Logger from './logger';
+
+const logger = new Logger('lib/leaflet', {
+  isBrowser: true
+});
 
 export function leafletIsReady () {
   return (
@@ -27,6 +32,15 @@ export function isValidLeafletElement (el) {
 
 export function isLeafletLayerGroup (el) {
   return !!(el && typeof el.getLayers === 'function');
+}
+
+/**
+ * isLeafletLayer
+ * @description Helper to check if the element is a layer
+ */
+
+export function isLeafletLayer (el) {
+  return !!(el && typeof el.getTileUrl === 'function');
 }
 
 /**
@@ -81,6 +95,29 @@ export function createGeoJsonLayer (geoJson, options = {}) {
 }
 
 /**
+ * createTileLayer
+ */
+
+export function createTileLayer (url, options = {}) {
+  const errorBase = 'createTileLayer - Failed to create tile layer';
+  if (!leafletIsReady()) return;
+
+  const { attribution } = options;
+
+  if (!attribution) {
+    logger.warn(`createTileLayer - Missing attribution for URL ${url}`);
+  }
+
+  if (typeof url !== 'string') {
+    throw new Error(`${errorBase}: Invalid URL`);
+  }
+
+  return L.tileLayer(url, {
+    ...options
+  });
+}
+
+/**
  * addGeoJsonLayer
  */
 
@@ -105,6 +142,30 @@ export function addGeoJsonLayer ({
   }
 
   return geoJsonLayer;
+}
+
+/**
+ * addTileLayer
+ */
+
+export function addTileLayer ({ url, map, featureGroup, options = {} } = {}) {
+  const errorBase = 'addTileLayer - Failed to add tile layer';
+  const layer = createTileLayer(url, {
+    ...options
+  });
+
+  if (!isLeafletLayer(layer)) {
+    throw new Error(`${errorBase}: Invalid layer`);
+  }
+
+  if (isLeafletLayerGroup(featureGroup)) {
+    featureGroup.addLayer(layer);
+    featureGroup.addTo(map);
+  } else {
+    layer.addTo(map);
+  }
+
+  return layer;
 }
 
 /**
