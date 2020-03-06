@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import ModInput from './';
-import Form from '../Form';
-import Button from '../Button';
+import Story from '../../../../stories/helpers/Story';
 
-const stories = storiesOf('Components|ModInput', module);
+import ModInput from '../';
+import Form from '../../Form';
+import Button from '../../Button';
 
-const defaultValue = 'Chookity';
+const STORY_COMPONENT = 'Mod Input';
+const STORY_NAME = 'Form';
+
+const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 const user = {
   firstName: 'Test',
@@ -106,22 +109,10 @@ const FormWrapper = () => {
   );
 };
 
-function handleOnSave (value, name) {
-  const hasChanged = value !== defaultValue;
-  action('ModInput::onSave')(
-    name,
-    value,
-    `Has changed since load: ${hasChanged}`
+stories.add(STORY_NAME, () => {
+  return (
+    <Story component={STORY_COMPONENT} name={STORY_NAME}>
+      <FormWrapper />
+    </Story>
   );
-}
-
-stories.add('Default', () => (
-  <ModInput
-    id="test"
-    defaultValue={defaultValue}
-    onSave={handleOnSave}
-    forceDisable={true}
-  />
-));
-
-stories.add('Form', () => <FormWrapper />);
+});

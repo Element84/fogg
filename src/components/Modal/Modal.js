@@ -5,6 +5,9 @@ import { FaTimes } from 'react-icons/fa';
 
 import Button from '../Button';
 
+// TODO: the user of the component shouldn't have to control isOpen manually. We can
+// set an internal state in useModal and update it if the defaultIsOpen changes
+
 const Modal = ({
   children,
   name,
@@ -19,14 +22,16 @@ const Modal = ({
   };
 
   ReactModal.setAppElement(appElement);
+
   const modalProperties = {
-    isOpen: isOpen,
-    contentLabel: contentLabel,
+    isOpen,
+    contentLabel,
     shouldCloseOnOverlayClick: true,
     shouldCloseOnEsc: true,
     portalClassName: 'modal ReactModalPortal',
     onRequestClose: handleRequestClose
   };
+
   return (
     <ReactModal {...modalProperties}>
       <div className="modal-header">
