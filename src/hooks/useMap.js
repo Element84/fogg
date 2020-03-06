@@ -4,10 +4,13 @@ import L from 'leaflet';
 import {
   isValidLeafletElement,
   clearFeatureGroupLayers,
+  clearFeatureGroupLayer,
   currentLeafletRef,
   setMapView,
   centerMapOnGeoJson,
-  addGeoJsonLayer
+  addGeoJsonLayer,
+  addTileLayer,
+  findLayerByName
 } from '../lib/leaflet';
 import { geoJsonFromLatLn, getGeoJsonCenter } from '../lib/map';
 import { isDomAvailable } from '../lib/device';
@@ -34,15 +37,24 @@ const MAP_STATE_DEFAULT = {
 
 const AVAILABLE_MAP_CONTROLS = Object.keys(MAP_CONFIG_DEFAULTS);
 
-let defaultMapFeatureGroup;
+let defaultMapFeaturesGroup;
+let defaultMapOverlaysGroup;
+
 const mapFeatureGroups = [];
 
 if (isDomAvailable()) {
+  defaultMapFeaturesGroup = new L.FeatureGroup();
+  defaultMapOverlaysGroup = new L.FeatureGroup();
+
   mapFeatureGroups.push({
-    id: 'default',
-    featureGroup: new L.FeatureGroup()
+    id: 'default-features',
+    featureGroup: defaultMapFeaturesGroup
   });
-  defaultMapFeatureGroup = mapFeatureGroups[0].featureGroup;
+
+  mapFeatureGroups.push({
+    id: 'default-overlays',
+    featureGroup: defaultMapOverlaysGroup
+  });
 }
 
 export default function useMap (mapSettings = {}) {
@@ -158,7 +170,7 @@ export default function useMap (mapSettings = {}) {
    */
 
   async function handleClearLayers ({
-    featureGroup = defaultMapFeatureGroup,
+    featureGroup = defaultMapFeaturesGroup,
     excludeLayers = []
   } = {}) {
     const map = currentLeafletRef(refMap);
@@ -173,12 +185,25 @@ export default function useMap (mapSettings = {}) {
   }
 
   /**
+   * handleClearLayer
+   */
+
+  function handleClearLayer (settings) {
+    const map = currentLeafletRef(refMap);
+    clearFeatureGroupLayer({
+      map,
+      featureGroup: defaultMapFeaturesGroup,
+      ...settings
+    });
+  }
+
+  /**
    * handleOnLayerCreate
    */
 
   function handleOnLayerCreate ({
     layer,
-    featureGroup = defaultMapFeatureGroup
+    featureGroup = defaultMapFeaturesGroup
   }) {
     const map = currentLeafletRef(refMap);
 
@@ -190,7 +215,7 @@ export default function useMap (mapSettings = {}) {
   }
 
   /**
-   * handleOnLayerCreate
+   * handleAddShapeToMap
    */
 
   function handleAddShapeToMap (settings = {}) {
@@ -207,8 +232,9 @@ export default function useMap (mapSettings = {}) {
       zoom,
       shapeOptions: mapShapeOptions = shapeOptions,
       clearOtherLayers = true,
-      featureGroup = defaultMapFeatureGroup
+      featureGroup = defaultMapFeaturesGroup
     } = settings;
+
     let centerGeoJson;
 
     if (!geoJson) {
@@ -248,6 +274,80 @@ export default function useMap (mapSettings = {}) {
         excludeLayers: layersToExclude
       });
     }
+  }
+
+  /**
+   * handleClearShapeLayers
+   */
+
+  function handleClearShapeLayers (settings) {
+    handleClearLayers({
+      featureGroup: defaultMapFeaturesGroup,
+      ...settings
+    });
+  }
+
+  /**
+   * handleAddTileLayer
+   */
+
+  function handleAddTileLayerToMap (settings = {}) {
+    const map = currentLeafletRef(refMap);
+
+    if (!isValidLeafletElement(map)) return;
+
+    const {
+      url,
+      options,
+      featureGroup = defaultMapOverlaysGroup,
+      clearOtherLayers
+    } = settings;
+
+    const layer = addTileLayer({
+      url,
+      map,
+      featureGroup,
+      options
+    });
+
+    const layersToExclude = [layer];
+
+    if (clearOtherLayers) {
+      handleClearLayers({
+        featureGroup,
+        excludeLayers: layersToExclude
+      });
+    }
+  }
+
+  /**
+   * handleClearTileLayers
+   */
+
+  function handleClearTileLayers (settings) {
+    handleClearLayers({
+      featureGroup: defaultMapOverlaysGroup,
+      ...settings
+    });
+  }
+
+  /**
+   * handleClearTileLayer
+   */
+
+  function handleClearTileLayer ({
+    featureGroup = defaultMapOverlaysGroup,
+    name
+  } = {}) {
+    const layer = findLayerByName({
+      name,
+      featureGroup
+    });
+
+    handleClearLayer({
+      featureGroup,
+      layer: layer
+    });
   }
 
   /**
@@ -323,7 +423,8 @@ export default function useMap (mapSettings = {}) {
 
   return {
     refMap,
-    mapFeatureGroup: defaultMapFeatureGroup,
+    mapFeatureGroup: defaultMapFeaturesGroup,
+    mapOverlaysGroup: defaultMapOverlaysGroup,
     mapConfig,
     mapState,
     services: mapServices,
@@ -336,6 +437,10 @@ export default function useMap (mapSettings = {}) {
     centerMapOnGeoJson: handleCenterMapOnGeoJson,
     addGeoJsonLayer: handleAddGeoJsonLayer,
     addShapeToMap: handleAddShapeToMap,
+    clearShapeLayers: handleClearShapeLayers,
+    addTileLayerToMap: handleAddTileLayerToMap,
+    clearTileLayers: handleClearTileLayers,
+    clearTileLayer: handleClearTileLayer,
     createFeatureGroup: handleCreateFeatureGroup,
     featureGroupById: handleFeatureGroupById
   };

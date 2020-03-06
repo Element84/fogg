@@ -64,6 +64,7 @@ const ItemList = ({
                     value={id}
                     onChange={onCheck}
                     isChecked={isChecked || false}
+                    controlChecked={true}
                   />
                 )}
                 <WonderLink to={to} onClick={onClick}>
