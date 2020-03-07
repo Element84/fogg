@@ -1,6 +1,14 @@
 # Fogg
 A Gatsby theme that provides out of the box components and tooling for mapmakers!
 
+## TODO
+[] Complete stories for each component
+[] Clean out unused components
+[] Add basic tests for each component
+[] Add tests for lib
+[] Add tests for hooks
+[] Cypress tests for integrations?
+
 ## About
 
 Fogg is a Gatsby Theme that provides a starting point for any map based front-end. It's built using the following tools:
