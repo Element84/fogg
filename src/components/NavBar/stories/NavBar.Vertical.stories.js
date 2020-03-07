@@ -2,30 +2,18 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { FaSearch, FaDatabase, FaServer } from 'react-icons/fa';
 
-import NavBar from './';
+import Story from '../../../../stories/helpers/Story';
 
-const stories = storiesOf('Components|NavBar', module);
+import NavBar from '../';
 
-stories.add('Default', () => {
+const STORY_COMPONENT = 'Nav Bar';
+const STORY_NAME = 'Vertical';
+
+const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
+
+stories.add(STORY_NAME, () => {
   return (
-    <>
-      <NavBar
-        primary={[
-          { label: 'Top Link 1', to: '/top1.html', icon: <FaSearch /> }
-        ]}
-        secondary={[
-          { label: 'Bottom Link 1', to: '/bottom/', icon: <FaDatabase /> },
-          { label: 'Bottom Link 2', to: '/bottom2/', icon: <FaServer /> }
-        ]}
-        activePage="/bottom"
-      />
-    </>
-  );
-});
-
-stories.add('Vertical', () => {
-  return (
-    <>
+    <Story component={STORY_COMPONENT} name={STORY_NAME}>
       <NavBar
         orientation="vertical"
         primary={[
@@ -37,6 +25,6 @@ stories.add('Vertical', () => {
         ]}
         activePage="/top1.html"
       />
-    </>
+    </Story>
   );
 });
