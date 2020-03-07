@@ -2,44 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 
-import Table from './';
-import { arrayFilter, setArrayFilterValue } from '../../lib/table';
+import Story from '../../../../stories/helpers/Story';
 
-const columns = [
-  {
-    Header: 'First Name',
-    accessor: 'firstName'
-  },
-  {
-    Header: 'Last Name',
-    accessor: 'lastName'
-  },
-  {
-    accessor: 'actions',
-    disableSorting: true,
-    Header: false
-  }
-];
+import Table from '../';
+import { arrayFilter, setArrayFilterValue } from '../../../lib/table';
 
-function DefaultColumnFilter ({ filterValue, setFilter, column = {}, ...rest }) {
-  const { id } = column;
-  return (
-    <input
-      className="table-filter"
-      value={filterValue}
-      onChange={e => {
-        setFilter(id, e.target.value || undefined); // Set undefined to remove the filter entirely
-      }}
-      placeholder="Filter..."
-    />
-  );
-}
+const STORY_COMPONENT = 'Table';
+const STORY_NAME = 'Filter';
 
-DefaultColumnFilter.propTypes = {
-  column: PropTypes.object,
-  filterValue: PropTypes.any,
-  setFilter: PropTypes.func
-};
+const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 const columnsWithFilters = [
   {
@@ -64,18 +35,6 @@ const columnsWithFilters = [
     accessor: 'actions',
     disableFilters: true,
     Header: false
-  }
-];
-
-const columnsNoLabels = [
-  {
-    accessor: 'firstName'
-  },
-  {
-    accessor: 'lastName'
-  },
-  {
-    accessor: 'actions'
   }
 ];
 
@@ -107,17 +66,7 @@ const data = [
   }
 ];
 
-const stories = storiesOf('Components|Table', module);
-
-stories.add('Default', () => {
-  return (
-    <>
-      <Table columns={columns} data={data} />
-    </>
-  );
-});
-
-stories.add('Filter', () => {
+stories.add(STORY_NAME, () => {
   const FILTER_MENU_OPTIONS = [
     {
       columnId: 'role',
@@ -144,23 +93,37 @@ stories.add('Filter', () => {
     }
   };
   return (
-    <Table
-      initialState={{
-        hiddenColumns: ['role', 'org']
-      }}
-      columns={columnsWithFilters}
-      data={data}
-      filterTypes={filterTypes}
-      enableFiltering={true}
-      filterMenuOptions={FILTER_MENU_OPTIONS}
-    />
+    <Story component={STORY_COMPONENT} name={STORY_NAME}>
+      <Table
+        initialState={{
+          hiddenColumns: ['role', 'org']
+        }}
+        columns={columnsWithFilters}
+        data={data}
+        filterTypes={filterTypes}
+        enableFiltering={true}
+        filterMenuOptions={FILTER_MENU_OPTIONS}
+      />
+    </Story>
   );
 });
 
-stories.add('Sort', () => {
-  return <Table columns={columns} data={data} enableSorting={true} />;
-});
+function DefaultColumnFilter ({ filterValue, setFilter, column = {}, ...rest }) {
+  const { id } = column;
+  return (
+    <input
+      className="table-filter"
+      value={filterValue}
+      onChange={e => {
+        setFilter(id, e.target.value || undefined); // Set undefined to remove the filter entirely
+      }}
+      placeholder="Filter..."
+    />
+  );
+}
 
-stories.add('No Header', () => {
-  return <Table hideHeader={true} columns={columnsNoLabels} data={data} />;
-});
+DefaultColumnFilter.propTypes = {
+  column: PropTypes.object,
+  filterValue: PropTypes.any,
+  setFilter: PropTypes.func
+};
