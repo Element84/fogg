@@ -1,3 +1,6 @@
+### Version 0.2.37
+- component story cleanup
+
 ### Version 0.2.36
 - story documentation cleanup
 
