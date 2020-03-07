@@ -5,7 +5,9 @@ import Button from '../Button';
 
 const PanelActions = ({ actions = [] }) => {
   if (!Array.isArray(actions)) return null;
-  const activeActions = actions.filter(action => !!action.isVisible);
+  const activeActions = actions.filter(
+    ({ isVisible = true } = {}) => !!isVisible
+  );
   if (activeActions.length === 0) return null;
   return (
     <ul>
