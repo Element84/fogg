@@ -13,6 +13,7 @@ import LensSearchSearchUpdateFilterSelect from './stories/LensSearchSearchUpdate
 import LensEarthSearchResetView from './stories/LensEarthSearchResetView.story';
 import LensEarthSearchInitialSearch from './stories/LensEarthSearchInitialSearch.story';
 import LensEarthSearchNoGeoSearch from './stories/LensEarthSearchNoGeoSearch.story';
+import LensEarthSearchResultsNoFilter from './stories/LensEarthSearchResultsNoFilter.story';
 
 const stories = storiesOf('Components|Lens', module);
 
@@ -49,3 +50,7 @@ stories.add(
 
 stories.add('Earth Search - Initial Search', LensEarthSearchInitialSearch);
 stories.add('Earth Search - No Geo Search', LensEarthSearchNoGeoSearch);
+stories.add(
+  'Earth Search - No Filters on Results',
+  LensEarthSearchResultsNoFilter
+);

@@ -31,6 +31,7 @@ const Lens = ({
   searchType,
   placeholder = 'Search',
   availableFilters,
+  showFilters = true,
   availableLayers = null,
   hideNativeLayers = true,
   fetchLayerData,
@@ -130,7 +131,9 @@ const Lens = ({
                             />
                           </Panel>
 
-                          {isActiveSearch && filters.available.length > 0 && (
+                          {showFilters &&
+                            isActiveSearch &&
+                            filters.available.length > 0 && (
                             <LensSearchPanelFilters
                               hasFilterCancel={hasFilterCancel}
                             />
@@ -205,6 +208,7 @@ Lens.propTypes = {
   search: PropTypes.bool,
   searchType: PropTypes.string,
   placeholder: PropTypes.string,
+  showFilters: PropTypes.bool,
   availableFilters: PropTypes.array,
   hideNativeLayers: PropTypes.bool,
   fetchLayerData: PropTypes.oneOfType([
