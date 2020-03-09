@@ -3,7 +3,6 @@ export { default as Button } from './src/components/Button';
 export { default as ChildToggle } from './src/components/ChildToggle';
 export { default as Datetime } from './src/components/Datetime';
 export { default as DatetimeRange } from './src/components/DatetimeRange';
-export { default as Footer } from './src/components/Footer';
 export { default as Form } from './src/components/Form';
 export { default as FormInput } from './src/components/FormInput';
 export { default as FormRow } from './src/components/FormRow';
