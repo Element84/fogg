@@ -1,3 +1,6 @@
+### Version 0.2.40
+- removing footer from ui.js
+
 ### Version 0.2.39
 - [JAM-971] Removing filters for search results
 - readme
