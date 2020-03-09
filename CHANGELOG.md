@@ -1,3 +1,7 @@
+### Version 0.2.39
+- [JAM-971] Removing filters for search results
+- readme
+
 ### Version 0.2.38
 - component story cleanup
 
