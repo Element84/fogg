@@ -1,3 +1,6 @@
+### Version 0.2.41
+- checking that results exists, providing backup defult if not
+
 ### Version 0.2.40
 - removing footer from ui.js
 
