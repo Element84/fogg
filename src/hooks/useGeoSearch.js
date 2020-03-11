@@ -56,7 +56,7 @@ export default function useGeoSearch (geoSearchSettings = {}) {
   const [queryParams, setQueryParams] = useState(defaultQueryParams);
   const [results, setResults] = useState(defaultResults);
 
-  const { features } = results;
+  const { features } = results || {};
 
   const isActiveSearch = Array.isArray(features);
   const hasResults = isActiveSearch && features.length > 0;
@@ -152,6 +152,10 @@ export default function useGeoSearch (geoSearchSettings = {}) {
       searchResults = await search(searchSettings, resolveOnSearch);
     } catch (e) {
       throw new Error(`${errorBase}: ${e}; ${searchSettings}`);
+    }
+
+    if (!searchResults) {
+      searchResults = {};
     }
 
     // In some situations, we don't want to fully replace the search results,
