@@ -40,7 +40,8 @@ const Lens = ({
   activeDateRange = {},
   defaultDateRange = {},
   PopupContent,
-  disableFutureDates = false
+  disableFutureDates = false,
+  resolveOnAutocomplete = resolveLensAutocomplete
 }) => {
   const refSearchComplete = createRef();
 
@@ -60,7 +61,7 @@ const Lens = ({
 
   const defaultGeoSearchSettings = {
     resolveOnSearch,
-    resolveOnAutocomplete: resolveLensAutocomplete,
+    resolveOnAutocomplete,
     filters: filters.active,
     date: defaultDateRange
   };
@@ -228,7 +229,8 @@ Lens.propTypes = {
    * If we ever decide that we should never allow future dates, we can remove this option and
    * pass allowFutureDate={false} to LensSearchDate directly
    */
-  disableFutureDates: PropTypes.bool
+  disableFutureDates: PropTypes.bool,
+  resolveOnAutocomplete: PropTypes.func
 };
 
 export default Lens;
