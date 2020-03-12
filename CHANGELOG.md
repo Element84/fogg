@@ -1,3 +1,5 @@
+### Version 0.2.42
+
 ### Version 0.2.41
 - checking that results exists, providing backup defult if not
 
