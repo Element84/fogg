@@ -30,14 +30,28 @@ const TaskAction = ({ children, positive, negative, className }) => {
         <div className="task-action-column">
           <div className="task-action-buttons">
             {positive && (
-              <Button type="postive" onClick={handlePositiveClick}>
-                {positiveLabel}
-              </Button>
+              <div>
+                <Button type="postive" onClick={handlePositiveClick}>
+                  {positiveLabel}
+                </Button>
+                {positive.disclaimer && (
+                  <div className="task-action-buttons-disclaimer">
+                    {positive.disclaimer}
+                  </div>
+                )}
+              </div>
             )}
             {negative && (
-              <Button type="negative" onClick={handleNegativeClick}>
-                {negativeLabel}
-              </Button>
+              <div>
+                <Button type="negative" onClick={handleNegativeClick}>
+                  {negativeLabel}
+                </Button>
+                {negative.disclaimer && (
+                  <div className="task-action-buttons-disclaimer">
+                    {negative.disclaimer}
+                  </div>
+                )}
+              </div>
             )}
           </div>
         </div>

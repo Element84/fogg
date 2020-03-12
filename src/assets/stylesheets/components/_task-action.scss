@@ -26,13 +26,19 @@
     }
   }
   .task-action-buttons {
+    div {
+      display: inline-block;
+    }
     margin-left: 2em;
-    
+
     .button {
       margin: 0 .5em;
     }
     .button-negative {
       background: red;
+    }
+    .task-action-buttons-disclaimer {
+      display: block;
     }
   }
 }
