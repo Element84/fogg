@@ -15,11 +15,15 @@ const defaultValue = 'Chookity';
 
 function handleOnSave (value, name) {
   const hasChanged = value !== defaultValue;
-  action('ModInput::onSave')(
+  action(`${STORY_COMPONENT}::onSave`)(
     name,
     value,
     `Has changed since load: ${hasChanged}`
   );
+}
+
+function handleOnKeyDown (event) {
+  action(`${STORY_COMPONENT}::onKeyDown`)(event);
 }
 
 stories.add(STORY_NAME, () => {
@@ -30,6 +34,7 @@ stories.add(STORY_NAME, () => {
         defaultValue={defaultValue}
         onSave={handleOnSave}
         forceDisable={true}
+        onKeyDown={handleOnKeyDown}
       />
     </Story>
   );

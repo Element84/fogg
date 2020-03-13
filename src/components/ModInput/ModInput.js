@@ -13,7 +13,8 @@ const ModInput = ({
   defaultValue = '',
   onSave,
   label,
-  allowEmpty = false
+  allowEmpty = false,
+  onKeyDown
 }) => {
   const inputName = name || id;
 
@@ -75,6 +76,7 @@ const ModInput = ({
     name: inputName,
     value: isChangeable ? value : originalValue,
     onChange: handleOnInputchange,
+    onKeyDown,
     disabled: !isChangeable
   };
 
@@ -106,6 +108,7 @@ ModInput.propTypes = {
   label: PropTypes.string,
   defaultValue: PropTypes.string,
   onSave: PropTypes.func,
+  onKeyDown: PropTypes.func,
   allowEmpty: PropTypes.bool
 };
 

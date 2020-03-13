@@ -20,7 +20,8 @@ const FormInput = props => {
     dataList,
     allowPastDate,
     utc,
-    validationMessage
+    validationMessage,
+    onKeyDown
   } = props;
   const { id, type, label, isInvalid, inputProps } = useInput({ props });
 
@@ -60,6 +61,7 @@ const FormInput = props => {
       <Textarea
         className={fieldClassName}
         props={inputProps}
+        onKeyDown={onKeyDown}
         onChange={handleOnChange}
         onInput={handleOnInput}
       />
@@ -80,6 +82,7 @@ const FormInput = props => {
       <Input
         className={fieldClassName}
         props={inputProps}
+        onKeyDown={onKeyDown}
         onChange={handleOnChange}
         onInput={handleOnInput}
         dataList={dataList}
@@ -123,6 +126,7 @@ FormInput.propTypes = {
   onInput: PropTypes.func,
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
+  onKeyDown: PropTypes.func,
   allowPastDate: PropTypes.bool,
   utc: PropTypes.bool,
   validationMessage: PropTypes.string
