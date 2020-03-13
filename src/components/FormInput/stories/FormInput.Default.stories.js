@@ -31,10 +31,19 @@ stories.add(STORY_NAME, () => {
   function handleSelectOnChange (field, selectEvent) {
     action('select :: onchange')(field, selectEvent);
   }
+
+  function handleOnKeyDown (event) {
+    action('select :: onchange')(event);
+  }
+
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
       <BaseForm>
-        <FormInput id="default-text" label="Default Text" />
+        <FormInput
+          id="default-text"
+          label="Default Text"
+          onKeyDown={handleOnKeyDown}
+        />
         <FormInput id="default-email" label="Default Email" type="email" />
         <FormInput
           id="default-password"
