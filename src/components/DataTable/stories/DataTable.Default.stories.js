@@ -27,7 +27,6 @@ const tableColumns = [
   }
 ];
 
-
 // icon: "FaPen"
 // buttonType: (2) ["text", "icon-before"]
 
@@ -53,7 +52,7 @@ const tableData = [
   },
   {
     firstName: 'Abraham',
-    lastName: 'Lincoln',
+    lastName: 'Lincoln'
   }
 ];
 

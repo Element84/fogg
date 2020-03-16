@@ -30,7 +30,7 @@ export default function useTableData ({ columns = [], data = [] }) {
     .filter(({ canFilter = true } = {}) => !!canFilter)
     .map(({ columnId } = {}) => columnId);
 
-  if ( filterKeys.find(key => typeof key === 'undefined' )) {
+  if (filterKeys.find(key => typeof key === 'undefined')) {
     throw new Error(`${errorBase}: Columns contain undefined columnId`);
   }
 
