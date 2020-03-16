@@ -14,6 +14,7 @@ const SearchComplete = ({
   placeholder = 'Search',
   defaultValue = '',
   date,
+  utc = false,
   forwardedRef
 }) => {
   const [isOpen, updateOpenState] = useState(false);
@@ -148,6 +149,7 @@ const SearchComplete = ({
         placeholder={placeholder}
         searchInput={searchInput}
         date={date}
+        utc={utc}
         onDateChange={onDateChange}
       />
 
@@ -188,6 +190,7 @@ SearchComplete.propTypes = {
   defaultValue: PropTypes.string,
   clearSearchInput: PropTypes.bool,
   date: PropTypes.object,
+  utc: PropTypes.bool,
   forwardedRef: PropTypes.object
 };
 

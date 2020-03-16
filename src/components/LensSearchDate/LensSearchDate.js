@@ -7,8 +7,9 @@ import SearchDate from '../SearchDate';
 
 const LensSearchDate = ({ allowFutureDate }) => {
   const { geoSearch = {} } = useLens();
-  const { updateSearch, queryParams = {} } = geoSearch;
+  const { updateSearch, queryParams = {}, config = {} } = geoSearch;
   const { date = {} } = queryParams;
+  const { utc } = config;
 
   /**
    * handleOnDateChange
@@ -28,6 +29,7 @@ const LensSearchDate = ({ allowFutureDate }) => {
       defaultDate={date}
       classPrefix={'search-box-controls'}
       allowFutureDate={allowFutureDate}
+      utc={utc}
     />
   );
 };

@@ -16,7 +16,8 @@ const DatetimeRange = ({
   onClear,
   defaultDate,
   allowPastDate = true,
-  allowFutureDate = true
+  allowFutureDate = true,
+  utc = false
 }) => {
   const [dateTemp, updateDateTemp] = useState({ ...emptyDate, ...defaultDate });
   const [date, updateDate] = useState(dateTemp);
@@ -157,6 +158,7 @@ const DatetimeRange = ({
           onChange={handleStartChange}
           value={dateTemp.start}
           isValidDate={isValidDate}
+          utc={utc}
         />
       </div>
       <div className="datetime-range-selection">
@@ -166,6 +168,7 @@ const DatetimeRange = ({
           onChange={handleEndChange}
           value={dateTemp.end}
           isValidDate={isValidDate}
+          utc={utc}
         />
       </div>
       <div className="datetime-range-actions">
@@ -194,7 +197,8 @@ DatetimeRange.propTypes = {
   onClear: PropTypes.func,
   defaultDate: PropTypes.object,
   allowPastDate: PropTypes.bool,
-  allowFutureDate: PropTypes.bool
+  allowFutureDate: PropTypes.bool,
+  utc: PropTypes.bool
 };
 
 export default DatetimeRange;

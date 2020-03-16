@@ -37,8 +37,13 @@ const resolveUndefinedSearch = () => UNDEFINED_SEARCH_RESULTS;
 export default function useGeoSearch (geoSearchSettings = {}) {
   const {
     resolveOnSearch = resolveUndefinedSearch,
-    resolveOnAutocomplete
+    resolveOnAutocomplete,
+    utc
   } = geoSearchSettings;
+
+  const config = {
+    utc
+  };
 
   const defaultQueryParams = {};
 
@@ -253,6 +258,7 @@ export default function useGeoSearch (geoSearchSettings = {}) {
     searchPlacename: handleSearchPlacename,
     resolveOnAutocomplete: handleResolveOnAutocomplete,
     queryParams,
+    config,
     results: {
       ...results,
       hasResults

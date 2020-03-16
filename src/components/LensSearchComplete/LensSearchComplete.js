@@ -9,11 +9,13 @@ const LensSearchComplete = ({ forwardedRef, ...props }) => {
   const { geoSearch = {} } = useLens();
   const {
     queryParams = {},
+    config = {},
     search,
     updateSearch,
     resolveOnAutocomplete
   } = geoSearch;
   const { date, textInput } = queryParams;
+  const { utc } = config;
 
   /**
    * handleDateChange
@@ -70,6 +72,7 @@ const LensSearchComplete = ({ forwardedRef, ...props }) => {
       resolveQueryComplete={resolveOnAutocomplete}
       forwardedRef={forwardedRef}
       onDateChange={handleDateChange}
+      utc={utc}
       {...props}
     />
   );
