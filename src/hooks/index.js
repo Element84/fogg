@@ -15,3 +15,4 @@ export { default as useModValue } from './useModValue';
 export { default as usePrevious } from './usePrevious';
 export { default as useGeoSearch } from './useGeoSearch';
 export { default as useStoredValue } from './useStoredValue';
+export { default as useTableData } from './useTableData';

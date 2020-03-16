@@ -3,61 +3,81 @@ import { storiesOf } from '@storybook/react';
 
 import Story from '../../../../stories/helpers/Story';
 
-import Table from '../';
+import { useTableData } from '../../../hooks';
 
-const columns = [
+import DataTable from '../';
+
+const tableColumns = [
   {
     Header: 'First Name',
-    accessor: 'firstName'
+    columnId: 'firstName'
   },
   {
     Header: 'Last Name',
-    accessor: 'lastName'
+    columnId: 'lastName'
   },
   {
-    accessor: 'actions',
-    disableSorting: true,
-    Header: false
+    columnId: 'actions',
+    Header: false,
+    align: 'right',
+    type: 'action',
+    canSort: false,
+    canFilter: false,
+    widthRatio: 1
   }
 ];
 
-const data = [
+
+// icon: "FaPen"
+// buttonType: (2) ["text", "icon-before"]
+
+const tableData = [
   {
     firstName: 'Gary',
     lastName: 'Godspeed',
-    role: ['admin'],
-    org: 'windbreakers',
     actions: <button key={'row-1-button'}>View</button>
   },
   {
     firstName: 'Quinn',
     lastName: 'Airgon',
-    role: ['user'],
-    org: 'windbreakers',
-    actions: (
-      <div key={'row-2-buttons'}>
-        <button>View</button>
-        <button>Edit</button>
-      </div>
-    )
+    actions: [
+      {
+        to: '#',
+        label: 'View'
+      },
+      {
+        to: '#',
+        label: 'Edit'
+      }
+    ]
   },
   {
     firstName: 'Abraham',
     lastName: 'Lincoln',
-    role: ['admin', 'user'],
-    org: 'emancipators'
   }
 ];
 
-const STORY_COMPONENT = 'Table';
+const STORY_COMPONENT = 'DataTable';
 const STORY_NAME = 'Default';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 stories.add(STORY_NAME, () => {
+  const { columns, data, sort, filter, clearFilters, filters } = useTableData({
+    columns: tableColumns,
+    data: tableData
+  });
+
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
-      <Table columns={columns} data={data} />
+      <DataTable
+        label="Users"
+        // onSort={handleOnSort}
+        columns={columns}
+        data={data}
+        // isLoading={isLoading}
+        responsive={false}
+      />
     </Story>
   );
 });

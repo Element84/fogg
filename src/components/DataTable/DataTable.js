@@ -31,7 +31,7 @@ const DataTable = ({
 
   return (
     <div className={componentClass.string}>
-      <Table columns={columns} data={data} onSort={onSort} />
+      <Table columns={columns} data={data} onSort={onSort} responsive={false} />
       {!!children && children}
       {!children && isEmpty && (
         <div className={componentClass.childString('empty-content')}>
