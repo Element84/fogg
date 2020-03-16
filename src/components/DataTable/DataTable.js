@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import ClassName from '../../models/classname';
 
-import Button from '../Button'
+import Button from '../Button';
 import Table from '../TableTable';
 
 const DataTable = ({
