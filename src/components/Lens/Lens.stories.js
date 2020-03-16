@@ -16,6 +16,7 @@ import LensEarthSearchNoGeoSearch from './stories/LensEarthSearchNoGeoSearch.sto
 import LensEarthSearchResultsNoFilter from './stories/LensEarthSearchResultsNoFilter.story';
 import LensEarthSearchCustomAutocomplete from './stories/LensEarthSearchCustomAutocomplete.story';
 import LensEarthSearchNoAutocomplete from './stories/LensEarthSearchNoAutocomplete.story';
+import LensEarthSearchUtc from './stories/LensEarthSearchUtc.story';
 
 const stories = storiesOf('Components|Lens', module);
 
@@ -64,3 +65,4 @@ stories.add(
   'Earth Search - Custom Autocomplete',
   LensEarthSearchCustomAutocomplete
 );
+stories.add('Earth Search - UTC', LensEarthSearchUtc);

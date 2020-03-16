@@ -15,6 +15,7 @@ const SearchBox = ({
   placeholder = 'Search',
   searchInput = '',
   date = {},
+  utc = false,
   onDateChange
 }) => {
   const { value: query, updateValue: setQuery } = useStoredValue(searchInput);
@@ -106,6 +107,7 @@ const SearchBox = ({
           onDateClear={handleDateSearch}
           defaultIsOpen={dateIsOpen}
           defaultDate={date}
+          utc={utc}
           classPrefix={'search-box-controls'}
         />
         <div className="search-box-controls-search">
@@ -127,7 +129,8 @@ SearchBox.propTypes = {
   onDateChange: PropTypes.func,
   placeholder: PropTypes.string,
   searchInput: PropTypes.string,
-  date: PropTypes.object
+  date: PropTypes.object,
+  utc: PropTypes.bool
 };
 
 export default SearchBox;

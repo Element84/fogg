@@ -15,7 +15,8 @@ const SearchDate = ({
   onDateChange,
   defaultIsOpen = false,
   defaultDate = {},
-  allowFutureDate
+  allowFutureDate,
+  utc = false
 }) => {
   const [state, updateState] = useState({
     date: defaultDate,
@@ -177,6 +178,7 @@ const SearchDate = ({
             onClear={handleDateClear}
             defaultDate={defaultDate}
             allowFutureDate={allowFutureDate}
+            utc={utc}
           />
         </div>
       </div>
@@ -194,7 +196,8 @@ SearchDate.propTypes = {
   onDateChange: PropTypes.func,
   defaultDate: PropTypes.object,
   defaultIsOpen: PropTypes.bool,
-  allowFutureDate: PropTypes.bool
+  allowFutureDate: PropTypes.bool,
+  utc: PropTypes.bool
 };
 
 export default SearchDate;
