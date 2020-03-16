@@ -41,7 +41,8 @@ const Lens = ({
   defaultDateRange = {},
   PopupContent,
   disableFutureDates = false,
-  resolveOnAutocomplete = resolveLensAutocomplete
+  resolveOnAutocomplete = resolveLensAutocomplete,
+  utc = false
 }) => {
   const refSearchComplete = createRef();
 
@@ -63,7 +64,8 @@ const Lens = ({
     resolveOnSearch,
     resolveOnAutocomplete,
     filters: filters.active,
-    date: defaultDateRange
+    date: defaultDateRange,
+    utc
   };
 
   const geoSearch = useGeoSearch(defaultGeoSearchSettings);
@@ -220,6 +222,7 @@ Lens.propTypes = {
   hasFilterCancel: PropTypes.bool,
   activeDateRange: PropTypes.object,
   defaultDateRange: PropTypes.object,
+  utc: PropTypes.bool,
   /**
    * Content of popup for drawn shapes
    */
