@@ -54,7 +54,6 @@
     "react-dom": "^16.12.0"
   },
   "devDependencies": {
-    "@fabiospampinato/bump": "^1.2.0",
     "@storybook/addon-actions": "^5.3.14",
     "@storybook/addon-info": "^5.3.14",
     "@storybook/addon-links": "^5.3.14",
@@ -97,7 +96,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "bump": "bump",
+    "bump": "npm version",
     "build": "yarn clean && gatsby build && yarn build-storybook",
     "build-storybook": "build-storybook",
     "clean": "gatsby clean",
