@@ -1,3 +1,6 @@
+### Version 0.2.45
+- adding UTC option to lens date components
+
 ### Version 0.2.44
 - onkeydown example for form input
 - onkeydown for modinput
