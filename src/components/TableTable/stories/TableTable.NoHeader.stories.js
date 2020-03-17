@@ -51,7 +51,7 @@ const tableData = [
 ];
 
 const STORY_COMPONENT = 'TableTable';
-const STORY_NAME = 'Default';
+const STORY_NAME = 'No Header';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
@@ -62,7 +62,7 @@ stories.add(STORY_NAME, () => {
   });
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
-      <TableTable columns={columns} data={data} />
+      <TableTable columns={columns} data={data} displayHeader={false} />
     </Story>
   );
 });

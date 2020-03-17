@@ -16,6 +16,7 @@ const Table = ({
   defaultHeight = 150,
   rowHeight = 80,
   headerHeight = 50,
+  displayHeader = true,
   frozenHeader = true,
   columns = [],
   data = [],
@@ -30,10 +31,14 @@ const Table = ({
   const componentClass = new ClassName('tabletable');
 
   componentClass.addIf(className, className);
-  componentClass.addIf(
-    componentClass.childString('frozen-header'),
-    frozenHeader
-  );
+
+  if (displayHeader && frozenHeader) {
+    componentClass.add(componentClass.childString('frozen-header'));
+  }
+
+  if (!displayHeader) {
+    headerHeight = 0;
+  }
 
   const [dimensions, setDimensions] = useState({
     width: defaultWidth,
@@ -65,16 +70,20 @@ const Table = ({
     });
   });
 
-  const headers = activeColumns.map((column = {}) => {
-    return {
-      ...column,
-      isHeader: true
-    };
-  });
+  const headers =
+    displayHeader &&
+    activeColumns.map((column = {}) => {
+      return {
+        ...column,
+        isHeader: true
+      };
+    });
 
   // If we're not trying to add frozen headers, add the headers to the top of the rows list
 
-  if (!frozenHeader) rows.unshift(headers);
+  if (displayHeader && !frozenHeader) {
+    rows.unshift(headers);
+  }
 
   const { width, height } = dimensions;
 
@@ -137,7 +146,7 @@ const Table = ({
   // If we want frozen headers, we need to separate out the components into their
   // own contained row in order to escape the react-window style and positioning
 
-  if (frozenHeader) {
+  if (displayHeader && frozenHeader) {
     const TableHeaderCreator = memoizee(TableCellCreator);
     HeaderCells = headers.map((header, index) => {
       const HeaderComponent = TableHeaderCreator({
@@ -168,7 +177,7 @@ const Table = ({
   return (
     <div className={componentClass.string} ref={ref}>
       <div style={containerStyles}>
-        {frozenHeader && (
+        {displayHeader && frozenHeader && (
           <div className={componentClass.childString('header')}>
             {HeaderCells}
           </div>
@@ -207,6 +216,7 @@ Table.propTypes = {
   defaultHeight: PropTypes.number,
   rowHeight: PropTypes.number,
   headerHeight: PropTypes.number,
+  displayHeader: PropTypes.bool,
   frozenHeader: PropTypes.bool,
   columns: PropTypes.array.isRequired,
   data: PropTypes.array.isRequired,
