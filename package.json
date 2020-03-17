@@ -42,7 +42,6 @@
     "react-leaflet-draw": "^0.19.0",
     "react-modal": "^3.11.1",
     "react-select": "^3.0.8",
-    "react-table": "7.0.0-rc.15",
     "react-window": "^1.8.5",
     "sass": "^1.24.0",
     "togeojson": "^0.16.0",

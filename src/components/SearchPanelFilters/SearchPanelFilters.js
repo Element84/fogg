@@ -6,7 +6,7 @@ import { findFilterById } from '../../lib/filters';
 
 import Panel from '../Panel';
 import PanelActions from '../PanelActions';
-import Table from '../Table';
+import Table from '../TableTable';
 
 const SearchPanelFilters = ({
   filters = {},
@@ -131,13 +131,16 @@ const SearchPanelFilters = ({
     >
       {hasActiveFilters(panelFilters) && (
         <Table
-          hideHeader={true}
+          rowHeight={50}
+          displayHeader={false}
+          fitContainer={true}
+          stretchHeightToContent={true}
           columns={[
             {
-              accessor: 'label'
+              columnId: 'label'
             },
             {
-              accessor: 'value'
+              columnId: 'value'
             }
           ]}
           data={panelFilters
