@@ -1,6 +1,7 @@
 export { default as Atlas } from './src/components/Lens';
 export { default as Button } from './src/components/Button';
 export { default as ChildToggle } from './src/components/ChildToggle';
+export { default as DataTable } from './src/components/DataTable';
 export { default as Datetime } from './src/components/Datetime';
 export { default as DatetimeRange } from './src/components/DatetimeRange';
 export { default as Form } from './src/components/Form';
@@ -41,6 +42,8 @@ export { default as StatusIndicator } from './src/components/StatusIndicator';
 export { default as Table } from './src/components/Table';
 export { default as TableHead } from './src/components/TableHead';
 export { default as TableRow } from './src/components/TableRow';
+export { default as TableSearchInput } from './src/components/TableSearchInput';
+export { default as TableSearchFilters } from './src/components/TableSearchFilters';
 export { default as TaskAction } from './src/components/TaskAction';
 export { default as TaskStatus } from './src/components/TaskStatus';
 export { default as Textarea } from './src/components/Textarea';
