@@ -18,6 +18,7 @@ const Table = ({
   headerHeight = 50,
   displayHeader = true,
   frozenHeader = true,
+  stretchHeightToContent = false,
   columns = [],
   data = [],
   onCellClick,
@@ -85,6 +86,13 @@ const Table = ({
     rows.unshift(headers);
   }
 
+  const rowsCount = rows.length;
+  const columnsCount = activeColumns.length;
+
+  if (stretchHeightToContent) {
+    dimensions.height = rowsCount * rowHeight;
+  }
+
   const { width, height } = dimensions;
 
   const widthRatios = activeColumns.map(
@@ -93,9 +101,6 @@ const Table = ({
   const widthRatiosTotal = widthRatios.reduce((a, b) => a + b, 0);
   const singleColumnWidth = width / widthRatiosTotal;
   const columnWidths = widthRatios.map(ratio => singleColumnWidth * ratio);
-
-  const rowsCount = rows.length;
-  const columnsCount = activeColumns.length;
 
   /**
    * handleOnResize
@@ -218,6 +223,7 @@ Table.propTypes = {
   headerHeight: PropTypes.number,
   displayHeader: PropTypes.bool,
   frozenHeader: PropTypes.bool,
+  stretchHeightToContent: PropTypes.bool,
   columns: PropTypes.array.isRequired,
   data: PropTypes.array.isRequired,
   onCellClick: PropTypes.func,
