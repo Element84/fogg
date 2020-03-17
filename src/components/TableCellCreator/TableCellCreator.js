@@ -25,7 +25,14 @@ function TableCellCreator ({ rows, columns, onCellClick, onSort } = {}) {
     const row = rows[rowIndex];
     const cell = row[columnIndex];
 
-    const { columnId, align = 'left', canSort = true, sortType } = column;
+    const hasSortFunction = typeof onSort === 'function';
+
+    const {
+      columnId,
+      align = 'left',
+      canSort = !!hasSortFunction,
+      sortType
+    } = column;
 
     const { value, isHeader } = cell;
 

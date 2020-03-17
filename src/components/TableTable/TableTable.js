@@ -11,7 +11,7 @@ import TableCellCreator from '../TableCellCreator';
 const Table = ({
   children,
   className,
-  responsive = true,
+  fitContainer = false,
   defaultWidth = 500,
   defaultHeight = 150,
   rowHeight = 80,
@@ -94,7 +94,7 @@ const Table = ({
    */
 
   function handleOnResize () {
-    if (!responsive) return;
+    if (!fitContainer) return;
 
     const { current: currentTable } = ref;
     const { current: currentGrid } = gridRef;
@@ -130,16 +130,6 @@ const Table = ({
     }
   }
 
-  /**
-   * handleOnSort
-   */
-
-  function handleOnSort (cell) {
-    if (typeof onSort === 'function') {
-      onSort(cell);
-    }
-  }
-
   const TableCellCreatorMemo = memoizee(TableCellCreator);
 
   let HeaderCells;
@@ -154,7 +144,7 @@ const Table = ({
         rows: [headers],
         columns: activeColumns,
         onCellClick: handleOnCellClick,
-        onSort: handleOnSort
+        onSort
       });
       return (
         <HeaderComponent
@@ -170,31 +160,37 @@ const Table = ({
     });
   }
 
+  const containerStyles = {
+    width,
+    height
+  };
+
   return (
     <div className={componentClass.string} ref={ref}>
-      {frozenHeader && (
-        <div className={componentClass.childString('header')}>
-          {HeaderCells}
+      <div style={containerStyles}>
+        {frozenHeader && (
+          <div className={componentClass.childString('header')}>
+            {HeaderCells}
+          </div>
+        )}
+        <div className={componentClass.childString('grid')}>
+          <Grid
+            ref={gridRef}
+            columnCount={columnsCount}
+            columnWidth={index => columnWidths[index]}
+            height={height}
+            rowCount={rowsCount}
+            rowHeight={() => rowHeight}
+            width={width}
+          >
+            {TableCellCreatorMemo({
+              rows,
+              columns: activeColumns,
+              onCellClick: handleOnCellClick
+            })}
+          </Grid>
         </div>
-      )}
-      <div className={componentClass.childString('grid')}>
-        <Grid
-          ref={gridRef}
-          columnCount={columnsCount}
-          columnWidth={index => columnWidths[index]}
-          height={height}
-          rowCount={rowsCount}
-          rowHeight={() => rowHeight}
-          width={width}
-        >
-          {TableCellCreatorMemo({
-            rows,
-            columns: activeColumns,
-            onCellClick: handleOnCellClick
-          })}
-        </Grid>
       </div>
-
       {children}
     </div>
   );
@@ -206,14 +202,14 @@ Table.propTypes = {
     PropTypes.node
   ]),
   className: PropTypes.string,
-  responsive: PropTypes.bool,
+  fitContainer: PropTypes.bool,
   defaultWidth: PropTypes.number,
   defaultHeight: PropTypes.number,
   rowHeight: PropTypes.number,
   headerHeight: PropTypes.number,
   frozenHeader: PropTypes.bool,
-  columns: PropTypes.array,
-  data: PropTypes.array,
+  columns: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
   onCellClick: PropTypes.func,
   onSort: PropTypes.func
 };

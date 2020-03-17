@@ -28,7 +28,14 @@ const tableColumns = [
 const tableData = [
   {
     firstName: 'Gary',
-    lastName: 'Godspeed'
+    lastName: 'Godspeed',
+    actions: [
+      {
+        to: '#',
+        label: 'View',
+        buttonType: ['text']
+      }
+    ]
   },
   {
     firstName: 'Quinn',
@@ -36,22 +43,28 @@ const tableData = [
     actions: [
       {
         to: '#',
-        label: 'View'
-      },
-      {
-        to: '#',
-        label: 'Edit'
+        label: 'Edit',
+        icon: 'FaPen',
+        buttonType: ['text', 'icon-before']
       }
     ]
   },
   {
     firstName: 'Abraham',
-    lastName: 'Lincoln'
+    lastName: 'Lincoln',
+    actions: [
+      {
+        to: '#',
+        label: 'Go',
+        icon: 'FaChevronRight',
+        buttonType: ['text', 'icon-after']
+      }
+    ]
   }
 ];
 
 const STORY_COMPONENT = 'DataTable';
-const STORY_NAME = 'Default';
+const STORY_NAME = 'Actions';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 

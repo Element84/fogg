@@ -10,11 +10,10 @@ const DataTable = ({
   children,
   label = 'Items',
   labelLower,
-  columns,
   data = [],
-  onSort,
   isLoading,
-  emptyActions = []
+  emptyActions = [],
+  ...rest
 }) => {
   const componentClass = new ClassName('data-table');
 
@@ -31,7 +30,7 @@ const DataTable = ({
 
   return (
     <div className={componentClass.string}>
-      <Table columns={columns} data={data} onSort={onSort} responsive={false} />
+      <Table data={data} {...rest} />
       {!!children && children}
       {!children && isEmpty && (
         <div className={componentClass.childString('empty-content')}>
@@ -60,9 +59,7 @@ DataTable.propTypes = {
   ]),
   label: PropTypes.string,
   labelLower: PropTypes.string,
-  columns: PropTypes.array,
   data: PropTypes.array,
-  onSort: PropTypes.func,
   isLoading: PropTypes.bool,
   emptyActions: PropTypes.array
 };

@@ -80,9 +80,14 @@ export default function useTableData ({ columns = [], data = [] }) {
         threshold: 0.2,
         keys: filterKeys
       });
+      let search;
 
       if (filterValue) {
-        workingData = fuse.search(filterValue);
+        search = fuse.search(filterValue);
+      }
+
+      if (Array.isArray(search)) {
+        workingData = search.map(({ item }) => item);
       }
 
       return;

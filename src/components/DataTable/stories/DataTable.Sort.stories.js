@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
 import Story from '../../../../stories/helpers/Story';
 
@@ -21,14 +22,20 @@ const tableColumns = [
     Header: false,
     align: 'right',
     type: 'action',
+    canSort: false,
+    canFilter: false,
     widthRatio: 1
   }
 ];
 
+// icon: "FaPen"
+// buttonType: (2) ["text", "icon-before"]
+
 const tableData = [
   {
     firstName: 'Gary',
-    lastName: 'Godspeed'
+    lastName: 'Godspeed',
+    actions: <button key={'row-1-button'}>View</button>
   },
   {
     firstName: 'Quinn',
@@ -51,19 +58,31 @@ const tableData = [
 ];
 
 const STORY_COMPONENT = 'DataTable';
-const STORY_NAME = 'Default';
+const STORY_NAME = 'Sort';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 stories.add(STORY_NAME, () => {
-  const { columns, data } = useTableData({
+  const { columns, data, sort } = useTableData({
     columns: tableColumns,
     data: tableData
   });
 
+  function handleOnSort (cell) {
+    if (typeof sort === 'function') {
+      sort(cell);
+    }
+    action(`${STORY_COMPONENT}::onSort`)(cell);
+  }
+
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
-      <DataTable label="Users" columns={columns} data={data} />
+      <DataTable
+        label="Users"
+        onSort={handleOnSort}
+        columns={columns}
+        data={data}
+      />
     </Story>
   );
 });

@@ -53,3 +53,29 @@
   }
 
 }
+
+.Story-DataTable-FitContainer {
+
+  .story {
+
+    .data-table {
+      height: 150px;
+    }
+
+  }
+
+}
+
+.Story-DataTable-Filters {
+
+  .story {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .story-search-filters {
+    width: 20em;
+    padding-right: 2em;
+  }
+
+}
