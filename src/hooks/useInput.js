@@ -88,10 +88,11 @@ const useInput = ({ inputRef = {}, props = {} }) => {
   }
 
   useEffect(() => {
-    const { current } = inputRef;
+    const { current = {} } = inputRef;
+    const { form } = current || {};
     let value = inputProps.value || inputProps.defaultValue;
     if (type === 'radio' || type === 'checkbox') {
-      value = getFormListValuesByName(current.form, inputProps.name);
+      value = getFormListValuesByName(form, inputProps.name);
     }
     // Update the field immediately with any local rules for validation and default value
     updateField(inputProps.name, value, inputRules);
