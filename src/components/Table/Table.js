@@ -29,7 +29,7 @@ const Table = ({
 
   const isEmpty = data.length === 0;
 
-  const componentClass = new ClassName('tabletable');
+  const componentClass = new ClassName('table');
 
   componentClass.addIf(className, className);
 

@@ -5,7 +5,7 @@ import Story from '../../../../stories/helpers/Story';
 
 import { useTableData } from '../../../hooks';
 
-import TableTable from '../';
+import Table from '../';
 
 const tableColumns = [
   {
@@ -50,7 +50,7 @@ const tableData = [
   }
 ];
 
-const STORY_COMPONENT = 'TableTable';
+const STORY_COMPONENT = 'Table';
 const STORY_NAME = 'Default';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
@@ -62,7 +62,7 @@ stories.add(STORY_NAME, () => {
   });
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
-      <TableTable columns={columns} data={data} />
+      <Table columns={columns} data={data} />
     </Story>
   );
 });

@@ -2,7 +2,7 @@
 
   height: 100%;
 
-  .tabletable-cell-type-action {
+  .table-cell-type-action {
 
     .button {
 
@@ -29,7 +29,7 @@
 .data-table-empty {
 
 
-  .tabletable {
+  .table {
 
     height: auto;
 
@@ -74,12 +74,12 @@
 
 .data-table-is-loading {
 
-  .tabletable-cell {
+  .table-cell {
 
     touch-action: none;
     pointer-events: none;
 
-    &:not(.tabletable-cell-header):not(.tabletable-cell-type-action) {
+    &:not(.table-cell-header):not(.table-cell-type-action) {
 
       & > span {
 

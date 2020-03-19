@@ -5,7 +5,7 @@ import Story from '../../../../stories/helpers/Story';
 
 import { useTableData } from '../../../hooks';
 
-import TableTable from '../';
+import Table from '../';
 
 const tableColumns = [
   {
@@ -50,26 +50,19 @@ const tableData = [
   }
 ];
 
-const tableDataDoubled = [...tableData, ...tableData];
-
-const STORY_COMPONENT = 'TableTable';
-const STORY_NAME = 'Stretch To Content';
+const STORY_COMPONENT = 'Table';
+const STORY_NAME = 'No Header';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 stories.add(STORY_NAME, () => {
   const { columns, data } = useTableData({
     columns: tableColumns,
-    data: tableDataDoubled
+    data: tableData
   });
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
-      <TableTable
-        columns={columns}
-        data={data}
-        stretchHeightToContent={true}
-        fitContainer={true}
-      />
+      <Table columns={columns} data={data} displayHeader={false} />
     </Story>
   );
 });

@@ -6,7 +6,7 @@ import { findFilterById } from '../../lib/filters';
 
 import Panel from '../Panel';
 import PanelActions from '../PanelActions';
-import Table from '../TableTable';
+import Table from '../Table';
 
 const SearchPanelFilters = ({
   filters = {},

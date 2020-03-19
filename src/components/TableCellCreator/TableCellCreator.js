@@ -19,7 +19,7 @@ function TableCellCreator ({ rows, columns, onCellClick, onSort } = {}) {
   const numberOfColumns = columns.length;
 
   const Cell = ({ columnIndex, rowIndex, style }) => {
-    const componentClass = new ClassName('tabletable-cell');
+    const componentClass = new ClassName('table-cell');
 
     const column = columns[columnIndex];
     const row = rows[rowIndex];
@@ -49,19 +49,19 @@ function TableCellCreator ({ rows, columns, onCellClick, onSort } = {}) {
 
     let { Cell, type = [] } = column;
 
-    componentClass.addIf('tabletable-cell-header', isHeader);
-    componentClass.addIf(`tabletable-cell-column-${columnId}`, columnId);
-    componentClass.addIf('tabletable-row-first', isFirstRow);
-    componentClass.addIf('tabletable-column-first', isFirstColumn);
-    componentClass.addIf('tabletable-row-last', isLastRow);
-    componentClass.addIf('tabletable-column-last', isLastColumn);
-    componentClass.add(`tabletable-cell-align-${align}`);
+    componentClass.addIf('table-cell-header', isHeader);
+    componentClass.addIf(`table-cell-column-${columnId}`, columnId);
+    componentClass.addIf('table-row-first', isFirstRow);
+    componentClass.addIf('table-column-first', isFirstColumn);
+    componentClass.addIf('table-row-last', isLastRow);
+    componentClass.addIf('table-column-last', isLastColumn);
+    componentClass.add(`table-cell-align-${align}`);
 
     if (typeof type === 'string') {
       type = [type];
     }
 
-    type.forEach(t => componentClass.add(`tabletable-cell-type-${t}`));
+    type.forEach(t => componentClass.add(`table-cell-type-${t}`));
 
     const cellArgs = {
       ...cell,

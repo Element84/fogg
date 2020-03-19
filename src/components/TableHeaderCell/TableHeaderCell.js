@@ -27,7 +27,7 @@ const TableHeaderCell = ({ cell = {}, sort = {} }) => {
       <span key={'TableHeaderCell-Sort'} className="table-header-sort">
         <SortIcon
           onClick={handleOnSortClick}
-          className="tabletable-cell-icon icon-sort"
+          className="table-cell-icon icon-sort"
         />
       </span>
     );
