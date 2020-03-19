@@ -2,10 +2,11 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import Story from '../../../../stories/helpers/Story';
+import StoryNotes from '../../../../stories/helpers/StoryNotes';
 
 import { useTableData } from '../../../hooks';
 
-import DataTable from '../';
+import Table from '../';
 
 import TableSearchInput from '../../TableSearchInput';
 import TableSearchFilters from '../../TableSearchFilters';
@@ -68,7 +69,7 @@ const FILTER_MENU_OPTIONS = [
   }
 ];
 
-const STORY_COMPONENT = 'DataTable';
+const STORY_COMPONENT = 'Table';
 const STORY_NAME = 'Filters';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
@@ -125,25 +126,30 @@ stories.add(STORY_NAME, () => {
 
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
-      <div className="story-search-filters">
+      <StoryNotes>
         <p>
-          Note: these components are maintained and imported outside of the
-          DataTable component.
+          Note: The TableSearchInput and TableSearchFilters components are
+          maintained and imported outside of the Table component.
         </p>
-        <TableSearchInput
-          value={filterValue}
-          onChange={handleOnSearchChange}
-          onClear={clearFilters}
-        />
+      </StoryNotes>
 
-        <TableSearchFilters
-          options={FILTER_MENU_OPTIONS}
-          defaultTableData={tableData}
-          onChange={handleOnFiltersChange}
-        />
+      <div className="story-search-filters">
+        <div className="story-search-filters-sidebar">
+          <TableSearchInput
+            value={filterValue}
+            onChange={handleOnSearchChange}
+            onClear={clearFilters}
+          />
+
+          <TableSearchFilters
+            options={FILTER_MENU_OPTIONS}
+            defaultTableData={tableData}
+            onChange={handleOnFiltersChange}
+          />
+        </div>
+
+        <Table label="Users" columns={columns} data={data} />
       </div>
-
-      <DataTable label="Users" columns={columns} data={data} />
     </Story>
   );
 });

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'fogg/ui';
 
-import ClassName from 'models/classname';
+import ClassName from '../../models/classname';
 
-import IconByName from 'components/IconByName';
+import Button from '../Button';
+import IconByName from '../IconByName';
 
 const TableActions = ({ className, actions = [] }) => {
   const componentClass = new ClassName('table-actions');

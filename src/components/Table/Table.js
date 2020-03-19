@@ -13,7 +13,7 @@ const Table = ({
   className,
   fitContainer = false,
   defaultWidth = 500,
-  defaultHeight = 150,
+  defaultHeight = 300,
   rowHeight = 80,
   headerHeight = 50,
   displayHeader = true,

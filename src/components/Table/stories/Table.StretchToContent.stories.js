@@ -53,7 +53,7 @@ const tableData = [
 const tableDataDoubled = [...tableData, ...tableData];
 
 const STORY_COMPONENT = 'Table';
-const STORY_NAME = 'Stretch To Content';
+const STORY_NAME = 'Stretch Height To Content';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 

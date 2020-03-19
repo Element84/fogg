@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { FaSatellite, FaRocket, FaSatelliteDish } from 'react-icons/fa';
 
 import Story from '../../../../stories/helpers/Story';
+import StoryNotes from '../../../../stories/helpers/StoryNotes';
 
 import PanelActions from '../';
 import Panel from '../../Panel';
@@ -40,14 +41,16 @@ const panelActions = [
 stories.add(STORY_NAME, () => {
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
-      <p>
-        The PanelActions component is a list (<code>ul</code>) of icon{' '}
-        <a href="/?path=/story/components-button--default">Buttons</a>. By
-        itself it may appear unstyled, however the primary use case is intended
-        to be that the PanelActions component is included as the{' '}
-        <code>actions</code> prop within the{' '}
-        <a href="/?path=/story/components-panel--default">Panel</a> component
-      </p>
+      <StoryNotes>
+        <p>
+          The PanelActions component is a list (<code>ul</code>) of icon{' '}
+          <a href="/?path=/story/components-button--default">Buttons</a>. By
+          itself it may appear unstyled, however the primary use case is
+          intended to be that the PanelActions component is included as the{' '}
+          <code>actions</code> prop within the{' '}
+          <a href="/?path=/story/components-panel--default">Panel</a> component
+        </p>
+      </StoryNotes>
 
       <PanelActions actions={panelActions} />
 

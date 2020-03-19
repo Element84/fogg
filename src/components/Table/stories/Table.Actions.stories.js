@@ -1,12 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 
 import Story from '../../../../stories/helpers/Story';
 
 import { useTableData } from '../../../hooks';
 
-import DataTable from '../';
+import Table from '../';
 
 const tableColumns = [
   {
@@ -22,20 +21,21 @@ const tableColumns = [
     Header: false,
     align: 'right',
     type: 'action',
-    canSort: false,
-    canFilter: false,
     widthRatio: 1
   }
 ];
-
-// icon: "FaPen"
-// buttonType: (2) ["text", "icon-before"]
 
 const tableData = [
   {
     firstName: 'Gary',
     lastName: 'Godspeed',
-    actions: <button key={'row-1-button'}>View</button>
+    actions: [
+      {
+        to: '#',
+        label: 'View',
+        buttonType: ['text']
+      }
+    ]
   },
   {
     firstName: 'Quinn',
@@ -43,46 +43,40 @@ const tableData = [
     actions: [
       {
         to: '#',
-        label: 'View'
-      },
-      {
-        to: '#',
-        label: 'Edit'
+        label: 'Edit',
+        icon: 'FaPen',
+        buttonType: ['text', 'icon-before']
       }
     ]
   },
   {
     firstName: 'Abraham',
-    lastName: 'Lincoln'
+    lastName: 'Lincoln',
+    actions: [
+      {
+        to: '#',
+        label: 'Go',
+        icon: 'FaChevronRight',
+        buttonType: ['text', 'icon-after']
+      }
+    ]
   }
 ];
 
-const STORY_COMPONENT = 'DataTable';
-const STORY_NAME = 'Sort';
+const STORY_COMPONENT = 'Table';
+const STORY_NAME = 'Actions';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 stories.add(STORY_NAME, () => {
-  const { columns, data, sort } = useTableData({
+  const { columns, data } = useTableData({
     columns: tableColumns,
     data: tableData
   });
 
-  function handleOnSort (cell) {
-    if (typeof sort === 'function') {
-      sort(cell);
-    }
-    action(`${STORY_COMPONENT}::onSort`)(cell);
-  }
-
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
-      <DataTable
-        label="Users"
-        onSort={handleOnSort}
-        columns={columns}
-        data={data}
-      />
+      <Table label="Users" columns={columns} data={data} />
     </Story>
   );
 });

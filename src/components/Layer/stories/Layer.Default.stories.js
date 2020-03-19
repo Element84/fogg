@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import Story from '../../../../stories/helpers/Story';
+import StoryNotes from '../../../../stories/helpers/StoryNotes';
 
 const STORY_COMPONENT = 'Layer';
 const STORY_NAME = 'Default';
@@ -19,9 +20,11 @@ stories.add(
   () => {
     return (
       <Story component={STORY_COMPONENT} name={STORY_NAME}>
-        <p>The Layer component is a wrapper...</p>
+        <StoryNotes>
+          <p>The Layer component is a wrapper...</p>
 
-        <p>TODO: add documentation</p>
+          <p>TODO: add documentation</p>
+        </StoryNotes>
 
         <h3>Usage</h3>
 

@@ -23,8 +23,7 @@ describe('Table', () => {
   const data = [
     {
       firstName: 'Gary',
-      lastName: 'Godspeed',
-      actions: <button key={'row-1-button'}>View</button>
+      lastName: 'Godspeed'
     },
     {
       firstName: 'Quinn',
