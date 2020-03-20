@@ -48,7 +48,7 @@ stories.add(STORY_NAME, () => {
           />
         </li>
         <li>
-          <p>With Sort</p>
+          <p>Without Sort</p>
           <TableCellHeader
             cell={{
               Header: 'Last Name',

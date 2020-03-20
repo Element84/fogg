@@ -1,66 +1,81 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Table from './';
+import TableCellHeader from './';
 
-describe('Table', () => {
-  const columns = [
-    {
-      Header: 'First Name',
-      accessor: 'firstName'
-    },
-    {
-      Header: 'Last Name',
-      accessor: 'lastName'
-    },
-    {
-      accessor: 'actions',
-      disableSorting: true,
-      disableFilters: true
-    }
-  ];
+const cellSorted = {
+  Header: 'First Name',
+  columnId: 'firstName',
+  isSorted: true,
+  sortType: 'none',
+  isHeader: true,
+  Cell: undefined,
+  columnIndex: 0,
+  rowIndex: 0,
+  value: undefined
+};
 
-  const data = [
-    {
-      firstName: 'Gary',
-      lastName: 'Godspeed'
-    },
-    {
-      firstName: 'Quinn',
-      lastName: 'Airgon',
-      actions: (
-        <div key={'row-2-buttons'}>
-          <button>View</button>
-          <button>Edit</button>
-        </div>
-      )
-    },
-    {
-      firstName: 'Abraham',
-      lastName: 'Lincoln'
-    }
-  ];
+const cellNoteSorted = {
+  Header: 'Last Name',
+  columnId: 'lastName',
+  isHeader: true,
+  Cell: undefined,
+  columnIndex: 1,
+  rowIndex: 0,
+  value: undefined
+};
 
+const cellEmpty = {
+  columnId: 'actions',
+  Header: false,
+  align: 'right',
+  type: 'action',
+  widthRatio: 1,
+  isHeader: true,
+  Cell: undefined,
+  columnIndex: 2,
+  rowIndex: 0,
+  value: undefined
+};
+
+const sortAvailable = {
+  sortType: 'none',
+  canSort: true,
+  onSort: handleOnSort
+};
+
+const sortNone = {
+  sortType: undefined,
+  canSort: false,
+  onSort: undefined
+};
+
+function handleOnSort (cell) {
+  return cell;
+}
+
+describe('TableHeaderCell', () => {
   describe('Render', () => {
-    const table = shallow(<Table columns={columns} data={data} />);
-
-    it('should render a table header', () => {
-      expect(
-        table
-          .find('thead')
-          .find('TableHead')
-          .props().headers[0].id
-      ).toEqual(columns[0].accessor);
+    it('should render a sortable column header cell', () => {
+      const Component = (
+        <TableCellHeader cell={cellSorted} sort={sortAvailable} />
+      );
+      const ComponentShallow = shallow(Component);
+      expect(ComponentShallow.length).toEqual(1);
     });
 
-    it('should render a table row', () => {
-      expect(
-        table
-          .find('tbody')
-          .find('TableRow')
-          .first()
-          .props().cells[0].row.original
-      ).toEqual(data[0]);
+    it('should render a column header cell without sort', () => {
+      const Component = (
+        <TableCellHeader cell={cellNoteSorted} sort={sortNone} />
+      );
+      const ComponentShallow = shallow(Component);
+      expect(ComponentShallow.length).toEqual(1);
+    });
+
+    it('should not render a cell', () => {
+      const Component = <TableCellHeader cell={cellEmpty} sort={sortNone} />;
+      const ComponentShallow = shallow(Component);
+      expect(ComponentShallow.length).toEqual(1);
     });
   });
 });

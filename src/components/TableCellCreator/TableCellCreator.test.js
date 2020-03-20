@@ -1,66 +1,128 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Table from './';
+import TableCellCreator from './';
 
-describe('Table', () => {
-  const columns = [
+const columns = [
+  {
+    Header: 'First Name',
+    columnId: 'firstName',
+    isSorted: true,
+    sortType: 'none',
+    isHeader: true
+  },
+  {
+    Header: 'Last Name',
+    columnId: 'lastName',
+    isHeader: true
+  },
+  {
+    columnId: 'actions',
+    Header: false,
+    align: 'right',
+    type: 'action',
+    widthRatio: 1,
+    isHeader: true
+  }
+];
+
+const rows = [
+  [
     {
       Header: 'First Name',
-      accessor: 'firstName'
+      columnId: 'firstName',
+      isSorted: true,
+      sortType: 'none',
+      isHeader: true
     },
     {
       Header: 'Last Name',
-      accessor: 'lastName'
+      columnId: 'lastName',
+      isHeader: true
     },
     {
-      accessor: 'actions',
-      disableSorting: true,
-      disableFilters: true
+      columnId: 'actions',
+      Header: false,
+      align: 'right',
+      type: 'action',
+      widthRatio: 1,
+      isHeader: true
     }
-  ];
-
-  const data = [
+  ],
+  [
     {
-      firstName: 'Gary',
-      lastName: 'Godspeed'
+      value: 'Gary'
     },
     {
-      firstName: 'Quinn',
-      lastName: 'Airgon',
-      actions: (
-        <div key={'row-2-buttons'}>
-          <button>View</button>
-          <button>Edit</button>
-        </div>
-      )
+      value: 'Godspeed'
     },
     {
-      firstName: 'Abraham',
-      lastName: 'Lincoln'
+      value: []
     }
-  ];
+  ],
+  [
+    {
+      value: 'Quinn'
+    },
+    {
+      value: 'Airgon'
+    },
+    {
+      value: [<button key="test-button">Test</button>]
+    }
+  ],
+  [
+    {
+      value: 'Abraham'
+    },
+    {
+      value: 'Lincoln'
+    },
+    {
+      value: []
+    }
+  ]
+];
 
+function handleOnCellClick (cellArgs, e) {
+  return {
+    cellArgs,
+    e
+  };
+}
+
+function handleOnSort (cellArgs, e) {
+  return {
+    cellArgs,
+    e
+  };
+}
+
+describe('TableCellCreator', () => {
   describe('Render', () => {
-    const table = shallow(<Table columns={columns} data={data} />);
-
-    it('should render a table header', () => {
-      expect(
-        table
-          .find('thead')
-          .find('TableHead')
-          .props().headers[0].id
-      ).toEqual(columns[0].accessor);
+    const Cell = TableCellCreator({
+      rows,
+      columns,
+      onCellClick: handleOnCellClick,
+      onSort: handleOnSort
     });
 
-    it('should render a table row', () => {
-      expect(
-        table
-          .find('tbody')
-          .find('TableRow')
-          .first()
-          .props().cells[0].row.original
-      ).toEqual(data[0]);
+    it('should render a header cell', () => {
+      const component = shallow(<Cell columnIndex={0} rowIndex={0} />);
+      expect(component.hasClass('table-cell')).toEqual(true);
+      expect(component.hasClass('table-cell-header')).toEqual(true);
+    });
+
+    it('should render a standard cell', () => {
+      const component = shallow(<Cell columnIndex={1} rowIndex={2} />);
+      expect(component.hasClass('table-cell')).toEqual(true);
+      expect(component.hasClass('table-cell-header')).toEqual(false);
+    });
+
+    it('should render a right aligned action', () => {
+      const component = shallow(<Cell columnIndex={2} rowIndex={1} />);
+      expect(component.hasClass('table-cell')).toEqual(true);
+      expect(component.hasClass('table-cell-column-actions')).toEqual(true);
     });
   });
 });
