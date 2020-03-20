@@ -29,7 +29,7 @@ module.exports = {
   ],
 
   transform: {
-    '^.+\\.js$': '<rootDir>/config/jest-preprocess.config.js'
+    '^.+\\.jsx?$': '<rootDir>/config/jest-preprocess.config.js'
   },
 
   transformIgnorePatterns: ['node_modules/(?!(gatsby|fogg)/)'],

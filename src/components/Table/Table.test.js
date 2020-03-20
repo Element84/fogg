@@ -1,67 +1,81 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import { useTableData } from '../../../hooks';
+
 import Table from './';
 
+const tableColumns = [
+  {
+    Header: 'First Name',
+    columnId: 'firstName'
+  },
+  {
+    Header: 'Last Name',
+    columnId: 'lastName'
+  },
+  {
+    columnId: 'actions',
+    Header: false,
+    align: 'right',
+    type: 'action',
+    widthRatio: 1
+  }
+];
+
+const tableData = [
+  {
+    firstName: 'Gary',
+    lastName: 'Godspeed'
+  },
+  {
+    firstName: 'Quinn',
+    lastName: 'Airgon',
+    actions: [
+      {
+        to: '#',
+        label: 'View'
+      },
+      {
+        to: '#',
+        label: 'Edit'
+      }
+    ]
+  },
+  {
+    firstName: 'Abraham',
+    lastName: 'Lincoln'
+  }
+];
+
 describe('Table', () => {
-  const columns = [
-    {
-      Header: 'First Name',
-      accessor: 'firstName'
-    },
-    {
-      Header: 'Last Name',
-      accessor: 'lastName'
-    },
-    {
-      accessor: 'actions',
-      disableSorting: true,
-      disableFilters: true
-    }
-  ];
-
-  const data = [
-    {
-      firstName: 'Gary',
-      lastName: 'Godspeed',
-      actions: <button key={'row-1-button'}>View</button>
-    },
-    {
-      firstName: 'Quinn',
-      lastName: 'Airgon',
-      actions: (
-        <div key={'row-2-buttons'}>
-          <button>View</button>
-          <button>Edit</button>
-        </div>
-      )
-    },
-    {
-      firstName: 'Abraham',
-      lastName: 'Lincoln'
-    }
-  ];
-
   describe('Render', () => {
-    const table = shallow(<Table columns={columns} data={data} />);
+    const ComponentWithHook = () => {
+      const { columns, data } = useTableData({
+        columns: tableColumns,
+        data: tableData
+      });
 
-    it('should render a table header', () => {
-      expect(
-        table
-          .find('thead')
-          .find('TableHead')
-          .props().headers[0].id
-      ).toEqual(columns[0].accessor);
+      return <Table label="test" columns={columns} data={data} />;
+    };
+
+    const componentShallow = shallow(<ComponentWithHook />);
+    const tableComponent = componentShallow.dive();
+
+    it('should render a table', () => {
+      expect(tableComponent.hasClass('table')).toBeTruthy();
     });
 
-    it('should render a table row', () => {
-      expect(
-        table
-          .find('tbody')
-          .find('TableRow')
-          .first()
-          .props().cells[0].row.original
-      ).toEqual(data[0]);
+    const tableComponentHeader = tableComponent.find('.table-header');
+
+    it('should render a table header', () => {
+      expect(tableComponentHeader.length).toEqual(1);
+    });
+
+    const tableComponentGrid = tableComponent.find('Grid');
+
+    it('should render a Grid', () => {
+      expect(tableComponentGrid.length).toEqual(1);
     });
   });
 });

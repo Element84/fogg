@@ -131,13 +131,16 @@ const SearchPanelFilters = ({
     >
       {hasActiveFilters(panelFilters) && (
         <Table
-          hideHeader={true}
+          rowHeight={50}
+          displayHeader={false}
+          fitContainer={true}
+          stretchHeightToContent={true}
           columns={[
             {
-              accessor: 'label'
+              columnId: 'label'
             },
             {
-              accessor: 'value'
+              columnId: 'value'
             }
           ]}
           data={panelFilters

@@ -1,5 +1,6 @@
 // Gatsby setup docs: via https://www.gatsbyjs.org/docs/visual-testing-with-storybook/
 
+import {createElement} from 'react';
 import { configure } from '@storybook/react';
 import { addDecorator, addParameters } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
@@ -41,6 +42,8 @@ addDecorator(withInfo({
   source: false,
   propTablesExclude: [ Story ]
 }));
+
+addDecorator(createElement);
 
 addParameters({
   info: {}

@@ -1,0 +1,120 @@
+.data-table {
+
+  height: 100%;
+
+  .table-cell-type-action {
+
+    .button {
+
+      a {
+
+        font-size: .9em;
+        text-decoration: none;
+        padding: 0;
+
+        &,
+        svg {
+          color: $color-gray8;
+          fill: $color-gray8;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+.data-table-empty {
+
+
+  .table {
+
+    height: auto;
+
+    & > div {
+      height: auto!important;
+    }
+
+  }
+
+}
+
+.data-table-empty-content {
+
+  text-align: center;
+  padding: 3em;
+
+  p {
+
+    font-size: 1.2em;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+  }
+
+}
+
+.data-table-empty-actions {
+
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 2em 0 0;
+
+  li {
+    margin: 0 .5em;
+  }
+
+}
+
+.data-table-is-loading {
+
+  .table-cell {
+
+    touch-action: none;
+    pointer-events: none;
+
+    &:not(.table-cell-header):not(.table-cell-type-action) {
+
+      & > span {
+
+        display: block;
+        width: 100%;
+        @extend .loading-1;
+
+        &,
+        svg,
+        a {
+          color: transparent;
+        }
+
+      }
+
+      svg {
+        fill: transparent;
+      }
+
+    }
+
+    .button {
+
+      @extend .button-disabled;
+
+      a {
+
+        svg {
+          fill: $color-gray2;
+        }
+
+      }
+
+    }
+
+  }
+
+}

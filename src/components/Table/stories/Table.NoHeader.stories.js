@@ -3,45 +3,50 @@ import { storiesOf } from '@storybook/react';
 
 import Story from '../../../../stories/helpers/Story';
 
+import { useTableData } from '../../../hooks';
+
 import Table from '../';
 
-const columnsNoLabels = [
+const tableColumns = [
   {
-    accessor: 'firstName'
+    Header: 'First Name',
+    columnId: 'firstName'
   },
   {
-    accessor: 'lastName'
+    Header: 'Last Name',
+    columnId: 'lastName'
   },
   {
-    accessor: 'actions'
+    columnId: 'actions',
+    Header: false,
+    align: 'right',
+    type: 'action',
+    widthRatio: 1
   }
 ];
 
-const data = [
+const tableData = [
   {
     firstName: 'Gary',
-    lastName: 'Godspeed',
-    role: ['admin'],
-    org: 'windbreakers',
-    actions: <button key={'row-1-button'}>View</button>
+    lastName: 'Godspeed'
   },
   {
     firstName: 'Quinn',
     lastName: 'Airgon',
-    role: ['user'],
-    org: 'windbreakers',
-    actions: (
-      <div key={'row-2-buttons'}>
-        <button>View</button>
-        <button>Edit</button>
-      </div>
-    )
+    actions: [
+      {
+        to: '#',
+        label: 'View'
+      },
+      {
+        to: '#',
+        label: 'Edit'
+      }
+    ]
   },
   {
     firstName: 'Abraham',
-    lastName: 'Lincoln',
-    role: ['admin', 'user'],
-    org: 'emancipators'
+    lastName: 'Lincoln'
   }
 ];
 
@@ -51,9 +56,13 @@ const STORY_NAME = 'No Header';
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 stories.add(STORY_NAME, () => {
+  const { columns, data } = useTableData({
+    columns: tableColumns,
+    data: tableData
+  });
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
-      <Table hideHeader={true} columns={columnsNoLabels} data={data} />
+      <Table columns={columns} data={data} displayHeader={false} />
     </Story>
   );
 });

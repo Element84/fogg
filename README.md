@@ -79,3 +79,5 @@ At this time, we're not accepting contributions until we can fully understand ho
 [] Add tests for hooks
 [] Examples
 [] Cypress tests for examples
+[] documentation for hooks
+[] documentation for lib

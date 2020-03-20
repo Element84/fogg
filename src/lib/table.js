@@ -30,3 +30,20 @@ function setArrayFilterValue (checkedOptions) {
 }
 
 module.exports.setArrayFilterValue = setArrayFilterValue;
+
+/**
+ * availableValuesByColumnId
+ */
+
+function availableValuesByColumnId (data = [], columnId) {
+  if (!Array.isArray(data)) return [];
+  const columnValues = data.map(row => row[columnId]);
+  const values = new Set();
+  columnValues.forEach(value => {
+    if (!Array.isArray(value)) value = [value];
+    value.forEach(v => values.add(v));
+  });
+  return [...values.values()];
+}
+
+module.exports.availableValuesByColumnId = availableValuesByColumnId;

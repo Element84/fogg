@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import Story from '../../../../stories/helpers/Story';
+import StoryNotes from '../../../../stories/helpers/StoryNotes';
 import BaseForm from '../../../../stories/helpers/BaseForm';
 
 import FormInput from '../';
@@ -30,10 +31,12 @@ stories.add(STORY_NAME, () => {
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
       <BaseForm>
-        <p>
-          Note: Placeholders are not always an ideal user experience and can
-          lead to confusion.
-        </p>
+        <StoryNotes>
+          <p>
+            Note: Placeholders are not always an ideal user experience and can
+            lead to confusion.
+          </p>
+        </StoryNotes>
         <FormInput
           id="placeholder-text"
           label="Placeholder Text"

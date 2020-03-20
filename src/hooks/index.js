@@ -1,5 +1,6 @@
 export { default as useAtlas } from './useLens';
 export { default as useChildToggle } from './useChildToggle';
+export { default as useEventListener } from './useEventListener';
 export { default as useForm } from './useForm';
 export { default as useGeoFilters } from './useGeoFilters';
 export { default as useInput } from './useInput';
@@ -14,3 +15,4 @@ export { default as useModValue } from './useModValue';
 export { default as usePrevious } from './usePrevious';
 export { default as useGeoSearch } from './useGeoSearch';
 export { default as useStoredValue } from './useStoredValue';
+export { default as useTableData } from './useTableData';
