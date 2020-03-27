@@ -172,10 +172,18 @@ export async function handleResolveOnEarthSearch ({
 // within that space
 
 export function handleEarthSearchUseMapEffect ({
+  lens = {},
   leafletControls = {},
   leafletElement,
   layersControl = {}
 }) {
+  console.group('handleEarthSearchUseMapEffect');
+  console.log('lens', lens);
+  console.log('leafletControls', leafletControls);
+  console.log('leafletElement', leafletElement);
+  console.log('layersControl', layersControl);
+  console.groupEnd('handleEarthSearchUseMapEffect');
+
   // const { tileLayer } = leafletControls;
 
   // const { controlProps = {} } = layersControl;

@@ -5,10 +5,20 @@ import { useLens } from '../../hooks';
 
 import Map from '../Map';
 
-const LensMap = ({ children, forwardedRef, ...rest }) => {
-  const { map, activeDateRange = {} } = useLens();
+const LensMap = ({ children, forwardedRef, useMapEffect, ...rest }) => {
+  const lens = useLens();
+  const { map, activeDateRange = {} } = lens;
   const { mapConfig = {}, services, projection, refMap } = map;
   const { defaultZoom, defaultCenter, maxZoom, minZoom } = mapConfig;
+
+  function handleUseMapEffect(mapOptions) {
+    if ( typeof useMapEffect === 'function' ) {
+      useMapEffect({
+        ...mapOptions,
+        lens
+      })
+    }
+  }
 
   const mapSettings = {
     ...rest,
@@ -18,7 +28,8 @@ const LensMap = ({ children, forwardedRef, ...rest }) => {
     center: defaultCenter && [defaultCenter.lat, defaultCenter.lng],
     services,
     projection,
-    activeDateRange
+    activeDateRange,
+    useMapEffect: handleUseMapEffect
   };
 
   return (
