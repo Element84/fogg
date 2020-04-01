@@ -5319,6 +5319,7 @@ Array [
                       name="firstName"
                       onChange={[Function]}
                       onInput={[Function]}
+                      onKeyDown={[Function]}
                       type="text"
                       value="Test"
                     />
@@ -5386,6 +5387,7 @@ Array [
                       name="lastName"
                       onChange={[Function]}
                       onInput={[Function]}
+                      onKeyDown={[Function]}
                       type="text"
                       value="McTest"
                     />
@@ -5453,6 +5455,7 @@ Array [
                       name="organization"
                       onChange={[Function]}
                       onInput={[Function]}
+                      onKeyDown={[Function]}
                       type="text"
                       value="Element 84"
                     />
@@ -5514,6 +5517,7 @@ Array [
                       name="plan"
                       onChange={[Function]}
                       onInput={[Function]}
+                      onKeyDown={[Function]}
                       type="text"
                       value="Plan - Testing out this feature"
                     />
