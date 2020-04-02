@@ -7,6 +7,8 @@ import { useModValue } from '../../hooks';
 import FormInput from '../FormInput';
 import Button from '../Button';
 
+const KEYBOARD_ENTER_CODE = 13;
+
 const ModInput = ({
   id,
   name,
@@ -70,13 +72,31 @@ const ModInput = ({
     updateValue(target.value || '');
   }
 
+  /**
+   * handleOnKeyDown
+   * @description Fires when a user clicks the enter key after changing a field input
+   */
+
+  function handleOnKeyDown (e) {
+    if ( typeof onKeyDown === 'function' ) {
+      onKeyDown(e);
+    }
+
+    // If the person hits the enter key, we want to force a save
+    // as if they manually hit the save button
+
+    if (e.keyCode === KEYBOARD_ENTER_CODE) {
+      handleChangeClick(e);
+    }
+  }
+
   const formInputProps = {
     id,
     label,
     name: inputName,
     value: isChangeable ? value : originalValue,
     onChange: handleOnInputchange,
-    onKeyDown,
+    onKeyDown: handleOnKeyDown,
     disabled: !isChangeable
   };
 
