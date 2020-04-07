@@ -3,6 +3,11 @@ import { useDebouncedCallback } from 'use-debounce';
 
 const DEFAULT_DEBOUNCE_TIMEOUT = 100;
 
+// Note: when using this hook, ensure the props, particularly the onEvent function,
+// doesn't change every time on load. If you're creating the function within a
+// component, every time the component rerenders, it will recreate the function,
+// essentially making the useEffect within this hook overfire as it's a dependency
+
 export default function useEventListener ({
   target,
   event,
