@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { VariableSizeGrid as Grid } from 'react-window';
 import memoizee from 'memoizee';
@@ -32,10 +32,9 @@ const Table = ({
   const componentClass = new ClassName('table');
 
   componentClass.addIf(className, className);
-
-  if (displayHeader && frozenHeader) {
-    componentClass.add(componentClass.childString('frozen-header'));
-  }
+  componentClass.addIf(componentClass.childString('frozen-header'), displayHeader && frozenHeader);
+  componentClass.addIf(componentClass.childString('stretch-height'), stretchHeightToContent);
+  componentClass.addIf(componentClass.childString('fit-container'), fitContainer);
 
   if (!displayHeader) {
     headerHeight = 0;
@@ -49,10 +48,14 @@ const Table = ({
   // Use an event listener to determine when the window resizes so that we
   // can use it to set the width dynamically for our Table
 
+  const memoizedHandleOnResize = useCallback(() => {
+    handleOnResize();
+  }, [ref, gridRef, headerHeight, stretchHeightToContent, fitContainer, isEmpty])
+
   useEventListener({
     target: window,
     event: 'resize',
-    onEvent: handleOnResize,
+    onEvent: memoizedHandleOnResize,
     debounceOnEvent: true,
     fireOnLoad: true
   });
