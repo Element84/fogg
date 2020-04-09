@@ -16,14 +16,14 @@ stories.add(STORY_NAME, () => {
   const defaultValue = '';
   const [value, setValue] = useState(defaultValue);
 
-  function handleOnChange ({currentTarget = {}} = {}) {
+  function handleOnChange ({ currentTarget = {} } = {}) {
     const { value } = currentTarget;
-    setValue(value)
+    setValue(value);
     action(`${STORY_COMPONENT}::onChange`)(value);
   }
 
-  function handleOnClear() {
-    setValue(defaultValue)
+  function handleOnClear () {
+    setValue(defaultValue);
     action(`${STORY_COMPONENT}::onClear`)();
   }
 

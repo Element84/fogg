@@ -213,9 +213,11 @@ export default function useTableData ({ columns = [], data = [] }) {
     const dataKeys = Object.keys(data) || [];
 
     dataKeys.forEach(key => {
-      const column = workingColumns.find(({ columnId } = {}) => columnId === key);
+      const column = workingColumns.find(
+        ({ columnId } = {}) => columnId === key
+      );
       const { cellTransformer } = column || {};
-      if ( typeof cellTransformer === 'function' ) {
+      if (typeof cellTransformer === 'function') {
         data[key] = cellTransformer(data[key]);
       }
     });
@@ -326,7 +328,7 @@ function getNextSortType (currentType) {
   return SORT_TYPES[typeIndex + 1] || SORT_TYPES[0];
 }
 
-function sanitizeFilterValue(query = '') {
-  if ( typeof query !== 'string') return query;
+function sanitizeFilterValue (query = '') {
+  if (typeof query !== 'string') return query;
   return query.replace(/\//g, '');
 }

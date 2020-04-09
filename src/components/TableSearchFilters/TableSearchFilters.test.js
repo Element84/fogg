@@ -49,7 +49,7 @@ describe('TableSearchFilters', () => {
       options: FILTER_MENU_OPTIONS,
       defaultTableData: tableData,
       onChange: handleOnChange
-    }
+    };
     const component = shallow(<TableSearchFilters {...props} />);
 
     it('should render TableSearchFilters', () => {

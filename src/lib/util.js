@@ -173,9 +173,9 @@ export function sortByKey (array = [], key, type = 'asc') {
 
   if (typeof key !== 'string') return newArray;
 
-  newArray = newArray.sort(compare)
+  newArray = newArray.sort(compare);
 
-  if ( type === 'desc' ) {
+  if (type === 'desc') {
     return newArray.reverse();
   }
 

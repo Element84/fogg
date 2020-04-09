@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const TableCell = ({ cell = {} }) => {
   const { Cell, value } = cell;
 
-  if ( !Cell && !value ) return null;
+  if (!Cell && !value) return null;
 
   if (!Cell && typeof value === 'string') {
     const CellRender = () => <span>{value}</span>;

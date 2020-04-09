@@ -78,7 +78,7 @@ const ModInput = ({
    */
 
   function handleOnKeyDown (e) {
-    if ( typeof onKeyDown === 'function' ) {
+    if (typeof onKeyDown === 'function') {
       onKeyDown(e);
     }
 

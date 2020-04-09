@@ -108,7 +108,7 @@
     "develop": "yarn clean && concurrently --names 'STORYBOOK' -c 'bgMagenta.bold' 'yarn storybook'",
     "format": "yarn format-js && yarn format-css && echo '> Finished formatting ✅'",
     "format-css": "yarn lint-css --fix",
-    "format-js": "prettier-eslint --eslint-config-path ./config/eslint.config.js --trailing-comma es5 --single-quote --write '**/*.js'",
+    "format-js": "prettier-eslint --eslint-config-path ./config/eslint.config.js --trailing-comma es5 --single-quote --write $PWD'/**/*.js'",
     "jest": "jest --config ./config/jest.config.js",
     "lint-css": "stylelint 'src/assets/stylesheets/**/*.scss' --config ./config/stylelint.config.js",
     "lint-js": "eslint -c ./config/eslint.config.js . --ext .js",
