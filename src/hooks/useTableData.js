@@ -60,9 +60,13 @@ export default function useTableData ({ columns = [], data = [] }) {
     filterKeys.push(key);
 
     workingData = workingData.map(set => {
+      let value = filterTransformer(set[columnId]);
+
+      value = sanitizeFilterValue(value);
+
       return {
         ...set,
-        [key]: filterTransformer(set[columnId])
+        [key]: value
       };
     });
   });
@@ -72,10 +76,9 @@ export default function useTableData ({ columns = [], data = [] }) {
     let { filterValue } = filter;
 
     if (filterType === 'search') {
+      filterValue = sanitizeFilterValue(filterValue);
+
       const fuse = new Fuse(workingData, {
-        sort: true,
-        tokenize: true,
-        matchAllTokens: true,
         findAllMatches: true,
         threshold: 0.2,
         keys: filterKeys
@@ -204,6 +207,22 @@ export default function useTableData ({ columns = [], data = [] }) {
     };
   });
 
+  // Loop through all of our data and tranform any cells that have a custom cellTransformer
+
+  workingData = workingData.map((data = {}, index) => {
+    const dataKeys = Object.keys(data) || [];
+
+    dataKeys.forEach(key => {
+      const column = workingColumns.find(({ columnId } = {}) => columnId === key);
+      const { cellTransformer } = column || {};
+      if ( typeof cellTransformer === 'function' ) {
+        data[key] = cellTransformer(data[key]);
+      }
+    });
+
+    return data;
+  });
+
   /**
    * handleSort
    */
@@ -305,4 +324,9 @@ function getNextSortType (currentType) {
   const typeIndex = SORT_TYPES.indexOf(currentType);
 
   return SORT_TYPES[typeIndex + 1] || SORT_TYPES[0];
+}
+
+function sanitizeFilterValue(query = '') {
+  if ( typeof query !== 'string') return query;
+  return query.replace(/\//g, '');
 }
