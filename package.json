@@ -113,13 +113,17 @@
     "lint-css": "stylelint 'src/assets/stylesheets/**/*.scss' --config ./config/stylelint.config.js",
     "lint-js": "eslint -c ./config/eslint.config.js . --ext .js",
     "lint": "yarn lint-js && yarn lint-css && echo '> Finished linting ✅'",
-    "precommit": "lint-staged",
     "serve": "gatsby serve",
     "start": "npm run develop",
     "storybook": "start-storybook -s ./src/stories/static -p 6006",
     "test-clean": "yarn jest -u",
     "test-watch": "yarn jest --watchAll",
     "test": "yarn jest && echo '> Finished testing ✅'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "**/*.js": [
