@@ -11,12 +11,12 @@ const LensMap = ({ children, forwardedRef, useMapEffect, ...rest }) => {
   const { mapConfig = {}, services, projection, refMap } = map;
   const { defaultZoom, defaultCenter, maxZoom, minZoom } = mapConfig;
 
-  function handleUseMapEffect(mapOptions) {
-    if ( typeof useMapEffect === 'function' ) {
+  function handleUseMapEffect (mapOptions) {
+    if (typeof useMapEffect === 'function') {
       useMapEffect({
         ...mapOptions,
         lens
-      })
+      });
     }
   }
 
@@ -44,7 +44,8 @@ LensMap.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
-  ])
+  ]),
+  useMapEffect: PropTypes.func
 };
 
 const LensMapWithRefs = React.forwardRef(function lensMap (props, ref) {

@@ -3,12 +3,12 @@ import { shallow } from 'enzyme';
 
 import TableSearchInput from './';
 
-function handleOnChange ({currentTarget = {}} = {}) {
+function handleOnChange ({ currentTarget = {} } = {}) {
   const { value } = currentTarget;
   return value;
 }
 
-function handleOnClear() {
+function handleOnClear () {
   return 'CLEAR';
 }
 
@@ -18,12 +18,11 @@ describe('TableSearchInput', () => {
       value: 'test',
       onChange: handleOnChange,
       onClear: handleOnClear
-    }
+    };
     const component = shallow(<TableSearchInput {...props} />);
 
     it('should render TableSearchInput', () => {
       expect(component.hasClass('table-search-input')).toBeTruthy();
     });
-
   });
 });

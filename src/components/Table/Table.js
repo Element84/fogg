@@ -32,9 +32,18 @@ const Table = ({
   const componentClass = new ClassName('table');
 
   componentClass.addIf(className, className);
-  componentClass.addIf(componentClass.childString('frozen-header'), displayHeader && frozenHeader);
-  componentClass.addIf(componentClass.childString('stretch-height'), stretchHeightToContent);
-  componentClass.addIf(componentClass.childString('fit-container'), fitContainer);
+  componentClass.addIf(
+    componentClass.childString('frozen-header'),
+    displayHeader && frozenHeader
+  );
+  componentClass.addIf(
+    componentClass.childString('stretch-height'),
+    stretchHeightToContent
+  );
+  componentClass.addIf(
+    componentClass.childString('fit-container'),
+    fitContainer
+  );
 
   if (!displayHeader) {
     headerHeight = 0;
@@ -50,7 +59,14 @@ const Table = ({
 
   const memoizedHandleOnResize = useCallback(() => {
     handleOnResize();
-  }, [ref, gridRef, headerHeight, stretchHeightToContent, fitContainer, isEmpty])
+  }, [
+    ref,
+    gridRef,
+    headerHeight,
+    stretchHeightToContent,
+    fitContainer,
+    isEmpty
+  ]);
 
   useEventListener({
     target: window,

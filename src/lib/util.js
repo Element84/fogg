@@ -145,7 +145,7 @@ export function isEmptyObject (obj) {
  * @description Sort the given array by the object key
  */
 
-export function sortByKey (array = [], key) {
+export function sortByKey (array = [], key, type = 'asc') {
   function compare (a, b) {
     let keyA = a[key];
     let keyB = b[key];
@@ -169,9 +169,15 @@ export function sortByKey (array = [], key) {
     return 0;
   }
 
-  const newArray = [...array];
+  let newArray = [...array];
 
   if (typeof key !== 'string') return newArray;
 
-  return newArray.sort(compare);
+  newArray = newArray.sort(compare);
+
+  if (type === 'desc') {
+    return newArray.reverse();
+  }
+
+  return newArray;
 }
