@@ -96,7 +96,7 @@ const useInput = ({ inputRef = {}, props = {} }) => {
     }
     // Update the field immediately with any local rules for validation and default value
     updateField(inputProps.name, value, inputRules);
-  }, []);
+  }, [inputProps.defaultValue]);
 
   inputProps.onInput = function (event) {
     if (!INPUT_LIST_TYPES.includes(type)) {
