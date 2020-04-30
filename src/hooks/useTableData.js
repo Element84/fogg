@@ -166,7 +166,7 @@ export default function useTableData ({ columns = [], data = [] }) {
   // Perform sorting on our row data
 
   if (sortType !== 'none' && sortId) {
-    workingData = sortByKey(data, sortId, sortType);
+    workingData = sortByKey(workingData, sortId, sortType);
   }
 
   /***********
