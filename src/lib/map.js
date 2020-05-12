@@ -1,4 +1,4 @@
-import { getGeom, center } from '@turf/turf';
+import center from '@turf/center';
 
 /**
  * geoJsonFromLatLn
@@ -52,7 +52,7 @@ export function latLngFromGeoJson (geoJson, type = 'object') {
 
 export function geometryTypeFromGeoJson ({ features = [] } = {}) {
   return features.map((feature = {}) => {
-    const { type } = getGeom(feature);
+    const { type } = getGeomFromGeoJson(feature);
     return type;
   });
 }
@@ -71,7 +71,12 @@ export function coordinatesFromGeoJson (geoJson) {
   // grab that instead and wrap it in an array for normalization
 
   if (!features && geoJson.geometry) {
-    features = [geoJson.geometry];
+    features = [
+      {
+        type: 'Feature',
+        geometry: geoJson.geometry
+      }
+    ];
   }
 
   if (!Array.isArray(features)) {
@@ -79,7 +84,7 @@ export function coordinatesFromGeoJson (geoJson) {
   }
 
   return features.map((feature = {}) => {
-    const { coordinates = [] } = getGeom(feature);
+    const { coordinates = [] } = getGeomFromGeoJson(feature);
     return coordinates;
   });
 }
@@ -94,4 +99,30 @@ export function getGeoJsonCenter (geoJson) {
     throw new Error('Failed to get geoJson center: Invalid geoJson type');
   }
   return center(geoJson);
+}
+
+/**
+ * getGeoJsonCenter
+ * @description
+ */
+
+export function getGeomFromGeoJson (geoJson = {}) {
+  const { type } = geoJson;
+
+  if (type === 'Feature') {
+    const { geometry } = geoJson;
+    return geometry;
+  }
+
+  if (type === 'FeatureCollection') {
+    const { features = [] } = geoJson;
+    return (
+      Array.isArray(features) &&
+      features.map(feature => {
+        return getGeomFromGeoJson(feature);
+      })
+    );
+  }
+
+  return geoJson;
 }
