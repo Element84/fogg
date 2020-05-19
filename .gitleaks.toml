@@ -1,0 +1,3 @@
+[whitelist]
+	description = "Whitelisted files"
+	file = 'yarn.lock'

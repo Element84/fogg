@@ -1,0 +1,54 @@
+$search-box-height: 3.2em;
+
+.search-box {
+  position: relative;
+}
+
+.search-box-input {
+
+  width: 100%;
+
+  input[type="text"] {
+    height: $search-box-height;
+    line-height: $search-box-height;
+    padding-left: 1em;
+    padding-right: ( $search-box-height * 2 );
+  }
+
+}
+
+.search-box-controls {
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+
+}
+
+.search-box-controls-control {
+
+  &:last-child {
+    border-radius: 0 $border-radius-small $border-radius-small 0;
+  }
+
+  &,
+  button {
+    width: $search-box-height;
+    height: $search-box-height;
+    line-height: $search-box-height;
+    text-align: center;
+    border-radius: 0;
+  }
+
+  button {
+    padding: 0;
+  }
+
+}
+
+.search-box-controls-date-picker {
+  position: absolute;
+  top: 100%;
+  right: 0;
+}

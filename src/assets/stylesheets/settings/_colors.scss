@@ -1,0 +1,230 @@
+/**
+ * Color Map
+ * @description Colors from https://www.materialui.co/colors
+ */
+
+$color-map: (
+
+  white: white,
+  black: black,
+
+  red0: #ffebee,
+  red1: #ffcdd2,
+  red2: #ef9a9a,
+  red3: #e57373,
+  red4: #ef5350,
+  red5: #f44336,
+  red6: #e53935,
+  red7: #d32f2f,
+  red8: #c62828,
+  red9: #b71c1c,
+  red: red5,
+
+  orange0: #FFF3E0,
+  orange1: #FFE0B2,
+  orange2: #FFCC80,
+  orange3: #FFB74D,
+  orange4: #FF5722,
+  orange5: #FF9800,
+  orange6: #FB8C00,
+  orange7: #F57C00,
+  orange8: #EF6C00,
+  orange9: #E65100,
+  orange: orange5,
+
+  yellow0: #FFFDE7,
+  yellow1: #FFF9C4,
+  yellow2: #FFF59D,
+  yellow3: #FFF176,
+  yellow4: #FFEE58,
+  yellow5: #FFEB3B,
+  yellow6: #FDD835,
+  yellow7: #FBC02D,
+  yellow8: #F9A825,
+  yellow9: #F57F17,
+  yellow: yellow5,
+
+  green0: #E8F5E9,
+  green1: #C8E6C9,
+  green2: #A5D6A7,
+  green3: #81C784,
+  green4: #66BB6A,
+  green5: #4CAF50,
+  green6: #43A047,
+  green7: #388E3C,
+  green8: #2E7D32,
+  green9: #1B5E20,
+  green: green5,
+
+  blue0: #E3F2FD,
+  blue1: #BBDEFB,
+  blue2: #90CAF9,
+  blue3: #64B5F6,
+  blue4: #42A5F5,
+  blue5: #2196F3,
+  blue6: #1E88E5,
+  blue7: #1976D2,
+  blue8: #1565C0,
+  blue9: #0D47A1,
+  blue: blue5,
+
+  purple0: #ede7f7,
+  purple1: #D1C4E9,
+  purple2: #B39DDB,
+  purple3: #9575CD,
+  purple4: #7E57C2,
+  purple5: #673AB7,
+  purple6: #5E35B1,
+  purple7: #512DA8,
+  purple8: #4527A0,
+  purple9: #311B92,
+  purple: purple5,
+
+  gray0: #ECEFF1,
+  gray1: #CFD8DC,
+  gray2: #B0BEC5,
+  gray3: #90A4AE,
+  gray4: #78909C,
+  gray5: #607D8B,
+  gray6: #546E7A,
+  gray7: #455A64,
+  gray8: #37474F,
+  gray9: #263238,
+  gray: gray5,
+
+  alert: red7,
+  alert_text: red9,
+  alert_background: red1,
+
+  warning: yellow,
+  warning_text: yellow9,
+  warning_background: yellow0,
+
+  error: red,
+  error_text: red8,
+  error_background: red0,
+
+  success: green,
+  success_text: green8,
+  success_background: green0,
+
+  info: gray,
+  info_text: gray8,
+  info_background: gray0,
+
+);
+
+
+// Define the colors in scss accessible values
+
+$color-red0: colorByKey(red0);
+$color-red1: colorByKey(red1);
+$color-red2: colorByKey(red2);
+$color-red3: colorByKey(red3);
+$color-red4: colorByKey(red4);
+$color-red5: colorByKey(red5);
+$color-red6: colorByKey(red6);
+$color-red7: colorByKey(red7);
+$color-red8: colorByKey(red8);
+$color-red9: colorByKey(red9);
+$color-red: colorByKey(red);
+
+$color-orange0: colorByKey(orange0);
+$color-orange1: colorByKey(orange1);
+$color-orange2: colorByKey(orange2);
+$color-orange3: colorByKey(orange3);
+$color-orange4: colorByKey(orange4);
+$color-orange5: colorByKey(orange5);
+$color-orange6: colorByKey(orange6);
+$color-orange7: colorByKey(orange7);
+$color-orange8: colorByKey(orange8);
+$color-orange9: colorByKey(orange9);
+$color-orange: colorByKey(orange);
+
+$color-yellow0: colorByKey(yellow0);
+$color-yellow1: colorByKey(yellow1);
+$color-yellow2: colorByKey(yellow2);
+$color-yellow3: colorByKey(yellow3);
+$color-yellow4: colorByKey(yellow4);
+$color-yellow5: colorByKey(yellow5);
+$color-yellow6: colorByKey(yellow6);
+$color-yellow7: colorByKey(yellow7);
+$color-yellow8: colorByKey(yellow8);
+$color-yellow9: colorByKey(yellow9);
+$color-yellow: colorByKey(yellow);
+
+$color-green0: colorByKey(green0);
+$color-green1: colorByKey(green1);
+$color-green2: colorByKey(green2);
+$color-green3: colorByKey(green3);
+$color-green4: colorByKey(green4);
+$color-green5: colorByKey(green5);
+$color-green6: colorByKey(green6);
+$color-green7: colorByKey(green7);
+$color-green8: colorByKey(green8);
+$color-green9: colorByKey(green9);
+$color-green: colorByKey(green);
+
+$color-blue0: colorByKey(blue0);
+$color-blue1: colorByKey(blue1);
+$color-blue2: colorByKey(blue2);
+$color-blue3: colorByKey(blue3);
+$color-blue4: colorByKey(blue4);
+$color-blue5: colorByKey(blue5);
+$color-blue6: colorByKey(blue6);
+$color-blue7: colorByKey(blue7);
+$color-blue8: colorByKey(blue8);
+$color-blue9: colorByKey(blue9);
+$color-blue: colorByKey(blue);
+
+$color-purple0: colorByKey(purple0);
+$color-purple1: colorByKey(purple1);
+$color-purple2: colorByKey(purple2);
+$color-purple3: colorByKey(purple3);
+$color-purple4: colorByKey(purple4);
+$color-purple5: colorByKey(purple5);
+$color-purple6: colorByKey(purple6);
+$color-purple7: colorByKey(purple7);
+$color-purple8: colorByKey(purple8);
+$color-purple9: colorByKey(purple9);
+$color-purple: colorByKey(purple);
+
+$color-gray0: colorByKey(gray0);
+$color-gray1: colorByKey(gray1);
+$color-gray2: colorByKey(gray2);
+$color-gray3: colorByKey(gray3);
+$color-gray4: colorByKey(gray4);
+$color-gray5: colorByKey(gray5);
+$color-gray6: colorByKey(gray6);
+$color-gray7: colorByKey(gray7);
+$color-gray8: colorByKey(gray8);
+$color-gray9: colorByKey(gray9);
+$color-gray: colorByKey(gray);
+
+$color-alert: colorByKey(alert);
+$color-alert-text: colorByKey(alert_text);
+$color-alert-background: colorByKey(alert_background);
+
+$color-warning: colorByKey(warning);
+$color-warning-text: colorByKey(warning_text);
+$color-warning-background: colorByKey(warning_background);
+
+$color-error: colorByKey(error);
+$color-error-text: colorByKey(error_text);
+$color-error-background: colorByKey(error_background);
+
+$color-success: colorByKey(success);
+$color-success-text: colorByKey(success_text);
+$color-success-background: colorByKey(success_background);
+
+$color-info: colorByKey(info);
+$color-info-text: colorByKey(info_text);
+$color-info-background: colorByKey(info_background);
+
+
+// Brand colors
+
+$color-facebook: #3b5998;
+$color-twitter: #1da1f2;
+$color-googleplus: #dd4b39;
+$color-pinterest: #bd081c;

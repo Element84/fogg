@@ -1,0 +1,97 @@
+$panel-side-padding: 1em;
+$panel-top-padding: .8em;
+
+.panel {
+  // We set this as display flex and a column to allow the margin
+  // of the inner content to push the height. We could use
+  // overflow: hidden, but then we can't escape the panel
+  // for things like autocomplete dropdown
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: $border-radius-small;
+  margin-bottom: 1em;
+  box-shadow: $component-shadow-strong;
+}
+
+.panel-header {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  background-color: $color-gray6;
+  padding: .6em $panel-side-padding;
+
+  p {
+
+    font-size: .9em;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+  }
+
+}
+
+.panel-header-actions {
+
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+
+    margin: 0 .3em;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+  }
+
+  .button {
+    display: block;
+    background: none;
+    box-shadow: none;
+  }
+
+  button {
+    padding: 0;
+  }
+
+}
+
+.panel-body {
+
+  padding: 0 $panel-side-padding;
+
+  .panel-clean & {
+    padding: 0;
+  }
+
+  p {
+
+    margin: $panel-top-padding 0;
+
+  }
+
+  .item-list {
+    margin: 0 ( $panel-side-padding - ( $panel-side-padding * 2 ) );
+  }
+
+}

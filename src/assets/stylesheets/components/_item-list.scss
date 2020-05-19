@@ -1,0 +1,97 @@
+$item-list-side-padding: 1em;
+$item-list-top-padding: .8em;
+
+.item-list {
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+
+    padding: 0;
+    border-bottom: solid 1px $color-gray1;
+    margin: 0;
+    display: flex;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    .checkbox-button {
+      padding-right: 0;
+      label {
+        box-shadow: none;
+        border-radius: 0;
+        border: none;
+        background-color: white;
+      }
+    }
+
+  }
+
+}
+
+.item-list-item {
+
+  position: relative;
+  overflow: hidden;
+
+  & > a,
+  & > span {
+    display: flex;
+    width: 100%;
+    color: inherit;
+    text-decoration: none;
+    padding: $item-list-top-padding 2.4em $item-list-top-padding 1em;
+  }
+
+}
+
+.item-list-item-thumb {
+
+  display: block;
+  width: 4em;
+  height: 4em;
+  margin-right: .5em;
+
+  img {
+    display: block;
+    width: 100%;
+  }
+
+}
+
+.item-list-item-content {
+  max-width: 100%;
+  flex-grow: 1;
+}
+
+.item-list-item-label,
+.item-list-item-sublabel {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-decoration: none;
+  text-overflow: ellipsis;
+}
+
+.item-list-item-sublabel {
+  color: $color-gray;
+  font-size: .8em;
+  margin-top: .4em;
+}
+
+.item-list-item-action {
+  position: absolute;
+  top: 0;
+  right: 1em;
+  bottom: 0;
+  width: 1.4em;
+  height: 1.4em;
+  line-height: 1.4em;
+  text-align: center;
+  margin: auto 0;
+}

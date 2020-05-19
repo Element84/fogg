@@ -1,0 +1,106 @@
+@import '~react-datetime/css/react-datetime.css';
+
+.form-input {
+
+  & > label {
+    display: block;
+    font-size: .9em;
+    margin-bottom: .4em;
+  }
+
+}
+
+.form-input-field {
+
+  display: block;
+  width: 100%;
+  line-height: 1.4;
+  background-color: white;
+  padding: .5em .7em;
+  border: solid 2px $color-gray;
+  border-radius: .2em;
+  box-shadow: $component-shadow-basic;
+  outline: 0;
+  -moz-appearance: textfield;
+  -webkit-appearance: none;
+
+  &:disabled {
+    background-color: $color-gray1;
+    pointer-events: none;
+  }
+
+  &:focus {
+    border: solid 2px $color-blue;
+    box-shadow: 0 0 7px 1px rgba($color-blue, .6);
+  }
+
+  // Prevent number inputs from showing increment UI
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+}
+
+
+.form-not-valid {
+
+  .form-input-invalid {
+
+    .form-input-field {
+
+      border: solid 2px $color-alert;
+
+      &:focus {
+        background-color: white;
+        box-shadow: 0 0 7px 1px $color-alert;
+      }
+
+    }
+
+  }
+
+}
+
+.form-validation-message {
+  font-style: italic;
+  margin: 0.5em 0;
+}
+
+/* Custom datepicker styles */
+
+.rdt {
+  svg {
+    position: absolute;
+    right: 0;
+    width: 1.5em;
+    height: 1.5em;
+    margin: 0.5em;
+  }
+
+  &.rdtOpen svg{
+    color: $color-blue;
+  }
+
+  .rdtPicker {
+
+    td {
+      border-radius: 3px;
+
+      &.rdtActive,
+      &.rdtActive:hover {		
+        background-color: $color-blue;
+      }
+
+      &.rdtDisabled,
+      &.rdtDisabled:hover,
+      span.rdtDisabled,
+      span.rdtDisabled:hover {
+        background: $color-gray0;
+        border-radius: 0;
+      }
+    }
+  }
+}

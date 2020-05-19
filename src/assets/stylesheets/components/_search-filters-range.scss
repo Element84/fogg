@@ -1,0 +1,36 @@
+.search-filters-range {}
+
+.search-filters-range-input {
+
+  display: flex;
+
+  .form-input {
+
+    padding: 0 .25em;
+
+    &:first-child {
+      margin-left: -.25em;
+    }
+
+    &:last-child {
+      margin-right: -.25em;
+    }
+
+  }
+
+  .form-label {
+    color: $color-gray6;
+    font-size: .8em;
+    font-weight: bold;
+    padding: 0;
+  }
+
+  .form-input-field {
+    border: solid 2px $color-gray3;
+  }
+
+}
+
+.search-filters-range-slider {
+  margin: 2em 0;
+}

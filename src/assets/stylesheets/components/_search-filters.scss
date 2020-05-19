@@ -1,0 +1,135 @@
+.search-filters {
+
+  position: absolute;
+  top: 0;
+  left: 24em;
+  z-index: 999;
+  width: 20em;
+  height: 100vh;
+  padding: 1em;
+
+}
+
+.search-filters-header {
+
+  position: sticky;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  background-color: white;
+  padding: .2em 0;
+  border-bottom: solid 1px $color-gray0;
+  border-radius: 0.2em 0.2em 0 0;
+  margin: 0 -1em 1em;
+
+  .search-filters-actions {
+
+    justify-content: flex-end;
+    align-items: flex-end;
+    align-content: flex-end;
+    padding: 0 .2em;
+    margin: 0;
+
+    li {
+      flex-grow: 0;
+    }
+
+  }
+
+  .button {
+
+    button {
+      padding: .6em;
+    }
+
+  }
+
+}
+
+.search-filters-available {
+
+  list-style: none;
+  padding: 0;
+  margin-top: 0;
+
+  & > li {
+    margin-bottom: 1em;
+  }
+
+  label {
+    font-size: .9em;
+    padding: .4em;
+    border: none;
+    box-shadow: none;
+    margin-bottom: .6em;
+  }
+
+  input:checked {
+
+    & + label {
+      border: none;
+      box-shadow: $component-shadow-basic;
+    }
+
+  }
+
+  .checkbox-button-checkbox {
+    font-size: .8em;
+  }
+
+}
+
+.search-filters-available-label {
+  display: block;
+  margin-bottom: 1em;
+}
+
+.search-filters-available-list {
+
+  list-style: none;
+  padding: 0 0 0 .5em;
+  border-left: solid 1px $color-gray1;
+
+  label {
+    font-size: .8em;
+  }
+
+}
+
+.search-filters-actions {
+
+  display: flex;
+  list-style: none;
+  padding: 0;
+
+  li {
+
+    flex-grow: 1;
+
+    &:first-child {
+
+      button {
+        color: $color-gray9;
+      }
+
+    }
+
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  button {
+    text-decoration: none;
+  }
+
+}
+
+.search-filters-actions-cancel {
+
+  button {
+    color: $color-gray4;
+  }
+
+}

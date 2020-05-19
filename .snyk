@@ -1,0 +1,77 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  SNYK-JS-MINIMIST-559764:
+    - togeojson > minimist:
+        reason: No fix available
+        expires: '2020-05-20T13:16:45.794Z'
+  SNYK-JS-NODESASS-535497:
+    - node-sass:
+        reason: No fix available
+        expires: '2020-05-20T13:16:45.794Z'
+  SNYK-JS-NODESASS-535498:
+    - node-sass:
+        reason: No fix available
+        expires: '2020-05-20T13:16:45.794Z'
+  SNYK-JS-NODESASS-535502:
+    - node-sass:
+        reason: No fix available
+        expires: '2020-05-20T13:16:45.794Z'
+  SNYK-JS-NODESASS-540956:
+    - node-sass:
+        reason: No fix available
+        expires: '2020-05-20T13:16:45.794Z'
+  SNYK-JS-NODESASS-540958:
+    - node-sass:
+        reason: No fix available
+        expires: '2020-05-20T13:16:45.794Z'
+  SNYK-JS-NODESASS-540964:
+    - node-sass:
+        reason: No fix available
+        expires: '2020-05-20T13:16:45.794Z'
+  SNYK-JS-NODESASS-540974:
+    - node-sass:
+        reason: No fix available
+        expires: '2020-05-20T13:16:45.794Z'
+  SNYK-JS-NODESASS-540978:
+    - node-sass:
+        reason: No fix available
+        expires: '2020-05-20T13:16:45.794Z'
+  SNYK-JS-NODESASS-540980:
+    - node-sass:
+        reason: No fix available
+        expires: '2020-05-20T13:16:45.794Z'
+  SNYK-JS-NODESASS-540990:
+    - node-sass:
+        reason: No fix available
+        expires: '2020-05-20T13:16:45.794Z'
+  SNYK-JS-NODESASS-540992:
+    - node-sass:
+        reason: No fix available
+        expires: '2020-05-20T13:16:45.794Z'
+  SNYK-JS-NODESASS-540994:
+    - node-sass:
+        reason: No fix available
+        expires: '2020-05-20T13:16:45.794Z'
+  SNYK-JS-NODESASS-540996:
+    - node-sass:
+        reason: No fix available
+        expires: '2020-05-20T13:16:45.794Z'
+  SNYK-JS-NODESASS-540998:
+    - node-sass:
+        reason: No fix available
+        expires: '2020-05-20T13:16:45.794Z'
+  SNYK-JS-NODESASS-541000:
+    - node-sass:
+        reason: No fix available
+        expires: '2020-05-20T13:16:45.794Z'
+  SNYK-JS-NODESASS-541002:
+    - node-sass:
+        reason: No fix available
+        expires: '2020-05-20T13:16:45.794Z'
+  SNYK-JS-YARGSPARSER-560381:
+    - node-sass > sass-graph > yargs > yargs-parser:
+        reason: No fix available
+        expires: '2020-05-20T13:16:45.794Z'
+patch: {}
