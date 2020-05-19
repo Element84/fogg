@@ -1,4 +1,5 @@
 import center from '@turf/center';
+import { getGeom } from '@turf/invariant';
 
 /**
  * geoJsonFromLatLn
@@ -107,22 +108,5 @@ export function getGeoJsonCenter (geoJson) {
  */
 
 export function getGeomFromGeoJson (geoJson = {}) {
-  const { type } = geoJson;
-
-  if (type === 'Feature') {
-    const { geometry } = geoJson;
-    return geometry;
-  }
-
-  if (type === 'FeatureCollection') {
-    const { features = [] } = geoJson;
-    return (
-      Array.isArray(features) &&
-      features.map(feature => {
-        return getGeomFromGeoJson(feature);
-      })
-    );
-  }
-
-  return geoJson;
+  return getGeom(geoJson);
 }
