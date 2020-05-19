@@ -1,7 +1,7 @@
 {
   "name": "fogg",
   "description": "Component library and tools for rapidly building maps",
-  "version": "0.2.53",
+  "version": "0.3.0",
   "author": "Element 84, Inc.",
   "dependencies": {
     "@babel/core": "^7.9.0",
