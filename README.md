@@ -70,16 +70,3 @@ yarn test
 
 # 🛠 Contributions
 At this time, we're not accepting contributions until we can fully understand how it ties in to our workflow. If interested, definitely reach out and let us know.
-
-## TODO - move to issues
-[] Complete stories for each component
-[] Clean out unused components
-[] Add basic tests for each component
-[] Add tests for lib
-[] Add tests for hooks
-[] Examples
-[] Cypress tests for examples
-[] git hooks for security review
-[] git secrets scan
-[] documentation for hooks
-[] documentation for lib
