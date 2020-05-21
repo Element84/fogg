@@ -142,7 +142,7 @@ export default function useLens () {
     const placenameAll = placenameShape === 'all';
 
     const addMarker = isPlacenameSearch && (placenameMarker || placenameAll);
-    const addGeoJson = placenamePolygon || placenameAll;
+    const addGeoJson = !isPlacenameSearch || placenamePolygon || placenameAll;
 
     if (addMarker) {
       featuresToAdd.push({

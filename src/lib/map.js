@@ -1,4 +1,4 @@
-import { getGeom, center } from '@turf/turf';
+import { getGeom, center, bboxPolygon } from '@turf/turf';
 
 /**
  * geoJsonFromLatLn
@@ -101,25 +101,5 @@ export function getGeoJsonCenter (geoJson) {
  */
 
 export function getGeoJsonFromExtent ({ xmax, xmin, ymax, ymin }) {
-  return {
-    type: 'FeatureCollection',
-    features: [
-      {
-        type: 'Feature',
-        properties: {},
-        geometry: {
-          type: 'Polygon',
-          coordinates: [
-            [
-              [xmin, ymax],
-              [xmax, ymax],
-              [xmax, ymin],
-              [xmin, ymin],
-              [xmin, ymax]
-            ]
-          ]
-        }
-      }
-    ]
-  };
+  return bboxPolygon([xmin, ymin, xmax, ymax]);
 }
