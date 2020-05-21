@@ -38,7 +38,8 @@ export default function useGeoSearch (geoSearchSettings = {}) {
   const {
     resolveOnSearch = resolveUndefinedSearch,
     resolveOnAutocomplete,
-    utc
+    utc,
+    placenameShape
   } = geoSearchSettings;
 
   const config = {
@@ -135,6 +136,9 @@ export default function useGeoSearch (geoSearchSettings = {}) {
       ...QUERY_DEFAULT_PARAMS,
       ...settings
     });
+    const searchOptions = {
+      placenameShape
+    };
     const { resolveBeforeSearch, concatResults = false } = options;
 
     let searchResults;
@@ -144,7 +148,8 @@ export default function useGeoSearch (geoSearchSettings = {}) {
     if (typeof resolveBeforeSearch === 'function') {
       try {
         await resolveBeforeSearch({
-          settings: searchSettings
+          settings: searchSettings,
+          options: searchOptions
         });
       } catch (e) {
         throw new Error(
@@ -191,6 +196,7 @@ export default function useGeoSearch (geoSearchSettings = {}) {
 
   async function handleUpdateSearch (settings) {
     const errorBase = 'Failed to update search';
+
     try {
       return await handleSearch({
         ...queryParams,
@@ -240,6 +246,7 @@ export default function useGeoSearch (geoSearchSettings = {}) {
 
   async function handleResolveOnAutocomplete () {
     const errorBase = 'Failed to resolve autocomplete';
+
     try {
       return await resolveOnAutocomplete.apply(
         this,

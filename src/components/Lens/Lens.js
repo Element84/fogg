@@ -42,7 +42,10 @@ const Lens = ({
   PopupContent,
   disableFutureDates = false,
   resolveOnAutocomplete = resolveLensAutocomplete,
-  utc = false
+  utc = false,
+  geoSearch: geoSearchSettings = {
+    placenameShape: 'marker'
+  }
 }) => {
   const refSearchComplete = createRef();
 
@@ -65,7 +68,8 @@ const Lens = ({
     resolveOnAutocomplete,
     filters: filters.active,
     date: defaultDateRange,
-    utc
+    utc,
+    ...geoSearchSettings
   };
 
   const geoSearch = useGeoSearch(defaultGeoSearchSettings);
@@ -223,6 +227,7 @@ Lens.propTypes = {
   activeDateRange: PropTypes.object,
   defaultDateRange: PropTypes.object,
   utc: PropTypes.bool,
+  geoSearch: PropTypes.object,
   /**
    * Content of popup for drawn shapes
    */
