@@ -95,3 +95,31 @@ export function getGeoJsonCenter (geoJson) {
   }
   return center(geoJson);
 }
+
+/**
+ * getGeoJsonFromExtent
+ */
+
+export function getGeoJsonFromExtent ({ xmax, xmin, ymax, ymin }) {
+  return {
+    type: 'FeatureCollection',
+    features: [
+      {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'Polygon',
+          coordinates: [
+            [
+              [xmin, ymax],
+              [xmax, ymax],
+              [xmax, ymin],
+              [xmin, ymin],
+              [xmin, ymax]
+            ]
+          ]
+        }
+      }
+    ]
+  };
+}

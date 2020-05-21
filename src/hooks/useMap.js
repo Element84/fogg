@@ -228,23 +228,31 @@ export default function useMap (mapSettings = {}) {
     const {
       panToShape,
       center,
-      geoJson,
       zoom,
       shapeOptions: mapShapeOptions = shapeOptions,
       clearOtherLayers = true,
       featureGroup = defaultMapFeaturesGroup
     } = settings;
 
+    let { geoJson } = settings;
+
     let centerGeoJson;
 
-    if (!geoJson) {
-      throw new Error(`${errorBase}: Invalid geoJson`);
+    if (!center && !geoJson) {
+      throw new Error(`${errorBase}: Can't find center or geoJson`);
     }
 
     if (center) {
       centerGeoJson = geoJsonFromLatLn(center);
     } else {
       centerGeoJson = getGeoJsonCenter(geoJson);
+    }
+
+    // If we don't have a geoJson object, let's use our center that
+    // we just created
+
+    if (centerGeoJson && !geoJson) {
+      geoJson = centerGeoJson;
     }
 
     const geoJsonLayer = addGeoJsonLayer({

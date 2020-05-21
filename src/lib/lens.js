@@ -1,5 +1,6 @@
 import { geocodePlacename } from './search';
 import { resolveMostRecent } from './request';
+import { getGeoJsonFromExtent } from './map';
 
 /**
  * resolveLensAutocomplete
@@ -19,10 +20,17 @@ export async function resolveLensAutocomplete (query) {
  * @description Function that takes a given candidate and returns usable result object
  */
 
-export function mapGeocodeCandidates ({ address, location } = {}) {
+export function mapGeocodeCandidates ({ address, location, extent } = {}) {
+  let geoJson;
+
+  if (extent) {
+    geoJson = getGeoJsonFromExtent(extent);
+  }
+
   return {
     label: address,
     sublabel: `Location: ${location.x}, ${location.y}`,
-    value: location
+    value: location,
+    geoJson
   };
 }
