@@ -3,31 +3,23 @@ import { storiesOf } from '@storybook/react';
 
 import Story from '../../../../stories/helpers/Story';
 
-import Map from '../';
+import Lens from '../';
 
-const STORY_COMPONENT = 'Map';
+const STORY_COMPONENT = 'Lens';
 const STORY_NAME = 'Default';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
-const ALEXANDRIA = {
-  lat: 38.8048,
-  lng: -77.0469
+const DEFAULT_CENTER = {
+  lat: 0,
+  lng: 0
 };
 
 stories.add(STORY_NAME, () => {
-  const mapSettings = {
-    center: [ALEXANDRIA.lat, ALEXANDRIA.lng],
-    zoom: 5
-  };
-
-  // TODO: we should figure out a way to display this nicer, as the original intent
-  // of 100% full screen doesn't work with the current Story layout
-
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
       <div className="story-map">
-        <Map {...mapSettings} />
+        <Lens defaultCenter={DEFAULT_CENTER} defaultZoom={4} />
       </div>
     </Story>
   );

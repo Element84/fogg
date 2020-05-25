@@ -1,8 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import LensBasemap from './stories/LensBasemap.story';
-import LensDefault from './stories/LensDefault.story';
 import LensLayers from './stories/LensLayers.story';
 import LensEarthSearchDynamicLayerDate from './stories/LensEarthSearchDynamicLayerDate.story';
 import LensEarthSearchDefault from './stories/LensEarthSearchDefault.story';
@@ -20,8 +18,6 @@ import LensEarthSearchUtc from './stories/LensEarthSearchUtc.story';
 
 const stories = storiesOf('Components|Lens', module);
 
-stories.add('Default', LensDefault);
-stories.add('Basemap', LensBasemap);
 stories.add('Layers', LensLayers);
 stories.add('Earth Search - Default', LensEarthSearchDefault);
 stories.add('Earth Search - No Filter', LensEarthSearchNoFilter);

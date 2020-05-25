@@ -81,6 +81,21 @@
 
 }
 
+.story {
+  width: 100%;
+}
+
+.story-map {
+
+  &,
+  .lens,
+  .map {
+    width: 100%;
+    height: 100vh;
+  }
+
+}
+
 .Story-Table-FitContainer {
 
   .story {
