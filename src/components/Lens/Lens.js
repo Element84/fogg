@@ -14,6 +14,8 @@ import LensSearchFilters from '../LensSearchFilters';
 import LensSearchPanelFilters from '../LensSearchPanelFilters';
 import LensSidebarComponents from '../LensSidebarComponents';
 import LensSearchDate from '../LensSearchDate';
+import Button from '../Button';
+import IconByName from '../IconByName';
 
 const Lens = ({
   children,
@@ -46,7 +48,8 @@ const Lens = ({
   geoSearch: geoSearchSettings = {
     placenameShape: 'marker',
     ignoreDatetime: true
-  }
+  },
+  searchActions = []
 }) => {
   const refSearchComplete = createRef();
 
@@ -100,6 +103,9 @@ const Lens = ({
   const displayFilters =
     isActiveSearch && filters.isOpen && filters.available.length > 0;
 
+  const hasSearchActions =
+    Array.isArray(searchActions) && searchActions.length > 0;
+
   const mapSettings = {
     projection,
     hideNativeLayers,
@@ -137,6 +143,23 @@ const Lens = ({
                               ref={refSearchComplete}
                               placeholder={placeholder}
                             />
+                            {hasSearchActions && (
+                              <ul className="lens-sidebar-search-actions">
+                                {searchActions.map((action, i) => {
+                                  const { label, icon, onClick } = action;
+                                  return (
+                                    <li key={i}>
+                                      <Button onClick={onClick}>
+                                        <IconByName name={icon} />
+                                        <span className="visually-hidden">
+                                          {label}
+                                        </span>
+                                      </Button>
+                                    </li>
+                                  );
+                                })}
+                              </ul>
+                            )}
                           </Panel>
 
                           {showFilters &&
@@ -229,6 +252,7 @@ Lens.propTypes = {
   defaultDateRange: PropTypes.object,
   utc: PropTypes.bool,
   geoSearch: PropTypes.object,
+  searchActions: PropTypes.array,
   /**
    * Content of popup for drawn shapes
    */

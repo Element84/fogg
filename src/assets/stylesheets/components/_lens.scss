@@ -43,6 +43,40 @@
 
 }
 
+.lens-sidebar-search {
+
+  .panel-body {
+    display: flex;
+  }
+
+  .search-complete {
+    flex-grow: 1;
+  }
+
+}
+
+.lens-sidebar-search-actions {
+
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0 1em;
+
+  // Same size as Search button
+
+  .button,
+  button {
+    width: 3.2em;
+    height: 3.2em;
+    line-height: 3.2em;
+    text-align: center;
+  }
+
+  button {
+    padding: 0;
+  }
+
+}
+
 .lens-map {
   position: relative;
   z-index: 0;
