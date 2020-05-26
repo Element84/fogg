@@ -14,8 +14,7 @@ import LensSearchFilters from '../LensSearchFilters';
 import LensSearchPanelFilters from '../LensSearchPanelFilters';
 import LensSidebarComponents from '../LensSidebarComponents';
 import LensSearchDate from '../LensSearchDate';
-import Button from '../Button';
-import IconByName from '../IconByName';
+import LensSearchActions from '../LensSearchActions';
 
 const Lens = ({
   children,
@@ -112,10 +111,16 @@ const Lens = ({
     useMapEffect
   };
 
+  const context = {
+    geoFilters,
+    layers,
+    geoSearch,
+    map,
+    activeDateRange
+  };
+
   return (
-    <LensContext.Provider
-      value={{ geoFilters, layers, geoSearch, map, activeDateRange }}
-    >
+    <LensContext.Provider value={context}>
       <LayersContext.Provider value={{ ...layers }}>
         <div
           className={lensClassName}
@@ -144,21 +149,7 @@ const Lens = ({
                               placeholder={placeholder}
                             />
                             {hasSearchActions && (
-                              <ul className="lens-sidebar-search-actions">
-                                {searchActions.map((action, i) => {
-                                  const { label, icon, onClick } = action;
-                                  return (
-                                    <li key={i}>
-                                      <Button onClick={onClick}>
-                                        <IconByName name={icon} />
-                                        <span className="visually-hidden">
-                                          {label}
-                                        </span>
-                                      </Button>
-                                    </li>
-                                  );
-                                })}
-                              </ul>
+                              <LensSearchActions actions={searchActions} />
                             )}
                           </Panel>
 
