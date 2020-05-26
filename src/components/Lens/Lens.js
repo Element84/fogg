@@ -47,7 +47,7 @@ const Lens = ({
   utc = false,
   geoSearch: geoSearchSettings = {
     placenameShape: 'marker',
-    ignoreDatetime: true
+    ignoreDatetime: false
   },
   searchActions = []
 }) => {
