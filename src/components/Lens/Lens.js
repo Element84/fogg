@@ -44,7 +44,8 @@ const Lens = ({
   resolveOnAutocomplete = resolveLensAutocomplete,
   utc = false,
   geoSearch: geoSearchSettings = {
-    placenameShape: 'marker'
+    placenameShape: 'marker',
+    ignoreDatetime: true
   }
 }) => {
   const refSearchComplete = createRef();
