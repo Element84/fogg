@@ -44,10 +44,7 @@ const Lens = ({
   disableFutureDates = false,
   resolveOnAutocomplete = resolveLensAutocomplete,
   utc = false,
-  geoSearch: geoSearchSettings = {
-    placenameShape: 'marker',
-    ignoreDatetime: false
-  },
+  geoSearch: geoSearchSettings,
   searchActions = []
 }) => {
   const refSearchComplete = createRef();
@@ -72,6 +69,8 @@ const Lens = ({
     filters: filters.active,
     date: defaultDateRange,
     utc,
+    placenameShape: 'marker',
+    ignoreDatetime: false,
     ...geoSearchSettings
   };
 
