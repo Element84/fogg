@@ -15,6 +15,7 @@ const SearchComplete = ({
   defaultValue = '',
   date,
   utc = false,
+  ignoreDatetime = false,
   forwardedRef
 }) => {
   const [isOpen, updateOpenState] = useState(false);
@@ -160,6 +161,7 @@ const SearchComplete = ({
         searchInput={searchInput}
         date={date}
         utc={utc}
+        ignoreDatetime={ignoreDatetime}
         onDateChange={onDateChange}
       />
 
@@ -203,6 +205,7 @@ SearchComplete.propTypes = {
   clearSearchInput: PropTypes.bool,
   date: PropTypes.object,
   utc: PropTypes.bool,
+  ignoreDatetime: PropTypes.bool,
   forwardedRef: PropTypes.object
 };
 

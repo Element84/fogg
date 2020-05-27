@@ -14,6 +14,7 @@ import LensSearchFilters from '../LensSearchFilters';
 import LensSearchPanelFilters from '../LensSearchPanelFilters';
 import LensSidebarComponents from '../LensSidebarComponents';
 import LensSearchDate from '../LensSearchDate';
+import LensSearchActions from '../LensSearchActions';
 
 const Lens = ({
   children,
@@ -44,8 +45,10 @@ const Lens = ({
   resolveOnAutocomplete = resolveLensAutocomplete,
   utc = false,
   geoSearch: geoSearchSettings = {
-    placenameShape: 'marker'
-  }
+    placenameShape: 'marker',
+    ignoreDatetime: false
+  },
+  searchActions = []
 }) => {
   const refSearchComplete = createRef();
 
@@ -99,16 +102,25 @@ const Lens = ({
   const displayFilters =
     isActiveSearch && filters.isOpen && filters.available.length > 0;
 
+  const hasSearchActions =
+    Array.isArray(searchActions) && searchActions.length > 0;
+
   const mapSettings = {
     projection,
     hideNativeLayers,
     useMapEffect
   };
 
+  const context = {
+    geoFilters,
+    layers,
+    geoSearch,
+    map,
+    activeDateRange
+  };
+
   return (
-    <LensContext.Provider
-      value={{ geoFilters, layers, geoSearch, map, activeDateRange }}
-    >
+    <LensContext.Provider value={context}>
       <LayersContext.Provider value={{ ...layers }}>
         <div
           className={lensClassName}
@@ -136,6 +148,9 @@ const Lens = ({
                               ref={refSearchComplete}
                               placeholder={placeholder}
                             />
+                            {hasSearchActions && (
+                              <LensSearchActions actions={searchActions} />
+                            )}
                           </Panel>
 
                           {showFilters &&
@@ -228,6 +243,7 @@ Lens.propTypes = {
   defaultDateRange: PropTypes.object,
   utc: PropTypes.bool,
   geoSearch: PropTypes.object,
+  searchActions: PropTypes.array,
   /**
    * Content of popup for drawn shapes
    */

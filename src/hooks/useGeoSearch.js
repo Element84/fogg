@@ -39,16 +39,19 @@ export default function useGeoSearch (geoSearchSettings = {}) {
     resolveOnSearch = resolveUndefinedSearch,
     resolveOnAutocomplete,
     utc,
-    placenameShape
+    placenameShape,
+    ignoreDatetime
   } = geoSearchSettings;
 
   const config = {
-    utc
+    utc,
+    ignoreDatetime
   };
 
   const defaultQueryParams = {};
 
   QUERY_AVAILABLE_PARAMS.forEach(param => {
+    if (ignoreDatetime && param === 'date') return;
     defaultQueryParams[param] =
       geoSearchSettings[param] || QUERY_DEFAULT_PARAMS[param];
   });
@@ -132,10 +135,13 @@ export default function useGeoSearch (geoSearchSettings = {}) {
 
   async function handleSearch (settings = {}, options = {}) {
     const errorBase = 'Failed to make search';
-    const searchSettings = configureSearchSettings({
-      ...QUERY_DEFAULT_PARAMS,
-      ...settings
-    });
+    const searchSettings = configureSearchSettings(
+      {
+        ...QUERY_DEFAULT_PARAMS,
+        ...settings
+      },
+      config
+    );
     const searchOptions = {
       placenameShape
     };
@@ -279,17 +285,20 @@ export default function useGeoSearch (geoSearchSettings = {}) {
  * @description
  */
 
-export function configureSearchSettings (settings) {
+export function configureSearchSettings (settings, config) {
   const searchSettings = {};
 
   const { center, geoJson } = settings;
   const hasGeoJson = geoJson && !isEmptyObject(geoJson);
   const hasCenter = center && !isEmptyObject(center);
 
+  const { ignoreDatetime } = config;
+
   // Loop through all of the keys that are available to search
   // on and populate the search settings with it's value if available
 
   QUERY_AVAILABLE_PARAMS.forEach(param => {
+    if (ignoreDatetime && param === 'date') return;
     if (settings[param]) {
       searchSettings[param] = settings[param];
     }

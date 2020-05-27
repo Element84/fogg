@@ -16,6 +16,7 @@ const SearchBox = ({
   searchInput = '',
   date = {},
   utc = false,
+  ignoreDatetime = false,
   onDateChange
 }) => {
   const { value: query, updateValue: setQuery } = useStoredValue(searchInput);
@@ -101,15 +102,17 @@ const SearchBox = ({
         />
       </Form>
       <div className="search-box-controls">
-        <SearchDate
-          onChange={handleChange}
-          onDateChange={handleDateSearch}
-          onDateClear={handleDateSearch}
-          defaultIsOpen={dateIsOpen}
-          defaultDate={date}
-          utc={utc}
-          classPrefix={'search-box-controls'}
-        />
+        {!ignoreDatetime && (
+          <SearchDate
+            onChange={handleChange}
+            onDateChange={handleDateSearch}
+            onDateClear={handleDateSearch}
+            defaultIsOpen={dateIsOpen}
+            defaultDate={date}
+            utc={utc}
+            classPrefix={'search-box-controls'}
+          />
+        )}
         <div className="search-box-controls-search">
           <Button
             className="search-box-controls-control"
@@ -130,7 +133,8 @@ SearchBox.propTypes = {
   placeholder: PropTypes.string,
   searchInput: PropTypes.string,
   date: PropTypes.object,
-  utc: PropTypes.bool
+  utc: PropTypes.bool,
+  ignoreDatetime: PropTypes.bool
 };
 
 export default SearchBox;

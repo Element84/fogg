@@ -125,7 +125,7 @@ const SearchPanelFilters = ({
 
   return (
     <Panel
-      className="panel-clean search-panel-filters"
+      className="search-panel-filters"
       header="Filters"
       actions={<PanelActions actions={filterActions} />}
     >
