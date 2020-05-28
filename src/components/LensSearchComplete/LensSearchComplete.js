@@ -15,7 +15,7 @@ const LensSearchComplete = ({ forwardedRef, ...props }) => {
     resolveOnAutocomplete
   } = geoSearch;
   const { date, textInput } = queryParams;
-  const { utc } = config;
+  const { utc, ignoreDatetime } = config;
 
   /**
    * handleDateChange
@@ -33,7 +33,7 @@ const LensSearchComplete = ({ forwardedRef, ...props }) => {
    * @description Manages creating a search based off of the search complete's values
    */
 
-  function handleSearch (location, date, textInput) {
+  function handleSearch ({ location, date, textInput, geoJson } = {}) {
     const hasTextInput = textInput && textInput !== '';
 
     // If we dont have a location or a text input, we can't actually make a search.
@@ -60,6 +60,7 @@ const LensSearchComplete = ({ forwardedRef, ...props }) => {
     search({
       textInput,
       center,
+      geoJson,
       date
     });
   }
@@ -68,6 +69,7 @@ const LensSearchComplete = ({ forwardedRef, ...props }) => {
     <SearchComplete
       defaultValue={textInput}
       date={date}
+      ignoreDatetime={ignoreDatetime}
       onSearch={handleSearch}
       resolveQueryComplete={resolveOnAutocomplete}
       forwardedRef={forwardedRef}

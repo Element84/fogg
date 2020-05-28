@@ -14,6 +14,7 @@ import LensSearchFilters from '../LensSearchFilters';
 import LensSearchPanelFilters from '../LensSearchPanelFilters';
 import LensSidebarComponents from '../LensSidebarComponents';
 import LensSearchDate from '../LensSearchDate';
+import LensSearchActions from '../LensSearchActions';
 
 const Lens = ({
   children,
@@ -42,7 +43,9 @@ const Lens = ({
   PopupContent,
   disableFutureDates = false,
   resolveOnAutocomplete = resolveLensAutocomplete,
-  utc = false
+  utc = false,
+  geoSearch: geoSearchSettings,
+  searchActions = []
 }) => {
   const refSearchComplete = createRef();
 
@@ -65,7 +68,10 @@ const Lens = ({
     resolveOnAutocomplete,
     filters: filters.active,
     date: defaultDateRange,
-    utc
+    utc,
+    placenameShape: 'marker',
+    ignoreDatetime: false,
+    ...geoSearchSettings
   };
 
   const geoSearch = useGeoSearch(defaultGeoSearchSettings);
@@ -95,16 +101,25 @@ const Lens = ({
   const displayFilters =
     isActiveSearch && filters.isOpen && filters.available.length > 0;
 
+  const hasSearchActions =
+    Array.isArray(searchActions) && searchActions.length > 0;
+
   const mapSettings = {
     projection,
     hideNativeLayers,
     useMapEffect
   };
 
+  const context = {
+    geoFilters,
+    layers,
+    geoSearch,
+    map,
+    activeDateRange
+  };
+
   return (
-    <LensContext.Provider
-      value={{ geoFilters, layers, geoSearch, map, activeDateRange }}
-    >
+    <LensContext.Provider value={context}>
       <LayersContext.Provider value={{ ...layers }}>
         <div
           className={lensClassName}
@@ -132,6 +147,9 @@ const Lens = ({
                               ref={refSearchComplete}
                               placeholder={placeholder}
                             />
+                            {hasSearchActions && (
+                              <LensSearchActions actions={searchActions} />
+                            )}
                           </Panel>
 
                           {showFilters &&
@@ -223,6 +241,8 @@ Lens.propTypes = {
   activeDateRange: PropTypes.object,
   defaultDateRange: PropTypes.object,
   utc: PropTypes.bool,
+  geoSearch: PropTypes.object,
+  searchActions: PropTypes.array,
   /**
    * Content of popup for drawn shapes
    */

@@ -1,4 +1,5 @@
 import center from '@turf/center';
+import bboxPolygon from '@turf/bbox-polygon';
 import { getGeom } from '@turf/invariant';
 
 /**
@@ -109,4 +110,12 @@ export function getGeoJsonCenter (geoJson) {
 
 export function getGeomFromGeoJson (geoJson = {}) {
   return getGeom(geoJson);
+}
+
+/**
+ * getGeoJsonFromExtent
+ */
+
+export function getGeoJsonFromExtent ({ xmax, xmin, ymax, ymin }) {
+  return bboxPolygon([xmin, ymin, xmax, ymax]);
 }
