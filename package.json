@@ -42,6 +42,7 @@
     "react-leaflet-draw": "^0.19.0",
     "react-modal": "^3.11.2",
     "react-select": "^3.0.8",
+    "react-virtualized-auto-sizer": "^1.0.2",
     "react-window": "^1.8.5",
     "sass": "^1.26.3",
     "togeojson": "^0.16.0",

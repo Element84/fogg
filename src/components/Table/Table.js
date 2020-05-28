@@ -1,12 +1,22 @@
 import React, { useState, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { VariableSizeGrid as Grid } from 'react-window';
+import AutoSizer from 'react-virtualized-auto-sizer';
 import memoizee from 'memoizee';
 
 import { useEventListener } from '../../hooks';
 import ClassName from '../../models/classname';
 
 import TableCellCreator from '../TableCellCreator';
+
+function calculateGridHeight(tableHeight, headerHeight) {
+  if ( headerHeight ) {
+    return tableHeight - headerHeight;
+  }
+  return tableHeight;
+}
+
+const calculateGridHeightMemo = memoizee(calculateGridHeight);
 
 const Table = ({
   children,
@@ -54,28 +64,6 @@ const Table = ({
     height: isEmpty ? headerHeight : defaultHeight
   });
 
-  // Use an event listener to determine when the window resizes so that we
-  // can use it to set the width dynamically for our Table
-
-  const memoizedHandleOnResize = useCallback(() => {
-    handleOnResize();
-  }, [
-    ref,
-    gridRef,
-    headerHeight,
-    stretchHeightToContent,
-    fitContainer,
-    isEmpty
-  ]);
-
-  useEventListener({
-    target: window,
-    event: 'resize',
-    onEvent: memoizedHandleOnResize,
-    debounceOnEvent: true,
-    fireOnLoad: true
-  });
-
   const activeColumns = columns.filter(
     ({ includeColumn = true } = {}) => !!includeColumn
   );
@@ -121,37 +109,7 @@ const Table = ({
   const singleColumnWidth = width / widthRatiosTotal;
   const columnWidths = widthRatios.map(ratio => singleColumnWidth * ratio);
 
-  /**
-   * handleOnResize
-   * @description Manages and sets the size state of the current ref when resize occurs
-   */
 
-  function handleOnResize () {
-    if (!fitContainer) return;
-
-    const { current: currentTable } = ref;
-    const { current: currentGrid } = gridRef;
-    const tableHeight = isEmpty ? headerHeight : height;
-
-    if (!currentTable) return;
-
-    const { offsetWidth, offsetHeight } = currentTable;
-
-    const isDiffWidth = offsetWidth !== width;
-    const isDiffHeight = offsetHeight !== tableHeight;
-
-    if (!isDiffWidth && !isDiffHeight) return;
-
-    setDimensions(prev => {
-      return {
-        ...prev,
-        width: offsetWidth,
-        height: isEmpty ? headerHeight : offsetHeight
-      };
-    });
-
-    currentGrid.resetAfterColumnIndex(0);
-  }
 
   /**
    * handleOnCellClick
@@ -194,40 +152,57 @@ const Table = ({
   }
 
   const containerStyles = {
-    width,
+    flexBasis: width,
     height
   };
 
   return (
     <div className={componentClass.string} ref={ref}>
-      <div style={containerStyles}>
-        {displayHeader && frozenHeader && (
-          <div className={componentClass.childString('header')}>
-            {HeaderCells}
-          </div>
-        )}
-        <div className={componentClass.childString('grid')}>
-          <Grid
-            ref={gridRef}
-            columnCount={columnsCount}
-            columnWidth={index => columnWidths[index]}
-            height={height}
-            rowCount={rowsCount}
-            rowHeight={() => rowHeight}
-            width={width}
-          >
-            {TableCellCreatorMemo({
-              rows,
-              columns: activeColumns,
-              onCellClick: handleOnCellClick
-            })}
-          </Grid>
-        </div>
+      <div className={componentClass.childString('container')} style={containerStyles}>
+        <AutoSizer>
+          {({ height, width }) => {
+            const gridHeight = calculateGridHeightMemo(height, displayHeader && headerHeight);
+
+            return (
+              <>
+                {displayHeader && frozenHeader && (
+                  <div className={componentClass.childString('header')} style={{
+                    width,
+                    height: headerHeight
+                  }}>
+                    {HeaderCells}
+                  </div>
+                )}
+                <div className={componentClass.childString('grid')} style={{
+                  width,
+                  height: gridHeight
+                }}>
+                  <Grid
+                    ref={gridRef}
+                    columnCount={columnsCount}
+                    columnWidth={index => columnWidths[index]}
+                    height={gridHeight}
+                    rowCount={rowsCount}
+                    rowHeight={() => rowHeight}
+                    width={width}
+                  >
+                    {TableCellCreatorMemo({
+                      rows,
+                      columns: activeColumns,
+                      onCellClick: handleOnCellClick
+                    })}
+                  </Grid>
+                </div>
+              </>
+            );
+        }}
+        </AutoSizer>
       </div>
       {children}
     </div>
   );
 };
+
 
 Table.propTypes = {
   children: PropTypes.oneOfType([
