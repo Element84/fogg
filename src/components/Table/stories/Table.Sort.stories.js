@@ -75,14 +75,11 @@ stories.add(STORY_NAME, () => {
   });
 
   function handleOnSort (cell) {
-    console.log('sort', cell);
     if (typeof sort === 'function') {
       sort(cell);
     }
     action(`${STORY_COMPONENT}::onSort`)(cell);
   }
-
-  console.log('data', data);
 
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>

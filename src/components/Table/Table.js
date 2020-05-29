@@ -150,8 +150,6 @@ const Table = ({
               });
             }
 
-            console.log('rows', rows);
-
             return (
               <>
                 {HeaderCells && (
