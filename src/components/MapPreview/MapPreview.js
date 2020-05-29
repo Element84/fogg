@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Polygon } from 'react-leaflet';
-import { center as turfCenter } from '@turf/turf';
 
 import { useLayers } from '../../hooks';
 import { LayersContext } from '../../context';
@@ -12,7 +11,8 @@ import {
   geoJsonFromLatLn,
   latLngFromGeoJson,
   geometryTypeFromGeoJson,
-  coordinatesFromGeoJson
+  coordinatesFromGeoJson,
+  getGeoJsonCenter
 } from '../../lib/map';
 
 import Map from '../Map';
@@ -60,7 +60,7 @@ const MapPreview = ({
   // the center of all points to determine our center
 
   if (!centerGeoJson && geoJson) {
-    centerGeoJson = turfCenter(geoJson);
+    centerGeoJson = getGeoJsonCenter(geoJson);
   }
 
   // If we don't have a user provided geoJson but we do have our
