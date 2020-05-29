@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 
 import ClassName from '../../src/models/classname';
 
-const StoryNotes = ({ children, className }) => {
+const StoryNotes = ({ children, className, ...rest }) => {
   const componentClass = new ClassName('story-notes');
 
   componentClass.addIf(className, className);
 
-  return <div className={componentClass.string}>{children}</div>;
+  return (
+    <div className={componentClass.string} {...rest}>
+      {children}
+    </div>
+  );
 };
 
 StoryNotes.propTypes = {

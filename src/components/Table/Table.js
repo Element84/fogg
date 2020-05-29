@@ -1,34 +1,28 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { VariableSizeGrid as Grid } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
-import memoizee from 'memoizee';
 
-import { useEventListener } from '../../hooks';
 import ClassName from '../../models/classname';
 
+import {
+  calculateGridHeightMemo,
+  mapColumnRatiosMemo,
+  calculateColumnRatiosTotalMemo,
+  calculateSingleColumnWidthMemo,
+  calculateColumnWidthsMemo
+} from './table-util';
+
 import TableCellCreator from '../TableCellCreator';
-
-function calculateGridHeight(tableHeight, headerHeight) {
-  if ( headerHeight ) {
-    return tableHeight - headerHeight;
-  }
-  return tableHeight;
-}
-
-const calculateGridHeightMemo = memoizee(calculateGridHeight);
 
 const Table = ({
   children,
   className,
-  fitContainer = false,
-  defaultWidth = 500,
   defaultHeight = 300,
   rowHeight = 80,
   headerHeight = 50,
   displayHeader = true,
   frozenHeader = true,
-  stretchHeightToContent = false,
   columns = [],
   data = [],
   onCellClick,
@@ -37,8 +31,6 @@ const Table = ({
   const ref = useRef();
   const gridRef = useRef();
 
-  const isEmpty = data.length === 0;
-
   const componentClass = new ClassName('table');
 
   componentClass.addIf(className, className);
@@ -46,23 +38,10 @@ const Table = ({
     componentClass.childString('frozen-header'),
     displayHeader && frozenHeader
   );
-  componentClass.addIf(
-    componentClass.childString('stretch-height'),
-    stretchHeightToContent
-  );
-  componentClass.addIf(
-    componentClass.childString('fit-container'),
-    fitContainer
-  );
 
   if (!displayHeader) {
     headerHeight = 0;
   }
-
-  const [dimensions, setDimensions] = useState({
-    width: defaultWidth,
-    height: isEmpty ? headerHeight : defaultHeight
-  });
 
   const activeColumns = columns.filter(
     ({ includeColumn = true } = {}) => !!includeColumn
@@ -96,21 +75,6 @@ const Table = ({
   const rowsCount = rows.length;
   const columnsCount = activeColumns.length;
 
-  if (stretchHeightToContent) {
-    dimensions.height = rowsCount * rowHeight;
-  }
-
-  const { width, height } = dimensions;
-
-  const widthRatios = activeColumns.map(
-    ({ widthRatio = 1 } = {}) => widthRatio
-  );
-  const widthRatiosTotal = widthRatios.reduce((a, b) => a + b, 0);
-  const singleColumnWidth = width / widthRatiosTotal;
-  const columnWidths = widthRatios.map(ratio => singleColumnWidth * ratio);
-
-
-
   /**
    * handleOnCellClick
    */
@@ -121,62 +85,93 @@ const Table = ({
     }
   }
 
-  const TableCellCreatorMemo = memoizee(TableCellCreator);
-
-  let HeaderCells;
-
-  // If we want frozen headers, we need to separate out the components into their
-  // own contained row in order to escape the react-window style and positioning
-
-  if (displayHeader && frozenHeader) {
-    const TableHeaderCreator = memoizee(TableCellCreator);
-    HeaderCells = headers.map((header, index) => {
-      const HeaderComponent = TableHeaderCreator({
-        rows: [headers],
-        columns: activeColumns,
-        onCellClick: handleOnCellClick,
-        onSort
-      });
-      return (
-        <HeaderComponent
-          key={`TableHeader-${index}`}
-          columnIndex={index}
-          rowIndex={0}
-          style={{
-            width: columnWidths[index],
-            height: headerHeight
-          }}
-        />
-      );
-    });
-  }
-
   const containerStyles = {
-    flexBasis: width,
-    height
+    flexBasis: defaultHeight
   };
+
+  /**
+   * handleOnResize
+   */
+
+  function handleOnResize () {
+    if (!gridRef.current) return;
+    gridRef.current.resetAfterColumnIndex(0);
+  }
 
   return (
     <div className={componentClass.string} ref={ref}>
-      <div className={componentClass.childString('container')} style={containerStyles}>
-        <AutoSizer>
+      <div
+        className={componentClass.childString('container')}
+        style={containerStyles}
+      >
+        <AutoSizer onResize={handleOnResize}>
           {({ height, width }) => {
-            const gridHeight = calculateGridHeightMemo(height, displayHeader && headerHeight);
+            const gridHeight = calculateGridHeightMemo(
+              height,
+              displayHeader && headerHeight
+            );
+            const widthRatios = activeColumns.map(mapColumnRatiosMemo);
+            const widthRatiosTotal = calculateColumnRatiosTotalMemo(
+              widthRatios
+            );
+            const singleColumnWidth = calculateSingleColumnWidthMemo(
+              width,
+              widthRatiosTotal
+            );
+            const columnWidths = calculateColumnWidthsMemo(
+              widthRatios,
+              singleColumnWidth
+            );
+
+            // If we want frozen headers, we need to separate out the components into their
+            // own contained row in order to escape the react-window style and positioning
+
+            let HeaderCells;
+
+            if (displayHeader && frozenHeader) {
+              HeaderCells = headers.map((header, index) => {
+                const HeaderComponent = TableCellCreator({
+                  rows: [headers],
+                  columns: activeColumns,
+                  onCellClick: handleOnCellClick,
+                  onSort
+                });
+                return (
+                  <HeaderComponent
+                    key={`TableHeader-${index}`}
+                    columnIndex={index}
+                    rowIndex={0}
+                    style={{
+                      width: columnWidths[index],
+                      height: headerHeight
+                    }}
+                  />
+                );
+              });
+            }
+
+            console.log('rows', rows);
 
             return (
               <>
-                {displayHeader && frozenHeader && (
-                  <div className={componentClass.childString('header')} style={{
-                    width,
-                    height: headerHeight
-                  }}>
+                {HeaderCells && (
+                  <div
+                    className={componentClass.childString('header')}
+                    style={{
+                      width,
+                      height: headerHeight
+                    }}
+                  >
                     {HeaderCells}
                   </div>
                 )}
-                <div className={componentClass.childString('grid')} style={{
-                  width,
-                  height: gridHeight
-                }}>
+                <div
+                  className={componentClass.childString('grid')}
+                  style={{
+                    width,
+                    height: gridHeight
+                  }}
+                >
                   <Grid
                     ref={gridRef}
                     columnCount={columnsCount}
@@ -186,7 +181,7 @@ const Table = ({
                     rowHeight={() => rowHeight}
                     width={width}
                   >
-                    {TableCellCreatorMemo({
+                    {TableCellCreator({
                       rows,
                       columns: activeColumns,
                       onCellClick: handleOnCellClick
@@ -195,7 +190,7 @@ const Table = ({
                 </div>
               </>
             );
-        }}
+          }}
         </AutoSizer>
       </div>
       {children}
@@ -203,21 +198,18 @@ const Table = ({
   );
 };
 
-
 Table.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
   className: PropTypes.string,
-  fitContainer: PropTypes.bool,
   defaultWidth: PropTypes.number,
   defaultHeight: PropTypes.number,
   rowHeight: PropTypes.number,
   headerHeight: PropTypes.number,
   displayHeader: PropTypes.bool,
   frozenHeader: PropTypes.bool,
-  stretchHeightToContent: PropTypes.bool,
   columns: PropTypes.array.isRequired,
   data: PropTypes.array.isRequired,
   onCellClick: PropTypes.func,

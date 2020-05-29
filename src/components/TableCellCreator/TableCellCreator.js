@@ -14,16 +14,21 @@ import ClassName from '../../models/classname';
  * @description Creates a Cell component for the table
  */
 
-function TableCellCreator ({ rows, columns, onCellClick, onSort } = {}) {
+function TableCellCreator ({
+  rows = [],
+  columns = [],
+  onCellClick,
+  onSort
+} = {}) {
   const numberOfRows = rows.length;
   const numberOfColumns = columns.length;
 
   const Cell = ({ columnIndex, rowIndex, style }) => {
     const componentClass = new ClassName('table-cell');
 
-    const column = columns[columnIndex];
-    const row = rows[rowIndex];
-    const cell = row[columnIndex];
+    const column = columns[columnIndex] || {};
+    const row = rows[rowIndex] || [];
+    const cell = row[columnIndex] || {};
 
     const hasSortFunction = typeof onSort === 'function';
 

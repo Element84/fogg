@@ -83,12 +83,9 @@
 
 .Story-Table-FitContainer {
 
+  &,
   .story {
-
-    .data-table {
-      height: 150px;
-    }
-
+    height: 100vh;
   }
 
 }
