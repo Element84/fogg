@@ -3,12 +3,12 @@ import memoizee from 'memoizee';
 /**
  * calculateGridHeight
  * @param {*} tableHeight
- * @param {*} headerHeight
+ * @param {*} additionalHeight
  */
 
-function calculateGridHeight (tableHeight, headerHeight) {
-  if (headerHeight) {
-    return tableHeight - headerHeight;
+function calculateGridHeight (tableHeight, additionalHeight) {
+  if (additionalHeight) {
+    return tableHeight - additionalHeight;
   }
   return tableHeight;
 }

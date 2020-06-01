@@ -21,10 +21,12 @@ const Table = ({
   defaultHeight = 300,
   rowHeight = 80,
   headerHeight = 50,
+  footerHeight = 0,
   displayHeader = true,
   frozenHeader = true,
   columns = [],
   data = [],
+  extraRows = [],
   onCellClick,
   onSort
 }) => {
@@ -49,13 +51,17 @@ const Table = ({
 
   const columnIds = activeColumns.map(({ columnId } = {}) => columnId);
 
-  const rows = data.map(row => {
+  let rows = data.map(row => {
     return columnIds.map(columnId => {
       return {
         value: row[columnId]
       };
     });
   });
+
+  if (Array.isArray(extraRows)) {
+    rows = [...rows, ...extraRows];
+  }
 
   const headers =
     displayHeader &&
@@ -106,10 +112,8 @@ const Table = ({
       >
         <AutoSizer onResize={handleOnResize}>
           {({ height, width }) => {
-            const gridHeight = calculateGridHeightMemo(
-              height,
-              displayHeader && headerHeight
-            );
+            const extrasHeight = headerHeight + footerHeight;
+            const gridHeight = calculateGridHeightMemo(height, extrasHeight);
             const widthRatios = activeColumns.map(mapColumnRatiosMemo);
             const widthRatiosTotal = calculateColumnRatiosTotalMemo(
               widthRatios
@@ -186,12 +190,20 @@ const Table = ({
                     })}
                   </Grid>
                 </div>
+                <div
+                  className={componentClass.childString('footer')}
+                  style={{
+                    width,
+                    height: footerHeight
+                  }}
+                >
+                  {children}
+                </div>
               </>
             );
           }}
         </AutoSizer>
       </div>
-      {children}
     </div>
   );
 };
@@ -206,10 +218,12 @@ Table.propTypes = {
   defaultHeight: PropTypes.number,
   rowHeight: PropTypes.number,
   headerHeight: PropTypes.number,
+  footerHeight: PropTypes.number,
   displayHeader: PropTypes.bool,
   frozenHeader: PropTypes.bool,
   columns: PropTypes.array.isRequired,
   data: PropTypes.array.isRequired,
+  extraRows: PropTypes.array.isRequired,
   onCellClick: PropTypes.func,
   onSort: PropTypes.func
 };

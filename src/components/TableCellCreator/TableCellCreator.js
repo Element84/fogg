@@ -29,6 +29,7 @@ function TableCellCreator ({
     const column = columns[columnIndex] || {};
     const row = rows[rowIndex] || [];
     const cell = row[columnIndex] || {};
+    const cellStyle = { ...style };
 
     const hasSortFunction = typeof onSort === 'function';
 
@@ -47,6 +48,7 @@ function TableCellCreator ({
       onSort
     };
 
+    const isFullRow = typeof row.Cell === 'function';
     const isFirstRow = rowIndex === 0;
     const isFirstColumn = columnIndex === 0;
     const isLastRow = numberOfRows - 1 === rowIndex;
@@ -59,7 +61,8 @@ function TableCellCreator ({
     componentClass.addIf('table-row-first', isFirstRow);
     componentClass.addIf('table-column-first', isFirstColumn);
     componentClass.addIf('table-row-last', isLastRow);
-    componentClass.addIf('table-column-last', isLastColumn);
+    componentClass.addIf('table-row-full', isFullRow);
+    componentClass.addIf('table-column-last', isLastColumn || isFullRow);
     componentClass.add(`table-cell-align-${align}`);
 
     if (typeof type === 'string') {
@@ -77,20 +80,29 @@ function TableCellCreator ({
       columnId
     };
 
+    if (isFullRow) {
+      cellStyle.width = '100%';
+    }
+
     function handleOnCellClick (e) {
       if (typeof onCellClick === 'function') {
         onCellClick(cellArgs, e);
       }
     }
 
+    if (isFullRow && !isFirstColumn) {
+      return null;
+    }
+
     return (
       <div
         className={componentClass.string}
-        style={style}
+        style={cellStyle}
         onClick={handleOnCellClick}
       >
         {isHeader && <TableHeaderCell cell={cellArgs} sort={sortOptions} />}
-        {!isHeader && <TableCell cell={cellArgs} />}
+        {!isHeader && !isFullRow && <TableCell cell={cellArgs} />}
+        {!isHeader && isFullRow && <row.Cell />}
       </div>
     );
   };
