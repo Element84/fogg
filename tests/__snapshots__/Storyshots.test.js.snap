@@ -1092,310 +1092,22 @@ Array [
             className="table table-frozen-header"
           >
             <div
+              className="table-container"
               style={
                 Object {
                   "height": 300,
-                  "width": 500,
                 }
               }
             >
               <div
-                className="table-header"
-              >
-                <div
-                  className="table-cell table-cell-header table-cell-column-firstName table-row-first table-column-first table-row-last table-cell-align-left"
-                  onClick={[Function]}
-                  style={
-                    Object {
-                      "height": 50,
-                      "width": 166.66666666666666,
-                    }
+                style={
+                  Object {
+                    "height": 0,
+                    "overflow": "visible",
+                    "width": 0,
                   }
-                >
-                  <span
-                    className="table-header-label"
-                  >
-                    First Name
-                  </span>
-                </div>
-                <div
-                  className="table-cell table-cell-header table-cell-column-lastName table-row-first table-row-last table-cell-align-left"
-                  onClick={[Function]}
-                  style={
-                    Object {
-                      "height": 50,
-                      "width": 166.66666666666666,
-                    }
-                  }
-                >
-                  <span
-                    className="table-header-label"
-                  >
-                    Last Name
-                  </span>
-                </div>
-                <div
-                  className="table-cell table-cell-header table-cell-column-actions table-row-first table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                  onClick={[Function]}
-                  style={
-                    Object {
-                      "height": 50,
-                      "width": 166.66666666666666,
-                    }
-                  }
-                >
-                  <span
-                    className="table-header-label"
-                  />
-                </div>
-              </div>
-              <div
-                className="table-grid"
-              >
-                <div
-                  onScroll={[Function]}
-                  style={
-                    Object {
-                      "WebkitOverflowScrolling": "touch",
-                      "direction": "ltr",
-                      "height": 300,
-                      "overflow": "auto",
-                      "position": "relative",
-                      "width": 500,
-                      "willChange": "transform",
-                    }
-                  }
-                >
-                  <div
-                    style={
-                      Object {
-                        "height": 240,
-                        "pointerEvents": undefined,
-                        "width": 500,
-                      }
-                    }
-                  >
-                    <div
-                      className="table-cell table-cell-column-firstName table-row-first table-column-first table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 0,
-                          "position": "absolute",
-                          "top": 0,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Gary
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-lastName table-row-first table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 166.66666666666666,
-                          "position": "absolute",
-                          "top": 0,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Godspeed
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-actions table-row-first table-column-last table-cell-align-right table-cell-type-action"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 333.3333333333333,
-                          "position": "absolute",
-                          "top": 0,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span
-                        className="button  button-text"
-                        data-full={false}
-                      >
-                        <a
-                          href="#"
-                          onClick={null}
-                          rel="noopener noreferrer"
-                        >
-                          View
-                        </a>
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-firstName table-column-first table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 0,
-                          "position": "absolute",
-                          "top": 80,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Quinn
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-lastName table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 166.66666666666666,
-                          "position": "absolute",
-                          "top": 80,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Airgon
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-actions table-column-last table-cell-align-right table-cell-type-action"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 333.3333333333333,
-                          "position": "absolute",
-                          "top": 80,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span
-                        className="button  button-text button-icon-before"
-                        data-full={false}
-                      >
-                        <a
-                          href="#"
-                          onClick={null}
-                          rel="noopener noreferrer"
-                        >
-                          <svg
-                            className="icon-FaPen"
-                            fill="currentColor"
-                            height="1em"
-                            stroke="currentColor"
-                            strokeWidth="0"
-                            style={
-                              Object {
-                                "color": undefined,
-                              }
-                            }
-                            viewBox="0 0 512 512"
-                            width="1em"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z"
-                            />
-                          </svg>
-                          Edit
-                        </a>
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-firstName table-column-first table-row-last table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 0,
-                          "position": "absolute",
-                          "top": 160,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Abraham
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-lastName table-row-last table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 166.66666666666666,
-                          "position": "absolute",
-                          "top": 160,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Lincoln
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-actions table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 333.3333333333333,
-                          "position": "absolute",
-                          "top": 160,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span
-                        className="button  button-text button-icon-after"
-                        data-full={false}
-                      >
-                        <a
-                          href="#"
-                          onClick={null}
-                          rel="noopener noreferrer"
-                        >
-                          Go
-                          <svg
-                            className="icon-FaChevronRight"
-                            fill="currentColor"
-                            height="1em"
-                            stroke="currentColor"
-                            strokeWidth="0"
-                            style={
-                              Object {
-                                "color": undefined,
-                              }
-                            }
-                            viewBox="0 0 320 512"
-                            width="1em"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"
-                            />
-                          </svg>
-                        </a>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                }
+              />
             </div>
           </div>
         </div>
@@ -1464,258 +1176,22 @@ Array [
             className="table table-frozen-header"
           >
             <div
+              className="table-container"
               style={
                 Object {
                   "height": 300,
-                  "width": 500,
                 }
               }
             >
               <div
-                className="table-header"
-              >
-                <div
-                  className="table-cell table-cell-header table-cell-column-firstName table-row-first table-column-first table-row-last table-cell-align-left"
-                  onClick={[Function]}
-                  style={
-                    Object {
-                      "height": 50,
-                      "width": 166.66666666666666,
-                    }
+                style={
+                  Object {
+                    "height": 0,
+                    "overflow": "visible",
+                    "width": 0,
                   }
-                >
-                  <span
-                    className="table-header-label"
-                  >
-                    First Name
-                  </span>
-                </div>
-                <div
-                  className="table-cell table-cell-header table-cell-column-lastName table-row-first table-row-last table-cell-align-left"
-                  onClick={[Function]}
-                  style={
-                    Object {
-                      "height": 50,
-                      "width": 166.66666666666666,
-                    }
-                  }
-                >
-                  <span
-                    className="table-header-label"
-                  >
-                    Last Name
-                  </span>
-                </div>
-                <div
-                  className="table-cell table-cell-header table-cell-column-actions table-row-first table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                  onClick={[Function]}
-                  style={
-                    Object {
-                      "height": 50,
-                      "width": 166.66666666666666,
-                    }
-                  }
-                >
-                  <span
-                    className="table-header-label"
-                  />
-                </div>
-              </div>
-              <div
-                className="table-grid"
-              >
-                <div
-                  onScroll={[Function]}
-                  style={
-                    Object {
-                      "WebkitOverflowScrolling": "touch",
-                      "direction": "ltr",
-                      "height": 300,
-                      "overflow": "auto",
-                      "position": "relative",
-                      "width": 500,
-                      "willChange": "transform",
-                    }
-                  }
-                >
-                  <div
-                    style={
-                      Object {
-                        "height": 240,
-                        "pointerEvents": undefined,
-                        "width": 500,
-                      }
-                    }
-                  >
-                    <div
-                      className="table-cell table-cell-column-firstName table-row-first table-column-first table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 0,
-                          "position": "absolute",
-                          "top": 0,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Gary
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-lastName table-row-first table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 166.66666666666666,
-                          "position": "absolute",
-                          "top": 0,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Godspeed
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-actions table-row-first table-column-last table-cell-align-right table-cell-type-action"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 333.3333333333333,
-                          "position": "absolute",
-                          "top": 0,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    />
-                    <div
-                      className="table-cell table-cell-column-firstName table-column-first table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 0,
-                          "position": "absolute",
-                          "top": 80,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Quinn
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-lastName table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 166.66666666666666,
-                          "position": "absolute",
-                          "top": 80,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Airgon
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-actions table-column-last table-cell-align-right table-cell-type-action"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 333.3333333333333,
-                          "position": "absolute",
-                          "top": 80,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span
-                        className="button "
-                        data-full={false}
-                      >
-                        <a
-                          href="#"
-                          onClick={null}
-                          rel="noopener noreferrer"
-                        >
-                          View
-                        </a>
-                      </span>
-                      <span
-                        className="button "
-                        data-full={false}
-                      >
-                        <a
-                          href="#"
-                          onClick={null}
-                          rel="noopener noreferrer"
-                        >
-                          Edit
-                        </a>
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-firstName table-column-first table-row-last table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 0,
-                          "position": "absolute",
-                          "top": 160,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Abraham
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-lastName table-row-last table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 166.66666666666666,
-                          "position": "absolute",
-                          "top": 160,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Lincoln
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-actions table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 333.3333333333333,
-                          "position": "absolute",
-                          "top": 160,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    />
-                  </div>
-                </div>
-              </div>
+                }
+              />
             </div>
           </div>
         </div>
@@ -1777,258 +1253,22 @@ Array [
             className="table table-frozen-header"
           >
             <div
+              className="table-container"
               style={
                 Object {
                   "height": 300,
-                  "width": 500,
                 }
               }
             >
               <div
-                className="table-header"
-              >
-                <div
-                  className="table-cell table-cell-header table-cell-column-firstName table-row-first table-column-first table-row-last table-cell-align-left"
-                  onClick={[Function]}
-                  style={
-                    Object {
-                      "height": 50,
-                      "width": 166.66666666666666,
-                    }
+                style={
+                  Object {
+                    "height": 0,
+                    "overflow": "visible",
+                    "width": 0,
                   }
-                >
-                  <span
-                    className="table-header-label"
-                  >
-                    First Name
-                  </span>
-                </div>
-                <div
-                  className="table-cell table-cell-header table-cell-column-lastName table-row-first table-row-last table-cell-align-left"
-                  onClick={[Function]}
-                  style={
-                    Object {
-                      "height": 50,
-                      "width": 166.66666666666666,
-                    }
-                  }
-                >
-                  <span
-                    className="table-header-label"
-                  >
-                    Last Name
-                  </span>
-                </div>
-                <div
-                  className="table-cell table-cell-header table-cell-column-actions table-row-first table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                  onClick={[Function]}
-                  style={
-                    Object {
-                      "height": 50,
-                      "width": 166.66666666666666,
-                    }
-                  }
-                >
-                  <span
-                    className="table-header-label"
-                  />
-                </div>
-              </div>
-              <div
-                className="table-grid"
-              >
-                <div
-                  onScroll={[Function]}
-                  style={
-                    Object {
-                      "WebkitOverflowScrolling": "touch",
-                      "direction": "ltr",
-                      "height": 300,
-                      "overflow": "auto",
-                      "position": "relative",
-                      "width": 500,
-                      "willChange": "transform",
-                    }
-                  }
-                >
-                  <div
-                    style={
-                      Object {
-                        "height": 240,
-                        "pointerEvents": undefined,
-                        "width": 500,
-                      }
-                    }
-                  >
-                    <div
-                      className="table-cell table-cell-column-firstName table-row-first table-column-first table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 0,
-                          "position": "absolute",
-                          "top": 0,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Gary
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-lastName table-row-first table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 166.66666666666666,
-                          "position": "absolute",
-                          "top": 0,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Godspeed
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-actions table-row-first table-column-last table-cell-align-right table-cell-type-action"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 333.3333333333333,
-                          "position": "absolute",
-                          "top": 0,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    />
-                    <div
-                      className="table-cell table-cell-column-firstName table-column-first table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 0,
-                          "position": "absolute",
-                          "top": 80,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Quinn
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-lastName table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 166.66666666666666,
-                          "position": "absolute",
-                          "top": 80,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Airgon
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-actions table-column-last table-cell-align-right table-cell-type-action"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 333.3333333333333,
-                          "position": "absolute",
-                          "top": 80,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span
-                        className="button "
-                        data-full={false}
-                      >
-                        <a
-                          href="#"
-                          onClick={null}
-                          rel="noopener noreferrer"
-                        >
-                          View
-                        </a>
-                      </span>
-                      <span
-                        className="button "
-                        data-full={false}
-                      >
-                        <a
-                          href="#"
-                          onClick={null}
-                          rel="noopener noreferrer"
-                        >
-                          Edit
-                        </a>
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-firstName table-column-first table-row-last table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 0,
-                          "position": "absolute",
-                          "top": 160,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Abraham
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-lastName table-row-last table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 166.66666666666666,
-                          "position": "absolute",
-                          "top": 160,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Lincoln
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-actions table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 333.3333333333333,
-                          "position": "absolute",
-                          "top": 160,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    />
-                  </div>
-                </div>
-              </div>
+                }
+              />
             </div>
           </div>
         </div>
@@ -7617,79 +6857,25 @@ Array [
             className="panel-body"
           >
             <div
-              className="table table-stretch-height table-fit-container"
+              className="table"
             >
               <div
+                className="table-container"
                 style={
                   Object {
                     "height": 50,
-                    "width": 500,
                   }
                 }
               >
                 <div
-                  className="table-grid"
-                >
-                  <div
-                    onScroll={[Function]}
-                    style={
-                      Object {
-                        "WebkitOverflowScrolling": "touch",
-                        "direction": "ltr",
-                        "height": 50,
-                        "overflow": "auto",
-                        "position": "relative",
-                        "width": 500,
-                        "willChange": "transform",
-                      }
+                  style={
+                    Object {
+                      "height": 0,
+                      "overflow": "visible",
+                      "width": 0,
                     }
-                  >
-                    <div
-                      style={
-                        Object {
-                          "height": 50,
-                          "pointerEvents": undefined,
-                          "width": 500,
-                        }
-                      }
-                    >
-                      <div
-                        className="table-cell table-cell-column-label table-row-first table-column-first table-row-last table-cell-align-left"
-                        onClick={[Function]}
-                        style={
-                          Object {
-                            "height": 50,
-                            "left": 0,
-                            "position": "absolute",
-                            "top": 0,
-                            "width": 250,
-                          }
-                        }
-                      >
-                        <span>
-                          Cloud Cover
-                        </span>
-                      </div>
-                      <div
-                        className="table-cell table-cell-column-value table-row-first table-row-last table-column-last table-cell-align-left"
-                        onClick={[Function]}
-                        style={
-                          Object {
-                            "height": 50,
-                            "left": 250,
-                            "position": "absolute",
-                            "top": 0,
-                            "width": 250,
-                          }
-                        }
-                      >
-                        <span>
-                          min: 0.2, max: 0.8
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  }
+                />
               </div>
             </div>
           </div>
@@ -8018,310 +7204,22 @@ Array [
           className="table table-frozen-header"
         >
           <div
+            className="table-container"
             style={
               Object {
                 "height": 300,
-                "width": 500,
               }
             }
           >
             <div
-              className="table-header"
-            >
-              <div
-                className="table-cell table-cell-header table-cell-column-firstName table-row-first table-column-first table-row-last table-cell-align-left"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "height": 50,
-                    "width": 166.66666666666666,
-                  }
+              style={
+                Object {
+                  "height": 0,
+                  "overflow": "visible",
+                  "width": 0,
                 }
-              >
-                <span
-                  className="table-header-label"
-                >
-                  First Name
-                </span>
-              </div>
-              <div
-                className="table-cell table-cell-header table-cell-column-lastName table-row-first table-row-last table-cell-align-left"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "height": 50,
-                    "width": 166.66666666666666,
-                  }
-                }
-              >
-                <span
-                  className="table-header-label"
-                >
-                  Last Name
-                </span>
-              </div>
-              <div
-                className="table-cell table-cell-header table-cell-column-actions table-row-first table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "height": 50,
-                    "width": 166.66666666666666,
-                  }
-                }
-              >
-                <span
-                  className="table-header-label"
-                />
-              </div>
-            </div>
-            <div
-              className="table-grid"
-            >
-              <div
-                onScroll={[Function]}
-                style={
-                  Object {
-                    "WebkitOverflowScrolling": "touch",
-                    "direction": "ltr",
-                    "height": 300,
-                    "overflow": "auto",
-                    "position": "relative",
-                    "width": 500,
-                    "willChange": "transform",
-                  }
-                }
-              >
-                <div
-                  style={
-                    Object {
-                      "height": 240,
-                      "pointerEvents": undefined,
-                      "width": 500,
-                    }
-                  }
-                >
-                  <div
-                    className="table-cell table-cell-column-firstName table-row-first table-column-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Gary
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-row-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Godspeed
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-row-first table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span
-                      className="button  button-text"
-                      data-full={false}
-                    >
-                      <a
-                        href="#"
-                        onClick={null}
-                        rel="noopener noreferrer"
-                      >
-                        View
-                      </a>
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-firstName table-column-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Quinn
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Airgon
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span
-                      className="button  button-text button-icon-before"
-                      data-full={false}
-                    >
-                      <a
-                        href="#"
-                        onClick={null}
-                        rel="noopener noreferrer"
-                      >
-                        <svg
-                          className="icon-FaPen"
-                          fill="currentColor"
-                          height="1em"
-                          stroke="currentColor"
-                          strokeWidth="0"
-                          style={
-                            Object {
-                              "color": undefined,
-                            }
-                          }
-                          viewBox="0 0 512 512"
-                          width="1em"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z"
-                          />
-                        </svg>
-                        Edit
-                      </a>
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-firstName table-column-first table-row-last table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Abraham
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-row-last table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Lincoln
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span
-                      className="button  button-text button-icon-after"
-                      data-full={false}
-                    >
-                      <a
-                        href="#"
-                        onClick={null}
-                        rel="noopener noreferrer"
-                      >
-                        Go
-                        <svg
-                          className="icon-FaChevronRight"
-                          fill="currentColor"
-                          height="1em"
-                          stroke="currentColor"
-                          strokeWidth="0"
-                          style={
-                            Object {
-                              "color": undefined,
-                            }
-                          }
-                          viewBox="0 0 320 512"
-                          width="1em"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"
-                          />
-                        </svg>
-                      </a>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+              }
+            />
           </div>
         </div>
       </div>
@@ -8496,6 +7394,7 @@ Array [
               <div
                 className="table-cell table-cell-header table-cell-column-firstName table-row-first table-column-first table-cell-align-left"
                 onClick={[Function]}
+                style={Object {}}
               >
                 <span
                   className="table-header-label"
@@ -8537,6 +7436,7 @@ Array [
               <div
                 className="table-cell table-cell-column-lastName table-cell-align-left"
                 onClick={[Function]}
+                style={Object {}}
               >
                 <span>
                   Airgon
@@ -8552,6 +7452,7 @@ Array [
               <div
                 className="table-cell table-cell-column-actions table-column-last table-cell-align-right table-cell-type-action"
                 onClick={[Function]}
+                style={Object {}}
               />
             </p>
           </li>
@@ -8688,258 +7589,95 @@ Array [
           className="table table-frozen-header"
         >
           <div
+            className="table-container"
             style={
               Object {
                 "height": 300,
-                "width": 500,
               }
             }
           >
             <div
-              className="table-header"
-            >
-              <div
-                className="table-cell table-cell-header table-cell-column-firstName table-row-first table-column-first table-row-last table-cell-align-left"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "height": 50,
-                    "width": 166.66666666666666,
-                  }
+              style={
+                Object {
+                  "height": 0,
+                  "overflow": "visible",
+                  "width": 0,
                 }
-              >
-                <span
-                  className="table-header-label"
-                >
-                  First Name
-                </span>
-              </div>
-              <div
-                className="table-cell table-cell-header table-cell-column-lastName table-row-first table-row-last table-cell-align-left"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "height": 50,
-                    "width": 166.66666666666666,
-                  }
-                }
-              >
-                <span
-                  className="table-header-label"
-                >
-                  Last Name
-                </span>
-              </div>
-              <div
-                className="table-cell table-cell-header table-cell-column-actions table-row-first table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "height": 50,
-                    "width": 166.66666666666666,
-                  }
-                }
-              >
-                <span
-                  className="table-header-label"
-                />
-              </div>
-            </div>
+              }
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  <button
+    className="info__show-button"
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "#027ac5",
+        "border": "none",
+        "borderRadius": "0 0 0 5px",
+        "color": "#fff",
+        "cursor": "pointer",
+        "display": "block",
+        "fontFamily": "sans-serif",
+        "fontSize": 12,
+        "padding": "5px 15px",
+        "position": "fixed",
+        "right": 0,
+        "top": 0,
+      }
+    }
+    type="button"
+  >
+    Show Info
+  </button>,
+]
+`;
+
+exports[`Storyshots Components/Table Extra Rows 1`] = `
+Array [
+  <div
+    style={
+      Object {
+        "position": "relative",
+        "zIndex": 0,
+      }
+    }
+  >
+    <div
+      className="story-container Story-Table-ExtraRows"
+    >
+      <h1>
+        Table
+      </h1>
+      <h2>
+        Extra Rows
+      </h2>
+      <div
+        className="story"
+      >
+        <div
+          className="table table-frozen-header"
+        >
+          <div
+            className="table-container"
+            style={
+              Object {
+                "height": 500,
+              }
+            }
+          >
             <div
-              className="table-grid"
-            >
-              <div
-                onScroll={[Function]}
-                style={
-                  Object {
-                    "WebkitOverflowScrolling": "touch",
-                    "direction": "ltr",
-                    "height": 300,
-                    "overflow": "auto",
-                    "position": "relative",
-                    "width": 500,
-                    "willChange": "transform",
-                  }
+              style={
+                Object {
+                  "height": 0,
+                  "overflow": "visible",
+                  "width": 0,
                 }
-              >
-                <div
-                  style={
-                    Object {
-                      "height": 240,
-                      "pointerEvents": undefined,
-                      "width": 500,
-                    }
-                  }
-                >
-                  <div
-                    className="table-cell table-cell-column-firstName table-row-first table-column-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Gary
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-row-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Godspeed
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-row-first table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  />
-                  <div
-                    className="table-cell table-cell-column-firstName table-column-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Quinn
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Airgon
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span
-                      className="button "
-                      data-full={false}
-                    >
-                      <a
-                        href="#"
-                        onClick={null}
-                        rel="noopener noreferrer"
-                      >
-                        View
-                      </a>
-                    </span>
-                    <span
-                      className="button "
-                      data-full={false}
-                    >
-                      <a
-                        href="#"
-                        onClick={null}
-                        rel="noopener noreferrer"
-                      >
-                        Edit
-                      </a>
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-firstName table-column-first table-row-last table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Abraham
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-row-last table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Lincoln
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  />
-                </div>
-              </div>
-            </div>
+              }
+            />
           </div>
         </div>
       </div>
@@ -9011,6 +7749,7 @@ Array [
             >
               <input
                 onChange={[Function]}
+                onKeyPress={[Function]}
                 placeholder="Search Table"
                 type="text"
                 value=""
@@ -9234,258 +7973,22 @@ Array [
             className="table table-frozen-header"
           >
             <div
+              className="table-container"
               style={
                 Object {
                   "height": 300,
-                  "width": 500,
                 }
               }
             >
               <div
-                className="table-header"
-              >
-                <div
-                  className="table-cell table-cell-header table-cell-column-firstName table-row-first table-column-first table-row-last table-cell-align-left"
-                  onClick={[Function]}
-                  style={
-                    Object {
-                      "height": 50,
-                      "width": 166.66666666666666,
-                    }
+                style={
+                  Object {
+                    "height": 0,
+                    "overflow": "visible",
+                    "width": 0,
                   }
-                >
-                  <span
-                    className="table-header-label"
-                  >
-                    First Name
-                  </span>
-                </div>
-                <div
-                  className="table-cell table-cell-header table-cell-column-lastName table-row-first table-row-last table-cell-align-left"
-                  onClick={[Function]}
-                  style={
-                    Object {
-                      "height": 50,
-                      "width": 166.66666666666666,
-                    }
-                  }
-                >
-                  <span
-                    className="table-header-label"
-                  >
-                    Last Name
-                  </span>
-                </div>
-                <div
-                  className="table-cell table-cell-header table-cell-column-actions table-row-first table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                  onClick={[Function]}
-                  style={
-                    Object {
-                      "height": 50,
-                      "width": 166.66666666666666,
-                    }
-                  }
-                >
-                  <span
-                    className="table-header-label"
-                  />
-                </div>
-              </div>
-              <div
-                className="table-grid"
-              >
-                <div
-                  onScroll={[Function]}
-                  style={
-                    Object {
-                      "WebkitOverflowScrolling": "touch",
-                      "direction": "ltr",
-                      "height": 300,
-                      "overflow": "auto",
-                      "position": "relative",
-                      "width": 500,
-                      "willChange": "transform",
-                    }
-                  }
-                >
-                  <div
-                    style={
-                      Object {
-                        "height": 240,
-                        "pointerEvents": undefined,
-                        "width": 500,
-                      }
-                    }
-                  >
-                    <div
-                      className="table-cell table-cell-column-firstName table-row-first table-column-first table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 0,
-                          "position": "absolute",
-                          "top": 0,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Gary
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-lastName table-row-first table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 166.66666666666666,
-                          "position": "absolute",
-                          "top": 0,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Godspeed
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-actions table-row-first table-column-last table-cell-align-right table-cell-type-action"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 333.3333333333333,
-                          "position": "absolute",
-                          "top": 0,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    />
-                    <div
-                      className="table-cell table-cell-column-firstName table-column-first table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 0,
-                          "position": "absolute",
-                          "top": 80,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Quinn
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-lastName table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 166.66666666666666,
-                          "position": "absolute",
-                          "top": 80,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Airgon
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-actions table-column-last table-cell-align-right table-cell-type-action"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 333.3333333333333,
-                          "position": "absolute",
-                          "top": 80,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span
-                        className="button "
-                        data-full={false}
-                      >
-                        <a
-                          href="#"
-                          onClick={null}
-                          rel="noopener noreferrer"
-                        >
-                          View
-                        </a>
-                      </span>
-                      <span
-                        className="button "
-                        data-full={false}
-                      >
-                        <a
-                          href="#"
-                          onClick={null}
-                          rel="noopener noreferrer"
-                        >
-                          Edit
-                        </a>
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-firstName table-column-first table-row-last table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 0,
-                          "position": "absolute",
-                          "top": 160,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Abraham
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-lastName table-row-last table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 166.66666666666666,
-                          "position": "absolute",
-                          "top": 160,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    >
-                      <span>
-                        Lincoln
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-actions table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 333.3333333333333,
-                          "position": "absolute",
-                          "top": 160,
-                          "width": 166.66666666666666,
-                        }
-                      }
-                    />
-                  </div>
-                </div>
-              </div>
+                }
+              />
             </div>
           </div>
         </div>
@@ -9530,6 +8033,11 @@ Array [
   >
     <div
       className="story-container Story-Table-FitContainer"
+      style={
+        Object {
+          "height": "100vh",
+        }
+      }
     >
       <h1>
         Table
@@ -9544,274 +8052,201 @@ Array [
           className="story-notes"
         >
           <p>
-            Using the component with the prop 
+            The component prop 
             <code>
               fitContainer
             </code>
-             set to
-             
-            <code>
-              true
-            </code>
-            requires the component's parent container to have a fixed height or height that won't grow past a certain point, such as using flexbox. Without this, the component will constantly try to rerender as it grows it's height.
+             has been deprecated. Instead, the table should be default fill its container
           </p>
+          <p>
+            The height of this story container was set to 100vh to demonstrate this example.
+          </p>
+          <pre>
+            <code>
+              .Story-Table-FitContainer {
+
+  &,
+  .story {
+    height: 100vh;
+  }
+
+}
+            </code>
+          </pre>
         </div>
         <div
-          className="table table-frozen-header table-fit-container"
+          className="table table-frozen-header"
         >
           <div
+            className="table-container"
             style={
               Object {
                 "height": 300,
-                "width": 500,
               }
             }
           >
             <div
-              className="table-header"
-            >
-              <div
-                className="table-cell table-cell-header table-cell-column-firstName table-row-first table-column-first table-row-last table-cell-align-left"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "height": 50,
-                    "width": 166.66666666666666,
-                  }
+              style={
+                Object {
+                  "height": 0,
+                  "overflow": "visible",
+                  "width": 0,
                 }
-              >
-                <span
-                  className="table-header-label"
-                >
-                  First Name
-                </span>
-              </div>
-              <div
-                className="table-cell table-cell-header table-cell-column-lastName table-row-first table-row-last table-cell-align-left"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "height": 50,
-                    "width": 166.66666666666666,
-                  }
-                }
-              >
-                <span
-                  className="table-header-label"
-                >
-                  Last Name
-                </span>
-              </div>
-              <div
-                className="table-cell table-cell-header table-cell-column-actions table-row-first table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "height": 50,
-                    "width": 166.66666666666666,
-                  }
-                }
-              >
-                <span
-                  className="table-header-label"
-                />
-              </div>
-            </div>
+              }
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  <button
+    className="info__show-button"
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "#027ac5",
+        "border": "none",
+        "borderRadius": "0 0 0 5px",
+        "color": "#fff",
+        "cursor": "pointer",
+        "display": "block",
+        "fontFamily": "sans-serif",
+        "fontSize": 12,
+        "padding": "5px 15px",
+        "position": "fixed",
+        "right": 0,
+        "top": 0,
+      }
+    }
+    type="button"
+  >
+    Show Info
+  </button>,
+]
+`;
+
+exports[`Storyshots Components/Table Fix Height to Content 1`] = `
+Array [
+  <div
+    style={
+      Object {
+        "position": "relative",
+        "zIndex": 0,
+      }
+    }
+  >
+    <div
+      className="story-container Story-Table-FixHeight to Content"
+    >
+      <h1>
+        Table
+      </h1>
+      <h2>
+        Fix Height to Content
+      </h2>
+      <div
+        className="story"
+      >
+        <div
+          className="table table-frozen-header"
+        >
+          <div
+            className="table-container"
+            style={
+              Object {
+                "height": 770,
+              }
+            }
+          >
             <div
-              className="table-grid"
-            >
-              <div
-                onScroll={[Function]}
-                style={
-                  Object {
-                    "WebkitOverflowScrolling": "touch",
-                    "direction": "ltr",
-                    "height": 300,
-                    "overflow": "auto",
-                    "position": "relative",
-                    "width": 500,
-                    "willChange": "transform",
-                  }
+              style={
+                Object {
+                  "height": 0,
+                  "overflow": "visible",
+                  "width": 0,
                 }
-              >
-                <div
-                  style={
-                    Object {
-                      "height": 240,
-                      "pointerEvents": undefined,
-                      "width": 500,
-                    }
-                  }
-                >
-                  <div
-                    className="table-cell table-cell-column-firstName table-row-first table-column-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Gary
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-row-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Godspeed
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-row-first table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  />
-                  <div
-                    className="table-cell table-cell-column-firstName table-column-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Quinn
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Airgon
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span
-                      className="button "
-                      data-full={false}
-                    >
-                      <a
-                        href="#"
-                        onClick={null}
-                        rel="noopener noreferrer"
-                      >
-                        View
-                      </a>
-                    </span>
-                    <span
-                      className="button "
-                      data-full={false}
-                    >
-                      <a
-                        href="#"
-                        onClick={null}
-                        rel="noopener noreferrer"
-                      >
-                        Edit
-                      </a>
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-firstName table-column-first table-row-last table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Abraham
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-row-last table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Lincoln
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  />
-                </div>
-              </div>
-            </div>
+              }
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  <button
+    className="info__show-button"
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "#027ac5",
+        "border": "none",
+        "borderRadius": "0 0 0 5px",
+        "color": "#fff",
+        "cursor": "pointer",
+        "display": "block",
+        "fontFamily": "sans-serif",
+        "fontSize": 12,
+        "padding": "5px 15px",
+        "position": "fixed",
+        "right": 0,
+        "top": 0,
+      }
+    }
+    type="button"
+  >
+    Show Info
+  </button>,
+]
+`;
+
+exports[`Storyshots Components/Table Footer 1`] = `
+Array [
+  <div
+    style={
+      Object {
+        "position": "relative",
+        "zIndex": 0,
+      }
+    }
+  >
+    <div
+      className="story-container Story-Table-Footer"
+    >
+      <h1>
+        Table
+      </h1>
+      <h2>
+        Footer
+      </h2>
+      <div
+        className="story"
+      >
+        <div
+          className="story-notes"
+        >
+          <p>
+            The difference between a table footer and adding extra rows is the footer is appended after the table component, where the extra rows are included as part of the table grid. This impacts things like sizing.
+          </p>
+        </div>
+        <div
+          className="table table-frozen-header"
+        >
+          <div
+            className="table-container"
+            style={
+              Object {
+                "height": 300,
+              }
+            }
+          >
+            <div
+              style={
+                Object {
+                  "height": 0,
+                  "overflow": "visible",
+                  "width": 0,
+                }
+              }
+            />
           </div>
         </div>
       </div>
@@ -9869,258 +8304,22 @@ Array [
           className="table table-frozen-header"
         >
           <div
+            className="table-container"
             style={
               Object {
                 "height": 300,
-                "width": 500,
               }
             }
           >
             <div
-              className="table-header"
-            >
-              <div
-                className="table-cell table-cell-header table-cell-column-firstName table-row-first table-column-first table-row-last table-cell-align-left"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "height": 50,
-                    "width": 166.66666666666666,
-                  }
+              style={
+                Object {
+                  "height": 0,
+                  "overflow": "visible",
+                  "width": 0,
                 }
-              >
-                <span
-                  className="table-header-label"
-                >
-                  First Name
-                </span>
-              </div>
-              <div
-                className="table-cell table-cell-header table-cell-column-lastName table-row-first table-row-last table-cell-align-left"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "height": 50,
-                    "width": 166.66666666666666,
-                  }
-                }
-              >
-                <span
-                  className="table-header-label"
-                >
-                  Last Name
-                </span>
-              </div>
-              <div
-                className="table-cell table-cell-header table-cell-column-actions table-row-first table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "height": 50,
-                    "width": 166.66666666666666,
-                  }
-                }
-              >
-                <span
-                  className="table-header-label"
-                />
-              </div>
-            </div>
-            <div
-              className="table-grid"
-            >
-              <div
-                onScroll={[Function]}
-                style={
-                  Object {
-                    "WebkitOverflowScrolling": "touch",
-                    "direction": "ltr",
-                    "height": 300,
-                    "overflow": "auto",
-                    "position": "relative",
-                    "width": 500,
-                    "willChange": "transform",
-                  }
-                }
-              >
-                <div
-                  style={
-                    Object {
-                      "height": 240,
-                      "pointerEvents": undefined,
-                      "width": 500,
-                    }
-                  }
-                >
-                  <div
-                    className="table-cell table-cell-column-firstName table-row-first table-column-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Gary
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-row-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Godspeed
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-row-first table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  />
-                  <div
-                    className="table-cell table-cell-column-firstName table-column-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Quinn
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Airgon
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span
-                      className="button "
-                      data-full={false}
-                    >
-                      <a
-                        href="#"
-                        onClick={null}
-                        rel="noopener noreferrer"
-                      >
-                        View
-                      </a>
-                    </span>
-                    <span
-                      className="button "
-                      data-full={false}
-                    >
-                      <a
-                        href="#"
-                        onClick={null}
-                        rel="noopener noreferrer"
-                      >
-                        Edit
-                      </a>
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-firstName table-column-first table-row-last table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Abraham
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-row-last table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Lincoln
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  />
-                </div>
-              </div>
-            </div>
+              }
+            />
           </div>
         </div>
       </div>
@@ -10297,6 +8496,7 @@ Array [
             >
               <input
                 onChange={[Function]}
+                onKeyPress={[Function]}
                 placeholder="Search Table"
                 type="text"
                 value=""
@@ -10517,400 +8717,25 @@ Array [
             </div>
           </div>
           <div
-            className="table table-frozen-header table-stretch-height table-fit-container"
+            className="table table-frozen-header"
           >
             <div
+              className="table-container"
               style={
                 Object {
-                  "height": 240,
-                  "width": 500,
+                  "height": 300,
                 }
               }
             >
               <div
-                className="table-header"
-              >
-                <div
-                  className="table-cell table-cell-header table-cell-column-firstName table-row-first table-column-first table-row-last table-cell-align-left"
-                  onClick={[Function]}
-                  style={
-                    Object {
-                      "height": 50,
-                      "width": 125,
-                    }
+                style={
+                  Object {
+                    "height": 0,
+                    "overflow": "visible",
+                    "width": 0,
                   }
-                >
-                  <span
-                    className="table-header-label"
-                  >
-                    First Name
-                  </span>
-                  <span
-                    className="table-header-sort"
-                  >
-                    <svg
-                      className="table-cell-icon icon-sort"
-                      fill="currentColor"
-                      height="1em"
-                      onClick={[Function]}
-                      stroke="currentColor"
-                      strokeWidth="0"
-                      style={
-                        Object {
-                          "color": undefined,
-                        }
-                      }
-                      viewBox="0 0 320 512"
-                      width="1em"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
-                      />
-                    </svg>
-                  </span>
-                </div>
-                <div
-                  className="table-cell table-cell-header table-cell-column-lastName table-row-first table-row-last table-cell-align-left"
-                  onClick={[Function]}
-                  style={
-                    Object {
-                      "height": 50,
-                      "width": 125,
-                    }
-                  }
-                >
-                  <span
-                    className="table-header-label"
-                  >
-                    Last Name
-                  </span>
-                  <span
-                    className="table-header-sort"
-                  >
-                    <svg
-                      className="table-cell-icon icon-sort"
-                      fill="currentColor"
-                      height="1em"
-                      onClick={[Function]}
-                      stroke="currentColor"
-                      strokeWidth="0"
-                      style={
-                        Object {
-                          "color": undefined,
-                        }
-                      }
-                      viewBox="0 0 320 512"
-                      width="1em"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
-                      />
-                    </svg>
-                  </span>
-                </div>
-                <div
-                  className="table-cell table-cell-header table-cell-column-date table-row-first table-row-last table-cell-align-left table-cell-type-date"
-                  onClick={[Function]}
-                  style={
-                    Object {
-                      "height": 50,
-                      "width": 125,
-                    }
-                  }
-                >
-                  <span
-                    className="table-header-label"
-                  >
-                    Date
-                  </span>
-                  <span
-                    className="table-header-sort"
-                  >
-                    <svg
-                      className="table-cell-icon icon-sort"
-                      fill="currentColor"
-                      height="1em"
-                      onClick={[Function]}
-                      stroke="currentColor"
-                      strokeWidth="0"
-                      style={
-                        Object {
-                          "color": undefined,
-                        }
-                      }
-                      viewBox="0 0 320 512"
-                      width="1em"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
-                      />
-                    </svg>
-                  </span>
-                </div>
-                <div
-                  className="table-cell table-cell-header table-cell-column-actions table-row-first table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                  onClick={[Function]}
-                  style={
-                    Object {
-                      "height": 50,
-                      "width": 125,
-                    }
-                  }
-                >
-                  <span
-                    className="table-header-label"
-                  />
-                </div>
-              </div>
-              <div
-                className="table-grid"
-              >
-                <div
-                  onScroll={[Function]}
-                  style={
-                    Object {
-                      "WebkitOverflowScrolling": "touch",
-                      "direction": "ltr",
-                      "height": 240,
-                      "overflow": "auto",
-                      "position": "relative",
-                      "width": 500,
-                      "willChange": "transform",
-                    }
-                  }
-                >
-                  <div
-                    style={
-                      Object {
-                        "height": 240,
-                        "pointerEvents": undefined,
-                        "width": 500,
-                      }
-                    }
-                  >
-                    <div
-                      className="table-cell table-cell-column-firstName table-row-first table-column-first table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 0,
-                          "position": "absolute",
-                          "top": 0,
-                          "width": 125,
-                        }
-                      }
-                    >
-                      <span>
-                        Gary
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-lastName table-row-first table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 125,
-                          "position": "absolute",
-                          "top": 0,
-                          "width": 125,
-                        }
-                      }
-                    >
-                      <span>
-                        Godspeed
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-date table-row-first table-cell-align-left table-cell-type-date"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 250,
-                          "position": "absolute",
-                          "top": 0,
-                          "width": 125,
-                        }
-                      }
-                    >
-                      <span>
-                        08/20/2019 11:51 am
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-actions table-row-first table-column-last table-cell-align-right table-cell-type-action"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 375,
-                          "position": "absolute",
-                          "top": 0,
-                          "width": 125,
-                        }
-                      }
-                    />
-                    <div
-                      className="table-cell table-cell-column-firstName table-column-first table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 0,
-                          "position": "absolute",
-                          "top": 80,
-                          "width": 125,
-                        }
-                      }
-                    >
-                      <span>
-                        Quinn
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-lastName table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 125,
-                          "position": "absolute",
-                          "top": 80,
-                          "width": 125,
-                        }
-                      }
-                    >
-                      <span>
-                        Airgon
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-date table-cell-align-left table-cell-type-date"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 250,
-                          "position": "absolute",
-                          "top": 80,
-                          "width": 125,
-                        }
-                      }
-                    >
-                      <span>
-                        08/20/2019 11:27 am
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-actions table-column-last table-cell-align-right table-cell-type-action"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 375,
-                          "position": "absolute",
-                          "top": 80,
-                          "width": 125,
-                        }
-                      }
-                    >
-                      <span
-                        className="button "
-                        data-full={false}
-                      >
-                        <a
-                          href="#"
-                          onClick={null}
-                          rel="noopener noreferrer"
-                        >
-                          View
-                        </a>
-                      </span>
-                      <span
-                        className="button "
-                        data-full={false}
-                      >
-                        <a
-                          href="#"
-                          onClick={null}
-                          rel="noopener noreferrer"
-                        >
-                          Edit
-                        </a>
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-firstName table-column-first table-row-last table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 0,
-                          "position": "absolute",
-                          "top": 160,
-                          "width": 125,
-                        }
-                      }
-                    >
-                      <span>
-                        Abraham
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-lastName table-row-last table-cell-align-left"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 125,
-                          "position": "absolute",
-                          "top": 160,
-                          "width": 125,
-                        }
-                      }
-                    >
-                      <span>
-                        Lincoln
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-date table-row-last table-cell-align-left table-cell-type-date"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 250,
-                          "position": "absolute",
-                          "top": 160,
-                          "width": 125,
-                        }
-                      }
-                    >
-                      <span>
-                        10/24/2019 9:36 pm
-                      </span>
-                    </div>
-                    <div
-                      className="table-cell table-cell-column-actions table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                      onClick={[Function]}
-                      style={
-                        Object {
-                          "height": 80,
-                          "left": 375,
-                          "position": "absolute",
-                          "top": 160,
-                          "width": 125,
-                        }
-                      }
-                    />
-                  </div>
-                </div>
-              </div>
+                }
+              />
             </div>
           </div>
         </div>
@@ -10969,208 +8794,22 @@ Array [
           className="table"
         >
           <div
+            className="table-container"
             style={
               Object {
                 "height": 300,
-                "width": 500,
               }
             }
           >
             <div
-              className="table-grid"
-            >
-              <div
-                onScroll={[Function]}
-                style={
-                  Object {
-                    "WebkitOverflowScrolling": "touch",
-                    "direction": "ltr",
-                    "height": 300,
-                    "overflow": "auto",
-                    "position": "relative",
-                    "width": 500,
-                    "willChange": "transform",
-                  }
+              style={
+                Object {
+                  "height": 0,
+                  "overflow": "visible",
+                  "width": 0,
                 }
-              >
-                <div
-                  style={
-                    Object {
-                      "height": 240,
-                      "pointerEvents": undefined,
-                      "width": 500,
-                    }
-                  }
-                >
-                  <div
-                    className="table-cell table-cell-column-firstName table-row-first table-column-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Gary
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-row-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Godspeed
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-row-first table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  />
-                  <div
-                    className="table-cell table-cell-column-firstName table-column-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Quinn
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Airgon
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span
-                      className="button "
-                      data-full={false}
-                    >
-                      <a
-                        href="#"
-                        onClick={null}
-                        rel="noopener noreferrer"
-                      >
-                        View
-                      </a>
-                    </span>
-                    <span
-                      className="button "
-                      data-full={false}
-                    >
-                      <a
-                        href="#"
-                        onClick={null}
-                        rel="noopener noreferrer"
-                      >
-                        Edit
-                      </a>
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-firstName table-column-first table-row-last table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Abraham
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-row-last table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Lincoln
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  />
-                </div>
-              </div>
-            </div>
+              }
+            />
           </div>
         </div>
       </div>
@@ -11507,6 +9146,7 @@ Array [
         >
           <input
             onChange={[Function]}
+            onKeyPress={[Function]}
             placeholder="Search Table"
             type="text"
             value=""
@@ -11567,872 +9207,22 @@ Array [
           className="table table-frozen-header"
         >
           <div
+            className="table-container"
             style={
               Object {
                 "height": 300,
-                "width": 700,
               }
             }
           >
             <div
-              className="table-header"
-            >
-              <div
-                className="table-cell table-cell-header table-cell-column-firstName table-row-first table-column-first table-row-last table-cell-align-left"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "height": 50,
-                    "width": 175,
-                  }
+              style={
+                Object {
+                  "height": 0,
+                  "overflow": "visible",
+                  "width": 0,
                 }
-              >
-                <span
-                  className="table-header-label"
-                >
-                  First Name
-                </span>
-                <span
-                  className="table-header-sort"
-                >
-                  <svg
-                    className="table-cell-icon icon-sort"
-                    fill="currentColor"
-                    height="1em"
-                    onClick={[Function]}
-                    stroke="currentColor"
-                    strokeWidth="0"
-                    style={
-                      Object {
-                        "color": undefined,
-                      }
-                    }
-                    viewBox="0 0 320 512"
-                    width="1em"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div
-                className="table-cell table-cell-header table-cell-column-lastName table-row-first table-row-last table-cell-align-left"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "height": 50,
-                    "width": 175,
-                  }
-                }
-              >
-                <span
-                  className="table-header-label"
-                >
-                  Last Name
-                </span>
-                <span
-                  className="table-header-sort"
-                >
-                  <svg
-                    className="table-cell-icon icon-sort"
-                    fill="currentColor"
-                    height="1em"
-                    onClick={[Function]}
-                    stroke="currentColor"
-                    strokeWidth="0"
-                    style={
-                      Object {
-                        "color": undefined,
-                      }
-                    }
-                    viewBox="0 0 320 512"
-                    width="1em"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div
-                className="table-cell table-cell-header table-cell-column-date table-row-first table-row-last table-cell-align-left table-cell-type-date"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "height": 50,
-                    "width": 175,
-                  }
-                }
-              >
-                <span
-                  className="table-header-label"
-                >
-                  Date
-                </span>
-                <span
-                  className="table-header-sort"
-                >
-                  <svg
-                    className="table-cell-icon icon-sort"
-                    fill="currentColor"
-                    height="1em"
-                    onClick={[Function]}
-                    stroke="currentColor"
-                    strokeWidth="0"
-                    style={
-                      Object {
-                        "color": undefined,
-                      }
-                    }
-                    viewBox="0 0 320 512"
-                    width="1em"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div
-                className="table-cell table-cell-header table-cell-column-actions table-row-first table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "height": 50,
-                    "width": 175,
-                  }
-                }
-              >
-                <span
-                  className="table-header-label"
-                />
-              </div>
-            </div>
-            <div
-              className="table-grid"
-            >
-              <div
-                onScroll={[Function]}
-                style={
-                  Object {
-                    "WebkitOverflowScrolling": "touch",
-                    "direction": "ltr",
-                    "height": 300,
-                    "overflow": "auto",
-                    "position": "relative",
-                    "width": 700,
-                    "willChange": "transform",
-                  }
-                }
-              >
-                <div
-                  style={
-                    Object {
-                      "height": 240,
-                      "pointerEvents": undefined,
-                      "width": 700,
-                    }
-                  }
-                >
-                  <div
-                    className="table-cell table-cell-column-firstName table-row-first table-column-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 175,
-                      }
-                    }
-                  >
-                    <span>
-                      Gary
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-row-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 175,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 175,
-                      }
-                    }
-                  >
-                    <span>
-                      Godspeed
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-date table-row-first table-cell-align-left table-cell-type-date"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 350,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 175,
-                      }
-                    }
-                  >
-                    <span>
-                      08/20/2019
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-row-first table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 525,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 175,
-                      }
-                    }
-                  />
-                  <div
-                    className="table-cell table-cell-column-firstName table-column-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 175,
-                      }
-                    }
-                  >
-                    <span>
-                      Quinn
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 175,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 175,
-                      }
-                    }
-                  >
-                    <span>
-                      Airgon
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-date table-cell-align-left table-cell-type-date"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 350,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 175,
-                      }
-                    }
-                  >
-                    <span>
-                      08/20/2019
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 525,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 175,
-                      }
-                    }
-                  >
-                    <span
-                      className="button "
-                      data-full={false}
-                    >
-                      <a
-                        href="#"
-                        onClick={null}
-                        rel="noopener noreferrer"
-                      >
-                        View
-                      </a>
-                    </span>
-                    <span
-                      className="button "
-                      data-full={false}
-                    >
-                      <a
-                        href="#"
-                        onClick={null}
-                        rel="noopener noreferrer"
-                      >
-                        Edit
-                      </a>
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-firstName table-column-first table-row-last table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 175,
-                      }
-                    }
-                  >
-                    <span>
-                      Abraham
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-row-last table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 175,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 175,
-                      }
-                    }
-                  >
-                    <span>
-                      Lincoln
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-date table-row-last table-cell-align-left table-cell-type-date"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 350,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 175,
-                      }
-                    }
-                  >
-                    <span>
-                      10/24/2019
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 525,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 175,
-                      }
-                    }
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>,
-  <button
-    className="info__show-button"
-    onClick={[Function]}
-    style={
-      Object {
-        "background": "#027ac5",
-        "border": "none",
-        "borderRadius": "0 0 0 5px",
-        "color": "#fff",
-        "cursor": "pointer",
-        "display": "block",
-        "fontFamily": "sans-serif",
-        "fontSize": 12,
-        "padding": "5px 15px",
-        "position": "fixed",
-        "right": 0,
-        "top": 0,
-      }
-    }
-    type="button"
-  >
-    Show Info
-  </button>,
-]
-`;
-
-exports[`Storyshots Components/Table Stretch Height To Content 1`] = `
-Array [
-  <div
-    style={
-      Object {
-        "position": "relative",
-        "zIndex": 0,
-      }
-    }
-  >
-    <div
-      className="story-container Story-Table-StretchHeight To Content"
-    >
-      <h1>
-        Table
-      </h1>
-      <h2>
-        Stretch Height To Content
-      </h2>
-      <div
-        className="story"
-      >
-        <div
-          className="table table-frozen-header table-stretch-height table-fit-container"
-        >
-          <div
-            style={
-              Object {
-                "height": 480,
-                "width": 500,
               }
-            }
-          >
-            <div
-              className="table-header"
-            >
-              <div
-                className="table-cell table-cell-header table-cell-column-firstName table-row-first table-column-first table-row-last table-cell-align-left"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "height": 50,
-                    "width": 166.66666666666666,
-                  }
-                }
-              >
-                <span
-                  className="table-header-label"
-                >
-                  First Name
-                </span>
-              </div>
-              <div
-                className="table-cell table-cell-header table-cell-column-lastName table-row-first table-row-last table-cell-align-left"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "height": 50,
-                    "width": 166.66666666666666,
-                  }
-                }
-              >
-                <span
-                  className="table-header-label"
-                >
-                  Last Name
-                </span>
-              </div>
-              <div
-                className="table-cell table-cell-header table-cell-column-actions table-row-first table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "height": 50,
-                    "width": 166.66666666666666,
-                  }
-                }
-              >
-                <span
-                  className="table-header-label"
-                />
-              </div>
-            </div>
-            <div
-              className="table-grid"
-            >
-              <div
-                onScroll={[Function]}
-                style={
-                  Object {
-                    "WebkitOverflowScrolling": "touch",
-                    "direction": "ltr",
-                    "height": 480,
-                    "overflow": "auto",
-                    "position": "relative",
-                    "width": 500,
-                    "willChange": "transform",
-                  }
-                }
-              >
-                <div
-                  style={
-                    Object {
-                      "height": 480,
-                      "pointerEvents": undefined,
-                      "width": 500,
-                    }
-                  }
-                >
-                  <div
-                    className="table-cell table-cell-column-firstName table-row-first table-column-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Gary
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-row-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Godspeed
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-row-first table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  />
-                  <div
-                    className="table-cell table-cell-column-firstName table-column-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Quinn
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Airgon
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 80,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span
-                      className="button "
-                      data-full={false}
-                    >
-                      <a
-                        href="#"
-                        onClick={null}
-                        rel="noopener noreferrer"
-                      >
-                        View
-                      </a>
-                    </span>
-                    <span
-                      className="button "
-                      data-full={false}
-                    >
-                      <a
-                        href="#"
-                        onClick={null}
-                        rel="noopener noreferrer"
-                      >
-                        Edit
-                      </a>
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-firstName table-column-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Abraham
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Lincoln
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 160,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  />
-                  <div
-                    className="table-cell table-cell-column-firstName table-column-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 240,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Gary
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 240,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Godspeed
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 240,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  />
-                  <div
-                    className="table-cell table-cell-column-firstName table-column-first table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 320,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Quinn
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 320,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Airgon
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 320,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span
-                      className="button "
-                      data-full={false}
-                    >
-                      <a
-                        href="#"
-                        onClick={null}
-                        rel="noopener noreferrer"
-                      >
-                        View
-                      </a>
-                    </span>
-                    <span
-                      className="button "
-                      data-full={false}
-                    >
-                      <a
-                        href="#"
-                        onClick={null}
-                        rel="noopener noreferrer"
-                      >
-                        Edit
-                      </a>
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-firstName table-column-first table-row-last table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 400,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Abraham
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-lastName table-row-last table-cell-align-left"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 166.66666666666666,
-                        "position": "absolute",
-                        "top": 400,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  >
-                    <span>
-                      Lincoln
-                    </span>
-                  </div>
-                  <div
-                    className="table-cell table-cell-column-actions table-row-last table-column-last table-cell-align-right table-cell-type-action"
-                    onClick={[Function]}
-                    style={
-                      Object {
-                        "height": 80,
-                        "left": 333.3333333333333,
-                        "position": "absolute",
-                        "top": 400,
-                        "width": 166.66666666666666,
-                      }
-                    }
-                  />
-                </div>
-              </div>
-            </div>
+            />
           </div>
         </div>
       </div>

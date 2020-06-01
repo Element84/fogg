@@ -66,16 +66,10 @@ describe('Table', () => {
       expect(tableComponent.hasClass('table')).toBeTruthy();
     });
 
-    const tableComponentHeader = tableComponent.find('.table-header');
-
-    it('should render a table header', () => {
-      expect(tableComponentHeader.length).toEqual(1);
-    });
-
-    const tableComponentGrid = tableComponent.find('Grid');
+    const tableComponentAutoSizer = tableComponent.find('AutoSizer');
 
     it('should render a Grid', () => {
-      expect(tableComponentGrid.length).toEqual(1);
+      expect(tableComponentAutoSizer.length).toEqual(1);
     });
   });
 });
