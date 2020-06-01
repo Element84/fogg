@@ -18,6 +18,7 @@ import TableCellCreator from '../TableCellCreator';
 const Table = ({
   children,
   className,
+  fixHeightToContent = false,
   defaultHeight = 300,
   rowHeight = 80,
   headerHeight = 50,
@@ -44,6 +45,8 @@ const Table = ({
   if (!displayHeader) {
     headerHeight = 0;
   }
+
+  const extrasHeight = headerHeight + footerHeight;
 
   const activeColumns = columns.filter(
     ({ includeColumn = true } = {}) => !!includeColumn
@@ -91,8 +94,13 @@ const Table = ({
     }
   }
 
+  if (fixHeightToContent) {
+    const contentHeight = rowsCount * rowHeight;
+    defaultHeight = contentHeight + extrasHeight;
+  }
+
   const containerStyles = {
-    flexBasis: defaultHeight
+    height: defaultHeight
   };
 
   /**
@@ -112,8 +120,8 @@ const Table = ({
       >
         <AutoSizer onResize={handleOnResize}>
           {({ height, width }) => {
-            const extrasHeight = headerHeight + footerHeight;
             const gridHeight = calculateGridHeightMemo(height, extrasHeight);
+
             const widthRatios = activeColumns.map(mapColumnRatiosMemo);
             const widthRatiosTotal = calculateColumnRatiosTotalMemo(
               widthRatios
@@ -190,15 +198,17 @@ const Table = ({
                     })}
                   </Grid>
                 </div>
-                <div
-                  className={componentClass.childString('footer')}
-                  style={{
-                    width,
-                    height: footerHeight
-                  }}
-                >
-                  {children}
-                </div>
+                {children && (
+                  <div
+                    className={componentClass.childString('footer')}
+                    style={{
+                      width,
+                      height: footerHeight
+                    }}
+                  >
+                    {children}
+                  </div>
+                )}
               </>
             );
           }}
@@ -214,7 +224,7 @@ Table.propTypes = {
     PropTypes.node
   ]),
   className: PropTypes.string,
-  defaultWidth: PropTypes.number,
+  fixHeightToContent: PropTypes.bool,
   defaultHeight: PropTypes.number,
   rowHeight: PropTypes.number,
   headerHeight: PropTypes.number,
@@ -223,7 +233,7 @@ Table.propTypes = {
   frozenHeader: PropTypes.bool,
   columns: PropTypes.array.isRequired,
   data: PropTypes.array.isRequired,
-  extraRows: PropTypes.array.isRequired,
+  extraRows: PropTypes.array,
   onCellClick: PropTypes.func,
   onSort: PropTypes.func
 };

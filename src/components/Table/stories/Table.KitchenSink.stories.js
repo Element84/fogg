@@ -176,7 +176,6 @@ stories.add(STORY_NAME, () => {
           columns={columns}
           data={data}
           frozenHeader={true}
-          stretchHeightToContent={true}
           onSort={handleOnSort}
         />
       </div>

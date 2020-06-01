@@ -133,7 +133,7 @@ const SearchPanelFilters = ({
         <Table
           rowHeight={50}
           displayHeader={false}
-          stretchHeightToContent={true}
+          fixHeightToContent={true}
           columns={[
             {
               columnId: 'label'
