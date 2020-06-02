@@ -51,20 +51,43 @@ const tableData = [
 ];
 
 const STORY_COMPONENT = 'Table';
-const STORY_NAME = 'Frozen Header';
+const STORY_NAME = 'Extra Rows';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
-const tripleTableData = [...tableData, ...tableData, ...tableData];
+const ExtraRow = () => {
+  return (
+    <p
+      style={{
+        width: '100%',
+        textAlign: 'center'
+      }}
+    >
+      Centered Extra Row
+    </p>
+  );
+};
 
 stories.add(STORY_NAME, () => {
   const { columns, data } = useTableData({
     columns: tableColumns,
-    data: tripleTableData
+    data: tableData
   });
+
+  const extraRows = [
+    {
+      Cell: ExtraRow
+    }
+  ];
+
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
-      <Table columns={columns} data={data} frozenHeader={true} />
+      <Table
+        columns={columns}
+        data={data}
+        defaultHeight={500}
+        extraRows={extraRows}
+      />
     </Story>
   );
 });

@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import Story from '../../../../stories/helpers/Story';
+import StoryNotes from '../../../../stories/helpers/StoryNotes';
 
 import { useTableData } from '../../../hooks';
 
@@ -50,26 +51,37 @@ const tableData = [
   }
 ];
 
-const tableDataDoubled = [...tableData, ...tableData];
-
 const STORY_COMPONENT = 'Table';
-const STORY_NAME = 'Stretch Height To Content';
+const STORY_NAME = 'Footer';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
+
+const tripleTableData = [...tableData, ...tableData, ...tableData];
 
 stories.add(STORY_NAME, () => {
   const { columns, data } = useTableData({
     columns: tableColumns,
-    data: tableDataDoubled
+    data: tripleTableData
   });
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
-      <Table
-        columns={columns}
-        data={data}
-        stretchHeightToContent={true}
-        fitContainer={true}
-      />
+      <StoryNotes>
+        <p>
+          The difference between a table footer and adding extra rows is the
+          footer is appended after the table component, where the extra rows are
+          included as part of the table grid. This impacts things like sizing.
+        </p>
+      </StoryNotes>
+      <Table columns={columns} data={data} footerHeight={20}>
+        <div
+          style={{
+            color: 'white',
+            backgroundColor: 'blueviolet'
+          }}
+        >
+          Table Footer
+        </div>
+      </Table>
     </Story>
   );
 });

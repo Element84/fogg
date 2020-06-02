@@ -1,33 +1,38 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { VariableSizeGrid as Grid } from 'react-window';
-import memoizee from 'memoizee';
+import AutoSizer from 'react-virtualized-auto-sizer';
 
-import { useEventListener } from '../../hooks';
 import ClassName from '../../models/classname';
+
+import {
+  calculateGridHeightMemo,
+  mapColumnRatiosMemo,
+  calculateColumnRatiosTotalMemo,
+  calculateSingleColumnWidthMemo,
+  calculateColumnWidthsMemo
+} from './table-util';
 
 import TableCellCreator from '../TableCellCreator';
 
 const Table = ({
   children,
   className,
-  fitContainer = false,
-  defaultWidth = 500,
+  fixHeightToContent = false,
   defaultHeight = 300,
   rowHeight = 80,
   headerHeight = 50,
+  footerHeight = 0,
   displayHeader = true,
   frozenHeader = true,
-  stretchHeightToContent = false,
   columns = [],
   data = [],
+  extraRows = [],
   onCellClick,
   onSort
 }) => {
   const ref = useRef();
   const gridRef = useRef();
-
-  const isEmpty = data.length === 0;
 
   const componentClass = new ClassName('table');
 
@@ -36,45 +41,12 @@ const Table = ({
     componentClass.childString('frozen-header'),
     displayHeader && frozenHeader
   );
-  componentClass.addIf(
-    componentClass.childString('stretch-height'),
-    stretchHeightToContent
-  );
-  componentClass.addIf(
-    componentClass.childString('fit-container'),
-    fitContainer
-  );
 
   if (!displayHeader) {
     headerHeight = 0;
   }
 
-  const [dimensions, setDimensions] = useState({
-    width: defaultWidth,
-    height: isEmpty ? headerHeight : defaultHeight
-  });
-
-  // Use an event listener to determine when the window resizes so that we
-  // can use it to set the width dynamically for our Table
-
-  const memoizedHandleOnResize = useCallback(() => {
-    handleOnResize();
-  }, [
-    ref,
-    gridRef,
-    headerHeight,
-    stretchHeightToContent,
-    fitContainer,
-    isEmpty
-  ]);
-
-  useEventListener({
-    target: window,
-    event: 'resize',
-    onEvent: memoizedHandleOnResize,
-    debounceOnEvent: true,
-    fireOnLoad: true
-  });
+  const extrasHeight = headerHeight + footerHeight;
 
   const activeColumns = columns.filter(
     ({ includeColumn = true } = {}) => !!includeColumn
@@ -82,13 +54,17 @@ const Table = ({
 
   const columnIds = activeColumns.map(({ columnId } = {}) => columnId);
 
-  const rows = data.map(row => {
+  let rows = data.map(row => {
     return columnIds.map(columnId => {
       return {
         value: row[columnId]
       };
     });
   });
+
+  if (Array.isArray(extraRows)) {
+    rows = [...rows, ...extraRows];
+  }
 
   const headers =
     displayHeader &&
@@ -108,51 +84,6 @@ const Table = ({
   const rowsCount = rows.length;
   const columnsCount = activeColumns.length;
 
-  if (stretchHeightToContent) {
-    dimensions.height = rowsCount * rowHeight;
-  }
-
-  const { width, height } = dimensions;
-
-  const widthRatios = activeColumns.map(
-    ({ widthRatio = 1 } = {}) => widthRatio
-  );
-  const widthRatiosTotal = widthRatios.reduce((a, b) => a + b, 0);
-  const singleColumnWidth = width / widthRatiosTotal;
-  const columnWidths = widthRatios.map(ratio => singleColumnWidth * ratio);
-
-  /**
-   * handleOnResize
-   * @description Manages and sets the size state of the current ref when resize occurs
-   */
-
-  function handleOnResize () {
-    if (!fitContainer) return;
-
-    const { current: currentTable } = ref;
-    const { current: currentGrid } = gridRef;
-    const tableHeight = isEmpty ? headerHeight : height;
-
-    if (!currentTable) return;
-
-    const { offsetWidth, offsetHeight } = currentTable;
-
-    const isDiffWidth = offsetWidth !== width;
-    const isDiffHeight = offsetHeight !== tableHeight;
-
-    if (!isDiffWidth && !isDiffHeight) return;
-
-    setDimensions(prev => {
-      return {
-        ...prev,
-        width: offsetWidth,
-        height: isEmpty ? headerHeight : offsetHeight
-      };
-    });
-
-    currentGrid.resetAfterColumnIndex(0);
-  }
-
   /**
    * handleOnCellClick
    */
@@ -163,68 +94,126 @@ const Table = ({
     }
   }
 
-  const TableCellCreatorMemo = memoizee(TableCellCreator);
-
-  let HeaderCells;
-
-  // If we want frozen headers, we need to separate out the components into their
-  // own contained row in order to escape the react-window style and positioning
-
-  if (displayHeader && frozenHeader) {
-    const TableHeaderCreator = memoizee(TableCellCreator);
-    HeaderCells = headers.map((header, index) => {
-      const HeaderComponent = TableHeaderCreator({
-        rows: [headers],
-        columns: activeColumns,
-        onCellClick: handleOnCellClick,
-        onSort
-      });
-      return (
-        <HeaderComponent
-          key={`TableHeader-${index}`}
-          columnIndex={index}
-          rowIndex={0}
-          style={{
-            width: columnWidths[index],
-            height: headerHeight
-          }}
-        />
-      );
-    });
+  if (fixHeightToContent) {
+    const contentHeight = rowsCount * rowHeight;
+    defaultHeight = contentHeight + extrasHeight;
   }
 
   const containerStyles = {
-    width,
-    height
+    height: defaultHeight
   };
+
+  /**
+   * handleOnResize
+   */
+
+  function handleOnResize () {
+    if (!gridRef.current) return;
+    gridRef.current.resetAfterColumnIndex(0);
+  }
 
   return (
     <div className={componentClass.string} ref={ref}>
-      <div style={containerStyles}>
-        {displayHeader && frozenHeader && (
-          <div className={componentClass.childString('header')}>
-            {HeaderCells}
-          </div>
-        )}
-        <div className={componentClass.childString('grid')}>
-          <Grid
-            ref={gridRef}
-            columnCount={columnsCount}
-            columnWidth={index => columnWidths[index]}
-            height={height}
-            rowCount={rowsCount}
-            rowHeight={() => rowHeight}
-            width={width}
-          >
-            {TableCellCreatorMemo({
-              rows,
-              columns: activeColumns,
-              onCellClick: handleOnCellClick
-            })}
-          </Grid>
-        </div>
+      <div
+        className={componentClass.childString('container')}
+        style={containerStyles}
+      >
+        <AutoSizer onResize={handleOnResize}>
+          {({ height, width }) => {
+            const gridHeight = calculateGridHeightMemo(height, extrasHeight);
+
+            const widthRatios = activeColumns.map(mapColumnRatiosMemo);
+            const widthRatiosTotal = calculateColumnRatiosTotalMemo(
+              widthRatios
+            );
+            const singleColumnWidth = calculateSingleColumnWidthMemo(
+              width,
+              widthRatiosTotal
+            );
+            const columnWidths = calculateColumnWidthsMemo(
+              widthRatios,
+              singleColumnWidth
+            );
+
+            // If we want frozen headers, we need to separate out the components into their
+            // own contained row in order to escape the react-window style and positioning
+
+            let HeaderCells;
+
+            if (displayHeader && frozenHeader) {
+              HeaderCells = headers.map((header, index) => {
+                const HeaderComponent = TableCellCreator({
+                  rows: [headers],
+                  columns: activeColumns,
+                  onCellClick: handleOnCellClick,
+                  onSort
+                });
+                return (
+                  <HeaderComponent
+                    key={`TableHeader-${index}`}
+                    columnIndex={index}
+                    rowIndex={0}
+                    style={{
+                      width: columnWidths[index],
+                      height: headerHeight
+                    }}
+                  />
+                );
+              });
+            }
+
+            return (
+              <>
+                {HeaderCells && (
+                  <div
+                    className={componentClass.childString('header')}
+                    style={{
+                      width,
+                      height: headerHeight
+                    }}
+                  >
+                    {HeaderCells}
+                  </div>
+                )}
+                <div
+                  className={componentClass.childString('grid')}
+                  style={{
+                    width,
+                    height: gridHeight
+                  }}
+                >
+                  <Grid
+                    ref={gridRef}
+                    columnCount={columnsCount}
+                    columnWidth={index => columnWidths[index]}
+                    height={gridHeight}
+                    rowCount={rowsCount}
+                    rowHeight={() => rowHeight}
+                    width={width}
+                  >
+                    {TableCellCreator({
+                      rows,
+                      columns: activeColumns,
+                      onCellClick: handleOnCellClick
+                    })}
+                  </Grid>
+                </div>
+                {children && (
+                  <div
+                    className={componentClass.childString('footer')}
+                    style={{
+                      width,
+                      height: footerHeight
+                    }}
+                  >
+                    {children}
+                  </div>
+                )}
+              </>
+            );
+          }}
+        </AutoSizer>
       </div>
-      {children}
     </div>
   );
 };
@@ -235,16 +224,16 @@ Table.propTypes = {
     PropTypes.node
   ]),
   className: PropTypes.string,
-  fitContainer: PropTypes.bool,
-  defaultWidth: PropTypes.number,
+  fixHeightToContent: PropTypes.bool,
   defaultHeight: PropTypes.number,
   rowHeight: PropTypes.number,
   headerHeight: PropTypes.number,
+  footerHeight: PropTypes.number,
   displayHeader: PropTypes.bool,
   frozenHeader: PropTypes.bool,
-  stretchHeightToContent: PropTypes.bool,
   columns: PropTypes.array.isRequired,
   data: PropTypes.array.isRequired,
+  extraRows: PropTypes.array,
   onCellClick: PropTypes.func,
   onSort: PropTypes.func
 };

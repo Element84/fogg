@@ -51,7 +51,7 @@ const tableData = [
 ];
 
 const STORY_COMPONENT = 'Table';
-const STORY_NAME = 'Frozen Header';
+const STORY_NAME = 'Fix Height to Content';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
@@ -62,9 +62,15 @@ stories.add(STORY_NAME, () => {
     columns: tableColumns,
     data: tripleTableData
   });
+
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
-      <Table columns={columns} data={data} frozenHeader={true} />
+      <Table
+        label="Users"
+        columns={columns}
+        data={data}
+        fixHeightToContent={true}
+      />
     </Story>
   );
 });
