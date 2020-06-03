@@ -12,10 +12,12 @@ import Story from '../stories/helpers/Story';
 
 // automatically import all files ending in *.stories.js
 
-const req = require.context('../src', true, /.stories.(js|mdx)/);
+const reqSrc = require.context('../src', true, /.stories.(js|mdx)/);
+const reqExamples = require.context('../examples', true, /.stories.(js|mdx)/);
 
 function loadStories() {
-  req.keys().forEach(filename => req(filename));
+  reqSrc.keys().forEach(filename => reqSrc(filename));
+  reqExamples.keys().forEach(filename => reqExamples(filename));
 }
 
 // Gatsby's Link overrides:

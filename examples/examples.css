@@ -1,0 +1,23 @@
+.Story-EarthSearch-Default .lens-sidebar {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+  max-height: 100%;
+}
+
+.Story-EarthSearch-Default .sidebar-results {
+  flex-grow: 0;
+  min-height: 0;
+}
+
+.Story-EarthSearch-Default .sidebar-results .panel {
+  overflow: hidden;
+  height: 100%;
+}
+
+.Story-EarthSearch-Default .sidebar-results .panel-body {
+  flex-grow: 0;
+  overflow-y: scroll;
+  min-height: 0;
+}

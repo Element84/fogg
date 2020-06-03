@@ -15,7 +15,7 @@ import {
 import { input } from '../../src/lib';
 const { regexByFieldName } = input;
 
-const stories = storiesOf('Integrations|Forms', module);
+const stories = storiesOf('Integrations/Forms', module);
 
 stories.add('Default', () => {
   function handleSubmit (event, fields) {

@@ -3,7 +3,6 @@ import { storiesOf } from '@storybook/react';
 
 import LensLayers from './stories/LensLayers.story';
 import LensEarthSearchDynamicLayerDate from './stories/LensEarthSearchDynamicLayerDate.story';
-import LensEarthSearchDefault from './stories/LensEarthSearchDefault.story';
 import LensEarthSearchNoFilter from './stories/LensEarthSearchNoFilter.story';
 import LensEarthSearchDateOnly from './stories/LensEarthSearchDateOnly.story';
 import LensEarthSearchCustomDraw from './stories/LensEarthSearchCustomDraw.story';
@@ -19,7 +18,6 @@ import LensEarthSearchUtc from './stories/LensEarthSearchUtc.story';
 const stories = storiesOf('Components|Lens', module);
 
 stories.add('Layers', LensLayers);
-stories.add('Earth Search - Default', LensEarthSearchDefault);
 stories.add('Earth Search - No Filter', LensEarthSearchNoFilter);
 stories.add('Earth Search - Date Only', LensEarthSearchDateOnly);
 stories.add('Earth Search - Date Only with Default Date', () => {
