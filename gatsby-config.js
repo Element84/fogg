@@ -12,13 +12,6 @@ module.exports = {
     // 'gatsby-plugin-react-leaflet',
     'gatsby-plugin-react-helmet',
     {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'images',
-        path: `${__dirname}/src/assets/images` // why does this matter?
-      }
-    },
-    {
       resolve: 'gatsby-plugin-manifest',
       options: {
         name: 'gatsby-starter-default',

@@ -23,7 +23,6 @@
     "gatsby-plugin-react-helmet": "^3.3.3",
     "gatsby-plugin-react-leaflet": "^2.0.13",
     "gatsby-plugin-sass": "^2.3.3",
-    "gatsby-source-filesystem": "^2.3.10",
     "leaflet-active-area": "^1.1.1",
     "leaflet-draw": "^1.0.4",
     "memoizee": "^0.4.14",
@@ -55,8 +54,8 @@
   "peerDependencies": {
     "gatsby": "^2.18.4",
     "leaflet": "1.6.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^5.3.19",
