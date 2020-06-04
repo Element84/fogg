@@ -110,7 +110,10 @@ export default function useLens () {
    * handleResolveBeforeSearch
    */
 
-  async function handleResolveBeforeSearch ({ settings = {} } = {}) {
+  async function handleResolveBeforeSearch ({
+    settings = {},
+    options = {}
+  } = {}) {
     const errorBase = 'handleResolveBeforeSearch - Failed to resolve';
     const map = currentLeafletRef(refMap);
 
@@ -119,20 +122,51 @@ export default function useLens () {
       return;
     }
 
+    const { placenameShape } = options;
+
+    const featuresToAdd = [];
+
     const {
       center = {},
       geoJson = {},
       zoom,
-      featureGroup = mapFeatureGroup
+      featureGroup = mapFeatureGroup,
+      textInput
     } = settings;
 
-    addShapeToMap({
-      featureGroup,
-      shapeOptions,
-      panToShape: true,
-      center,
-      geoJson,
-      zoom
+    const isPlacenameSearch =
+      typeof textInput === 'string' && textInput.length > 0;
+    const placenameMarker = placenameShape === 'marker';
+    const placenamePolygon = placenameShape === 'polygon';
+    const placenameAll = placenameShape === 'all';
+
+    const addMarker = isPlacenameSearch && (placenameMarker || placenameAll);
+    const addGeoJson = !isPlacenameSearch || placenamePolygon || placenameAll;
+
+    if (addMarker) {
+      featuresToAdd.push({
+        featureGroup,
+        shapeOptions,
+        panToShape: true,
+        center,
+        zoom
+      });
+    }
+
+    if (addGeoJson) {
+      featuresToAdd.push({
+        featureGroup,
+        shapeOptions,
+        panToShape: true,
+        center,
+        geoJson,
+        zoom,
+        clearOtherLayers: !addMarker
+      });
+    }
+
+    featuresToAdd.forEach((feature) => {
+      addShapeToMap(feature);
     });
   }
 

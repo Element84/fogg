@@ -1,4 +1,4 @@
-import { getGeom, center } from '@turf/turf';
+import { getGeom, center, bboxPolygon } from '@turf/turf';
 
 /**
  * geoJsonFromLatLn
@@ -94,4 +94,12 @@ export function getGeoJsonCenter (geoJson) {
     throw new Error('Failed to get geoJson center: Invalid geoJson type');
   }
   return center(geoJson);
+}
+
+/**
+ * getGeoJsonFromExtent
+ */
+
+export function getGeoJsonFromExtent ({ xmax, xmin, ymax, ymin }) {
+  return bboxPolygon([xmin, ymin, xmax, ymax]);
 }

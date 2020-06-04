@@ -66,9 +66,9 @@ const SearchComplete = ({
    * @description Triggers when someone clicks on a result item
    */
 
-  function handleResultClick (e, value, label) {
+  function handleResultClick (e, value, label, geoJson) {
     updateSearchInput(label);
-    handleQuery(value, null, label);
+    handleQuery(value, null, label, geoJson);
     updateQuery(value);
     updateOpenState(false);
   }
@@ -78,9 +78,19 @@ const SearchComplete = ({
    * @description Manges making the actual query search
    */
 
-  function handleQuery (query, searchDate = date, textInput = query) {
+  function handleQuery (
+    location,
+    searchDate = date,
+    textInput = query,
+    geoJson
+  ) {
     if (typeof onSearch === 'function') {
-      onSearch(query, searchDate && searchDate.date, textInput);
+      onSearch({
+        location,
+        geoJson,
+        date: searchDate && searchDate.date,
+        textInput
+      });
     }
   }
 
@@ -157,13 +167,15 @@ const SearchComplete = ({
         <ul>
           {results
             .slice(0, MAX_RESULTS)
-            .map(({ label, sublabel, value } = {}, index) => {
+            .map(({ label, sublabel, value, geoJson } = {}, index) => {
               return (
                 <li
                   key={`SearchComplete-Result-Item-${index}`}
                   className="search-complete-results-item"
                 >
-                  <button onClick={(e) => handleResultClick(e, value, label)}>
+                  <button
+                    onClick={(e) => handleResultClick(e, value, label, geoJson)}
+                  >
                     <span className="search-complete-results-item-label">
                       {label}
                     </span>
