@@ -15,7 +15,7 @@ const LensSearchComplete = ({ forwardedRef, ...props }) => {
     resolveOnAutocomplete
   } = geoSearch;
   const { date, textInput } = queryParams;
-  const { utc } = config;
+  const { utc, ignoreDatetime } = config;
 
   /**
    * handleDateChange
@@ -69,6 +69,7 @@ const LensSearchComplete = ({ forwardedRef, ...props }) => {
     <SearchComplete
       defaultValue={textInput}
       date={date}
+      ignoreDatetime={ignoreDatetime}
       onSearch={handleSearch}
       resolveQueryComplete={resolveOnAutocomplete}
       forwardedRef={forwardedRef}
