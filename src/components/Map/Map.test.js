@@ -26,12 +26,9 @@ describe('Map', () => {
     const mapDive = map.dive();
 
     it('should render a blue_marble map by default', () => {
-      expect(
-        mapDive
-          .find('Layer')
-          .first()
-          .prop('layer').id
-      ).toEqual('blue_marble');
+      expect(mapDive.find('Layer').first().prop('layer').id).toEqual(
+        'blue_marble'
+      );
     });
 
     it('should render with the given center coordinates', () => {

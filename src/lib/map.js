@@ -36,7 +36,7 @@ export function latLngFromGeoJson (geoJson, type = 'object') {
     throw new Error(`${errorBase}: Invalid coordinates`);
   }
 
-  return coordinates.map(set => {
+  return coordinates.map((set) => {
     if (type === 'array') {
       return [set[1], set[0]];
     }

@@ -25,8 +25,8 @@ const tableColumns = [
     Header: 'Date',
     columnId: 'date',
     type: 'date',
-    cellTransformer: value => formatDateTime(value),
-    filterTransformer: value => formatDateTime(value)
+    cellTransformer: (value) => formatDateTime(value),
+    filterTransformer: (value) => formatDateTime(value)
   },
   {
     columnId: 'actions',

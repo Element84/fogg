@@ -135,7 +135,7 @@ export function addGeoJsonLayer ({
   }
 
   if (isLeafletLayerGroup(featureGroup)) {
-    geoJsonLayer.eachLayer(layer => featureGroup.addLayer(layer));
+    geoJsonLayer.eachLayer((layer) => featureGroup.addLayer(layer));
     featureGroup.addTo(map);
   } else {
     geoJsonLayer.addTo(map);
@@ -192,7 +192,7 @@ export function clearFeatureGroupLayers ({
     ({ _leaflet_id: id } = {}) => !excludeIds.includes(id)
   );
 
-  layers.forEach(layer => {
+  layers.forEach((layer) => {
     featureGroup.removeLayer(layer);
     if (isValidMap) map.removeLayer(layer);
   });

@@ -23,18 +23,18 @@ export function buildLayerSet (availableLayers, availableServices = []) {
   }
 
   return {
-    base: availableLayers.base.map(layer => {
+    base: availableLayers.base.map((layer) => {
       const service = availableServices.find(
-        service => service.name === layer.serviceName
+        (service) => service.name === layer.serviceName
       );
       return {
         ...layer,
         service
       };
     }),
-    overlay: availableLayers.overlay.map(layer => {
+    overlay: availableLayers.overlay.map((layer) => {
       const service = availableServices.find(
-        service => service.name === layer.serviceName
+        (service) => service.name === layer.serviceName
       );
       return {
         ...layer,

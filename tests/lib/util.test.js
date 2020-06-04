@@ -70,7 +70,7 @@ describe('Util', () => {
     };
 
     it('should return an object with properties listed in the whitelist', () => {
-      expect(filterObject(object, key => whitelist.includes(key))).toEqual(
+      expect(filterObject(object, (key) => whitelist.includes(key))).toEqual(
         expected
       );
     });

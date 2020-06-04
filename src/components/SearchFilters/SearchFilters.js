@@ -37,7 +37,7 @@ const SearchFilters = ({
       if (!Array.isArray(activeFilter.value)) {
         value = [value];
       } else if (activeFilter.value.includes(value)) {
-        value = activeFilter.value.filter(val => val !== value);
+        value = activeFilter.value.filter((val) => val !== value);
       } else {
         value = activeFilter.value.concat([value]);
       }

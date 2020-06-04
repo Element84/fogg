@@ -54,8 +54,8 @@ const Table = ({
 
   const columnIds = activeColumns.map(({ columnId } = {}) => columnId);
 
-  let rows = data.map(row => {
-    return columnIds.map(columnId => {
+  let rows = data.map((row) => {
+    return columnIds.map((columnId) => {
       return {
         value: row[columnId]
       };
@@ -185,7 +185,7 @@ const Table = ({
                   <Grid
                     ref={gridRef}
                     columnCount={columnsCount}
-                    columnWidth={index => columnWidths[index]}
+                    columnWidth={(index) => columnWidths[index]}
                     height={gridHeight}
                     rowCount={rowsCount}
                     rowHeight={() => rowHeight}

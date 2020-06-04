@@ -52,7 +52,7 @@ const MapDraw = ({
   // Loop through all of our configured options and determine the
   // shape configuration for each if a valid shape
 
-  Object.keys(drawOptions).forEach(key => {
+  Object.keys(drawOptions).forEach((key) => {
     // Check if the option is turned off or if it's a valid shape
 
     if (!drawOptions[key] || !SHAPE_CONTROLS.includes(key)) return;

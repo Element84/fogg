@@ -27,7 +27,7 @@ const FormWrapper = () => {
   function handleFormSave (e, fields) {
     e.preventDefault();
 
-    Object.entries(fields).forEach(entry => {
+    Object.entries(fields).forEach((entry) => {
       const name = entry[0];
       const value = entry[1].value;
       handleModInputSave(value, name);

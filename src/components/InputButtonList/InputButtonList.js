@@ -67,8 +67,10 @@ const InputButtonList = ({
         });
     }
 
-    const selectedOptions = selectionOptions.map(selection => {
-      const isSelected = newSelections.find(option => option === selection.id);
+    const selectedOptions = selectionOptions.map((selection) => {
+      const isSelected = newSelections.find(
+        (option) => option === selection.id
+      );
       return {
         ...selection,
         isChecked: !!isSelected

@@ -13,7 +13,7 @@ import Datetime from '../Datetime';
  * @description Default input component with variable type option
  */
 
-const FormInput = props => {
+const FormInput = (props) => {
   const {
     className,
     disabled,

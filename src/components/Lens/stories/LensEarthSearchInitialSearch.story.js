@@ -27,7 +27,7 @@ if (isDomAvailable()) {
   customMapFeatureGroup = new L.FeatureGroup();
 }
 
-const SidebarWrapper = props => {
+const SidebarWrapper = (props) => {
   const { geoSearch = {}, map = {} } = useLens();
   const { search } = geoSearch;
   const { addTileLayerToMap, clearTileLayers, clearTileLayer } = map;

@@ -25,7 +25,7 @@ export function updateCheckedSelections (selections, { id, isChecked }) {
   if (isChecked && !newSelections.includes(id)) {
     newSelections.push(id);
   } else if (!isChecked && newSelections.includes(id)) {
-    newSelections = newSelections.filter(selection => selection !== id);
+    newSelections = newSelections.filter((selection) => selection !== id);
   }
 
   return newSelections;
@@ -38,7 +38,7 @@ export function updateCheckedSelections (selections, { id, isChecked }) {
 
 export function filterIsChecked (options) {
   if (!Array.isArray(options)) return [];
-  return options.filter(option => !!option.isChecked);
+  return options.filter((option) => !!option.isChecked);
 }
 
 /**

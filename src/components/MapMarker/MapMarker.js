@@ -4,7 +4,7 @@ import { Marker } from 'react-leaflet';
 
 import { useMapMarkerIcon } from '../../hooks';
 
-const MapMarker = props => {
+const MapMarker = (props) => {
   const { icon } = useMapMarkerIcon();
 
   const refMarker = createRef();

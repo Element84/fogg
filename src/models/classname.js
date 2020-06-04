@@ -13,7 +13,7 @@ class ClassName {
   add (className) {
     if (!className) return this.classes;
     const split = className.split(' ');
-    split.forEach(i => this.classes.add(i));
+    split.forEach((i) => this.classes.add(i));
     return this.classes;
   }
 

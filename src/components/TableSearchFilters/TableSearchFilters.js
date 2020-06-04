@@ -47,7 +47,7 @@ const TableSearchFilters = ({
         {options.map(({ Header, columnId, type } = {}, index) => {
           const values = availableValuesByColumnId(defaultTableData, columnId);
           const hasValues = Array.isArray(values) && values.length > 0;
-          const valueOptions = values.map(value => {
+          const valueOptions = values.map((value) => {
             return {
               label: value,
               value,

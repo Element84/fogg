@@ -102,7 +102,7 @@ const MapPreview = ({
             {type === 'Polygon' &&
               geoJsonCoordinates.map((set = []) => {
                 return set.map((position, index) => {
-                  const fixedPosition = position.map(coordinates => [
+                  const fixedPosition = position.map((coordinates) => [
                     coordinates[1],
                     coordinates[0]
                   ]);

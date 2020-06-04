@@ -176,7 +176,7 @@ const SearchComplete = ({
                   className="search-complete-results-item"
                 >
                   <button
-                    onClick={e => handleResultClick(e, value, label, geoJson)}
+                    onClick={(e) => handleResultClick(e, value, label, geoJson)}
                   >
                     <span className="search-complete-results-item-label">
                       {label}

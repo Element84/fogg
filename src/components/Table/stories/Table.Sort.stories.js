@@ -22,7 +22,7 @@ const tableColumns = [
     Header: 'Date',
     columnId: 'date',
     type: 'date',
-    cellTransformer: value => formatDate(value)
+    cellTransformer: (value) => formatDate(value)
   },
   {
     columnId: 'actions',

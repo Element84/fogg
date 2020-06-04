@@ -24,13 +24,13 @@ export default function useTableData ({ columns = [], data = [] }) {
 
   const [filters, updateFilters] = useState({});
 
-  const filtersArray = Object.keys(filters).map(key => filters[key]);
+  const filtersArray = Object.keys(filters).map((key) => filters[key]);
 
   const filterKeys = columns
     .filter(({ canFilter = true } = {}) => !!canFilter)
     .map(({ columnId } = {}) => columnId);
 
-  if (filterKeys.find(key => typeof key === 'undefined')) {
+  if (filterKeys.find((key) => typeof key === 'undefined')) {
     throw new Error(`${errorBase}: Columns contain undefined columnId`);
   }
 
@@ -59,7 +59,7 @@ export default function useTableData ({ columns = [], data = [] }) {
 
     filterKeys.push(key);
 
-    workingData = workingData.map(set => {
+    workingData = workingData.map((set) => {
       let value = filterTransformer(set[columnId]);
 
       value = sanitizeFilterValue(value);
@@ -97,7 +97,7 @@ export default function useTableData ({ columns = [], data = [] }) {
     }
 
     if (filterType === 'checklist') {
-      workingData = workingData.filter(row => {
+      workingData = workingData.filter((row) => {
         let rowValue = row[filterColumnId];
 
         if (!Array.isArray(rowValue)) rowValue = [rowValue];
@@ -110,7 +110,7 @@ export default function useTableData ({ columns = [], data = [] }) {
 
         let rowHasValue = true;
 
-        filterValue.forEach(value => {
+        filterValue.forEach((value) => {
           if (!rowValue.includes(value)) {
             rowHasValue = false;
           }
@@ -124,8 +124,8 @@ export default function useTableData ({ columns = [], data = [] }) {
   // Now that we have searched our data, loop back through our data and
   // remove our temporary filter key
 
-  workingData = workingData.map(set => {
-    const keysToStrip = Object.keys(set).filter(key =>
+  workingData = workingData.map((set) => {
+    const keysToStrip = Object.keys(set).filter((key) =>
       key.includes(FILTER_KEY)
     );
 
@@ -133,7 +133,7 @@ export default function useTableData ({ columns = [], data = [] }) {
       ...set
     };
 
-    keysToStrip.forEach(key => {
+    keysToStrip.forEach((key) => {
       delete data[key];
     });
 
@@ -142,7 +142,7 @@ export default function useTableData ({ columns = [], data = [] }) {
 
   // Return our filter keys to the original state before our temporary filterable key
 
-  filterKeys.map(key => key.replace(FILTER_KEY, ''));
+  filterKeys.map((key) => key.replace(FILTER_KEY, ''));
 
   /***********
    * SORTING *
@@ -212,7 +212,7 @@ export default function useTableData ({ columns = [], data = [] }) {
   workingData = workingData.map((data = {}, index) => {
     const dataKeys = Object.keys(data) || [];
 
-    dataKeys.forEach(key => {
+    dataKeys.forEach((key) => {
       const column = workingColumns.find(
         ({ columnId } = {}) => columnId === key
       );
@@ -230,7 +230,7 @@ export default function useTableData ({ columns = [], data = [] }) {
    */
 
   function handleSort ({ columnIndex, columnId } = {}) {
-    updateSortOptions(prev => {
+    updateSortOptions((prev) => {
       const { sortType: prevSortType, sortedIndex } = prev;
       const isSameColumn = sortedIndex === columnIndex;
       const nextSortType = isSameColumn
@@ -285,7 +285,7 @@ export default function useTableData ({ columns = [], data = [] }) {
 
       updateFilters(updatedFiltersState);
     } else {
-      updateFilters(prev => {
+      updateFilters((prev) => {
         return {
           ...prev,
           [activeIndex]: {

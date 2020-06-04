@@ -8,7 +8,7 @@ export default function useGeoFilters (filterSettings) {
   // Grab all the available filtesr with a defaultValue as the
   // default active
 
-  const defaultActiveFilters = available.map(filter => {
+  const defaultActiveFilters = available.map((filter) => {
     return {
       id: filter.id,
       value: filter.value || filter.defaultValue
@@ -71,7 +71,7 @@ export default function useGeoFilters (filterSettings) {
       'available',
       'defaultValue'
     );
-    const updatedFilters = changes.map(filter => {
+    const updatedFilters = changes.map((filter) => {
       const match = activeFilters.find(({ id } = {}) => id === filter.id);
       return {
         ...match,
@@ -155,13 +155,13 @@ export default function useGeoFilters (filterSettings) {
 
   function buildAvailableFilters () {
     let filtersSet = concatFilters(
-      filters.available.map(filter => ({ ...filter })),
-      filters.active.map(filter => ({ ...filter }))
+      filters.available.map((filter) => ({ ...filter })),
+      filters.active.map((filter) => ({ ...filter }))
     );
     if (filters.isOpen) {
       filtersSet = concatFilters(
         filtersSet,
-        filters.unsaved.map(filter => ({ ...filter }))
+        filters.unsaved.map((filter) => ({ ...filter }))
       );
     }
     return filtersSet;
@@ -176,10 +176,10 @@ export default function useGeoFilters (filterSettings) {
   function applyFilterSetKeyToFilters (filtersToUpdate = [], set, key) {
     if (!Array.isArray(filtersToUpdate)) return [];
 
-    return filtersToUpdate.map(filter => {
+    return filtersToUpdate.map((filter) => {
       const newKeys = {};
       const setFilter =
-        filters[set] && filters[set].find(sf => filter.id === sf.id);
+        filters[set] && filters[set].find((sf) => filter.id === sf.id);
       if (setFilter) {
         newKeys[key] = setFilter[key];
       }
@@ -230,11 +230,11 @@ function concatFilters () {
   // Loop through all args, allowing someone to pass in as many arrays
   // of filters as they wish
 
-  currentArguments.forEach(filterSet => {
+  currentArguments.forEach((filterSet) => {
     // Loop through each set of filters and overlay it into our main array
-    filterSet.forEach(filter => {
+    filterSet.forEach((filter) => {
       const existingIndex = allFilters.findIndex(
-        existingFilter => existingFilter.id === filter.id
+        (existingFilter) => existingFilter.id === filter.id
       );
 
       // If we can't find it, that means it doesn't exist in our array yet

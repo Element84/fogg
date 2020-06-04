@@ -16,7 +16,7 @@ import { buildLayerSet } from '../../lib/layers';
 
 import Layer from '../Layer';
 
-const Map = props => {
+const Map = (props) => {
   const {
     children,
     className,
@@ -55,7 +55,7 @@ const Map = props => {
 
     const { current: layersControl } = mapControlRef;
 
-    mapEffect.forEach(effect => {
+    mapEffect.forEach((effect) => {
       if (typeof effect === 'function') {
         effect({
           leafletControls: {
@@ -128,7 +128,7 @@ const Map = props => {
         {children}
         <LayersControl ref={mapControlRef}>
           {mapLayers.base &&
-            mapLayers.base.map(layer => (
+            mapLayers.base.map((layer) => (
               <LayersControl.BaseLayer
                 key={`base_layer_${layer.id}`}
                 name={layer.name}
@@ -142,7 +142,7 @@ const Map = props => {
               </LayersControl.BaseLayer>
             ))}
           {mapLayers.overlay &&
-            mapLayers.overlay.map(layer => (
+            mapLayers.overlay.map((layer) => (
               <LayersControl.Overlay
                 key={`overlay_layer_${layer.id}`}
                 name={layer.name}

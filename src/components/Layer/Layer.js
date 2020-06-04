@@ -4,7 +4,7 @@ import { uniqueId } from 'lodash';
 import { TileLayer, GeoJSON } from 'react-leaflet';
 import moment from 'moment';
 
-const getKey = layerKey => {
+const getKey = (layerKey) => {
   const newKey = uniqueId(layerKey);
   return newKey;
 };
@@ -23,7 +23,7 @@ const Layer = ({ layer = {}, layerKey, activeDateRange }) => {
       let features = data.data.features || data.data.geometries;
       if (!features) features = [];
 
-      const GeoJSONdata = features.filter(geoItem => {
+      const GeoJSONdata = features.filter((geoItem) => {
         let feature = null;
 
         if (geoItem.properties && geoItem.properties.time) {

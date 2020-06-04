@@ -45,7 +45,7 @@ describe('MapPreview', () => {
     const map = mapPreview.find('MapWithRefs');
     const mapPreviewPolygon = mapPreview.find('ForwardRef(Leaflet(Polygon))');
     const fcCoordinates = featureCollection.features[0].geometry.coordinates[0];
-    const fcCoordinatesReverse = fcCoordinates.map(set => [set[1], set[0]]);
+    const fcCoordinatesReverse = fcCoordinates.map((set) => [set[1], set[0]]);
     const fcCoordinatesFirst = fcCoordinates[0];
     const fcCoordinatesLast = fcCoordinates[fcCoordinates.length - 1];
 

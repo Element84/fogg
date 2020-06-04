@@ -43,7 +43,7 @@ const Button = ({
     if (typeof type === 'string') {
       type = [type];
     }
-    type.forEach(t => {
+    type.forEach((t) => {
       className += ` button-${t}`;
     });
   }

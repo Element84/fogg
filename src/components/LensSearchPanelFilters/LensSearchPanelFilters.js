@@ -4,7 +4,7 @@ import { useLens } from '../../hooks';
 
 import SearchPanelFilters from '../SearchPanelFilters';
 
-const LensSearchPanelFilters = props => {
+const LensSearchPanelFilters = (props) => {
   const { geoSearch = {}, geoFilters = {} } = useLens();
   const { updateSearch } = geoSearch;
   const {

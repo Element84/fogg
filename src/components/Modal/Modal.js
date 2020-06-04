@@ -17,7 +17,7 @@ const Modal = ({
   handleCloseModal,
   appElement
 }) => {
-  const handleRequestClose = e => {
+  const handleRequestClose = (e) => {
     handleCloseModal(e, name);
   };
 

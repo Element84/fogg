@@ -25,11 +25,7 @@ describe('FormInput', () => {
     const id = 'name-test-id';
     const input = shallow(<FormInput id={id} label={label} />);
 
-    const inputRendered = input
-      .find('Input')
-      .dive()
-      .find('input')
-      .render();
+    const inputRendered = input.find('Input').dive().find('input').render();
 
     it('should render a label', () => {
       expect(input.find('label').text()).toEqual(label);

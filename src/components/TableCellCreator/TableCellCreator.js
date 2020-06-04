@@ -69,7 +69,7 @@ function TableCellCreator ({
       type = [type];
     }
 
-    type.forEach(t => componentClass.add(`table-cell-type-${t}`));
+    type.forEach((t) => componentClass.add(`table-cell-type-${t}`));
 
     const cellArgs = {
       ...cell,

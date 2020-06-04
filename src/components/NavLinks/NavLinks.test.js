@@ -37,10 +37,7 @@ describe('Nav Links', () => {
     const nav = shallow(<NavLinks routes={navigationList} active="profile" />);
     it('correctly sets the active link', () => {
       expect(
-        nav
-          .find('[data-active=true]')
-          .find(WonderLink)
-          .props().to
+        nav.find('[data-active=true]').find(WonderLink).props().to
       ).toEqual('/profile');
     });
 
@@ -50,12 +47,12 @@ describe('Nav Links', () => {
       });
     });
 
-    navigationList.forEach(item => {
+    navigationList.forEach((item) => {
       it('all links in navigationList exist', () => {
         expect(
           nav
             .find(WonderLink)
-            .findWhere(n => n.prop('to') === item.to)
+            .findWhere((n) => n.prop('to') === item.to)
             .exists()
         ).toEqual(true);
       });

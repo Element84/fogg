@@ -72,7 +72,7 @@ export function objectToQueryString (
 ) {
   const keys = Object.keys(object);
 
-  const params = keys.map(key => {
+  const params = keys.map((key) => {
     let value = object[key];
     if (encodeValues) {
       value = encodeURIComponent(value);

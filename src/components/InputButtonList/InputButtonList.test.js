@@ -42,7 +42,7 @@ describe('InputButtonList', () => {
     const inputButtons = inputButtonListShallow.find('InputButtonWithRefs');
 
     it('should render the radio options as radio types', () => {
-      inputButtons.forEach(inputButton => {
+      inputButtons.forEach((inputButton) => {
         expect(inputButton.prop('type')).toEqual('radio');
       });
     });
@@ -54,7 +54,7 @@ describe('InputButtonList', () => {
     });
 
     it('should include the same name as a prop for each input button', () => {
-      inputButtons.forEach(inputButton => {
+      inputButtons.forEach((inputButton) => {
         expect(inputButton.prop('name')).toEqual(inputName);
       });
     });
@@ -74,7 +74,7 @@ describe('InputButtonList', () => {
     const inputButtons = inputButtonListShallow.find('InputButtonWithRefs');
 
     it('should render the checkbox options as checkbox types', () => {
-      inputButtons.forEach(inputButton => {
+      inputButtons.forEach((inputButton) => {
         expect(inputButton.prop('type')).toEqual('checkbox');
       });
     });

@@ -66,7 +66,7 @@ const SearchPanelFilters = ({
       value = value.join(', ');
     } else if (typeof value === 'object' && value.constructor === Object) {
       value = Object.keys(value)
-        .map(key => {
+        .map((key) => {
           return `${key}: ${value[key]}`;
         })
         .join(', ');
@@ -96,13 +96,13 @@ const SearchPanelFilters = ({
 
   function dedupFiltersById (filters) {
     const deduped = {};
-    filters.forEach(filter => {
+    filters.forEach((filter) => {
       if (!filter.id) return;
       if (!deduped[filter.id]) {
         deduped[filter.id] = filter;
       }
     });
-    return Object.keys(deduped).map(key => {
+    return Object.keys(deduped).map((key) => {
       return deduped[key];
     });
   }
@@ -114,7 +114,7 @@ const SearchPanelFilters = ({
 
   function hasActiveFilters (filters) {
     const availableValues = filters.map(({ value } = {}) => value);
-    return availableValues.filter(value => valueIsValid(value)).length > 0;
+    return availableValues.filter((value) => valueIsValid(value)).length > 0;
   }
 
   function valueIsValid (value) {

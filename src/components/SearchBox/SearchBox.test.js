@@ -14,10 +14,7 @@ describe('SearchBox', () => {
     );
     expect(searchbox.find('SearchDate').exists()).toEqual(true);
     expect(
-      searchbox
-        .find('.search-box-controls-search')
-        .find('Button')
-        .exists()
+      searchbox.find('.search-box-controls-search').find('Button').exists()
     ).toEqual(true);
   });
 

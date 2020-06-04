@@ -33,7 +33,7 @@ const LensEarthSearchDefault = () => {
 
 export default LensEarthSearchDefault;
 
-const SidebarPanelsWrapper = props => {
+const SidebarPanelsWrapper = (props) => {
   const { filters, search } = props;
   const { unsaved = [] } = filters || {};
 

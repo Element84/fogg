@@ -143,7 +143,7 @@ function isDateRangeEqual (one = {}, two = {}) {
   const keys = ['start', 'end'];
   let isEqual = true;
 
-  keys.forEach(key => {
+  keys.forEach((key) => {
     if (one[key] !== two[key]) {
       isEqual = false;
     }

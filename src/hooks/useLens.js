@@ -166,7 +166,7 @@ export default function useLens () {
       });
     }
 
-    featuresToAdd.forEach(feature => {
+    featuresToAdd.forEach((feature) => {
       addShapeToMap(feature);
     });
   }

@@ -32,12 +32,12 @@ describe('Nav Bar', () => {
       expect(wrapper.find(Button)).toHaveLength(4);
     });
 
-    primary.forEach(item => {
+    primary.forEach((item) => {
       it('correctly sets the to atrribute', () => {
         expect(
           wrapper
             .find(Button)
-            .findWhere(n => n.prop('to') === item.to)
+            .findWhere((n) => n.prop('to') === item.to)
             .exists()
         ).toEqual(true);
       });
@@ -46,18 +46,18 @@ describe('Nav Bar', () => {
         expect(
           wrapper
             .find(Button)
-            .findWhere(n => n.prop('children') === item.icon)
+            .findWhere((n) => n.prop('children') === item.icon)
             .exists()
         ).toEqual(true);
       });
     });
 
-    secondary.forEach(item => {
+    secondary.forEach((item) => {
       it('correctly sets the to atrribute', () => {
         expect(
           wrapper
             .find(Button)
-            .findWhere(n => n.prop('to') === item.to)
+            .findWhere((n) => n.prop('to') === item.to)
             .exists()
         ).toEqual(true);
       });
@@ -66,7 +66,7 @@ describe('Nav Bar', () => {
         expect(
           wrapper
             .find(Button)
-            .findWhere(n => n.prop('children') === item.icon)
+            .findWhere((n) => n.prop('children') === item.icon)
             .exists()
         ).toEqual(true);
       });
@@ -75,15 +75,15 @@ describe('Nav Bar', () => {
     it('correctly sets the active link', () => {
       wrapper
         .find(Button)
-        .findWhere(n => n.prop('to') === '/top1')
-        .forEach(item => {
+        .findWhere((n) => n.prop('to') === '/top1')
+        .forEach((item) => {
           expect(item.hasClass('nav-bar-active-button')).toEqual(true);
         });
 
       wrapper
         .find(Button)
-        .findWhere(n => n.prop('to') !== '/top1')
-        .forEach(item => {
+        .findWhere((n) => n.prop('to') !== '/top1')
+        .forEach((item) => {
           expect(item.hasClass('nav-bar-active-button')).not.toEqual(true);
         });
     });

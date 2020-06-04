@@ -69,8 +69,8 @@ const ModInputButtonList = ({
     updateValue(updatedValue || []);
   }
 
-  const optionsMap = options.map(option => {
-    const optionValue = value.find(val => val.value === option.value);
+  const optionsMap = options.map((option) => {
+    const optionValue = value.find((val) => val.value === option.value);
     return {
       ...option,
       isChecked: optionValue ? optionValue.isChecked : false

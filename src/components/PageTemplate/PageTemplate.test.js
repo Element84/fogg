@@ -61,10 +61,7 @@ describe('Page Template', () => {
 
     it('correctly displays parent link', () => {
       expect(
-        page
-          .find('.page-parent-link')
-          .find(WonderLink)
-          .props().to
+        page.find('.page-parent-link').find(WonderLink).props().to
       ).toEqual('/account');
     });
 

@@ -60,7 +60,7 @@ export const calculateSingleColumnWidthMemo = memoizee(
  */
 
 function calculateColumnWidths (ratios, singleColumnWidth) {
-  return ratios.map(ratio => singleColumnWidth * ratio);
+  return ratios.map((ratio) => singleColumnWidth * ratio);
 }
 
 export const calculateColumnWidthsMemo = memoizee(calculateColumnWidths);

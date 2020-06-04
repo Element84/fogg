@@ -14,7 +14,7 @@ const ALEXANDRIA = {
   lng: -77.0469
 };
 
-const LensEarthSearchDateOnly = props => {
+const LensEarthSearchDateOnly = (props) => {
   return (
     <>
       <Lens

@@ -42,7 +42,7 @@ describe('Button', () => {
       const route = '/';
       const types = ['text', 'icon-after'];
       const button = shallow(<Button type={types} to={route} />);
-      types.forEach(type => {
+      types.forEach((type) => {
         expect(button.hasClass(`button-${type}`)).toEqual(true);
       });
     });

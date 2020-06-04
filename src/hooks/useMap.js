@@ -129,7 +129,7 @@ export default function useMap (mapSettings = {}) {
    */
 
   function handleOnZoomEnd ({ target } = {}) {
-    setMapConfig(state => {
+    setMapConfig((state) => {
       return {
         ...state,
         zoom: target.getZoom()
@@ -264,7 +264,7 @@ export default function useMap (mapSettings = {}) {
 
     const layersToExclude = [];
 
-    geoJsonLayer.eachLayer(layer => layersToExclude.push(layer));
+    geoJsonLayer.eachLayer((layer) => layersToExclude.push(layer));
 
     if (panToShape) {
       centerMapOnGeoJson({
@@ -405,7 +405,7 @@ export default function useMap (mapSettings = {}) {
       throw new Error(`${errorBase}: Invalid ID ${id}`);
     }
 
-    return mapFeatureGroups.find(fg => fg.id === id);
+    return mapFeatureGroups.find((fg) => fg.id === id);
   }
 
   // useEffect(() => {
@@ -465,7 +465,7 @@ function buildDefaultMapSettings (userSettings) {
   // Loop through the controls we make available as a setting and populate
   // our default settings object with them from the mapSettings argument
 
-  AVAILABLE_MAP_CONTROLS.forEach(control => {
+  AVAILABLE_MAP_CONTROLS.forEach((control) => {
     defaults[control] = userSettings[control] || MAP_CONFIG_DEFAULTS[control];
   });
 

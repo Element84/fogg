@@ -12,7 +12,7 @@ const ALEXANDRIA = {
   lng: -77.0469
 };
 
-const LensEarthSearchDynamicLayerDate = props => {
+const LensEarthSearchDynamicLayerDate = (props) => {
   const layers = [
     {
       name: 'MODIS Aqua',

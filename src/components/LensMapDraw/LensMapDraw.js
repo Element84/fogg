@@ -5,7 +5,7 @@ import { useLens } from '../../hooks';
 
 import MapDraw from '../MapDraw';
 
-const LensMapDraw = props => {
+const LensMapDraw = (props) => {
   const { PopupContent } = props;
 
   const { geoSearch, map = {} } = useLens();

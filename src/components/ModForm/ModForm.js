@@ -11,7 +11,7 @@ import Button from '../Button';
  * @description Default form component
  */
 
-const ModForm = props => {
+const ModForm = (props) => {
   const {
     fields,
     updateField,

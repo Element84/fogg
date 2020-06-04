@@ -8,12 +8,7 @@ describe('Modal', () => {
     it('should render a  modal with default close button text', () => {
       const modal = shallow(<Modal />);
 
-      expect(
-        modal
-          .find('Button')
-          .dive()
-          .text()
-      ).toEqual('Close');
+      expect(modal.find('Button').dive().text()).toEqual('Close');
     });
   });
 });

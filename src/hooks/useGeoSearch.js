@@ -50,7 +50,7 @@ export default function useGeoSearch (geoSearchSettings = {}) {
 
   const defaultQueryParams = {};
 
-  QUERY_AVAILABLE_PARAMS.forEach(param => {
+  QUERY_AVAILABLE_PARAMS.forEach((param) => {
     if (ignoreDatetime && param === 'date') return;
     defaultQueryParams[param] =
       geoSearchSettings[param] || QUERY_DEFAULT_PARAMS[param];
@@ -297,7 +297,7 @@ export function configureSearchSettings (settings, config) {
   // Loop through all of the keys that are available to search
   // on and populate the search settings with it's value if available
 
-  QUERY_AVAILABLE_PARAMS.forEach(param => {
+  QUERY_AVAILABLE_PARAMS.forEach((param) => {
     if (ignoreDatetime && param === 'date') return;
     if (settings[param]) {
       searchSettings[param] = settings[param];
