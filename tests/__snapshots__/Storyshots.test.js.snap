@@ -5775,7 +5775,7 @@ Array [
         className="story"
       >
         <div
-          className="panel panel-clean search-panel-filters"
+          className="panel search-panel-filters"
         >
           <div
             className="panel-header"
