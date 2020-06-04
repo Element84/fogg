@@ -1,4 +1,4 @@
-import uuidv1 from 'uuid/v1';
+import { v1 as uuidv1 } from 'uuid';
 
 /**
  * resolveMostRecent
@@ -31,7 +31,7 @@ export async function resolveMostRecent (promiseInvocation) {
   // didn't complete and remove them from the request array
 
   resolveMostRecentRequestQueue
-    .filter(request => request.id !== id && !request.promise.isCanceled)
+    .filter((request) => request.id !== id && !request.promise.isCanceled)
     .forEach((request, index) => {
       request.promise.cancel();
       resolveMostRecentRequestQueue.splice(index, 1);
