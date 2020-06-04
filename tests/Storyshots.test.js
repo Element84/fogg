@@ -7,5 +7,5 @@ import initStoryshots from '@storybook/addon-storyshots';
 // TODO: Search Date, Search Box, Form Input, Datetime, Search Complete - Changes "today" daily, meaning component changes
 
 initStoryshots({
-  storyKindRegex: /^((?!.*?(Lens|Map|Input Range|Modal|Search Date|Search Box|Form Input|Datetime|Search Complete)).)*$/
+  storyKindRegex: /^((?!.*?(Lens|Map|Earth Search|Input Range|Modal|Search Date|Search Box|Form Input|Datetime|Search Complete)).)*$/
 });
