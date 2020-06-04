@@ -24,7 +24,7 @@
     "gatsby-plugin-react-leaflet": "^2.0.12",
     "gatsby-plugin-sass": "^2.1.31",
     "gatsby-source-filesystem": "^2.1.56",
-    "leaflet-active-area": "https://github.com/Mappy/Leaflet-active-area.git",
+    "leaflet-active-area": "^1.1.1",
     "leaflet-draw": "^1.0.4",
     "memoizee": "^0.4.14",
     "mkdirp": "^1.0.3",
