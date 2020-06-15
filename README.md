@@ -1,3 +1,5 @@
+test
+
 # 🎩 Fogg
 Fogg is a component library that stems from the need to quickly spin up new mapping applications with search capabilities. While the library contains generic components needed within a typical map-based dashboard, the Lens component is what serves as the flagship component to wrap a map.
 
