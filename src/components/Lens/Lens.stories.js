@@ -17,6 +17,7 @@ import LensEarthSearchResultsNoFilter from './stories/LensEarthSearchResultsNoFi
 import LensEarthSearchCustomAutocomplete from './stories/LensEarthSearchCustomAutocomplete.story';
 import LensEarthSearchNoAutocomplete from './stories/LensEarthSearchNoAutocomplete.story';
 import LensEarthSearchUtc from './stories/LensEarthSearchUtc.story';
+import LensCursorPosition from './stories/LensCursorPosition.story';
 
 const stories = storiesOf('Components|Lens', module);
 
@@ -66,3 +67,4 @@ stories.add(
   LensEarthSearchCustomAutocomplete
 );
 stories.add('Earth Search - UTC', LensEarthSearchUtc);
+stories.add('Cursor Position', LensCursorPosition);
