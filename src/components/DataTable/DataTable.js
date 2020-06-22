@@ -13,6 +13,7 @@ const DataTable = ({
   data = [],
   isLoading,
   emptyActions = [],
+  emptyMessage,
   ...rest
 }) => {
   const componentClass = new ClassName('data-table');
@@ -34,7 +35,7 @@ const DataTable = ({
       {!!children && children}
       {!children && isEmpty && (
         <div className={componentClass.childString('empty-content')}>
-          <p>Looks like there are no {labelLower}!</p>
+          <p>{emptyMessage || `Looks like there are no ${labelLower}!`}</p>
           {hasEmptyActions && (
             <ul className={componentClass.childString('empty-actions')}>
               {emptyActions.map(({ to, label } = {}, index) => {
@@ -61,7 +62,8 @@ DataTable.propTypes = {
   labelLower: PropTypes.string,
   data: PropTypes.array,
   isLoading: PropTypes.bool,
-  emptyActions: PropTypes.array
+  emptyActions: PropTypes.array,
+  emptyMessage: PropTypes.string
 };
 
 export default DataTable;
