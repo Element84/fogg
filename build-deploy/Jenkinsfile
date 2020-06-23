@@ -77,7 +77,7 @@ pipeline {
 
         sshagent(credentials : ['spacejam-buildserver']) {
 
-          sh 'mkdir ~/.ssh'
+          sh 'mkdir -p ~/.ssh'
           sh 'touch ~/.ssh/config'
           sh 'echo "StrictHostKeyChecking no" >> ~/.ssh/config'
 
