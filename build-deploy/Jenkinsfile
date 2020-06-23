@@ -25,6 +25,21 @@ pipeline {
         echo sh(returnStdout: true, script: 'env')
 
         updateCommitStatus('pending')
+        rtServer (
+            id: 'artifactory',
+            url: 'https://artifactory.prod.element84.com/artifactory',
+            credentialsId: 'artifactory'
+        )
+        rtNpmResolver (
+            id: 'npm-resolver',
+            serverId: 'artifactory',
+            repo: 'space-jam-virtual'
+        )
+        rtNpmDeployer (
+            id: 'npm-deployer',
+            serverId: 'artifactory',
+            repo: 'space-jam-virtual'
+        )
 
         sshagent(credentials : ['spacejam-buildserver']) {
 
@@ -35,10 +50,14 @@ pipeline {
           updateCommitStatus('running')
 
           echo "Installing..."
-          sh 'yarn install'
+          rtNpmInstall (
+              path: "$WORKSPACE",
+              resolverId: 'npm-resolver',
+              args: '--audit --loglevel warn'
+          )
 
           echo "Testing..."
-          sh 'yarn test'
+          sh 'npm run test'
 
         }
 
@@ -68,7 +87,7 @@ pipeline {
                |git config user.name "Jenkins"
                |GIT_COMMIT_MESSAGE=`git log -n 1 --pretty=%s $GIT_COMMIT`
                |if [[ "\$GIT_COMMIT_MESSAGE" == "Merge branch "* ]]; then
-               |  yarn bump "patch"
+               |  npm run bump "patch"
                |  git config push.default current
                |  git push
                |else
@@ -85,11 +104,45 @@ pipeline {
 
         // The actual build...
 
-        sh 'yarn build'
+        rtNpmResolver (
+            id: 'npm-resolver',
+            serverId: 'artifactory',
+            repo: 'space-jam-virtual'
+        )
+
+        sh 'npm run build'
         sh 'mkdir -p artifacts'
         sh 'tar --exclude="./artifacts" -czf artifacts/dashboard.tgz public'
         archiveArtifacts artifacts: 'artifacts/dashboard.tgz', fingerprint: true
 
+        rtPublishBuildInfo (
+            serverId: 'artifactory'
+        )
+      }
+    }
+
+    stage('Sonar Scan') {
+      options {
+          timeout(time: 1, unit: 'HOURS')
+      }
+      steps {
+        withCredentials([string(credentialsId: 'sonarqube', variable: 'SONARTOKEN')]) {
+          sh '''
+              npm run sonar -- -Dsonar.login=$SONARTOKEN
+          '''
+        }
+      }
+    }
+
+    stage('Xray Scan') {
+      options {
+        timeout(time: 1, unit: 'HOURS')
+      }
+      steps {
+        xrayScan (
+          serverId: 'artifactory',
+          failBuild: false
+        )
       }
     }
 

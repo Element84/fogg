@@ -24,6 +24,8 @@ module.exports = {
 
   testPathIgnorePatterns: ['node_modules', '.cache', '.storybook'],
 
+  testResultsProcessor: 'jest-sonar-reporter',
+
   setupFilesAfterEnv: [
     '<rootDir>/config/jest-setup.config.js',
     '<rootDir>/config/jest-loadershim.config.js'
