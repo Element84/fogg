@@ -25,31 +25,30 @@ pipeline {
             branch 'v2'
         }
         steps {
-            // Without 'force', bump will fail if it doesn't think
-            // there is anything to put in the changelog.
+            sshagent(credentials : ['buildserver-gitlab']) {
+                // Without 'force', bump will fail if it doesn't think
+                // there is anything to put in the changelog.
 
-            // Note this assumes the remote is gitlab -
-            // in bamboo for instance this doesn't work because
-            // the remote is a local cached copy of the git index
+                // Note this assumes the remote is gitlab -
+                // in bamboo for instance this doesn't work because
+                // the remote is a local cached copy of the git index
 
-            // In order for the branch to be known, Jenkins
-            // needs this setting on the git plugin:
-            //   "Check out to matching local branch"
+                // In order for the branch to be known, Jenkins
+                // needs this setting on the git plugin:
+                //   "Check out to matching local branch"
 
-            sh """git config user.email "buildserver@element84.com"
-                |git config user.name "Jenkins"
-                |GIT_COMMIT_MESSAGE=`git log -n 1 --pretty=%s $GIT_COMMIT`
-                |if [[ "\$GIT_COMMIT_MESSAGE" == "Merge branch "* ]]; then
-                |  npm version 0.2.$BUILD_NUMBER
-                |  git status
-                |  git remote -v
-                |  git fetch
-                |  git config push.default current
-                |  git push
-                |else
-                |  echo "Not a merge request - not bumping version"
-                |fi
-            """.stripMargin()
+                sh """git config user.email "buildserver@element84.com"
+                    |git config user.name "Jenkins"
+                    |GIT_COMMIT_MESSAGE=`git log -n 1 --pretty=%s $GIT_COMMIT`
+                    |if [[ "\$GIT_COMMIT_MESSAGE" == "Merge branch "* ]]; then
+                    |  npm version 0.2.$BUILD_NUMBER
+                    |  git config push.default current
+                    |  git push
+                    |else
+                    |  echo "Not a merge request - not bumping version"
+                    |fi
+                """.stripMargin()
+            }
         }
     }
 
