@@ -25,7 +25,7 @@ pipeline {
             branch 'v2'
         }
         steps {
-            sshagent(credentials : ['buildserver-gitlab']) {
+            sshagent(credentials : ['fogg-rw-deploy-key']) {
                 // Without 'force', bump will fail if it doesn't think
                 // there is anything to put in the changelog.
 
