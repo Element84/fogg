@@ -1140,6 +1140,90 @@ Array [
 ]
 `;
 
+exports[`Storyshots Components/DataTable Custom Empty Message 1`] = `
+Array [
+  <div
+    style={
+      Object {
+        "position": "relative",
+        "zIndex": 0,
+      }
+    }
+  >
+    <div
+      className="story-container Story-DataTable-CustomEmpty Message"
+    >
+      <h1>
+        DataTable
+      </h1>
+      <h2>
+        Custom Empty Message
+      </h2>
+      <div
+        className="story"
+      >
+        <div
+          className="data-table data-table-empty"
+        >
+          <div
+            className="table table-frozen-header"
+          >
+            <div
+              className="table-container"
+              style={
+                Object {
+                  "height": 300,
+                }
+              }
+            >
+              <div
+                style={
+                  Object {
+                    "height": 0,
+                    "overflow": "visible",
+                    "width": 0,
+                  }
+                }
+              />
+            </div>
+          </div>
+          <div
+            className="data-table-empty-content"
+          >
+            <p>
+              Unfortunately, we could not find any records.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  <button
+    className="info__show-button"
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "#027ac5",
+        "border": "none",
+        "borderRadius": "0 0 0 5px",
+        "color": "#fff",
+        "cursor": "pointer",
+        "display": "block",
+        "fontFamily": "sans-serif",
+        "fontSize": 12,
+        "padding": "5px 15px",
+        "position": "fixed",
+        "right": 0,
+        "top": 0,
+      }
+    }
+    type="button"
+  >
+    Show Info
+  </button>,
+]
+`;
+
 exports[`Storyshots Components/DataTable Default 1`] = `
 Array [
   <div
