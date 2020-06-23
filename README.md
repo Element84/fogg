@@ -53,19 +53,19 @@ search(searchSettings);
 ## Installation
 Run the following command in your terminal to install all dependencies:
 ```
-yarn install
+npm install
 ```
 
 ## Development
 Run the following command to start up your development server:
 ```
-yarn develop
+npm run develop
 ```
 
 ## Testing
 Run the following command to run the test suite:
 ```
-yarn test
+npm run test
 ```
 
 # Contributions

@@ -48,8 +48,7 @@
     "sass": "^1.26.7",
     "togeojson": "^0.16.0",
     "use-debounce": "^3.4.2",
-    "uuid": "^8.1.0",
-    "yarn": "^1.22.4"
+    "uuid": "^8.1.0"
   },
   "peerDependencies": {
     "gatsby": "^2.18.4",
@@ -84,6 +83,7 @@
     "husky": "^4.2.5",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^25.5.4",
+    "jest-sonar-reporter": "^2.0.0",
     "leaflet": "1.6.0",
     "lint-staged": "^10.2.9",
     "moxios": "^0.4.0",
@@ -104,23 +104,24 @@
   "license": "MIT",
   "scripts": {
     "bump": "npm version",
-    "build": "yarn clean && gatsby build && yarn build-storybook",
+    "build": "npm rum clean && gatsby build && npm run build-storybook",
     "build-storybook": "build-storybook",
     "clean": "gatsby clean",
-    "develop": "yarn clean && concurrently --names 'STORYBOOK' -c 'bgMagenta.bold' 'yarn storybook'",
-    "format": "yarn format-js && yarn format-css && echo '> Finished formatting ✅'",
-    "format-css": "yarn lint-css --fix",
+    "develop": "npm run clean && concurrently --names 'STORYBOOK' -c 'bgMagenta.bold' 'npm run storybook'",
+    "format": "npm run format-js && npm run format-css && echo '> Finished formatting ✅'",
+    "format-css": "npm run lint-css --fix",
     "format-js": "prettier-eslint --eslint-config-path ./config/eslint.config.js --trailing-comma es5 --single-quote --write $PWD'/**/*.js'",
     "jest": "jest --config ./config/jest.config.js",
     "lint-css": "stylelint 'src/assets/stylesheets/**/*.scss' --config ./config/stylelint.config.js",
     "lint-js": "eslint -c ./config/eslint.config.js . --ext .js",
-    "lint": "yarn lint-js && yarn lint-css && echo '> Finished linting ✅'",
+    "lint": "npm run lint-js && npm run lint-css && echo '> Finished linting ✅'",
     "serve": "gatsby serve",
+    "sonar": "sonar-scanner -Dsonar.projectVersion=$npm_package_version",
     "start": "npm run develop",
     "storybook": "start-storybook -s ./src/stories/static -p 6006",
-    "test-clean": "yarn jest -u",
-    "test-watch": "yarn jest --watchAll",
-    "test": "yarn jest && echo '> Finished testing ✅'"
+    "test-clean": "npm run jest -u",
+    "test-watch": "npm run jest --watchAll",
+    "test": "npm run jest && echo '> Finished testing ✅'"
   },
   "husky": {
     "hooks": {
@@ -129,13 +130,13 @@
   },
   "lint-staged": {
     "**/*.js": [
-      "yarn format-js",
-      "yarn lint-js",
+      "npm run format-js",
+      "npm run lint-js",
       "git add"
     ],
     "**/*.scss": [
-      "yarn format-css",
-      "yarn lint-css",
+      "npm run format-css",
+      "npm run lint-css",
       "git add"
     ]
   },
