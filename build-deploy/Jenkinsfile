@@ -42,7 +42,7 @@ pipeline {
                     |GIT_COMMIT_MESSAGE=`git log -n 1 --pretty=%s $GIT_COMMIT`
                     |if [[ "\$GIT_COMMIT_MESSAGE" == "Merge branch "* ]]; then
                     |  npm version 0.2.$BUILD_NUMBER
-                    |  ssh -Tvvv git@repo.element84.com
+                    |  ssh -o "StrictHostKeyChecking=no" -T git@repo.element84.com
                     |  git config push.default current
                     |  git push
                     |else
