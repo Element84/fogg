@@ -46,7 +46,8 @@ pipeline {
                     |  git config push.default current
                     |  git push
                     |else
-                    |  echo "Not a merge request - not bumping version"
+                    |  echo "Not a merge request - not bumping version - exiting"
+                    |  exit 1
                     |fi
                 """.stripMargin()
             }
@@ -153,13 +154,10 @@ pipeline {
             branch 'v2'
         }
         steps {
-            sh """GIT_COMMIT_MESSAGE=`git log -n 1 --pretty=%s $GIT_COMMIT`
-                |if [[ "\$GIT_COMMIT_MESSAGE" == "Merge branch "* ]]; then
-                |  npm publish
-                |else
-                |  echo "Did not bump version - so not publishing"
-                |fi
-            """.stripMargin()
+            rtNpmPublish (
+                path: "$WORKSPACE",
+                resolverId: 'npm-resolver'
+            )
         }
     }
 
