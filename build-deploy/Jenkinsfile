@@ -123,6 +123,22 @@ pipeline {
       }
     }
 
+    stage('Publish') {
+        // Under same conditions as versioning - we publish a new build
+        when {
+            branch 'v2'
+        }
+        steps {
+            rtNpmPublish (
+                path: "$WORKSPACE",
+                deployerId: 'npm-deployer'
+            )
+            rtPublishBuildInfo (
+                serverId: 'artifactory'
+            )
+        }
+    }
+
     stage('Sonar Scan') {
       options {
           timeout(time: 1, unit: 'HOURS')
@@ -146,19 +162,6 @@ pipeline {
           failBuild: false
         )
       }
-    }
-
-    stage('Publish') {
-        // Under same conditions as versioning - we publish a new build
-        when {
-            branch 'v2'
-        }
-        steps {
-            rtNpmPublish (
-                path: "$WORKSPACE",
-                deployerId: 'npm-deployer'
-            )
-        }
     }
 
     stage('Deploy Feature') {
