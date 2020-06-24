@@ -156,7 +156,7 @@ pipeline {
         steps {
             rtNpmPublish (
                 path: "$WORKSPACE",
-                resolverId: 'npm-resolver'
+                deployerId: 'npm-deployer'
             )
         }
     }
