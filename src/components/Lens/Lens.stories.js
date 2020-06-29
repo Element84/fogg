@@ -5,6 +5,7 @@ import LensBasemap from './stories/LensBasemap.story';
 import LensDefault from './stories/LensDefault.story';
 import LensLayers from './stories/LensLayers.story';
 import LensEarthSearchAvailableLayers from './stories/LensEarthSearchAvailableLayers.story';
+import LensEarthSearchAvailableFilters from './stories/LensEarthSearchAvailableFilters.story';
 import LensEarthSearchDynamicLayerDate from './stories/LensEarthSearchDynamicLayerDate.story';
 import LensEarthSearchDefault from './stories/LensEarthSearchDefault.story';
 import LensEarthSearchNoFilter from './stories/LensEarthSearchNoFilter.story';
@@ -27,6 +28,10 @@ stories.add('Basemap', LensBasemap);
 stories.add('Layers', LensLayers);
 stories.add('Earth Search - Default', LensEarthSearchDefault);
 stories.add('Earth Search - Available Layers', LensEarthSearchAvailableLayers);
+stories.add(
+  'Earth Search - Available Filters',
+  LensEarthSearchAvailableFilters
+);
 stories.add('Earth Search - No Filter', LensEarthSearchNoFilter);
 stories.add('Earth Search - Date Only', LensEarthSearchDateOnly);
 stories.add('Earth Search - Date Only with Default Date', () => {

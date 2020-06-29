@@ -25,10 +25,17 @@ export default function useGeoFilters (filterSettings) {
   });
 
   useEffect(() => {
+    const { active } = filters;
+    const newActive = active.filter((activeFilter) => {
+      const { id } = activeFilter;
+      return available.find((af) => af.id === id);
+    });
+
     updateFilters((prev) => {
       return {
         ...prev,
-        available
+        available,
+        active: newActive
       };
     });
   }, [available]);
