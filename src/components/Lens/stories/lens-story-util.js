@@ -66,7 +66,7 @@ export async function handleResolveOnEarthSearch ({
   let responseFeatures;
 
   const request = new Request(
-    'https://earth-search.aws.element84.com/stac/search'
+    'https://earth-search.aws.element84.com/v0/search'
   );
 
   const data = {

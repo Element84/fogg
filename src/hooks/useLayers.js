@@ -3,8 +3,11 @@ import { castArray, isPlainObject, snakeCase } from 'lodash';
 
 export default function useLayers (availableLayers, fetchLayerData) {
   const defaultLayers = buildDefaultLayers(availableLayers);
-
   const [layers, updateLayers] = useState(defaultLayers);
+
+  useEffect(() => {
+    updateLayers(buildDefaultLayers(availableLayers));
+  }, [availableLayers]);
 
   useEffect(() => {
     getDataForLayers(fetchLayerData);
