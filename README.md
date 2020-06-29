@@ -80,4 +80,4 @@ At this time, we're not accepting contributions until we can fully understand ho
 [] Examples
 [] Cypress tests for examples
 [] documentation for hooks
-[x] documentation for lib
+[] documentation for lib
