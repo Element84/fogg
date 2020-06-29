@@ -9,11 +9,6 @@ import {
   earthSearchAvailableFilters
 } from './lens-story-util';
 
-const DEFAULT_CENTER = {
-  lat: 0,
-  lng: 0
-};
-
 const LensEarthSearchAvailableFilters = () => {
   const [filters, updateFilters] = useState(earthSearchAvailableFilters);
 
@@ -42,7 +37,6 @@ const LensEarthSearchAvailableFilters = () => {
   return (
     <>
       <Lens
-        defaultCenter={DEFAULT_CENTER}
         defaultZoom={2}
         resolveOnSearch={handleResolveOnEarthSearch}
         SidebarComponents={EarthSearchSidebarPanels}
