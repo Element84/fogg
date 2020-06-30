@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@700&display=swap');
+
+.home {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  text-align: center;
+  padding: 5em 0 2em;
+
+  .logo-fogg {
+    display: inline-block;
+  }
+
+  h1 {
+    font-family: 'Zilla Slab', serif;
+    font-size: 5em;
+    margin-top: 0;
+  }
+
+  .button {
+    margin: 0 .5em;
+  }
+
+  .footnote {
+    font-size: 1.2em;
+    margin-top: 3em;
+  }
+
+}
