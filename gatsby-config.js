@@ -12,7 +12,7 @@ module.exports = {
     'gatsby-plugin-sass',
     // This should be a temporary fix in the event gatsby-plugin-react-leaflet removes
     // setting react-leaflet as a null loader. See gatsby-node.js
-    // 'gatsby-plugin-react-leaflet',
+    'gatsby-plugin-react-leaflet',
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-source-filesystem',
