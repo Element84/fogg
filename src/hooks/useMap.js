@@ -10,7 +10,8 @@ import {
   centerMapOnGeoJson,
   addGeoJsonLayer,
   addTileLayer,
-  findLayerByName
+  findLayerByName,
+  drawModeFromDrawControl
 } from '../lib/leaflet';
 import { geoJsonFromLatLn, getGeoJsonCenter } from '../lib/map';
 import { isDomAvailable } from '../lib/device';
@@ -59,6 +60,7 @@ if (isDomAvailable()) {
 
 export default function useMap (mapSettings = {}) {
   const refMap = useRef();
+  const refDrawControl = useRef();
 
   const { availableServices = [], projection, draw = {} } = mapSettings;
   const { onCreatedDraw, shapeOptions } = draw;
@@ -408,6 +410,20 @@ export default function useMap (mapSettings = {}) {
     return mapFeatureGroups.find((fg) => fg.id === id);
   }
 
+  /**
+   * handleEnableDrawTool
+   */
+
+  function handleEnableDrawTool ({ name }) {
+    const drawControl = currentLeafletRef(refDrawControl);
+    const drawMode = drawModeFromDrawControl({
+      drawControl,
+      name
+    });
+    const { handler } = drawMode;
+    handler.enable();
+  }
+
   // useEffect(() => {
   //   updateTileDate(date);
   // }, [date]);
@@ -431,6 +447,7 @@ export default function useMap (mapSettings = {}) {
 
   return {
     refMap,
+    refDrawControl,
     mapFeatureGroup: defaultMapFeaturesGroup,
     mapOverlaysGroup: defaultMapOverlaysGroup,
     mapConfig,
@@ -450,7 +467,8 @@ export default function useMap (mapSettings = {}) {
     clearTileLayers: handleClearTileLayers,
     clearTileLayer: handleClearTileLayer,
     createFeatureGroup: handleCreateFeatureGroup,
-    featureGroupById: handleFeatureGroupById
+    featureGroupById: handleFeatureGroupById,
+    enableDrawTool: handleEnableDrawTool
   };
 }
 
