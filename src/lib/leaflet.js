@@ -320,3 +320,35 @@ export function currentLeafletRef (ref = {}) {
 
   return leafletElement;
 }
+
+/**
+ * toolbarsFromDrawControl
+ */
+
+export function toolbarsFromDrawControl ({ drawControl = {} }) {
+  return drawControl._toolbars;
+}
+
+/**
+ * toolbarFromDrawControl
+ */
+
+export function toolbarFromDrawControl ({ name, drawControl = {} }) {
+  const toolbars = toolbarsFromDrawControl({
+    drawControl
+  });
+  return toolbars && toolbars[name];
+}
+
+/**
+ * drawModeFromDrawControl
+ */
+
+export function drawModeFromDrawControl ({ name, drawControl = {} }) {
+  const drawTroolbar = toolbarFromDrawControl({
+    name: 'draw',
+    drawControl
+  });
+  const modes = drawTroolbar && drawTroolbar._modes;
+  return modes && modes[name];
+}

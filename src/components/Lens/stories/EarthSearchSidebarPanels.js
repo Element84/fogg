@@ -39,7 +39,7 @@ const EarthSearchSidebarPanels = ({
 
   const { filters, clearActiveFilters } = geoFilters;
 
-  const { addShapeToMap, clearLayers } = map;
+  const { addShapeToMap, clearLayers, enableDrawTool } = map;
 
   function handleLoadMore (e) {
     if (hasMoreResults) {
@@ -116,6 +116,11 @@ const EarthSearchSidebarPanels = ({
           )}
           <Panel header="Explore">
             <p>Explore stuff</p>
+            <p>
+              <button onClick={() => enableDrawTool({ name: 'marker' })}>
+                Enable Marker
+              </button>
+            </p>
           </Panel>
           <Panel header="Past Searches">
             <ItemList
