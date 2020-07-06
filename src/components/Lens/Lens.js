@@ -125,6 +125,13 @@ const Lens = ({
 
   const displayCursorPosition = mapControls && mapControls.cursorPosition;
 
+  const displayFiltersPanel =
+    search &&
+    isActiveSearch &&
+    filters.available.length > 0 &&
+    searchType !== 'daterange' &&
+    showFilters;
+
   return (
     <LensContext.Provider value={context}>
       <LayersContext.Provider value={{ ...layers }}>
@@ -149,29 +156,22 @@ const Lens = ({
                         );
                       default:
                         return (
-                          <>
-                            <Panel className="panel-clean">
-                              <LensSearchComplete
-                                ref={refSearchComplete}
-                                placeholder={placeholder}
-                              />
-                              {hasSearchActions && (
-                                <LensSearchActions actions={searchActions} />
-                              )}
-                            </Panel>
-
-                            {showFilters &&
-                              isActiveSearch &&
-                              filters.available.length > 0 && (
-                              <LensSearchPanelFilters
-                                hasFilterCancel={hasFilterCancel}
-                              />
+                          <Panel className="panel-clean">
+                            <LensSearchComplete
+                              ref={refSearchComplete}
+                              placeholder={placeholder}
+                            />
+                            {hasSearchActions && (
+                              <LensSearchActions actions={searchActions} />
                             )}
-                          </>
+                          </Panel>
                         );
                     }
                   })()}
                 </div>
+              )}
+              {displayFiltersPanel && (
+                <LensSearchPanelFilters hasFilterCancel={hasFilterCancel} />
               )}
               {SidebarComponents && (
                 <LensSidebarComponents SidebarComponents={SidebarComponents} />
