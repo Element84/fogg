@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import L from 'leaflet';
-import toGeoJSON from '@mapbox/togeojson';
+import { kml } from '@tmcw/togeojson';
 import axios from 'axios';
 
 import Lens from '../../../components/Lens';
@@ -40,7 +40,7 @@ const LensLayers = () => {
       '/data/VNP14IMGTDL_NRT_USA_contiguous_and_Hawaii_24h.kml'
     );
 
-    const GeoJSON = toGeoJSON.kml(
+    const GeoJSON = kml(
       new window.DOMParser().parseFromString(response.data, 'text/xml')
     );
 
@@ -153,7 +153,7 @@ const LensLayers = () => {
           '/data/VNP14IMGTDL_NRT_USA_contiguous_and_Hawaii_24h-2.kml'
         );
 
-        const GeoJSON = toGeoJSON.kml(
+        const GeoJSON = kml(
           new window.DOMParser().parseFromString(response.data, 'text/xml')
         );
 
