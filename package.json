@@ -82,7 +82,7 @@
     "gatsby": "^2.23.22",
     "husky": "^4.2.5",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^26.1.0",
+    "jest": "^25.5.4",
     "jest-sonar-reporter": "^2.0.0",
     "leaflet": "1.6.0",
     "lint-staged": "^10.2.11",
