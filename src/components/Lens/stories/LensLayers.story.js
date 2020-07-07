@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import L from 'leaflet';
-import toGeoJSON from 'togeojson';
+import toGeoJSON from '@mapbox/togeojson';
 import axios from 'axios';
 
 import Lens from '../../../components/Lens';
