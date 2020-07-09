@@ -20,6 +20,7 @@ const FormInput = (props) => {
     dataList,
     allowPastDate,
     utc,
+    disableFrom,
     validationMessage,
     onKeyDown
   } = props;
@@ -75,6 +76,7 @@ const FormInput = (props) => {
         onInput={handleOnInput}
         allowPastDate={allowPastDate}
         utc={utc}
+        disableFrom={disableFrom}
       />
     );
   } else {
@@ -129,6 +131,7 @@ FormInput.propTypes = {
   onKeyDown: PropTypes.func,
   allowPastDate: PropTypes.bool,
   utc: PropTypes.bool,
+  disableFrom: PropTypes.object,
   validationMessage: PropTypes.string
 };
 
