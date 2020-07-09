@@ -26,3 +26,15 @@ stories.add(STORY_NAME, () => {
     </Story>
   );
 });
+
+stories.add('Disabled Until Future', () => {
+  return (
+    <Story component={STORY_COMPONENT} name="Disabled Until Future">
+      <Datetime
+        input={false}
+        onChange={handleDateChange}
+        disableUntilFuture={7}
+      />
+    </Story>
+  );
+});

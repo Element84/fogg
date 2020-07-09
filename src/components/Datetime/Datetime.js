@@ -14,7 +14,8 @@ const Datetime = ({
   onInput,
   allowPastDate = true,
   allowFutureDate = true,
-  utc = false
+  utc = false,
+  disableUntilFuture = 0
 }) => {
   const { name } = useInput({ props });
 
@@ -47,6 +48,11 @@ const Datetime = ({
    */
 
   function isValidDate (currentDate) {
+    // disable 'x' amount of days into the future
+    if (disableUntilFuture > 0) {
+      const futureDay = ReactDatetime.moment().add(disableUntilFuture, 'day');
+      return currentDate.isAfter(futureDay);
+    }
     if (allowPastDate && allowFutureDate) return true;
     const yesterday = ReactDatetime.moment().subtract(1, 'day');
     const today = ReactDatetime.moment();
@@ -103,7 +109,8 @@ Datetime.propTypes = {
   value: PropTypes.string,
   allowPastDate: PropTypes.bool,
   allowFutureDate: PropTypes.bool,
-  utc: PropTypes.bool
+  utc: PropTypes.bool,
+  disableUntilFuture: PropTypes.number
 };
 
 export default Datetime;

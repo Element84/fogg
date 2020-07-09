@@ -20,6 +20,7 @@ const FormInput = (props) => {
     dataList,
     allowPastDate,
     utc,
+    disableUntilFuture,
     validationMessage,
     onKeyDown
   } = props;
@@ -75,6 +76,7 @@ const FormInput = (props) => {
         onInput={handleOnInput}
         allowPastDate={allowPastDate}
         utc={utc}
+        disableUntilFuture={disableUntilFuture}
       />
     );
   } else {
@@ -129,6 +131,7 @@ FormInput.propTypes = {
   onKeyDown: PropTypes.func,
   allowPastDate: PropTypes.bool,
   utc: PropTypes.bool,
+  disableUntilFuture: PropTypes.number,
   validationMessage: PropTypes.string
 };
 
