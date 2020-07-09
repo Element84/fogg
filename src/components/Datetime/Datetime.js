@@ -15,7 +15,7 @@ const Datetime = ({
   allowPastDate = true,
   allowFutureDate = true,
   utc = false,
-  disableUntilFuture = 0
+  disableFrom
 }) => {
   const { name } = useInput({ props });
 
@@ -48,9 +48,15 @@ const Datetime = ({
    */
 
   function isValidDate (currentDate) {
-    // disable 'x' amount of days into the future
-    if (disableUntilFuture > 0) {
-      const futureDay = ReactDatetime.moment().add(disableUntilFuture, 'day');
+    // disable 'x' amount of days into the future (from an optional start day)
+    if (disableFrom) {
+      // disableFrom.from is a moment
+      // All moments are mutable. Clone it so that the future day stays consistent with the from date
+      const from = disableFrom.from ? disableFrom.from.clone() : {};
+      // Find a future day from either the current day, or from an optionally provided start day
+      const futureDay = disableFrom.from
+        ? from.add(disableFrom.days, 'day')
+        : ReactDatetime.moment().add(disableFrom.days, 'day');
       return currentDate.isAfter(futureDay);
     }
     if (allowPastDate && allowFutureDate) return true;
@@ -110,7 +116,7 @@ Datetime.propTypes = {
   allowPastDate: PropTypes.bool,
   allowFutureDate: PropTypes.bool,
   utc: PropTypes.bool,
-  disableUntilFuture: PropTypes.number
+  disableFrom: PropTypes.object
 };
 
 export default Datetime;

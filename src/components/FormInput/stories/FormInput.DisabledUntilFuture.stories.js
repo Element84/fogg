@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDatetime from 'react-datetime';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
@@ -26,6 +27,8 @@ const SELECT_OPTIONS = [
     value: 'mckenzie'
   }
 ];
+
+const optionalSelectDay = ReactDatetime.moment().add(4, 'day');
 
 stories.add(STORY_NAME, () => {
   function handleSelectOnChange (field, selectEvent) {
@@ -68,7 +71,14 @@ stories.add(STORY_NAME, () => {
           label="Datetime UTC (Only allow 7 days in the future)"
           type="datetime"
           utc={true}
-          disableUntilFuture={7}
+          disableFrom={{ days: 7 }}
+        />
+        <FormInput
+          id="default-datetime-utc"
+          label="Datetime UTC (disabled based on optional start day)"
+          type="datetime"
+          utc={true}
+          disableFrom={{ days: 7, from: optionalSelectDay }}
         />
         <FormInput
           id="default-datalist"
