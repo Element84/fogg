@@ -48,7 +48,7 @@
   ],
   "license": "Apache-2.0",
   "scripts": {
-    "build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
+    "build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages --prefix-paths",
     "bump": "npm version",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
