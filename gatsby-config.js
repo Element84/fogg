@@ -20,17 +20,6 @@ module.exports = {
         name: 'images',
         path: `${__dirname}/src/assets/images`
       }
-    },
-    {
-      resolve: 'gatsby-plugin-manifest',
-      options: {
-        name: siteMetadata.name,
-        start_url: '/',
-        background_color: '#663399',
-        theme_color: '#663399',
-        display: 'minimal-ui',
-        icon: `${__dirname}/src/assets/images/fogg-256x279.png`
-      }
     }
   ]
 };
