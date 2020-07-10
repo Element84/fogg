@@ -29,6 +29,20 @@ module.exports = {
         display: 'minimal-ui',
         icon: `${__dirname}/src/assets/images/fogg-256x279.png`
       }
+    },
+    {
+      resolve: 'gatsby-plugin-google-marketing-platform',
+      options: {
+        dataLayer: {
+          gaPropertyId: 'UA-171279226-1',
+        },
+        tagmanager: {
+          id: 'GTM-PLK7R5M'
+        },
+        analytics: {
+          id: 'UA-171279226-1'
+        }
+      },
     }
   ]
 };

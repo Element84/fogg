@@ -8,5 +8,24 @@ const siteMetadata = {
 
 module.exports = {
   siteMetadata,
-  plugins: ['gatsby-plugin-resolve-src', 'gatsby-plugin-sass', 'gatsby-plugin-react-helmet', 'fogg'],
+  plugins: [
+    'fogg',
+    'gatsby-plugin-resolve-src',
+    'gatsby-plugin-sass',
+    'gatsby-plugin-react-helmet',
+    {
+      resolve: 'gatsby-plugin-google-marketing-platform',
+      options: {
+        dataLayer: {
+          gaPropertyId: 'UA-171279226-1',
+        },
+        tagmanager: {
+          id: 'GTM-PLK7R5M',
+        },
+        analytics: {
+          id: 'UA-171279226-1',
+        },
+      },
+    },
+  ],
 };
