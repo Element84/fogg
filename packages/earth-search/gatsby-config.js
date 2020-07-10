@@ -8,6 +8,7 @@ const siteMetadata = {
 
 module.exports = {
   siteMetadata,
+  pathPrefix: '/earth-search',
   plugins: [
     'fogg',
     'gatsby-plugin-resolve-src',
