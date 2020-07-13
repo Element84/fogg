@@ -1,0 +1,117 @@
+// TODO: this should use the Fogg button component
+
+$button-color: #2196F3;
+$component-shadow-basic: 0 1px 3px rgba(0, 0, 0, 0.2);
+$border-radius-small: .2em;
+$font-weight-bold: 700;
+
+.button {
+
+  display: inline-block;
+  background: $button-color linear-gradient(lighten($button-color, 3), $button-color);
+  border-radius: $border-radius-small;
+  box-shadow: $component-shadow-basic;
+
+  a,
+  button {
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    color: white;
+    background: transparent;
+    font-size: 1em;
+    font-weight: $font-weight-bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 1em 1.4em;
+    border: none;
+    cursor: pointer;
+    border: none;
+
+  }
+
+  &[data-full="true"] {
+    display: block;
+    width: 100%;
+  }
+
+}
+
+.button-circle {
+
+  border-radius: 3.2em;
+
+  button,
+  a {
+    width: 3.2em;
+    height: 3.2em;
+    text-align: center;
+    padding: 0;
+
+  }
+
+}
+
+.button-text {
+
+  background: none;
+  box-shadow: none;
+
+  a,
+  span,
+  button {
+    color: $button-color;
+    text-transform: none;
+    text-decoration: underline;
+  }
+
+}
+
+.button-icon-after {
+
+  svg {
+    margin-left: .6em;
+  }
+
+}
+
+.button-icon-before {
+
+  svg {
+    margin-right: .6em;
+  }
+
+}
+
+.button-disabled {
+
+  &,
+  &:hover,
+  &:active {
+
+    box-shadow: none;
+
+    &:not(.button-text) {
+      background: #B0BEC5;
+    }
+
+  }
+
+  a,
+  button {
+    pointer-events: none;
+  }
+
+  &.button-text {
+
+    a,
+    button {
+      color: #B0BEC5;
+    }
+
+  }
+
+}

@@ -1,13 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@700&display=swap');
-
-.home {
+.page-home {
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
   text-align: center;
-  padding: 5em 0 2em;
 
   .logo-fogg {
     display: inline-block;
