@@ -18,7 +18,7 @@ Add Fogg as a dependency to your project
 yarn add fogg
 
 # With npm
-npm install fog
+npm install fogg
 ```
 
 ## Using the Library
