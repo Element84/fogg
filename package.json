@@ -144,5 +144,5 @@
     "type": "git",
     "url": "https://repo.element84.com/fogg/fogg"
   },
-  "main": "n/a"
+  "main": "gatsby-config.js"
 }
