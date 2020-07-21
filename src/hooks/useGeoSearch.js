@@ -200,8 +200,12 @@ export default function useGeoSearch (geoSearchSettings = {}) {
    * @description
    */
 
-  async function handleUpdateSearch (settings) {
+  async function handleUpdateSearch (settings = {}) {
     const errorBase = 'Failed to update search';
+
+    if (settings.resetPage) {
+      settings.page = QUERY_DEFAULT_PARAMS.page;
+    }
 
     try {
       return await handleSearch({
