@@ -19,8 +19,12 @@ const FILTER_KEY = '$$filterable';
 const errorBase = 'Failed to construct table data';
 
 export default function useTableData ({ columns = [], data = [] }) {
-  const [sortOptions, updateSortOptions] = useState(DEFAULT_SORT_OPTIONS);
-  const { sortedIndex, sortType, sortId } = sortOptions;
+  let workingColumns = [...columns];
+  let workingData = [...data];
+
+  /*************************
+   * SEARCHING / FILTERING *
+   *************************/
 
   const [filters, updateFilters] = useState({});
 
@@ -33,13 +37,6 @@ export default function useTableData ({ columns = [], data = [] }) {
   if (filterKeys.find((key) => typeof key === 'undefined')) {
     throw new Error(`${errorBase}: Columns contain undefined columnId`);
   }
-
-  let workingColumns = [...columns];
-  let workingData = [...data];
-
-  /*************************
-   * SEARCHING / FILTERING *
-   *************************/
 
   // Find all columns that have a filter transformer and create a filter friendly key
   // on the working data
@@ -147,6 +144,27 @@ export default function useTableData ({ columns = [], data = [] }) {
   /***********
    * SORTING *
    ***********/
+
+  const defaultSortOptions = {
+    ...DEFAULT_SORT_OPTIONS
+  };
+
+  // Try to see if we're designating a column as sorted by default
+
+  const defaultSortColumn = columns.findIndex(
+    ({ defaultSorted }) => !!defaultSorted
+  );
+
+  // If we find one, override the default sort option config
+
+  if (defaultSortColumn >= 0) {
+    defaultSortOptions.sortedIndex = defaultSortColumn;
+    defaultSortOptions.sortType = columns[defaultSortColumn].defaultSorted;
+    defaultSortOptions.sortId = columns[defaultSortColumn].columnId;
+  }
+
+  const [sortOptions, updateSortOptions] = useState(defaultSortOptions);
+  const { sortedIndex, sortType, sortId } = sortOptions;
 
   // Map our our sort state and tag the column header with the appropriate
   // sort status
