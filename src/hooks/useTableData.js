@@ -180,26 +180,33 @@ export default function useTableData ({ columns = [], data = [] }) {
     const actionComponents = [];
 
     if (Array.isArray(actions)) {
-      actions.forEach(({ to, label, buttonType, icon } = {}, index) => {
-        const hasType =
-          Array.isArray(buttonType) || typeof buttonType === 'string';
-        const iconBefore = hasType && buttonType.includes('icon-before');
-        const iconAfter = hasType && buttonType.includes('icon-after');
+      actions.forEach(
+        ({ to, label, buttonType, icon, ...rest } = {}, index) => {
+          const hasType =
+            Array.isArray(buttonType) || typeof buttonType === 'string';
+          const iconBefore = hasType && buttonType.includes('icon-before');
+          const iconAfter = hasType && buttonType.includes('icon-after');
 
-        if (typeof icon === 'string') {
-          icon = <IconByName name={icon} />;
+          if (typeof icon === 'string') {
+            icon = <IconByName name={icon} />;
+          }
+
+          const action = (
+            <Button
+              key={`Action-${index}`}
+              to={to && to}
+              type={buttonType}
+              {...rest}
+            >
+              {iconBefore && icon}
+              {label}
+              {iconAfter && icon}
+            </Button>
+          );
+
+          actionComponents.push(action);
         }
-
-        const action = (
-          <Button key={`Action-${index}`} to={to} type={buttonType}>
-            {iconBefore && icon}
-            {label}
-            {iconAfter && icon}
-          </Button>
-        );
-
-        actionComponents.push(action);
-      });
+      );
     }
     return {
       ...data,
