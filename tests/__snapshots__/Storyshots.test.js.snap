@@ -9411,6 +9411,79 @@ Array [
 ]
 `;
 
+exports[`Storyshots Components/Table Sort Defaults 1`] = `
+Array [
+  <div
+    style={
+      Object {
+        "position": "relative",
+        "zIndex": 0,
+      }
+    }
+  >
+    <div
+      className="story-container Story-Table-SortDefaults"
+    >
+      <h1>
+        Table
+      </h1>
+      <h2>
+        Sort Defaults
+      </h2>
+      <div
+        className="story"
+      >
+        <div
+          className="table table-frozen-header"
+        >
+          <div
+            className="table-container"
+            style={
+              Object {
+                "height": 300,
+              }
+            }
+          >
+            <div
+              style={
+                Object {
+                  "height": 0,
+                  "overflow": "visible",
+                  "width": 0,
+                }
+              }
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  <button
+    className="info__show-button"
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "#027ac5",
+        "border": "none",
+        "borderRadius": "0 0 0 5px",
+        "color": "#fff",
+        "cursor": "pointer",
+        "display": "block",
+        "fontFamily": "sans-serif",
+        "fontSize": 12,
+        "padding": "5px 15px",
+        "position": "fixed",
+        "right": 0,
+        "top": 0,
+      }
+    }
+    type="button"
+  >
+    Show Info
+  </button>,
+]
+`;
+
 exports[`Storyshots Components/Task Action Default 1`] = `
 Array [
   <div
