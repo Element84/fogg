@@ -12,6 +12,7 @@ const Modal = ({
   children,
   name,
   closeButtonText = 'Close',
+  hasFooter = true,
   isOpen = false,
   contentLabel,
   handleCloseModal,
@@ -23,13 +24,16 @@ const Modal = ({
 
   ReactModal.setAppElement(appElement);
 
+  const className = !hasFooter && 'modal-no-footer';
+
   const modalProperties = {
     isOpen,
     contentLabel,
     shouldCloseOnOverlayClick: true,
     shouldCloseOnEsc: true,
     portalClassName: 'modal ReactModalPortal',
-    onRequestClose: handleRequestClose
+    onRequestClose: handleRequestClose,
+    className
   };
 
   return (
@@ -47,13 +51,15 @@ const Modal = ({
 
       <div className="modal-body">{children}</div>
 
-      <div className="modal-footer">
-        <div className="button">
-          <Button onClick={handleCloseModal} data-modal={name}>
-            {closeButtonText}
-          </Button>
+      {hasFooter && (
+        <div className="modal-footer">
+          <div className="button">
+            <Button onClick={handleCloseModal} data-modal={name}>
+              {closeButtonText}
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
     </ReactModal>
   );
 };
@@ -67,6 +73,7 @@ Modal.propTypes = {
   ]),
   name: PropTypes.string,
   closeButtonText: PropTypes.string,
+  hasFooter: PropTypes.bool,
   isOpen: PropTypes.bool,
   contentLabel: PropTypes.string,
   handleCloseModal: PropTypes.func,
