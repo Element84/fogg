@@ -12,8 +12,11 @@ describe('ChildToggle', () => {
       </ChildToggle>
     );
 
-    it('does not render children when not checked', () => {
-      expect(repeater.contains(<div className="unique" />)).toBeFalsy();
+    it('hides the children when not checked', () => {
+      expect(repeater.contains(<div className="unique" />)).toBeTruthy();
+      expect(
+        repeater.find('.child-toggle[data-is-checked="false"]')
+      ).toHaveLength(1);
     });
 
     it('renders children when input is checked', () => {
@@ -26,6 +29,9 @@ describe('ChildToggle', () => {
       });
 
       expect(repeater.contains(<div className="unique" />)).toBeTruthy();
+      expect(
+        repeater.find('.child-toggle[data-is-checked="true"]')
+      ).toHaveLength(1);
     });
   });
 
