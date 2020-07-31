@@ -17,16 +17,18 @@ const Datetime = ({
   utc = false,
   disableFrom
 }) => {
-  const [defaultDate, setDefaultDate] = useState(props.value || '');
+  const [date, setDate] = useState(props.value || '');
 
   useEffect(() => {
-    setDefaultDate(props.value);
+    setDate(props.value);
   }, [props.value]);
 
   const { name } = useInput({ props });
 
   function handleChange (moment) {
     const value = moment && moment.format('x');
+
+    setDate(moment);
 
     const virtualEvent = {
       target: {
@@ -104,9 +106,9 @@ const Datetime = ({
 
   return (
     <ReactDatetime
+      value={date}
       renderInput={renderInput}
       onChange={handleChange}
-      defaultValue={defaultDate}
       isValidDate={isValidDate}
       utc={utc}
     />
