@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReactDatetime from 'react-datetime';
 import { FaCalendarAlt } from 'react-icons/fa';
@@ -17,6 +17,12 @@ const Datetime = ({
   utc = false,
   disableFrom
 }) => {
+  const [defaultDate, setDefaultDate] = useState(props.value || '');
+
+  useEffect(() => {
+    setDefaultDate(props.value);
+  }, [props.value]);
+
   const { name } = useInput({ props });
 
   function handleChange (moment) {
@@ -74,7 +80,7 @@ const Datetime = ({
 
   function renderInput (defaultProps) {
     const allProps = {
-      value: defaultProps.value || props.value || '',
+      value: defaultProps.value,
       onChange: defaultProps.onChange,
       onInput: defaultProps.onInput,
       onKeyDown: defaultProps.onKeydown,
@@ -100,7 +106,7 @@ const Datetime = ({
     <ReactDatetime
       renderInput={renderInput}
       onChange={handleChange}
-      defaultValue={props.value || ''}
+      defaultValue={defaultDate}
       isValidDate={isValidDate}
       utc={utc}
     />
