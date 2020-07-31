@@ -4158,7 +4158,7 @@ Array [
         className="story"
       >
         <div
-          className="notice notice-info notice-light notice-left"
+          className="notice notice-info notice-light notice-left layout-notice"
         >
           <div
             className="notice-content"
@@ -4170,7 +4170,7 @@ Array [
         </div>
         I'm in a Layout
         <div
-          className="notice notice-info notice-bold notice-left"
+          className="notice notice-info notice-bold notice-left layout-notice"
         >
           <div
             className="notice-content"

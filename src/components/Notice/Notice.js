@@ -24,12 +24,17 @@ Notice.propTypes = {
 
 const NoticeWrapper = ({
   children,
+  className,
   type = 'info',
   weight = 'light',
   align = 'left',
   onClose
 }) => {
-  const noticeClassName = `notice notice-${type} notice-${weight} notice-${align}`;
+  let noticeClassName = `notice notice-${type} notice-${weight} notice-${align}`;
+
+  if (className) {
+    noticeClassName = `${noticeClassName} ${className}`;
+  }
 
   return (
     <div className={noticeClassName}>
@@ -49,6 +54,7 @@ NoticeWrapper.propTypes = {
     PropTypes.node,
     PropTypes.string
   ]),
+  className: PropTypes.string,
   type: PropTypes.string,
   weight: PropTypes.string,
   align: PropTypes.string,
