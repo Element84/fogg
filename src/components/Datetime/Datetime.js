@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReactDatetime from 'react-datetime';
 import { FaCalendarAlt } from 'react-icons/fa';
@@ -17,10 +17,18 @@ const Datetime = ({
   utc = false,
   disableFrom
 }) => {
+  const [date, setDate] = useState(props.value || '');
+
+  useEffect(() => {
+    setDate(props.value);
+  }, [props.value]);
+
   const { name } = useInput({ props });
 
   function handleChange (moment) {
     const value = moment && moment.format('x');
+
+    setDate(moment);
 
     const virtualEvent = {
       target: {
@@ -74,7 +82,7 @@ const Datetime = ({
 
   function renderInput (defaultProps) {
     const allProps = {
-      value: defaultProps.value || props.value || '',
+      value: defaultProps.value,
       onChange: defaultProps.onChange,
       onInput: defaultProps.onInput,
       onKeyDown: defaultProps.onKeydown,
@@ -98,9 +106,9 @@ const Datetime = ({
 
   return (
     <ReactDatetime
+      value={date}
       renderInput={renderInput}
       onChange={handleChange}
-      defaultValue={props.value || ''}
       isValidDate={isValidDate}
       utc={utc}
     />
