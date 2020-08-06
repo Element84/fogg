@@ -11757,14 +11757,14 @@ Array [
                         4
                       </td>
                       <td
-                        className="rdtDay rdtToday"
+                        className="rdtDay"
                         data-value={5}
                         onClick={[Function]}
                       >
                         5
                       </td>
                       <td
-                        className="rdtDay"
+                        className="rdtDay rdtToday"
                         data-value={6}
                         onClick={[Function]}
                       >
@@ -12207,14 +12207,14 @@ Array [
                         4
                       </td>
                       <td
-                        className="rdtDay rdtToday"
+                        className="rdtDay"
                         data-value={5}
                         onClick={[Function]}
                       >
                         5
                       </td>
                       <td
-                        className="rdtDay"
+                        className="rdtDay rdtToday"
                         data-value={6}
                         onClick={[Function]}
                       >
@@ -12647,14 +12647,13 @@ Array [
                         4
                       </td>
                       <td
-                        className="rdtDay rdtToday"
+                        className="rdtDay rdtDisabled"
                         data-value={5}
-                        onClick={[Function]}
                       >
                         5
                       </td>
                       <td
-                        className="rdtDay"
+                        className="rdtDay rdtToday"
                         data-value={6}
                         onClick={[Function]}
                       >
@@ -13581,14 +13580,14 @@ Array [
                               4
                             </td>
                             <td
-                              className="rdtDay rdtToday"
+                              className="rdtDay"
                               data-value={5}
                               onClick={[Function]}
                             >
                               5
                             </td>
                             <td
-                              className="rdtDay"
+                              className="rdtDay rdtToday"
                               data-value={6}
                               onClick={[Function]}
                             >
