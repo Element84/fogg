@@ -36,6 +36,10 @@ const MAP_STATE_DEFAULT = {
   initialized: false
 };
 
+const DRAW_STATE_DEFAULT = {
+  active: false
+};
+
 const AVAILABLE_MAP_CONTROLS = Object.keys(MAP_CONFIG_DEFAULTS);
 
 let defaultMapFeaturesGroup;
@@ -71,7 +75,42 @@ export default function useMap (mapSettings = {}) {
   const [mapConfig, setMapConfig] = useState(defaultMapSettings);
   const [mapServices] = useState(availableServices);
 
+  const [drawState, setDrawState] = useState(DRAW_STATE_DEFAULT);
+
   const { defaultCenter, defaultZoom } = mapConfig;
+
+  /**************
+   * DRAW STATE *
+   **************/
+
+  function handleOnDrawStart () {
+    setDrawState((prev) => {
+      return {
+        ...prev,
+        active: true
+      };
+    });
+  }
+  function handleOnDrawStop () {
+    setDrawState((prev) => {
+      return {
+        ...prev,
+        active: false
+      };
+    });
+  }
+
+  useEffect(() => {
+    const map = currentLeafletRef(refMap);
+
+    map.on(L.Draw.Event.DRAWSTART, handleOnDrawStart);
+    map.on(L.Draw.Event.DRAWSTOP, handleOnDrawStop);
+
+    return () => {
+      map.off(L.Draw.Event.DRAWSTART, handleOnDrawStart);
+      map.off(L.Draw.Event.DRAWSTOP, handleOnDrawStop);
+    };
+  }, []);
 
   // Map build and teardown functions
 
@@ -455,6 +494,7 @@ export default function useMap (mapSettings = {}) {
     services: mapServices,
     projection,
     draw,
+    drawState,
 
     clearLayers: handleClearLayers,
     onLayerCreate: handleOnLayerCreate,
