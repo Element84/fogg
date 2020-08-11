@@ -51,7 +51,7 @@
     "uuid": "^8.3.0"
   },
   "peerDependencies": {
-    "gatsby": "^2.23.22",
+    "gatsby": "^2.24.33",
     "leaflet": "1.6.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
