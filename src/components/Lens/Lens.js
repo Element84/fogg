@@ -97,7 +97,7 @@ const Lens = ({
   };
 
   const map = useMap(defaultMapSettings) || {};
-  const { draw: mapDraw = {} } = map;
+  const { draw: mapDraw = {}, drawState = {} } = map;
   const { disableMapDraw } = mapDraw;
 
   const displayFilters =
@@ -139,6 +139,7 @@ const Lens = ({
           className={lensClassName}
           data-active-search={isActiveSearch}
           data-has-results={hasResults}
+          data-draw-is-active={drawState.active}
         >
           {displaySideBar && (
             <div className="lens-sidebar">
