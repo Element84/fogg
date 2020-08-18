@@ -6711,6 +6711,164 @@ exports[`Storyshots Components/Table Filters 1`] = `
                 </div>
               </ul>
             </li>
+            <li
+              className="table-search-filters-filter"
+            >
+              <ul
+                className="table-search-filters-filter-list"
+              >
+                <div
+                  className="form-input input-button-list"
+                >
+                  <label
+                    className="form-label"
+                  >
+                    First Name
+                  </label>
+                  <span
+                    className="radio-button"
+                  >
+                    <input
+                      className="visually-hidden"
+                      defaultChecked={false}
+                      id="firstName-0"
+                      name="firstName"
+                      onChange={[Function]}
+                      onInput={[Function]}
+                      type="radio"
+                      value="Gary"
+                    />
+                    <label
+                      htmlFor="firstName-0"
+                    >
+                      <span
+                        className="radio-button-checkbox"
+                      >
+                        <span>
+                          <svg
+                            fill="currentColor"
+                            height="1em"
+                            stroke="currentColor"
+                            strokeWidth="0"
+                            style={
+                              Object {
+                                "color": undefined,
+                              }
+                            }
+                            viewBox="0 0 512 512"
+                            width="1em"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                            />
+                          </svg>
+                        </span>
+                      </span>
+                      <span
+                        className="input-button-content"
+                      >
+                        Gary
+                      </span>
+                    </label>
+                  </span>
+                  <span
+                    className="radio-button"
+                  >
+                    <input
+                      className="visually-hidden"
+                      defaultChecked={false}
+                      id="firstName-1"
+                      name="firstName"
+                      onChange={[Function]}
+                      onInput={[Function]}
+                      type="radio"
+                      value="Quinn"
+                    />
+                    <label
+                      htmlFor="firstName-1"
+                    >
+                      <span
+                        className="radio-button-checkbox"
+                      >
+                        <span>
+                          <svg
+                            fill="currentColor"
+                            height="1em"
+                            stroke="currentColor"
+                            strokeWidth="0"
+                            style={
+                              Object {
+                                "color": undefined,
+                              }
+                            }
+                            viewBox="0 0 512 512"
+                            width="1em"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                            />
+                          </svg>
+                        </span>
+                      </span>
+                      <span
+                        className="input-button-content"
+                      >
+                        Quinn
+                      </span>
+                    </label>
+                  </span>
+                  <span
+                    className="radio-button"
+                  >
+                    <input
+                      className="visually-hidden"
+                      defaultChecked={false}
+                      id="firstName-2"
+                      name="firstName"
+                      onChange={[Function]}
+                      onInput={[Function]}
+                      type="radio"
+                      value="Abraham"
+                    />
+                    <label
+                      htmlFor="firstName-2"
+                    >
+                      <span
+                        className="radio-button-checkbox"
+                      >
+                        <span>
+                          <svg
+                            fill="currentColor"
+                            height="1em"
+                            stroke="currentColor"
+                            strokeWidth="0"
+                            style={
+                              Object {
+                                "color": undefined,
+                              }
+                            }
+                            viewBox="0 0 512 512"
+                            width="1em"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                            />
+                          </svg>
+                        </span>
+                      </span>
+                      <span
+                        className="input-button-content"
+                      >
+                        Abraham
+                      </span>
+                    </label>
+                  </span>
+                </div>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>
@@ -9276,7 +9434,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     10
                   </td>
                   <td
-                    className="rdtDay rdtToday"
+                    className="rdtDay"
                     data-value={11}
                     onClick={[Function]}
                   >
@@ -9327,7 +9485,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     17
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtToday"
                     data-value={18}
                     onClick={[Function]}
                   >
@@ -9726,7 +9884,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     10
                   </td>
                   <td
-                    className="rdtDay rdtToday"
+                    className="rdtDay"
                     data-value={11}
                     onClick={[Function]}
                   >
@@ -9777,7 +9935,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     17
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtToday"
                     data-value={18}
                     onClick={[Function]}
                   >
@@ -10160,58 +10318,51 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     10
                   </td>
                   <td
-                    className="rdtDay rdtToday"
+                    className="rdtDay rdtDisabled"
                     data-value={11}
-                    onClick={[Function]}
                   >
                     11
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtDisabled"
                     data-value={12}
-                    onClick={[Function]}
                   >
                     12
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtDisabled"
                     data-value={13}
-                    onClick={[Function]}
                   >
                     13
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtDisabled"
                     data-value={14}
-                    onClick={[Function]}
                   >
                     14
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtDisabled"
                     data-value={15}
-                    onClick={[Function]}
                   >
                     15
                   </td>
                 </tr>
                 <tr>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtDisabled"
                     data-value={16}
-                    onClick={[Function]}
                   >
                     16
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtDisabled"
                     data-value={17}
-                    onClick={[Function]}
                   >
                     17
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtToday"
                     data-value={18}
                     onClick={[Function]}
                   >
@@ -11094,7 +11245,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           10
                         </td>
                         <td
-                          className="rdtDay rdtToday"
+                          className="rdtDay"
                           data-value={11}
                           onClick={[Function]}
                         >
@@ -11145,7 +11296,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           17
                         </td>
                         <td
-                          className="rdtDay"
+                          className="rdtDay rdtToday"
                           data-value={18}
                           onClick={[Function]}
                         >
