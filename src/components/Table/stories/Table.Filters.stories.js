@@ -66,6 +66,11 @@ const FILTER_MENU_OPTIONS = [
     columnId: 'role',
     type: 'checkbox',
     Header: 'Role'
+  },
+  {
+    columnId: 'firstName',
+    type: 'radio',
+    Header: 'First Name'
   }
 ];
 

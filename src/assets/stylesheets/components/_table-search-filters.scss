@@ -23,6 +23,7 @@
     }
 
     .checkbox-button input:checked + label,
+    .radio-button input:checked + label,
     label {
       background: none;
       padding: 0;
@@ -30,7 +31,8 @@
       box-shadow: none;
     }
 
-    .checkbox-button {
+    .checkbox-button,
+    .radio-button {
 
       margin-bottom: 1em;
 
@@ -40,7 +42,8 @@
 
           & + label {
 
-            .checkbox-button-checkbox {
+            .checkbox-button-checkbox,
+            .radio-button-checkbox {
 
               span {
                 border: solid 2px $color-blue;
@@ -56,12 +59,13 @@
 
     }
 
-    .checkbox-button-checkbox {
+    .checkbox-button-checkbox,
+    .radio-button-checkbox {
 
       font-size: .65em;
 
       svg {
-        transform: translateY(.1em);
+        transform: translateY(-1px);
       }
 
     }
