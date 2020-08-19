@@ -22,7 +22,8 @@ const FormInput = (props) => {
     utc,
     disableFrom,
     validationMessage,
-    onKeyDown
+    onKeyDown,
+    showClear
   } = props;
   const { id, type, label, isInvalid, inputProps } = useInput({ props });
 
@@ -77,6 +78,7 @@ const FormInput = (props) => {
         allowPastDate={allowPastDate}
         utc={utc}
         disableFrom={disableFrom}
+        showClear={showClear}
       />
     );
   } else {
@@ -132,7 +134,8 @@ FormInput.propTypes = {
   allowPastDate: PropTypes.bool,
   utc: PropTypes.bool,
   disableFrom: PropTypes.object,
-  validationMessage: PropTypes.string
+  validationMessage: PropTypes.string,
+  showClear: PropTypes.bool
 };
 
 export default FormInput;

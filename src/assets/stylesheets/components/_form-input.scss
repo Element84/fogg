@@ -71,8 +71,17 @@
 
 /* Custom datepicker styles */
 
+.form-input-datetime {
+
+  .datetime-clear {
+    text-align: right;
+  }
+
+}
+
 .rdt {
-  svg {
+
+  .icon-calendar {
     position: absolute;
     right: 0;
     width: 1.5em;
@@ -80,7 +89,7 @@
     margin: 0.5em;
   }
 
-  &.rdtOpen svg{
+  &.rdtOpen .icon-calendar{
     color: $color-blue;
   }
 
@@ -90,7 +99,7 @@
       border-radius: 3px;
 
       &.rdtActive,
-      &.rdtActive:hover {		
+      &.rdtActive:hover {
         background-color: $color-blue;
       }
 
