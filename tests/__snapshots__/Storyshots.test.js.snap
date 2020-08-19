@@ -9207,7 +9207,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
       >
         <div>
           <svg
-            className="form-control"
+            className="icon-calendar"
             fill="currentColor"
             height="1em"
             onChange={[Function]}
@@ -9485,14 +9485,14 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     17
                   </td>
                   <td
-                    className="rdtDay rdtToday"
+                    className="rdtDay"
                     data-value={18}
                     onClick={[Function]}
                   >
                     18
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtToday"
                     data-value={19}
                     onClick={[Function]}
                   >
@@ -9657,7 +9657,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
       >
         <div>
           <svg
-            className="form-control"
+            className="icon-calendar"
             fill="currentColor"
             height="1em"
             onChange={[Function]}
@@ -9935,14 +9935,14 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     17
                   </td>
                   <td
-                    className="rdtDay rdtToday"
+                    className="rdtDay"
                     data-value={18}
                     onClick={[Function]}
                   >
                     18
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtToday"
                     data-value={19}
                     onClick={[Function]}
                   >
@@ -10107,7 +10107,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
       >
         <div>
           <svg
-            className="form-control"
+            className="icon-calendar"
             fill="currentColor"
             height="1em"
             onChange={[Function]}
@@ -10362,14 +10362,13 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     17
                   </td>
                   <td
-                    className="rdtDay rdtToday"
+                    className="rdtDay rdtDisabled"
                     data-value={18}
-                    onClick={[Function]}
                   >
                     18
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtToday"
                     data-value={19}
                     onClick={[Function]}
                   >
@@ -11018,7 +11017,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
             >
               <div>
                 <svg
-                  className="form-control"
+                  className="icon-calendar"
                   fill="currentColor"
                   height="1em"
                   onChange={[Function]}
@@ -11296,14 +11295,491 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           17
                         </td>
                         <td
-                          className="rdtDay rdtToday"
+                          className="rdtDay"
                           data-value={18}
                           onClick={[Function]}
                         >
                           18
                         </td>
                         <td
+                          className="rdtDay rdtToday"
+                          data-value={19}
+                          onClick={[Function]}
+                        >
+                          19
+                        </td>
+                        <td
                           className="rdtDay"
+                          data-value={20}
+                          onClick={[Function]}
+                        >
+                          20
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={21}
+                          onClick={[Function]}
+                        >
+                          21
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={22}
+                          onClick={[Function]}
+                        >
+                          22
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="rdtDay"
+                          data-value={23}
+                          onClick={[Function]}
+                        >
+                          23
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={24}
+                          onClick={[Function]}
+                        >
+                          24
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={25}
+                          onClick={[Function]}
+                        >
+                          25
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={26}
+                          onClick={[Function]}
+                        >
+                          26
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={27}
+                          onClick={[Function]}
+                        >
+                          27
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={28}
+                          onClick={[Function]}
+                        >
+                          28
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={29}
+                          onClick={[Function]}
+                        >
+                          29
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="rdtDay"
+                          data-value={30}
+                          onClick={[Function]}
+                        >
+                          30
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={31}
+                          onClick={[Function]}
+                        >
+                          31
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-value={1}
+                          onClick={[Function]}
+                        >
+                          1
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-value={2}
+                          onClick={[Function]}
+                        >
+                          2
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-value={3}
+                          onClick={[Function]}
+                        >
+                          3
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-value={4}
+                          onClick={[Function]}
+                        >
+                          4
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-value={5}
+                          onClick={[Function]}
+                        >
+                          5
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td
+                          className="rdtTimeToggle"
+                          colSpan={7}
+                          onClick={[Function]}
+                        >
+                          12:00 AM
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="form-row "
+        >
+          <div
+            className="form-input  form-input-datetime"
+          >
+            <label
+              className="form-label"
+              htmlFor="datetime-clear"
+            >
+              Datetime Clear
+            </label>
+            <div
+              className="rdt"
+            >
+              <div>
+                <svg
+                  className="icon-calendar"
+                  fill="currentColor"
+                  height="1em"
+                  onChange={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  stroke="currentColor"
+                  strokeWidth="0"
+                  style={
+                    Object {
+                      "color": undefined,
+                    }
+                  }
+                  type="text"
+                  value=""
+                  viewBox="0 0 448 512"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm320-196c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM192 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM64 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z"
+                  />
+                </svg>
+                <input
+                  autoComplete="off"
+                  className="input datetime form-input-field"
+                  id="datetime-clear"
+                  name="datetime-clear"
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  onInput={[Function]}
+                  type="datetime"
+                  value=""
+                />
+                <p
+                  className="datetime-clear"
+                >
+                  <button
+                    onClick={[Function]}
+                  >
+                    <svg
+                      className="icon-times-circle"
+                      fill="currentColor"
+                      height="1em"
+                      stroke="currentColor"
+                      strokeWidth="0"
+                      style={
+                        Object {
+                          "color": undefined,
+                        }
+                      }
+                      viewBox="0 0 512 512"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"
+                      />
+                    </svg>
+                    Clear
+                  </button>
+                </p>
+              </div>
+              <div
+                className="rdtPicker"
+              >
+                <div
+                  className="rdtDays"
+                >
+                  <table>
+                    <thead>
+                      <tr>
+                        <th
+                          className="rdtPrev"
+                          onClick={[Function]}
+                        >
+                          <span>
+                            ‹
+                          </span>
+                        </th>
+                        <th
+                          className="rdtSwitch"
+                          colSpan={5}
+                          data-value={7}
+                          onClick={[Function]}
+                        >
+                          August 2020
+                        </th>
+                        <th
+                          className="rdtNext"
+                          onClick={[Function]}
+                        >
+                          <span>
+                            ›
+                          </span>
+                        </th>
+                      </tr>
+                      <tr>
+                        <th
+                          className="dow"
+                        >
+                          Su
+                        </th>
+                        <th
+                          className="dow"
+                        >
+                          Mo
+                        </th>
+                        <th
+                          className="dow"
+                        >
+                          Tu
+                        </th>
+                        <th
+                          className="dow"
+                        >
+                          We
+                        </th>
+                        <th
+                          className="dow"
+                        >
+                          Th
+                        </th>
+                        <th
+                          className="dow"
+                        >
+                          Fr
+                        </th>
+                        <th
+                          className="dow"
+                        >
+                          Sa
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td
+                          className="rdtDay rdtOld"
+                          data-value={26}
+                          onClick={[Function]}
+                        >
+                          26
+                        </td>
+                        <td
+                          className="rdtDay rdtOld"
+                          data-value={27}
+                          onClick={[Function]}
+                        >
+                          27
+                        </td>
+                        <td
+                          className="rdtDay rdtOld"
+                          data-value={28}
+                          onClick={[Function]}
+                        >
+                          28
+                        </td>
+                        <td
+                          className="rdtDay rdtOld"
+                          data-value={29}
+                          onClick={[Function]}
+                        >
+                          29
+                        </td>
+                        <td
+                          className="rdtDay rdtOld"
+                          data-value={30}
+                          onClick={[Function]}
+                        >
+                          30
+                        </td>
+                        <td
+                          className="rdtDay rdtOld"
+                          data-value={31}
+                          onClick={[Function]}
+                        >
+                          31
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={1}
+                          onClick={[Function]}
+                        >
+                          1
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="rdtDay"
+                          data-value={2}
+                          onClick={[Function]}
+                        >
+                          2
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={3}
+                          onClick={[Function]}
+                        >
+                          3
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={4}
+                          onClick={[Function]}
+                        >
+                          4
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={5}
+                          onClick={[Function]}
+                        >
+                          5
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={6}
+                          onClick={[Function]}
+                        >
+                          6
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={7}
+                          onClick={[Function]}
+                        >
+                          7
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={8}
+                          onClick={[Function]}
+                        >
+                          8
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="rdtDay"
+                          data-value={9}
+                          onClick={[Function]}
+                        >
+                          9
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={10}
+                          onClick={[Function]}
+                        >
+                          10
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={11}
+                          onClick={[Function]}
+                        >
+                          11
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={12}
+                          onClick={[Function]}
+                        >
+                          12
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={13}
+                          onClick={[Function]}
+                        >
+                          13
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={14}
+                          onClick={[Function]}
+                        >
+                          14
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={15}
+                          onClick={[Function]}
+                        >
+                          15
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="rdtDay"
+                          data-value={16}
+                          onClick={[Function]}
+                        >
+                          16
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={17}
+                          onClick={[Function]}
+                        >
+                          17
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-value={18}
+                          onClick={[Function]}
+                        >
+                          18
+                        </td>
+                        <td
+                          className="rdtDay rdtToday"
                           data-value={19}
                           onClick={[Function]}
                         >

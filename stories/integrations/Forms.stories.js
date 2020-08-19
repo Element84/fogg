@@ -296,6 +296,14 @@ stories.add('Default', () => {
               required={true}
             />
           </FormRow>
+          <FormRow>
+            <FormInput
+              id="datetime-clear"
+              label="Datetime Clear"
+              type="datetime"
+              showClear={true}
+            />
+          </FormRow>
         </ChildToggle>
       </FormRow>
 

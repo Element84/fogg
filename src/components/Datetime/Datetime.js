@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReactDatetime from 'react-datetime';
-import { FaCalendarAlt } from 'react-icons/fa';
+import { FaCalendarAlt, FaTimesCircle } from 'react-icons/fa';
 
 import { useInput } from '../../hooks';
 
@@ -15,7 +15,8 @@ const Datetime = ({
   allowPastDate = true,
   allowFutureDate = true,
   utc = false,
-  disableFrom
+  disableFrom,
+  showClear = false
 }) => {
   const [date, setDate] = useState(props.value || '');
 
@@ -80,6 +81,10 @@ const Datetime = ({
     }
   }
 
+  /**
+   * renderInput
+   */
+
   function renderInput (defaultProps) {
     const allProps = {
       value: defaultProps.value,
@@ -89,9 +94,25 @@ const Datetime = ({
       onFocus: defaultProps.onFocus
     };
 
+    function handleOnClear (e) {
+      e.preventDefault();
+
+      defaultProps.onChange({
+        target: {
+          value: ''
+        }
+      });
+
+      setDate('');
+    }
+
     return (
       <>
-        <FaCalendarAlt {...defaultProps} {...allProps} />
+        <FaCalendarAlt
+          {...defaultProps}
+          {...allProps}
+          className="icon-calendar"
+        />
         <Input
           className={`datetime ${className}`}
           props={{
@@ -100,6 +121,14 @@ const Datetime = ({
           }}
           {...allProps}
         />
+        {showClear && (
+          <p className="datetime-clear">
+            <button onClick={handleOnClear}>
+              <FaTimesCircle className="icon-times-circle" />
+              Clear
+            </button>
+          </p>
+        )}
       </>
     );
   }
@@ -124,7 +153,8 @@ Datetime.propTypes = {
   allowPastDate: PropTypes.bool,
   allowFutureDate: PropTypes.bool,
   utc: PropTypes.bool,
-  disableFrom: PropTypes.object
+  disableFrom: PropTypes.object,
+  showClear: PropTypes.bool
 };
 
 export default Datetime;
