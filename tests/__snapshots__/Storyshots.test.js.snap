@@ -9492,14 +9492,14 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     18
                   </td>
                   <td
-                    className="rdtDay rdtToday"
+                    className="rdtDay"
                     data-value={19}
                     onClick={[Function]}
                   >
                     19
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtToday"
                     data-value={20}
                     onClick={[Function]}
                   >
@@ -9942,14 +9942,14 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     18
                   </td>
                   <td
-                    className="rdtDay rdtToday"
+                    className="rdtDay"
                     data-value={19}
                     onClick={[Function]}
                   >
                     19
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtToday"
                     data-value={20}
                     onClick={[Function]}
                   >
@@ -10368,14 +10368,13 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     18
                   </td>
                   <td
-                    className="rdtDay rdtToday"
+                    className="rdtDay rdtDisabled"
                     data-value={19}
-                    onClick={[Function]}
                   >
                     19
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtToday"
                     data-value={20}
                     onClick={[Function]}
                   >
@@ -11302,14 +11301,14 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           18
                         </td>
                         <td
-                          className="rdtDay rdtToday"
+                          className="rdtDay"
                           data-value={19}
                           onClick={[Function]}
                         >
                           19
                         </td>
                         <td
-                          className="rdtDay"
+                          className="rdtDay rdtToday"
                           data-value={20}
                           onClick={[Function]}
                         >
@@ -11779,14 +11778,14 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           18
                         </td>
                         <td
-                          className="rdtDay rdtToday"
+                          className="rdtDay"
                           data-value={19}
                           onClick={[Function]}
                         >
                           19
                         </td>
                         <td
-                          className="rdtDay"
+                          className="rdtDay rdtToday"
                           data-value={20}
                           onClick={[Function]}
                         >
