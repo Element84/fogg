@@ -11,10 +11,10 @@ const Header = () => {
         <p><LogoFull /></p>
         <ul>
           <li>
-            <Link to="/">Getting Started</Link>
+            <Link to="http://fogg.element84.com/docs">Getting Started</Link>
           </li>
           <li>
-            <Link to="/page-2/">View Source on Github</Link>
+            <Link to="https://github.com/Element84/fogg">View Source on Github</Link>
           </li>
         </ul>
       </Container>

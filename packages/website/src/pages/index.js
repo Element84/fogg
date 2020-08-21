@@ -41,7 +41,7 @@ const IndexPage = () => {
             </p>
           </div>
           <div className="home-hero-image">
-            <img width="504" src={imgMapSearch} />
+            <img width="504" src={imgMapSearch} alt="Map illustration" />
           </div>
         </div>
       </Container>

@@ -28,7 +28,18 @@ header {
   }
 
   li {
+
     display: inline-block;
+    margin: 0 .5em;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
   }
 
   a {
