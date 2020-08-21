@@ -7557,7 +7557,7 @@ gatsby-plugin-react-helmet@^3.3.9:
   dependencies:
     "@babel/runtime" "^7.10.3"
 
-gatsby-plugin-react-leaflet@2.0.13, gatsby-plugin-react-leaflet@^2.0.12:
+gatsby-plugin-react-leaflet@^2.0.12:
   version "2.0.13"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-react-leaflet/-/gatsby-plugin-react-leaflet-2.0.13.tgz#7214e08c0b9984317c10c9de71a5e51420b9c0de"
   integrity sha512-8QGG7il+ErQfX6PyNnQGsunGrKuaFblV63aIgY7d5WOyXYZARyrAh3U+kneeBcuSgJa1Xw/fJdAHvi2vC0wR+w==
@@ -13141,7 +13141,7 @@ react-leaflet-draw@^0.19.0:
   dependencies:
     lodash-es "^4.17.10"
 
-react-leaflet@^2.6.3, react-leaflet@^2.7.0:
+react-leaflet@^2.6.3:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-2.7.0.tgz#0e0e452a4903029f0bb564771eab8cf9db8e4517"
   integrity sha512-pMf5eRyWU8RH9HohM2i0NZymcWHraJA1m6iMFYu94/01PAaBJpOyxORZJmN6cV9dBzkVWaLjAAHTNmxbwIpcfw==
