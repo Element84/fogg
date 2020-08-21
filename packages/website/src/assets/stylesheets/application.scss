@@ -1,19 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Zilla+Slab:wght@500;600;700&display=swap');
 
+
+@import "settings/__settings";
+@import "util/__util";
 @import "components/__components";
 @import "pages/__pages";
 
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   padding: 0;
   margin: 0;
 }
 
 main {
-  display: flex;
-  text-align: center;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
   padding: 2em 0;
 }

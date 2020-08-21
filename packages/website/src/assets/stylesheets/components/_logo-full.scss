@@ -1,0 +1,16 @@
+.logo-full {
+
+  display: flex;
+  align-items: center;
+  color: darken($color-purple-dark, 10);
+  font-family: $font-display;
+  font-weight: 600;
+
+  .logo {
+    width: 1.4em;
+    height: 1.4em;
+    margin-right: .3em;
+    transform: translateY(-.05em);
+  }
+
+}

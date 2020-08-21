@@ -1,27 +1,82 @@
-.page-home {
+.page-home {}
+
+.home-hero {
 
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: center;
+  font-size: 1em;
 
-  .logo-fogg {
-    display: inline-block;
+  @media (max-width: 80em) {
+    font-size: clamp(.6em, 1.2vw, 1.2em);
   }
 
-  h1 {
-    font-family: 'Zilla Slab', serif;
-    font-size: 5em;
-    margin-top: 0;
+  @media (max-width: 50em) {
+    display: block;
+    font-size: clamp(.6em, 2.2vw, 1em);
   }
 
   .button {
+
     margin: 0 .5em;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
   }
 
-  .footnote {
-    font-size: 1.2em;
-    margin-top: 3em;
+}
+
+.home-hero-content {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (max-width: 50em) {
+    text-align: center;
+    align-items: center;
+  }
+
+}
+
+.home-hero-header {
+  color: $color-purple-dark;
+  font-family: 'Zilla Slab', serif;
+  font-size: 3.5em;
+  font-weight: 500;
+  margin: 0;
+}
+
+.home-hero-blurb {
+  color: $color-gray4;
+  font-size: 1.4em;
+  line-height: 1.4;
+}
+
+.home-hero-actions {
+  display: flex;
+  align-items: center;
+  font-size: 1.2em;
+  margin-top: 1em;
+}
+
+.home-hero-image {
+
+  img {
+
+    width: 44em;
+    transform: translateX(8em) translateY(1em);
+    margin: 0 0 0 -8em;
+
+    @media (max-width: 50em) {
+      width: 130%;
+      margin: 0 0 0 -28%;
+    }
+
   }
 
 }
