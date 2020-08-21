@@ -83,7 +83,9 @@ const Map = (props) => {
       geoJson: fitGeoJson
     });
 
-    leafletElement.fitBounds(bounds);
+    leafletElement.fitBounds(bounds, {
+      padding: [50, 50]
+    });
   }, [fitGeoJson, mapRef]);
 
   if (!isDomAvailable()) {
