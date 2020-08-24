@@ -6,7 +6,7 @@ import Story from '../../../../stories/helpers/Story';
 import Lens from '../';
 
 const STORY_COMPONENT = 'Lens';
-const STORY_NAME = 'Default';
+const STORY_NAME = '📓 Usage';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 

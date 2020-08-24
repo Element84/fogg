@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-const STORY_COMPONENT = 'Getting Started';
+const STORY_COMPONENT = 'Docs';
 const STORY_NAME = 'Setup';
 
 const stories = storiesOf(`${STORY_COMPONENT}`, module).addParameters({
