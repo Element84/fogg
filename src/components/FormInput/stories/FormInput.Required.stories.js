@@ -51,6 +51,19 @@ stories.add(STORY_NAME, () => {
           required={true}
         />
         <FormInput
+          id="default-datetime"
+          label="Default Datetime"
+          type="datetime"
+          required={true}
+        />
+        <FormInput
+          id="default-datetime-utc"
+          label="Default Datetime UTC"
+          type="datetime"
+          utc={true}
+          required={true}
+        />
+        <FormInput
           id="required-datalist"
           label="Required Datalist"
           dataList={['Fry', 'Leela', 'Zoidberg', 'Bender']}

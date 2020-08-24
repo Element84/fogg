@@ -18,6 +18,8 @@ const Datetime = ({
   disableFrom,
   showClear = false
 }) => {
+  const { disabled } = props;
+
   const [date, setDate] = useState(props.value || '');
 
   useEffect(() => {
@@ -86,12 +88,24 @@ const Datetime = ({
    */
 
   function renderInput (defaultProps) {
+    function handleOnClick (e) {
+      if (disabled) {
+        e.preventDefault();
+        return;
+      }
+
+      if (typeof defaultProps.onClick === 'function') {
+        defaultProps.onClick(e);
+      }
+    }
+
     const allProps = {
       value: defaultProps.value,
       onChange: defaultProps.onChange,
       onInput: defaultProps.onInput,
       onKeyDown: defaultProps.onKeydown,
-      onFocus: defaultProps.onFocus
+      onFocus: defaultProps.onFocus,
+      onClick: handleOnClick
     };
 
     function handleOnClear (e) {
@@ -120,6 +134,7 @@ const Datetime = ({
             autoComplete: 'off'
           }}
           {...allProps}
+          disabled={disabled}
         />
         {showClear && (
           <p className="datetime-clear">
@@ -154,7 +169,8 @@ Datetime.propTypes = {
   allowFutureDate: PropTypes.bool,
   utc: PropTypes.bool,
   disableFrom: PropTypes.object,
-  showClear: PropTypes.bool
+  showClear: PropTypes.bool,
+  disabled: PropTypes.bool
 };
 
 export default Datetime;

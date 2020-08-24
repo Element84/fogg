@@ -51,6 +51,19 @@ stories.add(STORY_NAME, () => {
           disabled={true}
         />
         <FormInput
+          id="default-datetime"
+          label="Default Datetime"
+          type="datetime"
+          disabled={true}
+        />
+        <FormInput
+          id="default-datetime-utc"
+          label="Default Datetime UTC"
+          type="datetime"
+          utc={true}
+          disabled={true}
+        />
+        <FormInput
           id="disabled-datalist"
           label="Disabled Datalist"
           disabled={true}
