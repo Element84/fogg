@@ -6,6 +6,11 @@ import { availableValuesByColumnId } from '../../lib/table';
 
 import InputButtonList from '../InputButtonList';
 
+const OPTION_ALL = {
+  label: 'All',
+  value: 'all'
+};
+
 const TableSearchFilters = ({
   options = [],
   defaultTableData = [],
@@ -30,11 +35,30 @@ const TableSearchFilters = ({
       selectedOptions.map(({ columnId } = {}) => columnId)
     );
     const columnId = [...columnIdSet.values()][0];
+
+    // If we have an "all" option, which is most likely a radio list,
+    // we want to be able that option to be able to clear all radios and
+    // provide all values. So if we find an all option, we'll first strip
+    // it out of the options list as it's not part of the native data
+    // and uncheck all the other options
+
+    const all = selectedOptions.find(optionIsAll);
+    let options = selectedOptions.filter((option) => !optionIsAll(option));
+
+    if (all && all.isChecked) {
+      options = options.map((option) => {
+        return {
+          ...option,
+          isChecked: false
+        };
+      });
+    }
+
     if (typeof onChange === 'function') {
       onChange(
         {
           columnId,
-          selectedOptions
+          selectedOptions: options
         },
         e
       );
@@ -54,6 +78,14 @@ const TableSearchFilters = ({
               columnId
             };
           });
+
+          if (type === 'radio') {
+            valueOptions.unshift({
+              columnId,
+              ...OPTION_ALL
+            });
+          }
+
           return (
             <li
               key={`TableSearchFilter-${index}`}
@@ -86,3 +118,11 @@ TableSearchFilters.propTypes = {
 };
 
 export default TableSearchFilters;
+
+/**
+ * optionIsAll
+ */
+
+function optionIsAll ({ label, value } = {}) {
+  return label === OPTION_ALL.label && value === OPTION_ALL.value;
+}
