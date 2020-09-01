@@ -32,7 +32,8 @@ const MapPreview = ({
   availableLayers,
   availableServices,
   projection,
-  fetchLayerData
+  fetchLayerData,
+  fitGeoJson = true
 }) => {
   const layers = useLayers(availableLayers, fetchLayerData);
 
@@ -86,11 +87,19 @@ const MapPreview = ({
     throw new Error('Invalid geometry type');
   }
 
+  // We want to allow someone to enable or disable but also simply set
+  // to true by default to use the available geojson
+
+  if (fitGeoJson === true && typeof geoJson === 'object') {
+    fitGeoJson = geoJson;
+  }
+
   const mapSettings = {
     center: [centerLatLng.lat, centerLatLng.lng],
     services: availableServices,
     zoom,
-    projection
+    projection,
+    fitGeoJson
   };
 
   return (
@@ -179,7 +188,8 @@ MapPreview.propTypes = {
   ]),
   availableServices: PropTypes.array,
   projection: PropTypes.string,
-  fetchLayerData: PropTypes.func
+  fetchLayerData: PropTypes.func,
+  fitGeoJson: PropTypes.oneOfType([PropTypes.object, PropTypes.bool])
 };
 
 export default MapPreview;

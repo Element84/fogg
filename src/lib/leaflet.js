@@ -310,12 +310,11 @@ export function getShapeType (layer) {
  * @description Helper to grab the current leaflet element available
  */
 
-export function currentLeafletRef (ref = {}) {
-  const { current = {} } = ref;
-
+export function currentLeafletRef (ref) {
   // Current returns null if unavialable, so we need to additionally
   // add an option for a falsy current value
 
+  const { current } = ref || {};
   const { leafletElement } = current || {};
 
   return leafletElement;
@@ -351,4 +350,18 @@ export function drawModeFromDrawControl ({ name, drawControl = {} }) {
   });
   const modes = drawTroolbar && drawTroolbar._modes;
   return modes && modes[name];
+}
+
+/**
+ * getBoundsFromGeoJson
+ */
+
+export function getBoundsFromGeoJson ({ geoJson = {} }) {
+  let leafletGeoJson = geoJson;
+
+  if (typeof geoJson.toGeoJSON !== 'function') {
+    leafletGeoJson = L.geoJSON(leafletGeoJson);
+  }
+
+  return leafletGeoJson.getBounds();
 }

@@ -13,6 +13,7 @@ import { LayersContext } from '../../context';
 
 import { isDomAvailable } from '../../lib/device';
 import { buildLayerSet } from '../../lib/layers';
+import { getBoundsFromGeoJson, currentLeafletRef } from '../../lib/leaflet';
 
 import Layer from '../Layer';
 
@@ -31,11 +32,15 @@ const Map = (props) => {
     hideNativeLayers = true,
     useMapEffect,
     forwardedRef,
-    activeDateRange
+    activeDateRange,
+    fitGeoJson
   } = props;
 
   const { layers = {}, toggleLayer } = useContext(LayersContext) || {};
+  const mapRefBackup = useRef();
   const mapControlRef = useRef();
+
+  const mapRef = forwardedRef || mapRefBackup;
 
   let mapClassName = `map ${className || ''}`;
 
@@ -44,14 +49,13 @@ const Map = (props) => {
   }
 
   useEffect(() => {
-    if (!isDomAvailable() || !forwardedRef) return;
+    if (!mapRef) return;
 
     const mapEffect = Array.isArray(useMapEffect)
       ? useMapEffect
       : [useMapEffect];
 
-    const { current = {} } = forwardedRef;
-    const { leafletElement = {} } = current;
+    const leafletElement = currentLeafletRef(mapRef);
 
     const { current: layersControl } = mapControlRef;
 
@@ -66,7 +70,23 @@ const Map = (props) => {
         });
       }
     });
-  }, [map, forwardedRef]);
+  }, [map, mapRef]);
+
+  // If the user passes in an argument of fitGeoJson, we'll use that
+  // geoJson value to find the bounds and fit the map view to them
+
+  useEffect(() => {
+    if (!fitGeoJson || !mapRef) return;
+
+    const leafletElement = currentLeafletRef(mapRef);
+    const bounds = getBoundsFromGeoJson({
+      geoJson: fitGeoJson
+    });
+
+    leafletElement.fitBounds(bounds, {
+      padding: [50, 50]
+    });
+  }, [fitGeoJson, mapRef]);
 
   if (!isDomAvailable()) {
     return (
@@ -124,7 +144,7 @@ const Map = (props) => {
 
   return (
     <div className={mapClassName}>
-      <BaseMap ref={forwardedRef} {...mapSettings}>
+      <BaseMap ref={mapRef} {...mapSettings}>
         {children}
         <LayersControl ref={mapControlRef}>
           {mapLayers.base &&
@@ -200,7 +220,8 @@ Map.propTypes = {
   toggleLayer: PropTypes.func,
   hideNativeLayers: PropTypes.bool,
   useMapEffect: PropTypes.func,
-  activeDateRange: PropTypes.shape({})
+  activeDateRange: PropTypes.shape({}),
+  fitGeoJson: PropTypes.object
 };
 
 const MapWithRefs = React.forwardRef(function map (props, ref) {
