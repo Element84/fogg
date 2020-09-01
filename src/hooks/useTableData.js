@@ -234,7 +234,8 @@ export default function useTableData ({ columns = [], data = [] }) {
 
   // Loop through all of our data and tranform any cells that have a custom cellTransformer
 
-  workingData = workingData.map((data = {}, index) => {
+  workingData = workingData.map((data = {}) => {
+    const dataOriginal = { ...data };
     const dataKeys = Object.keys(data) || [];
 
     dataKeys.forEach((key) => {
@@ -243,7 +244,9 @@ export default function useTableData ({ columns = [], data = [] }) {
       );
       const { cellTransformer } = column || {};
       if (typeof cellTransformer === 'function') {
-        data[key] = cellTransformer(data[key]);
+        data[key] = cellTransformer(data[key], {
+          data: dataOriginal
+        });
       }
     });
 
