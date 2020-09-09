@@ -109,19 +109,39 @@ const MapPreview = ({
           <MapDraw disableEditControls={true}>
             {type === 'Point' && <Marker position={geoJsonCoordinates} />}
             {type === 'Polygon' &&
-              geoJsonCoordinates.map((set = []) => {
-                return set.map((position, index) => {
-                  const fixedPosition = position.map((coordinates) => [
-                    coordinates[1],
-                    coordinates[0]
-                  ]);
-                  return (
-                    <Polygon
-                      key={`MapPreview-Polygon-${index}`}
-                      color={AVAILABLE_COLORS[index]}
-                      positions={fixedPosition}
-                    />
-                  );
+              geoJson.features.map((feature) => {
+                const coordinates = coordinatesFromGeoJson({
+                  type: 'FeatureCollection',
+                  features: [feature]
+                });
+
+                const { properties = {} } = feature;
+                const {
+                  shapeOptions = {},
+                  onClick,
+                  onMouseover,
+                  onMouseout
+                } = properties;
+                const { style = {} } = shapeOptions;
+
+                return coordinates.map((set) => {
+                  return set.map((position, index) => {
+                    const fixedPosition = position.map((coordinates) => [
+                      coordinates[1],
+                      coordinates[0]
+                    ]);
+                    return (
+                      <Polygon
+                        key={`MapPreview-Polygon-${index}`}
+                        color={AVAILABLE_COLORS[index]}
+                        positions={fixedPosition}
+                        {...style}
+                        onClick={onClick}
+                        onMouseover={onMouseover}
+                        onMouseout={onMouseout}
+                      />
+                    );
+                  });
                 });
               })}
           </MapDraw>
