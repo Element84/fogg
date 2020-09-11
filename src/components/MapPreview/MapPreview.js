@@ -80,7 +80,18 @@ const MapPreview = ({
     geoJsonLatLng = latLngFromGeoJson(geoJson)[0] || {};
     geoJsonCoordinates = [geoJsonLatLng.lat, geoJsonLatLng.lng];
   } else if (type === 'Polygon') {
-    geoJsonCoordinates = coordinatesFromGeoJson(geoJson);
+    let aoiFeatures = geoJson.features.filter(
+      ({ properties }) => properties.featureType === 'aoi'
+    );
+
+    if (aoiFeatures.length === 0) {
+      aoiFeatures = geoJson.features;
+    }
+
+    geoJsonCoordinates = coordinatesFromGeoJson({
+      type: 'FeatureCollection',
+      features: aoiFeatures
+    });
   }
 
   if (!type) {
