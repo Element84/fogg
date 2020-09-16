@@ -81,15 +81,6 @@ const SearchPanelFilters = ({
   }
 
   /**
-   * filterActiveFiltersNoValue
-   * @description
-   */
-
-  function filterActiveFiltersNoValue ({ value } = {}) {
-    return valueIsValid(value);
-  }
-
-  /**
    * dedupFiltersById
    * @description Remove any excessive instance of a filter ID
    */
@@ -117,12 +108,6 @@ const SearchPanelFilters = ({
     return availableValues.filter((value) => valueIsValid(value)).length > 0;
   }
 
-  function valueIsValid (value) {
-    if (!value) return false;
-    if (Array.isArray(value) && value.length === 0) return false;
-    return true;
-  }
-
   return (
     <Panel
       className="search-panel-filters"
@@ -144,6 +129,7 @@ const SearchPanelFilters = ({
           ]}
           data={panelFilters
             .filter(filterActiveFiltersNoValue)
+            .filter(({ type } = {}) => type !== 'hidden')
             .map(mapActiveFiltersToRow)}
         />
       )}
@@ -160,3 +146,22 @@ SearchPanelFilters.propTypes = {
 };
 
 export default SearchPanelFilters;
+
+/**
+ * valueIsValid
+ */
+
+function valueIsValid (value) {
+  if (!value) return false;
+  if (Array.isArray(value) && value.length === 0) return false;
+  return true;
+}
+
+/**
+ * filterActiveFiltersNoValue
+ * @description
+ */
+
+function filterActiveFiltersNoValue ({ value } = {}) {
+  return valueIsValid(value);
+}

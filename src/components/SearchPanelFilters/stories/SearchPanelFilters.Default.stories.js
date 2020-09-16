@@ -44,6 +44,12 @@ const filters = {
         min: 0.2,
         max: 0.8
       }
+    },
+    {
+      label: 'My Private Filter',
+      id: 'properties/product:attribute',
+      type: 'hidden',
+      value: 'Test'
     }
   ]
 };
