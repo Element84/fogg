@@ -5827,6 +5827,187 @@ exports[`Storyshots Components/Panel Default 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/Search Panel Filters Active 1`] = `
+<div
+  className="story-container Story-SearchPanel Filters-Active"
+>
+  <h1>
+    Search Panel Filters
+  </h1>
+  <h2>
+    Active
+  </h2>
+  <div
+    className="story"
+  >
+    <div
+      className="panel search-panel-filters"
+    >
+      <div
+        className="panel-header"
+      >
+        <div
+          className="panel-header-title"
+        >
+          <p>
+            Filters
+          </p>
+        </div>
+        <div
+          className="panel-header-actions"
+        >
+          <ul>
+            <li>
+              <span
+                className="button "
+                data-full={false}
+              >
+                <button
+                  data-event-action={null}
+                  data-event-category={null}
+                  data-event-label={null}
+                  disabled={false}
+                  onClick={[Function]}
+                  to={null}
+                >
+                  <span
+                    className="visually-hidden"
+                  >
+                    Edit Filters
+                  </span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 576 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"
+                    />
+                  </svg>
+                </button>
+              </span>
+            </li>
+            <li>
+              <span
+                className="button "
+                data-full={false}
+              >
+                <button
+                  data-event-action={null}
+                  data-event-category={null}
+                  data-event-label={null}
+                  disabled={false}
+                  onClick={[Function]}
+                  to={null}
+                >
+                  <span
+                    className="visually-hidden"
+                  >
+                    Save Filter Changes
+                  </span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </button>
+              </span>
+            </li>
+            <li>
+              <span
+                className="button "
+                data-full={false}
+              >
+                <button
+                  data-event-action={null}
+                  data-event-category={null}
+                  data-event-label={null}
+                  disabled={false}
+                  onClick={[Function]}
+                  to={null}
+                >
+                  <span
+                    className="visually-hidden"
+                  >
+                    Cancel Filter Changes
+                  </span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 352 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                    />
+                  </svg>
+                </button>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div
+        className="panel-body"
+      >
+        <div
+          className="table"
+        >
+          <div
+            className="table-container"
+            style={
+              Object {
+                "height": 50,
+              }
+            }
+          >
+            <div
+              style={
+                Object {
+                  "height": 0,
+                  "overflow": "visible",
+                  "width": 0,
+                }
+              }
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/Search Panel Filters Default 1`] = `
 <div
   className="story-container Story-SearchPanel Filters-Default"
@@ -5836,6 +6017,161 @@ exports[`Storyshots Components/Search Panel Filters Default 1`] = `
   </h1>
   <h2>
     Default
+  </h2>
+  <div
+    className="story"
+  >
+    <div
+      className="panel search-panel-filters"
+    >
+      <div
+        className="panel-header"
+      >
+        <div
+          className="panel-header-title"
+        >
+          <p>
+            Filters
+          </p>
+        </div>
+        <div
+          className="panel-header-actions"
+        >
+          <ul>
+            <li>
+              <span
+                className="button "
+                data-full={false}
+              >
+                <button
+                  data-event-action={null}
+                  data-event-category={null}
+                  data-event-label={null}
+                  disabled={false}
+                  onClick={[Function]}
+                  to={null}
+                >
+                  <span
+                    className="visually-hidden"
+                  >
+                    Add Filter
+                  </span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 448 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                    />
+                  </svg>
+                </button>
+              </span>
+            </li>
+            <li>
+              <span
+                className="button "
+                data-full={false}
+              >
+                <button
+                  data-event-action={null}
+                  data-event-category={null}
+                  data-event-label={null}
+                  disabled={false}
+                  onClick={[Function]}
+                  to={null}
+                >
+                  <span
+                    className="visually-hidden"
+                  >
+                    Save Filter Changes
+                  </span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </button>
+              </span>
+            </li>
+            <li>
+              <span
+                className="button "
+                data-full={false}
+              >
+                <button
+                  data-event-action={null}
+                  data-event-category={null}
+                  data-event-label={null}
+                  disabled={false}
+                  onClick={[Function]}
+                  to={null}
+                >
+                  <span
+                    className="visually-hidden"
+                  >
+                    Cancel Filter Changes
+                  </span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 352 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                    />
+                  </svg>
+                </button>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Search Panel Filters Open 1`] = `
+<div
+  className="story-container Story-SearchPanel Filters-Open"
+>
+  <h1>
+    Search Panel Filters
+  </h1>
+  <h2>
+    Open
   </h2>
   <div
     className="story"
@@ -9488,14 +9824,14 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     15
                   </td>
                   <td
-                    className="rdtDay rdtToday"
+                    className="rdtDay"
                     data-value={16}
                     onClick={[Function]}
                   >
                     16
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtToday"
                     data-value={17}
                     onClick={[Function]}
                   >
@@ -9938,14 +10274,14 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     15
                   </td>
                   <td
-                    className="rdtDay rdtToday"
+                    className="rdtDay"
                     data-value={16}
                     onClick={[Function]}
                   >
                     16
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtToday"
                     data-value={17}
                     onClick={[Function]}
                   >
@@ -10371,14 +10707,13 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     15
                   </td>
                   <td
-                    className="rdtDay rdtToday"
+                    className="rdtDay rdtDisabled"
                     data-value={16}
-                    onClick={[Function]}
                   >
                     16
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtToday"
                     data-value={17}
                     onClick={[Function]}
                   >
@@ -11305,14 +11640,14 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           15
                         </td>
                         <td
-                          className="rdtDay rdtToday"
+                          className="rdtDay"
                           data-value={16}
                           onClick={[Function]}
                         >
                           16
                         </td>
                         <td
-                          className="rdtDay"
+                          className="rdtDay rdtToday"
                           data-value={17}
                           onClick={[Function]}
                         >
@@ -11782,14 +12117,14 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           15
                         </td>
                         <td
-                          className="rdtDay rdtToday"
+                          className="rdtDay"
                           data-value={16}
                           onClick={[Function]}
                         >
                           16
                         </td>
                         <td
-                          className="rdtDay"
+                          className="rdtDay rdtToday"
                           data-value={17}
                           onClick={[Function]}
                         >
