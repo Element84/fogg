@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FaPlus, FaCheck, FaTimes, FaEdit } from 'react-icons/fa';
 
 import { findFilterById } from '../../lib/filters';
+import { sortByKey } from '../../lib/util';
 
 import Panel from '../Panel';
 import PanelActions from '../PanelActions';
@@ -24,6 +25,23 @@ const SearchPanelFilters = ({
   // we'll want them to be the same value, but as 1 active ID to filter on
 
   panelFilters = dedupFiltersById(panelFilters);
+
+  // map through the filters and make sure that we're associating the full informtation
+  // from an available filter to the filter itself. This should really only do anything
+  // in the event that via the above, the filters being used are active and may not
+  // have the entire dataset
+
+  panelFilters = panelFilters.map((filter) => {
+    const availableFilter = available && findFilterById(available, filter.id);
+    return {
+      ...availableFilter,
+      ...filter
+    };
+  });
+
+  // Sort the filters so they remain consistent through each render
+
+  panelFilters = sortByKey(panelFilters, 'label');
 
   const filterActions = [
     {
@@ -58,7 +76,15 @@ const SearchPanelFilters = ({
    */
 
   function mapActiveFiltersToRow ({ id } = {}, index) {
-    const { label, value: filterValue } = findFilterById(available, id);
+    const activeFilter = active && findFilterById(active, id);
+    const availableFilter = available && findFilterById(available, id);
+
+    const filter = {
+      ...availableFilter,
+      ...activeFilter
+    };
+
+    const { label, value: filterValue } = filter;
 
     let value = filterValue;
 

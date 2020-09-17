@@ -7,11 +7,12 @@ import Story from '../../../../stories/helpers/Story';
 import SearchPanelFilters from '../';
 
 const STORY_COMPONENT = 'Search Panel Filters';
-const STORY_NAME = 'Default';
+const STORY_NAME = 'Open';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 const filters = {
+  isOpen: true,
   unsaved: [],
   active: [],
   available: [
@@ -36,6 +37,10 @@ const filters = {
         max: 0.9
       },
       defaultValue: {
+        min: 0.2,
+        max: 0.8
+      },
+      value: {
         min: 0.2,
         max: 0.8
       }

@@ -7,13 +7,27 @@ import Story from '../../../../stories/helpers/Story';
 import SearchPanelFilters from '../';
 
 const STORY_COMPONENT = 'Search Panel Filters';
-const STORY_NAME = 'Default';
+const STORY_NAME = 'Active';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 const filters = {
   unsaved: [],
-  active: [],
+  active: [
+    {
+      label: 'My Private Filter',
+      id: 'properties/product:attribute',
+      value: 'Test'
+    },
+    {
+      label: 'Cloud Cover',
+      id: 'properties/eo:cloud_cover',
+      value: {
+        min: 0.2,
+        max: 0.8
+      }
+    }
+  ],
   available: [
     {
       label: 'Collection',
