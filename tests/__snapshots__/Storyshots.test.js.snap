@@ -6601,7 +6601,7 @@ exports[`Storyshots Components/Table Cell Creator Default 1`] = `
         <p>
           Header
         </p>
-        <p
+        <div
           style={
             Object {
               "overflow": "hidden",
@@ -6610,7 +6610,10 @@ exports[`Storyshots Components/Table Cell Creator Default 1`] = `
         >
           <div
             className="table-cell table-cell-header table-cell-column-firstName table-row-first table-column-first table-cell-align-left"
+            data-cell-id="0_0"
             onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
             style={Object {}}
           >
             <span
@@ -6643,35 +6646,41 @@ exports[`Storyshots Components/Table Cell Creator Default 1`] = `
               </svg>
             </span>
           </div>
-        </p>
+        </div>
       </li>
       <li>
         <p>
           Standard Cell
         </p>
-        <p>
+        <div>
           <div
             className="table-cell table-cell-column-lastName table-cell-align-left"
+            data-cell-id="2_1"
             onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
             style={Object {}}
           >
             <span>
               Airgon
             </span>
           </div>
-        </p>
+        </div>
       </li>
       <li>
         <p>
           Action, Aligned Right
         </p>
-        <p>
+        <div>
           <div
             className="table-cell table-cell-column-actions table-column-last table-cell-align-right table-cell-type-action"
+            data-cell-id="1_2"
             onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
             style={Object {}}
           />
-        </p>
+        </div>
       </li>
     </ul>
   </div>
@@ -6730,6 +6739,45 @@ exports[`Storyshots Components/Table Default 1`] = `
   </h1>
   <h2>
     Default
+  </h2>
+  <div
+    className="story"
+  >
+    <div
+      className="table table-frozen-header"
+    >
+      <div
+        className="table-container"
+        style={
+          Object {
+            "height": 300,
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "height": 0,
+              "overflow": "visible",
+              "width": 0,
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Table Events 1`] = `
+<div
+  className="story-container Story-Table-Events"
+>
+  <h1>
+    Table
+  </h1>
+  <h2>
+    Events
   </h2>
   <div
     className="story"
@@ -9831,14 +9879,14 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     16
                   </td>
                   <td
-                    className="rdtDay rdtToday"
+                    className="rdtDay"
                     data-value={17}
                     onClick={[Function]}
                   >
                     17
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtToday"
                     data-value={18}
                     onClick={[Function]}
                   >
@@ -10281,14 +10329,14 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     16
                   </td>
                   <td
-                    className="rdtDay rdtToday"
+                    className="rdtDay"
                     data-value={17}
                     onClick={[Function]}
                   >
                     17
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtToday"
                     data-value={18}
                     onClick={[Function]}
                   >
@@ -10713,14 +10761,13 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     16
                   </td>
                   <td
-                    className="rdtDay rdtToday"
+                    className="rdtDay rdtDisabled"
                     data-value={17}
-                    onClick={[Function]}
                   >
                     17
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtToday"
                     data-value={18}
                     onClick={[Function]}
                   >
@@ -11647,14 +11694,14 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           16
                         </td>
                         <td
-                          className="rdtDay rdtToday"
+                          className="rdtDay"
                           data-value={17}
                           onClick={[Function]}
                         >
                           17
                         </td>
                         <td
-                          className="rdtDay"
+                          className="rdtDay rdtToday"
                           data-value={18}
                           onClick={[Function]}
                         >
@@ -12124,14 +12171,14 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           16
                         </td>
                         <td
-                          className="rdtDay rdtToday"
+                          className="rdtDay"
                           data-value={17}
                           onClick={[Function]}
                         >
                           17
                         </td>
                         <td
-                          className="rdtDay"
+                          className="rdtDay rdtToday"
                           data-value={18}
                           onClick={[Function]}
                         >

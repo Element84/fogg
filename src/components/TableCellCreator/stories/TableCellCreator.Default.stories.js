@@ -98,6 +98,14 @@ stories.add(STORY_NAME, () => {
     action(`${STORY_COMPONENT}::onCellClick`)(cellArgs, e);
   }
 
+  function handleOnCellMouseOver (cellArgs, e) {
+    action(`${STORY_COMPONENT}::onCellMouseOver`)(cellArgs, e);
+  }
+
+  function handleOnCellMouseOut (cellArgs, e) {
+    action(`${STORY_COMPONENT}::onCellMouseOut`)(cellArgs, e);
+  }
+
   function handleOnSort (cellArgs, e) {
     action(`${STORY_COMPONENT}::onSort`)(cellArgs, e);
   }
@@ -106,6 +114,8 @@ stories.add(STORY_NAME, () => {
     rows,
     columns,
     onCellClick: handleOnCellClick,
+    onCellMouseOver: handleOnCellMouseOver,
+    onCellMouseOut: handleOnCellMouseOut,
     onSort: handleOnSort
   });
 
@@ -120,21 +130,21 @@ stories.add(STORY_NAME, () => {
       <ul>
         <li>
           <p>Header</p>
-          <p style={{ overflow: 'hidden' }}>
+          <div style={{ overflow: 'hidden' }}>
             <Cell columnIndex={0} rowIndex={0} />
-          </p>
+          </div>
         </li>
         <li>
           <p>Standard Cell</p>
-          <p>
+          <div>
             <Cell columnIndex={1} rowIndex={2} />
-          </p>
+          </div>
         </li>
         <li>
           <p>Action, Aligned Right</p>
-          <p>
+          <div>
             <Cell columnIndex={2} rowIndex={1} />
-          </p>
+          </div>
         </li>
       </ul>
     </Story>

@@ -18,6 +18,8 @@ function TableCellCreator ({
   rows = [],
   columns = [],
   onCellClick,
+  onCellMouseOver,
+  onCellMouseOut,
   onSort
 } = {}) {
   const numberOfRows = rows.length;
@@ -26,6 +28,7 @@ function TableCellCreator ({
   const Cell = ({ columnIndex, rowIndex, style }) => {
     const componentClass = new ClassName('table-cell');
 
+    const cellId = `${rowIndex}_${columnIndex}`;
     const column = columns[columnIndex] || {};
     const row = rows[rowIndex] || [];
     const cell = row[columnIndex] || {};
@@ -77,7 +80,8 @@ function TableCellCreator ({
       columnIndex,
       rowIndex,
       value,
-      columnId
+      columnId,
+      cellId
     };
 
     if (isFullRow) {
@@ -85,8 +89,23 @@ function TableCellCreator ({
     }
 
     function handleOnCellClick (e) {
+      e.persist();
       if (typeof onCellClick === 'function') {
         onCellClick(cellArgs, e);
+      }
+    }
+
+    function handleOnCellMouseOver (e) {
+      e.persist();
+      if (typeof onCellMouseOver === 'function') {
+        onCellMouseOver(cellArgs, e);
+      }
+    }
+
+    function handleOnCellMouseOut (e) {
+      e.persist();
+      if (typeof onCellMouseOut === 'function') {
+        onCellMouseOut(cellArgs, e);
       }
     }
 
@@ -96,9 +115,12 @@ function TableCellCreator ({
 
     return (
       <div
+        data-cell-id={cellId}
         className={componentClass.string}
         style={cellStyle}
         onClick={handleOnCellClick}
+        onMouseOver={handleOnCellMouseOver}
+        onMouseOut={handleOnCellMouseOut}
       >
         {isHeader && <TableHeaderCell cell={cellArgs} sort={sortOptions} />}
         {!isHeader && !isFullRow && <TableCell cell={cellArgs} />}
