@@ -29,6 +29,8 @@ const Table = ({
   data = [],
   extraRows = [],
   onCellClick,
+  onCellMouseOver,
+  onCellMouseOut,
   onSort
 }) => {
   const ref = useRef();
@@ -84,16 +86,6 @@ const Table = ({
   const rowsCount = rows.length;
   const columnsCount = activeColumns.length;
 
-  /**
-   * handleOnCellClick
-   */
-
-  function handleOnCellClick (cell, e) {
-    if (typeof onCellClick === 'function') {
-      onCellClick(cell, e);
-    }
-  }
-
   if (fixHeightToContent) {
     const contentHeight = rowsCount * rowHeight;
     defaultHeight = contentHeight + extrasHeight;
@@ -145,7 +137,9 @@ const Table = ({
                 const HeaderComponent = TableCellCreator({
                   rows: [headers],
                   columns: activeColumns,
-                  onCellClick: handleOnCellClick,
+                  onCellClick,
+                  onCellMouseOver,
+                  onCellMouseOut,
                   onSort
                 });
                 return (
@@ -194,7 +188,9 @@ const Table = ({
                     {TableCellCreator({
                       rows,
                       columns: activeColumns,
-                      onCellClick: handleOnCellClick
+                      onCellClick,
+                      onCellMouseOver,
+                      onCellMouseOut
                     })}
                   </Grid>
                 </div>
@@ -235,6 +231,8 @@ Table.propTypes = {
   data: PropTypes.array.isRequired,
   extraRows: PropTypes.array,
   onCellClick: PropTypes.func,
+  onCellMouseOver: PropTypes.func,
+  onCellMouseOut: PropTypes.func,
   onSort: PropTypes.func
 };
 
