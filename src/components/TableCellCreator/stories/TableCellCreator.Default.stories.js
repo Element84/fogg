@@ -106,6 +106,14 @@ stories.add(STORY_NAME, () => {
     action(`${STORY_COMPONENT}::onCellMouseOut`)(cellArgs, e);
   }
 
+  function handleOnCellMouseEnter (cellArgs, e) {
+    action(`${STORY_COMPONENT}::onCellMouseEnter`)(cellArgs, e);
+  }
+
+  function handleOnCellMouseLeave (cellArgs, e) {
+    action(`${STORY_COMPONENT}::onCellMouseLeave`)(cellArgs, e);
+  }
+
   function handleOnSort (cellArgs, e) {
     action(`${STORY_COMPONENT}::onSort`)(cellArgs, e);
   }
@@ -116,6 +124,8 @@ stories.add(STORY_NAME, () => {
     onCellClick: handleOnCellClick,
     onCellMouseOver: handleOnCellMouseOver,
     onCellMouseOut: handleOnCellMouseOut,
+    onCellMouseEnter: handleOnCellMouseEnter,
+    onCellMouseLeave: handleOnCellMouseLeave,
     onSort: handleOnSort
   });
 

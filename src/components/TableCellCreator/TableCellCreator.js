@@ -20,6 +20,8 @@ function TableCellCreator ({
   onCellClick,
   onCellMouseOver,
   onCellMouseOut,
+  onCellMouseEnter,
+  onCellMouseLeave,
   onSort
 } = {}) {
   const numberOfRows = rows.length;
@@ -96,16 +98,30 @@ function TableCellCreator ({
     }
 
     function handleOnCellMouseOver (e) {
-      e.persist();
       if (typeof onCellMouseOver === 'function') {
+        e.persist();
         onCellMouseOver(cellArgs, e);
       }
     }
 
     function handleOnCellMouseOut (e) {
-      e.persist();
       if (typeof onCellMouseOut === 'function') {
+        e.persist();
         onCellMouseOut(cellArgs, e);
+      }
+    }
+
+    function handleOnCellMouseEnter (e) {
+      if (typeof onCellMouseEnter === 'function') {
+        e.persist();
+        onCellMouseEnter(cellArgs, e);
+      }
+    }
+
+    function handleOnCellMouseLeave (e) {
+      if (typeof onCellMouseLeave === 'function') {
+        e.persist();
+        onCellMouseLeave(cellArgs, e);
       }
     }
 
@@ -121,6 +137,8 @@ function TableCellCreator ({
         onClick={handleOnCellClick}
         onMouseOver={handleOnCellMouseOver}
         onMouseOut={handleOnCellMouseOut}
+        onMouseEnter={handleOnCellMouseEnter}
+        onMouseLeave={handleOnCellMouseLeave}
       >
         {isHeader && <TableHeaderCell cell={cellArgs} sort={sortOptions} />}
         {!isHeader && !isFullRow && <TableCell cell={cellArgs} />}
