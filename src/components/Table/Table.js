@@ -31,6 +31,8 @@ const Table = ({
   onCellClick,
   onCellMouseOver,
   onCellMouseOut,
+  onCellMouseEnter,
+  onCellMouseLeave,
   onSort
 }) => {
   const ref = useRef();
@@ -140,6 +142,8 @@ const Table = ({
                   onCellClick,
                   onCellMouseOver,
                   onCellMouseOut,
+                  onCellMouseEnter,
+                  onCellMouseLeave,
                   onSort
                 });
                 return (
@@ -190,7 +194,9 @@ const Table = ({
                       columns: activeColumns,
                       onCellClick,
                       onCellMouseOver,
-                      onCellMouseOut
+                      onCellMouseOut,
+                      onCellMouseEnter,
+                      onCellMouseLeave
                     })}
                   </Grid>
                 </div>
@@ -233,6 +239,8 @@ Table.propTypes = {
   onCellClick: PropTypes.func,
   onCellMouseOver: PropTypes.func,
   onCellMouseOut: PropTypes.func,
+  onCellMouseEnter: PropTypes.func,
+  onCellMouseLeave: PropTypes.func,
   onSort: PropTypes.func
 };
 

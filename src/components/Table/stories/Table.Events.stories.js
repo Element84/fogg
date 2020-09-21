@@ -74,6 +74,14 @@ stories.add(STORY_NAME, () => {
     action(`${STORY_COMPONENT}::onCellMouseOut`)(cell, e);
   }
 
+  function handleOnCellMouseEnter (cell, e) {
+    action(`${STORY_COMPONENT}::onCellMouseEnter`)(cell, e);
+  }
+
+  function handleOnCellMouseLeave (cell, e) {
+    action(`${STORY_COMPONENT}::onCellMouseLeave`)(cell, e);
+  }
+
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
       <Table
@@ -82,6 +90,8 @@ stories.add(STORY_NAME, () => {
         onCellClick={handleOnCellClick}
         onCellMouseOver={handleOnCellMouseOver}
         onCellMouseOut={handleOnCellMouseOut}
+        onCellMouseEnter={handleOnCellMouseEnter}
+        onCellMouseLeave={handleOnCellMouseLeave}
       />
     </Story>
   );
