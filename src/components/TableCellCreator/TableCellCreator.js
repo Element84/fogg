@@ -17,6 +17,7 @@ import ClassName from '../../models/classname';
 function TableCellCreator ({
   rows = [],
   columns = [],
+  rowAttributes,
   onCellClick,
   onCellMouseOver,
   onCellMouseOut,
@@ -90,12 +91,43 @@ function TableCellCreator ({
       cellStyle.width = '100%';
     }
 
+    const cellProps = {
+      'data-cell-id': cellId,
+      className: componentClass.string,
+      style: cellStyle,
+      onClick: handleOnCellClick,
+      onMouseOver: handleOnCellMouseOver,
+      onMouseOut: handleOnCellMouseOut,
+      onMouseEnter: handleOnCellMouseEnter,
+      onMouseLeave: handleOnCellMouseLeave
+    };
+
+    if (Array.isArray(rowAttributes)) {
+      rowAttributes.forEach((attr) => {
+        const attrColumnIndex = columns.findIndex(
+          ({ columnId }) => columnId === attr
+        );
+        if (attrColumnIndex < 0) return;
+        const { columnId: attrColumnId } = columns[attrColumnIndex];
+        const { valueOrig } = row[attrColumnIndex];
+        cellProps[`data-cell-${attrColumnId.toLowerCase()}`] = valueOrig;
+      });
+    }
+
+    /**
+     * handleOnCellClick
+     */
+
     function handleOnCellClick (e) {
       e.persist();
       if (typeof onCellClick === 'function') {
         onCellClick(cellArgs, e);
       }
     }
+
+    /**
+     * handleOnCellMouseOver
+     */
 
     function handleOnCellMouseOver (e) {
       if (typeof onCellMouseOver === 'function') {
@@ -104,6 +136,10 @@ function TableCellCreator ({
       }
     }
 
+    /**
+     * handleOnCellMouseOut
+     */
+
     function handleOnCellMouseOut (e) {
       if (typeof onCellMouseOut === 'function') {
         e.persist();
@@ -111,12 +147,20 @@ function TableCellCreator ({
       }
     }
 
+    /**
+     * handleOnCellMouseEnter
+     */
+
     function handleOnCellMouseEnter (e) {
       if (typeof onCellMouseEnter === 'function') {
         e.persist();
         onCellMouseEnter(cellArgs, e);
       }
     }
+
+    /**
+     * handleOnCellMouseLeave
+     */
 
     function handleOnCellMouseLeave (e) {
       if (typeof onCellMouseLeave === 'function') {
@@ -130,16 +174,7 @@ function TableCellCreator ({
     }
 
     return (
-      <div
-        data-cell-id={cellId}
-        className={componentClass.string}
-        style={cellStyle}
-        onClick={handleOnCellClick}
-        onMouseOver={handleOnCellMouseOver}
-        onMouseOut={handleOnCellMouseOut}
-        onMouseEnter={handleOnCellMouseEnter}
-        onMouseLeave={handleOnCellMouseLeave}
-      >
+      <div {...cellProps}>
         {isHeader && <TableHeaderCell cell={cellArgs} sort={sortOptions} />}
         {!isHeader && !isFullRow && <TableCell cell={cellArgs} />}
         {!isHeader && isFullRow && <row.Cell />}

@@ -18,6 +18,8 @@ const FILTER_KEY = '$$filterable';
 
 const errorBase = 'Failed to construct table data';
 
+export const CELL_ORIGINAL_VALUE_POSTFIX = '/orig';
+
 export default function useTableData ({ columns = [], data = [] }) {
   let workingColumns = [...columns];
   let workingData = [...data];
@@ -244,6 +246,7 @@ export default function useTableData ({ columns = [], data = [] }) {
       );
       const { cellTransformer } = column || {};
       if (typeof cellTransformer === 'function') {
+        data[`${key}${CELL_ORIGINAL_VALUE_POSTFIX}`] = data[key];
         data[key] = cellTransformer(data[key], {
           data: dataOriginal
         });
