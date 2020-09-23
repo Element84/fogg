@@ -4,6 +4,7 @@ import { VariableSizeGrid as Grid } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 
 import ClassName from '../../models/classname';
+import { CELL_ORIGINAL_VALUE_POSTFIX } from '../../hooks/useTableData';
 
 import {
   calculateGridHeightMemo,
@@ -28,6 +29,7 @@ const Table = ({
   columns = [],
   data = [],
   extraRows = [],
+  rowAttributes = [],
   onCellClick,
   onCellMouseOver,
   onCellMouseOut,
@@ -58,17 +60,28 @@ const Table = ({
 
   const columnIds = activeColumns.map(({ columnId } = {}) => columnId);
 
+  // Map through the data and create a new array including just the value
+  // and the origina lvalue for each cell. The original value refers to
+  // what the value might have been before a cell transform
+
   let rows = data.map((row) => {
     return columnIds.map((columnId) => {
+      const valueOrig = row[`${columnId}${CELL_ORIGINAL_VALUE_POSTFIX}`];
       return {
-        value: row[columnId]
+        value: row[columnId],
+        valueOrig: valueOrig || row[columnId]
       };
     });
   });
 
+  // Apply any extra rows that were passed in from the table instance
+
   if (Array.isArray(extraRows)) {
     rows = [...rows, ...extraRows];
   }
+
+  // If the table wants to include headers, map through and create an array
+  // to configure the header row
 
   const headers =
     displayHeader &&
@@ -139,6 +152,7 @@ const Table = ({
                 const HeaderComponent = TableCellCreator({
                   rows: [headers],
                   columns: activeColumns,
+                  rowAttributes,
                   onCellClick,
                   onCellMouseOver,
                   onCellMouseOut,
@@ -192,6 +206,7 @@ const Table = ({
                     {TableCellCreator({
                       rows,
                       columns: activeColumns,
+                      rowAttributes,
                       onCellClick,
                       onCellMouseOver,
                       onCellMouseOut,
@@ -236,6 +251,7 @@ Table.propTypes = {
   columns: PropTypes.array.isRequired,
   data: PropTypes.array.isRequired,
   extraRows: PropTypes.array,
+  rowAttributes: PropTypes.array,
   onCellClick: PropTypes.func,
   onCellMouseOver: PropTypes.func,
   onCellMouseOut: PropTypes.func,
