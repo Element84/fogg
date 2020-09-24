@@ -71,6 +71,8 @@ const MapPreview = ({
     geoJson = centerGeoJson;
   }
 
+  const { features = [] } = geoJson;
+
   const centerLatLng = latLngFromGeoJson(centerGeoJson)[0] || {};
   const type = geometryTypeFromGeoJson(geoJson)[0] || {};
   let geoJsonLatLng;
@@ -105,6 +107,22 @@ const MapPreview = ({
     fitGeoJson = geoJson;
   }
 
+  // Determine the primary AOI from the geoJson
+
+  let aoiFeature = features.filter(
+    ({ properties }) => properties.featureType === 'aoi'
+  );
+
+  aoiFeature = aoiFeature && aoiFeature[0];
+
+  // If we don't have a specified AOI, grab the first feautre
+
+  if (!aoiFeature) {
+    aoiFeature = features[0];
+  }
+
+  const aoiType = aoiFeature.geometry.type;
+
   const mapSettings = {
     center: [centerLatLng.lat, centerLatLng.lng],
     services: availableServices,
@@ -118,22 +136,44 @@ const MapPreview = ({
       <figure className="map-preview">
         <Map {...mapSettings}>
           <MapDraw disableEditControls={true}>
-            {type === 'Point' && <Marker position={geoJsonCoordinates} />}
-            {type === 'Polygon' &&
-              geoJson.features.map((feature) => {
+            {features.map((feature) => {
+              const { geometry, properties } = feature;
+
+              const {
+                shapeOptions = {},
+                onClick,
+                onMouseover,
+                onMouseout
+              } = properties;
+
+              const { style = {} } = shapeOptions;
+
+              const featureProps = {
+                ...style,
+                onClick,
+                onMouseover,
+                onMouseout
+              };
+
+              if (geometry.type === 'Point') {
+                const latLngs = latLngFromGeoJson(feature);
+
+                return latLngs.map(({ lat, lng }, index) => {
+                  return (
+                    <Marker
+                      key={`${lat}-${lng}-${index}`}
+                      position={[lat, lng]}
+                      {...featureProps}
+                    />
+                  );
+                });
+              }
+
+              if (geometry.type === 'Polygon') {
                 const coordinates = coordinatesFromGeoJson({
                   type: 'FeatureCollection',
                   features: [feature]
                 });
-
-                const { properties = {} } = feature;
-                const {
-                  shapeOptions = {},
-                  onClick,
-                  onMouseover,
-                  onMouseout
-                } = properties;
-                const { style = {} } = shapeOptions;
 
                 return coordinates.map((set) => {
                   return set.map((position, index) => {
@@ -143,18 +183,18 @@ const MapPreview = ({
                     ]);
                     return (
                       <Polygon
-                        key={`MapPreview-Polygon-${index}`}
+                        key={`${coordinates[0]}-${coordinates[1]}-${index}`}
                         color={AVAILABLE_COLORS[index]}
                         positions={fixedPosition}
-                        {...style}
-                        onClick={onClick}
-                        onMouseover={onMouseover}
-                        onMouseout={onMouseout}
+                        {...featureProps}
                       />
                     );
                   });
                 });
-              })}
+              }
+
+              return null;
+            })}
           </MapDraw>
         </Map>
         <figcaption>
@@ -162,12 +202,12 @@ const MapPreview = ({
             <strong>Area of Interest</strong>
           </p>
           <p className="map-preview-geometry">
-            <strong>Geometry:</strong> {type}
+            <strong>Geometry:</strong> {aoiType}
           </p>
           <div className="map-preview-coordinates">
             <p>
               <strong>Coordinates:</strong>
-              {type === 'Point' && (
+              {aoiType === 'Point' && (
                 <>
                   {/* Add an extra space to prevent a single coordinate from bumping against */}{' '}
                   <span className="map-preview-coordinates-item">
@@ -176,7 +216,7 @@ const MapPreview = ({
                 </>
               )}
             </p>
-            {type === 'Polygon' &&
+            {aoiType === 'Polygon' &&
               geoJsonCoordinates.map((set = [], coordinatesIndex) => {
                 return (
                   <ul key={`MapPreview-Coordinates-${coordinatesIndex}`}>
