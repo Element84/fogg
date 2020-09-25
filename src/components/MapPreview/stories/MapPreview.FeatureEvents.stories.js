@@ -5,7 +5,7 @@ import Story from '../../../../stories/helpers/Story';
 
 import MapPreview from '../';
 
-import featureCollection from '../../../../tests/fixtures/feature-collection.json';
+import featureCollection from '../../../../tests/fixtures/feature-collection-colors-marker-aoi.json';
 
 const STORY_COMPONENT = 'Map Preview';
 const STORY_NAME = 'Feature Events';

@@ -8,7 +8,7 @@ import MapPreview from '../';
 import featureCollection from '../../../../tests/fixtures/feature-collection-colors.json';
 
 const STORY_COMPONENT = 'Map Preview';
-const STORY_NAME = 'Draw Options';
+const STORY_NAME = 'Shape Options';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
