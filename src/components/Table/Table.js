@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { VariableSizeGrid as Grid } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
@@ -109,6 +109,11 @@ const Table = ({
   const containerStyles = {
     height: defaultHeight
   };
+
+  // When our data object changes, try invalidating the size
+  // to make sure our tables are always in the correct state
+
+  useEffect(() => handleOnResize(), [data]);
 
   /**
    * handleOnResize
