@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { VariableSizeGrid as Grid } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
+import { v1 as uuidv1 } from 'uuid';
 
 import ClassName from '../../models/classname';
 import { CELL_ORIGINAL_VALUE_POSTFIX } from '../../hooks/useTableData';
@@ -15,6 +16,8 @@ import {
 } from './table-util';
 
 import TableCellCreator from '../TableCellCreator';
+
+const defaultTableKey = uuidv1();
 
 const Table = ({
   children,
@@ -39,6 +42,7 @@ const Table = ({
 }) => {
   const ref = useRef();
   const gridRef = useRef();
+  const [tableKey, setTableKey] = useState(defaultTableKey);
 
   const componentClass = new ClassName('table');
 
@@ -113,7 +117,10 @@ const Table = ({
   // When our data object changes, try invalidating the size
   // to make sure our tables are always in the correct state
 
-  useEffect(() => handleOnResize(), [data]);
+  useEffect(() => {
+    setTableKey(uuidv1());
+    handleOnResize();
+  }, [data]);
 
   /**
    * handleOnResize
@@ -130,7 +137,7 @@ const Table = ({
         className={componentClass.childString('container')}
         style={containerStyles}
       >
-        <AutoSizer onResize={handleOnResize}>
+        <AutoSizer key={tableKey} onResize={handleOnResize}>
           {({ height, width }) => {
             const gridHeight = calculateGridHeightMemo(height, extrasHeight);
 
