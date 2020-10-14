@@ -24,7 +24,7 @@ const Modal = ({
 
   ReactModal.setAppElement(appElement);
 
-  const className = !hasFooter && 'modal-no-footer';
+  const className = !hasFooter ? 'modal-no-footer' : undefined;
 
   const modalProperties = {
     isOpen,
