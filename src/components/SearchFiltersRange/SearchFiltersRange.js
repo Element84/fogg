@@ -66,6 +66,26 @@ const SearchFiltersRange = ({
       max: typeof max === 'number' ? chompFloat(max, 2) : max
     };
 
+    // Make sure the min  value is normalized and not outside the range
+
+    if (updatedValue.min < rangeMin) {
+      updatedValue.min = rangeMin;
+    }
+
+    if (updatedValue.min > rangeMax) {
+      updatedValue.min = rangeMax;
+    }
+
+    // Make sure the max value is normalized and not outside the range
+
+    if (updatedValue.max < rangeMin) {
+      updatedValue.max = rangeMin;
+    }
+
+    if (updatedValue.max > rangeMax) {
+      updatedValue.max = rangeMax;
+    }
+
     if (typeof onChange === 'function') {
       onChange({
         target: {
