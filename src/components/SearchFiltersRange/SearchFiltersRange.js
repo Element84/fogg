@@ -105,12 +105,14 @@ const SearchFiltersRange = ({
         <div className="search-filters-range-input">
           <FormInputDebounced
             id={`${namePrefix}-min`}
+            type="number"
             label="Min"
             value={valueMin}
             onChange={handleInputChange}
           />
           <FormInputDebounced
             id={`${namePrefix}-max`}
+            type="number"
             label="Max"
             value={valueMax}
             onChange={handleInputChange}
@@ -125,6 +127,9 @@ const SearchFiltersRange = ({
             onChangeComplete={handleOnSliderChange}
           />
         </div>
+        <p className="search-filters-range-note">
+          Values outside of range will default to min and max.
+        </p>
       </div>
     </>
   );
