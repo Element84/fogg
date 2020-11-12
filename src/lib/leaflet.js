@@ -284,7 +284,9 @@ export function setMapView ({ map, settings = {} }) {
 
   if (isAutoZoom && geoJson) {
     const bounds = L.geoJSON(geoJson).getBounds();
-    map.fitBounds(bounds);
+    map.fitBounds(bounds, {
+      padding: [50, 50]
+    });
   }
 }
 
