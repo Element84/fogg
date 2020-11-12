@@ -308,8 +308,8 @@ export default function useMap (mapSettings = {}) {
     geoJsonLayer.eachLayer((layer) => layersToExclude.push(layer));
 
     if (panToShape) {
-      centerMapOnGeoJson({
-        geoJson: centerGeoJson,
+      handleCenterMapOnGeoJson({
+        geoJson,
         map,
         settings: {
           zoom
@@ -400,7 +400,7 @@ export default function useMap (mapSettings = {}) {
   }
 
   /**
-   * handleOnLayerCreate
+   * handleCenterMapOnGeoJson
    */
 
   function handleCenterMapOnGeoJson (settings = {}) {
@@ -408,7 +408,7 @@ export default function useMap (mapSettings = {}) {
   }
 
   /**
-   * handleOnLayerCreate
+   * handleAddGeoJsonLayer
    */
 
   function handleAddGeoJsonLayer (settings = {}) {
