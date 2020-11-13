@@ -1,6 +1,6 @@
 import L from 'leaflet';
 
-import { latLngFromGeoJson } from './map';
+import { latLngFromGeoJson, getGeoJsonCenter } from './map';
 import { isDomAvailable } from './device';
 import Logger from './logger';
 
@@ -240,13 +240,15 @@ export function findLayerByName ({ name: layerName, featureGroup } = {}) {
  */
 
 export function centerMapOnGeoJson ({ geoJson, map = {}, settings = {} } = {}) {
-  const latLngs = latLngFromGeoJson(geoJson);
+  const centerGeoJson = getGeoJsonCenter(geoJson);
+  const latLngs = latLngFromGeoJson(centerGeoJson);
   const center = latLngs[0];
 
   setMapView({
     map,
     settings: {
       center,
+      geoJson,
       ...settings
     }
   });
@@ -260,18 +262,31 @@ export function centerMapOnGeoJson ({ geoJson, map = {}, settings = {} } = {}) {
  */
 
 export function setMapView ({ map, settings = {} }) {
-  const { center } = settings;
+  const { center, geoJson } = settings;
   let { zoom } = settings;
+
+  const isAutoZoom = zoom === 'auto';
 
   // If we can find the existing zoom, use that to prevent changing the zoom
   // level on someone interacting with the map
 
-  if (!zoom && typeof map.getZoom === 'function') {
+  if ((!zoom || isAutoZoom) && typeof map.getZoom === 'function') {
     zoom = map.getZoom();
   }
 
   if (typeof map.setView === 'function') {
     map.setView(center, zoom);
+  }
+
+  // If someone passes in the auto parameter, we want to try to automatically
+  // figure out the "zoom" level by grabbing the bounds of the geojson and
+  // fitting the map view to it
+
+  if (isAutoZoom && geoJson) {
+    const bounds = L.geoJSON(geoJson).getBounds();
+    map.fitBounds(bounds, {
+      padding: [50, 50]
+    });
   }
 }
 

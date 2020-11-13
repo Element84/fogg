@@ -142,6 +142,16 @@ const EarthSearchSidebarPanels = ({
                       zoom: 6
                     });
                   }
+                },
+                {
+                  label: 'Grao Mogol, MG - Polygon, Zoom Auto',
+                  onClick: () => {
+                    search({
+                      geoJson: GEOJSON_GRAO_MOGOL_POLYGON,
+                      filters: [],
+                      zoom: 'auto'
+                    });
+                  }
                 }
               ]}
             />
