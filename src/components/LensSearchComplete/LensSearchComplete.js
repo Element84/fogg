@@ -6,7 +6,7 @@ import { useLens } from '../../hooks';
 import SearchComplete from '../SearchComplete';
 
 const LensSearchComplete = ({ forwardedRef, ...props }) => {
-  const { geoSearch = {} } = useLens();
+  const { geoSearch = {}, geoFilters = {} } = useLens();
   const {
     queryParams = {},
     config = {},
@@ -14,6 +14,7 @@ const LensSearchComplete = ({ forwardedRef, ...props }) => {
     updateSearch,
     resolveOnAutocomplete
   } = geoSearch;
+  const { clearActiveFilters } = geoFilters;
   const { date, textInput } = queryParams;
   const { utc, ignoreDatetime } = config;
 
@@ -71,6 +72,7 @@ const LensSearchComplete = ({ forwardedRef, ...props }) => {
       date={date}
       ignoreDatetime={ignoreDatetime}
       onSearch={handleSearch}
+      onSearchButtonClick={clearActiveFilters}
       resolveQueryComplete={resolveOnAutocomplete}
       forwardedRef={forwardedRef}
       onDateChange={handleDateChange}
