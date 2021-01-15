@@ -16,7 +16,7 @@ const DatetimeRange = ({
 }) => {
   const emptyDate = {
     start: null,
-    end: null
+    end: Datetime.moment().endOf('day') // Gets the current date/end of day time of 11:59 pm
   };
 
   const initialDate = { ...emptyDate, ...defaultDate };
