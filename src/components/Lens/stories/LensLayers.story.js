@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import Lens from '../../../components/Lens';
 import Panel from '../../../components/Panel';
+import LayerList from '../../../components/LayerList';
 
 const DEFAULT_CENTER = {
   lat: 39.52052,
@@ -174,39 +175,11 @@ const LensLayers = () => {
           <p>
             <b>Base</b>
           </p>
-          {layers.base.length > 0 &&
-            layers.base.map((layer, i) => (
-              <p key={`toggle_${i}`}>
-                <label htmlFor={`input_${layer.id}`}>
-                  <input
-                    id={`input_${layer.id}`}
-                    type="checkbox"
-                    name={`input_${layer.id}`}
-                    checked={layer.isActive}
-                    onChange={() => toggleLayer(layer.id)}
-                  />
-                  &nbsp;{layer.name}
-                </label>
-              </p>
-            ))}
+          <LayerList layers={layers.base} onChange={toggleLayer} />
           <p>
             <b>Overlay</b>
           </p>
-          {layers.overlay.length > 0 &&
-            layers.overlay.map((layer, i) => (
-              <p key={`toggle_${i}`}>
-                <label htmlFor={`input_${layer.id}`}>
-                  <input
-                    id={`input_${layer.id}`}
-                    type="checkbox"
-                    name={`input_${layer.id}`}
-                    checked={layer.isActive}
-                    onChange={() => toggleLayer(layer.id)}
-                  />
-                  &nbsp;{layer.name}
-                </label>
-              </p>
-            ))}
+          <LayerList layers={layers.overlay} onChange={toggleLayer} />
           <p>
             <button onClick={() => getData()}>Sync</button>
           </p>
