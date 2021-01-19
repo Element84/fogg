@@ -10,6 +10,7 @@ const QUERY_COMPLETE_DEBOUNCE = 300;
 const SearchComplete = ({
   onSearch,
   onDateChange,
+  onSearchButtonClick,
   resolveQueryComplete,
   placeholder = 'Search',
   defaultValue = '',
@@ -57,6 +58,10 @@ const SearchComplete = ({
 
     const searchQuery =
       typeof query !== 'string' && textInput === searchInput ? query : value;
+    // If any additional functions need to be passed through the button click
+    if (typeof onSearchButtonClick === 'function') {
+      onSearchButtonClick();
+    }
     updateQuery(searchQuery);
     handleQuery(searchQuery, searchDate, textInput);
     updateOpenState(false);
@@ -176,7 +181,7 @@ const SearchComplete = ({
                   className="search-complete-results-item"
                 >
                   <button
-                    onClick={(e) => handleResultClick(e, value, label, geoJson)}
+                    onClick={e => handleResultClick(e, value, label, geoJson)}
                   >
                     <span className="search-complete-results-item-label">
                       {label}
@@ -199,6 +204,7 @@ const SearchComplete = ({
 SearchComplete.propTypes = {
   onSearch: PropTypes.func,
   onDateChange: PropTypes.func,
+  onSearchButtonClick: PropTypes.func,
   resolveQueryComplete: PropTypes.func,
   placeholder: PropTypes.string,
   defaultValue: PropTypes.string,
