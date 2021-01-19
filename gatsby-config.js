@@ -7,15 +7,10 @@ module.exports = {
   pathPrefix: '/fogg',
   plugins: [
     'gatsby-plugin-sass',
-    'gatsby-plugin-react-leaflet',
+    // This should be a temporary fix in the event gatsby-plugin-react-leaflet removes
+    // setting react-leaflet as a null loader. See gatsby-node.js
+    // 'gatsby-plugin-react-leaflet',
     'gatsby-plugin-react-helmet',
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'images',
-        path: `${__dirname}/src/assets/images` // why does this matter?
-      }
-    },
     {
       resolve: 'gatsby-plugin-manifest',
       options: {

@@ -4,7 +4,7 @@ import { closeModal, openModal } from '../actions';
 import { ui } from '../reducers';
 import { ModalContext } from '../context';
 
-const useModal = initialState => {
+const useModal = (initialState) => {
   const [state, dispatch] = useReducer(ui, initialState);
   const handleModalOpen = (e, name) => {
     if (typeof e.preventDefault === 'function') {

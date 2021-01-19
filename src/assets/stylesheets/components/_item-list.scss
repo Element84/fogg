@@ -14,9 +14,20 @@ $item-list-top-padding: .8em;
     padding: 0;
     border-bottom: solid 1px $color-gray1;
     margin: 0;
+    display: flex;
 
     &:last-child {
       border-bottom: 0;
+    }
+
+    .checkbox-button {
+      padding-right: 0;
+      label {
+        box-shadow: none;
+        border-radius: 0;
+        border: none;
+        background-color: white;
+      }
     }
 
   }
@@ -26,10 +37,12 @@ $item-list-top-padding: .8em;
 .item-list-item {
 
   position: relative;
+  overflow: hidden;
 
   & > a,
   & > span {
     display: flex;
+    width: 100%;
     color: inherit;
     text-decoration: none;
     padding: $item-list-top-padding 2.4em $item-list-top-padding 1em;

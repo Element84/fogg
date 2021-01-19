@@ -26,7 +26,7 @@ describe('Validation', () => {
     },
     password: {
       minLength: 8,
-      isValid: value => {
+      isValid: (value) => {
         // Check that the value has "coolbeans" in it
         // for testing purposes
         return value.includes('coolbeans');

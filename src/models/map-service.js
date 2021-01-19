@@ -27,14 +27,14 @@ class MapService {
   configure () {
     this.crs = projectionByName(this.projection);
 
-    const availableServices = this.services.filter(service => {
+    const availableServices = this.services.filter((service) => {
       if (service.projections && Array.isArray(service.projections)) {
         return service.projections.indexOf(this.projection) > -1;
       }
       return service.projections === this.projection;
     });
 
-    this.services = availableServices.map(service => {
+    this.services = availableServices.map((service) => {
       const configuredService = { ...service };
 
       configuredService.product = service && service.product;
@@ -77,7 +77,7 @@ export default MapService;
  */
 
 function serviceByName (services, name) {
-  return services.find(service => service.name === name);
+  return services.find((service) => service.name === name);
 }
 
 /**
@@ -85,7 +85,7 @@ function serviceByName (services, name) {
  */
 
 function projectionByName (name) {
-  return mapProjections.find(projection => projection.name === name);
+  return mapProjections.find((projection) => projection.name === name);
 }
 
 /**

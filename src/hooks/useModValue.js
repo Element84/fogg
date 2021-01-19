@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { ModFormContext } from '../context';
 
-const useModValue = props => {
+const useModValue = (props) => {
   const { inputName, defaultValue, onSave, allowEmpty } = props;
 
   const [isChangeable, updateChangeable] = useState(false);

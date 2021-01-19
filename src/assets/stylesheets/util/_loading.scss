@@ -1,0 +1,60 @@
+.loading {
+
+  &,
+  svg {
+    color: transparent;
+  }
+
+  background: linear-gradient(90deg, $color-gray0 30%, lighten($color-gray0, 3) 50%, $color-gray0 70%);
+  background-size: 400%;
+  animation: loading 1.2s ease-in-out infinite;
+
+}
+
+.loading-0 {
+
+  &,
+  svg {
+    color: transparent;
+  }
+
+  background: linear-gradient(90deg, $color-gray0 30%, lighten($color-gray0, 3) 50%, $color-gray0 70%);
+  background-size: 400%;
+  animation: loading 1.2s ease-in-out infinite;
+
+}
+
+.loading-1 {
+
+  &,
+  svg {
+    color: transparent;
+  }
+
+  background: linear-gradient(90deg, $color-gray1 30%, lighten($color-gray1, 5) 50%, $color-gray1 70%);
+  background-size: 400%;
+  animation: loading 1.2s ease-in-out infinite;
+
+}
+
+.loading-2 {
+
+  &,
+  svg {
+    color: transparent;
+  }
+
+  background: linear-gradient(90deg, $color-gray2 30%, lighten($color-gray2, 5) 50%, $color-gray2 70%);
+  background-size: 400%;
+  animation: loading 1.2s ease-in-out infinite;
+
+}
+
+@keyframes loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
