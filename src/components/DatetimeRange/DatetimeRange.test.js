@@ -68,17 +68,5 @@ describe('DatetimeRange', () => {
 
       expect(typeof endDate).toEqual('number');
     });
-
-    it('should default range end date time to 11:59 pm', () => {
-      const datetimerange = mount(<DatetimeRange />);
-
-      expect(
-        datetimerange
-          .find('.datetime-range-selection')
-          .last()
-          .find('.rdtTimeToggle')
-          .text()
-      ).toEqual('11:59 PM');
-    });
   });
 });
