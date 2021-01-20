@@ -1,11 +1,3 @@
-### Version 0.1.200
-- [CD-110] Added LayerList Component, which will be used for adding a basemap widget to the Change Detection Website
-- [CD-110-basemap-toggle] Fixed incorrect prop types for LayerList
-
-### Version 0.1.199
-
-### Version 0.1.198
-- InputRange
 ### Version 0.2.45
 - adding UTC option to lens date components
 
