@@ -30,7 +30,6 @@ const PageTemplate = ({ id, children, title, parent, navigation, icon }) => {
 
 PageTemplate.propTypes = {
   id: PropTypes.string,
-  children: PropTypes.arrayOf(PropTypes.node),
   title: PropTypes.string,
   parent: PropTypes.object,
   navigation: PropTypes.arrayOf(PropTypes.object),
