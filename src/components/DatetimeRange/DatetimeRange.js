@@ -28,6 +28,7 @@ const DatetimeRange = ({
   // in a controlled state, so we want to sync the local state
 
   useEffect(() => {
+    if ( !defaultDate ) return;
     const updatedDate = {
       ...emptyDate,
       ...defaultDate
