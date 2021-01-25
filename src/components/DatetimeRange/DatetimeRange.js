@@ -5,11 +5,6 @@ import { FaCheck, FaTimes, FaBan } from 'react-icons/fa';
 
 import Button from '../Button';
 
-const emptyDate = {
-  start: null,
-  end: null
-};
-
 const DatetimeRange = ({
   onChange,
   onCancel,
@@ -19,14 +14,21 @@ const DatetimeRange = ({
   allowFutureDate = true,
   utc = false
 }) => {
-  const [dateTemp, updateDateTemp] = useState({ ...emptyDate, ...defaultDate });
+  const emptyDate = {
+    start: null,
+    end: Datetime.moment().endOf('day') // Gets the current date/end of day time of 11:59 pm
+  };
+
+  const initialDate = { ...emptyDate, ...defaultDate };
+
+  const [dateTemp, updateDateTemp] = useState(initialDate);
   const [date, updateDate] = useState(dateTemp);
 
   // If our defaultDate changes, that most likely means we're using the component
   // in a controlled state, so we want to sync the local state
 
   useEffect(() => {
-    if ( !defaultDate ) return;
+    if (!defaultDate) return;
     const updatedDate = {
       ...emptyDate,
       ...defaultDate
