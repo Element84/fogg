@@ -4,7 +4,7 @@ pipeline {
     docker {
       label 'SpaceJam'
       image '942037308728.dkr.ecr.us-west-2.amazonaws.com/spacejam-builds:latest'
-     // args '-e npm_config_cache=/npm_cache -v /opt/jenkins/cache:/npm_cache'
+      args '-e npm_config_cache=/npm_cache -v /opt/jenkins/cache:/npm_cache'
     }
   }
 
