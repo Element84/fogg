@@ -91,6 +91,7 @@ pipeline {
               args: '--audit --loglevel warn'
           )
 
+          sh 'npm run jest -- -u'
           echo "Testing..."
           sh 'npm run test'
 
