@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useDebouncedCallback } from 'use-debounce';
-import composeRefs from '@seznam/compose-react-refs'
+import composeRefs from '@seznam/compose-react-refs';
 
 import SearchBox from '../SearchBox';
 
@@ -28,19 +28,16 @@ const SearchComplete = ({
     QUERY_COMPLETE_DEBOUNCE
   );
 
-  const [isComponentVisible, setIsComponentVisible] = useState(false);
   const ref = useRef(null);
 
   const handleEscapeButton = (event) => {
-    if (event.key === "Escape") {
-      setIsComponentVisible(false);
+    if (event.key === 'Escape') {
       updateOpenState(false);
     }
   };
 
-  const handleClickOutside = event => {
+  const handleClickOutside = (event) => {
     if (ref.current && !ref.current.contains(event.target)) {
-      setIsComponentVisible(false);
       updateOpenState(false);
     }
   };
@@ -50,11 +47,11 @@ const SearchComplete = ({
 
   useEffect(() => {
     updateSearchInput(defaultValue);
-    document.addEventListener("keydown", handleEscapeButton, true);
-    document.addEventListener("click", handleClickOutside, true);
+    document.addEventListener('keydown', handleEscapeButton, true);
+    document.addEventListener('click', handleClickOutside, true);
     return () => {
-      document.removeEventListener("keydown", handleEscapeButton, true);
-      document.removeEventListener("click", handleClickOutside, true);
+      document.removeEventListener('keydown', handleEscapeButton, true);
+      document.removeEventListener('click', handleClickOutside, true);
     };
   }, [defaultValue]);
 
@@ -189,7 +186,9 @@ const SearchComplete = ({
         onDateChange={onDateChange}
       />
 
-      <div className={`search-complete-results ${isOpen ? "active" : "inactive"}`}>
+      <div
+        className={`search-complete-results ${isOpen ? 'active' : 'inactive'}`}
+      >
         <ul>
           {results
             .slice(0, MAX_RESULTS)
