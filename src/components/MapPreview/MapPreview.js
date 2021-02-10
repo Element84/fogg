@@ -206,12 +206,12 @@ const MapPreview = ({
           </p>
           <div className="map-preview-coordinates">
             <p>
-              <strong>Coordinates:</strong>
+              <strong>Coordinates (Latitude &amp; Longtitude):</strong>
               {aoiType === 'Point' && (
                 <>
                   {/* Add an extra space to prevent a single coordinate from bumping against */}{' '}
                   <span className="map-preview-coordinates-item">
-                    {geoJsonLatLng.lat} &deg;N, {geoJsonLatLng.lng} &deg;W
+                    {geoJsonLatLng.lat}, {geoJsonLatLng.lng}
                   </span>
                 </>
               )}
@@ -224,7 +224,7 @@ const MapPreview = ({
                       return positions.map(([posLng, posLat], setIndex) => {
                         return (
                           <li key={`MapPreview-Coordinates-${setIndex}`}>
-                            {posLat} &deg;N, {posLng} &deg;W
+                            {posLat}, {posLng}
                           </li>
                         );
                       });
