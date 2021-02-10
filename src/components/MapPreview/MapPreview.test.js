@@ -35,7 +35,7 @@ describe('MapPreview', () => {
       const mapPreviewCoordinates = mapPreview.find('.map-preview-coordinates');
       const mapPreviewText = mapPreviewCoordinates.text();
       expect(mapPreviewText).toEqual(
-        `Coordinates: ${ALEXANDRIA.lat} °N, ${ALEXANDRIA.lng} °W`
+        `Coordinates (Latitude & Longtitude): ${ALEXANDRIA.lat}, ${ALEXANDRIA.lng}`
       );
     });
   });
@@ -63,10 +63,10 @@ describe('MapPreview', () => {
       const firstCoordinates = mapPreviewCoordinatesListItems.first();
       const lastCoordinates = mapPreviewCoordinatesListItems.first();
       expect(firstCoordinates.text()).toEqual(
-        `${fcCoordinatesFirst[1]} °N, ${fcCoordinatesFirst[0]} °W`
+        `${fcCoordinatesFirst[1]}, ${fcCoordinatesFirst[0]}`
       );
       expect(lastCoordinates.text()).toEqual(
-        `${fcCoordinatesLast[1]} °N, ${fcCoordinatesLast[0]} °W`
+        `${fcCoordinatesLast[1]}, ${fcCoordinatesLast[0]}`
       );
     });
   });
