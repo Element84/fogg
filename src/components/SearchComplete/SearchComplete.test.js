@@ -13,6 +13,8 @@ describe('SearchComplete', () => {
     expect(searchComplete.find('.search-complete-results').exists()).toEqual(
       true
     );
-    expect(searchComplete.find('.search-complete-results .active').exists()).toEqual(false);
+    expect(
+      searchComplete.find('.search-complete-results .active').exists()
+    ).toEqual(false);
   });
 });
