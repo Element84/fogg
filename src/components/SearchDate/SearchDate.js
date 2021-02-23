@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { FaCalendarAlt } from 'react-icons/fa';
 
@@ -24,11 +24,31 @@ const SearchDate = ({
   });
   const { isOpen, date } = state;
 
+  const ref = useRef(null);
+
+  const handleEscapeButton = (event) => {
+    if (event.key === 'Escape') {
+      handleDateCancel();
+    }
+  };
+
+  const handleClickOutside = (event) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      handleDateCancel();
+    }
+  };
+
   useEffect(() => {
     updateState({
       ...state,
       isOpen: defaultIsOpen
     });
+    document.addEventListener('keydown', handleEscapeButton, true);
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+      document.removeEventListener('keydown', handleEscapeButton, true);
+      document.removeEventListener('click', handleClickOutside, true);
+    };
   }, [defaultIsOpen]);
 
   useEffect(() => {
@@ -158,6 +178,7 @@ const SearchDate = ({
 
   return (
     <div
+      ref={ref}
       className="search-date"
       data-has-active-date-range={date && !!(date.start || date.end)}
     >

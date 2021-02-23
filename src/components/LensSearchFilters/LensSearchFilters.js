@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { useLens } from '../../hooks';
@@ -20,6 +20,29 @@ const LensSearchFilters = ({
   } = geoFilters;
 
   const { available } = filters;
+
+  const ref = useRef(null);
+
+  const handleEscapeButton = (event) => {
+    if (event.key === 'Escape') {
+      handleSaveFilters();
+    }
+  };
+
+  const handleClickOutside = (event) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      handleSaveFilters();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleEscapeButton, true);
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+      document.removeEventListener('keydown', handleEscapeButton, true);
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  }, [available]);
 
   /**
    * handleSaveFilters
@@ -55,6 +78,7 @@ const LensSearchFilters = ({
 
   return (
     <SearchFilters
+      ref={ref}
       className="lens-search-filters"
       filters={available}
       onCancelChanges={cancelFilterChanges}
