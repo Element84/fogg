@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { chompFloat } from '../../lib/util';
@@ -18,6 +18,9 @@ const SearchFiltersRange = ({
 
   const namePrefix = `${id}-range`;
 
+  const [minError, updateMinErrorState] = useState(false);
+  const [maxError, updateMaxErrorState] = useState(false);
+
   /**
    * handleInputChange
    * @description When the text inputs change, fire away
@@ -35,6 +38,22 @@ const SearchFiltersRange = ({
 
     if (typeof floatValue !== 'number') {
       floatValue = targetValue;
+    }
+
+    switch (rangeLimit) {
+      case 'min':
+        if (floatValue < range.min || floatValue > range.max ) {
+          updateMinErrorState(true);
+          return;
+         } else { updateMinErrorState(false); };
+        break;
+      case 'max':
+        if (floatValue > range.max || floatValue < range.min ) {
+          updateMaxErrorState(true);
+          return;
+        } else { updateMaxErrorState(false); };
+        break;
+      default:
     }
 
     handleOnChange({
@@ -102,7 +121,7 @@ const SearchFiltersRange = ({
         <strong className="search-filters-available-label">{label}</strong>
       )}
       <div className="search-filters-range">
-        <div className="search-filters-range-input">
+        <div className={`search-filters-range-input ${minError ? "min-error" : ""} ${maxError ? "max-error" : ""}`}>
           <FormInputDebounced
             id={`${namePrefix}-min`}
             type="number"
@@ -117,6 +136,8 @@ const SearchFiltersRange = ({
             value={valueMax}
             onChange={handleInputChange}
           />
+          <span className="error">{`${minError ? "Invalid Min Range" : ""}`}</span>
+          <span className="error">{`${maxError ? "Invalid Max Range" : ""}`}</span>
         </div>
         <div className="search-filters-range-slider">
           <InputRange
