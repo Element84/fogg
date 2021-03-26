@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+//import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FaSearch } from 'react-icons/fa';
 
@@ -8,6 +9,7 @@ import Form from '../Form';
 import FormInput from '../FormInput';
 import Button from '../Button';
 import SearchDate from '../SearchDate';
+import SearchDropOptions from '../SearchDropOptions';
 
 const SearchBox = ({
   onInput,
@@ -16,11 +18,22 @@ const SearchBox = ({
   searchInput = '',
   date = {},
   utc = false,
+  searchDropOption = false,
+  searchDropOptions = [],
   ignoreDatetime = false,
   onDateChange
 }) => {
   const { value: query, updateValue: setQuery } = useStoredValue(searchInput);
   const [dateIsOpen, setDateIsOpen] = useState(false);
+  const [option, setOptions] = useState(searchDropOptions);
+  
+  let activeOptionVal;
+  if (Array.isArray(option) && option.length !== 0) {
+    let activeOption = option.findIndex((obj => obj.isChecked == true));
+    activeOptionVal = option[activeOption].value;
+  }
+
+  const [optionValue, setOptionValue] = useState(activeOptionVal);
 
   /**
    * handleSearchInput
@@ -50,9 +63,9 @@ const SearchBox = ({
    * @description Handles performing search and firing onSearch callback with query
    */
 
-  function handleSearch (searchQuery = query, searchDate = date) {
+  function handleSearch (searchQuery = query, searchDate = date, searchOption = optionValue) {
     if (typeof onSearch === 'function') {
-      onSearch(searchQuery, searchDate);
+      onSearch(searchQuery, searchDate, searchOption);
     }
   }
 
@@ -90,9 +103,27 @@ const SearchBox = ({
     return false;
   }
 
+  function handleOptionClick (e) {
+    activeOptionVal = e.target.value;
+
+    // Reset and re-assign the active one.
+    searchDropOptions.forEach((item) => item.isChecked = 'false');
+    let objIndex = searchDropOptions.findIndex((obj => obj.id == e.target.id));
+    searchDropOptions[objIndex].isChecked = e.target.checked;
+
+    setOptions(option => [...option, searchDropOptions]);
+    setOptionValue(e.target.value);
+  }
+
   return (
     <div className="search-box">
       <Form onSubmit={handleFormSubmit} autoComplete="off">
+        {searchDropOption && (
+          <SearchDropOptions 
+            options={searchDropOptions}
+            onOptionClick={handleOptionClick}
+          />
+        )}
         <FormInput
           id="search-box-input"
           className="search-box-input"
@@ -134,6 +165,8 @@ SearchBox.propTypes = {
   searchInput: PropTypes.string,
   date: PropTypes.object,
   utc: PropTypes.bool,
+  searchDropOption: PropTypes.bool,
+  searchDropOptions: PropTypes.array,
   ignoreDatetime: PropTypes.bool
 };
 

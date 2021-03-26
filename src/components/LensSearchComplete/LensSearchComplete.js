@@ -5,7 +5,12 @@ import { useLens } from '../../hooks';
 
 import SearchComplete from '../SearchComplete';
 
-const LensSearchComplete = ({ forwardedRef, ...props }) => {
+const LensSearchComplete = ({ 
+  forwardedRef, 
+  searchDropOption,
+  searchDropOptions,
+  ...props 
+}) => {
   const { geoSearch = {} } = useLens();
   const {
     queryParams = {},
@@ -33,7 +38,7 @@ const LensSearchComplete = ({ forwardedRef, ...props }) => {
    * @description Manages creating a search based off of the search complete's values
    */
 
-  function handleSearch ({ location, date, textInput, geoJson } = {}) {
+  function handleSearch ({ location, date, textInput, geoJson, activeSearchOption } = {}) {
     const hasTextInput = textInput && textInput !== '';
 
     // If we dont have a location or a text input, we can't actually make a search.
@@ -61,7 +66,8 @@ const LensSearchComplete = ({ forwardedRef, ...props }) => {
       textInput,
       center,
       geoJson,
-      date
+      date,
+      activeSearchOption
     });
   }
 
@@ -75,13 +81,17 @@ const LensSearchComplete = ({ forwardedRef, ...props }) => {
       forwardedRef={forwardedRef}
       onDateChange={handleDateChange}
       utc={utc}
+      searchDropOption={searchDropOption}
+      searchDropOptions={searchDropOptions}
       {...props}
     />
   );
 };
 
 LensSearchComplete.propTypes = {
-  forwardedRef: PropTypes.object
+  forwardedRef: PropTypes.object,
+  searchDropOption: PropTypes.bool,
+  searchDropOptions: PropTypes.array
 };
 
 const LensSearchCompleteWithRefs = React.forwardRef(function lensMap (

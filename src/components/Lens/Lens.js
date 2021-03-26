@@ -47,7 +47,9 @@ const Lens = ({
   utc = false,
   geoSearch: geoSearchSettings,
   searchActions = [],
-  mapControls = {}
+  mapControls = {},
+  searchDropOption = false,
+  searchDropOptions = []
 }) => {
   const refSearchComplete = createRef();
 
@@ -161,6 +163,8 @@ const Lens = ({
                             <LensSearchComplete
                               ref={refSearchComplete}
                               placeholder={placeholder}
+                              searchDropOption={searchDropOption}
+                              searchDropOptions={searchDropOptions}
                             />
                             {hasSearchActions && (
                               <LensSearchActions actions={searchActions} />
@@ -266,7 +270,9 @@ Lens.propTypes = {
    */
   disableFutureDates: PropTypes.bool,
   resolveOnAutocomplete: PropTypes.func,
-  mapControls: PropTypes.object
+  mapControls: PropTypes.object,
+  searchDropOption: PropTypes.bool,
+  searchDropOptions: PropTypes.array
 };
 
 export default Lens;
