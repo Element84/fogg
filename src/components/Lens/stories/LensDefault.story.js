@@ -81,6 +81,7 @@ const LensDefault = () => {
         resolveOnSearch={testPatchTextQuery}
         searchDropOption={searchDropOption}
         searchDropOptions={searchDropOptions}
+        hideDatetime={false}
       />
     </>
   );
