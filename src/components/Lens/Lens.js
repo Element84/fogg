@@ -49,7 +49,8 @@ const Lens = ({
   searchActions = [],
   mapControls = {},
   searchDropOption = false,
-  searchDropOptions = []
+  searchDropOptions = [],
+  hideDatetime = false
 }) => {
   const refSearchComplete = createRef();
 
@@ -165,6 +166,7 @@ const Lens = ({
                               placeholder={placeholder}
                               searchDropOption={searchDropOption}
                               searchDropOptions={searchDropOptions}
+                              ignoreDatetime={hideDatetime}
                             />
                             {hasSearchActions && (
                               <LensSearchActions actions={searchActions} />
@@ -272,7 +274,8 @@ Lens.propTypes = {
   resolveOnAutocomplete: PropTypes.func,
   mapControls: PropTypes.object,
   searchDropOption: PropTypes.bool,
-  searchDropOptions: PropTypes.array
+  searchDropOptions: PropTypes.array,
+  hideDatetime: PropTypes.bool
 };
 
 export default Lens;
