@@ -36,6 +36,10 @@ stories.add(STORY_NAME, () => {
     action('select :: onchange')(event);
   }
 
+  function handleOnSave (event) {
+    action('dateTime :: onsave')(event);
+  }
+
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
       <BaseForm>
@@ -73,6 +77,13 @@ stories.add(STORY_NAME, () => {
           label="Default Datetime UTC"
           type="datetime"
           utc={true}
+        />
+        <FormInput
+          id="default-datetime-showactions"
+          label="Default Datetime Show Actions"
+          type="datetime"
+          extraActions={true}
+          onSave={handleOnSave}
         />
         <FormInput
           id="default-datalist"

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ReactDatetime from 'react-datetime';
-import { FaCalendarAlt, FaTimesCircle } from 'react-icons/fa';
+import { FaCalendarAlt, FaTimesCircle, FaSave } from 'react-icons/fa';
 
 import { useInput } from '../../hooks';
 
@@ -12,15 +12,34 @@ const Datetime = ({
   props = {},
   onChange,
   onInput,
+  onSave,
   allowPastDate = true,
   allowFutureDate = true,
   utc = false,
   disableFrom,
-  showClear = false
+  showClear = false,
+  extraActions = false
 }) => {
   const { disabled } = props;
 
   const [date, setDate] = useState(props.value || '');
+  const [isOpen, updateOpenState] = useState(false);
+  const ref = useRef(null);
+
+  const handleClickOutside = (event) => {
+    updateOpenState(true);
+    if ( ref.current && event.target.classList.contains('extra') && extraActions === true ) {
+      event.target.closest(".rdt").removeAttribute('id');
+      event.target.closest(".rdt").setAttribute('id','rdtOpened');
+    };
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     setDate(props.value);
@@ -87,7 +106,7 @@ const Datetime = ({
    * renderInput
    */
 
-  function renderInput (defaultProps) {
+  function renderInput (defaultProps, openCalendar, closeCalendar) {
     function handleOnClick (e) {
       if (disabled) {
         e.preventDefault();
@@ -97,6 +116,24 @@ const Datetime = ({
       if (typeof defaultProps.onClick === 'function') {
         defaultProps.onClick(e);
       }
+    }
+
+    function clearCal() {
+      defaultProps.onChange({ target: { value: "" } });
+    }
+
+    function closeCalendar(event) {
+      event.target.closest(".rdt").removeAttribute('id');
+      event.target.closest(".rdt").setAttribute('id','rdtClosed');
+    }
+
+    function closeCal(event) {
+      saveCal();
+      closeCalendar(event);
+    }
+
+    function saveCal() {
+      return onSave(ReactDatetime.moment(defaultProps.value).valueOf());
     }
 
     const allProps = {
@@ -128,7 +165,7 @@ const Datetime = ({
           className="icon-calendar"
         />
         <Input
-          className={`datetime ${className}`}
+          className={`datetime ${className} ${extraActions ? "extra" : ""}`}
           props={{
             ...props,
             autoComplete: 'off'
@@ -144,18 +181,46 @@ const Datetime = ({
             </button>
           </p>
         )}
+        {extraActions && (
+          <div className="datetime-controls">
+            <button onClick={saveCal}>
+              <FaSave className="icon-save" />
+              Save
+            </button>
+            <button onClick={closeCal}>
+              <FaTimesCircle className="icon-close" />
+              Save &amp; Close
+            </button>
+          </div>        
+        )}
       </>
     );
   }
 
   return (
-    <ReactDatetime
-      value={date}
-      renderInput={renderInput}
-      onChange={handleChange}
-      isValidDate={isValidDate}
-      utc={utc}
-    />
+    <>
+      {!extraActions && (
+        <ReactDatetime
+          value={date}
+          renderInput={renderInput}
+          onChange={handleChange}
+          isValidDate={isValidDate}
+          utc={utc}
+        />
+      )}
+      {extraActions && (
+        <ReactDatetime
+          value={date}
+          renderInput={renderInput}
+          onChange={handleChange}
+          isValidDate={isValidDate}
+          utc={utc}
+          closeOnClickOutside={false}
+          closeOnTab={false}
+          ref={ref}
+        />
+      )}
+    </>
   );
 };
 
@@ -164,12 +229,14 @@ Datetime.propTypes = {
   props: PropTypes.object,
   onChange: PropTypes.func,
   onInput: PropTypes.func,
+  onSave: PropTypes.func,
   value: PropTypes.string,
   allowPastDate: PropTypes.bool,
   allowFutureDate: PropTypes.bool,
   utc: PropTypes.bool,
   disableFrom: PropTypes.object,
   showClear: PropTypes.bool,
+  extraActions: PropTypes.bool,
   disabled: PropTypes.bool
 };
 
