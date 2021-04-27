@@ -183,14 +183,14 @@ const Datetime = ({
         )}
         {extraActions && (
           <div className="datetime-controls">
-            <button onClick={saveCal}>
+            <span className="datetime-ctl-button" onClick={saveCal}>
               <FaSave className="icon-save" />
               Save
-            </button>
-            <button onClick={closeCal}>
+            </span>
+            <span className="datetime-ctl-button" onClick={closeCal}>
               <FaTimesCircle className="icon-close" />
               Save &amp; Close
-            </button>
+            </span>
           </div>        
         )}
       </>
