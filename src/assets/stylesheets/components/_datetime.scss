@@ -21,3 +21,46 @@
   }
 
 }
+
+.datetime-controls {
+  display: none;
+  text-align: right;
+  margin: .2em 0 0;
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-gray5;
+    font-size: .7em;
+    font-weight: bold;
+    background: none;
+    padding: .2em .3em;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .icon-save, .icon-close {
+    font-size: .9em;
+    margin-right: .4em;
+  }
+
+}
+
+.rdtOpen {
+  .datetime-controls {
+    display: block
+  }
+}
+
+#rdtOpened {
+  .datetime-controls, .rdtPicker {
+    display: block !important;
+  }
+}
+
+#rdtClosed {
+  .datetime-controls, .rdtPicker {
+    display: none !important;
+  }
+}

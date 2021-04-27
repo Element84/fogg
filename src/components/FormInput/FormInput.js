@@ -23,7 +23,9 @@ const FormInput = (props) => {
     disableFrom,
     validationMessage,
     onKeyDown,
-    showClear
+    onSave,
+    showClear,
+    extraActions
   } = props;
   const { id, type, label, isInvalid, inputProps } = useInput({ props });
 
@@ -56,6 +58,10 @@ const FormInput = (props) => {
     }
   }
 
+  function handleOnSave (event) {
+    onSave(event);
+  }
+
   if (type === 'select') {
     input = <Select className={fieldClassName} props={inputProps} />;
   } else if (type === 'textarea') {
@@ -75,10 +81,12 @@ const FormInput = (props) => {
         props={inputProps}
         onChange={handleOnChange}
         onInput={handleOnInput}
+        onSave={handleOnSave}
         allowPastDate={allowPastDate}
         utc={utc}
         disableFrom={disableFrom}
         showClear={showClear}
+        extraActions={extraActions}
       />
     );
   } else {
@@ -129,13 +137,15 @@ FormInput.propTypes = {
   inputMode: PropTypes.string,
   onInput: PropTypes.func,
   onChange: PropTypes.func,
+  onSave: PropTypes.func,
   onFocus: PropTypes.func,
   onKeyDown: PropTypes.func,
   allowPastDate: PropTypes.bool,
   utc: PropTypes.bool,
   disableFrom: PropTypes.object,
   validationMessage: PropTypes.string,
-  showClear: PropTypes.bool
+  showClear: PropTypes.bool,
+  extraActions: PropTypes.bool
 };
 
 export default FormInput;
