@@ -133,7 +133,19 @@ const Datetime = ({
     }
 
     function saveCal() {
-      return onSave(ReactDatetime.moment(defaultProps.value).valueOf());
+      let dateTime = ReactDatetime.moment.utc(defaultProps.value);
+      const value = dateTime && dateTime.format('x');
+
+      setDate(dateTime);
+
+      const virtualEvent = {
+        target: {
+          name,
+          value
+        }
+      };
+
+      return onSave(virtualEvent);
     }
 
     const allProps = {
@@ -183,13 +195,9 @@ const Datetime = ({
         )}
         {extraActions && (
           <div className="datetime-controls">
-            <span className="datetime-ctl-button" onClick={saveCal}>
-              <FaSave className="icon-save" />
-              Save
-            </span>
             <span className="datetime-ctl-button" onClick={closeCal}>
               <FaTimesCircle className="icon-close" />
-              Save &amp; Close
+              Save
             </span>
           </div>        
         )}
