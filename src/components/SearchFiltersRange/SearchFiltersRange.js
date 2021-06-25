@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { chompFloat } from '../../lib/util';
@@ -18,8 +18,20 @@ const SearchFiltersRange = ({
 
   const namePrefix = `${id}-range`;
 
+  const [valueMinLocal, setValueMinLocal] = useState(valueMin);
+  const [valueMaxLocal, setValueMaxLocal] = useState(valueMax);
+
   const [minError, updateMinErrorState] = useState(false);
   const [maxError, updateMaxErrorState] = useState(false);
+
+  useEffect(() => {
+    if ( maxError === true ) {
+      handleInputChange({target : { id: 'incidence_angle-range-max', value: valueMaxLocal.toString() }});
+    }
+    if ( minError === true ) {
+      handleInputChange({target : { id: 'incidence_angle-range-min', value: valueMinLocal.toString() }});
+    }
+  }, [valueMinLocal, valueMaxLocal]);
 
   /**
    * handleInputChange
@@ -28,6 +40,12 @@ const SearchFiltersRange = ({
 
   function handleInputChange ({ target = {} } = {}) {
     const { id: targetId, value: targetValue } = target;
+
+    if (!targetValue) {
+      updateMinErrorState(true);
+      return;
+    }
+
     const rangeLimit = targetId.replace(`${namePrefix}-`, '');
     const isCompleteFloat = targetValue && targetValue.substr(-1) !== '.';
 
@@ -40,15 +58,20 @@ const SearchFiltersRange = ({
       floatValue = targetValue;
     }
 
+    setValueMaxLocal(valueMaxLocal);
+    setValueMinLocal(valueMinLocal);
+
     switch (rangeLimit) {
       case 'min':
-        if (floatValue < range.min || floatValue > range.max ) {
+        setValueMinLocal(floatValue);
+        if (floatValue < range.min || floatValue > range.max || floatValue > valueMaxLocal) {
           updateMinErrorState(true);
           return;
          } else { updateMinErrorState(false); };
         break;
       case 'max':
-        if (floatValue > range.max || floatValue < range.min ) {
+        setValueMaxLocal(floatValue);
+        if (floatValue > range.max || floatValue < range.min || floatValue < valueMinLocal) {
           updateMaxErrorState(true);
           return;
         } else { updateMaxErrorState(false); };
