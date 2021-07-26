@@ -181,3 +181,24 @@ export function sortByKey (array = [], key, type = 'asc') {
 
   return newArray;
 }
+
+/**
+ * Sort an array of objects based on order set in another array
+ * @array - array to sort, @order - desired order, @key field to sort by
+ **/ 
+
+ export function mapOrder (array, order, key) {
+  
+  array.sort( function (a, b) {
+    var A = a[key], B = b[key];
+    
+    if (order.indexOf(A) > order.indexOf(B)) {
+      return 1;
+    } else {
+      return -1;
+    }
+    
+  });
+  
+  return array;
+};
