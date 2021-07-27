@@ -45,9 +45,6 @@ pipeline {
                     |  ssh -o "StrictHostKeyChecking=no" -T git@repo.element84.com
                     |  git config push.default current
                     |  git push
-                    |else
-                    |  echo "Not a merge request - not bumping version - exiting"
-                    |  exit 1
                     |fi
                 """.stripMargin()
             }
