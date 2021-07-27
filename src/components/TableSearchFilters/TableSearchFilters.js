@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import ClassName from '../../models/classname';
 import { availableValuesByColumnId } from '../../lib/table';
+import { mapOrder } from '../../lib/util';
 
 import InputButtonList from '../InputButtonList';
 
@@ -68,16 +69,21 @@ const TableSearchFilters = ({
   return (
     <div className={componentClass.string}>
       <ul className={componentClass.childString('menu')}>
-        {options.map(({ Header, columnId, type } = {}, index) => {
+        {options.map(({ Header, columnId, type, order } = {}, index) => {
           const values = availableValuesByColumnId(defaultTableData, columnId);
           const hasValues = Array.isArray(values) && values.length > 0;
-          const valueOptions = values.map((value) => {
+          let valueOptions = values.map((value) => {
             return {
               label: value,
               value,
               columnId
             };
           });
+
+          // If desired order array is passed, reorder based on it
+          if (order && order.length) {
+            valueOptions = mapOrder(valueOptions, order, 'label');
+          }
 
           if (type === 'radio') {
             valueOptions.unshift({
