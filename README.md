@@ -15,7 +15,7 @@ This library is packaged as a Gatsby theme that  can be easily imported to a pro
 Add Fogg as a dependency to your project
 ```
 # With npm
-npm install fog
+npm install fogg
 ```
 
 ## Using the Library
