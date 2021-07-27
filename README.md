@@ -45,7 +45,7 @@ search(searchSettings);
 # Developing
 
 ## Prerequisites
-- [Yarn Package Manager](https://yarnpkg.com/en/)
+- NPM
 
 ## Installation
 Run the following command in your terminal to install all dependencies:
