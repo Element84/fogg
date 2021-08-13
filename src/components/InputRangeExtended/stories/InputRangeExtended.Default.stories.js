@@ -27,7 +27,7 @@ stories.add(STORY_NAME, () => {
         value={rangeValue}
         onChange={handleOnChange}
         onChangeComplete={handleOnChangeComplete}
-        step={2}
+        step={1}
         metric={'m'}
         onChangeDelay={2}
       />

@@ -16,6 +16,7 @@ const InputRangeExtended = (props = {}) => {
   } = props;
 
   const inputRef = useRef(null);
+  const rangeRef = useRef(null);
   const onChangeCompleteDelay = onChangeDelay;
   const [rangeValue, setRangeValue] = useState(value);
   const [rangeInputValue, setRangeInputValue] = useState(value);
@@ -49,19 +50,18 @@ const InputRangeExtended = (props = {}) => {
 		const newPosition = 0 - (newValue * 0.2);
     setRangeInputStylePosition(newPosition);
 
-    const diff = (a, b)=> { 
-      return Math.abs(a - b); 
-    }
+    const maxRangeLengthPixels = rangeRef.current.offsetWidth;
+    const inputLengthPixels = inputRef.current.offsetWidth;
+    const overflowBreakpointPixels = maxRangeLengthPixels - inputLengthPixels;
+    const thumbHalfWidth = 15;
 
-    const breakMargin = (93 / inputRef.current.offsetWidth) * 100;
-    const totalRange = diff(maxValue, minValue);
-    const maxPercent = (totalRange * breakMargin) / 100;
-    const maxInputLength = maxValue - maxPercent;
+    const thumbCurrentPositionPixels = (((rangeValue - minValue) / (maxValue - minValue)) * ((maxRangeLengthPixels - thumbHalfWidth) - thumbHalfWidth)) + thumbHalfWidth;
 
-    if ( rangeValue <= maxInputLength + 5 ){
+    if ( rangeValue <= maxRangeLengthPixels ){
       setRangeInputStyle({left: `calc(${newValue}% + (${newPosition}px))`});
-    } else if ( rangeValue > maxInputLength ){
-      setRangeInputStyle({left: `calc(${newValue}% - (${maxInputLength}px))`})
+    }
+    if ( thumbCurrentPositionPixels > overflowBreakpointPixels ){
+      setRangeInputStyle({left: `${overflowBreakpointPixels}px`})
     }
     setRangeStyle({background: 'linear-gradient(to right, #2196F3 0%, #2196F3 ' + newValue + '%, #CFD8DC ' + newValue + '%, #CFD8DC 100%)'});
 
@@ -147,15 +147,15 @@ const InputRangeExtended = (props = {}) => {
   return (
     <>
       <div className={`range-wrap ${className}`}>
-        <div id="rangeValue" style={rangeInputStyle} className={`${minError || maxError || generalError ? "error" : ""}`}>
+        <div id="rangeValue" ref={inputRef} style={rangeInputStyle} className={`${minError || maxError || generalError ? "error" : ""}`}>
           <div className="number-input">
-            <button 
+            <span 
               className="minus" 
               id="minus"
               onClick={e => { handleSetMinus(rangeValue) }}
             >
               <FaArrowDown />
-            </button>
+            </span>
             <input 
               type="number" 
               id="rangeInput" 
@@ -167,13 +167,13 @@ const InputRangeExtended = (props = {}) => {
               value={rangeInputValue} 
               onChange={e => { handleRangeInputChange(e) }}
             />
-            <button 
+            <span 
               className="plus" 
               id="plus" 
               onClick={e => { handleSetPlus(rangeValue) }}
             >
               <FaArrowUp />
-            </button>
+            </span>
           </div>
         </div>
         <input 
@@ -185,7 +185,7 @@ const InputRangeExtended = (props = {}) => {
           step={step} 
           onChange={e => { handleRangeInputChange(e) }}
           style={rangeStyle}
-          ref={inputRef}
+          ref={rangeRef}
         />
         <div className="labels">
           <span className="min">{minValue}{metric}</span>
