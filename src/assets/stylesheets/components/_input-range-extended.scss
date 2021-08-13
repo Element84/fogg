@@ -40,7 +40,8 @@
         border: 1px solid $color-gray1;
         display: inline-flex;
       
-        > button {
+        > .minus, 
+        > .plus {
           outline: none;
           -webkit-appearance: none;
           background-color: transparent;
@@ -76,7 +77,8 @@
         .number-input {
             border: none;
 
-            > button {
+            > .minus, 
+            > .plus {
                 color: $color-red;
             }
             > input[type="number"] {
