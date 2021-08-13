@@ -57,11 +57,9 @@ const InputRangeExtended = (props = {}) => {
 
     const thumbCurrentPositionPixels = (((rangeValue - minValue) / (maxValue - minValue)) * ((maxRangeLengthPixels - thumbHalfWidth) - thumbHalfWidth)) + thumbHalfWidth;
 
-    if ( rangeValue <= maxRangeLengthPixels ){
-      setRangeInputStyle({left: `calc(${newValue}% + (${newPosition}px))`});
-    }
+    setRangeInputStyle({left: `${thumbCurrentPositionPixels - thumbHalfWidth}px`});
     if ( thumbCurrentPositionPixels > overflowBreakpointPixels ){
-      setRangeInputStyle({left: `${overflowBreakpointPixels}px`})
+      setRangeInputStyle({left: `${overflowBreakpointPixels}px`});
     }
     setRangeStyle({background: 'linear-gradient(to right, #2196F3 0%, #2196F3 ' + newValue + '%, #CFD8DC ' + newValue + '%, #CFD8DC 100%)'});
 
