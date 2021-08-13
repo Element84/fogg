@@ -31,6 +31,10 @@ const InputRangeExtended = (props = {}) => {
   const [generalError, updateGeneralErrorState] = useState(false);
 
   useEffect(() => {
+    animateRange();
+  }, []);
+
+  useEffect(() => {
     if ( maxError === true ) {
       handleRangeInputChange({target : { value: rangeValue }});
     }
