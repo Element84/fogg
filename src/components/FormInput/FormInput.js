@@ -64,6 +64,8 @@ const FormInput = (props) => {
 
   if (type === 'select') {
     input = <Select className={fieldClassName} props={inputProps} />;
+  } else if (type === 'multiselect') {
+    input = <Select className={fieldClassName} isMulti={true} props={inputProps} />;
   } else if (type === 'textarea') {
     input = (
       <Textarea

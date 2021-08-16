@@ -4,7 +4,7 @@ import { default as ReactSelect } from 'react-select';
 
 import { useInput } from '../../hooks';
 
-const Select = ({ className, props }) => {
+const Select = ({ className, props, isMulti = false }) => {
   const { inputProps } = useInput({ props });
 
   const {
@@ -23,6 +23,7 @@ const Select = ({ className, props }) => {
     <ReactSelect
       className={`select ${className}`}
       options={options}
+      isMulti={isMulti}
       isClearable={isClearable}
       isSearchable={isSearchable}
       isDisabled={isDisabled}
