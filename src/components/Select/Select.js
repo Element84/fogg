@@ -16,7 +16,10 @@ const Select = ({ className, props, isMulti = false }) => {
     defaultValue
   } = inputProps;
 
-  const defaultVal = options.filter((option) => option.value === defaultValue);
+  let defaultVal = defaultValue;
+  if (!defaultValue.length) {
+    defaultVal = options.filter((option) => option.value === defaultValue);
+  }
   delete inputProps.defaultValue;
 
   return (
