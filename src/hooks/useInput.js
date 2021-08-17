@@ -117,6 +117,8 @@ const useInput = ({ inputRef = {}, props = {} }) => {
       let value;
       if (selectEvent.action === 'clear') {
         value = [];
+      } else if (!event && selectEvent.action === 'remove-value') {
+        value = [];
       } else {
         const selections = Array.isArray(event) ? event : [event];
         value = selections.map((selection) => selection.value);

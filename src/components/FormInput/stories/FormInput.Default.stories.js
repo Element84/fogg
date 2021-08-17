@@ -63,6 +63,13 @@ stories.add(STORY_NAME, () => {
           onChange={handleSelectOnChange}
         />
         <FormInput
+          id="default-select"
+          label="Default Multi-Select"
+          type="multiselect"
+          options={SELECT_OPTIONS}
+          onChange={handleSelectOnChange}
+        />
+        <FormInput
           id="default-textarea"
           label="Default Textarea"
           type="textarea"
