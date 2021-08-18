@@ -75,12 +75,8 @@ const InputRangeExtended = (props = {}) => {
     updateMaxErrorState(false);
     updateMinErrorState(false);
 
-    if (!val) {
+    if (!val && val !== 0) {
       updateGeneralErrorState(true);
-      setTimeout(() => {
-        updateGeneralErrorState(false)
-      }, onChangeCompleteDelay * 1000);
-      return true;
     }
     if (val > maxValue) {
       updateMaxErrorState(true);
