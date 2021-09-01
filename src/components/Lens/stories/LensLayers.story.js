@@ -234,6 +234,8 @@ const LensLayers = () => {
     getDataForLayers: PropTypes.func.isRequired
   };
 
+  function HandleUseMapEffect (args) {}
+
   return (
     <>
       <Lens
@@ -251,6 +253,7 @@ const LensLayers = () => {
         activeDateRange={{
           end: '2018-11-08 5:00:00'
         }}
+        useMapEffect={HandleUseMapEffect}
       />
     </>
   );
