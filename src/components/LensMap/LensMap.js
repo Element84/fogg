@@ -11,13 +11,8 @@ const LensMap = ({ children, forwardedRef, useMapEffect, ...rest }) => {
   const { mapConfig = {}, services, projection, refMap } = map;
   const { defaultZoom, defaultCenter, maxZoom, minZoom } = mapConfig;
 
-  function handleUseMapEffect (mapOptions) {
-    if (typeof useMapEffect === 'function') {
-      useMapEffect({
-        ...mapOptions,
-        lens
-      });
-    }
+  const HandleUseMapEffect = mapOptions => {
+    useMapEffect({lens, ...mapOptions})
   }
 
   const mapSettings = {
@@ -29,7 +24,7 @@ const LensMap = ({ children, forwardedRef, useMapEffect, ...rest }) => {
     services,
     projection,
     activeDateRange,
-    useMapEffect: handleUseMapEffect
+    useMapEffect: HandleUseMapEffect
   };
 
   return (

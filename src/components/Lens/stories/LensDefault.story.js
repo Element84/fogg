@@ -73,6 +73,8 @@ const LensDefault = () => {
     return handleResolveOnSearch(args);
   }
 
+  function HandleUseMapEffect (args) {}
+
   return (
     <>
       <Lens
@@ -82,6 +84,7 @@ const LensDefault = () => {
         searchDropOption={searchDropOption}
         searchDropOptions={searchDropOptions}
         hideDatetime={false}
+        useMapEffect={HandleUseMapEffect}
       />
     </>
   );

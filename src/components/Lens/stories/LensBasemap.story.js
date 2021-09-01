@@ -29,6 +29,8 @@ const LensBasemap = () => {
     }
   ];
 
+  function HandleUseMapEffect (args) {}
+
   return (
     <>
       <Lens
@@ -39,6 +41,7 @@ const LensBasemap = () => {
         availableServices={services}
         map="open_street_map"
         search={false}
+        useMapEffect={HandleUseMapEffect}
       />
     </>
   );
