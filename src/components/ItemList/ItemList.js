@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { FaChevronRight } from 'react-icons/fa';
 
@@ -11,8 +11,20 @@ const ItemList = ({
   actionIcon,
   onItemMouseEnter,
   onItemMouseLeave,
-  onCheck
+  onCheck,
+  subListIcon
 }) => {
+
+  const [currentSubLink, setCurrentSubLink] = useState('');
+
+  const handleClick = (index) => () => {
+    if ( currentSubLink === `sublist-item-${index}`){
+      setCurrentSubLink('');
+    } else {
+      setCurrentSubLink(`sublist-item-${index}`);
+    }
+  };
+
   return (
     <div className={`item-list ${className || ''}`}>
       <ul>
@@ -23,13 +35,14 @@ const ItemList = ({
               thumb,
               label,
               sublabels,
-              to,
               onClick,
               id,
               isChecked
             } = item;
             let { icon } = item;
-            let itemClassName = 'item-list-item';
+            let { to } = item;
+            let { hasChildren, children } = item;
+            let itemClassName = `${hasChildren && currentSubLink === `sublist-item-${index}` ? 'item-list-item has-children' : 'item-list-item'} ${hasChildren ? 'is-parent' : ''}`;
 
             if (className) {
               itemClassName = `${itemClassName} ${className}`;
@@ -43,9 +56,17 @@ const ItemList = ({
               icon = <FaChevronRight />;
             }
 
+            if (hasChildren) {
+              to = null;
+            }
+
             const additional = Array.isArray(sublabels)
               ? sublabels
               : [sublabels];
+
+            const additionalList = Array.isArray(children)
+              ? children
+              : [];
 
             const itemProps = {
               id,
@@ -73,7 +94,11 @@ const ItemList = ({
                       <img src={thumb} alt={`${label} Thumbnail`} />
                     </span>
                   )}
-                  <span className="item-list-item-content">
+                  <span 
+                    className={`item-list-item-content ${hasChildren ? 'sub-list-parent' : ''}`} 
+                    id={index}
+                    onClick={(hasChildren && handleClick(index)) || null}
+                  >
                     <span className="item-list-item-label">{label}</span>
                     {additional &&
                       additional.map((item, index) => {
@@ -96,6 +121,70 @@ const ItemList = ({
                     )}
                   </span>
                 </WonderLink>
+                {hasChildren && currentSubLink === `sublist-item-${index}` && (
+                  <ul className={`sub-list sublist-item-${index}`}>
+                    {Array.isArray(additionalList) &&
+                      additionalList.map((subItem, index) => {
+                        const subItemProps = {
+                          id,
+                          className: 'item-list-item',
+                          onMouseLeave: onItemMouseLeave,
+                          onMouseEnter: onItemMouseEnter
+                        };
+                        
+                        return (
+                          <li key={`ItemList-Item-${index}`}  {...subItemProps}>
+                            {subListIcon && (
+                              <span className="sublink-icon">
+                                <img src={subListIcon} alt="Rocket Location Icon" />
+                              </span>
+                            )}
+                            {onCheck && (
+                              <InputButton
+                                id={`item-list-checkbox-${index}`}
+                                name={`item-list-checkbox-${index}`}
+                                type="checkbox"
+                                value={subItem.id}
+                                onChange={onCheck}
+                                isChecked={subItem.isChecked || false}
+                                controlChecked={true}
+                              />
+                            )}
+                            <WonderLink to={subItem.to} onClick={subItem.onClick}>
+                              {subItem.thumb && (
+                                <span className="item-list-item-thumb">
+                                  <img src={subItem.thumb} alt={`${subItem.label} Thumbnail`} />
+                                </span>
+                              )}
+                              <span className="item-list-item-content">
+                                <span className="item-list-item-label">{subItem.label}</span>
+                                {subItem.additional &&
+                                  subItem.additional.map((subAdditionalItem, index) => {
+                                    return (
+                                      <span
+                                        key={`ItemListItemSublabel-${index}`}
+                                        className="item-list-item-sublabel"
+                                      >
+                                        {subAdditionalItem}
+                                      </span>
+                                    );
+                                  })}
+                                {subItem.icon !== false && (
+                                  <span
+                                    className="item-list-item-action"
+                                    aria-hidden="true"
+                                  >
+                                    {subItem.icon || <FaChevronRight />}
+                                  </span>
+                                )}
+                              </span>
+                            </WonderLink>
+                          </li> 
+                        );
+                      })
+                    }
+                  </ul>
+                )}
               </li>
             );
           })}
@@ -110,7 +199,8 @@ ItemList.propTypes = {
   actionIcon: PropTypes.node,
   onItemMouseEnter: PropTypes.func,
   onItemMouseLeave: PropTypes.func,
-  onCheck: PropTypes.func
+  onCheck: PropTypes.func,
+  subListIcon: PropTypes.string
 };
 
 export default ItemList;
