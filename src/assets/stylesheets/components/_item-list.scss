@@ -60,7 +60,7 @@ $item-list-top-padding: .8em;
   }
 
   &.has-children {
-    overflow: auto;
+    overflow: hidden;
 
     > span:not(.sub-list, .sub-list *),
     > a:not(.sub-list, .sub-list *) {
