@@ -24,6 +24,8 @@ const SearchFiltersRange = ({
   const [minError, updateMinErrorState] = useState(false);
   const [maxError, updateMaxErrorState] = useState(false);
 
+  const [rangeValue, setRangeValue] = useState(value);
+
   useEffect(() => {
     if ( maxError === true ) {
       handleInputChange({target : { id: 'incidence_angle-range-max', value: valueMaxLocal.toString() }});
@@ -31,7 +33,7 @@ const SearchFiltersRange = ({
     if ( minError === true ) {
       handleInputChange({target : { id: 'incidence_angle-range-min', value: valueMinLocal.toString() }});
     }
-  }, [valueMinLocal, valueMaxLocal]);
+  }, [valueMinLocal, valueMaxLocal, rangeValue]);
 
   /**
    * handleInputChange
@@ -67,14 +69,20 @@ const SearchFiltersRange = ({
         if (floatValue < range.min || floatValue > range.max || floatValue > valueMaxLocal) {
           updateMinErrorState(true);
           return;
-         } else { updateMinErrorState(false); };
+         } else { 
+           updateMinErrorState(false);
+           setRangeValue({min: floatValue, max: rangeValue.max});
+          };
         break;
       case 'max':
         setValueMaxLocal(floatValue);
         if (floatValue > range.max || floatValue < range.min || floatValue < valueMinLocal) {
           updateMaxErrorState(true);
           return;
-        } else { updateMaxErrorState(false); };
+        } else { 
+          updateMaxErrorState(false);
+          setRangeValue({min: rangeValue.min, max: floatValue});
+        };
         break;
       default:
     }
@@ -86,12 +94,41 @@ const SearchFiltersRange = ({
   }
 
   /**
-   * handleInputChange
+   * handleInputRangeChange
    * @description When the slider changes, fire away
    */
 
   function handleOnSliderChange (updatedValue) {
     handleOnChange(updatedValue);
+
+    let cleanedValues = updatedValue;
+    const { min, max } = cleanedValues;
+    if ( parseInt(min) % 1 !== 0 ) { 
+      cleanedValues.min = parseInt(parseFloat(cleanedValues.min).toFixed(2)); 
+    };
+    if ( parseInt(max) % 1 !== 0 ) { 
+      cleanedValues.max = parseInt(parseFloat(cleanedValues.max).toFixed(2)); 
+    };
+
+    setValueMaxLocal(cleanedValues.max);
+    setValueMinLocal(cleanedValues.min);
+    setRangeValue(cleanedValues);
+
+    if (cleanedValues.min < range.min || cleanedValues.min > range.max) {
+      updateMinErrorState(true);
+      return;
+    } else { 
+       updateMinErrorState(false);
+       setRangeValue(cleanedValues);
+    };
+
+    if (cleanedValues.max > range.max|| cleanedValues.max < range.min) {
+      updateMaxErrorState(true);
+      return;
+    } else { 
+      updateMaxErrorState(false);
+      setRangeValue(cleanedValues);
+    };
   }
 
   /**
@@ -149,14 +186,14 @@ const SearchFiltersRange = ({
             id={`${namePrefix}-min`}
             type="number"
             label="Min"
-            value={valueMin}
+            value={Math.round(rangeValue.min * 100) / 100}
             onChange={handleInputChange}
           />
           <FormInputDebounced
             id={`${namePrefix}-max`}
             type="number"
             label="Max"
-            value={valueMax}
+            value={Math.round(rangeValue.max * 100) / 100}
             onChange={handleInputChange}
           />
           <span className="error">{`${minError ? "Invalid Min Range" : ""}`}</span>
@@ -167,7 +204,7 @@ const SearchFiltersRange = ({
             minValue={rangeMin}
             maxValue={rangeMax}
             step={0.01}
-            value={value}
+            value={rangeValue}
             onChangeComplete={handleOnSliderChange}
           />
         </div>
