@@ -70,7 +70,7 @@ pipeline {
         rtNpmDeployer (
             id: 'npm-deployer',
             serverId: 'artifactory',
-            repo: 'space-jam-virtual'
+            repo: 'e84-shared-npm-local'
         )
 
         sshagent(credentials : ['spacejam-buildserver']) {
