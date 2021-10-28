@@ -38,11 +38,13 @@ const Table = ({
   onCellMouseOut,
   onCellMouseEnter,
   onCellMouseLeave,
-  onSort
+  onSort,
+  storeScrollPosition = false // Retain vertical scroll position even as data changes
 }) => {
   const ref = useRef();
   const gridRef = useRef();
   const [tableKey, setTableKey] = useState(defaultTableKey);
+  const [scrollState, setScrollState] = useState(0);
 
   const componentClass = new ClassName('table');
 
@@ -213,7 +215,11 @@ const Table = ({
                     height={gridHeight}
                     rowCount={rowsCount}
                     rowHeight={() => rowHeight}
+                    initialScrollTop={storeScrollPosition ? rowHeight * scrollState : undefined} 
                     width={width}
+                    onItemsRendered={({visibleRowStartIndex}) => {
+                      setScrollState(visibleRowStartIndex)
+                    }}
                   >
                     {TableCellCreator({
                       rows,
