@@ -43,7 +43,7 @@ const InputButton = ({
     inputClassName = `${inputClassName} input-button-invalid`;
   }
 
-  if (controlChecked || isChecked) {
+  if (controlChecked) {
     extendedAttributes.checked = !!isChecked;
   } else {
     extendedAttributes.defaultChecked = !!isChecked;
