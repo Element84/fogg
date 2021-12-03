@@ -12,4 +12,20 @@
     font-weight: bold;
   }
 
+  .search-panel-filters-list-item {
+
+    display: flex;
+
+    .table-cell {
+      display: inline-block;
+      width: 50%;
+    }
+
+    &:last-of-type {
+      .table-cell {
+        border-bottom: none;
+      }
+    }
+  }
+
 }

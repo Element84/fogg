@@ -7,7 +7,6 @@ import { sortByKey } from '../../lib/util';
 
 import Panel from '../Panel';
 import PanelActions from '../PanelActions';
-import Table from '../Table';
 
 const SearchPanelFilters = ({
   filters = {},
@@ -134,6 +133,10 @@ const SearchPanelFilters = ({
     return availableValues.filter((value) => valueIsValid(value)).length > 0;
   }
 
+  const panelFiltersMapped = panelFilters && panelFilters.filter(filterActiveFiltersNoValue)
+  .filter(({ type } = {}) => type !== 'hidden')
+  .map(mapActiveFiltersToRow);
+
   return (
     <Panel
       className="search-panel-filters"
@@ -141,26 +144,25 @@ const SearchPanelFilters = ({
       actions={<PanelActions actions={filterActions} />}
     >
       {hasActiveFilters(panelFilters) && (
-        <Table
-          rowHeight={50}
-          displayHeader={false}
-          fixHeightToContent={true}
-          columns={[
-            {
-              columnId: 'label'
-            },
-            {
-              columnId: 'value'
-            }
-          ]}
-          data={panelFilters
-            .filter(filterActiveFiltersNoValue)
-            .filter(({ type } = {}) => type !== 'hidden')
-            .map(mapActiveFiltersToRow)}
-        />
+        <div className="table-grid search-panel-filters-list">
+          {panelFiltersMapped.map((filter, i)=>{
+            return(
+              <div className="search-panel-filters-list-item" key={i}>
+                <div className="table-cell table-cell-column-label table-row-first table-column-first table-cell-align-left column-label">
+                  <span>{filter.label}</span>
+                </div>
+                <div className="table-cell table-row-first table-column-first table-cell-align-right column-value">
+                  <span>{filter.value}</span>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
       )}
     </Panel>
   );
+
 };
 
 SearchPanelFilters.propTypes = {
