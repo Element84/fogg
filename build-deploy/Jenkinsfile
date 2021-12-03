@@ -234,9 +234,9 @@ void performDeploy(environment, credentials_env = 'dev', createBucket = false) {
           aws lambda invoke --function-name pipeline-service-live-initializeNewEnvironment --region us-west-2 --log-type Tail --payload '{"key":"'${JIRA_TICKET}'", "url":"'${s3_bucket}'"}' /tmp/outfile-${JIRA_TICKET}.txt && cat "/tmp/outfile-${JIRA_TICKET}.txt" && echo "${JIRA_TICKET}\n"
          '''
     }
-    echo 'Deleting old files from S3...'
+    // echo 'Deleting old files from S3...'
 
-    s3Delete bucket: "${target_bucket}", path: '/'
+    // s3Delete bucket: "${target_bucket}", path: '/'
 
     echo 'Uploading new files to S3...'
 
