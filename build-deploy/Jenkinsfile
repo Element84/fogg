@@ -182,15 +182,15 @@ pipeline {
   post {
     always {
       echo 'Cleaning workspace...'
-       deleteDir()
-     }
-     success {
+      deleteDir()
+    }
+    success {
       updateCommitStatus('success')
-     }
-     failure {
+    }
+    failure {
       updateCommitStatus('failed')
       notifySlack('failure')
-     }
+    }
   }
 
 }
@@ -232,19 +232,18 @@ void performDeploy(environment, credentials_env = 'dev', createBucket = false) {
           cd build-deploy && \
           sh ./create-bucket.sh "${target_environment}" "${target_bucket}" "${credentials_env}"
           aws lambda invoke --function-name pipeline-service-live-initializeNewEnvironment --region us-west-2 --log-type Tail --payload '{"key":"'${JIRA_TICKET}'", "url":"'${s3_bucket}'"}' /tmp/outfile-${JIRA_TICKET}.txt && cat "/tmp/outfile-${JIRA_TICKET}.txt" && echo "${JIRA_TICKET}\n"
-         '''
+        '''
     }
-    // echo 'Deleting old files from S3...'
 
-    // s3Delete bucket: "${target_bucket}", path: '/'
+    echo 'Syncing deployment to S3...'
 
-    echo 'Uploading new files to S3...'
-
-    s3Upload(file: 'storybook-static', bucket: "${target_bucket}")
-
+    sh '''
+      aws s3 rm s3://${target_bucket} --recursive
+      aws s3 cp ./public s3://${target_bucket}/ --recursive
+    '''
   }
 
-   notifySlack('success', environment == "uat" || environment == "prod")
+  notifySlack('success', environment == "uat" || environment == "prod")
 }
 
 void updateCommitStatus(status) {
