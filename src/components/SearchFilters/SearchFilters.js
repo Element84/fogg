@@ -53,6 +53,22 @@ const SearchFilters = ({
     }
   }
 
+  /**
+   * handleChecklistClear
+   * @description Triggers when a filter checklist clear button is clicked
+   */
+
+  function handleChecklistClear ({ target = {} }) {
+    if (typeof onUpdateChanges === 'function') {
+      onUpdateChanges([
+        {
+          id: target.name,
+          value: []
+        }
+      ]);
+    }
+  }
+
   return (
     <div className={`search-filters ${className || ''}`}>
       <Panel>
@@ -99,6 +115,7 @@ const SearchFilters = ({
                           activeValues={value || []}
                           type={type}
                           onChange={handleFilterChange}
+                          onClearChecklist={handleChecklistClear}
                         />
                       );
                     })()}
