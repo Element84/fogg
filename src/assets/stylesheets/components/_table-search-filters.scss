@@ -1,0 +1,71 @@
+.table-search-filters {
+  margin: 1.5em 0;
+}
+
+.table-search-filters-menu,
+.table-search-filters-filter-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.table-search-filters-filter-list {
+
+  .input-button-list {
+
+    font-size: 1em;
+
+    .form-label {
+      display: block;
+      font-weight: $font-weight-bold;
+      padding: 0;
+      margin-bottom: 1em;
+    }
+
+    .checkbox-button input:checked + label,
+    .radio-button input:checked + label,
+    label {
+      background: none;
+      padding: 0;
+      border: none;
+      box-shadow: none;
+    }
+
+    .checkbox-button,
+    .radio-button {
+
+      margin-bottom: 1em;
+
+      input {
+
+        &:checked {
+
+          & + label {
+
+            .checkbox-button-checkbox,
+            .radio-button-checkbox {
+
+              span {
+                border: solid 2px $color-blue;
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+    }
+
+    .checkbox-button-checkbox,
+    .radio-button-checkbox {
+
+      font-size: .65em;
+
+    }
+
+  }
+
+}

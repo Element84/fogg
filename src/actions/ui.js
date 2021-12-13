@@ -3,7 +3,7 @@
  * @description Updates the modal state to trigger globally available modals
  */
 
-export const updateModal = data => {
+export const updateModal = (data) => {
   return {
     type: 'UPDATE_MODAL',
     data: data
@@ -15,7 +15,7 @@ export const updateModal = data => {
  * @description Opens the given modal
  */
 
-export const openModal = modal => {
+export const openModal = (modal) => {
   const modalSettings = {};
 
   modalSettings[modal] = {
@@ -30,7 +30,7 @@ export const openModal = modal => {
  * @description Closes the given modal
  */
 
-export const closeModal = modal => {
+export const closeModal = (modal) => {
   const modalSettings = {};
 
   modalSettings[modal] = {

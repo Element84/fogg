@@ -1,0 +1,44 @@
+.task-action-wrapper {
+  display: flex;
+  margin-top: 2.3em;
+  .task-action-column {
+    flex-direction: column;
+  }
+  .task-action-children-example {
+    margin-right: 5em;
+    span {
+      margin: 1em;
+    }
+    span:nth-child(1) {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-right: .3em;
+    }
+    span:nth-child(2) {
+      font-size: 1.8em;
+      font-weight: bolder;
+    }
+    span:nth-child(3) {
+      display: block;
+      color: gray;
+      font-size: .9em;
+      margin-left: 1.4em;
+    }
+  }
+  .task-action-buttons {
+    div {
+      display: inline-block;
+    }
+    margin-left: 2em;
+
+    .button {
+      margin: 0 .5em;
+    }
+    .button-negative {
+      background: red;
+    }
+    .task-action-buttons-disclaimer {
+      display: block;
+    }
+  }
+}

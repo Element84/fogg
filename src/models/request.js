@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { addParamsToUrl } from '../lib/util';
+import { addParamsToUrl } from '../lib/location';
 import { HttpError } from '../errors/http';
 
 /**
@@ -74,10 +74,10 @@ export default class Request {
     return this.validate().then(() => {
       return axios
         .get(this.url, this.options)
-        .catch(error => {
+        .catch((error) => {
           throw new this.RequestError(error, error.message);
         })
-        .then(response => {
+        .then((response) => {
           return response;
         });
     });
@@ -91,7 +91,7 @@ export default class Request {
 
   post () {
     return this.validate().then(() => {
-      return axios.post(this.url, this.data, this.options).catch(error => {
+      return axios.post(this.url, this.data, this.options).catch((error) => {
         if (error) error.config = null;
         if (error && error.response) error.response.config = null;
         throw new this.RequestError(error, error.message);

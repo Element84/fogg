@@ -13,7 +13,7 @@ const useModForm = () => {
    */
 
   function updateField (name, isChangeable) {
-    setFields(fields => {
+    setFields((fields) => {
       let fieldAttributes = fields[name] || {};
 
       fieldAttributes = Object.assign({}, fieldAttributes, {

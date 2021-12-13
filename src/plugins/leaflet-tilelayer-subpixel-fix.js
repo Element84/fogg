@@ -2,6 +2,7 @@
 import L from 'leaflet';
 
 (function () {
+  if (typeof window === 'undefined') return;
   if (!L || !L.GridLayer || !L.GridLayer.prototype) return;
 
   var originalInitTile = L.GridLayer.prototype._initTile;

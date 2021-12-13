@@ -7,9 +7,9 @@ import Logger from '../lib/logger';
 
 function getFormListValuesByName (form, name) {
   if (!form || !form.elements) return [];
-  const list = Array.from(form.elements).filter(input => input.name === name);
-  const checked = list.filter(input => !!input.checked);
-  const values = checked.map(input => input.value);
+  const list = Array.from(form.elements).filter((input) => input.name === name);
+  const checked = list.filter((input) => !!input.checked);
+  const values = checked.map((input) => input.value);
   return values;
 }
 
@@ -59,7 +59,7 @@ const useInput = ({ inputRef = {}, props = {} }) => {
 
   // Only include the input props that we know for sure we want to have in the DOM
 
-  const inputProps = filterObject(props, key =>
+  const inputProps = filterObject(props, (key) =>
     INPUT_PROPS_WHITELIST.includes(key)
   );
 
@@ -88,14 +88,15 @@ const useInput = ({ inputRef = {}, props = {} }) => {
   }
 
   useEffect(() => {
-    const { current } = inputRef;
+    const { current = {} } = inputRef;
+    const { form } = current || {};
     let value = inputProps.value || inputProps.defaultValue;
     if (type === 'radio' || type === 'checkbox') {
-      value = getFormListValuesByName(current.form, inputProps.name);
+      value = getFormListValuesByName(form, inputProps.name);
     }
     // Update the field immediately with any local rules for validation and default value
     updateField(inputProps.name, value, inputRules);
-  }, []);
+  }, [inputProps.defaultValue]);
 
   inputProps.onInput = function (event) {
     if (!INPUT_LIST_TYPES.includes(type)) {
@@ -116,9 +117,11 @@ const useInput = ({ inputRef = {}, props = {} }) => {
       let value;
       if (selectEvent.action === 'clear') {
         value = [];
+      } else if (!event && selectEvent.action === 'remove-value') {
+        value = [];
       } else {
         const selections = Array.isArray(event) ? event : [event];
-        value = selections.map(selection => selection.value);
+        value = selections.map((selection) => selection.value);
       }
       updateField(selectEvent.name, value);
       if (typeof onChange === 'function') {
