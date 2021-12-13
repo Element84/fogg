@@ -3,8 +3,11 @@ import { castArray, isPlainObject, snakeCase } from 'lodash';
 
 export default function useLayers (availableLayers, fetchLayerData) {
   const defaultLayers = buildDefaultLayers(availableLayers);
-
   const [layers, updateLayers] = useState(defaultLayers);
+
+  useEffect(() => {
+    updateLayers(buildDefaultLayers(availableLayers));
+  }, [availableLayers]);
 
   useEffect(() => {
     getDataForLayers(fetchLayerData);
@@ -15,7 +18,7 @@ export default function useLayers (availableLayers, fetchLayerData) {
    */
 
   function getDataForLayers (fetchFns) {
-    castArray(fetchFns).forEach(fetchFn => {
+    castArray(fetchFns).forEach((fetchFn) => {
       getDataForLayer(layers, fetchFn);
     });
   }
@@ -30,7 +33,7 @@ export default function useLayers (availableLayers, fetchLayerData) {
         return fetchFn();
       };
 
-      getLayerData().then(response => {
+      getLayerData().then((response) => {
         const newLayer = getLayerById(layers, getLayerIdByName(response.name));
         newLayer.data = response;
         updateLayers(
@@ -55,7 +58,7 @@ export default function useLayers (availableLayers, fetchLayerData) {
     };
 
     if (layerType === 'base') {
-      newLayers.base = layers.base.map(layer => {
+      newLayers.base = layers.base.map((layer) => {
         // If we only have one base layer, dont do anything
 
         if (layers.base.length === 1) return layer;
@@ -70,7 +73,7 @@ export default function useLayers (availableLayers, fetchLayerData) {
     }
 
     if (layerType === 'overlay') {
-      newLayers.overlay = layers.overlay.map(layer => {
+      newLayers.overlay = layers.overlay.map((layer) => {
         // Overlay layers support more than one active layer, so we only update the layer
         // the user has toggled
 
@@ -98,8 +101,8 @@ export default function useLayers (availableLayers, fetchLayerData) {
  */
 
 function getLayerTypeById (layers, id) {
-  if (layers.base.find(layer => id === layer.id)) return 'base';
-  if (layers.overlay.find(layer => id === layer.id)) return 'overlay';
+  if (layers.base.find((layer) => id === layer.id)) return 'base';
+  if (layers.overlay.find((layer) => id === layer.id)) return 'overlay';
 }
 
 /**
@@ -118,7 +121,7 @@ function replaceInLayersByType (layers, newLayer, type) {
   return {
     ...layers,
     [type]: [
-      ...layers[type].map(layer => {
+      ...layers[type].map((layer) => {
         if (layer.id === newLayer.id) return newLayer;
         return layer;
       })
@@ -147,7 +150,7 @@ function constructLayer (layer, visibilityForLayer) {
  */
 
 function getLayerById (layers, id) {
-  return [...layers.base, ...layers.overlay].find(layer => id === layer.id);
+  return [...layers.base, ...layers.overlay].find((layer) => id === layer.id);
 }
 
 /**
@@ -178,7 +181,7 @@ function buildDefaultLayers (availableLayers) {
     // Set all overlay layers to false, unless defaultIsActive is set to override
 
     if (Array.isArray(availableLayers.overlay)) {
-      availableLayers.overlay.forEach(layer => {
+      availableLayers.overlay.forEach((layer) => {
         defaultLayers.overlay.push(constructLayer(layer, false));
       });
     }

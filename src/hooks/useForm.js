@@ -10,7 +10,7 @@ let validate;
 const useForm = ({ onSubmit, onChange, rules = {} }) => {
   const [attempts, updateAttempts] = useState(0);
   const [fields, setFields] = useState(copyKeysToEmptyObject(rules, {}));
-  let invalidFields = Object.keys(fields).filter(key => !fields[key].isValid);
+  let invalidFields = Object.keys(fields).filter((key) => !fields[key].isValid);
 
   // If we haven't submitted the form yet, we don't want to trigger the errors
   // within the UI
@@ -88,7 +88,7 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
     const dependencies = validate.getDependenciesByName(name);
     const depdendentFields = getDependendentFieldsByName(name);
 
-    setFields(fields => {
+    setFields((fields) => {
       const fieldsToUpdate = {
         ...fields
       };
@@ -96,7 +96,7 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
       fieldsToUpdate[name] = updateFieldAttributes(name, value, dependencies);
 
       if (Array.isArray(depdendentFields)) {
-        depdendentFields.forEach(fieldName => {
+        depdendentFields.forEach((fieldName) => {
           const fieldValue = fields[fieldName].value;
           const fieldDependencies = validate.getDependenciesByName(fieldName);
           fieldsToUpdate[fieldName] = updateFieldAttributes(
@@ -125,7 +125,7 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
       if (!Object.prototype.hasOwnProperty.call(fields, key)) continue;
       if (!Array.isArray(fields[key].dependencies)) continue;
       const depKeys = fields[key].dependencies.map(
-        dependency => dependency.field
+        (dependency) => dependency.field
       );
       if (depKeys.includes(name)) dependentFields.add(key);
     }
@@ -147,7 +147,7 @@ const useForm = ({ onSubmit, onChange, rules = {} }) => {
     let fieldDependencies = [];
 
     if (Array.isArray(dependencies)) {
-      fieldDependencies = dependencies.map(dependency => {
+      fieldDependencies = dependencies.map((dependency) => {
         return {
           ...dependency,
           ...fieldSet[dependency.field]

@@ -3,10 +3,13 @@
 .search-filters-range-input {
 
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 
   .form-input {
 
     padding: 0 .25em;
+    flex: 1 0 50%;
 
     &:first-child {
       margin-left: -.25em;
@@ -15,6 +18,55 @@
     &:last-child {
       margin-right: -.25em;
     }
+
+  }
+
+  &.min-error {
+
+    .form-input {
+
+      &:first-child {
+        
+        .form-input-field {
+          border: 2px $color-red solid;
+        }
+
+      }
+
+    }
+
+  }
+
+  &.max-error {
+
+    .form-input {
+
+      &:nth-child(2) {
+        
+        .form-input-field {
+          border: 2px $color-red solid;
+        }
+        
+      }
+
+    }
+
+    span.error {
+  
+      &:last-child {
+        padding: 0 .25em;
+        margin-left: 0em;
+      }
+  
+    }
+
+  }
+
+  span.error {
+
+    flex: 1 0 50%;
+    color: $color-red;
+    font-size: .6rem;
 
   }
 
@@ -33,4 +85,10 @@
 
 .search-filters-range-slider {
   margin: 2em 0;
+}
+
+.search-filters-range-note {
+  font-size: .9em;
+  color: $color-gray5;
+  padding-top: .6em;
 }

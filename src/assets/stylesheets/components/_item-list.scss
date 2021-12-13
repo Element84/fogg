@@ -14,9 +14,20 @@ $item-list-top-padding: .8em;
     padding: 0;
     border-bottom: solid 1px $color-gray1;
     margin: 0;
+    display: flex;
 
     &:last-child {
       border-bottom: 0;
+    }
+
+    .checkbox-button {
+      padding-right: 0;
+      label {
+        box-shadow: none;
+        border-radius: 0;
+        border: none;
+        background-color: white;
+      }
     }
 
   }
@@ -26,13 +37,88 @@ $item-list-top-padding: .8em;
 .item-list-item {
 
   position: relative;
+  overflow: hidden;
+
+  &.is-parent {
+    cursor: pointer;
+    
+    > span:not(.sub-list, .sub-list *),
+    > a:not(.sub-list, .sub-list *) {
+
+      span.item-list-item-action {
+        svg {
+          -webkit-transform: rotate(90deg);
+          -moz-transform: rotate(90deg);
+          -ms-transform: rotate(90deg);
+          -o-transform: rotate(90deg);
+          transform: rotate(90deg);
+        }
+      }
+      
+    }
+
+  }
+
+  &.has-children {
+    overflow: hidden;
+
+    > span:not(.sub-list, .sub-list *),
+    > a:not(.sub-list, .sub-list *) {
+      height: 50px;
+      position: absolute;
+      background-color: $color-gray0;
+      overflow: hidden;
+
+      span.item-list-item-action {
+        margin-top: 15px;
+
+        svg {
+          -webkit-transform: rotate(-90deg);
+          -moz-transform: rotate(-90deg);
+          -ms-transform: rotate(-90deg);
+          -o-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+        }
+      }
+
+    }
+
+  }
 
   & > a,
   & > span {
     display: flex;
+    width: 100%;
     color: inherit;
     text-decoration: none;
     padding: $item-list-top-padding 2.4em $item-list-top-padding 1em;
+  }
+
+  > .sub-list {
+    width: 100%;
+    position: relative;
+    top: 50px;
+    margin: 0 0 50px 0;
+
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(1, 0, 1, 0);
+    transition-property: margin, max-height, opacity, background-color, color;
+
+    > li {
+      background-color: $color-gray9;
+      border-bottom: solid 1px $color-gray;
+      color: white;
+    }
+
+    .sublink-icon {
+      width: 10%;
+      padding: 0 0 0 10px;
+
+      img {
+        width: 30px;
+      }
+    }
+    
   }
 
 }

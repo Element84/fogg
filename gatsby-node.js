@@ -32,6 +32,21 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   });
 
   if (stage === 'build-html') {
+    // This should be a temporary fix in the event gatsby-plugin-react-leaflet removes
+    // setting react-leaflet as a null loader
+
+    const regex = [/node_modules\/leaflet/, /node_modules\\leaflet/];
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: regex,
+            use: loaders.null()
+          }
+        ]
+      }
+    });
+
     actions.setWebpackConfig({
       module: {
         rules: [
@@ -42,6 +57,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
         ]
       }
     });
+
     actions.setWebpackConfig({
       module: {
         rules: [

@@ -1,11 +1,129 @@
-### Version 0.1.200
-- [CD-110] Added LayerList Component, which will be used for adding a basemap widget to the Change Detection Website
-- [CD-110-basemap-toggle] Fixed incorrect prop types for LayerList
+### Version 0.2.45
+- adding UTC option to lens date components
 
-### Version 0.1.199
+### Version 0.2.44
+- onkeydown example for form input
+- onkeydown for modinput
 
-### Version 0.1.198
-- InputRange
+### Version 0.2.43
+
+### Version 0.2.42
+
+### Version 0.2.41
+- checking that results exists, providing backup defult if not
+
+### Version 0.2.40
+- removing footer from ui.js
+
+### Version 0.2.39
+- [JAM-971] Removing filters for search results
+- readme
+
+### Version 0.2.38
+- component story cleanup
+
+### Version 0.2.37
+- component story cleanup
+
+### Version 0.2.36
+- story documentation cleanup
+
+### Version 0.2.35
+
+### Version 0.2.34
+- [CD-137] default resolve function to ersolve a non-search lookup
+- [CD-137] using const to return instead of new object inf unction
+
+### Version 0.2.33
+- [JAM-998] adding function that allows setting a tilelayer on the map with clear controls
+- [JAM-988] adding a function to allow clearing a tile layer by name
+- [JAM-988] contorlling check of item list
+
+### Version 0.2.32
+- removing yarn lock
+- Revert "removing yarn lock"
+- updating lens map to create a ref and feature group to be used for all map shapes without using state
+
+### Version 0.2.31
+- [FD-289] publish registry
+
+### Version 0.2.30
+- [JAM-953] Tasking request cost component
+- moving all components into their own directory with stories and tests
+- [JAM-953] adding button config options into task action component
+- [JAM-998] Checkbox fix for item list
+
+### Version 0.2.29
+- [JAM-857] passing featuregroup through to clear layer handler
+- [JAM-857] clearing all feature groups of layers on unmount
+
+### Version 0.2.28
+- [JAM-857] mouseenter instead of mouseover
+
+### Version 0.2.27
+- [JAM-857] adding ability to create and keep track of feature groups for custom layer groups
+
+### Version 0.2.26
+- [JAM-857] adding mouse events for itemlist
+
+### Version 0.2.25
+- [JAM-857] setting up configurations to use adding and clearing shape
+
+### Version 0.2.24
+- adding initialState option to table
+
+### Version 0.2.23
+- [JAM-896] fixing sort api for columns
+
+### Version 0.2.22
+- [JAM-896] fixing table bug
+
+### Version 0.2.21
+- [JAM-896] removing react-leaflet from null loader
+
+### Version 0.2.20
+- [JAM-896] trying to fix undefined extend
+
+### Version 0.2.19
+- [JAM-896] fixing L call outside of dom
+
+### Version 0.2.18
+- [JAM-896] setting up shape additions to be added in an effect hook to allow consistent availability of the refMap
+
+### Version 0.2.17
+- [JAM-896] fixing map draw test
+- [JAM-896] adding map state with initialized setting
+
+### Version 0.2.16
+- [JAM-896] fixing geojson layer to respect layers inside object
+
+### Version 0.2.15
+- [JAM-896] fixing bug where featuregroup wouldn't be avialable for clearing
+
+### Version 0.2.14
+- [JAM-896] fixing bug where map would re-set the map coordinates on render
+
+### Version 0.2.13
+- [JAM-896] preventing search input from firing if no search query or location, fixing map center fvrom geojson search
+
+### Version 0.2.12
+- [JAM-896] fixing reset map view
+- [JAM-896] fixing shape options to work on draw controls
+
+### Version 0.2.11
+- [JAM-896] hardening logic for handling clearing leaflet layers
+
+### Version 0.2.10
+- [JAM-896] fixing layer add function bug
+
+### Version 0.2.9
+- [JAM-896] valid leaflet check
+
+### Version 0.2.8
+- [JAM-896] syncing state with zoom when user zooms on map
+
+### Version 0.2.7
+- [JAM-896] fixing zoom option passthrough, fixing loading more results
 
 ### Version 0.1.197
 - [JAM-980] Tweaks to make table filters work with array fields

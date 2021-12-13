@@ -47,7 +47,7 @@ class Validation {
 
     // Checks through all fields and returns true if there are no invalid fields
     const invalidFields = Object.keys(validatedSet).filter(
-      key => !validatedSet[key].isValid
+      (key) => !validatedSet[key].isValid
     );
 
     if (returnErrors) {
@@ -101,7 +101,7 @@ function validate (rules = {}, value, dependencies = []) {
   // If we have a list and any of it's values are not
   // a valid type, it's not valid
 
-  if (isList && value.filter(v => !isValidType(v)).length > 0 && isRequired) {
+  if (isList && value.filter((v) => !isValidType(v)).length > 0 && isRequired) {
     return false;
   }
 
@@ -112,7 +112,7 @@ function validate (rules = {}, value, dependencies = []) {
 
   if (dependencies.length > 0) {
     hasInvalidDependencies =
-      dependencies.filter(dependency => {
+      dependencies.filter((dependency) => {
         if (dependency.exactMatch && value !== dependency.value) return true;
         return false;
       }).length > 0;
@@ -152,7 +152,7 @@ function validateSet (rules, set) {
     // the given set to validate on
 
     if (Array.isArray(set[key].dependencies)) {
-      fieldDependencies = set[key].dependencies.map(dependency => {
+      fieldDependencies = set[key].dependencies.map((dependency) => {
         return {
           ...dependency,
           ...(dependency.field && set[dependency.field])
