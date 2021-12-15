@@ -120,8 +120,8 @@
     "sonar": "sonar-scanner -Dsonar.projectVersion=$npm_package_version",
     "start": "npm run develop",
     "storybook": "start-storybook -s ./stories/static -p 6006",
-    "test-clean": "npm run jest -u",
-    "test-watch": "npm run jest --watchAll",
+    "test-clean": "npm run jest -- -u",
+    "test-watch": "npm run jest -- --watchAll",
     "test": "npm run jest && echo '> Finished testing ✅'"
   },
   "husky": {

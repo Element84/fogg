@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import L from 'leaflet';
+import L, { LatLngBounds } from 'leaflet';
 
 import {
   isValidLeafletElement,
@@ -463,26 +463,27 @@ export default function useMap (mapSettings = {}) {
     handler.enable();
   }
 
-  // useEffect(() => {
-  //   updateTileDate(date);
-  // }, [date]);
+  /**
+   * zooms map to geoJson bounds
+   * @param {LatLngBounds} [layerBounds=LatLngBounds(...)] - bounding coordinates of an area on the map, typically a shape
+   * @param {Array} [padding=[250, 250]] - padding around the zoomed area
+   */
+  function handleZoomToBounds ({
+    layerBounds = LatLngBounds(L.latLng(40.712, -74.227), L.latLng(40.774, -74.125)),
+    padding = [250, 250]
+  }) {
+    const map = currentLeafletRef(refMap);
 
-  // function updateTileDate (date) {
-  //   const { date: dateRange = {} } = date || {};
-  //   const tileDate =
-  //     formatMapServiceDate(dateRange.end) ||
-  //     formatMapServiceDate(dateRange.start);
-  //   updateMapServices(
-  //     availableServices.map(service => {
-  //       return {
-  //         ...service,
-  //         time: service.enableDynamicTime
-  //           ? tileDate || service.time
-  //           : service.time
-  //       };
-  //     })
-  //   );
-  // }
+    // get the maximum zoom level based on layerBounds
+    let targetZoom = map.getBoundsZoom(layerBounds, false, padding);
+    targetZoom = Math.min(map.getMaxZoom(), targetZoom);
+
+    // fit map bounds to layerBounds
+    map.fitBounds(layerBounds, {
+      padding,
+      maxZoom: targetZoom
+    });
+  }
 
   return {
     refMap,
@@ -508,7 +509,8 @@ export default function useMap (mapSettings = {}) {
     clearTileLayer: handleClearTileLayer,
     createFeatureGroup: handleCreateFeatureGroup,
     featureGroupById: handleFeatureGroupById,
-    enableDrawTool: handleEnableDrawTool
+    enableDrawTool: handleEnableDrawTool,
+    zoomToBounds: handleZoomToBounds
   };
 }
 

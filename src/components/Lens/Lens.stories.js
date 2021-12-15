@@ -20,6 +20,7 @@ import LensEarthSearchCustomAutocomplete from './stories/LensEarthSearchCustomAu
 import LensEarthSearchNoAutocomplete from './stories/LensEarthSearchNoAutocomplete.story';
 import LensEarthSearchUtc from './stories/LensEarthSearchUtc.story';
 import LensCursorPosition from './stories/LensCursorPosition.story';
+import LensEarthSearchResultsZoom from './stories/LensEarthSearchResultsZoom.story';
 
 const stories = storiesOf('Components|Lens', module);
 
@@ -74,4 +75,5 @@ stories.add(
   LensEarthSearchCustomAutocomplete
 );
 stories.add('Earth Search - UTC', LensEarthSearchUtc);
+stories.add('Earth Search - Zoom to Bounds Feature', LensEarthSearchResultsZoom);
 stories.add('Cursor Position', LensCursorPosition);
