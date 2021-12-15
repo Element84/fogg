@@ -20,9 +20,9 @@ pipeline {
   stages {
 
     stage('Versioning') {
-        // bumping version number for the v2 pipeline
+        // bumping version number for the develop (formerly v2) pipeline
         when {
-            branch 'v2'
+            branch 'develop'
         }
         steps {
             sshagent(credentials : ['fogg-rw-deploy-key']) {
