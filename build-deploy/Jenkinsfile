@@ -88,9 +88,8 @@ pipeline {
               args: '--audit --loglevel warn'
           )
 
+          echo "Updating Snapshots and Running Tests..."
           sh 'npm run jest -- -u'
-          echo "Testing..."
-          sh 'npm run test'
 
         }
 
@@ -124,7 +123,7 @@ pipeline {
     stage('Publish') {
         // Under same conditions as versioning - we publish a new build
         when {
-            branch 'v2'
+            branch 'develop'
         }
         steps {
             rtNpmPublish (
