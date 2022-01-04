@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FaCheck, FaTimes } from 'react-icons/fa';
-
+import { useDebouncedCallback } from 'use-debounce';
 import { findFilterById } from '../../lib/filters';
 
 import Panel from '../Panel';
@@ -23,6 +23,12 @@ const SearchFilters = ({
     return null;
   }
 
+  // Debounce Filter Change handler to avoid browser locking up
+  const [debouncedOnUpdateChanges] = useDebouncedCallback(
+    onUpdateChanges,
+    100
+  );
+
   /**
    * handleFilterChange
    * @descriptioon Triggers when a filter change is detected
@@ -43,8 +49,8 @@ const SearchFilters = ({
       }
     }
 
-    if (typeof onUpdateChanges === 'function') {
-      onUpdateChanges([
+    if (typeof debouncedOnUpdateChanges === 'function') {
+      debouncedOnUpdateChanges([
         {
           id,
           value
