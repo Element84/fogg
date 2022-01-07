@@ -5,6 +5,7 @@
   "author": "Element 84, Inc.",
   "dependencies": {
     "@babel/core": "^7.11.1",
+    "@babel/plugin-transform-spread": "7.12.1",
     "@seznam/compose-react-refs": "^1.0.5",
     "@tmcw/togeojson": "^4.1.0",
     "@turf/bbox-polygon": "^6.0.1",
