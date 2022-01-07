@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Uses Node.js 14
+    - name: Uses Node.js 12
       uses: actions/setup-node@v1
       with:
-        node-version: 14
+        node-version: 12
     - run: npm install
     - run: npm run build
     - run: npm run jest -- -u
