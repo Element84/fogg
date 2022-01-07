@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: 'Fogg',
+    title: 'Fogg Component Library',
     name: 'fogg',
-    description: 'Component library for rapidly building maps with Gatsby + Leaflet',
+    description: 'Leaflet + Gatsby Component Library',
     author: 'Element 84'
   },
   pathPrefix: '/fogg',
