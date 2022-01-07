@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import faker from 'faker';
 
 import SearchBox from './';
 
@@ -21,7 +20,7 @@ describe('SearchBox', () => {
 
   describe('Events', () => {
     describe('Search Box Input', () => {
-      const inputTestValue = faker.random.word();
+      const inputTestValue = 'Gary';
 
       it('should have the correct input value', () => {
         const searchbox = shallow(<SearchBox onInput={handleInput} />);

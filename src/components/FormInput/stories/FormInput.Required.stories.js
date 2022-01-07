@@ -13,25 +13,17 @@ const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 const SELECT_OPTIONS = [
   {
-    label: 'Jason',
-    value: 'Gaylord'
+    label: 'Bender',
+    value: 'rodriguez'
   },
   {
-    label: 'Delilah',
-    value: 'Bayer'
+    label: 'John',
+    value: 'zoidberg'
   },
   {
-    label: 'Dena',
-    value: 'Dooley'
+    label: 'Slurms',
+    value: 'mckenzie'
   }
-];
-
-const DATALIST_OPTIONS = [
-  'Grenada',
-  'supply-chains',
-  'Paradigm',
-  'Assistant',
-  'bypassing'
 ];
 
 stories.add(STORY_NAME, () => {
@@ -59,9 +51,22 @@ stories.add(STORY_NAME, () => {
           required={true}
         />
         <FormInput
+          id="default-datetime"
+          label="Default Datetime"
+          type="datetime"
+          required={true}
+        />
+        <FormInput
+          id="default-datetime-utc"
+          label="Default Datetime UTC"
+          type="datetime"
+          utc={true}
+          required={true}
+        />
+        <FormInput
           id="required-datalist"
           label="Required Datalist"
-          dataList={DATALIST_OPTIONS}
+          dataList={['Fry', 'Leela', 'Zoidberg', 'Bender']}
           required={true}
         />
       </BaseForm>

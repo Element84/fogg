@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { sortByKey } from '../lib/util';
 
+const EMPTY_FILTERS = [];
+
 export default function useGeoFilters (filterSettings) {
-  const { available = [] } = filterSettings;
+  const { available = EMPTY_FILTERS } = filterSettings;
 
   // Grab all the available filtesr with a defaultValue as the
   // default active
@@ -21,6 +23,22 @@ export default function useGeoFilters (filterSettings) {
     active: concatAndCleanFilters(defaultActiveFilters),
     available
   });
+
+  useEffect(() => {
+    const { active } = filters;
+    const newActive = active.filter((activeFilter) => {
+      const { id } = activeFilter;
+      return available.find((af) => af.id === id);
+    });
+
+    updateFilters((prev) => {
+      return {
+        ...prev,
+        available,
+        active: newActive
+      };
+    });
+  }, [available]);
 
   /**
    * openFilters

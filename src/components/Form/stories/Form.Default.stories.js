@@ -13,7 +13,7 @@ const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 stories.add(STORY_NAME, () => {
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
-      <Form>I am a form!</Form>
+      <Form>Hi</Form>
     </Story>
   );
 });

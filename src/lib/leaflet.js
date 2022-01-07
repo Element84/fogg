@@ -1,6 +1,6 @@
 import L from 'leaflet';
 
-import { latLngFromGeoJson } from './map';
+import { latLngFromGeoJson, getGeoJsonCenter } from './map';
 import { isDomAvailable } from './device';
 import Logger from './logger';
 
@@ -240,13 +240,15 @@ export function findLayerByName ({ name: layerName, featureGroup } = {}) {
  */
 
 export function centerMapOnGeoJson ({ geoJson, map = {}, settings = {} } = {}) {
-  const latLngs = latLngFromGeoJson(geoJson);
+  const centerGeoJson = getGeoJsonCenter(geoJson);
+  const latLngs = latLngFromGeoJson(centerGeoJson);
   const center = latLngs[0];
 
   setMapView({
     map,
     settings: {
       center,
+      geoJson,
       ...settings
     }
   });
@@ -260,18 +262,31 @@ export function centerMapOnGeoJson ({ geoJson, map = {}, settings = {} } = {}) {
  */
 
 export function setMapView ({ map, settings = {} }) {
-  const { center } = settings;
+  const { center, geoJson } = settings;
   let { zoom } = settings;
+
+  const isAutoZoom = zoom === 'auto';
 
   // If we can find the existing zoom, use that to prevent changing the zoom
   // level on someone interacting with the map
 
-  if (!zoom && typeof map.getZoom === 'function') {
+  if ((!zoom || isAutoZoom) && typeof map.getZoom === 'function') {
     zoom = map.getZoom();
   }
 
   if (typeof map.setView === 'function') {
     map.setView(center, zoom);
+  }
+
+  // If someone passes in the auto parameter, we want to try to automatically
+  // figure out the "zoom" level by grabbing the bounds of the geojson and
+  // fitting the map view to it
+
+  if (isAutoZoom && geoJson) {
+    const bounds = L.geoJSON(geoJson).getBounds();
+    map.fitBounds(bounds, {
+      padding: [50, 50]
+    });
   }
 }
 
@@ -310,13 +325,58 @@ export function getShapeType (layer) {
  * @description Helper to grab the current leaflet element available
  */
 
-export function currentLeafletRef (ref = {}) {
-  const { current = {} } = ref;
-
+export function currentLeafletRef (ref) {
   // Current returns null if unavialable, so we need to additionally
   // add an option for a falsy current value
 
+  const { current } = ref || {};
   const { leafletElement } = current || {};
 
   return leafletElement;
+}
+
+/**
+ * toolbarsFromDrawControl
+ */
+
+export function toolbarsFromDrawControl ({ drawControl = {} }) {
+  return drawControl._toolbars;
+}
+
+/**
+ * toolbarFromDrawControl
+ */
+
+export function toolbarFromDrawControl ({ name, drawControl = {} }) {
+  const toolbars = toolbarsFromDrawControl({
+    drawControl
+  });
+  return toolbars && toolbars[name];
+}
+
+/**
+ * drawModeFromDrawControl
+ */
+
+export function drawModeFromDrawControl ({ name, drawControl = {} }) {
+  const drawTroolbar = toolbarFromDrawControl({
+    name: 'draw',
+    drawControl
+  });
+  const modes = drawTroolbar && drawTroolbar._modes;
+  return modes && modes[name];
+}
+
+/**
+ * getBoundsFromGeoJson
+ */
+
+export function getBoundsFromGeoJson ({ geoJson = {} }) {
+  let leafletGeoJson = geoJson;
+
+  if (typeof geoJson.toGeoJSON !== 'function') {
+    leafletGeoJson = L.geoJSON(leafletGeoJson);
+  }
+
+  return leafletGeoJson.getBounds();
 }

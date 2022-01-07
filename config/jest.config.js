@@ -8,7 +8,8 @@ module.exports = {
   rootDir: '../',
 
   globals: {
-    __PATH_PREFIX__: ''
+    __PATH_PREFIX__: '',
+    __BASE_PATH__: ''
   },
 
   // Ideally this will be kept in sync with the webpack config
@@ -22,6 +23,8 @@ module.exports = {
   ],
 
   testPathIgnorePatterns: ['node_modules', '.cache', '.storybook'],
+
+  testResultsProcessor: 'jest-sonar-reporter',
 
   setupFilesAfterEnv: [
     '<rootDir>/config/jest-setup.config.js',

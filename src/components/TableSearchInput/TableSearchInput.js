@@ -4,7 +4,15 @@ import { FaTimesCircle } from 'react-icons/fa';
 
 import ClassName from '../../models/classname';
 
-const TableSearchInput = ({ className, value, onChange, onClear }) => {
+const TableSearchInput = ({
+  className,
+  value,
+  onChange,
+  onClear,
+  onSubmit,
+  placeholder = 'Search Table',
+  ...rest
+}) => {
   const componentClass = new ClassName('table-search-input');
 
   if (className) componentClass.add(className);
@@ -31,13 +39,25 @@ const TableSearchInput = ({ className, value, onChange, onClear }) => {
     }
   }
 
+  /**
+   * handleKeyPress
+   */
+
+  function handleKeyPress (e) {
+    if (onSubmit && e.key === 'Enter') {
+      onSubmit(value);
+    }
+  }
+
   return (
     <span className={componentClass.string}>
       <input
         type="text"
         value={value || ''}
         onChange={handleOnChange}
-        placeholder="Search Table"
+        onKeyPress={handleKeyPress}
+        placeholder={placeholder}
+        {...rest}
       />
       {hasValue && (
         <button
@@ -56,7 +76,9 @@ TableSearchInput.propTypes = {
   className: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
-  onClear: PropTypes.func
+  onClear: PropTypes.func,
+  onSubmit: PropTypes.func,
+  placeholder: PropTypes.string
 };
 
 export default TableSearchInput;

@@ -1,8 +1,13 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
+import LensBasemap from './stories/LensBasemap.story';
+import LensDefault from './stories/LensDefault.story';
 import LensLayers from './stories/LensLayers.story';
+import LensEarthSearchAvailableLayers from './stories/LensEarthSearchAvailableLayers.story';
+import LensEarthSearchAvailableFilters from './stories/LensEarthSearchAvailableFilters.story';
 import LensEarthSearchDynamicLayerDate from './stories/LensEarthSearchDynamicLayerDate.story';
+import LensEarthSearchDefault from './stories/LensEarthSearchDefault.story';
 import LensEarthSearchNoFilter from './stories/LensEarthSearchNoFilter.story';
 import LensEarthSearchDateOnly from './stories/LensEarthSearchDateOnly.story';
 import LensEarthSearchCustomDraw from './stories/LensEarthSearchCustomDraw.story';
@@ -14,10 +19,20 @@ import LensEarthSearchResultsNoFilter from './stories/LensEarthSearchResultsNoFi
 import LensEarthSearchCustomAutocomplete from './stories/LensEarthSearchCustomAutocomplete.story';
 import LensEarthSearchNoAutocomplete from './stories/LensEarthSearchNoAutocomplete.story';
 import LensEarthSearchUtc from './stories/LensEarthSearchUtc.story';
+import LensCursorPosition from './stories/LensCursorPosition.story';
+import LensEarthSearchResultsZoom from './stories/LensEarthSearchResultsZoom.story';
 
 const stories = storiesOf('Components|Lens', module);
 
+stories.add('Default', LensDefault);
+stories.add('Basemap', LensBasemap);
 stories.add('Layers', LensLayers);
+stories.add('Earth Search - Default', LensEarthSearchDefault);
+stories.add('Earth Search - Available Layers', LensEarthSearchAvailableLayers);
+stories.add(
+  'Earth Search - Available Filters',
+  LensEarthSearchAvailableFilters
+);
 stories.add('Earth Search - No Filter', LensEarthSearchNoFilter);
 stories.add('Earth Search - Date Only', LensEarthSearchDateOnly);
 stories.add('Earth Search - Date Only with Default Date', () => {
@@ -60,3 +75,5 @@ stories.add(
   LensEarthSearchCustomAutocomplete
 );
 stories.add('Earth Search - UTC', LensEarthSearchUtc);
+stories.add('Earth Search - Zoom to Bounds Feature', LensEarthSearchResultsZoom);
+stories.add('Cursor Position', LensCursorPosition);

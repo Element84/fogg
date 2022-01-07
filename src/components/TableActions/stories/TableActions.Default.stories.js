@@ -14,7 +14,7 @@ const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 const actions = [
   {
     to: '#',
-    label: 'Create a New Thingy',
+    label: 'Create a New Mooncake',
     buttonType: ['text', 'icon-before'],
     icon: 'FaPlusCircle'
   }

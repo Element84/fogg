@@ -1,5 +1,3 @@
-import faker from 'faker';
-
 import React from 'react';
 import { shallow } from 'enzyme';
 
@@ -7,7 +5,7 @@ import Button from './';
 
 describe('Button', () => {
   describe('Render', () => {
-    const text = faker.random.word();
+    const text = 'Name';
     const button = shallow(<Button>{text}</Button>);
     it('should render a button', () => {
       expect(button.find('span').text()).toEqual(text);

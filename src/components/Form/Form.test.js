@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
-import faker from 'faker';
 
 import Form from './';
 
@@ -19,14 +18,13 @@ describe('Form', () => {
   };
 
   describe('Text', () => {
-    const text = faker.random.word();
     const formClass = 'test-class';
-    const form = shallow(<Form className={formClass}>{text}</Form>).find(
+    const form = shallow(<Form className={formClass}>Chookity!</Form>).find(
       'form'
     );
 
     it('should render the given text', () => {
-      expect(form.text()).toEqual(text);
+      expect(form.text()).toEqual('Chookity!');
     });
 
     it('should render the given text', () => {

@@ -37,13 +37,13 @@ const tableColumns = [
 
 const tableData = [
   {
-    firstName: 'Rowan',
-    lastName: 'Hagenes',
+    firstName: 'Gary',
+    lastName: 'Godspeed',
     date: '2019-08-20T11:27:22.506Z'
   },
   {
-    firstName: 'Domingo',
-    lastName: 'Cummings',
+    firstName: 'Quinn',
+    lastName: 'Airgon',
     date: '2019-08-20T11:51:36.896Z',
     actions: [
       {
@@ -57,8 +57,8 @@ const tableData = [
     ]
   },
   {
-    firstName: 'Zackery',
-    lastName: 'Nader',
+    firstName: 'Abraham',
+    lastName: 'Lincoln',
     date: '2019-10-24T21:36:04.522Z'
   }
 ];

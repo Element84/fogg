@@ -15,12 +15,13 @@ import LensSearchPanelFilters from '../LensSearchPanelFilters';
 import LensSidebarComponents from '../LensSidebarComponents';
 import LensSearchDate from '../LensSearchDate';
 import LensSearchActions from '../LensSearchActions';
+import LensCursorPosition from '../LensCursorPosition';
 
 const Lens = ({
   children,
   className,
   draw,
-  defaultCenter = {},
+  defaultCenter = { lat: 0, lng: 0 },
   defaultZoom = 4,
   maxZoom,
   minZoom,
@@ -44,11 +45,12 @@ const Lens = ({
   disableFutureDates = false,
   resolveOnAutocomplete = resolveLensAutocomplete,
   utc = false,
-  geoSearch: geoSearchSettings = {
-    placenameShape: 'marker',
-    ignoreDatetime: false
-  },
-  searchActions = []
+  geoSearch: geoSearchSettings,
+  searchActions = [],
+  mapControls = {},
+  searchDropOption = false,
+  searchDropOptions = [],
+  hideDatetime = false
 }) => {
   const refSearchComplete = createRef();
 
@@ -72,6 +74,8 @@ const Lens = ({
     filters: filters.active,
     date: defaultDateRange,
     utc,
+    placenameShape: 'marker',
+    ignoreDatetime: false,
     ...geoSearchSettings
   };
 
@@ -96,7 +100,7 @@ const Lens = ({
   };
 
   const map = useMap(defaultMapSettings) || {};
-  const { draw: mapDraw = {} } = map;
+  const { draw: mapDraw = {}, drawState = {} } = map;
   const { disableMapDraw } = mapDraw;
 
   const displayFilters =
@@ -116,8 +120,20 @@ const Lens = ({
     layers,
     geoSearch,
     map,
-    activeDateRange
+    activeDateRange,
+    mapControls
   };
+
+  const displaySideBar = search || SidebarComponents;
+
+  const displayCursorPosition = mapControls && mapControls.cursorPosition;
+
+  const displayFiltersPanel =
+    search &&
+    isActiveSearch &&
+    filters.available.length > 0 &&
+    searchType !== 'daterange' &&
+    showFilters;
 
   return (
     <LensContext.Provider value={context}>
@@ -126,50 +142,49 @@ const Lens = ({
           className={lensClassName}
           data-active-search={isActiveSearch}
           data-has-results={hasResults}
+          data-draw-is-active={drawState.active}
         >
-          <div className="lens-sidebar">
-            {search && (
-              <div className="lens-sidebar-search">
-                {(() => {
-                  switch (searchType) {
-                    case 'daterange':
-                      return (
-                        <div className="lens-sidebar-date">
-                          <LensSearchDate
-                            allowFutureDate={!disableFutureDates}
-                          />
-                        </div>
-                      );
-                    default:
-                      return (
-                        <>
+          {displaySideBar && (
+            <div className="lens-sidebar">
+              {search && (
+                <div className="lens-sidebar-search">
+                  {(() => {
+                    switch (searchType) {
+                      case 'daterange':
+                        return (
+                          <div className="lens-sidebar-date">
+                            <LensSearchDate
+                              allowFutureDate={!disableFutureDates}
+                            />
+                          </div>
+                        );
+                      default:
+                        return (
                           <Panel className="panel-clean">
                             <LensSearchComplete
                               ref={refSearchComplete}
                               placeholder={placeholder}
+                              searchDropOption={searchDropOption}
+                              searchDropOptions={searchDropOptions}
+                              ignoreDatetime={hideDatetime}
                             />
                             {hasSearchActions && (
                               <LensSearchActions actions={searchActions} />
                             )}
                           </Panel>
-
-                          {showFilters &&
-                            isActiveSearch &&
-                            filters.available.length > 0 && (
-                            <LensSearchPanelFilters
-                              hasFilterCancel={hasFilterCancel}
-                            />
-                          )}
-                        </>
-                      );
-                  }
-                })()}
-              </div>
-            )}
-            {SidebarComponents && (
-              <LensSidebarComponents SidebarComponents={SidebarComponents} />
-            )}
-          </div>
+                        );
+                    }
+                  })()}
+                </div>
+              )}
+              {displayFiltersPanel && (
+                <LensSearchPanelFilters hasFilterCancel={hasFilterCancel} />
+              )}
+              {SidebarComponents && (
+                <LensSidebarComponents SidebarComponents={SidebarComponents} />
+              )}
+            </div>
+          )}
 
           {displayFilters && (
             <LensSearchFilters hasFilterCancel={hasFilterCancel} />
@@ -178,6 +193,8 @@ const Lens = ({
           <LensMap {...mapSettings}>
             {!disableMapDraw && <LensMapDraw PopupContent={PopupContent} />}
           </LensMap>
+
+          {displayCursorPosition && <LensCursorPosition />}
 
           <div className="lens-extensions">{children}</div>
         </div>
@@ -254,7 +271,11 @@ Lens.propTypes = {
    * pass allowFutureDate={false} to LensSearchDate directly
    */
   disableFutureDates: PropTypes.bool,
-  resolveOnAutocomplete: PropTypes.func
+  resolveOnAutocomplete: PropTypes.func,
+  mapControls: PropTypes.object,
+  searchDropOption: PropTypes.bool,
+  searchDropOptions: PropTypes.array,
+  hideDatetime: PropTypes.bool
 };
 
 export default Lens;

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { FaPlus, FaCheck, FaTimes, FaEdit } from 'react-icons/fa';
 
 import { findFilterById } from '../../lib/filters';
+import { sortByKey } from '../../lib/util';
 
 import Panel from '../Panel';
 import PanelActions from '../PanelActions';
-import Table from '../Table';
 
 const SearchPanelFilters = ({
   filters = {},
@@ -24,6 +24,23 @@ const SearchPanelFilters = ({
   // we'll want them to be the same value, but as 1 active ID to filter on
 
   panelFilters = dedupFiltersById(panelFilters);
+
+  // map through the filters and make sure that we're associating the full informtation
+  // from an available filter to the filter itself. This should really only do anything
+  // in the event that via the above, the filters being used are active and may not
+  // have the entire dataset
+
+  panelFilters = panelFilters.map((filter) => {
+    const availableFilter = available && findFilterById(available, filter.id);
+    return {
+      ...availableFilter,
+      ...filter
+    };
+  });
+
+  // Sort the filters so they remain consistent through each render
+
+  panelFilters = sortByKey(panelFilters, 'label');
 
   const filterActions = [
     {
@@ -58,7 +75,15 @@ const SearchPanelFilters = ({
    */
 
   function mapActiveFiltersToRow ({ id } = {}, index) {
-    const { label, value: filterValue } = findFilterById(available, id);
+    const activeFilter = active && findFilterById(active, id);
+    const availableFilter = available && findFilterById(available, id);
+
+    const filter = {
+      ...availableFilter,
+      ...activeFilter
+    };
+
+    const { label, value: filterValue } = filter;
 
     let value = filterValue;
 
@@ -78,15 +103,6 @@ const SearchPanelFilters = ({
       label,
       value
     };
-  }
-
-  /**
-   * filterActiveFiltersNoValue
-   * @description
-   */
-
-  function filterActiveFiltersNoValue ({ value } = {}) {
-    return valueIsValid(value);
   }
 
   /**
@@ -117,11 +133,9 @@ const SearchPanelFilters = ({
     return availableValues.filter((value) => valueIsValid(value)).length > 0;
   }
 
-  function valueIsValid (value) {
-    if (!value) return false;
-    if (Array.isArray(value) && value.length === 0) return false;
-    return true;
-  }
+  const panelFiltersMapped = panelFilters && panelFilters.filter(filterActiveFiltersNoValue)
+  .filter(({ type } = {}) => type !== 'hidden')
+  .map(mapActiveFiltersToRow);
 
   return (
     <Panel
@@ -130,26 +144,25 @@ const SearchPanelFilters = ({
       actions={<PanelActions actions={filterActions} />}
     >
       {hasActiveFilters(panelFilters) && (
-        <Table
-          rowHeight={50}
-          displayHeader={false}
-          fitContainer={true}
-          stretchHeightToContent={true}
-          columns={[
-            {
-              columnId: 'label'
-            },
-            {
-              columnId: 'value'
-            }
-          ]}
-          data={panelFilters
-            .filter(filterActiveFiltersNoValue)
-            .map(mapActiveFiltersToRow)}
-        />
+        <div className="table-grid search-panel-filters-list">
+          {panelFiltersMapped.map((filter, i)=>{
+            return(
+              <div className="search-panel-filters-list-item" key={i}>
+                <div className="table-cell table-cell-column-label table-row-first table-column-first table-cell-align-left column-label">
+                  <span>{filter.label}</span>
+                </div>
+                <div className="table-cell table-row-first table-column-first table-cell-align-right column-value">
+                  <span>{filter.value}</span>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
       )}
     </Panel>
   );
+
 };
 
 SearchPanelFilters.propTypes = {
@@ -161,3 +174,22 @@ SearchPanelFilters.propTypes = {
 };
 
 export default SearchPanelFilters;
+
+/**
+ * valueIsValid
+ */
+
+function valueIsValid (value) {
+  if (!value) return false;
+  if (Array.isArray(value) && value.length === 0) return false;
+  return true;
+}
+
+/**
+ * filterActiveFiltersNoValue
+ * @description
+ */
+
+function filterActiveFiltersNoValue ({ value } = {}) {
+  return valueIsValid(value);
+}

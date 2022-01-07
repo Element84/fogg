@@ -28,7 +28,11 @@ Layout.propTypes = {
 export default Layout;
 
 const LayoutNotice = ({ text, ...rest }) => {
-  return <Notice {...rest}>{text}</Notice>;
+  return (
+    <Notice className="layout-notice" {...rest}>
+      {text}
+    </Notice>
+  );
 };
 
 LayoutNotice.propTypes = {

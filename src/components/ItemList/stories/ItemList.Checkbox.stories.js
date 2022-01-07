@@ -15,28 +15,33 @@ stories.add(STORY_NAME, () => {
   const items = [
     {
       id: 'item-1',
-      label: 'Deposit',
+      thumb: 'https://www.placecage.com/200/200',
+      label: 'Why',
       to: '#'
     },
     {
       id: 'item-2',
-      label: 'XML (Checked by default)',
+      thumb: 'https://www.placecage.com/300/300',
+      label: 'Not (Checked by default)',
       to: '#',
       isChecked: true
     },
     {
       id: 'item-3',
-      label: 'B2C',
+      thumb: 'https://www.placecage.com/400/400',
+      label: 'Nic',
       to: '#'
     },
     {
       id: 'item-4',
-      label: 'Encoding (No Icon, No To)',
+      thumb: 'https://www.placecage.com/500/500',
+      label: 'Cage (No Icon, No To)',
       icon: false
     },
     {
       id: 'item-5',
-      label: 'Initiatives  (No To)'
+      thumb: 'https://www.placecage.com/600/600',
+      label: '?  (No To)'
     }
   ];
 

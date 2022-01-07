@@ -68,3 +68,9 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
+
+#Webstorm stuff
+.idea
+
+#SonarReport
+test-report.xml

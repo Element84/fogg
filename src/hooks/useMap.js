@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import L from 'leaflet';
+import L, { LatLngBounds } from 'leaflet';
 
 import {
   isValidLeafletElement,
@@ -10,7 +10,8 @@ import {
   centerMapOnGeoJson,
   addGeoJsonLayer,
   addTileLayer,
-  findLayerByName
+  findLayerByName,
+  drawModeFromDrawControl
 } from '../lib/leaflet';
 import { geoJsonFromLatLn, getGeoJsonCenter } from '../lib/map';
 import { isDomAvailable } from '../lib/device';
@@ -33,6 +34,10 @@ const MAP_CONFIG_DEFAULTS = {
 
 const MAP_STATE_DEFAULT = {
   initialized: false
+};
+
+const DRAW_STATE_DEFAULT = {
+  active: false
 };
 
 const AVAILABLE_MAP_CONTROLS = Object.keys(MAP_CONFIG_DEFAULTS);
@@ -59,6 +64,7 @@ if (isDomAvailable()) {
 
 export default function useMap (mapSettings = {}) {
   const refMap = useRef();
+  const refDrawControl = useRef();
 
   const { availableServices = [], projection, draw = {} } = mapSettings;
   const { onCreatedDraw, shapeOptions } = draw;
@@ -69,7 +75,42 @@ export default function useMap (mapSettings = {}) {
   const [mapConfig, setMapConfig] = useState(defaultMapSettings);
   const [mapServices] = useState(availableServices);
 
+  const [drawState, setDrawState] = useState(DRAW_STATE_DEFAULT);
+
   const { defaultCenter, defaultZoom } = mapConfig;
+
+  /**************
+   * DRAW STATE *
+   **************/
+
+  function handleOnDrawStart () {
+    setDrawState((prev) => {
+      return {
+        ...prev,
+        active: true
+      };
+    });
+  }
+  function handleOnDrawStop () {
+    setDrawState((prev) => {
+      return {
+        ...prev,
+        active: false
+      };
+    });
+  }
+
+  useEffect(() => {
+    const map = currentLeafletRef(refMap);
+
+    map.on(L.Draw.Event.DRAWSTART, handleOnDrawStart);
+    map.on(L.Draw.Event.DRAWSTOP, handleOnDrawStop);
+
+    return () => {
+      map.off(L.Draw.Event.DRAWSTART, handleOnDrawStart);
+      map.off(L.Draw.Event.DRAWSTOP, handleOnDrawStop);
+    };
+  }, []);
 
   // Map build and teardown functions
 
@@ -267,8 +308,8 @@ export default function useMap (mapSettings = {}) {
     geoJsonLayer.eachLayer((layer) => layersToExclude.push(layer));
 
     if (panToShape) {
-      centerMapOnGeoJson({
-        geoJson: centerGeoJson,
+      handleCenterMapOnGeoJson({
+        geoJson,
         map,
         settings: {
           zoom
@@ -359,7 +400,7 @@ export default function useMap (mapSettings = {}) {
   }
 
   /**
-   * handleOnLayerCreate
+   * handleCenterMapOnGeoJson
    */
 
   function handleCenterMapOnGeoJson (settings = {}) {
@@ -367,7 +408,7 @@ export default function useMap (mapSettings = {}) {
   }
 
   /**
-   * handleOnLayerCreate
+   * handleAddGeoJsonLayer
    */
 
   function handleAddGeoJsonLayer (settings = {}) {
@@ -408,29 +449,45 @@ export default function useMap (mapSettings = {}) {
     return mapFeatureGroups.find((fg) => fg.id === id);
   }
 
-  // useEffect(() => {
-  //   updateTileDate(date);
-  // }, [date]);
+  /**
+   * handleEnableDrawTool
+   */
 
-  // function updateTileDate (date) {
-  //   const { date: dateRange = {} } = date || {};
-  //   const tileDate =
-  //     formatMapServiceDate(dateRange.end) ||
-  //     formatMapServiceDate(dateRange.start);
-  //   updateMapServices(
-  //     availableServices.map(service => {
-  //       return {
-  //         ...service,
-  //         time: service.enableDynamicTime
-  //           ? tileDate || service.time
-  //           : service.time
-  //       };
-  //     })
-  //   );
-  // }
+  function handleEnableDrawTool ({ name }) {
+    const drawControl = currentLeafletRef(refDrawControl);
+    const drawMode = drawModeFromDrawControl({
+      drawControl,
+      name
+    });
+    const { handler } = drawMode;
+    handler.enable();
+  }
+
+  /**
+   * zooms map to geoJson bounds
+   * @param {LatLngBounds} [layerBounds=LatLngBounds(...)] - bounding coordinates of an area on the map, typically a shape
+   * @param {Array} [padding=[250, 250]] - padding around the zoomed area
+   */
+  function handleZoomToBounds ({
+    layerBounds = LatLngBounds(L.latLng(40.712, -74.227), L.latLng(40.774, -74.125)),
+    padding = [250, 250]
+  }) {
+    const map = currentLeafletRef(refMap);
+
+    // get the maximum zoom level based on layerBounds
+    let targetZoom = map.getBoundsZoom(layerBounds, false, padding);
+    targetZoom = Math.min(map.getMaxZoom(), targetZoom);
+
+    // fit map bounds to layerBounds
+    map.fitBounds(layerBounds, {
+      padding,
+      maxZoom: targetZoom
+    });
+  }
 
   return {
     refMap,
+    refDrawControl,
     mapFeatureGroup: defaultMapFeaturesGroup,
     mapOverlaysGroup: defaultMapOverlaysGroup,
     mapConfig,
@@ -438,6 +495,7 @@ export default function useMap (mapSettings = {}) {
     services: mapServices,
     projection,
     draw,
+    drawState,
 
     clearLayers: handleClearLayers,
     onLayerCreate: handleOnLayerCreate,
@@ -450,7 +508,9 @@ export default function useMap (mapSettings = {}) {
     clearTileLayers: handleClearTileLayers,
     clearTileLayer: handleClearTileLayer,
     createFeatureGroup: handleCreateFeatureGroup,
-    featureGroupById: handleFeatureGroupById
+    featureGroupById: handleFeatureGroupById,
+    enableDrawTool: handleEnableDrawTool,
+    zoomToBounds: handleZoomToBounds
   };
 }
 

@@ -4,7 +4,7 @@ import { default as ReactSelect } from 'react-select';
 
 import { useInput } from '../../hooks';
 
-const Select = ({ className, props }) => {
+const Select = ({ className, props, isMulti = false }) => {
   const { inputProps } = useInput({ props });
 
   const {
@@ -16,13 +16,15 @@ const Select = ({ className, props }) => {
     defaultValue
   } = inputProps;
 
-  const defaultVal = options.filter((option) => option.value === defaultValue);
+  let defaultVal = options.filter((option) => option.value === defaultValue);
+  if (isMulti) defaultVal = defaultValue;
   delete inputProps.defaultValue;
 
   return (
     <ReactSelect
       className={`select ${className}`}
       options={options}
+      isMulti={isMulti}
       isClearable={isClearable}
       isSearchable={isSearchable}
       isDisabled={isDisabled}

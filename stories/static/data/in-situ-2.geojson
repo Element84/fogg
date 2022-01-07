@@ -33,7 +33,7 @@
             "properties": {
                 "type": "Missing Animal",
                 "time": "2018-11-08 05:43:44",
-                "reporter": "Ron Stevens",
+                "reporter": "Paul Pilone",
                 "metadata": {
                     "name": "Fido",
                     "species": "Canine",
@@ -54,7 +54,7 @@
             "properties": {
                 "type": "Missing Animal",
                 "time": "2018-11-07 09:26:34",
-                "reporter": "John Brooks",
+                "reporter": "John Cromartie",
                 "metadata": {
                     "name": "Stacey",
                     "species": "Horse",

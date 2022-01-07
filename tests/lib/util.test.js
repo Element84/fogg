@@ -1,5 +1,3 @@
-import faker from 'faker';
-
 import { util } from '../../lib';
 
 const {
@@ -13,30 +11,30 @@ const {
 describe('Util', () => {
   describe('parseNumber', () => {
     it('should return a number given a number', () => {
-      const number = faker.random.number();
+      const number = 1234;
       expect(parseNumber(number)).toEqual(number);
     });
     it('should return a number given a number string', () => {
-      const number = `${faker.random.number()}`;
+      const number = '1234';
       expect(parseNumber(number)).toEqual(parseFloat(number));
     });
     it('should return undefined given a text string', () => {
-      const number = faker.random.word();
+      const number = 'test';
       expect(parseNumber(number)).toEqual(undefined);
     });
   });
 
   describe('copyKeysToEmptyObject', () => {
     const object = {
-      one: faker.random.word(),
+      one: 'Chookity',
       two: {
-        [faker.random.word()]: faker.random.word()
+        wubbalubba: 'dubdub'
       },
       three: {
-        [faker.random.word()]: {
-          [faker.random.word()]: faker.random.word()
+        look: {
+          at: 'me'
         },
-        [faker.random.word()]: [faker.random.word(), faker.random.word()]
+        im: ['mister', 'meseeks']
       }
     };
 

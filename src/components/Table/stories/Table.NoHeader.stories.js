@@ -27,12 +27,12 @@ const tableColumns = [
 
 const tableData = [
   {
-    firstName: 'Tristin',
-    lastName: 'Friesen'
+    firstName: 'Gary',
+    lastName: 'Godspeed'
   },
   {
-    firstName: 'Berta',
-    lastName: 'Franecki',
+    firstName: 'Quinn',
+    lastName: 'Airgon',
     actions: [
       {
         to: '#',
@@ -45,8 +45,8 @@ const tableData = [
     ]
   },
   {
-    firstName: 'Ena',
-    lastName: 'Abernathy'
+    firstName: 'Abraham',
+    lastName: 'Lincoln'
   }
 ];
 

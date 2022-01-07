@@ -1,26 +1,25 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import sinon from 'sinon';
-import faker from 'faker';
 
 import FormInput from './';
 
-const SELECT_OPTIONS = [
-  {
-    label: faker.name.firstName(),
-    value: faker.name.lastName()
-  },
-  {
-    label: faker.name.firstName(),
-    value: faker.name.lastName()
-  },
-  {
-    label: faker.name.firstName(),
-    value: faker.name.lastName()
-  }
-];
-
 describe('FormInput', () => {
+  const selectOptions = [
+    {
+      label: 'Futurama',
+      value: 'futurama'
+    },
+    {
+      label: 'Rick & Morty',
+      value: 'rick-morty'
+    },
+    {
+      label: 'Final Space',
+      value: 'final-space'
+    }
+  ];
+
   describe('Render', () => {
     const label = 'Name';
     const id = 'name-test-id';
@@ -39,8 +38,8 @@ describe('FormInput', () => {
 
   describe('Events', () => {
     describe('Text', () => {
-      const changeTestValue = faker.random.word();
-      const inputTestValue = faker.random.word();
+      const changeTestValue = 'Rick';
+      const inputTestValue = 'Morty';
 
       let changeTest = null;
       let inputTest = null;
@@ -85,8 +84,10 @@ describe('FormInput', () => {
     });
 
     describe('Textarea', () => {
-      const changeTestValue = faker.random.words();
-      const inputTestValue = faker.random.words();
+      const changeTestValue =
+        'Really?! You&apos;ll have all the Slurm you can drink when you&apos;re partying with Slurms McKenzie!';
+      const inputTestValue =
+        'Whoa a real live robot; or is that some kind of cheesy New Year&apos;s costume?';
 
       let changeTest = null;
       let inputTest = null;
@@ -135,7 +136,7 @@ describe('FormInput', () => {
       let inputTest = null;
 
       function handleChange (event) {
-        changeTest = SELECT_OPTIONS[0];
+        changeTest = selectOptions[0];
       }
 
       function handleInput (event) {
@@ -146,7 +147,7 @@ describe('FormInput', () => {
         <FormInput
           id="organization"
           type="select"
-          options={SELECT_OPTIONS}
+          options={selectOptions}
           onChange={handleChange}
           onInput={handleInput}
         />
@@ -159,19 +160,19 @@ describe('FormInput', () => {
         const selectEvent = {
           action: 'select-option',
           name: 'organization',
-          option: SELECT_OPTIONS[0]
+          option: selectOptions[0]
         };
-        input.simulate('change', SELECT_OPTIONS[0], selectEvent);
-        expect(changeTest).toEqual(SELECT_OPTIONS[0]);
+        input.simulate('change', selectOptions[0], selectEvent);
+        expect(changeTest).toEqual(selectOptions[0]);
       });
 
       it('should fire the input handler', () => {
         input.simulate('input', {
           target: {
-            value: SELECT_OPTIONS[1].value
+            value: selectOptions[1].value
           }
         });
-        expect(inputTest).toEqual(SELECT_OPTIONS[1].value);
+        expect(inputTest).toEqual(selectOptions[1].value);
       });
     });
 
@@ -246,18 +247,18 @@ describe('FormInput', () => {
         <FormInput
           id="organization"
           type="select"
-          options={SELECT_OPTIONS}
+          options={selectOptions}
           onChange={'test'}
           onInput={'test'}
         />
       );
 
       it('should not throw an error when trying to fire the change handler', () => {
-        const event = SELECT_OPTIONS[0];
+        const event = selectOptions[0];
         const selectEvent = {
           action: 'select-option',
           name: 'organization',
-          option: SELECT_OPTIONS[0]
+          option: selectOptions[0]
         };
         expect(input.simulate('change', event, selectEvent)).toEqual({});
       });

@@ -20,8 +20,12 @@ const FormInput = (props) => {
     dataList,
     allowPastDate,
     utc,
+    disableFrom,
     validationMessage,
-    onKeyDown
+    onKeyDown,
+    onSave,
+    showClear,
+    extraActions
   } = props;
   const { id, type, label, isInvalid, inputProps } = useInput({ props });
 
@@ -54,8 +58,14 @@ const FormInput = (props) => {
     }
   }
 
+  function handleOnSave (event) {
+    onSave(event);
+  }
+
   if (type === 'select') {
     input = <Select className={fieldClassName} props={inputProps} />;
+  } else if (type === 'multiselect') {
+    input = <Select className={fieldClassName} isMulti={true} props={inputProps} />;
   } else if (type === 'textarea') {
     input = (
       <Textarea
@@ -73,8 +83,12 @@ const FormInput = (props) => {
         props={inputProps}
         onChange={handleOnChange}
         onInput={handleOnInput}
+        onSave={handleOnSave}
         allowPastDate={allowPastDate}
         utc={utc}
+        disableFrom={disableFrom}
+        showClear={showClear}
+        extraActions={extraActions}
       />
     );
   } else {
@@ -125,11 +139,15 @@ FormInput.propTypes = {
   inputMode: PropTypes.string,
   onInput: PropTypes.func,
   onChange: PropTypes.func,
+  onSave: PropTypes.func,
   onFocus: PropTypes.func,
   onKeyDown: PropTypes.func,
   allowPastDate: PropTypes.bool,
   utc: PropTypes.bool,
-  validationMessage: PropTypes.string
+  disableFrom: PropTypes.object,
+  validationMessage: PropTypes.string,
+  showClear: PropTypes.bool,
+  extraActions: PropTypes.bool
 };
 
 export default FormInput;

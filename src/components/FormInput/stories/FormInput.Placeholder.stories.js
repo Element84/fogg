@@ -14,25 +14,17 @@ const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 const SELECT_OPTIONS = [
   {
-    label: 'Antwan',
-    value: 'Koelpin'
+    label: 'Bender',
+    value: 'rodriguez'
   },
   {
-    label: 'Ramiro',
-    value: 'Luettgen'
+    label: 'John',
+    value: 'zoidberg'
   },
   {
-    label: 'Athena',
-    value: 'Hudson'
+    label: 'Slurms',
+    value: 'mckenzie'
   }
-];
-
-const DATALIST_OPTIONS = [
-  'Savings Account',
-  'Usability',
-  'Fields',
-  'SQL',
-  'Auto Loan Account'
 ];
 
 stories.add(STORY_NAME, () => {
@@ -72,8 +64,8 @@ stories.add(STORY_NAME, () => {
         <FormInput
           id="placeholder-datalist"
           label="Placeholder Datalist"
-          placeholder="Placeholder for datalist"
-          dataList={DATALIST_OPTIONS}
+          placeholder="Why not?"
+          dataList={['Fry', 'Leela', 'Zoidberg', 'Bender']}
         />
       </BaseForm>
     </Story>

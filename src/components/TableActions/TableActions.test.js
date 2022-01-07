@@ -6,7 +6,7 @@ import TableActions from './';
 const actions = [
   {
     to: '#',
-    label: 'Create a New Thingy',
+    label: 'Create a New Mooncake',
     buttonType: ['text', 'icon-before'],
     icon: 'FaPlusCircle'
   }

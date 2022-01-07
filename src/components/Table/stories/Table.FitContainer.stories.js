@@ -28,12 +28,12 @@ const tableColumns = [
 
 const tableData = [
   {
-    firstName: 'Agnes',
-    lastName: 'Rippin'
+    firstName: 'Gary',
+    lastName: 'Godspeed'
   },
   {
-    firstName: 'Emmalee',
-    lastName: 'Turcotte',
+    firstName: 'Quinn',
+    lastName: 'Airgon',
     actions: [
       {
         to: '#',
@@ -46,8 +46,8 @@ const tableData = [
     ]
   },
   {
-    firstName: 'Margot',
-    lastName: 'Thompson'
+    firstName: 'Abraham',
+    lastName: 'Lincoln'
   }
 ];
 
@@ -56,25 +56,43 @@ const STORY_NAME = 'Fit Container';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
+const tripleTableData = [...tableData, ...tableData, ...tableData];
+
 stories.add(STORY_NAME, () => {
+  const fixedHeight = {
+    height: '100vh'
+  };
+
   const { columns, data } = useTableData({
     columns: tableColumns,
-    data: tableData
+    data: tripleTableData
   });
 
   return (
-    <Story component={STORY_COMPONENT} name={STORY_NAME}>
+    <Story component={STORY_COMPONENT} name={STORY_NAME} style={fixedHeight}>
       <StoryNotes>
         <p>
-          Using the component with the prop <code>fitContainer</code> set to{' '}
-          <code>true</code>
-          requires the component&apos;s parent container to have a fixed height
-          or height that won&apos;t grow past a certain point, such as using
-          flexbox. Without this, the component will constantly try to rerender
-          as it grows it&apos;s height.
+          The component prop <code>fitContainer</code> has been deprecated.
+          Instead, the table should be default fill its container
         </p>
+        <p>
+          The height of this story container was set to 100vh to demonstrate
+          this example.
+        </p>
+        <pre>
+          <code>
+            {`.Story-Table-FitContainer {
+
+  &,
+  .story {
+    height: 100vh;
+  }
+
+}`}
+          </code>
+        </pre>
       </StoryNotes>
-      <Table label="Users" columns={columns} data={data} fitContainer={true} />
+      <Table label="Users" columns={columns} data={data} />
     </Story>
   );
 });

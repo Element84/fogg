@@ -13,25 +13,17 @@ const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 const SELECT_OPTIONS = [
   {
-    label: 'Ruthie',
-    value: 'Feeney'
+    label: 'Bender',
+    value: 'rodriguez'
   },
   {
-    label: 'Lurline',
-    value: 'Heaney'
+    label: 'John',
+    value: 'zoidberg'
   },
   {
-    label: 'Barney',
-    value: 'Nolan'
+    label: 'Slurms',
+    value: 'mckenzie'
   }
-];
-
-const DATALIST_OPTIONS = [
-  'payment',
-  'multi-byte',
-  'Station',
-  'Liaison',
-  'Squares'
 ];
 
 stories.add(STORY_NAME, () => {
@@ -59,10 +51,23 @@ stories.add(STORY_NAME, () => {
           disabled={true}
         />
         <FormInput
+          id="default-datetime"
+          label="Default Datetime"
+          type="datetime"
+          disabled={true}
+        />
+        <FormInput
+          id="default-datetime-utc"
+          label="Default Datetime UTC"
+          type="datetime"
+          utc={true}
+          disabled={true}
+        />
+        <FormInput
           id="disabled-datalist"
           label="Disabled Datalist"
           disabled={true}
-          dataList={DATALIST_OPTIONS}
+          dataList={['Fry', 'Leela', 'Zoidberg', 'Bender']}
         />
       </BaseForm>
     </Story>

@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { FaTimes } from 'react-icons/fa';
+
 import InputButton from '../InputButton';
+import Button from '../Button';
 
 const ALL_VALUES_ITEM = 'All Values';
 
@@ -10,6 +13,7 @@ const SearchFiltersList = ({
   label,
   list = [],
   onChange,
+  onClearChecklist,
   activeValues = [],
   type = 'checklist'
 }) => {
@@ -20,6 +24,7 @@ const SearchFiltersList = ({
 
   if (type === 'radiolist') {
     inputType = 'radio';
+    filtersList.push(ALL_VALUES_ITEM);
   } else if (type === 'checklist') {
     inputType = 'checkbox';
   }
@@ -30,15 +35,32 @@ const SearchFiltersList = ({
     }
   }
 
-  filtersList.push(ALL_VALUES_ITEM);
-
   Array.isArray(filtersList) && filtersList.sort();
 
   return (
     <>
-      {label && (
-        <strong className="search-filters-available-label">{label}</strong>
-      )}
+      {type === 'checklist'
+        ? (
+            <div className="search-filters-available-header">
+              {label && (
+                <strong className="search-filters-available-label">{label}</strong>
+              )}
+              <Button
+                disabled={noActiveValues}
+                onClick={onClearChecklist}
+                type="text"
+                className="button-icon-before"
+                name={id}
+              ><FaTimes className="icon-times" />Clear</Button>
+            </div>
+          )
+        : (
+          label && (
+            <strong className="search-filters-available-label">{label}</strong>
+          ))
+      }
+      
+
       {Array.isArray(filtersList) && (
         <ul className="search-filters-available-list">
           {filtersList.map((item, index) => {
@@ -60,6 +82,7 @@ const SearchFiltersList = ({
                   value={item}
                   onChange={handleChange}
                   isChecked={isChecked}
+                  controlChecked={true}
                 />
               </li>
             );
@@ -75,6 +98,7 @@ SearchFiltersList.propTypes = {
   label: PropTypes.string,
   list: PropTypes.array,
   onChange: PropTypes.func,
+  onClearChecklist: PropTypes.func,
   activeValues: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   type: PropTypes.string
 };
