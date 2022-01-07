@@ -13,25 +13,17 @@ const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 const SELECT_OPTIONS = [
   {
-    label: 'Joanny',
-    value: 'Conn'
+    label: 'Bender',
+    value: 'rodriguez'
   },
   {
-    label: 'Arne',
-    value: 'Rohan'
+    label: 'John',
+    value: 'zoidberg'
   },
   {
-    label: 'Bonita',
-    value: 'Kling'
+    label: 'Slurms',
+    value: 'mckenzie'
   }
-];
-
-const DATALIST_OPTIONS = [
-  'Brand',
-  'e-business',
-  'deposit',
-  'supply-chains',
-  'port'
 ];
 
 stories.add(STORY_NAME, () => {
@@ -41,26 +33,26 @@ stories.add(STORY_NAME, () => {
         <FormInput
           id="initial-text"
           label="Initial Text"
-          defaultValue="calculating"
+          defaultValue="My Text"
         />
         <FormInput
           id="initial-email"
           label="Initial Email"
           type="email"
-          defaultValue="Vida88@hotmail.com"
+          defaultValue="My Email"
         />
         <FormInput
           id="initial-select"
           label="Initial Select"
           type="select"
           options={SELECT_OPTIONS}
-          defaultValue={SELECT_OPTIONS[1].value}
+          defaultValue="zoidberg"
         />
         <FormInput
           id="initial-textarea"
           label="Initial Textarea"
           type="textarea"
-          defaultValue="programming"
+          defaultValue="My Textarea"
         />
         <FormInput
           id="initial-datetime"
@@ -71,8 +63,8 @@ stories.add(STORY_NAME, () => {
         <FormInput
           id="initial-datalist"
           label="Initial Datalist"
-          value={DATALIST_OPTIONS[1]}
-          dataList={DATALIST_OPTIONS}
+          value="Fry"
+          dataList={['Fry', 'Leela', 'Zoidberg', 'Bender']}
         />
       </BaseForm>
     </Story>

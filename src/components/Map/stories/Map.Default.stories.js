@@ -26,7 +26,7 @@ stories.add(STORY_NAME, () => {
 
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
-      <div className="story-map">
+      <div style={{ width: '100vw', height: '100vh' }}>
         <Map {...mapSettings} />
       </div>
     </Story>

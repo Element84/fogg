@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import faker from 'faker';
 
 import TableSearchFilters from './';
 
@@ -14,13 +13,13 @@ const FILTER_MENU_OPTIONS = [
 
 const tableData = [
   {
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
+    firstName: 'Gary',
+    lastName: 'Godspeed',
     role: ['user', 'cool-guy']
   },
   {
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
+    firstName: 'Quinn',
+    lastName: 'Airgon',
     role: ['user', 'hero'],
     actions: [
       {
@@ -34,8 +33,8 @@ const tableData = [
     ]
   },
   {
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
+    firstName: 'Abraham',
+    lastName: 'Lincoln',
     role: ['user', 'emancipator']
   }
 ];

@@ -1,0 +1,18 @@
+.order-status-status-info-wrapper {
+  display: flex;
+  .order-status-column {
+    flex-direction: column;
+  }
+  .order-status-status-indicator {
+    border: .1em solid black;
+    width: 15em;
+    margin-top: 1em;
+  }
+  .order-status-order-date {
+    margin-left: 1em;
+  }
+  .order-status-download-button {
+    margin-top: 2.3em;
+    margin-left: 1em
+  }
+}

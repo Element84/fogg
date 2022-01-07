@@ -3,16 +3,35 @@
   position: fixed;
   width: 100%;
 }
-  
+
 .modal {
-  
+
+  // Have to apply default modal styles
+  .modal-no-footer {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    border: 1px solid #ccc;
+    background: #fff;
+    overflow: auto;
+    WebkitOverflowScrolling: touch;
+    borderRadius: 4px;
+    outline: none;
+    padding: 20px;
+
+    &:after {
+      bottom: 0 !important;
+    }
+  }
+
   .ReactModal__Content {
     overflow: hidden !important;
     max-width: breakpointByKey(medium, max);
     border-radius: $border-radius-medium !important;
     padding: 0 !important;
     margin: 0 auto;
-  
     //   @include mobile() {
     //     top: 1em !important;
     //     right: 1em !important;

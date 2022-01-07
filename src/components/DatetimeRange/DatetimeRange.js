@@ -7,7 +7,7 @@ import Button from '../Button';
 
 const emptyDate = {
   start: null,
-  end: null
+  end: Datetime.moment.utc().endOf('day') // Default end day time to 11:59 pm
 };
 
 const DatetimeRange = ({
@@ -19,13 +19,16 @@ const DatetimeRange = ({
   allowFutureDate = true,
   utc = false
 }) => {
-  const [dateTemp, updateDateTemp] = useState({ ...emptyDate, ...defaultDate });
+  const initialDate = { ...emptyDate, ...defaultDate };
+
+  const [dateTemp, updateDateTemp] = useState(initialDate);
   const [date, updateDate] = useState(dateTemp);
 
   // If our defaultDate changes, that most likely means we're using the component
   // in a controlled state, so we want to sync the local state
 
   useEffect(() => {
+    if (!defaultDate) return;
     const updatedDate = {
       ...emptyDate,
       ...defaultDate

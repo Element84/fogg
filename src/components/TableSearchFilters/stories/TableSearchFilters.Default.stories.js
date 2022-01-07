@@ -22,13 +22,13 @@ const FILTER_MENU_OPTIONS = [
 
 const tableData = [
   {
-    firstName: 'Eldora',
-    lastName: 'Bernhard',
+    firstName: 'Gary',
+    lastName: 'Godspeed',
     role: ['user', 'cool-guy']
   },
   {
-    firstName: 'Darian',
-    lastName: 'Harber',
+    firstName: 'Quinn',
+    lastName: 'Airgon',
     role: ['user', 'hero'],
     actions: [
       {
@@ -42,8 +42,8 @@ const tableData = [
     ]
   },
   {
-    firstName: 'Lorenza',
-    lastName: 'Metz',
+    firstName: 'Abraham',
+    lastName: 'Lincoln',
     role: ['user', 'emancipator']
   }
 ];

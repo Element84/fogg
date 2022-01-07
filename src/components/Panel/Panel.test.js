@@ -1,14 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import faker from 'faker';
 
 import Panel from './';
 
 describe('Panel', () => {
   describe('Render', () => {
     const bodyClass = 'test';
-    const bodyText = faker.random.word();
-    const header = faker.random.word();
+    const bodyText = 'Chookity';
+    const header = 'Mooncake';
     const body = <p className={bodyClass}>{bodyText}</p>;
 
     it('should render a Panel with a paragraph body and header', () => {

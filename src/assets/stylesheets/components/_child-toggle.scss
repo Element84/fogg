@@ -1,5 +1,13 @@
 .child-toggle {
 
+  &[data-is-checked="false"] {
+
+    .children {
+      display: none;
+    }
+
+  }
+
   .checkbox-button label {
     padding: 0.5em;
   }

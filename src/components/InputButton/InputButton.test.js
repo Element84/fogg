@@ -4,10 +4,9 @@ import { shallow } from 'enzyme';
 import InputButton from './';
 
 describe('InputButton', () => {
-  const text = 'Hello, world!';
   const inputButtonShallow = shallow(
     <InputButton name="checkbox">
-      <span>{text}</span>
+      <span>hello world</span>
     </InputButton>
   );
   const inputButtonDive = inputButtonShallow.dive();
@@ -19,7 +18,7 @@ describe('InputButton', () => {
 
   it('renders an InputButton', () => {
     expect(inputButtonDive.find('.input-button-content span').text()).toEqual(
-      text
+      'hello world'
     );
   });
 

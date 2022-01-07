@@ -10,33 +10,32 @@ const STORY_NAME = 'Default';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
-const items = [
-  {
-    id: 'item-1',
-    label: 'Regional'
-  },
-  {
-    id: 'item-2',
-    label: 'Branding'
-  },
-  {
-    id: 'item-3',
-    label: 'Turkey'
-  },
-  {
-    id: 'item-4',
-    label: 'Dynamic'
-  },
-  {
-    id: 'item-5',
-    label: 'Array'
-  }
-];
-
 stories.add(STORY_NAME, () => {
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
-      <ItemList items={items} />
+      <ItemList
+        items={[
+          {
+            label: 'Kaaaaaaaaa',
+            to: '#'
+          },
+          {
+            label: 'Meeeeeeeeeeeee',
+            to: '#'
+          },
+          {
+            label: 'Haaaaaa',
+            to: '#'
+          },
+          {
+            label: 'Meeeeeeeeeee (No Icon, No To)',
+            icon: false
+          },
+          {
+            label: 'Haaaaaaaaaaaaaaaaaa (No To)'
+          }
+        ]}
+      />
     </Story>
   );
 });

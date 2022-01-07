@@ -55,10 +55,12 @@ const STORY_NAME = 'Frozen Header';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
+const tripleTableData = [...tableData, ...tableData, ...tableData];
+
 stories.add(STORY_NAME, () => {
   const { columns, data } = useTableData({
     columns: tableColumns,
-    data: tableData
+    data: tripleTableData
   });
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>

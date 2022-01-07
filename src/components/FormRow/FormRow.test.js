@@ -1,13 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import faker from 'faker';
 
 import FormRow from './';
 
 describe('WonderLink', () => {
   describe('Default', () => {
-    const text = faker.random.word();
-    const formrow = shallow(<FormRow>{text}</FormRow>);
+    const formrow = shallow(<FormRow>Chookity!</FormRow>);
 
     const repeaterrow = shallow(
       <FormRow className="repeater-row" col={2}>
@@ -16,7 +14,7 @@ describe('WonderLink', () => {
     );
 
     it('should render the given text', () => {
-      expect(formrow.text()).toEqual(text);
+      expect(formrow.text()).toEqual('Chookity!');
     });
 
     it('should have the correct class', () => {

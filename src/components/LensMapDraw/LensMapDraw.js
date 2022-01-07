@@ -10,7 +10,7 @@ const LensMapDraw = (props) => {
 
   const { geoSearch, map = {} } = useLens();
   const { updateSearch } = geoSearch;
-  const { clearLayers, draw = {}, mapFeatureGroup } = map;
+  const { clearLayers, draw = {}, mapFeatureGroup, refDrawControl } = map;
   const { clearOnDraw, searchOnDraw, controlOptions, shapeOptions } = draw;
 
   /**
@@ -37,6 +37,7 @@ const LensMapDraw = (props) => {
 
   return (
     <MapDraw
+      ref={refDrawControl}
       onCreated={handleOnDrawCreate}
       controlOptions={controlOptions}
       shapeOptions={shapeOptions}

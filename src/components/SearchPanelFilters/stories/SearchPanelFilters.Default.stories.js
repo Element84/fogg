@@ -12,7 +12,6 @@ const STORY_NAME = 'Default';
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 const filters = {
-  isOpen: true,
   unsaved: [],
   active: [],
   available: [
@@ -39,11 +38,13 @@ const filters = {
       defaultValue: {
         min: 0.2,
         max: 0.8
-      },
-      value: {
-        min: 0.2,
-        max: 0.8
       }
+    },
+    {
+      label: 'My Private Filter',
+      id: 'properties/product:attribute',
+      type: 'hidden',
+      value: 'Test'
     }
   ]
 };

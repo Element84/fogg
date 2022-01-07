@@ -35,13 +35,13 @@ const tableColumns = [
 
 const tableData = [
   {
-    firstName: 'Gabriel',
-    lastName: 'Bode',
+    firstName: 'Gary',
+    lastName: 'Godspeed',
     role: ['user', 'cool-guy']
   },
   {
-    firstName: 'Kaylee',
-    lastName: 'Fadel',
+    firstName: 'Quinn',
+    lastName: 'Airgon',
     role: ['user', 'hero'],
     actions: [
       {
@@ -55,8 +55,8 @@ const tableData = [
     ]
   },
   {
-    firstName: 'Lesly',
-    lastName: 'Funk',
+    firstName: 'Abraham',
+    lastName: 'Lincoln',
     role: ['user', 'emancipator']
   }
 ];
@@ -66,6 +66,11 @@ const FILTER_MENU_OPTIONS = [
     columnId: 'role',
     type: 'checkbox',
     Header: 'Role'
+  },
+  {
+    columnId: 'firstName',
+    type: 'radio',
+    Header: 'First Name'
   }
 ];
 

@@ -12,10 +12,10 @@ import {
   InputButtonList
 } from '../../ui';
 
-import { input } from '../../src/lib';
+import { input } from '../../lib';
 const { regexByFieldName } = input;
 
-const stories = storiesOf('Integrations/Forms', module);
+const stories = storiesOf('Integrations|Forms', module);
 
 stories.add('Default', () => {
   function handleSubmit (event, fields) {
@@ -286,6 +286,22 @@ stories.add('Default', () => {
               type="number"
               defaultValue={1337}
               required={true}
+            />
+          </FormRow>
+          <FormRow>
+            <FormInput
+              id="datetime"
+              label="Datetime"
+              type="datetime"
+              required={true}
+            />
+          </FormRow>
+          <FormRow>
+            <FormInput
+              id="datetime-clear"
+              label="Datetime Clear"
+              type="datetime"
+              showClear={true}
             />
           </FormRow>
         </ChildToggle>

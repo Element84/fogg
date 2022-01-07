@@ -1,0 +1,13 @@
+<svg viewBox="0 0 1000 1000" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>.cls-1{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:19.05px;width:100px;height:100px;}</style>
+    </defs>
+    <polygon points="904.43 733.5 904.43 266.5 500 33 95.57 266.5 95.57 733.5 500 967 904.43 733.5" class="cls-1"></polygon>
+    <path d="M511,128.22C548.82,166.5,647.4,284.28,647.4,473.29V659.9H359.91V473.29c0-189,98.58-306.79,136.44-345.07Z" class="cls-1"></path>
+    <circle r="38.98" cy="307.61" cx="506.09" class="cls-1"></circle>
+    <path d="M365.88,394.06S252.71,483,252.71,561v58.47h107.2" class="cls-1"></path>
+    <path d="M642.53,394.06S755.69,483,755.69,561v58.47H648.49" class="cls-1"></path>
+    <line y2="882.59" x2="496.35" y1="697.43" x1="496.35" class="cls-1"></line>
+    <line y2="804.63" x2="554.82" y1="697.43" x1="554.82" class="cls-1"></line>
+    <line y2="804.63" x2="437.87" y1="697.43" x1="437.87" class="cls-1"></line>
+</svg>

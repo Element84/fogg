@@ -13,6 +13,21 @@ const STORY_NAME = 'Checked with Custom Icon';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
+const intervalOptions = [
+  {
+    value: 'hours',
+    label: 'Hours'
+  },
+  {
+    value: 'days',
+    label: 'Days'
+  },
+  {
+    value: 'weeks',
+    label: 'Weeks'
+  }
+];
+
 stories.add(STORY_NAME, () => {
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
@@ -22,6 +37,14 @@ stories.add(STORY_NAME, () => {
         isChecked={true}
         icon={<FaTimes />}
       >
+        <FormRow className="repeater-row">
+          <FormInput
+            type="select"
+            id="interval"
+            label="Interval"
+            options={intervalOptions}
+          />
+        </FormRow>
         <FormRow className="repeater-row" col={2}>
           <FormInput type="text" id="separation-min" label="Separation Min" />
           <FormInput type="text" id="separation-max" label="Separation Max" />

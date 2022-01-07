@@ -11,32 +11,6 @@ const STORY_NAME = 'Mouse Events';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
-const items = [
-  {
-    id: 'item-1',
-    label: 'Mills',
-    to: '#'
-  },
-  {
-    id: 'item-2',
-    label: 'bar',
-    to: '#'
-  },
-  {
-    id: 'item-3',
-    label: 'open-source',
-    to: '#'
-  },
-  {
-    id: 'item-4',
-    label: 'RSS'
-  },
-  {
-    id: 'item-5',
-    label: 'Tajikistan'
-  }
-];
-
 stories.add(STORY_NAME, () => {
   function handleMouseEvent (name, event) {
     event.persist();
@@ -64,7 +38,37 @@ stories.add(STORY_NAME, () => {
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
       <ItemList
-        items={items}
+        items={[
+          {
+            id: 'item-1',
+            thumb: 'https://www.placecage.com/200/200',
+            label: 'Why',
+            to: '#'
+          },
+          {
+            id: 'item-2',
+            thumb: 'https://www.placecage.com/300/300',
+            label: 'Not',
+            to: '#'
+          },
+          {
+            id: 'item-3',
+            thumb: 'https://www.placecage.com/400/400',
+            label: 'Nic',
+            to: '#'
+          },
+          {
+            id: 'item-4',
+            thumb: 'https://www.placecage.com/500/500',
+            label: 'Cage (No Icon, No To)',
+            icon: false
+          },
+          {
+            id: 'item-5',
+            thumb: 'https://www.placecage.com/600/600',
+            label: '?  (No To)'
+          }
+        ]}
         onItemMouseEnter={handleItemOnMouseEnter}
         onItemMouseLeave={handleItemOnMouseLeave}
       />

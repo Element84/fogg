@@ -32,7 +32,8 @@ const MapPreview = ({
   availableLayers,
   availableServices,
   projection,
-  fetchLayerData
+  fetchLayerData,
+  fitGeoJson = true
 }) => {
   const layers = useLayers(availableLayers, fetchLayerData);
 
@@ -70,6 +71,8 @@ const MapPreview = ({
     geoJson = centerGeoJson;
   }
 
+  const { features = [] } = geoJson;
+
   const centerLatLng = latLngFromGeoJson(centerGeoJson)[0] || {};
   const type = geometryTypeFromGeoJson(geoJson)[0] || {};
   let geoJsonLatLng;
@@ -79,18 +82,53 @@ const MapPreview = ({
     geoJsonLatLng = latLngFromGeoJson(geoJson)[0] || {};
     geoJsonCoordinates = [geoJsonLatLng.lat, geoJsonLatLng.lng];
   } else if (type === 'Polygon') {
-    geoJsonCoordinates = coordinatesFromGeoJson(geoJson);
+    let aoiFeatures = geoJson.features.filter(
+      ({ properties }) => properties.featureType === 'aoi'
+    );
+
+    if (aoiFeatures.length === 0) {
+      aoiFeatures = geoJson.features;
+    }
+
+    geoJsonCoordinates = coordinatesFromGeoJson({
+      type: 'FeatureCollection',
+      features: aoiFeatures
+    });
   }
 
   if (!type) {
     throw new Error('Invalid geometry type');
   }
 
+  // We want to allow someone to enable or disable but also simply set
+  // to true by default to use the available geojson
+
+  if (fitGeoJson === true && typeof geoJson === 'object') {
+    fitGeoJson = geoJson;
+  }
+
+  // Determine the primary AOI from the geoJson
+
+  let aoiFeature = features.filter(
+    ({ properties }) => properties.featureType === 'aoi'
+  );
+
+  aoiFeature = aoiFeature && aoiFeature[0];
+
+  // If we don't have a specified AOI, grab the first feautre
+
+  if (!aoiFeature) {
+    aoiFeature = features[0];
+  }
+
+  const aoiType = aoiFeature.geometry.type;
+
   const mapSettings = {
     center: [centerLatLng.lat, centerLatLng.lng],
     services: availableServices,
     zoom,
-    projection
+    projection,
+    fitGeoJson
   };
 
   return (
@@ -98,23 +136,65 @@ const MapPreview = ({
       <figure className="map-preview">
         <Map {...mapSettings}>
           <MapDraw disableEditControls={true}>
-            {type === 'Point' && <Marker position={geoJsonCoordinates} />}
-            {type === 'Polygon' &&
-              geoJsonCoordinates.map((set = []) => {
-                return set.map((position, index) => {
-                  const fixedPosition = position.map((coordinates) => [
-                    coordinates[1],
-                    coordinates[0]
-                  ]);
+            {features.map((feature) => {
+              const { geometry, properties } = feature;
+
+              const {
+                shapeOptions = {},
+                onClick,
+                onMouseover,
+                onMouseout
+              } = properties;
+
+              const { style = {} } = shapeOptions;
+
+              const featureProps = {
+                ...style,
+                onClick,
+                onMouseover,
+                onMouseout
+              };
+
+              if (geometry.type === 'Point') {
+                const latLngs = latLngFromGeoJson(feature);
+
+                return latLngs.map(({ lat, lng }, index) => {
                   return (
-                    <Polygon
-                      key={`MapPreview-Polygon-${index}`}
-                      color={AVAILABLE_COLORS[index]}
-                      positions={fixedPosition}
+                    <Marker
+                      key={`${lat}-${lng}-${index}`}
+                      position={[lat, lng]}
+                      {...featureProps}
                     />
                   );
                 });
-              })}
+              }
+
+              if (geometry.type === 'Polygon') {
+                const coordinates = coordinatesFromGeoJson({
+                  type: 'FeatureCollection',
+                  features: [feature]
+                });
+
+                return coordinates.map((set) => {
+                  return set.map((position, index) => {
+                    const fixedPosition = position.map((coordinates) => [
+                      coordinates[1],
+                      coordinates[0]
+                    ]);
+                    return (
+                      <Polygon
+                        key={`${coordinates[0]}-${coordinates[1]}-${index}`}
+                        color={AVAILABLE_COLORS[index]}
+                        positions={fixedPosition}
+                        {...featureProps}
+                      />
+                    );
+                  });
+                });
+              }
+
+              return null;
+            })}
           </MapDraw>
         </Map>
         <figcaption>
@@ -122,21 +202,21 @@ const MapPreview = ({
             <strong>Area of Interest</strong>
           </p>
           <p className="map-preview-geometry">
-            <strong>Geometry:</strong> {type}
+            <strong>Geometry:</strong> {aoiType}
           </p>
           <div className="map-preview-coordinates">
             <p>
-              <strong>Coordinates:</strong>
-              {type === 'Point' && (
+              <strong>Coordinates (Latitude &amp; Longtitude):</strong>
+              {aoiType === 'Point' && (
                 <>
                   {/* Add an extra space to prevent a single coordinate from bumping against */}{' '}
                   <span className="map-preview-coordinates-item">
-                    {geoJsonLatLng.lat} &deg;N, {geoJsonLatLng.lng} &deg;W
+                    {geoJsonLatLng.lat}, {geoJsonLatLng.lng}
                   </span>
                 </>
               )}
             </p>
-            {type === 'Polygon' &&
+            {aoiType === 'Polygon' &&
               geoJsonCoordinates.map((set = [], coordinatesIndex) => {
                 return (
                   <ul key={`MapPreview-Coordinates-${coordinatesIndex}`}>
@@ -144,7 +224,7 @@ const MapPreview = ({
                       return positions.map(([posLng, posLat], setIndex) => {
                         return (
                           <li key={`MapPreview-Coordinates-${setIndex}`}>
-                            {posLat} &deg;N, {posLng} &deg;W
+                            {posLat}, {posLng}
                           </li>
                         );
                       });
@@ -179,7 +259,8 @@ MapPreview.propTypes = {
   ]),
   availableServices: PropTypes.array,
   projection: PropTypes.string,
-  fetchLayerData: PropTypes.func
+  fetchLayerData: PropTypes.func,
+  fitGeoJson: PropTypes.oneOfType([PropTypes.object, PropTypes.bool])
 };
 
 export default MapPreview;

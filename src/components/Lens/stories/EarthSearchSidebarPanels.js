@@ -39,7 +39,7 @@ const EarthSearchSidebarPanels = ({
 
   const { filters, clearActiveFilters } = geoFilters;
 
-  const { addShapeToMap, clearLayers } = map;
+  const { addShapeToMap, clearLayers, enableDrawTool } = map;
 
   function handleLoadMore (e) {
     if (hasMoreResults) {
@@ -116,6 +116,11 @@ const EarthSearchSidebarPanels = ({
           )}
           <Panel header="Explore">
             <p>Explore stuff</p>
+            <p>
+              <button onClick={() => enableDrawTool({ name: 'marker' })}>
+                Enable Marker
+              </button>
+            </p>
           </Panel>
           <Panel header="Past Searches">
             <ItemList
@@ -135,6 +140,16 @@ const EarthSearchSidebarPanels = ({
                       geoJson: GEOJSON_MONTES_CLAROS_POLYGON,
                       filters: [],
                       zoom: 6
+                    });
+                  }
+                },
+                {
+                  label: 'Grao Mogol, MG - Polygon, Zoom Auto',
+                  onClick: () => {
+                    search({
+                      geoJson: GEOJSON_GRAO_MOGOL_POLYGON,
+                      filters: [],
+                      zoom: 'auto'
                     });
                   }
                 }

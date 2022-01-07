@@ -10,41 +10,37 @@ const STORY_NAME = 'Thumbnails';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
-const items = [
-  {
-    id: 'item-1',
-    thumb: 'https://picsum.photos/100',
-    label: 'Wooden',
-    to: '#'
-  },
-  {
-    id: 'item-2',
-    thumb: 'https://picsum.photos/150',
-    label: 'Practical',
-    to: '#'
-  },
-  {
-    id: 'item-3',
-    thumb: 'https://picsum.photos/200',
-    label: 'Keyboard',
-    to: '#'
-  },
-  {
-    id: 'item-4',
-    thumb: 'https://picsum.photos/250',
-    label: 'Electronics'
-  },
-  {
-    id: 'item-5',
-    thumb: 'https://picsum.photos/300',
-    label: 'Gold'
-  }
-];
-
 stories.add(STORY_NAME, () => {
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
-      <ItemList items={items} />
+      <ItemList
+        items={[
+          {
+            thumb: 'https://www.placecage.com/200/200',
+            label: 'Why',
+            to: '#'
+          },
+          {
+            thumb: 'https://www.placecage.com/300/300',
+            label: 'Not',
+            to: '#'
+          },
+          {
+            thumb: 'https://www.placecage.com/400/400',
+            label: 'Nic',
+            to: '#'
+          },
+          {
+            thumb: 'https://www.placecage.com/500/500',
+            label: 'Cage (No Icon, No To)',
+            icon: false
+          },
+          {
+            thumb: 'https://www.placecage.com/600/600',
+            label: '?  (No To)'
+          }
+        ]}
+      />
     </Story>
   );
 });

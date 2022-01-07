@@ -18,9 +18,15 @@ const FILTER_KEY = '$$filterable';
 
 const errorBase = 'Failed to construct table data';
 
+export const CELL_ORIGINAL_VALUE_POSTFIX = '/orig';
+
 export default function useTableData ({ columns = [], data = [] }) {
-  const [sortOptions, updateSortOptions] = useState(DEFAULT_SORT_OPTIONS);
-  const { sortedIndex, sortType, sortId } = sortOptions;
+  let workingColumns = [...columns];
+  let workingData = [...data];
+
+  /*************************
+   * SEARCHING / FILTERING *
+   *************************/
 
   const [filters, updateFilters] = useState({});
 
@@ -33,13 +39,6 @@ export default function useTableData ({ columns = [], data = [] }) {
   if (filterKeys.find((key) => typeof key === 'undefined')) {
     throw new Error(`${errorBase}: Columns contain undefined columnId`);
   }
-
-  let workingColumns = [...columns];
-  let workingData = [...data];
-
-  /*************************
-   * SEARCHING / FILTERING *
-   *************************/
 
   // Find all columns that have a filter transformer and create a filter friendly key
   // on the working data
@@ -148,6 +147,27 @@ export default function useTableData ({ columns = [], data = [] }) {
    * SORTING *
    ***********/
 
+  const defaultSortOptions = {
+    ...DEFAULT_SORT_OPTIONS
+  };
+
+  // Try to see if we're designating a column as sorted by default
+
+  const defaultSortColumn = columns.findIndex(
+    ({ defaultSorted }) => !!defaultSorted
+  );
+
+  // If we find one, override the default sort option config
+
+  if (defaultSortColumn >= 0) {
+    defaultSortOptions.sortedIndex = defaultSortColumn;
+    defaultSortOptions.sortType = columns[defaultSortColumn].defaultSorted;
+    defaultSortOptions.sortId = columns[defaultSortColumn].columnId;
+  }
+
+  const [sortOptions, updateSortOptions] = useState(defaultSortOptions);
+  const { sortedIndex, sortType, sortId } = sortOptions;
+
   // Map our our sort state and tag the column header with the appropriate
   // sort status
 
@@ -180,26 +200,33 @@ export default function useTableData ({ columns = [], data = [] }) {
     const actionComponents = [];
 
     if (Array.isArray(actions)) {
-      actions.forEach(({ to, label, buttonType, icon } = {}, index) => {
-        const hasType =
-          Array.isArray(buttonType) || typeof buttonType === 'string';
-        const iconBefore = hasType && buttonType.includes('icon-before');
-        const iconAfter = hasType && buttonType.includes('icon-after');
+      actions.forEach(
+        ({ to, label, buttonType, icon, ...rest } = {}, index) => {
+          const hasType =
+            Array.isArray(buttonType) || typeof buttonType === 'string';
+          const iconBefore = hasType && buttonType.includes('icon-before');
+          const iconAfter = hasType && buttonType.includes('icon-after');
 
-        if (typeof icon === 'string') {
-          icon = <IconByName name={icon} />;
+          if (typeof icon === 'string') {
+            icon = <IconByName name={icon} />;
+          }
+
+          const action = (
+            <Button
+              key={`Action-${index}`}
+              to={to && to}
+              type={buttonType}
+              {...rest}
+            >
+              {iconBefore && icon}
+              {label}
+              {iconAfter && icon}
+            </Button>
+          );
+
+          actionComponents.push(action);
         }
-
-        const action = (
-          <Button key={`Action-${index}`} to={to} type={buttonType}>
-            {iconBefore && icon}
-            {label}
-            {iconAfter && icon}
-          </Button>
-        );
-
-        actionComponents.push(action);
-      });
+      );
     }
     return {
       ...data,
@@ -209,7 +236,8 @@ export default function useTableData ({ columns = [], data = [] }) {
 
   // Loop through all of our data and tranform any cells that have a custom cellTransformer
 
-  workingData = workingData.map((data = {}, index) => {
+  workingData = workingData.map((data = {}) => {
+    const dataOriginal = { ...data };
     const dataKeys = Object.keys(data) || [];
 
     dataKeys.forEach((key) => {
@@ -218,7 +246,10 @@ export default function useTableData ({ columns = [], data = [] }) {
       );
       const { cellTransformer } = column || {};
       if (typeof cellTransformer === 'function') {
-        data[key] = cellTransformer(data[key]);
+        data[`${key}${CELL_ORIGINAL_VALUE_POSTFIX}`] = data[key];
+        data[key] = cellTransformer(data[key], {
+          data: dataOriginal
+        });
       }
     });
 

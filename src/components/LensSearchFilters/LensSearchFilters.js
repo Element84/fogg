@@ -31,7 +31,8 @@ const LensSearchFilters = ({
     });
     if (searchOnSave) {
       updateSearch({
-        filters: active
+        filters: active,
+        resetPage: true
       });
     }
   }
@@ -46,7 +47,8 @@ const LensSearchFilters = ({
     });
     if (searchOnChange) {
       updateSearch({
-        filters: active
+        filters: active,
+        resetPage: true
       });
     }
   }

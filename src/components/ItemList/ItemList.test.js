@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { FaBeer } from 'react-icons/fa';
-import faker from 'faker';
 
 import ItemList from './';
 
@@ -9,24 +8,24 @@ describe('ItemList', () => {
   describe('Render', () => {
     const items = [
       {
-        label: faker.name.firstName(),
-        to: `/${faker.random.word()}`
+        label: 'Philip J. Fry',
+        to: '/philip-j-fry'
       },
       {
-        label: faker.name.firstName(),
-        to: `/${faker.random.word()}`
+        label: 'Turanga Leela',
+        to: '/turanga-leela'
       },
       {
-        label: faker.name.firstName(),
-        to: faker.random.word()
+        label: 'Bender',
+        to: 'bender'
       },
       {
-        label: faker.name.firstName(),
-        to: faker.random.word()
+        label: 'Hermes Conrad',
+        to: 'hermes-conrad'
       },
       {
-        label: faker.name.firstName(),
-        to: faker.random.word()
+        label: 'Dr. John A. Zoidberg',
+        to: 'dr-john-a-zoidberg'
       }
     ];
 

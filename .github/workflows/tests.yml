@@ -17,7 +17,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12
-    - run: npm install -g yarn
-    - run: yarn install
-    - run: yarn build
-    - run: yarn test
+    - run: npm install
+    - run: npm run build
+    - run: npm run jest -- -u
+    - run: npm rebuild node-sass

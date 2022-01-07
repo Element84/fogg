@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useDebouncedCallback } from 'use-debounce';
+import composeRefs from '@seznam/compose-react-refs';
 
 import SearchBox from '../SearchBox';
 
@@ -16,7 +17,9 @@ const SearchComplete = ({
   date,
   utc = false,
   ignoreDatetime = false,
-  forwardedRef
+  forwardedRef,
+  searchDropOption = false,
+  searchDropOptions = []
 }) => {
   const [isOpen, updateOpenState] = useState(false);
   const [results, updateResults] = useState([]);
@@ -26,12 +29,94 @@ const SearchComplete = ({
     updateQueryState,
     QUERY_COMPLETE_DEBOUNCE
   );
+  const [option, setOptionValue] = useState('default');
+  const [options, setOptions] = useState([searchDropOptions]);
+  let activeSearchOption = option;
+  let activeSearchOptions = options;
+
+  const ref = useRef(null);
+
+  const handleEscapeButton = (event) => {
+    if (event.key === 'Escape') {
+      updateOpenState(false);
+    }
+  };
+
+  const handleClickOutside = (event) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      updateOpenState(false);
+    }
+  };
+  
+  let localSearchDropOptions = [
+    {
+        label: 'Map Location',
+        id: 'search-radio-1',
+        onClick: handleOptionClick,
+        value: 'default',
+        isChecked: true
+    },
+    {
+        label: 'Collect ID',
+        id: 'search-radio-2',
+        onClick: handleOptionClick,
+        value: 'collect-id-007',
+        isChecked: false
+    },
+    {
+        label: 'Granule ID',
+        id: 'search-radio-3',
+        onClick: handleOptionClick,
+        value: 'granule-id-007',
+        isChecked: false
+    }
+  ];
+
+  let reducedOptions;
+
+  useEffect(() => {
+    if ( options.length === 0 || options[0].length === 0 ) {
+      reducedOptions = localSearchDropOptions;
+      setOptions(options => [...options, localSearchDropOptions]);
+    }
+  }, [searchDropOption]);
+
+  function handleOptionClick (e) {
+
+    if (!Array.isArray(options)) {
+
+      activeSearchOptions = options;
+      activeSearchOptions.forEach((item) => item.isChecked = 'false');
+      let objIndex = activeSearchOptions.findIndex((obj => obj.id == e.target.id));
+      activeSearchOptions[objIndex].isChecked = e.target.checked;
+
+      setOptionValue(e.target.value);
+      
+    } else {
+      
+      options.forEach(element => activeSearchOptions = element);
+      activeSearchOptions.forEach(item => item.isChecked = 'false');
+      let objIndex = activeSearchOptions.findIndex((obj => obj.id == e.target.id));
+      activeSearchOptions[objIndex].isChecked = e.target.checked;
+
+      setOptionValue(e.target.value);
+
+    }
+  }
+
+  activeSearchOptions.forEach(element => reducedOptions = element);
 
   // When the component renders, update the state with the default values
   // Particularly useful for grabbing query params and prefilling state
 
   useEffect(() => {
     updateSearchInput(defaultValue);
+    document.addEventListener('keydown', handleEscapeButton, true);
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+      document.removeEventListener('keydown', handleEscapeButton, true);
+      document.removeEventListener('click', handleClickOutside, true);
+    };
   }, [defaultValue]);
 
   /**
@@ -39,7 +124,9 @@ const SearchComplete = ({
    * @description Triggers when the search box's search button is clicked
    */
 
-  async function handleSearchboxSearch (textInput, searchDate) {
+  async function handleSearchboxSearch (textInput, searchDate, activeSearchOption = activeSearchOption) {
+    setOptionValue(activeSearchOption);
+
     let autocompleteResults = [];
 
     if (
@@ -58,7 +145,7 @@ const SearchComplete = ({
     const searchQuery =
       typeof query !== 'string' && textInput === searchInput ? query : value;
     updateQuery(searchQuery);
-    handleQuery(searchQuery, searchDate, textInput);
+    handleQuery(searchQuery, searchDate, textInput, null, activeSearchOption);
     updateOpenState(false);
   }
 
@@ -67,9 +154,9 @@ const SearchComplete = ({
    * @description Triggers when someone clicks on a result item
    */
 
-  function handleResultClick (e, value, label, geoJson) {
+  function handleResultClick (e, value, label, geoJson, activeSearchOption = activeSearchOption) {
     updateSearchInput(label);
-    handleQuery(value, null, label, geoJson);
+    handleQuery(value, null, label, geoJson, activeSearchOption);
     updateQuery(value);
     updateOpenState(false);
   }
@@ -83,14 +170,16 @@ const SearchComplete = ({
     location,
     searchDate = date,
     textInput = query,
-    geoJson
+    geoJson,
+    activeSearchOption
   ) {
     if (typeof onSearch === 'function') {
       onSearch({
         location,
         geoJson,
         date: searchDate && searchDate.date,
-        textInput
+        textInput,
+        activeSearchOption
       });
     }
   }
@@ -150,7 +239,7 @@ const SearchComplete = ({
 
   return (
     <div
-      ref={forwardedRef}
+      ref={composeRefs(ref, forwardedRef)}
       className="search-complete"
       data-is-search-complete-open={isOpen && results.length > 0}
     >
@@ -163,9 +252,13 @@ const SearchComplete = ({
         utc={utc}
         ignoreDatetime={ignoreDatetime}
         onDateChange={onDateChange}
+        searchDropOption={searchDropOption}
+        searchDropOptions={reducedOptions}
       />
 
-      <div className="search-complete-results">
+      <div
+        className={`search-complete-results ${isOpen ? 'active' : 'inactive'}`}
+      >
         <ul>
           {results
             .slice(0, MAX_RESULTS)
@@ -206,7 +299,9 @@ SearchComplete.propTypes = {
   date: PropTypes.object,
   utc: PropTypes.bool,
   ignoreDatetime: PropTypes.bool,
-  forwardedRef: PropTypes.object
+  forwardedRef: PropTypes.object,
+  searchDropOption: PropTypes.bool,
+  searchDropOptions: PropTypes.array
 };
 
 export default SearchComplete;

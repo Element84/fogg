@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import faker from 'faker';
 
 import TableCellCreator from './';
 
@@ -52,10 +51,10 @@ const rows = [
   ],
   [
     {
-      value: faker.name.firstName()
+      value: 'Gary'
     },
     {
-      value: faker.name.lastName()
+      value: 'Godspeed'
     },
     {
       value: []
@@ -63,10 +62,10 @@ const rows = [
   ],
   [
     {
-      value: faker.name.firstName()
+      value: 'Quinn'
     },
     {
-      value: faker.name.lastName()
+      value: 'Airgon'
     },
     {
       value: [<button key="test-button">Test</button>]
@@ -74,10 +73,10 @@ const rows = [
   ],
   [
     {
-      value: faker.name.firstName()
+      value: 'Abraham'
     },
     {
-      value: faker.name.lastName()
+      value: 'Lincoln'
     },
     {
       value: []

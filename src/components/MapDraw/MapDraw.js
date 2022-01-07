@@ -89,6 +89,7 @@ const MapDraw = ({
       {!disableEditControls && (
         <>
           <EditControl
+            ref={forwardedRef}
             position="bottomright"
             onCreated={handleOnCreated}
             draw={drawOptions}

@@ -12,12 +12,12 @@ import Story from '../stories/helpers/Story';
 
 // automatically import all files ending in *.stories.js
 
-const reqDocs = require.context('../docs', true, /.stories.(js|mdx)/);
-const reqSrc = require.context('../src', true, /.stories.(js|mdx)/);
+const reqStories = require.context('../src', true, /.stories.(js|mdx)/);
+const reqIntegrations = require.context('../stories', true, /.stories.(js|mdx)/);
 
 function loadStories() {
-  reqDocs.keys().forEach(filename => reqDocs(filename));
-  reqSrc.keys().forEach(filename => reqSrc(filename));
+  reqStories.keys().forEach(filename => reqStories(filename));
+  reqIntegrations.keys().forEach(filename => reqIntegrations(filename));
 }
 
 // Gatsby's Link overrides:
@@ -31,6 +31,7 @@ global.___loader = {
 // Gatsby internal mocking to prevent unnecessary errors in storybook testing environment
 
 global.__PATH_PREFIX__ = '';
+global.__BASE_PATH__ = '';
 
 // This is to utilized to override the window.___navigate method Gatsby defines and uses to report what path a Link would be taking us to if it wasn't inside a storybook
 

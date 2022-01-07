@@ -66,7 +66,7 @@ export async function handleResolveOnEarthSearch ({
   let responseFeatures;
 
   const request = new Request(
-    'https://earth-search.aws.element84.com/stac/search'
+    'https://earth-search.aws.element84.com/v0/search'
   );
 
   const data = {
@@ -138,8 +138,10 @@ export async function handleResolveOnEarthSearch ({
 
   responseFeatures = response && response.data && response.data.features;
 
-  const responseMeta = response && response.data && response.data.meta;
-  const numberOfResults = responseMeta && responseMeta.found;
+  const {
+    numberMatched: numberOfResults = 0,
+    numberReturned = 0
+  } = response.data;
 
   if (Array.isArray(responseFeatures)) {
     responseFeatures = responseFeatures.map((feature = {}) => {
@@ -160,7 +162,7 @@ export async function handleResolveOnEarthSearch ({
 
   return {
     features: responseFeatures || [],
-    hasMoreResults: responseHasMoreResults(responseMeta),
+    hasMoreResults: numberReturned < numberOfResults,
     numberOfResults
   };
 }
@@ -210,14 +212,9 @@ export function handleEarthSearchUseMapEffect ({
   // }
 }
 
-export function responseHasMoreResults ({ page, limit, found } = {}) {
-  if (page * limit < found) return true;
-  return false;
-}
-
 /**
  * lensDateToSatTime
- * @description Converts an Lens date object to SAT API friendly string
+ * @description Converts an Atlas date object to SAT API friendly string
  * @see http://sat-utils.github.io/sat-api/#search-stac-items-by-simple-filtering-
  */
 

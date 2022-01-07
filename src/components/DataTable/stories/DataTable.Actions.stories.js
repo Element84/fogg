@@ -27,8 +27,8 @@ const tableColumns = [
 
 const tableData = [
   {
-    firstName: 'Enos',
-    lastName: 'Considine',
+    firstName: 'Gary',
+    lastName: 'Godspeed',
     actions: [
       {
         to: '#',
@@ -38,8 +38,8 @@ const tableData = [
     ]
   },
   {
-    firstName: 'Pearline',
-    lastName: 'Veum',
+    firstName: 'Quinn',
+    lastName: 'Airgon',
     actions: [
       {
         to: '#',
@@ -50,8 +50,8 @@ const tableData = [
     ]
   },
   {
-    firstName: 'Kiara',
-    lastName: 'Gerlach',
+    firstName: 'Abraham',
+    lastName: 'Lincoln',
     actions: [
       {
         to: '#',

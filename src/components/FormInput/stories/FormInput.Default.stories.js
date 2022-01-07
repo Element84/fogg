@@ -14,25 +14,17 @@ const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 const SELECT_OPTIONS = [
   {
-    label: 'Filiberto',
-    value: 'Mayert'
+    label: 'Bender',
+    value: 'rodriguez'
   },
   {
-    label: 'Sydni',
-    value: 'Haley'
+    label: 'John',
+    value: 'zoidberg'
   },
   {
-    label: 'Kacie',
-    value: 'Keefe'
+    label: 'Slurms',
+    value: 'mckenzie'
   }
-];
-
-const DATALIST_OPTIONS = [
-  'Avon',
-  'Distributed',
-  'Secured',
-  'index',
-  'Administrator'
 ];
 
 stories.add(STORY_NAME, () => {
@@ -42,6 +34,10 @@ stories.add(STORY_NAME, () => {
 
   function handleOnKeyDown (event) {
     action('select :: onchange')(event);
+  }
+
+  function handleOnSave (event) {
+    action('dateTime :: onsave')(event);
   }
 
   return (
@@ -67,6 +63,13 @@ stories.add(STORY_NAME, () => {
           onChange={handleSelectOnChange}
         />
         <FormInput
+          id="default-select"
+          label="Default Multi-Select"
+          type="multiselect"
+          options={SELECT_OPTIONS}
+          onChange={handleSelectOnChange}
+        />
+        <FormInput
           id="default-textarea"
           label="Default Textarea"
           type="textarea"
@@ -83,9 +86,16 @@ stories.add(STORY_NAME, () => {
           utc={true}
         />
         <FormInput
+          id="default-datetime-showactions"
+          label="Default Datetime Show Actions"
+          type="datetime"
+          extraActions={true}
+          onSave={handleOnSave}
+        />
+        <FormInput
           id="default-datalist"
           label="Default Datalist"
-          dataList={DATALIST_OPTIONS}
+          dataList={['Fry', 'Leela', 'Zoidberg', 'Bender']}
         />
       </BaseForm>
     </Story>

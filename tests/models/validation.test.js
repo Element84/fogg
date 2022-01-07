@@ -1,5 +1,3 @@
-import faker from 'faker';
-
 import { Validation } from '../../models';
 import { regexByFieldName } from 'lib/input';
 
@@ -42,20 +40,18 @@ describe('Validation', () => {
     }
   };
 
-  const email = faker.internet.email();
-
   const validFields = {
     firstName: {
-      value: faker.name.firstName()
+      value: 'Gustavo'
     },
     lastName: {
-      value: 'Fiver'
+      value: 'Fring'
     },
     email: {
-      value: email
+      value: 'gus.bus@fring.com'
     },
     confirmEmail: {
-      value: email
+      value: 'gus.bus@fring.com'
     },
     password: {
       value: 'coolbeans88'
@@ -84,17 +80,11 @@ describe('Validation', () => {
     const validate = new Validation(rules);
 
     it('should return true a valid input', () => {
-      expect(validate.byField('firstName', faker.name.firstName())).toEqual(
-        true
-      );
+      expect(validate.byField('firstName', 'Walter')).toEqual(true);
       expect(validate.byField('password', '')).toEqual(true);
-      expect(validate.byField('radioList', [faker.name.firstName()])).toEqual(
-        true
-      );
+      expect(validate.byField('radioList', ['white'])).toEqual(true);
       expect(validate.byField('radioList', [0])).toEqual(true);
-      expect(validate.byField('radioList', [faker.random.word(), 0])).toEqual(
-        true
-      );
+      expect(validate.byField('radioList', ['white', 0])).toEqual(true);
     });
 
     it('should return false with no input', () => {
@@ -112,21 +102,25 @@ describe('Validation', () => {
     });
 
     it('should return proper valid state for min and max length rules', () => {
-      expect(validate.byField('lastName', 'Sho')).toEqual(false);
-      expect(validate.byField('lastName', 'Shortn')).toEqual(true);
-      expect(validate.byField('lastName', 'Shortname')).toEqual(false);
+      expect(validate.byField('lastName', 'Whi')).toEqual(false);
+      expect(validate.byField('lastName', 'White')).toEqual(true);
+      expect(validate.byField('lastName', 'WalterWhite')).toEqual(false);
     });
 
     it('should return proper valid state for regex rules', () => {
-      expect(validate.byField('email', 'test@company.tech')).toEqual(true);
-      expect(validate.byField('email', 'test.test@company.tech')).toEqual(true);
-      expect(validate.byField('email', 'test@company.tech.org')).toEqual(true);
-      expect(validate.byField('email', 'test.test@company.tech.org')).toEqual(
+      expect(validate.byField('email', 'walter@greymatter.tech')).toEqual(true);
+      expect(validate.byField('email', 'walter.white@greymatter.tech')).toEqual(
         true
       );
-      expect(validate.byField('email', '@company.tech')).toEqual(false);
-      expect(validate.byField('email', 'test@')).toEqual(false);
-      expect(validate.byField('email', 'test@org')).toEqual(false);
+      expect(validate.byField('email', 'walter@greymatter.tech.org')).toEqual(
+        true
+      );
+      expect(
+        validate.byField('email', 'walter.white@greymatter.tech.org')
+      ).toEqual(true);
+      expect(validate.byField('email', '@greymatter.tech')).toEqual(false);
+      expect(validate.byField('email', 'walter@')).toEqual(false);
+      expect(validate.byField('email', 'walter@org')).toEqual(false);
     });
 
     it('should return return true if the custom isValid function is truthy', () => {
@@ -146,19 +140,26 @@ describe('Validation', () => {
 
     describe('Dependencies', () => {
       it('should validate exactMatch dependencies', () => {
-        const email = faker.internet.email();
         const fieldDependencies = [
           {
             ...rules.confirmEmail.dependencies[0],
-            value: email
+            value: 'walter.white@greymatter.tech.org'
           }
         ];
 
         expect(
-          validate.byField('confirmEmail', email, fieldDependencies)
+          validate.byField(
+            'confirmEmail',
+            'walter.white@greymatter.tech.org',
+            fieldDependencies
+          )
         ).toEqual(true);
         expect(
-          validate.byField('confirmEmail', `test${email}`, fieldDependencies)
+          validate.byField(
+            'confirmEmail',
+            'walter@greymatter.tech.org',
+            fieldDependencies
+          )
         ).toEqual(false);
       });
     });
@@ -217,7 +218,7 @@ describe('Validation', () => {
           ...validFields,
           [key]: {
             ...validFields[key],
-            value: faker.internet.email()
+            value: 'gus@fring.com'
           }
         };
 

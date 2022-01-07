@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import ClassName from '../../src/models/classname';
 
-const Story = ({ children, component, name }) => {
+const Story = ({ children, component, name, ...rest }) => {
   const className = new ClassName('story-container');
 
   const componentClass = component.replace(' ', '');
@@ -12,7 +12,7 @@ const Story = ({ children, component, name }) => {
   className.add(`Story-${componentClass}-${nameClass}`);
 
   return (
-    <div className={className.string}>
+    <div className={className.string} {...rest}>
       <h1>{component}</h1>
       <h2>{name}</h2>
 

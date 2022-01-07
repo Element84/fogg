@@ -3,8 +3,14 @@ import PropTypes from 'prop-types';
 
 import ClassName from '../../models/classname';
 import { availableValuesByColumnId } from '../../lib/table';
+import { mapOrder } from '../../lib/util';
 
 import InputButtonList from '../InputButtonList';
+
+const OPTION_ALL = {
+  label: 'All',
+  value: 'all'
+};
 
 const TableSearchFilters = ({
   options = [],
@@ -30,11 +36,30 @@ const TableSearchFilters = ({
       selectedOptions.map(({ columnId } = {}) => columnId)
     );
     const columnId = [...columnIdSet.values()][0];
+
+    // If we have an "all" option, which is most likely a radio list,
+    // we want to be able that option to be able to clear all radios and
+    // provide all values. So if we find an all option, we'll first strip
+    // it out of the options list as it's not part of the native data
+    // and uncheck all the other options
+
+    const all = selectedOptions.find(optionIsAll);
+    let options = selectedOptions.filter((option) => !optionIsAll(option));
+
+    if (all && all.isChecked) {
+      options = options.map((option) => {
+        return {
+          ...option,
+          isChecked: false
+        };
+      });
+    }
+
     if (typeof onChange === 'function') {
       onChange(
         {
           columnId,
-          selectedOptions
+          selectedOptions: options
         },
         e
       );
@@ -44,16 +69,29 @@ const TableSearchFilters = ({
   return (
     <div className={componentClass.string}>
       <ul className={componentClass.childString('menu')}>
-        {options.map(({ Header, columnId, type } = {}, index) => {
+        {options.map(({ Header, columnId, type, order } = {}, index) => {
           const values = availableValuesByColumnId(defaultTableData, columnId);
           const hasValues = Array.isArray(values) && values.length > 0;
-          const valueOptions = values.map((value) => {
+          let valueOptions = values.map((value) => {
             return {
               label: value,
               value,
               columnId
             };
           });
+
+          // If desired order array is passed, reorder based on it
+          if (order && order.length) {
+            valueOptions = mapOrder(valueOptions, order, 'label');
+          }
+
+          if (type === 'radio') {
+            valueOptions.unshift({
+              columnId,
+              ...OPTION_ALL
+            });
+          }
+
           return (
             <li
               key={`TableSearchFilter-${index}`}
@@ -86,3 +124,11 @@ TableSearchFilters.propTypes = {
 };
 
 export default TableSearchFilters;
+
+/**
+ * optionIsAll
+ */
+
+function optionIsAll ({ label, value } = {}) {
+  return label === OPTION_ALL.label && value === OPTION_ALL.value;
+}

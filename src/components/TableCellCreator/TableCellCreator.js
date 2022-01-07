@@ -14,16 +14,28 @@ import ClassName from '../../models/classname';
  * @description Creates a Cell component for the table
  */
 
-function TableCellCreator ({ rows, columns, onCellClick, onSort } = {}) {
+function TableCellCreator ({
+  rows = [],
+  columns = [],
+  rowAttributes,
+  onCellClick,
+  onCellMouseOver,
+  onCellMouseOut,
+  onCellMouseEnter,
+  onCellMouseLeave,
+  onSort
+} = {}) {
   const numberOfRows = rows.length;
   const numberOfColumns = columns.length;
 
   const Cell = ({ columnIndex, rowIndex, style }) => {
     const componentClass = new ClassName('table-cell');
 
-    const column = columns[columnIndex];
-    const row = rows[rowIndex];
-    const cell = row[columnIndex];
+    const cellId = `${rowIndex}_${columnIndex}`;
+    const column = columns[columnIndex] || {};
+    const row = rows[rowIndex] || [];
+    const cell = row[columnIndex] || {};
+    const cellStyle = { ...style };
 
     const hasSortFunction = typeof onSort === 'function';
 
@@ -42,6 +54,7 @@ function TableCellCreator ({ rows, columns, onCellClick, onSort } = {}) {
       onSort
     };
 
+    const isFullRow = typeof row.Cell === 'function';
     const isFirstRow = rowIndex === 0;
     const isFirstColumn = columnIndex === 0;
     const isLastRow = numberOfRows - 1 === rowIndex;
@@ -54,7 +67,8 @@ function TableCellCreator ({ rows, columns, onCellClick, onSort } = {}) {
     componentClass.addIf('table-row-first', isFirstRow);
     componentClass.addIf('table-column-first', isFirstColumn);
     componentClass.addIf('table-row-last', isLastRow);
-    componentClass.addIf('table-column-last', isLastColumn);
+    componentClass.addIf('table-row-full', isFullRow);
+    componentClass.addIf('table-column-last', isLastColumn || isFullRow);
     componentClass.add(`table-cell-align-${align}`);
 
     if (typeof type === 'string') {
@@ -69,23 +83,101 @@ function TableCellCreator ({ rows, columns, onCellClick, onSort } = {}) {
       columnIndex,
       rowIndex,
       value,
-      columnId
+      columnId,
+      cellId
     };
 
+    if (isFullRow) {
+      cellStyle.width = '100%';
+    }
+
+    const cellProps = {
+      'data-cell-id': cellId,
+      className: componentClass.string,
+      style: cellStyle,
+      onClick: handleOnCellClick,
+      onMouseOver: handleOnCellMouseOver,
+      onMouseOut: handleOnCellMouseOut,
+      onMouseEnter: handleOnCellMouseEnter,
+      onMouseLeave: handleOnCellMouseLeave
+    };
+
+    if (Array.isArray(rowAttributes)) {
+      rowAttributes.forEach((attr) => {
+        const attrColumnIndex = columns.findIndex(
+          ({ columnId }) => columnId === attr
+        );
+        if (attrColumnIndex < 0) return;
+        const { columnId: attrColumnId } = columns[attrColumnIndex];
+        const { valueOrig } = row[attrColumnIndex];
+        cellProps[`data-cell-${attrColumnId.toLowerCase()}`] = valueOrig;
+      });
+    }
+
+    /**
+     * handleOnCellClick
+     */
+
     function handleOnCellClick (e) {
+      e.persist();
       if (typeof onCellClick === 'function') {
         onCellClick(cellArgs, e);
       }
     }
 
+    /**
+     * handleOnCellMouseOver
+     */
+
+    function handleOnCellMouseOver (e) {
+      if (typeof onCellMouseOver === 'function') {
+        e.persist();
+        onCellMouseOver(cellArgs, e);
+      }
+    }
+
+    /**
+     * handleOnCellMouseOut
+     */
+
+    function handleOnCellMouseOut (e) {
+      if (typeof onCellMouseOut === 'function') {
+        e.persist();
+        onCellMouseOut(cellArgs, e);
+      }
+    }
+
+    /**
+     * handleOnCellMouseEnter
+     */
+
+    function handleOnCellMouseEnter (e) {
+      if (typeof onCellMouseEnter === 'function') {
+        e.persist();
+        onCellMouseEnter(cellArgs, e);
+      }
+    }
+
+    /**
+     * handleOnCellMouseLeave
+     */
+
+    function handleOnCellMouseLeave (e) {
+      if (typeof onCellMouseLeave === 'function') {
+        e.persist();
+        onCellMouseLeave(cellArgs, e);
+      }
+    }
+
+    if (isFullRow && !isFirstColumn) {
+      return null;
+    }
+
     return (
-      <div
-        className={componentClass.string}
-        style={style}
-        onClick={handleOnCellClick}
-      >
+      <div {...cellProps}>
         {isHeader && <TableHeaderCell cell={cellArgs} sort={sortOptions} />}
-        {!isHeader && <TableCell cell={cellArgs} />}
+        {!isHeader && !isFullRow && <TableCell cell={cellArgs} />}
+        {!isHeader && isFullRow && <row.Cell />}
       </div>
     );
   };

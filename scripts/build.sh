@@ -5,13 +5,13 @@ rm -rf packages/website/public packages/website/.cache;
 rm -rf packages/earth-search/public packages/earth-search/.cache;
 
 cd packages/website;
-yarn install;
-yarn build;
+npm install;
+npm run build;
 cd ../../;
 
 cd packages/earth-search;
-yarn install;
-yarn build;
+npm install;
+npm run build;
 cd ../../
 
 mv ./packages/website/public ./;
