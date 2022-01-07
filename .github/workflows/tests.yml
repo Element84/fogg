@@ -16,7 +16,8 @@ jobs:
     - name: Uses Node.js 14
       uses: actions/setup-node@v1
       with:
-        node-version: 12
+        node-version: 14
     - run: npm install
     - run: npm run build
+    - run: npm run jest -- -u
     - run: npm run test
