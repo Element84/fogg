@@ -1,15 +1,9 @@
 import React from 'react';
 
-import Layout from '../components/Layout';
-
-import '../assets/stylesheets/theme.scss';
+import Website from '../../packages/website/src/pages/index';
 
 const IndexPage = () => (
-  <Layout>
-    <main>
-      <h1>Welcome to the Space Jam</h1>
-    </main>
-  </Layout>
+  <Website />
 );
 
 export default IndexPage;

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'gatsby';
 
-import Container from 'components/Container';
-import LogoFull from 'components/LogoFull';
+import Container from './Container';
+import LogoFull from './LogoFull';
 
 const Header = () => {
   return (
