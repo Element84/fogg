@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 
-import 'assets/stylesheets/application.scss';
+import '../assets/stylesheets/application.scss';
 
-import Header from 'components/Header';
-import Footer from 'components/Footer';
+import Header from './Header';
+import Footer from './Footer';
 
 const Layout = ({ children, header = true, pageName }) => {
   let className = 'layout';

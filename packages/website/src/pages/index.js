@@ -2,11 +2,11 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { FiGithub } from 'react-icons/fi';
 
-import Layout from 'components/Layout';
-import Container from 'components/Container';
-import Button from 'components/Button';
+import Layout from '../components/Layout';
+import Container from '../components/Container';
+import Button from '../components/Button';
 
-import imgMapSearch from 'assets/images/map-search.png';
+import imgMapSearch from '../assets/images/map-search.png';
 
 const IndexPage = () => {
   return (

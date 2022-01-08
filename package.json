@@ -107,6 +107,7 @@
     "build-storybook": "build-storybook",
     "clean": "gatsby clean",
     "develop": "npm run clean && concurrently --names 'STORYBOOK' -c 'bgMagenta.bold' 'npm run storybook'",
+    "website": "gatsby develop",
     "format": "npm run format-js && npm run format-css && echo '> Finished formatting ✅'",
     "format-css": "npm run lint-css --fix",
     "format-js": "prettier-eslint --eslint-config-path ./config/eslint.config.js --trailing-comma es5 --single-quote --write $PWD'/**/*.js'",
