@@ -1,18 +1,15 @@
 import React from 'react';
 
-import { useSiteMetadata } from 'hooks';
-
-import Container from 'components/Container';
+import Container from './Container';
 
 const Footer = () => {
-  const { companyName, companyUrl } = useSiteMetadata();
 
   return (
     <footer>
       <Container>
         <p>
           <span>
-            From <a href={companyUrl}>{companyName}</a>
+            From <a href='https://element84.com'>Element 84, Inc.</a>
           </span>
           <span>&copy; {new Date().getFullYear()}</span>
         </p>
