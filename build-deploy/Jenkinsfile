@@ -82,7 +82,7 @@ pipeline {
           updateCommitStatus('running')
 
           echo "Installing..."
-          rtNpmInstall (
+          rtNpmCi (
               path: "$WORKSPACE",
               resolverId: 'npm-resolver',
               args: '--audit --loglevel warn'
