@@ -82,7 +82,6 @@ stories.add(STORY_NAME, () => {
             children: subList
           }
         ]}
-        subListIcon={rocketMarker}
       />
     </Story>
   );
