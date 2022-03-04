@@ -33,15 +33,13 @@
     border: solid 2px $color-blue;
     box-shadow: 0 0 7px 1px rgba($color-blue, .6);
   }
+}
 
-  // Prevent number inputs from showing increment UI
-
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
+.form-input-field[type="number"] {
+  padding-right: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: 2.4;
 }
 
 
