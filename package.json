@@ -130,15 +130,12 @@
     }
   },
   "lint-staged": {
-    "**/*.js": [
-      "npm run format-js",
-      "npm run lint-js",
-      "git add"
-    ],
     "**/*.scss": [
-      "npm run format-css",
-      "npm run lint-css",
-      "git add"
+      "stylelint --config ./config/stylelint.config.js"
+    ],
+    "**/*.js": [
+      "eslint -c ./config/eslint.config.js",
+      "jest --bail --findRelatedTests --config ./config/jest.config.js --coverage=false"
     ]
   },
   "repository": {
