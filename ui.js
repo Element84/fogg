@@ -1,4 +1,5 @@
 export { default as Atlas } from './src/components/Lens';
+export { default as Badge } from './src/components/Badge';
 export { default as Button } from './src/components/Button';
 export { default as ChildToggle } from './src/components/ChildToggle';
 export { default as DataTable } from './src/components/DataTable';
