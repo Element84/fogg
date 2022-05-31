@@ -24,7 +24,6 @@ const SearchFiltersList = ({
 
   if (type === 'radiolist') {
     inputType = 'radio';
-    filtersList.push(ALL_VALUES_ITEM);
   } else if (type === 'checklist') {
     inputType = 'checkbox';
   }
@@ -35,31 +34,34 @@ const SearchFiltersList = ({
     }
   }
 
-  Array.isArray(filtersList) && filtersList.sort();
+  // sort the array before pushing the all values item to the front
+  if (Array.isArray(filtersList)) {
+    filtersList.sort();
+    filtersList.unshift(ALL_VALUES_ITEM);
+  }
 
   return (
     <>
       {type === 'checklist'
         ? (
-            <div className="search-filters-available-header">
-              {label && (
-                <strong className="search-filters-available-label">{label}</strong>
-              )}
-              <Button
-                disabled={noActiveValues}
-                onClick={onClearChecklist}
-                type="text"
-                className="button-icon-before"
-                name={id}
-              ><FaTimes className="icon-times" />Clear</Button>
-            </div>
-          )
+          <div className="search-filters-available-header">
+            {label && (
+              <strong className="search-filters-available-label">{label}</strong>
+            )}
+            <Button
+              disabled={noActiveValues}
+              onClick={onClearChecklist}
+              type="text"
+              className="button-icon-before"
+              name={id}
+            ><FaTimes className="icon-times" />Clear</Button>
+          </div>
+        )
         : (
           label && (
             <strong className="search-filters-available-label">{label}</strong>
           ))
       }
-      
 
       {Array.isArray(filtersList) && (
         <ul className="search-filters-available-list">
