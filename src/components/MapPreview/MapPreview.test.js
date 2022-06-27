@@ -35,7 +35,7 @@ describe('MapPreview', () => {
       const mapPreviewCoordinates = mapPreview.find('.map-preview-coordinates');
       const mapPreviewText = mapPreviewCoordinates.text();
       expect(mapPreviewText).toEqual(
-        `Coordinates (Latitude & Longtitude): ${ALEXANDRIA.lat}, ${ALEXANDRIA.lng}`
+        `Coordinates (Latitude & Longitude): ${ALEXANDRIA.lat}, ${ALEXANDRIA.lng}`
       );
     });
   });
