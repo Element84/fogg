@@ -206,7 +206,7 @@ const MapPreview = ({
           </p>
           <div className="map-preview-coordinates">
             <p>
-              <strong>Coordinates (Latitude &amp; Longtitude):</strong>
+              <strong>Coordinates (Latitude &amp; Longitude):</strong>
               {aoiType === 'Point' && (
                 <>
                   {/* Add an extra space to prevent a single coordinate from bumping against */}{' '}
