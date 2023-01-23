@@ -23,13 +23,14 @@ const IndexPage = () => {
               Fogg is an open-source, React-based component library that makes building map interfaces easy, consistent, and powerful.
             </p>
             <p className="home-hero-actions">
+              {/* TO-DO: Fix documentation on deploy
               <Button
                 to="http://fogg.element84.com/docs"
                 type="icon-before"
                 external={true}
               >
                 Documentation
-              </Button>
+              </Button> */}
               <Button
                 to="https://github.com/Element84/fogg"
                 type={['icon-before', 'secondary']}

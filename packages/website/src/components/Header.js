@@ -10,9 +10,10 @@ const Header = () => {
       <Container>
         <p><LogoFull /></p>
         <ul>
+          {/* TO-DO: Fix documentation on deploy
           <li>
             <Link to="http://fogg.element84.com/docs">Getting Started</Link>
-          </li>
+          </li> */}
           <li>
             <Link to="https://github.com/Element84/fogg">View Source on Github</Link>
           </li>
