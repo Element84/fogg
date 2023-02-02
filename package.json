@@ -50,7 +50,7 @@
     "uuid": "^8.3.0"
   },
   "peerDependencies": {
-    "gatsby": "^2.24.33",
+    "gatsby": "^5.5.0",
     "leaflet": "1.6.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
@@ -78,7 +78,7 @@
     "eslint-plugin-react": "^7.20.5",
     "eslint-plugin-react-hooks": "^4.0.8",
     "eslint-plugin-standard": "^4.0.1",
-    "gatsby": "^2.24.33",
+    "gatsby": "^5.5.0",
     "husky": "^4.2.5",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^25.5.4",
