@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ReactDatetime from 'react-datetime';
-import { FaCalendarAlt, FaTimesCircle, FaSave } from 'react-icons/fa';
+import { FaCalendarAlt, FaTimesCircle } from 'react-icons/fa';
 
 import { useInput } from '../../hooks';
 
@@ -18,7 +18,8 @@ const Datetime = ({
   utc = false,
   disableFrom,
   showClear = false,
-  extraActions = false
+  extraActions = false,
+  closeOnSelect = false
 }) => {
   const { disabled } = props;
 
@@ -47,8 +48,31 @@ const Datetime = ({
 
   const { name } = useInput({ props });
 
+  // Help keep track of cursor while manually editing dates:
+  // https://github.com/arqex/react-datetime/issues/755
+
+  const inputElement = useRef(null);
+  const [cursorPosition, setCursorPosition] = useState(0);
+
+  function handleInput () {
+    setCursorPosition(inputElement.current?.selectionStart || 0);
+  }
+
+  useEffect(() => {
+    inputElement.current?.setSelectionRange(cursorPosition, cursorPosition);
+  },[date, cursorPosition]);
+
+  /* 
+   * Datepicker change handler/callback for date changes
+   * {string} param is a Moment date object if valid date is input, 
+   * If date is NOT valid, the input string is passed
+  */
   function handleChange (moment) {
-    const value = moment && moment.format('x');
+    let value;
+
+    if (moment && moment.format) {
+      value = moment.format('x');
+    }
 
     setDate(moment);
 
@@ -59,7 +83,7 @@ const Datetime = ({
       }
     };
 
-    if (typeof onChange === 'function') {
+    if (typeof onChange === 'function' && value) {
       onChange(virtualEvent);
     }
 
@@ -180,6 +204,7 @@ const Datetime = ({
           className={`datetime ${className} ${extraActions ? "extra" : ""}`}
           props={{
             ...props,
+            ...defaultProps,
             autoComplete: 'off'
           }}
           {...allProps}
@@ -212,8 +237,13 @@ const Datetime = ({
           value={date}
           renderInput={renderInput}
           onChange={handleChange}
+          inputProps={{
+            onInput: handleInput,
+            ref: inputElement,
+          }}
           isValidDate={isValidDate}
           utc={utc}
+          closeOnSelect={closeOnSelect}
         />
       )}
       {extraActions && (
@@ -222,9 +252,14 @@ const Datetime = ({
           renderInput={renderInput}
           onChange={handleChange}
           isValidDate={isValidDate}
+          inputProps={{
+            onInput: handleInput,
+            ref: inputElement,
+          }}
           utc={utc}
           closeOnClickOutside={false}
           closeOnTab={false}
+          closeOnSelect={closeOnSelect}
           ref={ref}
         />
       )}

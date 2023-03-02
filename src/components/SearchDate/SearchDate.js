@@ -16,6 +16,7 @@ const SearchDate = ({
   defaultIsOpen = false,
   defaultDate = {},
   allowFutureDate,
+  allowStartAfterEndDate,
   utc = false
 }) => {
   const [state, updateState] = useState({
@@ -199,6 +200,7 @@ const SearchDate = ({
             onClear={handleDateClear}
             defaultDate={defaultDate}
             allowFutureDate={allowFutureDate}
+            allowStartAfterEndDate={allowStartAfterEndDate}
             utc={utc}
           />
         </div>
@@ -218,6 +220,7 @@ SearchDate.propTypes = {
   defaultDate: PropTypes.object,
   defaultIsOpen: PropTypes.bool,
   allowFutureDate: PropTypes.bool,
+  allowStartAfterEndDate: PropTypes.bool,
   utc: PropTypes.bool
 };
 

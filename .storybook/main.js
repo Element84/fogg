@@ -1,10 +1,15 @@
 const path = require('path');
 
 module.exports = {
+  core: {
+    builder: "webpack5",
+  },
+  stories: ['../src/**/*.stories.@(js|mdx)'],
   addons: [
     '@storybook/addon-actions',
     '@storybook/addon-storysource',
-    '@storybook/addon-links'
+    '@storybook/addon-links',
+    "@storybook/addon-essentials"
   ],
   webpackFinal: async config => {
 
@@ -41,7 +46,7 @@ module.exports = {
 
     config.module.rules.push({
       test: /\.scss$/,
-      loaders: [
+      use: [
         "style-loader",
         "css-loader",
         "sass-loader",

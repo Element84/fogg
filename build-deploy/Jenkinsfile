@@ -3,7 +3,7 @@ pipeline {
   agent {
     docker {
       label 'SpaceJam'
-      image '942037308728.dkr.ecr.us-west-2.amazonaws.com/spacejam-builds:latest'
+      image '942037308728.dkr.ecr.us-west-2.amazonaws.com/spacejam-builds-node14:latest'
       args '-e npm_config_cache=/npm_cache -v /opt/jenkins/cache:/npm_cache'
     }
   }
@@ -41,7 +41,7 @@ pipeline {
                     |git config user.name "Jenkins"
                     |GIT_COMMIT_MESSAGE=`git log -n 1 --pretty=%s $GIT_COMMIT`
                     |if [[ "\$GIT_COMMIT_MESSAGE" == "Merge branch "* ]]; then
-                    |  npm version 0.2.$BUILD_NUMBER
+                    |  npm version 0.4.$BUILD_NUMBER
                     |  ssh -o "StrictHostKeyChecking=no" -T git@repo.element84.com
                     |  git config push.default current
                     |  git push
@@ -54,6 +54,14 @@ pipeline {
     stage('Prepare'){
 
       steps {
+        // Set node 14.18
+        sh '''#!/bin/bash
+            export NVM_DIR=~jenkins/.nvm
+            . $NVM_DIR/nvm.sh
+            nvm install 14.18.2 ; nvm use 14.18.2
+            node -v
+        '''
+
         echo sh(returnStdout: true, script: 'env')
 
         updateCommitStatus('pending')
@@ -101,17 +109,22 @@ pipeline {
 
       steps {
 
-        // The actual build...
-
         rtNpmResolver (
             id: 'npm-resolver',
             serverId: 'artifactory',
             repo: 'space-jam-virtual'
         )
 
-        sh 'npm run build'
-        sh 'mkdir -p artifacts'
-        sh 'tar --exclude="./artifacts" -czf artifacts/dashboard.tgz public'
+        // Set node 14.18, then build
+        sh '''#!/bin/bash
+            export NVM_DIR=~jenkins/.nvm
+            . $NVM_DIR/nvm.sh
+            nvm install 14.18.2 ; nvm use 14.18.2
+            node -v
+            npm run build
+            mkdir -p artifacts
+            tar --exclude="./artifacts" -czf artifacts/dashboard.tgz public
+        '''
         archiveArtifacts artifacts: 'artifacts/dashboard.tgz', fingerprint: true
 
         rtPublishBuildInfo (
@@ -124,6 +137,22 @@ pipeline {
         // Under same conditions as versioning - we publish a new build
         when {
             branch 'develop'
+        }
+        steps {
+            rtNpmPublish (
+                path: "$WORKSPACE",
+                deployerId: 'npm-deployer'
+            )
+            rtPublishBuildInfo (
+                serverId: 'artifactory'
+            )
+        }
+    }
+
+    stage('Publish v4') {
+        // Under same conditions as versioning - we publish a new build
+        when {
+            branch 'v4'
         }
         steps {
             rtNpmPublish (

@@ -48,6 +48,13 @@ const Map = (props) => {
     mapClassName = `${mapClassName} map-hide-layers-control`;
   }
 
+  // Reset map size on mount to ensure it fills parent container
+  useEffect(()=>{
+    const leafletElement = currentLeafletRef(mapRef);
+    if (!leafletElement) return;
+    leafletElement.invalidateSize(true);
+  },[]);
+
   useEffect(() => {
     if (!mapRef) return;
 
@@ -221,7 +228,7 @@ Map.propTypes = {
   hideNativeLayers: PropTypes.bool,
   useMapEffect: PropTypes.func,
   activeDateRange: PropTypes.shape({}),
-  fitGeoJson: PropTypes.object
+  fitGeoJson: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 };
 
 const MapWithRefs = React.forwardRef(function map (props, ref) {

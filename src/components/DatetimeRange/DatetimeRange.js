@@ -7,7 +7,7 @@ import Button from '../Button';
 
 const emptyDate = {
   start: null,
-  end: Datetime.moment.utc().endOf('day') // Default end day time to 11:59 pm
+  end: new Date(Datetime.moment.utc().endOf('day')).getTime() // Default end day time to 11:59 pm
 };
 
 const DatetimeRange = ({
@@ -17,7 +17,8 @@ const DatetimeRange = ({
   defaultDate,
   allowPastDate = true,
   allowFutureDate = true,
-  utc = false
+  utc = false,
+  allowStartAfterEndDate = false
 }) => {
   const initialDate = { ...emptyDate, ...defaultDate };
 
@@ -54,6 +55,24 @@ const DatetimeRange = ({
     if (!allowFutureDate) {
       return dateIsBeforeToday;
     }
+  }
+
+  function isValidDateStart (currentDate) {
+    const yesterday = Datetime.moment().subtract(1, 'day');
+    const today = Datetime.moment();
+    const dateIsAfterYesterday = currentDate.isAfter(yesterday);
+    const dateIsBeforeToday = currentDate.isBefore(today);
+    if (!allowPastDate) {
+      return dateIsAfterYesterday;
+    }
+    if (!allowFutureDate && allowStartAfterEndDate) {
+      return dateIsBeforeToday;
+    }
+    if (!allowStartAfterEndDate) {
+      return (currentDate && currentDate < dateTemp.end)
+    }
+    // Return true by default and allow date selection
+    return true;
   }
 
   /**
@@ -160,7 +179,7 @@ const DatetimeRange = ({
           input={false}
           onChange={handleStartChange}
           value={dateTemp.start}
-          isValidDate={isValidDate}
+          isValidDate={isValidDateStart}
           utc={utc}
         />
       </div>

@@ -49,4 +49,5 @@ export { default as TableSearchFilters } from './src/components/TableSearchFilte
 export { default as TaskAction } from './src/components/TaskAction';
 export { default as TaskStatus } from './src/components/TaskStatus';
 export { default as Textarea } from './src/components/Textarea';
+export { default as ToggleButtonGroup } from './src/components/ToggleButtonGroup';
 export { default as WonderLink } from './src/components/WonderLink';

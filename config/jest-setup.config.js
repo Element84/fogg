@@ -1,5 +1,6 @@
 import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+// React 17 specific enzyme adapter
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import registerRequireContextHook from 'babel-plugin-require-context-hook/register';
 
 configure({

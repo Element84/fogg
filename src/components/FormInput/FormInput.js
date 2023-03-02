@@ -25,7 +25,8 @@ const FormInput = (props) => {
     onKeyDown,
     onSave,
     showClear,
-    extraActions
+    extraActions,
+    closeOnSelectDate
   } = props;
   const { id, type, label, isInvalid, inputProps } = useInput({ props });
 
@@ -89,6 +90,7 @@ const FormInput = (props) => {
         disableFrom={disableFrom}
         showClear={showClear}
         extraActions={extraActions}
+        closeOnSelect={closeOnSelectDate}
       />
     );
   } else {
@@ -147,7 +149,8 @@ FormInput.propTypes = {
   disableFrom: PropTypes.object,
   validationMessage: PropTypes.string,
   showClear: PropTypes.bool,
-  extraActions: PropTypes.bool
+  extraActions: PropTypes.bool,
+  closeOnSelectDate: PropTypes.bool
 };
 
 export default FormInput;

@@ -6,11 +6,12 @@ import { FaTimes } from 'react-icons/fa';
 import InputButton from '../InputButton';
 import Button from '../Button';
 
-const ALL_VALUES_ITEM = 'All Values';
+export const ALL_VALUES_ITEM = 'All Values';
 
 const SearchFiltersList = ({
   id,
   label,
+  subLabel,
   list = [],
   onChange,
   onClearChecklist,
@@ -19,8 +20,9 @@ const SearchFiltersList = ({
 }) => {
   let inputType;
   const filtersList = [...list];
-  const noActiveValues =
-    typeof activeValues === 'undefined' || activeValues.length === 0;
+  const noActiveValues = typeof activeValues === 'undefined' ||
+    activeValues.length === 0 ||
+    activeValues.includes(ALL_VALUES_ITEM);
 
   if (type === 'radiolist') {
     inputType = 'radio';
@@ -45,9 +47,15 @@ const SearchFiltersList = ({
       {type === 'checklist'
         ? (
           <div className="search-filters-available-header">
-            {label && (
-              <strong className="search-filters-available-label">{label}</strong>
-            )}
+          {(label || subLabel) && (
+            <div className="search-filters-available-label">
+              {label && <strong>{label}</strong>}
+              {subLabel && (
+                <div className="search-filters-available-sublabel">{subLabel}</div>
+              )}
+            </div>
+          )}
+            
             <Button
               disabled={noActiveValues}
               onClick={onClearChecklist}
@@ -58,11 +66,15 @@ const SearchFiltersList = ({
           </div>
         )
         : (
-          label && (
-            <strong className="search-filters-available-label">{label}</strong>
-          ))
-      }
-
+          (label || subLabel) && (
+            <div className="search-filters-available-label">
+              {label && <strong>{label}</strong>}
+              {subLabel && (
+                <div className="search-filters-available-sublabel">{subLabel}</div>
+              )}
+            </div>
+          )
+        )}
       {Array.isArray(filtersList) && (
         <ul className="search-filters-available-list">
           {filtersList.map((item, index) => {
@@ -99,6 +111,7 @@ const SearchFiltersList = ({
 SearchFiltersList.propTypes = {
   id: PropTypes.string,
   label: PropTypes.string,
+  subLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   list: PropTypes.array,
   onChange: PropTypes.func,
   onClearChecklist: PropTypes.func,

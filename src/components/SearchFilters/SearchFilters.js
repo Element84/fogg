@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FaCheck, FaTimes } from 'react-icons/fa';
-import { useDebouncedCallback } from 'use-debounce';
 import { findFilterById } from '../../lib/filters';
 
 import Panel from '../Panel';
@@ -10,6 +9,7 @@ import InputButton from '../InputButton';
 import Button from '../Button';
 import SearchFiltersList from '../SearchFiltersList';
 import SearchFiltersRange from '../SearchFiltersRange';
+import { ALL_VALUES_ITEM } from '../SearchFiltersList/SearchFiltersList';
 
 const SearchFilters = ({
   className,
@@ -23,11 +23,6 @@ const SearchFilters = ({
     return null;
   }
 
-  // Debounce Filter Change handler to avoid browser locking up
-  const [debouncedOnUpdateChanges] = useDebouncedCallback(
-    onUpdateChanges,
-    100
-  );
 
   /**
    * handleFilterChange
@@ -39,18 +34,29 @@ const SearchFilters = ({
     const activeFilter = findFilterById(filters, id);
     let value = target.value || target.checked;
 
+    // Unique Logic for checkbox filters 
     if (typeof value === 'string' && activeFilter.type === 'checklist') {
+      // Initial load, no filters selected yet
       if (!Array.isArray(activeFilter.value)) {
         value = [value];
+      } else if (target.value === ALL_VALUES_ITEM && !activeFilter.value.includes(ALL_VALUES_ITEM)) {
+        // If selecting "All Values", deselect all active filters
+        value = [target.value]
       } else if (activeFilter.value.includes(value)) {
-        value = activeFilter.value.filter((val) => val !== value);
+        // Remove filter on click if already checked
+        value = activeFilter.value.filter(val => val !== value);
       } else {
+        // Default behavior, add item to current filters
         value = activeFilter.value.concat([value]);
+        // De-select "All Values" if selecting anything other than it
+        if (activeFilter.value.includes(ALL_VALUES_ITEM) && target.value !== ALL_VALUES_ITEM) {
+          value = value.filter(val => val !== ALL_VALUES_ITEM);
+        }
       }
     }
 
-    if (typeof debouncedOnUpdateChanges === 'function') {
-      debouncedOnUpdateChanges([
+    if (typeof onUpdateChanges === 'function') {
+      onUpdateChanges([
         {
           id,
           value
@@ -103,6 +109,7 @@ const SearchFilters = ({
             {filters.map((filter = {}, index) => {
               const {
                 label,
+                subLabel,
                 id,
                 type = 'default',
                 value,
@@ -117,6 +124,7 @@ const SearchFilters = ({
                         <SearchFiltersList
                           id={id}
                           label={label}
+                          subLabel={subLabel}
                           list={list}
                           activeValues={value || []}
                           type={type}
@@ -133,6 +141,7 @@ const SearchFilters = ({
                         <SearchFiltersRange
                           id={id}
                           label={label}
+                          subLabel={subLabel}
                           value={value || defaultValue}
                           range={range}
                           onChange={handleFilterChange}
