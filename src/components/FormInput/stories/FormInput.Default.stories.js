@@ -86,6 +86,12 @@ stories.add(STORY_NAME, () => {
           utc={true}
         />
         <FormInput
+          id="default-datetime-auto-close"
+          label="Auto-Close on Date Select"
+          type="datetime"
+          closeOnSelectDate={true}
+        />
+        <FormInput
           id="default-datetime-showactions"
           label="Default Datetime Show Actions"
           type="datetime"

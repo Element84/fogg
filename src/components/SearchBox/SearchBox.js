@@ -21,7 +21,9 @@ const SearchBox = ({
   searchDropOption = false,
   searchDropOptions = [],
   ignoreDatetime = false,
-  onDateChange
+  onDateChange,
+  allowStartAfterEndDate,
+  allowFutureDate
 }) => {
   const { value: query, updateValue: setQuery } = useStoredValue(searchInput);
   const [dateIsOpen, setDateIsOpen] = useState(false);
@@ -142,6 +144,8 @@ const SearchBox = ({
             defaultDate={date}
             utc={utc}
             classPrefix={'search-box-controls'}
+            allowStartAfterEndDate={allowStartAfterEndDate}
+            allowFutureDate={allowFutureDate}
           />
         )}
         <div className="search-box-controls-search">
@@ -167,7 +171,9 @@ SearchBox.propTypes = {
   utc: PropTypes.bool,
   searchDropOption: PropTypes.bool,
   searchDropOptions: PropTypes.array,
-  ignoreDatetime: PropTypes.bool
+  ignoreDatetime: PropTypes.bool,
+  allowFutureDate: PropTypes.bool,
+  allowStartAfterEndDate: PropTypes.bool
 };
 
 export default SearchBox;

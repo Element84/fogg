@@ -6,7 +6,17 @@ module.exports = {
   },
   pathPrefix: '/fogg',
   plugins: [
-    'gatsby-plugin-sass',
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        cssLoaderOptions: {
+          esModule: false,
+          modules: {
+            namedExport: false,
+          },
+        },
+      },
+    },
     // This should be a temporary fix in the event gatsby-plugin-react-leaflet removes
     // setting react-leaflet as a null loader. See gatsby-node.js
     // 'gatsby-plugin-react-leaflet',

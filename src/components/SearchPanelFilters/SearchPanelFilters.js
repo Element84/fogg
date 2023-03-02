@@ -7,6 +7,7 @@ import { sortByKey } from '../../lib/util';
 
 import Panel from '../Panel';
 import PanelActions from '../PanelActions';
+import { ALL_VALUES_ITEM } from '../SearchFiltersList/SearchFiltersList';
 
 const SearchPanelFilters = ({
   filters = {},
@@ -83,12 +84,15 @@ const SearchPanelFilters = ({
       ...activeFilter
     };
 
-    const { label, value: filterValue } = filter;
+    const { label, value: filterValue, type } = filter;
 
     let value = filterValue;
 
     if (Array.isArray(value)) {
-      value = value.join(', ');
+      // Display comma list of active filters, unless "All Values" is selected
+      if (type === "checklist" && value.includes(ALL_VALUES_ITEM)) {
+        return undefined;
+      } else value = value.join(', ');
     } else if (typeof value === 'object' && value.constructor === Object) {
       value = Object.keys(value)
         .map((key) => {
@@ -146,16 +150,18 @@ const SearchPanelFilters = ({
       {hasActiveFilters(panelFilters) && (
         <div className="table-grid search-panel-filters-list">
           {panelFiltersMapped.map((filter, i)=>{
-            return(
-              <div className="search-panel-filters-list-item" key={i}>
-                <div className="table-cell table-cell-column-label table-row-first table-column-first table-cell-align-left column-label">
-                  <span>{filter.label}</span>
+            if (filter) {
+              return(
+                <div className="search-panel-filters-list-item" key={i}>
+                  <div className="table-cell table-cell-column-label table-row-first table-column-first table-cell-align-left column-label">
+                    <span>{filter.label}</span>
+                  </div>
+                  <div className="table-cell table-row-first table-column-first table-cell-align-right column-value">
+                    <span>{filter.value}</span>
+                  </div>
                 </div>
-                <div className="table-cell table-row-first table-column-first table-cell-align-right column-value">
-                  <span>{filter.value}</span>
-                </div>
-              </div>
-            )
+              )
+            }
           })}
         </div>
 

@@ -40,7 +40,10 @@ const INPUT_PROPS_WHITELIST = [
   'searchable',
   'type',
   'value',
-  'isMulti'
+  'isMulti',
+  'inputProps',
+  'ref',
+  'selectionStart'
 ];
 
 const INPUT_LIST_TYPES = ['radio', 'checkbox'];
@@ -72,7 +75,8 @@ const useInput = ({ inputRef = {}, props = {} }) => {
   // Missing name prevents form functionality from working so warn about it
 
   if (!inputProps.name && !!isField) {
-    logger.warn(`Missing input name: ${JSON.stringify(inputProps)}`);
+    // ref causes circular reference, causing error from JSON.stringify
+    logger.warn(`Missing input name: ${!inputProps.ref ? JSON.stringify(inputProps) : ''}`);
   }
 
   // Check if our input is invalid from a form level
