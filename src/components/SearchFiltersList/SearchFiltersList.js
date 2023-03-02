@@ -8,11 +8,28 @@ import Button from '../Button';
 
 export const ALL_VALUES_ITEM = 'All Values';
 
+/**
+ * @template {string[]} FilterItemValues
+ * @param {object} param0
+ * @param {string} param0.id
+ * @param {string} [param0.label]
+ * @param {string} [param0.subLabel]
+ * @param {FilterItemValues} [param0.list=[]] List of input values, e.g. ['value1', 'value2', ...]
+ * @param {{[x in FilterItemValues]: string}} [param0.displayList={}] Dictionary style object for adding friendly display names.
+ *                                               Keys should match a value in param0.list, and the value is the friendly display name,
+ *                                               e.g. { value1: 'Display Value 1', value2: 'Display Value 2', ... }
+ * @param {Function} [param0.onChange]
+ * @param {Function} [param0.onClearChecklist]
+ * @param {StringValue[]} [activeValues=[]]
+ * @param {'checklist'|'radiolist'} [param0.type='checklist']
+ * @returns {React.Component}
+ */
 const SearchFiltersList = ({
   id,
   label,
   subLabel,
   list = [],
+  displayList = {},
   onChange,
   onClearChecklist,
   activeValues = [],
@@ -20,7 +37,8 @@ const SearchFiltersList = ({
 }) => {
   let inputType;
   const filtersList = [...list];
-  const noActiveValues = typeof activeValues === 'undefined' ||
+  const noActiveValues =
+    typeof activeValues === 'undefined' ||
     activeValues.length === 0 ||
     activeValues.includes(ALL_VALUES_ITEM);
 
@@ -46,44 +64,51 @@ const SearchFiltersList = ({
     <>
       {type === 'checklist'
         ? (
-          <div className="search-filters-available-header">
+        <div className="search-filters-available-header">
           {(label || subLabel) && (
             <div className="search-filters-available-label">
               {label && <strong>{label}</strong>}
               {subLabel && (
-                <div className="search-filters-available-sublabel">{subLabel}</div>
+                <div className="search-filters-available-sublabel">
+                  {subLabel}
+                </div>
               )}
             </div>
           )}
-            
-            <Button
-              disabled={noActiveValues}
-              onClick={onClearChecklist}
-              type="text"
-              className="button-icon-before"
-              name={id}
-            ><FaTimes className="icon-times" />Clear</Button>
-          </div>
-        )
-        : (
-          (label || subLabel) && (
-            <div className="search-filters-available-label">
-              {label && <strong>{label}</strong>}
-              {subLabel && (
-                <div className="search-filters-available-sublabel">{subLabel}</div>
-              )}
-            </div>
+
+          <Button
+            disabled={noActiveValues}
+            onClick={onClearChecklist}
+            type="text"
+            className="button-icon-before"
+            name={id}
+          >
+            <FaTimes className="icon-times" />
+            Clear
+          </Button>
+        </div>
           )
-        )}
+        : (
+            (label || subLabel) && (
+          <div className="search-filters-available-label">
+            {label && <strong>{label}</strong>}
+            {subLabel && (
+              <div className="search-filters-available-sublabel">
+                {subLabel}
+              </div>
+            )}
+          </div>
+            )
+          )}
       {Array.isArray(filtersList) && (
         <ul className="search-filters-available-list">
-          {filtersList.map((item, index) => {
+          {filtersList.map((value, index) => {
             let isChecked = false;
-            if (Array.isArray(activeValues) && activeValues.includes(item)) {
+            if (Array.isArray(activeValues) && activeValues.includes(value)) {
               isChecked = true;
-            } else if (activeValues === item) {
+            } else if (activeValues === value) {
               isChecked = true;
-            } else if (noActiveValues && item === ALL_VALUES_ITEM) {
+            } else if (noActiveValues && value === ALL_VALUES_ITEM) {
               isChecked = true;
             }
 
@@ -92,9 +117,9 @@ const SearchFiltersList = ({
                 <InputButton
                   type={inputType}
                   name={id}
-                  label={item}
-                  id={`filter-${id}-${item}`}
-                  value={item}
+                  label={displayList[value] || value}
+                  id={`filter-${id}-${value}`}
+                  value={value}
                   onChange={handleChange}
                   isChecked={isChecked}
                   controlChecked={true}
@@ -113,6 +138,7 @@ SearchFiltersList.propTypes = {
   label: PropTypes.string,
   subLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   list: PropTypes.array,
+  displayList: PropTypes.object,
   onChange: PropTypes.func,
   onClearChecklist: PropTypes.func,
   activeValues: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),

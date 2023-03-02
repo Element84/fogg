@@ -7,7 +7,7 @@ const EMPTY_FILTERS = [];
 export default function useGeoFilters (filterSettings) {
   const { available = EMPTY_FILTERS } = filterSettings;
 
-  // Grab all the available filtesr with a defaultValue as the
+  // Grab all the available filters with a defaultValue as the
   // default active
 
   const defaultActiveFilters = available.map((filter) => {

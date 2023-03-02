@@ -24,7 +24,7 @@ const SearchPanelFilters = ({
   // happen, but there are instances where we'll an ID with 2 property names, where
   // we'll want them to be the same value, but as 1 active ID to filter on
 
-  panelFilters = dedupFiltersById(panelFilters);
+  panelFilters = dedupeFiltersById(panelFilters);
 
   // map through the filters and make sure that we're associating the full informtation
   // from an available filter to the filter itself. This should really only do anything
@@ -90,7 +90,7 @@ const SearchPanelFilters = ({
 
     if (Array.isArray(value)) {
       // Display comma list of active filters, unless "All Values" is selected
-      if (type === "checklist" && value.includes(ALL_VALUES_ITEM)) {
+      if (type === 'checklist' && value.includes(ALL_VALUES_ITEM)) {
         return undefined;
       } else value = value.join(', ');
     } else if (typeof value === 'object' && value.constructor === Object) {
@@ -110,11 +110,11 @@ const SearchPanelFilters = ({
   }
 
   /**
-   * dedupFiltersById
+   * dedupeFiltersById
    * @description Remove any excessive instance of a filter ID
    */
 
-  function dedupFiltersById (filters) {
+  function dedupeFiltersById (filters) {
     const deduped = {};
     filters.forEach((filter) => {
       if (!filter.id) return;
@@ -137,9 +137,12 @@ const SearchPanelFilters = ({
     return availableValues.filter((value) => valueIsValid(value)).length > 0;
   }
 
-  const panelFiltersMapped = panelFilters && panelFilters.filter(filterActiveFiltersNoValue)
-  .filter(({ type } = {}) => type !== 'hidden')
-  .map(mapActiveFiltersToRow);
+  const panelFiltersMapped =
+    panelFilters &&
+    panelFilters
+      .filter(filterActiveFiltersNoValue)
+      .filter(({ type } = {}) => type !== 'hidden')
+      .map(mapActiveFiltersToRow);
 
   return (
     <Panel
@@ -149,26 +152,20 @@ const SearchPanelFilters = ({
     >
       {hasActiveFilters(panelFilters) && (
         <div className="table-grid search-panel-filters-list">
-          {panelFiltersMapped.map((filter, i)=>{
-            if (filter) {
-              return(
-                <div className="search-panel-filters-list-item" key={i}>
-                  <div className="table-cell table-cell-column-label table-row-first table-column-first table-cell-align-left column-label">
-                    <span>{filter.label}</span>
-                  </div>
-                  <div className="table-cell table-row-first table-column-first table-cell-align-right column-value">
-                    <span>{filter.value}</span>
-                  </div>
-                </div>
-              )
-            }
-          })}
+          {panelFiltersMapped.map((filter, i) => (
+            <div className="search-panel-filters-list-item" key={i}>
+              <div className="table-cell table-cell-column-label table-row-first table-column-first table-cell-align-left column-label">
+                <span>{filter.label}</span>
+              </div>
+              <div className="table-cell table-row-first table-column-first table-cell-align-right column-value">
+                <span>{filter.value}</span>
+              </div>
+            </div>
+          ))}
         </div>
-
       )}
     </Panel>
   );
-
 };
 
 SearchPanelFilters.propTypes = {
