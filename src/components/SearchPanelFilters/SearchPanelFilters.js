@@ -152,7 +152,7 @@ const SearchPanelFilters = ({
     >
       {hasActiveFilters(panelFilters) && (
         <div className="table-grid search-panel-filters-list">
-          {panelFiltersMapped.map((filter, i) => (
+          {panelFiltersMapped.map((filter, i) => !!filter && (
             <div className="search-panel-filters-list-item" key={i}>
               <div className="table-cell table-cell-column-label table-row-first table-column-first table-cell-align-left column-label">
                 <span>{filter.label}</span>
