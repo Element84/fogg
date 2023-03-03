@@ -1,9 +1,16 @@
 module.exports = {
   collectCoverage: true,
 
-  collectCoverageFrom: ['src/**/*.js'],
+  collectCoverageFrom: ['src/**/*.js', '!src/**/*.stories.js'],
 
-  coveragePathIgnorePatterns: ['src/stories'],
+  coverageThreshold: {
+    global: {
+      branches: 41.6,
+      functions: 38.5,
+      lines: 48.8,
+      statements: 47.5
+    }
+  },
 
   rootDir: '../',
 

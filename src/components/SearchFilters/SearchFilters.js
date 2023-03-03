@@ -23,10 +23,9 @@ const SearchFilters = ({
     return null;
   }
 
-
   /**
    * handleFilterChange
-   * @descriptioon Triggers when a filter change is detected
+   * @description Triggers when a filter change is detected
    */
 
   function handleFilterChange ({ target = {}, ...rest } = {}) {
@@ -34,14 +33,14 @@ const SearchFilters = ({
     const activeFilter = findFilterById(filters, id);
     let value = target.value || target.checked;
 
-    // Unique Logic for checkbox filters 
+    // Unique Logic for checkbox filters
     if (typeof value === 'string' && activeFilter.type === 'checklist') {
       // Initial load, no filters selected yet
       if (!Array.isArray(activeFilter.value)) {
         value = [value];
       } else if (target.value === ALL_VALUES_ITEM && !activeFilter.value.includes(ALL_VALUES_ITEM)) {
         // If selecting "All Values", deselect all active filters
-        value = [target.value]
+        value = [target.value];
       } else if (activeFilter.value.includes(value)) {
         // Remove filter on click if already checked
         value = activeFilter.value.filter(val => val !== value);
@@ -119,13 +118,14 @@ const SearchFilters = ({
                 <li key={`SearchFilters-Available-${index}`}>
                   {(type === 'checklist' || type === 'radiolist') &&
                     (() => {
-                      const { list } = filter;
+                      const { list, displayList } = filter;
                       return (
                         <SearchFiltersList
                           id={id}
                           label={label}
                           subLabel={subLabel}
                           list={list}
+                          displayList={displayList}
                           activeValues={value || []}
                           type={type}
                           onChange={handleFilterChange}

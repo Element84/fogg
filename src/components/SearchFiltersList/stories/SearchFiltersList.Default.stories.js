@@ -61,6 +61,17 @@ const searchFilters = [
     name: 'properties/sar:polarizations',
     type: 'radiolist',
     list: ['HH', 'VV']
+  },
+  {
+    label: 'Processing Level',
+    id: 'properties/eo:processing_level',
+    type: 'checklist',
+    list: ['L1GT', 'L1TP', 'L1GS'],
+    displayList: {
+      L1GT: 'Systematic Terrain Correction L1GT',
+      L1TP: 'Standard Terrain Correction L1TP',
+      L1GS: 'Systematic Correction L1GS'
+    }
   }
 ];
 
@@ -73,7 +84,6 @@ stories.add(STORY_NAME, () => {
     action(`${STORY_COMPONENT}::onChecklistClear`)(e);
   }
 
-  
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
       {searchFilters.map((filter = {}, index) => {
@@ -82,20 +92,20 @@ stories.add(STORY_NAME, () => {
           subLabel,
           id,
           type = 'default',
-          value,
-          defaultValue
+          value
         } = filter;
         return (
           <div key={`SearchFilters-Available-${index}`}>
             {(type === 'checklist' || type === 'radiolist') &&
               (() => {
-                const { list } = filter;
+                const { list, displayList } = filter;
                 return (
                   <SearchFiltersList
                     id={id}
                     label={label}
                     subLabel={subLabel}
                     list={list}
+                    displayList={displayList}
                     activeValues={value || []}
                     type={type}
                     onChange={handleFilterChange}
@@ -104,7 +114,7 @@ stories.add(STORY_NAME, () => {
                 );
               })()}
           </div>
-          )
+        );
       })}
     </Story>
   );

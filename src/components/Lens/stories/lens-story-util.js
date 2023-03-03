@@ -34,6 +34,12 @@ export const earthSearchAvailableFilters = [
     ]
   },
   {
+    label: 'Processing Level',
+    id: 'properties/eo:processing_level',
+    type: 'checklist',
+    list: ['L1GT', 'L1TP', 'L1GS']
+  },
+  {
     label: 'Cloud Cover',
     id: 'properties/eo:cloud_cover',
     type: 'range',
@@ -46,6 +52,24 @@ export const earthSearchAvailableFilters = [
       max: 0.8
     }
   }
+];
+
+// The same filters as `earthSearchAvailableFilters` but adding displayList for the cloud cover filter
+export const earthSearchAvailableFiltersWithDisplayList = [
+  ...earthSearchAvailableFilters.map((filter) => {
+    if (filter.label === 'Processing Level') {
+      return {
+        ...filter,
+        displayList: {
+          L1GT: 'Systematic Terrain Correction L1GT',
+          L1TP: 'Standard Terrain Correction L1TP',
+          L1GS: 'Systematic Correction L1GS'
+        }
+      };
+    }
+
+    return filter;
+  })
 ];
 
 // Function that gets used to handle any async lookups
@@ -105,6 +129,10 @@ export async function handleResolveOnEarthSearch ({
             ...(value.max && {
               lte: value.max
             })
+          };
+        } else if (value instanceof Array) {
+          filterQuery[id] = {
+            in: value
           };
         } else {
           filterQuery[id] = {
