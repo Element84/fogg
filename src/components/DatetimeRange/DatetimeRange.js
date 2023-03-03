@@ -220,7 +220,8 @@ DatetimeRange.propTypes = {
   defaultDate: PropTypes.object,
   allowPastDate: PropTypes.bool,
   allowFutureDate: PropTypes.bool,
-  utc: PropTypes.bool
+  utc: PropTypes.bool,
+  allowStartAfterEndDate: PropTypes.bool
 };
 
 export default DatetimeRange;
