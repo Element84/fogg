@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Lens from '..';
+import { handleEarthSearchUseMapEffect } from './lens-story-util';
 
 const DEFAULT_CENTER = {
   lat: 0,
@@ -40,6 +41,7 @@ const LensCursorPosition = () => {
         projection="epsg3857"
         availableLayers={layers}
         availableServices={services}
+        useMapEffect={handleEarthSearchUseMapEffect}
         map="open_street_map"
         search={false}
         mapControls={mapControls}
