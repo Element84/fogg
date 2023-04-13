@@ -1,7 +1,7 @@
 {
   "name": "fogg",
   "description": "Gatsby theme for mapping!",
-  "version": "0.4.327",
+  "version": "0.4.329",
   "author": "Element 84, Inc.",
   "publishConfig": {
     "registry": "https://registry.npmjs.com/"
