@@ -77,10 +77,17 @@ export default function useTableData ({ columns = [], data = [] }) {
     if (filterType === 'search') {
       filterValue = sanitizeFilterValue(filterValue);
 
+      const charLength = filterValue ? filterValue.length : 0;
+
+      // https://fusejs.io/api/options.html
       const fuse = new Fuse(workingData, {
         findAllMatches: true,
-        threshold: 0.2,
-        keys: filterKeys
+        threshold: 0.1,
+        keys: filterKeys,
+        ignoreLocation: true,
+        location: 0,
+        distance: 100,
+        minMatchCharLength: charLength
       });
       let search;
 
