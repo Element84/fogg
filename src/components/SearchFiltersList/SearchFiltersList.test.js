@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import SearchFiltersList, { ALL_VALUES_ITEM } from './SearchFiltersList';
+import SearchFiltersList from './SearchFiltersList';
+import { ALL_VALUES_ITEM } from '../../data/search-filters';
 
 const baseFiltersList = {
   id: 'base-list',
@@ -135,6 +136,35 @@ describe('SearchFiltersList', () => {
 
       it(`component[${index}].label should be ${expectedDisplayLabel}`, () => {
         expect(inputButtonComponent.prop('label')).toBe(expectedDisplayLabel);
+      });
+    });
+  });
+
+  describe('Renders checklist with no All Values item and a Select All button', () => {
+    const filterList = {
+      ...baseFiltersList,
+      onToggleChecklist: () => {},
+      showAllValuesListItem: false
+    };
+    const searchFiltersListComponent = shallow(
+      <SearchFiltersList {...filterList} />
+    );
+    const inputButtonComponents = searchFiltersListComponent.find(
+      'InputButtonWithRefs'
+    );
+
+    it('should render the SelectAllButton', () => {
+      expect(searchFiltersListComponent.find('SelectAllButton'))
+        .toHaveLength(1);
+    });
+
+    it('should render the filter list items', () => {
+      expect(inputButtonComponents).toHaveLength(baseFiltersList.list.length);
+    });
+
+    inputButtonComponents.forEach((inputButtonComponent, index) => {
+      it(`component[${index}].value should be ${baseFiltersList.list[index]}`, () => {
+        expect(inputButtonComponent.prop('value')).toBe(baseFiltersList.list[index]);
       });
     });
   });

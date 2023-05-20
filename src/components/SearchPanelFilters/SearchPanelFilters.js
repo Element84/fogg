@@ -7,7 +7,7 @@ import { sortByKey } from '../../lib/util';
 
 import Panel from '../Panel';
 import PanelActions from '../PanelActions';
-import { ALL_VALUES_ITEM } from '../SearchFiltersList/SearchFiltersList';
+import { ALL_VALUES_ITEM } from '../../data/search-filters';
 
 const SearchPanelFilters = ({
   filters = {},

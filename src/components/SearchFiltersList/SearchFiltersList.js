@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes, FaCheckDouble, FaMinus } from 'react-icons/fa';
 
 import InputButton from '../InputButton';
 import Button from '../Button';
-
-export const ALL_VALUES_ITEM = 'All Values';
+import { ALL_VALUES_ITEM } from '../../data/search-filters';
 
 /**
  * @template {string[]} FilterItemValues
@@ -32,8 +31,11 @@ const SearchFiltersList = ({
   displayList = {},
   onChange,
   onClearChecklist,
+  onToggleChecklist,
+  toggleChecklistValue,
   activeValues = [],
-  type = 'checklist'
+  type = 'checklist',
+  showAllValuesListItem = true
 }) => {
   let inputType;
   const filtersList = [...list];
@@ -60,73 +62,102 @@ const SearchFiltersList = ({
     filtersList.unshift(ALL_VALUES_ITEM);
   }
 
+  const SelectAllButton = () => (
+    <Button
+      onClick={onToggleChecklist}
+      type="text"
+      className="button-icon-before"
+      name={id}
+    >
+      {toggleChecklistValue
+        ? (<><FaMinus /> Select None</>)
+        : (<><FaCheckDouble /> Select All</>)}
+    </Button>
+  );
+
+  const ClearButton = () => (
+    <Button
+      disabled={noActiveValues}
+      onClick={onClearChecklist}
+      type="text"
+      className="button-icon-before"
+      name={id}
+    >
+      <FaTimes className="icon-times" />
+      Clear
+    </Button>
+  );
+
   return (
     <>
       {type === 'checklist'
         ? (
-        <div className="search-filters-available-header">
-          {(label || subLabel) && (
-            <div className="search-filters-available-label">
-              {label && <strong>{label}</strong>}
-              {subLabel && (
-                <div className="search-filters-available-sublabel">
-                  {subLabel}
-                </div>
-              )}
-            </div>
-          )}
+          <div className="search-filters-available-header">
+            {(label || subLabel) && (
+              <div className="search-filters-available-label">
+                {label && <strong>{label}</strong>}
+                {subLabel && (
+                  <div className="search-filters-available-sublabel">
+                    {subLabel}
+                  </div>
+                )}
+              </div>
+            )}
 
-          <Button
-            disabled={noActiveValues}
-            onClick={onClearChecklist}
-            type="text"
-            className="button-icon-before"
-            name={id}
-          >
-            <FaTimes className="icon-times" />
-            Clear
-          </Button>
-        </div>
+            {typeof onToggleChecklist === 'function' && (
+              <SelectAllButton/>
+            )}
+            {typeof onToggleChecklist !== 'function' && typeof onClearChecklist === 'function' && (
+              <ClearButton/>
+            )}
+          </div>
           )
         : (
             (label || subLabel) && (
-          <div className="search-filters-available-label">
-            {label && <strong>{label}</strong>}
-            {subLabel && (
-              <div className="search-filters-available-sublabel">
-                {subLabel}
+              <div className="search-filters-available-label">
+                {label && <strong>{label}</strong>}
+                {subLabel && (
+                  <div className="search-filters-available-sublabel">
+                    {subLabel}
+                  </div>
+                )}
               </div>
-            )}
-          </div>
             )
           )}
       {Array.isArray(filtersList) && (
         <ul className="search-filters-available-list">
-          {filtersList.map((value, index) => {
-            let isChecked = false;
-            if (Array.isArray(activeValues) && activeValues.includes(value)) {
-              isChecked = true;
-            } else if (activeValues === value) {
-              isChecked = true;
-            } else if (noActiveValues && value === ALL_VALUES_ITEM) {
-              isChecked = true;
-            }
+          {filtersList
+            .filter((value) => {
+              if (value === ALL_VALUES_ITEM && showAllValuesListItem === false) {
+                return false;
+              }
+              return true;
+            })
+            .map((value, index) => {
+              let isChecked = false;
+              if (Array.isArray(activeValues) && activeValues.includes(value)) {
+                isChecked = true;
+              } else if (activeValues === value) {
+                isChecked = true;
+              } else if (noActiveValues && value === ALL_VALUES_ITEM) {
+                isChecked = true;
+              }
 
-            return (
-              <li key={`SearchFiltersList-Item-${index}`}>
-                <InputButton
-                  type={inputType}
-                  name={id}
-                  label={displayList[value] || value}
-                  id={`filter-${id}-${value}`}
-                  value={value}
-                  onChange={handleChange}
-                  isChecked={isChecked}
-                  controlChecked={true}
-                />
-              </li>
-            );
-          })}
+              return (
+                <li key={`SearchFiltersList-Item-${index}`}>
+                  <InputButton
+                    type={inputType}
+                    name={id}
+                    label={displayList[value] || value}
+                    id={`filter-${id}-${value}`}
+                    value={value}
+                    onChange={handleChange}
+                    isChecked={isChecked}
+                    controlChecked={true}
+                  />
+                </li>
+              );
+            })}
         </ul>
       )}
     </>
@@ -141,8 +172,11 @@ SearchFiltersList.propTypes = {
   displayList: PropTypes.object,
   onChange: PropTypes.func,
   onClearChecklist: PropTypes.func,
+  onToggleChecklist: PropTypes.func,
+  toggleChecklistValue: PropTypes.bool,
   activeValues: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  type: PropTypes.string
+  type: PropTypes.string,
+  showAllValuesListItem: PropTypes.bool
 };
 
 export default SearchFiltersList;
