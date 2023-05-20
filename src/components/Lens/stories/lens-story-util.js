@@ -72,6 +72,66 @@ export const earthSearchAvailableFiltersWithDisplayList = [
   })
 ];
 
+export const earthSearchAlternateFilters = [
+  {
+    label: 'Collection',
+    id: 'properties/collection',
+    type: 'checklist',
+    list: ['sentinel-2-l1c']
+  },
+  {
+    label: 'Sentinel Grid Square',
+    id: 'properties/sentinel:grid_square',
+    type: 'checklist',
+    list: [
+      'EG',
+      'FV',
+      'GL',
+      'KA',
+      'MD',
+      'NC',
+      'ND',
+      'PC',
+      'PD',
+      'UH',
+      'UJ',
+      'VT',
+      'VU',
+      'WT',
+      'WU'
+    ],
+    defaultValue: ['EG', 'FV', 'WT'],
+    shouldToggleItems: true,
+    showAllValuesListItem: false
+  },
+  {
+    label: 'Processing Level',
+    id: 'properties/eo:processing_level',
+    type: 'checklist',
+    list: ['L1GT', 'L1TP', 'L1GS'],
+    displayList: {
+      L1GT: 'Systematic Terrain Correction L1GT',
+      L1TP: 'Standard Terrain Correction L1TP',
+      L1GS: 'Systematic Correction L1GS'
+    },
+    shouldToggleItems: true,
+    showAllValuesListItem: false
+  },
+  {
+    label: 'Cloud Cover',
+    id: 'properties/eo:cloud_cover',
+    type: 'range',
+    range: {
+      min: 0.1,
+      max: 0.9
+    },
+    defaultValue: {
+      min: 0.2,
+      max: 0.8
+    }
+  }
+];
+
 // Function that gets used to handle any async lookups
 // or search requests. Resolves as a promise. Here we're
 // using Earth Search as an example endpoint, which
@@ -131,9 +191,11 @@ export async function handleResolveOnEarthSearch ({
             })
           };
         } else if (value instanceof Array) {
-          filterQuery[id] = {
-            in: value
-          };
+          if (value.length) {
+            filterQuery[id] = {
+              in: value
+            };
+          }
         } else {
           filterQuery[id] = {
             eq: value

@@ -6292,6 +6292,1475 @@ exports[`Storyshots Components/Search Drop Options Default 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/Search Filters List Checklist Showcase 1`] = `
+<div
+  className="story-container Story-SearchFilters List-ChecklistShowcase"
+>
+  <h1>
+    Search Filters List
+  </h1>
+  <h2>
+    Checklist Showcase
+  </h2>
+  <div
+    className="story"
+  >
+    <div>
+      <div
+        className="search-filters-available-header"
+      >
+        <div
+          className="search-filters-available-label"
+        >
+          <strong>
+            Colors
+          </strong>
+          <div
+            className="search-filters-available-sublabel"
+          >
+            Default checklist showcase.
+          </div>
+        </div>
+        <span
+          className="button button-icon-before button-disabled button-text"
+          data-full={false}
+        >
+          <button
+            data-event-action={null}
+            data-event-category={null}
+            data-event-label={null}
+            disabled={true}
+            name="colors"
+            onClick={[Function]}
+            to={null}
+          >
+            <svg
+              className="icon-times"
+              fill="currentColor"
+              height="1em"
+              stroke="currentColor"
+              strokeWidth="0"
+              style={
+                Object {
+                  "color": undefined,
+                }
+              }
+              viewBox="0 0 352 512"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+              />
+            </svg>
+            Clear
+          </button>
+        </span>
+      </div>
+      <ul
+        className="search-filters-available-list"
+      >
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={true}
+              className="visually-hidden"
+              id="filter-colors-All Values"
+              name="colors"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="All Values"
+            />
+            <label
+              htmlFor="filter-colors-All Values"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                All Values
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={false}
+              className="visually-hidden"
+              id="filter-colors-blue"
+              name="colors"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="blue"
+            />
+            <label
+              htmlFor="filter-colors-blue"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                blue
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={false}
+              className="visually-hidden"
+              id="filter-colors-green"
+              name="colors"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="green"
+            />
+            <label
+              htmlFor="filter-colors-green"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                green
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={false}
+              className="visually-hidden"
+              id="filter-colors-pink"
+              name="colors"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="pink"
+            />
+            <label
+              htmlFor="filter-colors-pink"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                pink
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={false}
+              className="visually-hidden"
+              id="filter-colors-purple"
+              name="colors"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="purple"
+            />
+            <label
+              htmlFor="filter-colors-purple"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                purple
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={false}
+              className="visually-hidden"
+              id="filter-colors-red"
+              name="colors"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="red"
+            />
+            <label
+              htmlFor="filter-colors-red"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                red
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={false}
+              className="visually-hidden"
+              id="filter-colors-yellow"
+              name="colors"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="yellow"
+            />
+            <label
+              htmlFor="filter-colors-yellow"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                yellow
+              </span>
+            </label>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <div
+        className="search-filters-available-header"
+      >
+        <div
+          className="search-filters-available-label"
+        >
+          <strong>
+            Emojis
+          </strong>
+          <div
+            className="search-filters-available-sublabel"
+          >
+            Checklist with friendly display names per item.
+          </div>
+        </div>
+        <span
+          className="button button-icon-before button-disabled button-text"
+          data-full={false}
+        >
+          <button
+            data-event-action={null}
+            data-event-category={null}
+            data-event-label={null}
+            disabled={true}
+            name="fogg-emojis"
+            onClick={[Function]}
+            to={null}
+          >
+            <svg
+              className="icon-times"
+              fill="currentColor"
+              height="1em"
+              stroke="currentColor"
+              strokeWidth="0"
+              style={
+                Object {
+                  "color": undefined,
+                }
+              }
+              viewBox="0 0 352 512"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+              />
+            </svg>
+            Clear
+          </button>
+        </span>
+      </div>
+      <ul
+        className="search-filters-available-list"
+      >
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={true}
+              className="visually-hidden"
+              id="filter-fogg-emojis-All Values"
+              name="fogg-emojis"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="All Values"
+            />
+            <label
+              htmlFor="filter-fogg-emojis-All Values"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                All Values
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={false}
+              className="visually-hidden"
+              id="filter-fogg-emojis-eagle"
+              name="fogg-emojis"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="eagle"
+            />
+            <label
+              htmlFor="filter-fogg-emojis-eagle"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                🦅
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={false}
+              className="visually-hidden"
+              id="filter-fogg-emojis-piggy"
+              name="fogg-emojis"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="piggy"
+            />
+            <label
+              htmlFor="filter-fogg-emojis-piggy"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                🐷
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={false}
+              className="visually-hidden"
+              id="filter-fogg-emojis-snake"
+              name="fogg-emojis"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="snake"
+            />
+            <label
+              htmlFor="filter-fogg-emojis-snake"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                🐍
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={false}
+              className="visually-hidden"
+              id="filter-fogg-emojis-tiger"
+              name="fogg-emojis"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="tiger"
+            />
+            <label
+              htmlFor="filter-fogg-emojis-tiger"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                🐯
+              </span>
+            </label>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <div
+        className="search-filters-available-header"
+      >
+        <div
+          className="search-filters-available-label"
+        >
+          <strong>
+            Trilogies
+          </strong>
+          <div
+            className="search-filters-available-sublabel"
+          >
+            Checklist with custom default values checked.
+          </div>
+        </div>
+        <span
+          className="button button-icon-before button-text"
+          data-full={false}
+        >
+          <button
+            data-event-action={null}
+            data-event-category={null}
+            data-event-label={null}
+            disabled={false}
+            name="trilogies"
+            onClick={[Function]}
+            to={null}
+          >
+            <svg
+              className="icon-times"
+              fill="currentColor"
+              height="1em"
+              stroke="currentColor"
+              strokeWidth="0"
+              style={
+                Object {
+                  "color": undefined,
+                }
+              }
+              viewBox="0 0 352 512"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+              />
+            </svg>
+            Clear
+          </button>
+        </span>
+      </div>
+      <ul
+        className="search-filters-available-list"
+      >
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={false}
+              className="visually-hidden"
+              id="filter-trilogies-All Values"
+              name="trilogies"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="All Values"
+            />
+            <label
+              htmlFor="filter-trilogies-All Values"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                All Values
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={true}
+              className="visually-hidden"
+              id="filter-trilogies-back-to-the-future"
+              name="trilogies"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="back-to-the-future"
+            />
+            <label
+              htmlFor="filter-trilogies-back-to-the-future"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                Back to the Future
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={false}
+              className="visually-hidden"
+              id="filter-trilogies-dark-knight"
+              name="trilogies"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="dark-knight"
+            />
+            <label
+              htmlFor="filter-trilogies-dark-knight"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                Dark Knight
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={true}
+              className="visually-hidden"
+              id="filter-trilogies-godfather"
+              name="trilogies"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="godfather"
+            />
+            <label
+              htmlFor="filter-trilogies-godfather"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                Godfather
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={false}
+              className="visually-hidden"
+              id="filter-trilogies-lotr"
+              name="trilogies"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="lotr"
+            />
+            <label
+              htmlFor="filter-trilogies-lotr"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                The Lord of the Rings
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={false}
+              className="visually-hidden"
+              id="filter-trilogies-matrix"
+              name="trilogies"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="matrix"
+            />
+            <label
+              htmlFor="filter-trilogies-matrix"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                The Matrix
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={true}
+              className="visually-hidden"
+              id="filter-trilogies-star-wars"
+              name="trilogies"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="star-wars"
+            />
+            <label
+              htmlFor="filter-trilogies-star-wars"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                Star Wars 
+              </span>
+            </label>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <div
+        className="search-filters-available-header"
+      >
+        <div
+          className="search-filters-available-label"
+        >
+          <strong>
+            Genres
+          </strong>
+          <div
+            className="search-filters-available-sublabel"
+          >
+            Checklist with toggle all button instead of all values item.
+          </div>
+        </div>
+        <span
+          className="button button-icon-before button-text"
+          data-full={false}
+        >
+          <button
+            data-event-action={null}
+            data-event-category={null}
+            data-event-label={null}
+            disabled={false}
+            name="genres"
+            onClick={[Function]}
+            to={null}
+          >
+            <svg
+              fill="currentColor"
+              height="1em"
+              stroke="currentColor"
+              strokeWidth="0"
+              style={
+                Object {
+                  "color": undefined,
+                }
+              }
+              viewBox="0 0 512 512"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M505 174.8l-39.6-39.6c-9.4-9.4-24.6-9.4-33.9 0L192 374.7 80.6 263.2c-9.4-9.4-24.6-9.4-33.9 0L7 302.9c-9.4 9.4-9.4 24.6 0 34L175 505c9.4 9.4 24.6 9.4 33.9 0l296-296.2c9.4-9.5 9.4-24.7.1-34zm-324.3 106c6.2 6.3 16.4 6.3 22.6 0l208-208.2c6.2-6.3 6.2-16.4 0-22.6L366.1 4.7c-6.2-6.3-16.4-6.3-22.6 0L192 156.2l-55.4-55.5c-6.2-6.3-16.4-6.3-22.6 0L68.7 146c-6.2 6.3-6.2 16.4 0 22.6l112 112.2z"
+              />
+            </svg>
+             Select All
+          </button>
+        </span>
+      </div>
+      <ul
+        className="search-filters-available-list"
+      >
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={true}
+              className="visually-hidden"
+              id="filter-genres-blues"
+              name="genres"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="blues"
+            />
+            <label
+              htmlFor="filter-genres-blues"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                blues
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={true}
+              className="visually-hidden"
+              id="filter-genres-electronic"
+              name="genres"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="electronic"
+            />
+            <label
+              htmlFor="filter-genres-electronic"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                electronic
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={true}
+              className="visually-hidden"
+              id="filter-genres-hip-hop"
+              name="genres"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="hip-hop"
+            />
+            <label
+              htmlFor="filter-genres-hip-hop"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                hip-hop
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={true}
+              className="visually-hidden"
+              id="filter-genres-jazz"
+              name="genres"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="jazz"
+            />
+            <label
+              htmlFor="filter-genres-jazz"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                jazz
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={true}
+              className="visually-hidden"
+              id="filter-genres-metal"
+              name="genres"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="metal"
+            />
+            <label
+              htmlFor="filter-genres-metal"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                metal
+              </span>
+            </label>
+          </span>
+        </li>
+        <li>
+          <span
+            className="checkbox-button"
+          >
+            <input
+              checked={true}
+              className="visually-hidden"
+              id="filter-genres-rock"
+              name="genres"
+              onChange={[Function]}
+              onInput={[Function]}
+              type="checkbox"
+              value="rock"
+            />
+            <label
+              htmlFor="filter-genres-rock"
+            >
+              <span
+                className="checkbox-button-checkbox"
+              >
+                <span>
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 512 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span
+                className="input-button-content"
+              >
+                rock
+              </span>
+            </label>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/Search Filters List Default 1`] = `
 <div
   className="story-container Story-SearchFilters List-Default"
@@ -12092,7 +13561,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     3
                   </td>
                   <td
-                    className="rdtDay rdtToday"
+                    className="rdtDay"
                     data-month={4}
                     data-value={4}
                     data-year={2023}
@@ -12157,7 +13626,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     10
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtToday"
                     data-month={4}
                     data-value={11}
                     data-year={2023}
@@ -12627,7 +14096,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     3
                   </td>
                   <td
-                    className="rdtDay rdtToday"
+                    className="rdtDay"
                     data-month={4}
                     data-value={4}
                     data-year={2023}
@@ -12692,7 +14161,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     10
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtToday"
                     data-month={4}
                     data-value={11}
                     data-year={2023}
@@ -13158,72 +14627,65 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     3
                   </td>
                   <td
-                    className="rdtDay rdtToday"
+                    className="rdtDay rdtDisabled"
                     data-month={4}
                     data-value={4}
                     data-year={2023}
-                    onClick={[Function]}
                   >
                     4
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtDisabled"
                     data-month={4}
                     data-value={5}
                     data-year={2023}
-                    onClick={[Function]}
                   >
                     5
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtDisabled"
                     data-month={4}
                     data-value={6}
                     data-year={2023}
-                    onClick={[Function]}
                   >
                     6
                   </td>
                 </tr>
                 <tr>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtDisabled"
                     data-month={4}
                     data-value={7}
                     data-year={2023}
-                    onClick={[Function]}
                   >
                     7
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtDisabled"
                     data-month={4}
                     data-value={8}
                     data-year={2023}
-                    onClick={[Function]}
                   >
                     8
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtDisabled"
                     data-month={4}
                     data-value={9}
                     data-year={2023}
-                    onClick={[Function]}
                   >
                     9
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtDisabled"
                     data-month={4}
                     data-value={10}
                     data-year={2023}
-                    onClick={[Function]}
                   >
                     10
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtToday"
                     data-month={4}
                     data-value={11}
                     data-year={2023}
@@ -14177,7 +15639,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           3
                         </td>
                         <td
-                          className="rdtDay rdtToday"
+                          className="rdtDay"
                           data-month={4}
                           data-value={4}
                           data-year={2023}
@@ -14242,7 +15704,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           10
                         </td>
                         <td
-                          className="rdtDay"
+                          className="rdtDay rdtToday"
                           data-month={4}
                           data-value={11}
                           data-year={2023}
@@ -14739,7 +16201,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           3
                         </td>
                         <td
-                          className="rdtDay rdtToday"
+                          className="rdtDay"
                           data-month={4}
                           data-value={4}
                           data-year={2023}
@@ -14804,7 +16266,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           10
                         </td>
                         <td
-                          className="rdtDay"
+                          className="rdtDay rdtToday"
                           data-month={4}
                           data-value={11}
                           data-year={2023}

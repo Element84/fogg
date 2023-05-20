@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 import { findFilterById } from '../../lib/filters';
@@ -9,7 +9,7 @@ import InputButton from '../InputButton';
 import Button from '../Button';
 import SearchFiltersList from '../SearchFiltersList';
 import SearchFiltersRange from '../SearchFiltersRange';
-import { ALL_VALUES_ITEM } from '../SearchFiltersList/SearchFiltersList';
+import { ALL_VALUES_ITEM } from '../../data/search-filters';
 
 const SearchFilters = ({
   className,
@@ -19,6 +19,8 @@ const SearchFilters = ({
   onUpdateChanges,
   hasFilterCancel = true
 }) => {
+  const [toggleState, setToggleState] = useState({});
+
   if (!Array.isArray(filters) || filters.length === 0) {
     return null;
   }
@@ -38,7 +40,7 @@ const SearchFilters = ({
       // Initial load, no filters selected yet
       if (!Array.isArray(activeFilter.value)) {
         value = [value];
-      } else if (target.value === ALL_VALUES_ITEM && !activeFilter.value.includes(ALL_VALUES_ITEM)) {
+      } else if (target.value === ALL_VALUES_ITEM) {
         // If selecting "All Values", deselect all active filters
         value = [target.value];
       } else if (activeFilter.value.includes(value)) {
@@ -61,6 +63,13 @@ const SearchFilters = ({
           value
         }
       ]);
+      const toToggle = value.length >= activeFilter.list.length;
+      setToggleState((prevState) => {
+        return {
+          ...prevState,
+          [id]: toToggle
+        };
+      });
     }
   }
 
@@ -77,6 +86,22 @@ const SearchFilters = ({
           value: []
         }
       ]);
+    }
+  }
+
+  function handleCheckListToggle ({ target = {} }) {
+    if (typeof onUpdateChanges === 'function') {
+      const id = target.name;
+      const toToggle = !toggleState[id];
+      const activeFilter = findFilterById(filters, id);
+      onUpdateChanges([{
+        id,
+        value: toToggle ? activeFilter.list : []
+      }]);
+      setToggleState((prevState) => ({
+        ...prevState,
+        [id]: toToggle
+      }));
     }
   }
 
@@ -112,7 +137,9 @@ const SearchFilters = ({
                 id,
                 type = 'default',
                 value,
-                defaultValue
+                defaultValue = [],
+                shouldToggleItems = false,
+                showAllValuesListItem = true
               } = filter;
               return (
                 <li key={`SearchFilters-Available-${index}`}>
@@ -126,10 +153,13 @@ const SearchFilters = ({
                           subLabel={subLabel}
                           list={list}
                           displayList={displayList}
-                          activeValues={value || []}
+                          activeValues={value || defaultValue}
                           type={type}
                           onChange={handleFilterChange}
                           onClearChecklist={handleChecklistClear}
+                          onToggleChecklist={shouldToggleItems ? handleCheckListToggle : undefined}
+                          toggleChecklistValue={toggleState[id]}
+                          showAllValuesListItem={showAllValuesListItem}
                         />
                       );
                     })()}

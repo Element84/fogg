@@ -58,10 +58,19 @@
     font-size: .75em;
     text-transform: uppercase;
     font-weight: bold;
-    padding: 0 1em;
+    padding: 0;
     text-decoration: none;
     margin-bottom: 1em;
+    white-space: nowrap;
 
+  }
+  
+  .button-icon-before {
+  
+    svg {
+      margin-right: .4em;
+    }
+  
   }
 
 }
