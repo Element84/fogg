@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ReactDatetime from 'react-datetime';
-import { FaCalendarAlt, FaTimesCircle, FaSave } from 'react-icons/fa';
+import { FaCalendarAlt, FaTimesCircle } from 'react-icons/fa';
 
 import { useInput } from '../../hooks';
 
@@ -18,7 +18,8 @@ const Datetime = ({
   utc = false,
   disableFrom,
   showClear = false,
-  extraActions = false
+  extraActions = false,
+  closeOnSelect = false
 }) => {
   const { disabled } = props;
 
@@ -28,10 +29,10 @@ const Datetime = ({
 
   const handleClickOutside = (event) => {
     updateOpenState(true);
-    if ( ref.current && event.target.classList.contains('extra') && extraActions === true ) {
-      event.target.closest(".rdt").removeAttribute('id');
-      event.target.closest(".rdt").setAttribute('id','rdtOpened');
-    };
+    if (ref.current && event.target.classList.contains('extra') && extraActions === true) {
+      event.target.closest('.rdt').removeAttribute('id');
+      event.target.closest('.rdt').setAttribute('id', 'rdtOpened');
+    }
   };
 
   useEffect(() => {
@@ -47,8 +48,33 @@ const Datetime = ({
 
   const { name } = useInput({ props });
 
+  // Help keep track of cursor while manually editing dates:
+  // https://github.com/arqex/react-datetime/issues/755
+
+  const inputElement = useRef(null);
+  const cursorPosition = useRef(0);
+
+  function handleInput () {
+    cursorPosition.current = inputElement.current.selectionStart || 0;
+  }
+
+  useEffect(() => {
+    if (cursorPosition.current) {
+      inputElement.current.setSelectionRange(cursorPosition.current, cursorPosition.current);
+    }
+  }, [date]);
+
+  /*
+   * Datepicker change handler/callback for date changes
+   * {string} param is a Moment date object if valid date is input, 
+   * If date is NOT valid, the input string is passed
+  */
   function handleChange (moment) {
-    const value = moment && moment.format('x');
+    let value;
+
+    if (moment && moment.format) {
+      value = moment.format('x');
+    }
 
     setDate(moment);
 
@@ -59,7 +85,7 @@ const Datetime = ({
       }
     };
 
-    if (typeof onChange === 'function') {
+    if (typeof onChange === 'function' && value) {
       onChange(virtualEvent);
     }
 
@@ -118,22 +144,14 @@ const Datetime = ({
       }
     }
 
-    function clearCal() {
-      defaultProps.onChange({ target: { value: "" } });
-    }
-
-    function closeCalendar(event) {
-      event.target.closest(".rdt").removeAttribute('id');
-      event.target.closest(".rdt").setAttribute('id','rdtClosed');
-    }
-
-    function closeCal(event) {
+    function closeCal (event) {
       saveCal();
-      closeCalendar(event);
+      event.target.closest('.rdt').removeAttribute('id');
+      event.target.closest('.rdt').setAttribute('id', 'rdtClosed');
     }
 
-    function saveCal() {
-      let dateTime = ReactDatetime.moment.utc(defaultProps.value);
+    function saveCal () {
+      const dateTime = ReactDatetime.moment.utc(defaultProps.value);
       const value = dateTime && dateTime.format('x');
 
       setDate(dateTime);
@@ -169,17 +187,20 @@ const Datetime = ({
       setDate('');
     }
 
+    // The parent ref is included in these props, causing a React console error
+    const propsMinusRef = { ...defaultProps, ...allProps };
+    delete propsMinusRef.ref;
     return (
       <>
         <FaCalendarAlt
-          {...defaultProps}
-          {...allProps}
+          {...propsMinusRef}
           className="icon-calendar"
         />
         <Input
-          className={`datetime ${className} ${extraActions ? "extra" : ""}`}
+          className={`datetime ${className} ${extraActions ? 'extra' : ''}`}
           props={{
             ...props,
+            ...defaultProps,
             autoComplete: 'off'
           }}
           {...allProps}
@@ -199,7 +220,7 @@ const Datetime = ({
               <FaTimesCircle className="icon-close" />
               Save
             </span>
-          </div>        
+          </div>
         )}
       </>
     );
@@ -212,8 +233,13 @@ const Datetime = ({
           value={date}
           renderInput={renderInput}
           onChange={handleChange}
+          inputProps={{
+            onInput: handleInput,
+            ref: inputElement
+          }}
           isValidDate={isValidDate}
           utc={utc}
+          closeOnSelect={closeOnSelect}
         />
       )}
       {extraActions && (
@@ -222,9 +248,14 @@ const Datetime = ({
           renderInput={renderInput}
           onChange={handleChange}
           isValidDate={isValidDate}
+          inputProps={{
+            onInput: handleInput,
+            ref: inputElement
+          }}
           utc={utc}
           closeOnClickOutside={false}
           closeOnTab={false}
+          closeOnSelect={closeOnSelect}
           ref={ref}
         />
       )}
@@ -238,14 +269,18 @@ Datetime.propTypes = {
   onChange: PropTypes.func,
   onInput: PropTypes.func,
   onSave: PropTypes.func,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
   allowPastDate: PropTypes.bool,
   allowFutureDate: PropTypes.bool,
   utc: PropTypes.bool,
   disableFrom: PropTypes.object,
   showClear: PropTypes.bool,
   extraActions: PropTypes.bool,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  closeOnSelect: PropTypes.bool
 };
 
 export default Datetime;

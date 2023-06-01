@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 
 import { sortByKey } from '../lib/util';
+import { ALL_VALUES_ITEM } from '../data/search-filters';
 
 const EMPTY_FILTERS = [];
 
 export default function useGeoFilters (filterSettings) {
   const { available = EMPTY_FILTERS } = filterSettings;
 
-  // Grab all the available filtesr with a defaultValue as the
+  // Grab all the available filters with a defaultValue as the
   // default active
 
   const defaultActiveFilters = available.map((filter) => {
@@ -152,14 +153,18 @@ export default function useGeoFilters (filterSettings) {
   /**
    * clearActiveFilters
    * @description Clears out all active and unsaved filters
+   * @param {object} param0
+   * @param {boolean} [param0.resetToDefault=false] resets to the default active filters instead of clearing the filters
    */
 
-  function clearActiveFilters () {
+  function clearActiveFilters ({
+    resetToDefault = false
+  } = {}) {
     const updatedFilterState = {
       ...filters,
       isOpen: false,
       unsaved: [],
-      active: []
+      active: resetToDefault === true ? concatAndCleanFilters(defaultActiveFilters) : []
     };
     updateFilters(updatedFilterState);
     return updatedFilterState;
@@ -272,8 +277,19 @@ function concatFilters () {
 
       allFilters[existingIndex].value = filter.value;
 
-      if (allFilters[existingIndex].value === 'All Values') {
+      // preventing "All Values" from going to the search query
+      if (allFilters[existingIndex].value === ALL_VALUES_ITEM) {
         delete allFilters[existingIndex].value;
+      }
+
+      // preventing ["All Values"] from going to the search query
+      if (Array.isArray(allFilters[existingIndex].value) && allFilters[existingIndex].value.length) {
+        if (allFilters[existingIndex].value.includes(ALL_VALUES_ITEM)) {
+          allFilters[existingIndex].value.splice(allFilters[existingIndex].value.indexOf(ALL_VALUES_ITEM), 1);
+          if (allFilters[existingIndex].value.length === 0) {
+            delete allFilters[existingIndex].value;
+          }
+        }
       }
     });
   });

@@ -8,6 +8,7 @@ import LensEarthSearchAvailableLayers from './stories/LensEarthSearchAvailableLa
 import LensEarthSearchAvailableFilters from './stories/LensEarthSearchAvailableFilters.story';
 import LensEarthSearchDynamicLayerDate from './stories/LensEarthSearchDynamicLayerDate.story';
 import LensEarthSearchDefault from './stories/LensEarthSearchDefault.story';
+import LensEarthSearchAltFilters from './stories/LensEarthSearchAlternateFilters.story';
 import LensEarthSearchNoFilter from './stories/LensEarthSearchNoFilter.story';
 import LensEarthSearchDateOnly from './stories/LensEarthSearchDateOnly.story';
 import LensEarthSearchCustomDraw from './stories/LensEarthSearchCustomDraw.story';
@@ -19,6 +20,7 @@ import LensEarthSearchResultsNoFilter from './stories/LensEarthSearchResultsNoFi
 import LensEarthSearchCustomAutocomplete from './stories/LensEarthSearchCustomAutocomplete.story';
 import LensEarthSearchNoAutocomplete from './stories/LensEarthSearchNoAutocomplete.story';
 import LensEarthSearchUtc from './stories/LensEarthSearchUtc.story';
+import LensEarthSearchStartAfterEndDate from './stories/LensEarthSearchStartDateAfterEnd.story';
 import LensCursorPosition from './stories/LensCursorPosition.story';
 import LensEarthSearchResultsZoom from './stories/LensEarthSearchResultsZoom.story';
 
@@ -33,6 +35,7 @@ stories.add(
   'Earth Search - Available Filters',
   LensEarthSearchAvailableFilters
 );
+stories.add('Earth Search - Alternate Filters', LensEarthSearchAltFilters);
 stories.add('Earth Search - No Filter', LensEarthSearchNoFilter);
 stories.add('Earth Search - Date Only', LensEarthSearchDateOnly);
 stories.add('Earth Search - Date Only with Default Date', () => {
@@ -75,5 +78,6 @@ stories.add(
   LensEarthSearchCustomAutocomplete
 );
 stories.add('Earth Search - UTC', LensEarthSearchUtc);
+stories.add('Earth Search - Start Date after End Date', LensEarthSearchStartAfterEndDate);
 stories.add('Earth Search - Zoom to Bounds Feature', LensEarthSearchResultsZoom);
 stories.add('Cursor Position', LensCursorPosition);

@@ -6,7 +6,6 @@ import { Map as BaseMap, LayersControl, ZoomControl } from 'react-leaflet';
 import 'proj4';
 import 'proj4leaflet';
 import 'leaflet-active-area';
-import '../../plugins/leaflet-tilelayer-subpixel-fix';
 
 import MapService from '../../models/map-service';
 import { LayersContext } from '../../context';
@@ -47,6 +46,13 @@ const Map = (props) => {
   if (hideNativeLayers) {
     mapClassName = `${mapClassName} map-hide-layers-control`;
   }
+
+  // Reset map size on mount to ensure it fills parent container
+  useEffect(()=>{
+    const leafletElement = currentLeafletRef(mapRef);
+    if (!leafletElement) return;
+    leafletElement.invalidateSize(true);
+  },[]);
 
   useEffect(() => {
     if (!mapRef) return;
@@ -221,7 +227,7 @@ Map.propTypes = {
   hideNativeLayers: PropTypes.bool,
   useMapEffect: PropTypes.func,
   activeDateRange: PropTypes.shape({}),
-  fitGeoJson: PropTypes.object
+  fitGeoJson: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 };
 
 const MapWithRefs = React.forwardRef(function map (props, ref) {

@@ -34,6 +34,38 @@ $button-color: $color-blue;
     width: 100%;
   }
 
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.danger {
+    background: $color-red;
+  }
+
+  &.danger.button-text {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    button {
+      color: $color-red;
+    }
+  }
+
+  &.button-secondary {
+    background: transparent;
+    box-shadow: none;
+    border: 2px solid $color-gray3;
+    button {
+      color: $button-color;
+    }
+    &:hover {
+      background: lighten($color-gray1, 12%);
+    }
+  }
+
+  &.button-disabled {
+    cursor: not-allowed;
+  }
 }
 
 .button-circle {

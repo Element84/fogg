@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FaCheck, FaTimes } from 'react-icons/fa';
-
 import { findFilterById } from '../../lib/filters';
 
 import Panel from '../Panel';
@@ -10,6 +9,7 @@ import InputButton from '../InputButton';
 import Button from '../Button';
 import SearchFiltersList from '../SearchFiltersList';
 import SearchFiltersRange from '../SearchFiltersRange';
+import { ALL_VALUES_ITEM } from '../../data/search-filters';
 
 const SearchFilters = ({
   className,
@@ -19,13 +19,15 @@ const SearchFilters = ({
   onUpdateChanges,
   hasFilterCancel = true
 }) => {
+  const [toggleState, setToggleState] = useState({});
+
   if (!Array.isArray(filters) || filters.length === 0) {
     return null;
   }
 
   /**
    * handleFilterChange
-   * @descriptioon Triggers when a filter change is detected
+   * @description Triggers when a filter change is detected
    */
 
   function handleFilterChange ({ target = {}, ...rest } = {}) {
@@ -33,13 +35,24 @@ const SearchFilters = ({
     const activeFilter = findFilterById(filters, id);
     let value = target.value || target.checked;
 
+    // Unique Logic for checkbox filters
     if (typeof value === 'string' && activeFilter.type === 'checklist') {
+      // Initial load, no filters selected yet
       if (!Array.isArray(activeFilter.value)) {
         value = [value];
+      } else if (target.value === ALL_VALUES_ITEM) {
+        // If selecting "All Values", deselect all active filters
+        value = [target.value];
       } else if (activeFilter.value.includes(value)) {
-        value = activeFilter.value.filter((val) => val !== value);
+        // Remove filter on click if already checked
+        value = activeFilter.value.filter(val => val !== value);
       } else {
+        // Default behavior, add item to current filters
         value = activeFilter.value.concat([value]);
+        // De-select "All Values" if selecting anything other than it
+        if (activeFilter.value.includes(ALL_VALUES_ITEM) && target.value !== ALL_VALUES_ITEM) {
+          value = value.filter(val => val !== ALL_VALUES_ITEM);
+        }
       }
     }
 
@@ -50,6 +63,13 @@ const SearchFilters = ({
           value
         }
       ]);
+      const toToggle = value.length >= activeFilter.list.length;
+      setToggleState((prevState) => {
+        return {
+          ...prevState,
+          [id]: toToggle
+        };
+      });
     }
   }
 
@@ -66,6 +86,22 @@ const SearchFilters = ({
           value: []
         }
       ]);
+    }
+  }
+
+  function handleCheckListToggle ({ target = {} }) {
+    if (typeof onUpdateChanges === 'function') {
+      const id = target.name;
+      const toToggle = !toggleState[id];
+      const activeFilter = findFilterById(filters, id);
+      onUpdateChanges([{
+        id,
+        value: toToggle ? activeFilter.list : []
+      }]);
+      setToggleState((prevState) => ({
+        ...prevState,
+        [id]: toToggle
+      }));
     }
   }
 
@@ -97,25 +133,33 @@ const SearchFilters = ({
             {filters.map((filter = {}, index) => {
               const {
                 label,
+                subLabel,
                 id,
                 type = 'default',
                 value,
-                defaultValue
+                defaultValue = [],
+                shouldToggleItems = false,
+                showAllValuesListItem = true
               } = filter;
               return (
                 <li key={`SearchFilters-Available-${index}`}>
                   {(type === 'checklist' || type === 'radiolist') &&
                     (() => {
-                      const { list } = filter;
+                      const { list, displayList } = filter;
                       return (
                         <SearchFiltersList
                           id={id}
                           label={label}
+                          subLabel={subLabel}
                           list={list}
-                          activeValues={value || []}
+                          displayList={displayList}
+                          activeValues={value || defaultValue}
                           type={type}
                           onChange={handleFilterChange}
                           onClearChecklist={handleChecklistClear}
+                          onToggleChecklist={shouldToggleItems ? handleCheckListToggle : undefined}
+                          toggleChecklistValue={toggleState[id]}
+                          showAllValuesListItem={showAllValuesListItem}
                         />
                       );
                     })()}
@@ -127,6 +171,7 @@ const SearchFilters = ({
                         <SearchFiltersRange
                           id={id}
                           label={label}
+                          subLabel={subLabel}
                           value={value || defaultValue}
                           range={range}
                           onChange={handleFilterChange}

@@ -6,7 +6,7 @@ import EarthSearchSidebarPanels from './EarthSearchSidebarPanels';
 import {
   handleResolveOnEarthSearch,
   handleEarthSearchUseMapEffect,
-  earthSearchAvailableFilters
+  earthSearchAvailableFiltersWithDisplayList
 } from './lens-story-util';
 
 const DEFAULT_CENTER = {
@@ -24,7 +24,7 @@ const LensEarthSearchDefault = () => {
         SidebarComponents={EarthSearchSidebarPanels}
         useMapEffect={handleEarthSearchUseMapEffect}
         placeholder="Look stuffs on Earth Data"
-        availableFilters={earthSearchAvailableFilters}
+        availableFilters={earthSearchAvailableFiltersWithDisplayList}
       />
     </>
   );

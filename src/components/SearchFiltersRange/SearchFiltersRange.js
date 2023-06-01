@@ -9,6 +9,7 @@ import InputRange from '../InputRange';
 const SearchFiltersRange = ({
   id,
   label,
+  subLabel,
   onChange,
   value = {},
   range = {}
@@ -177,8 +178,13 @@ const SearchFiltersRange = ({
 
   return (
     <>
-      {label && (
-        <strong className="search-filters-available-label">{label}</strong>
+      {(label || subLabel) && (
+        <div className="search-filters-available-label">
+          {label && <strong>{label}</strong>}
+          {subLabel && (
+            <div className="search-filters-available-sublabel">{subLabel}</div>
+          )}
+        </div>
       )}
       <div className="search-filters-range">
         <div className={`search-filters-range-input ${minError ? "min-error" : ""} ${maxError ? "max-error" : ""}`}>
@@ -219,6 +225,7 @@ const SearchFiltersRange = ({
 SearchFiltersRange.propTypes = {
   id: PropTypes.string,
   label: PropTypes.string,
+  subLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   onChange: PropTypes.func,
   value: PropTypes.object,
   range: PropTypes.shape({

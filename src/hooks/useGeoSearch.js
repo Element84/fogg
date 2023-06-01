@@ -158,7 +158,7 @@ export default function useGeoSearch (geoSearchSettings = {}) {
           options: searchOptions
         });
       } catch (e) {
-        throw new Error(
+        console.error(
           `${errorBase}: Error resolving before search hook; ${e}`
         );
       }

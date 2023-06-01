@@ -7,7 +7,7 @@ import '../assets/stylesheets/theme.scss';
 const IndexPage = () => (
   <Layout>
     <main>
-      <h1>Welcome to the Space Jam</h1>
+      <h1>Welcome to Fogg</h1>
     </main>
   </Layout>
 );

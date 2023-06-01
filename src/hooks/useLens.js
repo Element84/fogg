@@ -172,10 +172,12 @@ export default function useLens () {
 
   /**
    * handleClearFilters
+   *
+   * @param {object} [options={}] provide optional config options for useGeoFilters.clearActiveFilters
    */
 
-  async function handleClearActiveFilters () {
-    const { active } = clearActiveFilters();
+  async function handleClearActiveFilters (options = {}) {
+    const { active } = clearActiveFilters(options);
     const response = await handleUpdateSearch({
       filters: active
     });

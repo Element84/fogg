@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Polygon } from 'react-leaflet';
 
@@ -33,7 +33,11 @@ const MapPreview = ({
   availableServices,
   projection,
   fetchLayerData,
-  fitGeoJson = true
+  fitGeoJson = true,
+  label = "Area of Interest",
+  showGeometryType = true,
+  mapRef,
+  useMapEffect
 }) => {
   const layers = useLayers(availableLayers, fetchLayerData);
 
@@ -128,7 +132,9 @@ const MapPreview = ({
     services: availableServices,
     zoom,
     projection,
-    fitGeoJson
+    fitGeoJson,
+    forwardedRef: mapRef,
+    useMapEffect
   };
 
   return (
@@ -197,21 +203,16 @@ const MapPreview = ({
             })}
           </MapDraw>
         </Map>
-        <figcaption>
-          <p className="map-preview-area-of-interest">
-            <strong>Area of Interest</strong>
-          </p>
-          <p className="map-preview-geometry">
-            <strong>Geometry:</strong> {aoiType}
-          </p>
+        <figcaption className="map-preview-header">
+          <h5>{label}</h5>
+          {showGeometryType && (<h5>Geometry: {aoiType}</h5>)}
           <div className="map-preview-coordinates">
             <p>
-              <strong>Coordinates (Latitude &amp; Longtitude):</strong>
               {aoiType === 'Point' && (
                 <>
                   {/* Add an extra space to prevent a single coordinate from bumping against */}{' '}
                   <span className="map-preview-coordinates-item">
-                    {geoJsonLatLng.lat}, {geoJsonLatLng.lng}
+                    Lat: <b>{geoJsonLatLng.lat.toFixed(3)}</b>, Long: <b>{geoJsonLatLng.lng.toFixed(3)}</b>
                   </span>
                 </>
               )}
@@ -224,7 +225,7 @@ const MapPreview = ({
                       return positions.map(([posLng, posLat], setIndex) => {
                         return (
                           <li key={`MapPreview-Coordinates-${setIndex}`}>
-                            {posLat}, {posLng}
+                            Lat: <b>{posLat.toFixed(3)}</b>, Long: <b>{posLng.toFixed(3)}</b>
                           </li>
                         );
                       });
@@ -260,7 +261,11 @@ MapPreview.propTypes = {
   availableServices: PropTypes.array,
   projection: PropTypes.string,
   fetchLayerData: PropTypes.func,
-  fitGeoJson: PropTypes.oneOfType([PropTypes.object, PropTypes.bool])
+  fitGeoJson: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  label: PropTypes.string,
+  showGeometryType: PropTypes.bool,
+  mapRef: PropTypes.object,
+  useMapEffect: PropTypes.func
 };
 
 export default MapPreview;

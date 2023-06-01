@@ -1,0 +1,44 @@
+.badge {
+  border: solid 2px $color-gray3;
+  color: $color-gray4;
+  border-radius: 5px;
+  line-height: 1.5;
+  padding: 0.2em 0.4em;
+  text-transform: uppercase;
+  font-size: smaller;
+  font-weight: bold;
+  text-align: center;
+  &.info {
+    border-color: $color-blue5;
+    color: $color-blue5;
+  }
+  &.success {
+    border-color: $color-green5;
+    color: $color-green5;
+  }
+  &.danger {
+    border-color: $color-red5;
+    color: $color-red5;
+  }
+  &.block {
+    display: block;
+  }
+
+  // Sizes
+  &.small {
+    font-size: x-small;
+    padding: .2em;
+    line-height: 1.2;
+  }
+  &.large {
+    font-size: large;
+    padding: .5em;
+    line-height: 1.5;
+  }
+
+  // Loading State
+  &.loading {
+    border: none;
+    @extend .loading;
+  }
+}

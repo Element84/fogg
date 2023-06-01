@@ -50,7 +50,8 @@ const Lens = ({
   mapControls = {},
   searchDropOption = false,
   searchDropOptions = [],
-  hideDatetime = false
+  hideDatetime = false,
+  allowStartAfterEndDate = true
 }) => {
   const refSearchComplete = createRef();
 
@@ -155,6 +156,7 @@ const Lens = ({
                           <div className="lens-sidebar-date">
                             <LensSearchDate
                               allowFutureDate={!disableFutureDates}
+                              allowStartAfterEndDate={allowStartAfterEndDate}
                             />
                           </div>
                         );
@@ -167,6 +169,8 @@ const Lens = ({
                               searchDropOption={searchDropOption}
                               searchDropOptions={searchDropOptions}
                               ignoreDatetime={hideDatetime}
+                              allowStartAfterEndDate={allowStartAfterEndDate}
+                              allowFutureDate={!disableFutureDates}
                             />
                             {hasSearchActions && (
                               <LensSearchActions actions={searchActions} />
@@ -275,7 +279,8 @@ Lens.propTypes = {
   mapControls: PropTypes.object,
   searchDropOption: PropTypes.bool,
   searchDropOptions: PropTypes.array,
-  hideDatetime: PropTypes.bool
+  hideDatetime: PropTypes.bool,
+  allowStartAfterEndDate: PropTypes.bool
 };
 
 export default Lens;
