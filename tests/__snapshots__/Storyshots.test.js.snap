@@ -13470,10 +13470,10 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   <th
                     className="rdtSwitch"
                     colSpan={5}
-                    data-value={4}
+                    data-value={5}
                     onClick={[Function]}
                   >
-                    May 2023
+                    June 2023
                   </th>
                   <th
                     className="rdtNext"
@@ -13526,266 +13526,6 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                 <tr>
                   <td
                     className="rdtDay rdtOld"
-                    data-month={3}
-                    data-value={30}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    30
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={1}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    1
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={2}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    2
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={3}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    3
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={4}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    4
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={5}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    5
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={6}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    6
-                  </td>
-                </tr>
-                <tr>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={7}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    7
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={8}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    8
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={9}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    9
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={10}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    10
-                  </td>
-                  <td
-                    className="rdtDay rdtToday"
-                    data-month={4}
-                    data-value={11}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    11
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={12}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    12
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={13}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    13
-                  </td>
-                </tr>
-                <tr>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={14}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    14
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={15}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    15
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={16}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    16
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={17}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    17
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={18}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    18
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={19}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    19
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={20}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    20
-                  </td>
-                </tr>
-                <tr>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={21}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    21
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={22}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    22
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={23}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    23
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={24}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    24
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={25}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    25
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={26}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    26
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={27}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    27
-                  </td>
-                </tr>
-                <tr>
-                  <td
-                    className="rdtDay"
                     data-month={4}
                     data-value={28}
                     data-year={2023}
@@ -13794,7 +13534,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     28
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtOld"
                     data-month={4}
                     data-value={29}
                     data-year={2023}
@@ -13803,7 +13543,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     29
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtOld"
                     data-month={4}
                     data-value={30}
                     data-year={2023}
@@ -13812,7 +13552,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     30
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtOld"
                     data-month={4}
                     data-value={31}
                     data-year={2023}
@@ -13821,7 +13561,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     31
                   </td>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={1}
                     data-year={2023}
@@ -13830,7 +13570,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     1
                   </td>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={2}
                     data-year={2023}
@@ -13839,7 +13579,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     2
                   </td>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={3}
                     data-year={2023}
@@ -13850,7 +13590,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                 </tr>
                 <tr>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={4}
                     data-year={2023}
@@ -13859,7 +13599,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     4
                   </td>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={5}
                     data-year={2023}
@@ -13868,7 +13608,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     5
                   </td>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={6}
                     data-year={2023}
@@ -13877,7 +13617,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     6
                   </td>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={7}
                     data-year={2023}
@@ -13886,7 +13626,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     7
                   </td>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={8}
                     data-year={2023}
@@ -13895,7 +13635,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     8
                   </td>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={9}
                     data-year={2023}
@@ -13904,13 +13644,273 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     9
                   </td>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={10}
                     data-year={2023}
                     onClick={[Function]}
                   >
                     10
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={11}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    11
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={12}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    12
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={13}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    13
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={14}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    14
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={15}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    15
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={16}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    16
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={17}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    17
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={18}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    18
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={19}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    19
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={20}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    20
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={21}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    21
+                  </td>
+                  <td
+                    className="rdtDay rdtToday"
+                    data-month={5}
+                    data-value={22}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    22
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={23}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    23
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={24}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    24
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={25}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    25
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={26}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    26
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={27}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    27
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={28}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    28
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={29}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    29
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={30}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    30
+                  </td>
+                  <td
+                    className="rdtDay rdtNew"
+                    data-month={6}
+                    data-value={1}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    1
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="rdtDay rdtNew"
+                    data-month={6}
+                    data-value={2}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    2
+                  </td>
+                  <td
+                    className="rdtDay rdtNew"
+                    data-month={6}
+                    data-value={3}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    3
+                  </td>
+                  <td
+                    className="rdtDay rdtNew"
+                    data-month={6}
+                    data-value={4}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    4
+                  </td>
+                  <td
+                    className="rdtDay rdtNew"
+                    data-month={6}
+                    data-value={5}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    5
+                  </td>
+                  <td
+                    className="rdtDay rdtNew"
+                    data-month={6}
+                    data-value={6}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    6
+                  </td>
+                  <td
+                    className="rdtDay rdtNew"
+                    data-month={6}
+                    data-value={7}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    7
+                  </td>
+                  <td
+                    className="rdtDay rdtNew"
+                    data-month={6}
+                    data-value={8}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    8
                   </td>
                 </tr>
               </tbody>
@@ -14005,10 +14005,10 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   <th
                     className="rdtSwitch"
                     colSpan={5}
-                    data-value={4}
+                    data-value={5}
                     onClick={[Function]}
                   >
-                    May 2023
+                    June 2023
                   </th>
                   <th
                     className="rdtNext"
@@ -14061,266 +14061,6 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                 <tr>
                   <td
                     className="rdtDay rdtOld"
-                    data-month={3}
-                    data-value={30}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    30
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={1}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    1
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={2}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    2
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={3}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    3
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={4}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    4
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={5}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    5
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={6}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    6
-                  </td>
-                </tr>
-                <tr>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={7}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    7
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={8}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    8
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={9}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    9
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={10}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    10
-                  </td>
-                  <td
-                    className="rdtDay rdtToday"
-                    data-month={4}
-                    data-value={11}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    11
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={12}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    12
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={13}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    13
-                  </td>
-                </tr>
-                <tr>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={14}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    14
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={15}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    15
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={16}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    16
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={17}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    17
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={18}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    18
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={19}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    19
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={20}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    20
-                  </td>
-                </tr>
-                <tr>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={21}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    21
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={22}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    22
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={23}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    23
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={24}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    24
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={25}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    25
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={26}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    26
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={27}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    27
-                  </td>
-                </tr>
-                <tr>
-                  <td
-                    className="rdtDay"
                     data-month={4}
                     data-value={28}
                     data-year={2023}
@@ -14329,7 +14069,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     28
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtOld"
                     data-month={4}
                     data-value={29}
                     data-year={2023}
@@ -14338,7 +14078,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     29
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtOld"
                     data-month={4}
                     data-value={30}
                     data-year={2023}
@@ -14347,7 +14087,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     30
                   </td>
                   <td
-                    className="rdtDay"
+                    className="rdtDay rdtOld"
                     data-month={4}
                     data-value={31}
                     data-year={2023}
@@ -14356,7 +14096,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     31
                   </td>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={1}
                     data-year={2023}
@@ -14365,7 +14105,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     1
                   </td>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={2}
                     data-year={2023}
@@ -14374,7 +14114,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     2
                   </td>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={3}
                     data-year={2023}
@@ -14385,7 +14125,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                 </tr>
                 <tr>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={4}
                     data-year={2023}
@@ -14394,7 +14134,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     4
                   </td>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={5}
                     data-year={2023}
@@ -14403,7 +14143,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     5
                   </td>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={6}
                     data-year={2023}
@@ -14412,7 +14152,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     6
                   </td>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={7}
                     data-year={2023}
@@ -14421,7 +14161,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     7
                   </td>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={8}
                     data-year={2023}
@@ -14430,7 +14170,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     8
                   </td>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={9}
                     data-year={2023}
@@ -14439,13 +14179,273 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     9
                   </td>
                   <td
-                    className="rdtDay rdtNew"
+                    className="rdtDay"
                     data-month={5}
                     data-value={10}
                     data-year={2023}
                     onClick={[Function]}
                   >
                     10
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={11}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    11
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={12}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    12
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={13}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    13
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={14}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    14
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={15}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    15
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={16}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    16
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={17}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    17
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={18}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    18
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={19}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    19
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={20}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    20
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={21}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    21
+                  </td>
+                  <td
+                    className="rdtDay rdtToday"
+                    data-month={5}
+                    data-value={22}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    22
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={23}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    23
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={24}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    24
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={25}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    25
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={26}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    26
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={27}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    27
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={28}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    28
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={29}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    29
+                  </td>
+                  <td
+                    className="rdtDay"
+                    data-month={5}
+                    data-value={30}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    30
+                  </td>
+                  <td
+                    className="rdtDay rdtNew"
+                    data-month={6}
+                    data-value={1}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    1
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    className="rdtDay rdtNew"
+                    data-month={6}
+                    data-value={2}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    2
+                  </td>
+                  <td
+                    className="rdtDay rdtNew"
+                    data-month={6}
+                    data-value={3}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    3
+                  </td>
+                  <td
+                    className="rdtDay rdtNew"
+                    data-month={6}
+                    data-value={4}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    4
+                  </td>
+                  <td
+                    className="rdtDay rdtNew"
+                    data-month={6}
+                    data-value={5}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    5
+                  </td>
+                  <td
+                    className="rdtDay rdtNew"
+                    data-month={6}
+                    data-value={6}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    6
+                  </td>
+                  <td
+                    className="rdtDay rdtNew"
+                    data-month={6}
+                    data-value={7}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    7
+                  </td>
+                  <td
+                    className="rdtDay rdtNew"
+                    data-month={6}
+                    data-value={8}
+                    data-year={2023}
+                    onClick={[Function]}
+                  >
+                    8
                   </td>
                 </tr>
               </tbody>
@@ -14540,10 +14540,10 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   <th
                     className="rdtSwitch"
                     colSpan={5}
-                    data-value={4}
+                    data-value={5}
                     onClick={[Function]}
                   >
-                    May 2023
+                    June 2023
                   </th>
                   <th
                     className="rdtNext"
@@ -14596,15 +14596,39 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                 <tr>
                   <td
                     className="rdtDay rdtOld rdtDisabled"
-                    data-month={3}
+                    data-month={4}
+                    data-value={28}
+                    data-year={2023}
+                  >
+                    28
+                  </td>
+                  <td
+                    className="rdtDay rdtOld rdtDisabled"
+                    data-month={4}
+                    data-value={29}
+                    data-year={2023}
+                  >
+                    29
+                  </td>
+                  <td
+                    className="rdtDay rdtOld rdtDisabled"
+                    data-month={4}
                     data-value={30}
                     data-year={2023}
                   >
                     30
                   </td>
                   <td
-                    className="rdtDay rdtDisabled"
+                    className="rdtDay rdtOld rdtDisabled"
                     data-month={4}
+                    data-value={31}
+                    data-year={2023}
+                  >
+                    31
+                  </td>
+                  <td
+                    className="rdtDay rdtDisabled"
+                    data-month={5}
                     data-value={1}
                     data-year={2023}
                   >
@@ -14612,7 +14636,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   </td>
                   <td
                     className="rdtDay rdtDisabled"
-                    data-month={4}
+                    data-month={5}
                     data-value={2}
                     data-year={2023}
                   >
@@ -14620,15 +14644,17 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   </td>
                   <td
                     className="rdtDay rdtDisabled"
-                    data-month={4}
+                    data-month={5}
                     data-value={3}
                     data-year={2023}
                   >
                     3
                   </td>
+                </tr>
+                <tr>
                   <td
                     className="rdtDay rdtDisabled"
-                    data-month={4}
+                    data-month={5}
                     data-value={4}
                     data-year={2023}
                   >
@@ -14636,7 +14662,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   </td>
                   <td
                     className="rdtDay rdtDisabled"
-                    data-month={4}
+                    data-month={5}
                     data-value={5}
                     data-year={2023}
                   >
@@ -14644,17 +14670,15 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   </td>
                   <td
                     className="rdtDay rdtDisabled"
-                    data-month={4}
+                    data-month={5}
                     data-value={6}
                     data-year={2023}
                   >
                     6
                   </td>
-                </tr>
-                <tr>
                   <td
                     className="rdtDay rdtDisabled"
-                    data-month={4}
+                    data-month={5}
                     data-value={7}
                     data-year={2023}
                   >
@@ -14662,7 +14686,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   </td>
                   <td
                     className="rdtDay rdtDisabled"
-                    data-month={4}
+                    data-month={5}
                     data-value={8}
                     data-year={2023}
                   >
@@ -14670,7 +14694,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   </td>
                   <td
                     className="rdtDay rdtDisabled"
-                    data-month={4}
+                    data-month={5}
                     data-value={9}
                     data-year={2023}
                   >
@@ -14678,118 +14702,107 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   </td>
                   <td
                     className="rdtDay rdtDisabled"
-                    data-month={4}
+                    data-month={5}
                     data-value={10}
                     data-year={2023}
                   >
                     10
                   </td>
+                </tr>
+                <tr>
                   <td
-                    className="rdtDay rdtToday"
-                    data-month={4}
+                    className="rdtDay rdtDisabled"
+                    data-month={5}
                     data-value={11}
                     data-year={2023}
-                    onClick={[Function]}
                   >
                     11
                   </td>
                   <td
-                    className="rdtDay"
-                    data-month={4}
+                    className="rdtDay rdtDisabled"
+                    data-month={5}
                     data-value={12}
                     data-year={2023}
-                    onClick={[Function]}
                   >
                     12
                   </td>
                   <td
-                    className="rdtDay"
-                    data-month={4}
+                    className="rdtDay rdtDisabled"
+                    data-month={5}
                     data-value={13}
                     data-year={2023}
-                    onClick={[Function]}
                   >
                     13
                   </td>
-                </tr>
-                <tr>
                   <td
-                    className="rdtDay"
-                    data-month={4}
+                    className="rdtDay rdtDisabled"
+                    data-month={5}
                     data-value={14}
                     data-year={2023}
-                    onClick={[Function]}
                   >
                     14
                   </td>
                   <td
-                    className="rdtDay"
-                    data-month={4}
+                    className="rdtDay rdtDisabled"
+                    data-month={5}
                     data-value={15}
                     data-year={2023}
-                    onClick={[Function]}
                   >
                     15
                   </td>
                   <td
-                    className="rdtDay"
-                    data-month={4}
+                    className="rdtDay rdtDisabled"
+                    data-month={5}
                     data-value={16}
                     data-year={2023}
-                    onClick={[Function]}
                   >
                     16
                   </td>
                   <td
-                    className="rdtDay"
-                    data-month={4}
+                    className="rdtDay rdtDisabled"
+                    data-month={5}
                     data-value={17}
                     data-year={2023}
-                    onClick={[Function]}
                   >
                     17
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={18}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    18
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={19}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    19
-                  </td>
-                  <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={20}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    20
                   </td>
                 </tr>
                 <tr>
                   <td
-                    className="rdtDay"
-                    data-month={4}
+                    className="rdtDay rdtDisabled"
+                    data-month={5}
+                    data-value={18}
+                    data-year={2023}
+                  >
+                    18
+                  </td>
+                  <td
+                    className="rdtDay rdtDisabled"
+                    data-month={5}
+                    data-value={19}
+                    data-year={2023}
+                  >
+                    19
+                  </td>
+                  <td
+                    className="rdtDay rdtDisabled"
+                    data-month={5}
+                    data-value={20}
+                    data-year={2023}
+                  >
+                    20
+                  </td>
+                  <td
+                    className="rdtDay rdtDisabled"
+                    data-month={5}
                     data-value={21}
                     data-year={2023}
-                    onClick={[Function]}
                   >
                     21
                   </td>
                   <td
-                    className="rdtDay"
-                    data-month={4}
+                    className="rdtDay rdtToday"
+                    data-month={5}
                     data-value={22}
                     data-year={2023}
                     onClick={[Function]}
@@ -14798,7 +14811,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   </td>
                   <td
                     className="rdtDay"
-                    data-month={4}
+                    data-month={5}
                     data-value={23}
                     data-year={2023}
                     onClick={[Function]}
@@ -14807,16 +14820,18 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   </td>
                   <td
                     className="rdtDay"
-                    data-month={4}
+                    data-month={5}
                     data-value={24}
                     data-year={2023}
                     onClick={[Function]}
                   >
                     24
                   </td>
+                </tr>
+                <tr>
                   <td
                     className="rdtDay"
-                    data-month={4}
+                    data-month={5}
                     data-value={25}
                     data-year={2023}
                     onClick={[Function]}
@@ -14825,7 +14840,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   </td>
                   <td
                     className="rdtDay"
-                    data-month={4}
+                    data-month={5}
                     data-value={26}
                     data-year={2023}
                     onClick={[Function]}
@@ -14834,18 +14849,16 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   </td>
                   <td
                     className="rdtDay"
-                    data-month={4}
+                    data-month={5}
                     data-value={27}
                     data-year={2023}
                     onClick={[Function]}
                   >
                     27
                   </td>
-                </tr>
-                <tr>
                   <td
                     className="rdtDay"
-                    data-month={4}
+                    data-month={5}
                     data-value={28}
                     data-year={2023}
                     onClick={[Function]}
@@ -14854,7 +14867,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   </td>
                   <td
                     className="rdtDay"
-                    data-month={4}
+                    data-month={5}
                     data-value={29}
                     data-year={2023}
                     onClick={[Function]}
@@ -14863,7 +14876,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   </td>
                   <td
                     className="rdtDay"
-                    data-month={4}
+                    data-month={5}
                     data-value={30}
                     data-year={2023}
                     onClick={[Function]}
@@ -14871,26 +14884,19 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                     30
                   </td>
                   <td
-                    className="rdtDay"
-                    data-month={4}
-                    data-value={31}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    31
-                  </td>
-                  <td
                     className="rdtDay rdtNew"
-                    data-month={5}
+                    data-month={6}
                     data-value={1}
                     data-year={2023}
                     onClick={[Function]}
                   >
                     1
                   </td>
+                </tr>
+                <tr>
                   <td
                     className="rdtDay rdtNew"
-                    data-month={5}
+                    data-month={6}
                     data-value={2}
                     data-year={2023}
                     onClick={[Function]}
@@ -14899,18 +14905,16 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   </td>
                   <td
                     className="rdtDay rdtNew"
-                    data-month={5}
+                    data-month={6}
                     data-value={3}
                     data-year={2023}
                     onClick={[Function]}
                   >
                     3
                   </td>
-                </tr>
-                <tr>
                   <td
                     className="rdtDay rdtNew"
-                    data-month={5}
+                    data-month={6}
                     data-value={4}
                     data-year={2023}
                     onClick={[Function]}
@@ -14919,7 +14923,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   </td>
                   <td
                     className="rdtDay rdtNew"
-                    data-month={5}
+                    data-month={6}
                     data-value={5}
                     data-year={2023}
                     onClick={[Function]}
@@ -14928,7 +14932,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   </td>
                   <td
                     className="rdtDay rdtNew"
-                    data-month={5}
+                    data-month={6}
                     data-value={6}
                     data-year={2023}
                     onClick={[Function]}
@@ -14937,7 +14941,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   </td>
                   <td
                     className="rdtDay rdtNew"
-                    data-month={5}
+                    data-month={6}
                     data-value={7}
                     data-year={2023}
                     onClick={[Function]}
@@ -14946,30 +14950,12 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                   </td>
                   <td
                     className="rdtDay rdtNew"
-                    data-month={5}
+                    data-month={6}
                     data-value={8}
                     data-year={2023}
                     onClick={[Function]}
                   >
                     8
-                  </td>
-                  <td
-                    className="rdtDay rdtNew"
-                    data-month={5}
-                    data-value={9}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    9
-                  </td>
-                  <td
-                    className="rdtDay rdtNew"
-                    data-month={5}
-                    data-value={10}
-                    data-year={2023}
-                    onClick={[Function]}
-                  >
-                    10
                   </td>
                 </tr>
               </tbody>
@@ -15548,10 +15534,10 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                         <th
                           className="rdtSwitch"
                           colSpan={5}
-                          data-value={4}
+                          data-value={5}
                           onClick={[Function]}
                         >
-                          May 2023
+                          June 2023
                         </th>
                         <th
                           className="rdtNext"
@@ -15604,266 +15590,6 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                       <tr>
                         <td
                           className="rdtDay rdtOld"
-                          data-month={3}
-                          data-value={30}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          30
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={1}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          1
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={2}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          2
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={3}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          3
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={4}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          4
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={5}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          5
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={6}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          6
-                        </td>
-                      </tr>
-                      <tr>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={7}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          7
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={8}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          8
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={9}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          9
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={10}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          10
-                        </td>
-                        <td
-                          className="rdtDay rdtToday"
-                          data-month={4}
-                          data-value={11}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          11
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={12}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          12
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={13}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          13
-                        </td>
-                      </tr>
-                      <tr>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={14}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          14
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={15}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          15
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={16}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          16
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={17}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          17
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={18}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          18
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={19}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          19
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={20}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          20
-                        </td>
-                      </tr>
-                      <tr>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={21}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          21
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={22}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          22
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={23}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          23
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={24}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          24
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={25}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          25
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={26}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          26
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={27}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          27
-                        </td>
-                      </tr>
-                      <tr>
-                        <td
-                          className="rdtDay"
                           data-month={4}
                           data-value={28}
                           data-year={2023}
@@ -15872,7 +15598,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           28
                         </td>
                         <td
-                          className="rdtDay"
+                          className="rdtDay rdtOld"
                           data-month={4}
                           data-value={29}
                           data-year={2023}
@@ -15881,7 +15607,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           29
                         </td>
                         <td
-                          className="rdtDay"
+                          className="rdtDay rdtOld"
                           data-month={4}
                           data-value={30}
                           data-year={2023}
@@ -15890,7 +15616,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           30
                         </td>
                         <td
-                          className="rdtDay"
+                          className="rdtDay rdtOld"
                           data-month={4}
                           data-value={31}
                           data-year={2023}
@@ -15899,7 +15625,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           31
                         </td>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={1}
                           data-year={2023}
@@ -15908,7 +15634,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           1
                         </td>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={2}
                           data-year={2023}
@@ -15917,7 +15643,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           2
                         </td>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={3}
                           data-year={2023}
@@ -15928,7 +15654,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                       </tr>
                       <tr>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={4}
                           data-year={2023}
@@ -15937,7 +15663,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           4
                         </td>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={5}
                           data-year={2023}
@@ -15946,7 +15672,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           5
                         </td>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={6}
                           data-year={2023}
@@ -15955,7 +15681,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           6
                         </td>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={7}
                           data-year={2023}
@@ -15964,7 +15690,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           7
                         </td>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={8}
                           data-year={2023}
@@ -15973,7 +15699,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           8
                         </td>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={9}
                           data-year={2023}
@@ -15982,13 +15708,273 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           9
                         </td>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={10}
                           data-year={2023}
                           onClick={[Function]}
                         >
                           10
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={11}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          11
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={12}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          12
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={13}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          13
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={14}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          14
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={15}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          15
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={16}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          16
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={17}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          17
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={18}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          18
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={19}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          19
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={20}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          20
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={21}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          21
+                        </td>
+                        <td
+                          className="rdtDay rdtToday"
+                          data-month={5}
+                          data-value={22}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          22
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={23}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          23
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={24}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          24
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={25}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          25
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={26}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          26
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={27}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          27
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={28}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          28
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={29}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          29
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={30}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          30
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-month={6}
+                          data-value={1}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          1
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-month={6}
+                          data-value={2}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          2
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-month={6}
+                          data-value={3}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          3
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-month={6}
+                          data-value={4}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          4
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-month={6}
+                          data-value={5}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          5
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-month={6}
+                          data-value={6}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          6
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-month={6}
+                          data-value={7}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          7
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-month={6}
+                          data-value={8}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          8
                         </td>
                       </tr>
                     </tbody>
@@ -16110,10 +16096,10 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                         <th
                           className="rdtSwitch"
                           colSpan={5}
-                          data-value={4}
+                          data-value={5}
                           onClick={[Function]}
                         >
-                          May 2023
+                          June 2023
                         </th>
                         <th
                           className="rdtNext"
@@ -16166,266 +16152,6 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                       <tr>
                         <td
                           className="rdtDay rdtOld"
-                          data-month={3}
-                          data-value={30}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          30
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={1}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          1
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={2}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          2
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={3}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          3
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={4}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          4
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={5}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          5
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={6}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          6
-                        </td>
-                      </tr>
-                      <tr>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={7}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          7
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={8}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          8
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={9}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          9
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={10}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          10
-                        </td>
-                        <td
-                          className="rdtDay rdtToday"
-                          data-month={4}
-                          data-value={11}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          11
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={12}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          12
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={13}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          13
-                        </td>
-                      </tr>
-                      <tr>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={14}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          14
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={15}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          15
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={16}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          16
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={17}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          17
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={18}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          18
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={19}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          19
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={20}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          20
-                        </td>
-                      </tr>
-                      <tr>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={21}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          21
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={22}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          22
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={23}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          23
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={24}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          24
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={25}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          25
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={26}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          26
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-month={4}
-                          data-value={27}
-                          data-year={2023}
-                          onClick={[Function]}
-                        >
-                          27
-                        </td>
-                      </tr>
-                      <tr>
-                        <td
-                          className="rdtDay"
                           data-month={4}
                           data-value={28}
                           data-year={2023}
@@ -16434,7 +16160,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           28
                         </td>
                         <td
-                          className="rdtDay"
+                          className="rdtDay rdtOld"
                           data-month={4}
                           data-value={29}
                           data-year={2023}
@@ -16443,7 +16169,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           29
                         </td>
                         <td
-                          className="rdtDay"
+                          className="rdtDay rdtOld"
                           data-month={4}
                           data-value={30}
                           data-year={2023}
@@ -16452,7 +16178,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           30
                         </td>
                         <td
-                          className="rdtDay"
+                          className="rdtDay rdtOld"
                           data-month={4}
                           data-value={31}
                           data-year={2023}
@@ -16461,7 +16187,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           31
                         </td>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={1}
                           data-year={2023}
@@ -16470,7 +16196,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           1
                         </td>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={2}
                           data-year={2023}
@@ -16479,7 +16205,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           2
                         </td>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={3}
                           data-year={2023}
@@ -16490,7 +16216,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                       </tr>
                       <tr>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={4}
                           data-year={2023}
@@ -16499,7 +16225,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           4
                         </td>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={5}
                           data-year={2023}
@@ -16508,7 +16234,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           5
                         </td>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={6}
                           data-year={2023}
@@ -16517,7 +16243,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           6
                         </td>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={7}
                           data-year={2023}
@@ -16526,7 +16252,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           7
                         </td>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={8}
                           data-year={2023}
@@ -16535,7 +16261,7 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           8
                         </td>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={9}
                           data-year={2023}
@@ -16544,13 +16270,273 @@ exports[`Storyshots Integrations|Forms Default 1`] = `
                           9
                         </td>
                         <td
-                          className="rdtDay rdtNew"
+                          className="rdtDay"
                           data-month={5}
                           data-value={10}
                           data-year={2023}
                           onClick={[Function]}
                         >
                           10
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={11}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          11
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={12}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          12
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={13}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          13
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={14}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          14
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={15}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          15
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={16}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          16
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={17}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          17
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={18}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          18
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={19}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          19
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={20}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          20
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={21}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          21
+                        </td>
+                        <td
+                          className="rdtDay rdtToday"
+                          data-month={5}
+                          data-value={22}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          22
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={23}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          23
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={24}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          24
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={25}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          25
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={26}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          26
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={27}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          27
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={28}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          28
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={29}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          29
+                        </td>
+                        <td
+                          className="rdtDay"
+                          data-month={5}
+                          data-value={30}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          30
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-month={6}
+                          data-value={1}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          1
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-month={6}
+                          data-value={2}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          2
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-month={6}
+                          data-value={3}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          3
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-month={6}
+                          data-value={4}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          4
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-month={6}
+                          data-value={5}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          5
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-month={6}
+                          data-value={6}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          6
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-month={6}
+                          data-value={7}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          7
+                        </td>
+                        <td
+                          className="rdtDay rdtNew"
+                          data-month={6}
+                          data-value={8}
+                          data-year={2023}
+                          onClick={[Function]}
+                        >
+                          8
                         </td>
                       </tr>
                     </tbody>
