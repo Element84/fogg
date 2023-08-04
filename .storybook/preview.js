@@ -12,10 +12,12 @@ import Story from '../stories/helpers/Story';
 
 // automatically import all files ending in *.stories.js
 
+const reqDocs = require.context('../docs', true, /.stories.(js|mdx)/);
 const reqStories = require.context('../src', true, /.stories.(js|mdx)/);
 const reqIntegrations = require.context('../stories', true, /.stories.(js|mdx)/);
 
 function loadStories() {
+  reqDocs.keys().forEach(filename => reqDocs(filename));
   reqStories.keys().forEach(filename => reqStories(filename));
   reqIntegrations.keys().forEach(filename => reqIntegrations(filename));
 }

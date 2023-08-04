@@ -14,8 +14,14 @@ module.exports = {
     },
   },
 
+  settings: {
+    react: {
+      version: 'detect',
+    },
+    polyfills: ["Promise"]
+  },
+
   rules: {
-    'import/no-named-default': 0,
     'no-warning-comments': [
       'warn',
       {
@@ -23,8 +29,13 @@ module.exports = {
         location: 'start',
       },
     ],
+    'no-console': 'warn',
+    // TODO: Remove when is https://github.com/babel/babel-eslint/issues/530 fixed
+    // via: https://github.com/babel/babel-eslint/issues/681
+    'template-curly-spacing': 'off'
   },
 
+  plugins: ['react'],
   settings: {
     react: {
       version: 'detect',

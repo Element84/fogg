@@ -19,7 +19,9 @@ const SearchComplete = ({
   ignoreDatetime = false,
   forwardedRef,
   searchDropOption = false,
-  searchDropOptions = []
+  searchDropOptions = [],
+  allowStartAfterEndDate,
+  allowFutureDate
 }) => {
   const [isOpen, updateOpenState] = useState(false);
   const [results, updateResults] = useState([]);
@@ -254,6 +256,8 @@ const SearchComplete = ({
         onDateChange={onDateChange}
         searchDropOption={searchDropOption}
         searchDropOptions={reducedOptions}
+        allowStartAfterEndDate={allowStartAfterEndDate}
+        allowFutureDate={allowFutureDate}
       />
 
       <div

@@ -59,7 +59,7 @@ let searchDropOptions = [
 stories.add('Default', () => {
     return (
         <Story component={STORY_COMPONENT} name={STORY_NAME}>
-            <SearchBox onInput={handleOnInput} onSearch={handleOnSearch} searchDropOption={searchDropOption} searchDropOptions={searchDropOptions} placeholder='Search Capella' />
+            <SearchBox onInput={handleOnInput} onSearch={handleOnSearch} searchDropOption={searchDropOption} searchDropOptions={searchDropOptions} placeholder='Search...' />
         </Story>
     );
 });

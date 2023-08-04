@@ -32,7 +32,7 @@ describe('DatetimeRange', () => {
         startDate = start;
       }
 
-      const startPicker = datetimerange.find('DateTime').first();
+      const startPicker = datetimerange.find('.datetime-range-selection').first();
       const body = startPicker.find('tbody');
       const firstrow = body.find('tr').first();
       const firstday = firstrow.find('td').first();
@@ -55,7 +55,7 @@ describe('DatetimeRange', () => {
         endDate = end;
       }
 
-      const endPicker = datetimerange.find('DateTime').last();
+      const endPicker = datetimerange.find('.datetime-range-selection').last();
       const body = endPicker.find('tbody');
       const firstrow = body.find('tr').first();
       const firstday = firstrow.find('td').first();

@@ -1,4 +1,4 @@
-# Fogg
+# Fogg - Now using Gatsby v4
 Fogg is a component library that stems from the need to quickly spin up new mapping applications with search capabilities. While the library contains generic components needed within a typical map-based dashboard, the Lens component is what serves as the flagship component to wrap a map.
 
 This library is packaged as a Gatsby theme that  can be easily imported to a project.
@@ -15,7 +15,7 @@ This library is packaged as a Gatsby theme that  can be easily imported to a pro
 Add Fogg as a dependency to your project
 ```
 # With npm
-npm install fogg
+npm install fogg --legacy-peer-deps
 ```
 
 ## Using the Library
@@ -50,7 +50,7 @@ search(searchSettings);
 ## Installation
 Run the following command in your terminal to install all dependencies:
 ```
-npm install
+npm install --legacy-peer-deps
 ```
 
 ## Development

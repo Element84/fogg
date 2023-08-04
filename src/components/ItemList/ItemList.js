@@ -11,8 +11,7 @@ const ItemList = ({
   actionIcon,
   onItemMouseEnter,
   onItemMouseLeave,
-  onCheck,
-  subListIcon
+  onCheck
 }) => {
 
   const [currentSubLink, setCurrentSubLink] = useState('');
@@ -134,9 +133,9 @@ const ItemList = ({
                         
                         return (
                           <li key={`ItemList-Item-${index}`}  {...subItemProps}>
-                            {subListIcon && (
+                            {subItem.subIcon && (
                               <span className="sublink-icon">
-                                <img src={subListIcon} alt="Rocket Location Icon" />
+                                <img src={subItem.subIcon} alt={`${subItem.label} Icon`} />
                               </span>
                             )}
                             {onCheck && (
@@ -199,8 +198,7 @@ ItemList.propTypes = {
   actionIcon: PropTypes.node,
   onItemMouseEnter: PropTypes.func,
   onItemMouseLeave: PropTypes.func,
-  onCheck: PropTypes.func,
-  subListIcon: PropTypes.string
+  onCheck: PropTypes.func
 };
 
 export default ItemList;

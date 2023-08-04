@@ -49,7 +49,9 @@ const EarthSearchSidebarPanels = ({
 
   function handleClearFilters () {
     if (typeof clearActiveFilters === 'function') {
-      clearActiveFilters();
+      clearActiveFilters({
+        resetToDefault: true
+      });
     }
   }
 

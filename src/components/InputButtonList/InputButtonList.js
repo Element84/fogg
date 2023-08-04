@@ -98,7 +98,7 @@ const InputButtonList = ({
               name={name}
               type={type}
               required={required}
-              disabled={disabled}
+              disabled={disabled || option.disabled}
               onChange={handleOnChange}
               controlChecked={controlChecked}
             />

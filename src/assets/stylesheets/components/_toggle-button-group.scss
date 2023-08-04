@@ -1,0 +1,45 @@
+.toggle-button-group {
+  width: 100%;
+  border-radius: 4px;
+  display: flex;
+
+  .button.button-secondary {
+    height: 40px;
+    margin: 0 !important;
+    border-radius: 0;
+    flex: 1;
+    border: 1px solid $color-gray2;
+    background-color: white;
+    border-right: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: $color-gray7;
+    text-decoration: none;
+
+    &:first-of-type {
+      border-radius: 4px 0 0 4px;
+    }
+    &:last-of-type {
+      border-radius: 0 4px 4px 0;
+      border-right: 1px solid $color-gray2;
+    }
+
+    &.active {
+      border-color: $button-color;
+      color: $button-color;
+      background: lighten($button-color, 40%);
+      font-weight: 600;
+    }
+    svg {
+      margin-right: .5rem;
+    }
+    small {
+      position: absolute;
+      color: $color-gray3;
+      bottom: -20px;
+      font-size: 0.7rem;
+    }
+  }
+}

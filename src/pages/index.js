@@ -1,9 +1,12 @@
 import React from 'react';
-
-import Website from '../../packages/website/src/pages/index';
+import Layout from '../components/Layout';
 
 const IndexPage = () => (
-  <Website />
+  <Layout>
+    <main>
+      <h1>Welcome to Fogg</h1>
+    </main>
+  </Layout>
 );
 
 export default IndexPage;

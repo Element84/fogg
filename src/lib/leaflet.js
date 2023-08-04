@@ -3,6 +3,8 @@ import L from 'leaflet';
 import { latLngFromGeoJson, getGeoJsonCenter } from './map';
 import { isDomAvailable } from './device';
 import Logger from './logger';
+import MapMarker from '../assets/images/map-marker.svg';
+import MapMarkerShadow from '../assets/images/map-marker-shadow.svg';
 
 const logger = new Logger('lib/leaflet', {
   isBrowser: true
@@ -56,11 +58,11 @@ export function createMarkerIcon () {
   // make sure it's available otherwise don't return anything of value
   if (!icon && typeof window !== 'undefined') {
     icon = new L.Icon({
-      iconUrl: require('../assets/images/map-marker.svg'),
+      iconUrl: MapMarker,
       iconAnchor: [16, 39],
       popupAnchor: [10, -44],
       iconSize: [32], // SVG auto scales, ignore 2nd height value
-      shadowUrl: require('../assets/images/map-marker-shadow.svg'),
+      shadowUrl: MapMarkerShadow,
       shadowSize: [20], // SVG auto scales, ignore 2nd height value
       shadowAnchor: [0, 18],
       className: 'map-marker'
