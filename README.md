@@ -15,7 +15,7 @@ This library is packaged as a Gatsby theme that  can be easily imported to a pro
 Add Fogg as a dependency to your project
 ```
 # With npm
-npm install fogg
+npm install fogg --legacy-peer-deps
 ```
 
 ## Using the Library
@@ -50,7 +50,7 @@ search(searchSettings);
 ## Installation
 Run the following command in your terminal to install all dependencies:
 ```
-npm install
+npm install --legacy-peer-deps
 ```
 
 ## Development
