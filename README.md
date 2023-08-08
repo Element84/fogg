@@ -1,9 +1,11 @@
 # Fogg - Now using Gatsby v4
+
 Fogg is a component library that stems from the need to quickly spin up new mapping applications with search capabilities. While the library contains generic components needed within a typical map-based dashboard, the Lens component is what serves as the flagship component to wrap a map.
 
 This library is packaged as a Gatsby theme that  can be easily imported to a project.
 
 ## What's inside?
+
 - [Gatsby](https://www.gatsbyjs.org/) for templating and static site generation
 - Gatsby relies on [React](https://reactjs.org/) as the UI framework
 - [Gatsby Themes](https://www.gatsbyjs.org/blog/2018-11-11-introducing-gatsby-themes/) are utilized to provide a reusable starting point for mapping UIs
@@ -12,17 +14,23 @@ This library is packaged as a Gatsby theme that  can be easily imported to a pro
 # Getting Started
 
 ## Installing Fogg
+
 Add Fogg as a dependency to your project
-```
+
+```sh
 # With npm
-npm install fogg --legacy-peer-deps
+npm install fogg
 ```
+
+Note: if install fails, try using the `--legacy-peer-deps` flag with the install command.
 
 ## Using the Library
 
 ### Components
+
 Importing the Lens component:
-```
+
+```javascript
 import { Lens } from 'fogg/ui';
 
 const MyComponent = () => {
@@ -33,8 +41,10 @@ const MyComponent = () => {
 ```
 
 ### Hooks
-Imporing the hook that provides an API to Lens:
-```
+
+Importing the hook that provides an API to Lens:
+
+```javascript
 import { useLens } from 'fogg/hooks';
 const { geoSearch = {}, map = {} } = useLens();
 const { search } = geoSearch;
@@ -45,36 +55,53 @@ search(searchSettings);
 # Developing
 
 ## Prerequisites
-- NPM
+
+- Node version specified in [.nvmrc](.nvmrc)
+- NVM is highly recommended
 
 ## Installation
-Run the following command in your terminal to install all dependencies:
-```
-npm install --legacy-peer-deps
+
+Run the following commands in your terminal to install all dependencies:
+
+```sh
+nvm use
+npm install
 ```
 
 ## Development
+
 Run the following command to start up your development server:
-```
-npm run develop
+
+```sh
+npm start
 ```
 
 ## Testing
+
 Run the following command to run the test suite:
+
+```sh
+npm test
 ```
-npm run test
+
+Run the following command to run tests while updating the snapshot
+
+```sh
+npm run test-clean
 ```
 
 # Contributions
+
 At this time, we're not accepting contributions until we can fully understand how it ties in to our workflow. If interested, definitely reach out and let us know.
 
 ## TODO - move to issues
-[] Complete stories for each component
-[] Clean out unused components
-[] Add basic tests for each component
-[] Add tests for lib
-[] Add tests for hooks
-[] Examples
-[] Cypress tests for examples
-[] documentation for hooks
-[] documentation for lib
+
+- [ ] Complete stories for each component
+- [ ] Clean out unused components
+- [ ] Add basic tests for each component
+- [ ] Add tests for lib
+- [ ] Add tests for hooks
+- [ ] Examples
+- [ ] Cypress tests for examples
+- [ ] documentation for hooks
+- [ ] documentation for lib
