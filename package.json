@@ -23,7 +23,6 @@
     "fuse.js": "^6.6.2",
     "gatsby-plugin-manifest": "^5.12.0",
     "gatsby-plugin-react-helmet": "^6.12.0",
-    "gatsby-plugin-react-leaflet": "^3.0.3",
     "gatsby-plugin-sass": "^6.12.0",
     "leaflet-active-area": "^1.2.1",
     "leaflet-draw": "^1.0.4",
@@ -50,6 +49,7 @@
     "react-virtualized-auto-sizer": "^1.0.20",
     "react-window": "^1.8.9",
     "sass": "^1.68.0",
+    "style-to-object": "^0.4.2",
     "use-debounce": "^3.4.3",
     "uuid": "^8.3.2"
   },
