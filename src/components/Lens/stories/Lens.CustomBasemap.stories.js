@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import Story from '../../../../stories/helpers/Story';
+import { handleEarthSearchUseMapEffect } from './lens-story-util';
 
 import Lens from '../';
 
@@ -45,6 +46,7 @@ stories.add(STORY_NAME, () => {
           defaultZoom={4}
           projection="epsg3857"
           availableLayers={layers}
+          useMapEffect={handleEarthSearchUseMapEffect}
           availableServices={services}
           map="open_street_map"
         />

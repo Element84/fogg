@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import Story from '../../../../stories/helpers/Story';
+import { handleEarthSearchUseMapEffect } from './lens-story-util';
 
 import Lens from '../';
 
@@ -19,7 +20,11 @@ stories.add(STORY_NAME, () => {
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
       <div className="story-map">
-        <Lens defaultCenter={DEFAULT_CENTER} defaultZoom={4} />
+        <Lens
+          defaultCenter={DEFAULT_CENTER}
+          defaultZoom={4}
+          useMapEffect={handleEarthSearchUseMapEffect}
+        />
       </div>
     </Story>
   );
