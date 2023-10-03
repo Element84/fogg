@@ -50,6 +50,12 @@ module.exports = {
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       '<rootDir>/tests/__mocks__/fileMock.js',
-    '.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy'
+    '.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',
+    '^gatsby-page-utils/(.*)$': 'gatsby-page-utils/dist/$1', // Workaround for https://github.com/facebook/jest/issues/9771
+    '^gatsby-core-utils/(.*)$': 'gatsby-core-utils/dist/$1', // Workaround for https://github.com/facebook/jest/issues/9771
+    '^gatsby-plugin-utils/(.*)$': [
+      'gatsby-plugin-utils/dist/$1',
+      'gatsby-plugin-utils/$1'
+    ] // Workaround for https://github.com/facebook/jest/issues/9771
   }
 };
