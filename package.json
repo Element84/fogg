@@ -24,6 +24,7 @@
     "gatsby-plugin-manifest": "^5.12.0",
     "gatsby-plugin-react-helmet": "^6.12.0",
     "gatsby-plugin-sass": "^6.12.0",
+    "gatsby-source-filesystem": "^4.21.0",
     "leaflet-active-area": "^1.2.1",
     "leaflet-draw": "^1.0.4",
     "memoizee": "^0.4.15",
