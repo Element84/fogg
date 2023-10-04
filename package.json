@@ -15,7 +15,7 @@
     "@turf/invariant": "^6.5.0",
     "axios": "^0.26.1",
     "babel-loader": "^8.2.3",
-    "babel-preset-gatsby": "^2.2.0",
+    "babel-preset-gatsby": "^2.25.0",
     "clone": "^2.1.2",
     "esri-leaflet": "^2.5.0",
     "esri-leaflet-geocoder": "^2.3.3",
@@ -55,19 +55,19 @@
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.5.16",
+    "@storybook/addon-essentials": "^6.5.16",
     "@storybook/addon-info": "^5.3.21",
     "@storybook/addon-links": "^6.5.16",
-    "@storybook/addon-storyshots": "^6.5.16",
     "@storybook/addon-storysource": "^6.5.16",
     "@storybook/addons": "^6.5.16",
     "@storybook/builder-webpack5": "^6.5.16",
-    "@storybook/cli": "^6.5.16",
     "@storybook/manager-webpack5": "^6.5.16",
+    "@storybook/cli": "^6.5.16",
     "@storybook/react": "^6.5.16",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.7",
     "babel-jest": "^26.2.2",
     "babel-plugin-require-context-hook": "^1.0.0",
-    "concurrently": "^6.4.0",
+    "concurrently": "^6.5.1",
     "core-js": "^3.19.2",
     "enzyme": "^3.11.0",
     "eslint": "^8.50.0",
@@ -101,8 +101,7 @@
   "resolutions": {
     "graphql": "^15.4.0",
     "graphql-compose": "^7.25.0",
-    "webpack": "^5.24.2",
-    "react-test-renderer": "18.1.0"
+    "webpack": "^5.24.2"
   },
   "keywords": [
     "gatsby"

@@ -41,7 +41,6 @@ window.___navigate = pathname => {
   action('NavigateTo:')(pathname);
 }
 
-// Seems we don't need this configure() step any longer...
 configure(loadStories, module);
 
 addDecorator(withInfo({
