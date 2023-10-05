@@ -1,12 +1,11 @@
-### TODO: FIX ME! ###
-# name: Security
+name: Security
 
-# on: [push, pull_request]
+on: [push, pull_request]
 
-# jobs:
-#   scan:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@v1
-#     - name: Gitleaks
-#       uses: zricethezav/gitleaks-action@master
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Gitleaks
+      uses: zricethezav/gitleaks-action@master
