@@ -1,11 +1,16 @@
-name: Security
+## TODO: Add SYNK Token to Github Env Variables! I don't have permissions
+# name: Security
 
-on: [push, pull_request]
+# on: [push, pull_request]
 
-jobs:
-  scan:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Gitleaks
-      uses: zricethezav/gitleaks-action@master
+# jobs:
+#   security:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@master
+#       - name: Run Snyk to check for vulnerabilities
+#         uses: snyk/actions/nodemaster
+#         env:
+#           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+#         with:
+#           args: --severity-threshold=high
