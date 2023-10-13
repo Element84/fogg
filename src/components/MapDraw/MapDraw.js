@@ -33,6 +33,7 @@ const MapDraw = ({
   shapeOptions,
   PopupContent,
   featureGroup,
+  featureRef,
   ...rest
 }) => {
   const { icon } = useMapMarkerIcon();
@@ -79,22 +80,22 @@ const MapDraw = ({
 
   function handleOnCreated ({ layer } = {}) {
     if (typeof onCreated === 'function') {
-      onCreated(layer, featureGroup);
+      console.log('mapDraw onCreated Ref', forwardedRef, featureRef, editRef);
+      onCreated(layer, forwardedRef);
     }
   }
 
   return (
-    <FeatureGroup featureGroup={featureGroup}>
+    <FeatureGroup featureGroup={featureGroup} ref={featureRef}>
       {children}
       {!disableEditControls && (
         <>
           <EditControl
-            ref={forwardedRef}
             position="bottomright"
             onCreated={handleOnCreated}
             draw={drawOptions}
             edit={{
-              edit: false,
+              edit: true,
               remove: false
             }}
           />
@@ -117,7 +118,8 @@ MapDraw.propTypes = {
   controlOptions: PropTypes.object,
   shapeOptions: PropTypes.object,
   featureGroup: PropTypes.object,
-  PopupContent: PropTypes.any
+  PopupContent: PropTypes.any,
+  featureRef: PropTypes.object
 };
 
 const MapDrawWithRefs = React.forwardRef(function mapDraw (props, ref) {

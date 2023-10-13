@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Polygon } from 'react-leaflet';
 
@@ -34,10 +34,13 @@ const MapPreview = ({
   projection,
   fetchLayerData,
   fitGeoJson = true,
-  label = "Area of Interest",
+  label = 'Area of Interest',
   showGeometryType = true,
   mapRef,
-  useMapEffect
+  useMapEffect,
+  disableDraw = true,
+  onCreated,
+  featureRef
 }) => {
   const layers = useLayers(availableLayers, fetchLayerData);
 
@@ -141,7 +144,11 @@ const MapPreview = ({
     <LayersContext.Provider value={{ ...layers }}>
       <figure className="map-preview">
         <Map {...mapSettings}>
-          <MapDraw disableEditControls={true}>
+          <MapDraw
+            disableEditControls={disableDraw}
+            onCreated={onCreated}
+            featureRef={featureRef}
+          >
             {features.map((feature) => {
               const { geometry, properties } = feature;
 
@@ -265,7 +272,10 @@ MapPreview.propTypes = {
   label: PropTypes.string,
   showGeometryType: PropTypes.bool,
   mapRef: PropTypes.object,
-  useMapEffect: PropTypes.func
+  useMapEffect: PropTypes.func,
+  disableDraw: PropTypes.bool,
+  onCreated: PropTypes.func,
+  featureRef: PropTypes.object
 };
 
 export default MapPreview;
