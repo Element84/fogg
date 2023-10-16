@@ -28,6 +28,7 @@ const MapDraw = ({
   children,
   forwardedRef,
   onCreated,
+  onEdited,
   disableEditControls = false,
   controlOptions,
   shapeOptions,
@@ -80,8 +81,18 @@ const MapDraw = ({
 
   function handleOnCreated ({ layer } = {}) {
     if (typeof onCreated === 'function') {
-      console.log('mapDraw onCreated Ref', forwardedRef, featureRef, editRef);
       onCreated(layer, forwardedRef);
+    }
+  }
+
+  /**
+   * handleOnEdited
+   * @description Fires when a layer is edited. Triggers callback if available.
+   */
+
+  function handleOnEdited ({ target } = {}) {
+    if (typeof onCreated === 'function') {
+      onEdited(target, forwardedRef);
     }
   }
 
@@ -93,6 +104,7 @@ const MapDraw = ({
           <EditControl
             position="bottomright"
             onCreated={handleOnCreated}
+            onEdited={handleOnEdited}
             draw={drawOptions}
             edit={{
               edit: true,
@@ -114,6 +126,7 @@ MapDraw.propTypes = {
   children: PropTypes.node,
   forwardedRef: PropTypes.object,
   onCreated: PropTypes.func,
+  onEdited: PropTypes.func,
   disableEditControls: PropTypes.bool,
   controlOptions: PropTypes.object,
   shapeOptions: PropTypes.object,

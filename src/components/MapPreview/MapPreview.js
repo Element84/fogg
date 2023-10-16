@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Polygon } from 'react-leaflet';
 
@@ -39,8 +39,10 @@ const MapPreview = ({
   mapRef,
   useMapEffect,
   disableDraw = true,
-  onCreated,
-  featureRef
+  onDrawCreated,
+  onDrawEdited,
+  featureRef = useRef(),
+  emptyMap = false,
 }) => {
   const layers = useLayers(availableLayers, fetchLayerData);
 
@@ -140,16 +142,46 @@ const MapPreview = ({
     useMapEffect
   };
 
+  /**
+   * handleOnDraw
+   * @description Fires when a draw layer is created. Triggers callback if available.
+   * Also clears all any previous layers except the newly created one.
+   */
+  function handleOnDraw (layer) {
+    const drawnItems = featureRef.current?.leafletElement._layers;
+    if (Object.keys(drawnItems).length > 1) {
+      Object.keys(drawnItems).forEach((layerid, index) => {
+        if (index > 0) return;
+        const layer = drawnItems[layerid];
+        featureRef.current.leafletElement.removeLayer(layer);
+      });
+    }
+    if (typeof onDrawCreated === 'function') {
+      onDrawCreated(layer, featureRef);
+    }
+  }
+
+  /**
+   * handleOnEditDraw
+   * @description Fires after editing an existing draw layer. Triggers callback if available
+   */
+  function handleOnEditDraw (layer) {
+    if (typeof onDrawEdited === 'function') {
+      onDrawEdited(layer, featureRef);
+    }
+  }
+
   return (
     <LayersContext.Provider value={{ ...layers }}>
       <figure className="map-preview">
         <Map {...mapSettings}>
           <MapDraw
             disableEditControls={disableDraw}
-            onCreated={onCreated}
+            onCreated={handleOnDraw}
+            onEdited={handleOnEditDraw}
             featureRef={featureRef}
           >
-            {features.map((feature) => {
+            {!emptyMap && features.map((feature) => {
               const { geometry, properties } = feature;
 
               const {
@@ -274,8 +306,10 @@ MapPreview.propTypes = {
   mapRef: PropTypes.object,
   useMapEffect: PropTypes.func,
   disableDraw: PropTypes.bool,
-  onCreated: PropTypes.func,
-  featureRef: PropTypes.object
+  onDrawCreated: PropTypes.func,
+  onDrawEdited: PropTypes.func,
+  featureRef: PropTypes.object,
+  emptyMap: PropTypes.bool
 };
 
 export default MapPreview;
