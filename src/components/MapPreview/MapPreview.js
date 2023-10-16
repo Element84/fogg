@@ -17,7 +17,7 @@ import {
 
 import Map from '../Map';
 import Marker from '../MapMarker';
-import MapDraw from '../MapDraw';
+import MapPreviewDraw from '../MapPreviewDraw';
 
 const logger = new Logger('FormInput', {
   isBrowser: true
@@ -175,7 +175,7 @@ const MapPreview = ({
     <LayersContext.Provider value={{ ...layers }}>
       <figure className="map-preview">
         <Map {...mapSettings}>
-          <MapDraw
+          <MapPreviewDraw
             disableEditControls={disableDraw}
             onCreated={handleOnDraw}
             onEdited={handleOnEditDraw}
@@ -240,7 +240,7 @@ const MapPreview = ({
 
               return null;
             })}
-          </MapDraw>
+          </MapPreviewDraw>
         </Map>
         <figcaption className="map-preview-header">
           <h5>{label}</h5>

@@ -24,15 +24,17 @@ const DEFAULT_SHAPE_OPTIONS = {
   weight: 3
 };
 
-const MapDraw = ({
+const MapPreviewDraw = ({
   children,
   forwardedRef,
   onCreated,
+  onEdited,
   disableEditControls = false,
   controlOptions,
   shapeOptions,
   PopupContent,
   featureGroup,
+  featureRef,
   ...rest
 }) => {
   const { icon } = useMapMarkerIcon();
@@ -79,22 +81,33 @@ const MapDraw = ({
 
   function handleOnCreated ({ layer } = {}) {
     if (typeof onCreated === 'function') {
-      onCreated(layer, featureGroup);
+      onCreated(layer, forwardedRef);
+    }
+  }
+
+  /**
+   * handleOnEdited
+   * @description Fires when a layer is edited. Triggers callback if available.
+   */
+
+  function handleOnEdited ({ target } = {}) {
+    if (typeof onCreated === 'function') {
+      onEdited(target, forwardedRef);
     }
   }
 
   return (
-    <FeatureGroup featureGroup={featureGroup}>
+    <FeatureGroup featureGroup={featureGroup} ref={featureRef}>
       {children}
       {!disableEditControls && (
         <>
           <EditControl
-            ref={forwardedRef}
             position="bottomright"
             onCreated={handleOnCreated}
+            onEdited={handleOnEdited}
             draw={drawOptions}
             edit={{
-              edit: false,
+              edit: true,
               remove: false
             }}
           />
@@ -109,21 +122,23 @@ const MapDraw = ({
   );
 };
 
-MapDraw.propTypes = {
+MapPreviewDraw.propTypes = {
   children: PropTypes.node,
   forwardedRef: PropTypes.object,
   onCreated: PropTypes.func,
+  onEdited: PropTypes.func,
   disableEditControls: PropTypes.bool,
   controlOptions: PropTypes.object,
   shapeOptions: PropTypes.object,
   featureGroup: PropTypes.object,
-  PopupContent: PropTypes.any
+  PopupContent: PropTypes.any,
+  featureRef: PropTypes.object
 };
 
-const MapDrawWithRefs = React.forwardRef(function mapDraw (props, ref) {
-  return <MapDraw {...props} forwardedRef={ref} />;
+const MapPreviewDrawWithRefs = React.forwardRef(function mapDraw (props, ref) {
+  return <MapPreviewDraw {...props} forwardedRef={ref} />;
 });
 
-MapDrawWithRefs.displayName = 'MapDrawWithRefs';
+MapPreviewDrawWithRefs.displayName = 'MapDrawWithRefs';
 
-export default MapDrawWithRefs;
+export default MapPreviewDrawWithRefs;
