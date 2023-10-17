@@ -39,6 +39,7 @@ const MapPreview = ({
   mapRef,
   useMapEffect,
   disableDraw = true,
+  drawControlOptions,
   onDrawCreated,
   onDrawEdited,
   featureRef = useRef(),
@@ -147,7 +148,7 @@ const MapPreview = ({
    * @description Fires when a draw layer is created. Triggers callback if available.
    * Also clears all any previous layers except the newly created one.
    */
-  function handleOnDraw (layer) {
+  function handleOnDraw (drawLayer) {
     const drawnItems = featureRef.current?.leafletElement._layers;
     if (Object.keys(drawnItems).length > 1) {
       Object.keys(drawnItems).forEach((layerid, index) => {
@@ -156,8 +157,9 @@ const MapPreview = ({
         featureRef.current.leafletElement.removeLayer(layer);
       });
     }
+    const { leafletElement } = featureRef.current || {};
     if (typeof onDrawCreated === 'function') {
-      onDrawCreated(layer, featureRef);
+      onDrawCreated(drawLayer, leafletElement);
     }
   }
 
@@ -165,9 +167,10 @@ const MapPreview = ({
    * handleOnEditDraw
    * @description Fires after editing an existing draw layer. Triggers callback if available
    */
-  function handleOnEditDraw (layer) {
+  function handleOnEditDraw (drawLayer) {
+    const { leafletElement } = featureRef.current || {};
     if (typeof onDrawEdited === 'function') {
-      onDrawEdited(layer, featureRef);
+      onDrawEdited(drawLayer, leafletElement);
     }
   }
 
@@ -180,6 +183,7 @@ const MapPreview = ({
             onCreated={handleOnDraw}
             onEdited={handleOnEditDraw}
             featureRef={featureRef}
+            controlOptions={drawControlOptions}
           >
             {!emptyMap && features.map((feature) => {
               const { geometry, properties } = feature;
@@ -306,6 +310,7 @@ MapPreview.propTypes = {
   mapRef: PropTypes.object,
   useMapEffect: PropTypes.func,
   disableDraw: PropTypes.bool,
+  drawControlOptions: PropTypes.object,
   onDrawCreated: PropTypes.func,
   onDrawEdited: PropTypes.func,
   featureRef: PropTypes.object,

@@ -3,22 +3,22 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Story from '../../../../stories/helpers/Story';
 
-import MapPreview from '../';
+import MapPreview from '..';
 
 const STORY_COMPONENT = 'Map Preview';
-const STORY_NAME = 'Map Only & Draw';
+const STORY_NAME = 'Empty Map & Draw Controls';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
 stories.add(STORY_NAME, () => {
   const featureRef = useRef();
 
-  function handleOnDraw (layer) {
-    action(`${STORY_COMPONENT}::${STORY_NAME}::onDraw`)(layer);
+  function handleOnDraw (drawLayer, leafletElement) {
+    action(`${STORY_COMPONENT}::onDraw`)(drawLayer, leafletElement);
   }
 
-  function handleOnEdit (layer) {
-    action(`${STORY_COMPONENT}::${STORY_NAME}::onEdit`)(layer);
+  function handleOnEdit (drawLayer, leafletElement) {
+    action(`${STORY_COMPONENT}::onEdit`)(drawLayer, leafletElement);
   }
 
   return (
@@ -33,9 +33,17 @@ stories.add(STORY_NAME, () => {
           displayAccessRequests={false}
           displayAOIDetails={false}
           disableDraw={false}
-          onCreated={handleOnDraw}
-          onEdited={handleOnEdit}
+          onDrawCreated={handleOnDraw}
+          onDrawEdited={handleOnEdit}
           featureRef={featureRef}
+          drawControlOptions={{
+            circle: true,
+            circlemarker: false,
+            marker: false,
+            polygon: true,
+            polyline: false,
+            rectangle: true
+          }}
       />
     </Story>
   );
