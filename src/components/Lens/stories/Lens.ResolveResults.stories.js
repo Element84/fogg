@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 
+import { handleEarthSearchUseMapEffect } from './lens-story-util';
 import Story from '../../../../stories/helpers/Story';
 
 import Lens from '../';
@@ -74,6 +75,7 @@ stories.add(STORY_NAME, () => {
           defaultZoom={4}
           resolveOnSearch={handleResolveOnSearch}
           SidebarComponents={Sidebar}
+          useMapEffect={handleEarthSearchUseMapEffect}
         />
       </div>
     </Story>
