@@ -94,6 +94,14 @@ npm run test-clean
 
 At this time, we're not accepting contributions until we can fully understand how it ties in to our workflow. If interested, definitely reach out and let us know.
 
+# Need an older version?
+
+We aren't always on top of publishing versions of fogg to NPM, but before cutting major updates (e.g. Gatsby 2 > 4) we at least try to keep a branch available with the legacy versions for anyone who isn't ugprading Gatsby yet. 
+
+- Gatsby@2.x / Node 14.x [https://github.com/Element84/fogg/tree/gatsby-v2]
+- Gatsby@4.x / Node 16.x [https://github.com/Element84/fogg/tree/gatsby-v4]
+- Gatsby@5.x / Node 18.x (Latest) [https://github.com/Element84/fogg/tree/master]
+
 ## TODO - move to issues
 
 - [ ] Complete stories for each component
