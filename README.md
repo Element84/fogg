@@ -102,14 +102,14 @@ We aren't always on top of publishing versions of fogg to NPM, but before cuttin
 - Gatsby 4.x / Node 16.x [https://github.com/Element84/fogg/tree/gatsby-v4]
 - Gatsby 5.x / Node 18.x (Latest) [https://github.com/Element84/fogg/tree/master]
 
-## TODO - move to issues
+## TODO
 
-- [ ] Complete stories for each component
+- [ ] Publish current version to NPM
+- [ ] Publish `gatsby-v2` & `gatsby-v4` to NPM
+- [ ] Add Snyk scan to Github actions
+- [ ] Complete stories for each major component
 - [ ] Clean out unused components
 - [ ] Add basic tests for each component
 - [ ] Add tests for lib
 - [ ] Add tests for hooks
 - [ ] Examples
-- [ ] Cypress tests for examples
-- [ ] documentation for hooks
-- [ ] documentation for lib
