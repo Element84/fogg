@@ -36,6 +36,7 @@ const MapPreview = ({
   fitGeoJson = true,
   label = 'Area of Interest',
   showGeometryType = true,
+  shapeOptions,
   mapRef,
   useMapEffect,
   disableDraw = true,
@@ -184,6 +185,7 @@ const MapPreview = ({
             onEdited={handleOnEditDraw}
             featureRef={featureRef}
             controlOptions={drawControlOptions}
+            shapeOptions={shapeOptions}
           >
             {!emptyMap && features.map((feature) => {
               const { geometry, properties } = feature;
@@ -309,6 +311,7 @@ MapPreview.propTypes = {
   showGeometryType: PropTypes.bool,
   mapRef: PropTypes.object,
   useMapEffect: PropTypes.func,
+  shapeOptions: PropTypes.object,
   disableDraw: PropTypes.bool,
   drawControlOptions: PropTypes.object,
   onDrawCreated: PropTypes.func,
