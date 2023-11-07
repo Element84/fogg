@@ -17,7 +17,7 @@ import {
 
 import Map from '../Map';
 import Marker from '../MapMarker';
-import MapDraw from '../MapDraw';
+import MapPreviewDraw from '../MapPreviewDraw';
 
 const logger = new Logger('FormInput', {
   isBrowser: true
@@ -34,10 +34,18 @@ const MapPreview = ({
   projection,
   fetchLayerData,
   fitGeoJson = true,
-  label = "Area of Interest",
+  label = 'Area of Interest',
   showGeometryType = true,
+  shapeOptions,
   mapRef,
-  useMapEffect
+  useMapEffect,
+  disableDraw = true,
+  disableEdit = false,
+  drawControlOptions,
+  onDrawCreated,
+  onDrawEdited,
+  featureRef = useRef(),
+  emptyMap = false,
 }) => {
   const layers = useLayers(availableLayers, fetchLayerData);
 
@@ -137,12 +145,51 @@ const MapPreview = ({
     useMapEffect
   };
 
+  /**
+   * handleOnDraw
+   * @description Fires when a draw layer is created. Triggers callback if available.
+   * Also clears all any previous layers except the newly created one.
+   */
+  function handleOnDraw (drawLayer) {
+    const drawnItems = featureRef.current?.leafletElement._layers;
+    if (Object.keys(drawnItems).length > 1) {
+      Object.keys(drawnItems).forEach((layerid, index) => {
+        if (index > 0) return;
+        const layer = drawnItems[layerid];
+        featureRef.current.leafletElement.removeLayer(layer);
+      });
+    }
+    const { leafletElement } = featureRef.current || {};
+    if (typeof onDrawCreated === 'function') {
+      onDrawCreated(drawLayer, leafletElement);
+    }
+  }
+
+  /**
+   * handleOnEditDraw
+   * @description Fires after editing an existing draw layer. Triggers callback if available
+   */
+  function handleOnEditDraw (drawLayer) {
+    const { leafletElement } = featureRef.current || {};
+    if (typeof onDrawEdited === 'function') {
+      onDrawEdited(drawLayer, leafletElement);
+    }
+  }
+
   return (
     <LayersContext.Provider value={{ ...layers }}>
       <figure className="map-preview">
         <Map {...mapSettings}>
-          <MapDraw disableEditControls={true}>
-            {features.map((feature) => {
+          <MapPreviewDraw
+            disableDrawControls={disableDraw}
+            disableEditControls={disableEdit}
+            onCreated={handleOnDraw}
+            onEdited={handleOnEditDraw}
+            featureRef={featureRef}
+            controlOptions={drawControlOptions}
+            shapeOptions={shapeOptions}
+          >
+            {!emptyMap && features.map((feature) => {
               const { geometry, properties } = feature;
 
               const {
@@ -201,7 +248,7 @@ const MapPreview = ({
 
               return null;
             })}
-          </MapDraw>
+          </MapPreviewDraw>
         </Map>
         <figcaption className="map-preview-header">
           <h5>{label}</h5>
@@ -265,7 +312,15 @@ MapPreview.propTypes = {
   label: PropTypes.string,
   showGeometryType: PropTypes.bool,
   mapRef: PropTypes.object,
-  useMapEffect: PropTypes.func
+  useMapEffect: PropTypes.func,
+  shapeOptions: PropTypes.object,
+  disableDraw: PropTypes.bool,
+  disableEdit: PropTypes.bool,
+  drawControlOptions: PropTypes.object,
+  onDrawCreated: PropTypes.func,
+  onDrawEdited: PropTypes.func,
+  featureRef: PropTypes.object,
+  emptyMap: PropTypes.bool
 };
 
 export default MapPreview;

@@ -83,7 +83,7 @@ InputButton.propTypes = {
   icon: PropTypes.oneOfType([PropTypes.element, PropTypes.array]),
   forwardedRef: PropTypes.object,
   id: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   value: PropTypes.string,
   name: PropTypes.string,
   type: PropTypes.string,

@@ -124,7 +124,7 @@ const FormInput = (props) => {
 
 FormInput.propTypes = {
   className: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   type: PropTypes.string,
   id: PropTypes.string,
   name: PropTypes.string,
