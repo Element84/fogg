@@ -103,6 +103,7 @@ const MapPreviewDraw = ({
       {!disableDrawControls && (
         <>
           <EditControl
+            key={disableEditControls}
             position="bottomright"
             onCreated={handleOnCreated}
             onEdited={handleOnEdited}
