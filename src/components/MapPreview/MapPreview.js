@@ -40,6 +40,7 @@ const MapPreview = ({
   mapRef,
   useMapEffect,
   disableDraw = true,
+  disableEdit = false,
   drawControlOptions,
   onDrawCreated,
   onDrawEdited,
@@ -180,7 +181,8 @@ const MapPreview = ({
       <figure className="map-preview">
         <Map {...mapSettings}>
           <MapPreviewDraw
-            disableEditControls={disableDraw}
+            disableDrawControls={disableDraw}
+            disableEditControls={disableEdit}
             onCreated={handleOnDraw}
             onEdited={handleOnEditDraw}
             featureRef={featureRef}
@@ -313,6 +315,7 @@ MapPreview.propTypes = {
   useMapEffect: PropTypes.func,
   shapeOptions: PropTypes.object,
   disableDraw: PropTypes.bool,
+  disableEdit: PropTypes.bool,
   drawControlOptions: PropTypes.object,
   onDrawCreated: PropTypes.func,
   onDrawEdited: PropTypes.func,

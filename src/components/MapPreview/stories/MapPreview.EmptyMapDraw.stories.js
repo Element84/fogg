@@ -33,6 +33,7 @@ stories.add(STORY_NAME, () => {
           displayAccessRequests={false}
           displayAOIDetails={false}
           disableDraw={false}
+          disableEdit={false}
           onDrawCreated={handleOnDraw}
           onDrawEdited={handleOnEdit}
           featureRef={featureRef}

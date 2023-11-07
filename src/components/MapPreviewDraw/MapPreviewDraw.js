@@ -29,6 +29,7 @@ const MapPreviewDraw = ({
   forwardedRef,
   onCreated,
   onEdited,
+  disableDrawControls = false,
   disableEditControls = false,
   controlOptions,
   shapeOptions,
@@ -99,7 +100,7 @@ const MapPreviewDraw = ({
   return (
     <FeatureGroup featureGroup={featureGroup} ref={featureRef}>
       {children}
-      {!disableEditControls && (
+      {!disableDrawControls && (
         <>
           <EditControl
             position="bottomright"
@@ -107,7 +108,7 @@ const MapPreviewDraw = ({
             onEdited={handleOnEdited}
             draw={drawOptions}
             edit={{
-              edit: true,
+              edit: !disableEditControls,
               remove: false
             }}
           />
@@ -127,6 +128,7 @@ MapPreviewDraw.propTypes = {
   forwardedRef: PropTypes.object,
   onCreated: PropTypes.func,
   onEdited: PropTypes.func,
+  disableDrawControls: PropTypes.bool,
   disableEditControls: PropTypes.bool,
   controlOptions: PropTypes.object,
   shapeOptions: PropTypes.object,
