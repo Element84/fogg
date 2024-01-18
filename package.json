@@ -27,6 +27,7 @@
     "gatsby-source-filesystem": "^4.21.0",
     "leaflet-active-area": "^1.2.1",
     "leaflet-draw": "^1.0.4",
+    "leaflet-editable": "^1.2.0",
     "memoizee": "^0.4.15",
     "mkdirp": "^1.0.4",
     "moment": "^2.29.1",
