@@ -1,4 +1,4 @@
-# Fogg - Now using Gatsby v4
+# Fogg - Now using Gatsby v5
 
 Fogg is a component library that stems from the need to quickly spin up new mapping applications with search capabilities. While the library contains generic components needed within a typical map-based dashboard, the Lens component is what serves as the flagship component to wrap a map.
 
@@ -100,7 +100,7 @@ We aren't always on top of publishing versions of fogg to NPM, but before cuttin
 
 - Gatsby 2.x / Node 14.x [https://github.com/Element84/fogg/tree/gatsby-v2]
 - Gatsby 4.x / Node 16.x [https://github.com/Element84/fogg/tree/gatsby-v4]
-- Gatsby 5.x / Node 18.x (Latest) [https://github.com/Element84/fogg/tree/master]
+- Gatsby 5.x / Node 18.x (Latest) [https://github.com/Element84/fogg/tree/main]
 
 ## TODO
 
