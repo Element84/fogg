@@ -92,7 +92,7 @@ const MapPreviewDraw = ({
    */
 
   function handleOnEdited ({ target } = {}) {
-    if (typeof onCreated === 'function') {
+    if (typeof onEdited === 'function') {
       onEdited(target, forwardedRef);
     }
   }
@@ -109,6 +109,7 @@ const MapPreviewDraw = ({
             onEdited={handleOnEdited}
             draw={drawOptions}
             edit={{
+              featureGroup: featureRef,
               edit: !disableEditControls,
               remove: false
             }}

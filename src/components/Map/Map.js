@@ -6,6 +6,7 @@ import { Map as BaseMap, LayersControl, ZoomControl } from 'react-leaflet';
 import 'proj4';
 import 'proj4leaflet';
 import 'leaflet-active-area';
+import 'leaflet-editable';
 
 import MapService from '../../models/map-service';
 import { LayersContext } from '../../context';
@@ -125,7 +126,8 @@ const Map = (props) => {
     maxZoom: maxZoom || baseMaxZoom,
     minZoom: minZoom || baseMinZoom,
     maxNativeZoom: baseMaxNativeZoom,
-    zoomControl: false
+    zoomControl: false,
+    editable: true
   };
 
   // Only set up a new CRS if one is provided, otherwise fallback to the leaflet defaults (3857)
