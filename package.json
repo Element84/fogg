@@ -13,7 +13,7 @@
     "@turf/bbox-polygon": "^6.5.0",
     "@turf/center": "^6.5.0",
     "@turf/invariant": "^6.5.0",
-    "axios": "^0.26.1",
+    "axios": "^1.6.8",
     "babel-loader": "^8.2.3",
     "babel-preset-gatsby": "^2.25.0",
     "clone": "^2.1.2",
