@@ -92,7 +92,23 @@ npm run test-clean
 
 # Contributions
 
-At this time, we're not accepting contributions until we can fully understand how it ties in to our workflow. If interested, definitely reach out and let us know.
+We are happy to take contributions! It is best to get in touch with the maintainers about larger features or design changes *before* starting the work, as it will make the process of accepting changes smoother.
+
+## Contributor License Agreement (CLA)
+
+Everyone who contributes code to Fogg will be asked to sign a CLA, which is based off of the Apache CLA.
+
+- Download a copy of **one of** the following from the `docs/cla` directory in this repository:
+
+  - Individual Contributor (You're using your time): `2024_10_10-Fogg-Open-Source-Contributor-Agreement-Individual.pdf` 
+  - Corporate Contributor (You're using company time): `2024_10_10-Fogg-Open-Source-Contributor-Agreement-Corporate.pdf`
+
+- Sign the CLA -- either physically on a printout or digitally using appropriate PDF software.
+
+- Send the signed CLAs to Element 84 via **one of** the following methods:
+
+  - Emailing the document to contracts@element84.com
+  - Mailing a hardcopy to: ``Element 84, 210 N. Lee Street Suite 203 Alexandria, VA 22314, USA``.
 
 # Need an older version?
 
