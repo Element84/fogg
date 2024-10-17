@@ -5,6 +5,7 @@ import { FaPlus, FaCheck, FaTimes, FaEdit } from 'react-icons/fa';
 import { findFilterById } from '../../lib/filters';
 import { sortByKey } from '../../lib/util';
 
+import Button from '../Button';
 import Panel from '../Panel';
 import PanelActions from '../PanelActions';
 import { ALL_VALUES_ITEM } from '../../data/search-filters';
@@ -14,7 +15,9 @@ const SearchPanelFilters = ({
   onOpenFilters,
   onSaveFiltersChanges,
   onCancelFilterChanges,
-  hasFilterCancel = true
+  hasFilterCancel = true,
+  additionalFilterItems = [],
+  handleRemoveClick
 }) => {
   const { active, isOpen, available } = filters;
 
@@ -104,6 +107,7 @@ const SearchPanelFilters = ({
     value = `${value}`;
 
     return {
+      id,
       label,
       value
     };
@@ -134,15 +138,15 @@ const SearchPanelFilters = ({
 
   function hasActiveFilters (filters) {
     const availableValues = filters.map(({ value } = {}) => value);
-    return availableValues.filter((value) => valueIsValid(value)).length > 0;
+    return (availableValues.filter((value) => valueIsValid(value)).length > 0 || additionalFilterItems.length > 0);
   }
 
-  const panelFiltersMapped =
-    panelFilters &&
-    panelFilters
+  const panelFiltersMapped = additionalFilterItems.concat(
+    (panelFilters || [])
       .filter(filterActiveFiltersNoValue)
       .filter(({ type } = {}) => type !== 'hidden')
-      .map(mapActiveFiltersToRow);
+      .map(mapActiveFiltersToRow)
+  );
 
   return (
     <Panel
@@ -158,8 +162,25 @@ const SearchPanelFilters = ({
                 <span>{filter.label}</span>
               </div>
               <div className="table-cell table-row-first table-column-first table-cell-align-right column-value">
-                <span>{filter.value}</span>
+                <span style={{ verticalAlign: 'middle' }}>{filter.value}</span>
               </div>
+              {(handleRemoveClick || filter.onClick) && (
+                <div className="table-cell" style={{ width: 'auto' }}>
+                  <Button
+                    className="search-panel-filters-list-item-remove"
+                    onClick={() => {
+                      if (filter.onClick) {
+                        filter.onClick();
+                      } else {
+                        handleRemoveClick(filter.id);
+                      }
+                    }}
+                  >
+                    <span className="visually-hidden">Remove Filter</span>
+                    <FaTimes />
+                  </Button>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -173,7 +194,9 @@ SearchPanelFilters.propTypes = {
   onOpenFilters: PropTypes.func,
   onSaveFiltersChanges: PropTypes.func,
   onCancelFilterChanges: PropTypes.func,
-  hasFilterCancel: PropTypes.bool
+  hasFilterCancel: PropTypes.bool,
+  additionalFilterItems: PropTypes.array,
+  handleRemoveClick: PropTypes.func
 };
 
 export default SearchPanelFilters;
