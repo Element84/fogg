@@ -26,6 +26,19 @@
         border-bottom: none;
       }
     }
+
+    .search-panel-filters-list-item-remove {
+      background: transparent;
+      box-shadow: none;
+      font-size: 0.8em;
+      height: 100%;
+      display: flex;
+
+      button {
+        padding: 0;
+        color: black;
+      }
+    }
   }
 
 }

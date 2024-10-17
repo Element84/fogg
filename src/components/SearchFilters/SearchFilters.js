@@ -172,7 +172,7 @@ const SearchFilters = ({
                           id={id}
                           label={label}
                           subLabel={subLabel}
-                          value={value || defaultValue}
+                          value={value || defaultValue || range}
                           range={range}
                           onChange={handleFilterChange}
                         />

@@ -34,6 +34,8 @@ const Lens = ({
   placeholder = 'Search',
   availableFilters,
   showFilters = true,
+  additionalFilterItems,
+  hideGeometryFilter = false,
   availableLayers = null,
   hideNativeLayers = true,
   fetchLayerData,
@@ -182,7 +184,7 @@ const Lens = ({
                 </div>
               )}
               {displayFiltersPanel && (
-                <LensSearchPanelFilters hasFilterCancel={hasFilterCancel} />
+                <LensSearchPanelFilters hasFilterCancel={hasFilterCancel} hideGeometryFilter={hideGeometryFilter} additionalFilterItems={additionalFilterItems} />
               )}
               {SidebarComponents && (
                 <LensSidebarComponents SidebarComponents={SidebarComponents} />
@@ -252,6 +254,8 @@ Lens.propTypes = {
   searchType: PropTypes.string,
   placeholder: PropTypes.string,
   showFilters: PropTypes.bool,
+  hideGeometryFilter: PropTypes.bool,
+  additionalFilterItems: PropTypes.array,
   availableFilters: PropTypes.array,
   hideNativeLayers: PropTypes.bool,
   fetchLayerData: PropTypes.oneOfType([
