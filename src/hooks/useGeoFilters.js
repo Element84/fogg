@@ -118,6 +118,27 @@ export default function useGeoFilters (filterSettings) {
   }
 
   /**
+   * removeSingleFilter
+   * @description Disables a single activated filter
+   */
+
+  function removeSingleFilter (filterId) {
+    const updatedFilterState = {
+      ...filters,
+      active: filters.active.filter(({ id } = {}) => id !== filterId),
+      unsaved: filters.unsaved.filter(({ id } = {}) => id !== filterId),
+      available: filters.available.map(filterInstance => ({
+        ...filterInstance,
+        value: filterInstance.id === filterId ? undefined : filterInstance.value
+      }))
+    };
+
+    updateFilters(updatedFilterState);
+
+    return updatedFilterState;
+  }
+
+  /**
    * saveFilterChanges
    * @description Stores any new unsaved changes to active and clears unsaved
    */
@@ -225,6 +246,7 @@ export default function useGeoFilters (filterSettings) {
     saveFilterChanges,
     setActiveFilters,
     addActiveFilters,
+    removeSingleFilter,
     cancelFilterChanges,
     clearActiveFilters
   };
