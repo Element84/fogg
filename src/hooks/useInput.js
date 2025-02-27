@@ -43,7 +43,9 @@ const INPUT_PROPS_WHITELIST = [
   'isMulti',
   'inputProps',
   'ref',
-  'selectionStart'
+  'selectionStart',
+  'min',
+  'max'
 ];
 
 const INPUT_LIST_TYPES = ['radio', 'checkbox'];
