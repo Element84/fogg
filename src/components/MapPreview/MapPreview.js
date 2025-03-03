@@ -258,8 +258,16 @@ const MapPreview = ({
       const earthRadius = 6371000; // meters
       const [centerLat, centerLon] = center;
 
-      const endLat = centerLat + (1500 / earthRadius) * Math.cos(angleRadians) * (180 / Math.PI);
-      const endLon = centerLon + (1500 / earthRadius) * Math.sin(angleRadians) * (180 / Math.PI) / Math.cos(centerLat * Math.PI / 180);
+      const endLat = centerLat
+        + (1500 / earthRadius)
+        * Math.cos(angleRadians)
+        * (180 / Math.PI);
+
+      const endLon = centerLon
+        + (1500 / earthRadius)
+        * Math.sin(angleRadians)
+        * (180 / Math.PI)
+        / Math.cos(centerLat * Math.PI / 180);
 
       featuresArray.push(
         <Polyline
