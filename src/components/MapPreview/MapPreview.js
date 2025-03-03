@@ -247,6 +247,7 @@ const MapPreview = ({
 
     featuresArray.push(
       <Circle
+        key={`azimuth-circle-${center[0]}-${center[1]}`}
         center={center}
         radius={1500}
         fill={false}
@@ -271,6 +272,7 @@ const MapPreview = ({
 
       featuresArray.push(
         <Polyline
+          key={`azimuth-polyline-${start}-${stop}`}
           positions={[[centerLat, centerLon], [endLat, endLon]]}
           weight={3}
         />
@@ -278,6 +280,7 @@ const MapPreview = ({
     } else if (!((start === 0 && stop === 360) || (start === 360 && stop === 0))) {
       featuresArray.push(
         <SemiCircle
+          key={`azimuth-semicircle-${start}-${stop}`}
           position={center}
           radius={1500}
           weight={3}
