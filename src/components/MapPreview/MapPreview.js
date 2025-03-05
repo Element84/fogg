@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Polygon } from 'react-leaflet';
+import { Polygon, Circle, Polyline } from 'react-leaflet';
+import { SemiCircle } from 'react-leaflet-semicircle';
 
 import { useLayers } from '../../hooks';
 import { LayersContext } from '../../context';
@@ -46,6 +47,7 @@ const MapPreview = ({
   onDrawEdited,
   featureRef = useRef(),
   emptyMap = false,
+  azimuthDisplay
 }) => {
   const layers = useLayers(availableLayers, fetchLayerData);
 
@@ -176,6 +178,120 @@ const MapPreview = ({
     }
   }
 
+  let featuresArray = [];
+
+  if (!emptyMap) {
+    featuresArray = features.map((feature) => {
+      const { geometry, properties } = feature;
+
+      const {
+        shapeOptions = {},
+        onClick,
+        onMouseover,
+        onMouseout
+      } = properties;
+
+      const { style = {} } = shapeOptions;
+
+      const featureProps = {
+        ...style,
+        onClick,
+        onMouseover,
+        onMouseout
+      };
+
+      if (geometry.type === 'Point') {
+        const latLngs = latLngFromGeoJson(feature);
+
+        return latLngs.map(({ lat, lng }, index) => {
+          return (
+            <Marker
+              key={`${lat}-${lng}-${index}`}
+              position={[lat, lng]}
+              {...featureProps}
+            />
+          );
+        });
+      }
+
+      if (geometry.type === 'Polygon') {
+        const coordinates = coordinatesFromGeoJson({
+          type: 'FeatureCollection',
+          features: [feature]
+        });
+
+        return coordinates.map((set) => {
+          return set.map((position, index) => {
+            const fixedPosition = position.map((coordinates) => [
+              coordinates[1],
+              coordinates[0]
+            ]);
+            return (
+              <Polygon
+                key={`${coordinates[0]}-${coordinates[1]}-${index}`}
+                color={AVAILABLE_COLORS[index]}
+                positions={fixedPosition}
+                {...featureProps}
+              />
+            );
+          });
+        });
+      }
+
+      return null;
+    });
+  }
+
+  if (azimuthDisplay) {
+    const { center, start, stop } = azimuthDisplay;
+
+    featuresArray.push(
+      <Circle
+        key={`azimuth-circle-${center[0]}-${center[1]}`}
+        center={center}
+        radius={1500}
+        fill={false}
+      />
+    );
+
+    if (start === stop) {
+      const angleRadians = start * Math.PI / 180;
+      const earthRadius = 6371000; // meters
+      const [centerLat, centerLon] = center;
+
+      const endLat = centerLat
+        + (1500 / earthRadius)
+        * Math.cos(angleRadians)
+        * (180 / Math.PI);
+
+      const endLon = centerLon
+        + (1500 / earthRadius)
+        * Math.sin(angleRadians)
+        * (180 / Math.PI)
+        / Math.cos(centerLat * Math.PI / 180);
+
+      featuresArray.push(
+        <Polyline
+          key={`azimuth-polyline-${start}-${stop}`}
+          positions={[[centerLat, centerLon], [endLat, endLon]]}
+          weight={3}
+        />
+      );
+    } else if (!((start === 0 && stop === 360) || (start === 360 && stop === 0))) {
+      featuresArray.push(
+        <SemiCircle
+          key={`azimuth-semicircle-${start}-${stop}`}
+          position={center}
+          radius={1500}
+          weight={3}
+          startAngle={start}
+          stopAngle={stop}
+          fillOpacity={0.25}
+        />
+      );
+    }
+  }
+
   return (
     <LayersContext.Provider value={{ ...layers }}>
       <figure className="map-preview">
@@ -189,65 +305,7 @@ const MapPreview = ({
             controlOptions={drawControlOptions}
             shapeOptions={shapeOptions}
           >
-            {!emptyMap && features.map((feature) => {
-              const { geometry, properties } = feature;
-
-              const {
-                shapeOptions = {},
-                onClick,
-                onMouseover,
-                onMouseout
-              } = properties;
-
-              const { style = {} } = shapeOptions;
-
-              const featureProps = {
-                ...style,
-                onClick,
-                onMouseover,
-                onMouseout
-              };
-
-              if (geometry.type === 'Point') {
-                const latLngs = latLngFromGeoJson(feature);
-
-                return latLngs.map(({ lat, lng }, index) => {
-                  return (
-                    <Marker
-                      key={`${lat}-${lng}-${index}`}
-                      position={[lat, lng]}
-                      {...featureProps}
-                    />
-                  );
-                });
-              }
-
-              if (geometry.type === 'Polygon') {
-                const coordinates = coordinatesFromGeoJson({
-                  type: 'FeatureCollection',
-                  features: [feature]
-                });
-
-                return coordinates.map((set) => {
-                  return set.map((position, index) => {
-                    const fixedPosition = position.map((coordinates) => [
-                      coordinates[1],
-                      coordinates[0]
-                    ]);
-                    return (
-                      <Polygon
-                        key={`${coordinates[0]}-${coordinates[1]}-${index}`}
-                        color={AVAILABLE_COLORS[index]}
-                        positions={fixedPosition}
-                        {...featureProps}
-                      />
-                    );
-                  });
-                });
-              }
-
-              return null;
-            })}
+            {featuresArray}
           </MapPreviewDraw>
         </Map>
         <figcaption className="map-preview-header">
@@ -320,7 +378,8 @@ MapPreview.propTypes = {
   onDrawCreated: PropTypes.func,
   onDrawEdited: PropTypes.func,
   featureRef: PropTypes.object,
-  emptyMap: PropTypes.bool
+  emptyMap: PropTypes.bool,
+  azimuthDisplay: PropTypes.object
 };
 
 export default MapPreview;

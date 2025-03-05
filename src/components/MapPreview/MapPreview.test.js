@@ -1,4 +1,6 @@
 import React from 'react';
+import { Circle, Polyline } from 'react-leaflet';
+import { SemiCircle } from 'react-leaflet-semicircle';
 import { shallow } from 'enzyme';
 
 import MapPreview from './';
@@ -68,6 +70,112 @@ describe('MapPreview', () => {
       expect(lastCoordinates.text()).toEqual(
         `Lat: ${fcCoordinatesLast[1].toFixed(3)}, Long: ${fcCoordinatesLast[0].toFixed(3)}`
       );
+    });
+  });
+
+  describe('Azimuth Display', () => {
+    const baseAzimuthParams = {
+      center: ALEXANDRIA_COORDINATES
+    };
+
+    it('should render only a circle if start=0 and stop=360', () => {
+      const mapPreview = shallow(
+        <MapPreview
+          geoJson={featureCollection}
+          azimuthDisplay={{
+            ...baseAzimuthParams,
+            start: 0,
+            stop: 360
+          }}
+        />
+      );
+      const mapPreviewCircle = mapPreview.find(Circle);
+      const mapPreviewSemicircle = mapPreview.find(SemiCircle);
+      const mapPreviewPolyline = mapPreview.find(Polyline);
+
+      expect(mapPreviewCircle).toHaveLength(1);
+      expect(mapPreviewSemicircle).toHaveLength(0);
+      expect(mapPreviewPolyline).toHaveLength(0);
+    });
+
+    it('should render only a circle if start=360 and stop=0', () => {
+      const mapPreview = shallow(
+        <MapPreview
+          geoJson={featureCollection}
+          azimuthDisplay={{
+            ...baseAzimuthParams,
+            start: 360,
+            stop: 0
+          }}
+        />
+      );
+      const mapPreviewCircle = mapPreview.find(Circle);
+      const mapPreviewSemicircle = mapPreview.find(SemiCircle);
+      const mapPreviewPolyline = mapPreview.find(Polyline);
+
+      expect(mapPreviewCircle).toHaveLength(1);
+      expect(mapPreviewSemicircle).toHaveLength(0);
+      expect(mapPreviewPolyline).toHaveLength(0);
+    });
+
+    it('should render a circle and polyline if start=stop', () => {
+      const mapPreview = shallow(
+        <MapPreview
+          geoJson={featureCollection}
+          azimuthDisplay={{
+            ...baseAzimuthParams,
+            start: 120,
+            stop: 120
+          }}
+        />
+      );
+      const mapPreviewCircle = mapPreview.find(Circle);
+      const mapPreviewSemicircle = mapPreview.find(SemiCircle);
+      const mapPreviewPolyline = mapPreview.find(Polyline);
+
+      expect(mapPreviewCircle).toHaveLength(1);
+      expect(mapPreviewSemicircle).toHaveLength(0);
+      expect(mapPreviewPolyline).toHaveLength(1);
+    });
+
+    it('should render a circle and semicircle if start > stop', () => {
+      const mapPreview = shallow(
+        <MapPreview
+          geoJson={featureCollection}
+          azimuthDisplay={{
+            ...baseAzimuthParams,
+            start: 80,
+            stop: 120
+          }}
+        />
+      );
+      const mapPreviewCircle = mapPreview.find(Circle);
+      const mapPreviewSemicircle = mapPreview.find(SemiCircle);
+      const mapPreviewPolyline = mapPreview.find(Polyline);
+
+      expect(mapPreviewCircle).toHaveLength(1);
+      expect(mapPreviewSemicircle).toHaveLength(1);
+      expect(mapPreviewPolyline).toHaveLength(0);
+    });
+
+    it('should render a circle and semicircle if start < stop', () => {
+      const mapPreview = shallow(
+        <MapPreview
+          geoJson={featureCollection}
+          azimuthDisplay={{
+            ...baseAzimuthParams,
+            start: 340,
+            stop: 20
+          }}
+        />
+      );
+      const mapPreviewCircle = mapPreview.find(Circle);
+      const mapPreviewSemicircle = mapPreview.find(SemiCircle);
+      const mapPreviewPolyline = mapPreview.find(Polyline);
+
+      expect(mapPreviewCircle).toHaveLength(1);
+      expect(mapPreviewSemicircle).toHaveLength(1);
+      expect(mapPreviewPolyline).toHaveLength(0);
     });
   });
 });
