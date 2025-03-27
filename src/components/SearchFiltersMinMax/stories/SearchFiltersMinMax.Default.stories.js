@@ -10,7 +10,7 @@ const STORY_NAME = 'Default';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);
 
-stories.add('Default', () => {
+stories.add(STORY_NAME, () => {
   return (
     <Story component={STORY_COMPONENT} name={STORY_NAME}>
       <SearchFiltersMinMax
