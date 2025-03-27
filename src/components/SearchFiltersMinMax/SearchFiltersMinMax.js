@@ -35,11 +35,13 @@ const SearchFiltersMinMax = ({
 
   useEffect(() => {
     const { min, max } = value;
-    if ((min && (valueMinLocal !== min)) || (max && (valueMaxLocal !== max))) {
+    if (valueMinLocal !== min) {
       setValueMinLocal(min);
+    }
+    if (valueMaxLocal !== max) {
       setValueMaxLocal(max);
     }
-  }, [value]);
+  }, [value, valueMinLocal, valueMaxLocal]);
 
   /**
    * handleInputChange
