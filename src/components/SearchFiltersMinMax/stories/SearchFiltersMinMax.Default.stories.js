@@ -5,7 +5,7 @@ import Story from '../../../../stories/helpers/Story';
 
 import SearchFiltersMinMax from '../SearchFiltersMinMax';
 
-const STORY_COMPONENT = 'Search Filters Min/Max';
+const STORY_COMPONENT = 'Search Filters Min-Max';
 const STORY_NAME = 'Default';
 
 const stories = storiesOf(`Components/${STORY_COMPONENT}`, module);

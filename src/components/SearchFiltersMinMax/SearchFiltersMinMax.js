@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { chompFloat } from '../../lib/util';
-
 import FormInputDebounced from '../FormInputDebounced';
 
 const SearchFiltersMinMax = ({
@@ -25,15 +23,6 @@ const SearchFiltersMinMax = ({
   const [maxError, updateMaxErrorState] = useState(false);
 
   useEffect(() => {
-    if (maxError === true) {
-      handleInputChange({ target: { id: `${namePrefix}-max`, value: valueMaxLocal.toString() } });
-    }
-    if (minError === true) {
-      handleInputChange({ target: { id: `${namePrefix}-min`, value: valueMinLocal.toString() } });
-    }
-  }, [valueMinLocal, valueMaxLocal]);
-
-  useEffect(() => {
     const { min, max } = value;
     if (valueMinLocal !== min) {
       setValueMinLocal(min);
@@ -50,13 +39,17 @@ const SearchFiltersMinMax = ({
 
   function handleInputChange ({ target = {} } = {}) {
     const { id: targetId, value: targetValue } = target;
+    const inputName = targetId.replace(`${namePrefix}-`, '');
 
     if (!targetValue) {
-      updateMinErrorState(true);
+      if (inputName === 'min') {
+        updateMinErrorState(true);
+      } else if (inputName === 'max') {
+        updateMaxErrorState(true);
+      }
       return;
     }
 
-    const inputName = targetId.replace(`${namePrefix}-`, '');
     const isCompleteFloat = targetValue && targetValue.substr(-1) !== '.';
 
     let floatValue = isCompleteFloat && parseFloat(targetValue);
@@ -67,9 +60,6 @@ const SearchFiltersMinMax = ({
     if (typeof floatValue !== 'number') {
       floatValue = targetValue;
     }
-
-    setValueMaxLocal(valueMaxLocal);
-    setValueMinLocal(valueMinLocal);
 
     switch (inputName) {
       case 'min':
@@ -93,51 +83,11 @@ const SearchFiltersMinMax = ({
       default:
     }
 
-    handleOnChange({
-      ...value,
-      [inputName]: floatValue
-    });
-  }
-
-  /**
-   * handleOnChange
-   * @description Manages all changes to bubble up to the parent component
-   */
-
-  function handleOnChange ({ min, max } = {}) {
-    // Before we update, we want to normalize the values to fix
-    // them to a maximum of 2 decimal places
-
-    const updatedValue = {
-      min: typeof min === 'number' ? chompFloat(min, 2) : min,
-      max: typeof max === 'number' ? chompFloat(max, 2) : max
-    };
-
-    // Make sure the min  value is normalized and not outside the limits
-
-    if (updatedValue.min < limitsMin.min) {
-      updatedValue.min = limitsMin.min;
-    }
-
-    if (updatedValue.min > limitsMin.max) {
-      updatedValue.min = limitsMax.max;
-    }
-
-    // Make sure the max value is normalized and not outside the limits
-
-    if (updatedValue.max < limitsMax.min) {
-      updatedValue.max = limitsMax.min;
-    }
-
-    if (updatedValue.max > limitsMax.max) {
-      updatedValue.max = limitsMax.max;
-    }
-
     if (typeof onChange === 'function') {
       onChange({
         target: {
           name: id,
-          value: updatedValue
+          value: floatValue
         }
       });
     }
