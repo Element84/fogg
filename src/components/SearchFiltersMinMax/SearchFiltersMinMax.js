@@ -30,7 +30,7 @@ const SearchFiltersMinMax = ({
     if (valueMaxLocal !== max) {
       setValueMaxLocal(max);
     }
-  }, [value, valueMinLocal, valueMaxLocal]);
+  }, [value]);
 
   /**
    * handleInputChange
