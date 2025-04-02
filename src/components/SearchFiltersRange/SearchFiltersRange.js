@@ -29,10 +29,10 @@ const SearchFiltersRange = ({
 
   useEffect(() => {
     if (maxError === true) {
-      handleInputChange({ target: { id: 'incidence_angle-range-max', value: valueMaxLocal.toString() } });
+      handleInputChange({ target: { id: `${namePrefix}-max`, value: valueMaxLocal.toString() } });
     }
     if (minError === true) {
-      handleInputChange({ target: { id: 'incidence_angle-range-min', value: valueMinLocal.toString() } });
+      handleInputChange({ target: { id: `${namePrefix}-min`, value: valueMinLocal.toString() } });
     }
   }, [valueMinLocal, valueMaxLocal, rangeValue]);
 

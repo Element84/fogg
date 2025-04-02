@@ -9,6 +9,7 @@ import InputButton from '../InputButton';
 import Button from '../Button';
 import SearchFiltersList from '../SearchFiltersList';
 import SearchFiltersRange from '../SearchFiltersRange';
+import SearchFiltersMinMax from '../SearchFiltersMinMax';
 import { ALL_VALUES_ITEM } from '../../data/search-filters';
 
 const SearchFilters = ({
@@ -174,6 +175,20 @@ const SearchFilters = ({
                           subLabel={subLabel}
                           value={value || defaultValue || range}
                           range={range}
+                          onChange={handleFilterChange}
+                        />
+                      );
+                    })()}
+
+                  {type === 'minmax' &&
+                    (() => {
+                      return (
+                        <SearchFiltersMinMax
+                          id={id}
+                          label={label}
+                          subLabel={subLabel}
+                          value={value || defaultValue}
+                          limits={filter.limits}
                           onChange={handleFilterChange}
                         />
                       );
