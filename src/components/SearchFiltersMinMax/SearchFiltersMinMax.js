@@ -11,13 +11,12 @@ const SearchFiltersMinMax = ({
   value = {},
   limits = {}
 }) => {
-  const { min: valueMin, max: valueMax } = value;
   const { min: limitsMin, max: limitsMax } = limits;
 
   const namePrefix = `${id}-minmax`;
 
-  const [valueMinLocal, setValueMinLocal] = useState(valueMin);
-  const [valueMaxLocal, setValueMaxLocal] = useState(valueMax);
+  const [valueMinLocal, setValueMinLocal] = useState(value.min);
+  const [valueMaxLocal, setValueMaxLocal] = useState(value.max);
 
   const [minError, updateMinErrorState] = useState(false);
   const [maxError, updateMaxErrorState] = useState(false);
@@ -87,7 +86,10 @@ const SearchFiltersMinMax = ({
       onChange({
         target: {
           name: id,
-          value: floatValue
+          value: {
+            ...value,
+            [inputName]: floatValue
+          }
         }
       });
     }
